@@ -1,0 +1,23 @@
+.root {
+	display: flex;
+	justify-content: space-between;
+	padding: 1rem 0;
+
+	border-bottom: 1px solid rgb(0, 0, 0, 0.1);
+
+	.logoContainer {
+		margin: auto;
+		text-align: center;
+		.logo {
+			color: #282828;
+		}
+	}
+
+	.simpleButton {
+		background-color: #282828;
+		color: white;
+		padding: 0.5rem 1rem;
+		border-radius: 5px;
+		cursor: pointer;
+	}
+}
