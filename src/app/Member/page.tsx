@@ -3,6 +3,7 @@ import { DefaultSession, options } from "../api/auth/[...nextauth]/options";
 import { redirect } from "next/navigation";
 import { signIn } from "@/lib/routing/paths";
 
+// temp page just for showing how to use session
 export default async function Member() {
 	const session = await getServerSession(options);
 

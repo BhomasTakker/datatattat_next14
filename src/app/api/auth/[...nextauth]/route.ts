@@ -1,3 +1,5 @@
+// https://www.youtube.com/watch?v=MNm1XhDjX1s
+
 import NextAuth from "next-auth";
 import { options } from "./options";
 

@@ -1,9 +1,5 @@
-import { getServerSession } from "next-auth";
 import { NavigationHeader } from "./navigation-header";
 import { NavigationMenu } from "./navigation/navigation-menu";
-import { options } from "@/app/api/auth/[...nextauth]/options";
-import Link from "next/link";
-import { signIn, signOut } from "@/lib/routing/paths";
 
 const items = [
 	{
@@ -21,17 +17,11 @@ const items = [
 ];
 
 export const MainHeader = async () => {
-	const session = await getServerSession(options);
-
+	// load header data based on route
 	return (
 		<header>
 			<NavigationHeader />
 			<NavigationMenu items={items} />
-			{session ? (
-				<Link href={signOut("/")}>Logout</Link>
-			) : (
-				<Link href={signIn("/")}>Login</Link>
-			)}
 		</header>
 	);
 };
