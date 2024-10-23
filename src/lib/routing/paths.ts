@@ -10,6 +10,15 @@ export const home = () => {
 	return "/";
 };
 
+export const edit = () => {
+	return "/edit";
+};
+
+export const user = (username: string) => {
+	return `/user/${username}`;
+};
+
+// rem these
 export const member = () => {
 	return "/Member";
 };
@@ -17,3 +26,5 @@ export const member = () => {
 export const clientMember = () => {
 	return "/ClientMember";
 };
+
+// Should export as an object perhaps
