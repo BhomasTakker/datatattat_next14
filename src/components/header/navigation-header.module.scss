@@ -4,12 +4,18 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	padding: 1rem 0;
+	padding: 1rem 0.5rem;
 
 	border-bottom: 1px solid colours.$shadowLight2;
 
+	.datatattat {
+		color: colours.$logoDark;
+		font-size: 1.5rem;
+	}
+
 	.logo {
 		color: colours.$logoDark;
+		font-size: 1.5rem;
 	}
 
 	//
@@ -22,6 +28,10 @@
 		justify-content: space-between;
 		align-items: center;
 		cursor: pointer;
+		.logo {
+			font-size: 1.5rem;
+			color: colours.$textColourDark;
+		}
 		p {
 			color: colours.$textColourDark;
 		}

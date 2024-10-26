@@ -1,0 +1,19 @@
+@mixin scrollYNoScroller() {
+	overflow-y: auto;
+
+	// check this it might be old and unneccesary / or just incorrect
+	-webkit-overflow-scrolling: touch;
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
+}
+
+@mixin scrollXNoScroller() {
+	overflow-x: auto;
+	-webkit-overflow-scrolling: touch;
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
+}

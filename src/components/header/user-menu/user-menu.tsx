@@ -27,7 +27,7 @@ export const UserMenu = () => {
 	return (
 		<div>
 			<button className={styles.menuButton} onClick={openModal}>
-				<BiSolidUser size={"2rem"} />
+				<BiSolidUser className={styles.logo} />
 			</button>
 			<dialog ref={modalRef} className={styles.menu} onBlur={closeModal}>
 				<ul>

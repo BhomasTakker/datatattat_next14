@@ -4,13 +4,13 @@ import Link from "next/link";
 import { PATHS } from "@/lib/routing/paths";
 import { getServerSession } from "next-auth";
 import { options } from "@/app/api/auth/[...nextauth]/options";
-import { UserMenu } from "./user-menu";
+import { UserMenu } from "./user-menu/user-menu";
 import { BiSolidUser } from "react-icons/bi";
 
 const Logo = () => {
 	return (
 		<Link className={styles.logo} aria-label="Home" href="/">
-			<AiFillHome size={"2rem"} />
+			<AiFillHome className={styles.logo} />
 		</Link>
 	);
 };
@@ -20,7 +20,7 @@ const Datatattat = () => {
 		<div className={styles.logoContainer}>
 			<Link href={"/"} key={"Home"} aria-hidden>
 				{/* Pull from state - We should have a state config */}
-				<h2 className={styles.logo}>DATATATTAT</h2>
+				<h2 className={styles.datatattat}>DATATATTAT</h2>
 			</Link>
 		</div>
 	);
@@ -30,7 +30,7 @@ const SignInButton = () => {
 	return (
 		// callback to current page
 		<Link className={styles.simpleButton} href={PATHS.signIn("/")}>
-			<BiSolidUser size={"2rem"} />
+			<BiSolidUser className={styles.logo} />
 			<p>Login</p>
 		</Link>
 	);
