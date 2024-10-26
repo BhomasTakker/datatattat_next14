@@ -1,6 +1,6 @@
 "use client";
 
-import { edit, signOut, user } from "@/lib/routing/paths";
+import { PATHS } from "@/lib/routing/paths";
 import Link from "next/link";
 import { BiSolidUser } from "react-icons/bi";
 import styles from "./user-menu.module.scss";
@@ -33,15 +33,15 @@ export const UserMenu = () => {
 				<ul>
 					{/* // callback to current page */}
 					<li>
-						<Link href={signOut(pathname)}>Sign Out</Link>
+						<Link href={PATHS.signOut(pathname)}>Sign Out</Link>
 					</li>
 					<li>
 						{/* add page query? */}
-						<Link href={edit()}>Edit</Link>
+						<Link href={PATHS.edit()}>Edit</Link>
 					</li>
 					{data?.user?.name ? (
 						<li>
-							<Link href={user(data?.user?.name || "")}>User Page</Link>
+							<Link href={PATHS.user(data?.user?.name || "")}>User Page</Link>
 						</li>
 					) : null}
 				</ul>

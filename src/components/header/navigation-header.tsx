@@ -1,7 +1,7 @@
 import { AiFillHome } from "react-icons/ai";
 import styles from "./navigation-header.module.scss";
 import Link from "next/link";
-import { signIn } from "@/lib/routing/paths";
+import { PATHS } from "@/lib/routing/paths";
 import { getServerSession } from "next-auth";
 import { options } from "@/app/api/auth/[...nextauth]/options";
 import { UserMenu } from "./user-menu";
@@ -29,7 +29,7 @@ const Datatattat = () => {
 const SignInButton = () => {
 	return (
 		// callback to current page
-		<Link className={styles.simpleButton} href={signIn("/")}>
+		<Link className={styles.simpleButton} href={PATHS.signIn("/")}>
 			<BiSolidUser size={"2rem"} />
 			<p>Login</p>
 		</Link>
