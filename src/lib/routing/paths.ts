@@ -27,4 +27,4 @@ export const clientMember = () => {
 	return "/ClientMember";
 };
 
-// Should export as an object perhaps
+// Should export as an object perhaps / absolutely should!! home and edit!! lol

@@ -1,7 +1,7 @@
 import { AiFillHome } from "react-icons/ai";
 import styles from "./navigation-header.module.scss";
 import Link from "next/link";
-import { signIn, signOut } from "@/lib/routing/paths";
+import { signIn } from "@/lib/routing/paths";
 import { getServerSession } from "next-auth";
 import { options } from "@/app/api/auth/[...nextauth]/options";
 import { UserMenu } from "./user-menu";
@@ -31,7 +31,7 @@ const SignInButton = () => {
 		// callback to current page
 		<Link className={styles.simpleButton} href={signIn("/")}>
 			<BiSolidUser size={"2rem"} />
-			Login
+			<p>Login</p>
 		</Link>
 	);
 };
@@ -44,14 +44,6 @@ export const NavigationHeader = async () => {
 			<Logo />
 			<Datatattat />
 			{!session ? <SignInButton /> : <UserMenu />}
-			<dialog className={styles.menu}>
-				<ul>
-					{/* // callback to current page - how get this without client? */}
-					<li>
-						<Link href={signOut("/")}>Sign Out</Link>
-					</li>
-				</ul>
-			</dialog>
 		</nav>
 	);
 };

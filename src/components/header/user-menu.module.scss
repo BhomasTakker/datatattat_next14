@@ -1,3 +1,5 @@
+@use "../../scss/abstracts/colours/" as colours;
+
 .menuButton {
 	border: none;
 	background-color: unset;
@@ -5,7 +7,7 @@
 	border-radius: 50%;
 
 	:hover {
-		background-color: rgba(0, 0, 0, 0.05);
+		background-color: colours.$shadowLight1;
 	}
 }
 
@@ -18,13 +20,13 @@
 	right: 1rem;
 	border: 0;
 	border-radius: 5px;
-	box-shadow: 0 0 1em rgba(0, 0, 0, 0.3);
+	box-shadow: 0 0 1em colours.$shadowLight3;
 
 	& > * {
 		margin: 0 0 0.5rem 0;
 	}
 
 	::backdrop {
-		background: rgb(0, 0, 0, 0.1);
+		background: colours.$shadowLight2;
 	}
 }
