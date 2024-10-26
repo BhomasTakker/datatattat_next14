@@ -1,6 +1,6 @@
 "use server";
 
-import { home } from "@/lib/routing/paths";
+import { PATHS } from "@/lib/routing/paths";
 import Header from "@/models/Header";
 import { cloneDeep } from "@/utils/object";
 import { HeaderType } from "@/types/header";
@@ -20,12 +20,12 @@ const isProtectedRoute = (route: string) => {
 	//missed a thing and got into an infinite loop
 	//We CANNOT do this on Vercel!!
 	// Could instead count and drop after x iterations to be safe
-	return !route || route === home() || route === "/users";
+	return !route || route === PATHS.home() || route === "/users";
 };
 
 export async function getMainHeader(): Promise<HeaderType> {
 	const header =
-		(await Header.findOne({ route: home() }).lean()) || EMPTY_HEADER;
+		(await Header.findOne({ route: PATHS.home() }).lean()) || EMPTY_HEADER;
 
 	return cloneDeep(header);
 }

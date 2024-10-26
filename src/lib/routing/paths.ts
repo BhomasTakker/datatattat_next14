@@ -1,30 +1,39 @@
-export const signIn = (callback: string) => {
+const signIn = (callback: string) => {
 	return `/api/auth/signin?callbackUrl=${callback}`;
 };
 
-export const signOut = (callback: string) => {
+const signOut = (callback: string) => {
 	return `/api/auth/signout?callbackUrl=${callback}`;
 };
 
-export const home = () => {
+const home = () => {
 	return "/";
 };
 
-export const edit = () => {
+const edit = () => {
 	return "/edit";
 };
 
-export const user = (username: string) => {
+const user = (username: string) => {
 	return `/user/${username}`;
 };
 
 // rem these
-export const member = () => {
+const member = () => {
 	return "/Member";
 };
 
-export const clientMember = () => {
+const clientMember = () => {
 	return "/ClientMember";
 };
 
 // Should export as an object perhaps / absolutely should!! home and edit!! lol
+export const PATHS = {
+	signIn,
+	signOut,
+	home,
+	edit,
+	user,
+	member,
+	clientMember,
+};
