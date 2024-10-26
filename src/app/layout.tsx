@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { MainHeader } from "../components/header/main-header";
 import AuthProvider from "@/components/header/auth/auth-provider";
+import { connectToMongoDB } from "@/lib/mongo/db";
 
 const geistSans = localFont({
 	src: "./fonts/GeistVF.woff",
@@ -25,11 +26,15 @@ export default function RootLayout({
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
+	// TODO:
+	// Initialize services / we need to guarantee server use only
+	// Create a Providers component to match accepted standard
+	connectToMongoDB();
 	return (
 		<html lang="en">
 			<AuthProvider>
 				<body className={`${geistSans.variable} ${geistMono.variable}`}>
-					<MainHeader></MainHeader>
+					<MainHeader />
 					{children}
 				</body>
 			</AuthProvider>

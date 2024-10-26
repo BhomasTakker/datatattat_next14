@@ -1,23 +1,29 @@
+@use "../../scss/abstracts/colours/" as colours;
+
 .root {
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
 	padding: 1rem 0;
 
-	border-bottom: 1px solid rgb(0, 0, 0, 0.1);
+	border-bottom: 1px solid colours.$shadowLight2;
 
-	.logoContainer {
-		margin: auto;
-		text-align: center;
-		.logo {
-			color: #282828;
-		}
+	.logo {
+		color: colours.$logoDark;
 	}
 
+	//
 	.simpleButton {
-		background-color: #282828;
-		color: white;
+		// background-color: colours.$white;
+		color: colours.$logoDark;
 		padding: 0.5rem 1rem;
 		border-radius: 5px;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
 		cursor: pointer;
+		p {
+			color: colours.$textColourDark;
+		}
 	}
 }
