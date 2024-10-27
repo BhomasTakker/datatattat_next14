@@ -1,21 +1,16 @@
 "use server";
 
 import { PATHS } from "@/lib/routing/paths";
-import Header from "@/models/Header";
 import { cloneDeep } from "@/utils/object";
 import { HeaderType } from "@/types/header";
+import { getHeader } from "@/lib/mongo/actions/header";
 
-const EMPTY_HEADER: HeaderType = {
-	route: "",
-	nav: [],
-};
-
-const trimHeader = (route: string) => {
+export const trimHeader = (route: string) => {
 	const header = route.split("/");
-	return header.splice(0, -1);
+	return header.splice(0, header.length - 1).join("/");
 };
 
-const isProtectedRoute = (route: string) => {
+export const isProtectedRoute = (route: string) => {
 	//This isn't great?
 	//missed a thing and got into an infinite loop
 	//We CANNOT do this on Vercel!!
@@ -24,8 +19,7 @@ const isProtectedRoute = (route: string) => {
 };
 
 export async function getMainHeader(): Promise<HeaderType> {
-	const header =
-		(await Header.findOne({ route: PATHS.home() }).lean()) || EMPTY_HEADER;
+	const header = await getHeader(PATHS.home());
 
 	return cloneDeep(header);
 }
@@ -35,14 +29,12 @@ async function populateSubHeaders(route: string): Promise<HeaderType[]> {
 		return [];
 	}
 
-	const result = (await Header.findOne({ route }).lean()) || EMPTY_HEADER;
+	const result = await getHeader(route);
 	const header = [result];
 
 	const parentHeader = trimHeader(route);
 
-	const sub = parentHeader
-		? await populateSubHeaders(parentHeader.join("/"))
-		: [];
+	const sub = parentHeader ? await populateSubHeaders(parentHeader) : [];
 
 	return [...header, ...sub] as HeaderType[];
 }

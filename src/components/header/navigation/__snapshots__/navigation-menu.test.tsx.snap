@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Navigation Menu renders navigation unchanged 1`] = `
+<div>
+  <div
+    class="root"
+  >
+    <nav
+      class="toolbar"
+      data-testid="nav"
+    >
+      <div>
+        <a
+          data-testid="Home"
+          href="/home"
+        >
+          Home
+        </a>
+        <a
+          data-testid="About"
+          href="/about"
+        >
+          About
+        </a>
+      </div>
+    </nav>
+  </div>
+</div>
+`;

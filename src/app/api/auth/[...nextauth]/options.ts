@@ -11,7 +11,6 @@ if (!GITHUB_ID || !GITHUB_SECRET) {
 const providers = [
 	Github({
 		profile(profile) {
-			// console.log({ profile });
 			let userRole = "standard";
 
 			if (profile.name === "BhomasTakker") {

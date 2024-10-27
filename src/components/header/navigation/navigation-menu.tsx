@@ -7,12 +7,12 @@ interface NavigationMenuProps {
 }
 
 export const NavigationMenu = ({ items }: NavigationMenuProps) => {
-	const showNav = items && items.length;
+	const showNav = items && items.length > 0;
 
 	return (
 		<div className={classes.root}>
 			{showNav ? (
-				<nav className={classes.toolbar}>
+				<nav className={classes.toolbar} data-testid={"nav"}>
 					<NavigationLinks navLinks={items} />
 				</nav>
 			) : null}
