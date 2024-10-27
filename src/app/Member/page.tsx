@@ -13,8 +13,6 @@ export default async function Member() {
 
 	const { user } = session as DefaultSession;
 
-	console.log({ session, user });
-
 	return (
 		<div>
 			<h1>Member page</h1>

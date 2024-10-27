@@ -25,8 +25,6 @@ export const ClientHeader = () => {
 		fetchData();
 	}, [pathname]);
 
-	console.log({ pathname, subHeaders });
-
 	return (
 		<>
 			{header ? <NavigationMenu items={header.nav} /> : null}

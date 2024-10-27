@@ -4,7 +4,6 @@ import mongoose, { Connection } from "mongoose";
 
 // Declaring a variable to store the cached database connection
 let cachedConnection: Connection | null = null;
-let count = 0;
 
 // Function to establish a connection to MongoDB
 export async function connectToMongoDB() {
@@ -14,14 +13,13 @@ export async function connectToMongoDB() {
 		return cachedConnection;
 	}
 	try {
-		count++;
 		// Check the thing exists and throw an error if it doesn'ts
 		// If no cached connection exists, establish a new connection to MongoDB
 		const cnx = await mongoose.connect(process.env.MONGODB_URI!);
 		// Cache the connection for future use
 		cachedConnection = cnx.connection;
 		// Log message indicating a new MongoDB connection is established
-		console.log("New mongodb connection established", { count });
+		console.log("New mongodb connection established");
 		// Return the newly established connection
 
 		return cachedConnection;

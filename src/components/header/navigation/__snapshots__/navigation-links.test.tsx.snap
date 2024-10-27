@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Navigation Links renders navigation unchanged 1`] = `
+<div>
+  <div
+    class="root"
+  >
+    <a
+      data-testid="Home"
+      href="/home"
+    >
+      Home
+    </a>
+    <a
+      data-testid="About"
+      href="/about"
+    >
+      About
+    </a>
+  </div>
+</div>
+`;
