@@ -1,4 +1,4 @@
-name: MainTest
+name: ci-v1
 
 on:
   push:
