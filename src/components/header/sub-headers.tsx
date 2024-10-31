@@ -22,7 +22,7 @@ export const SubHeaders = ({
 }: {
 	headersArray: HeaderType[];
 }) => {
-	if (!headersArray) {
+	if (!headersArray || headersArray.length === 0) {
 		return null;
 	}
 

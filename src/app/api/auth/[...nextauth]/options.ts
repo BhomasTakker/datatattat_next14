@@ -43,7 +43,6 @@ const callbacks = {
 	// server side callback
 	// @ts-expect-error - types are incorrect
 	async jwt({ token, user }) {
-		console.log({ user, token });
 		if (user) {
 			token.role = user.role;
 		}
@@ -51,7 +50,6 @@ const callbacks = {
 	},
 	// @ts-expect-error - types are incorrect
 	async session({ session, token }) {
-		console.log({ session, token });
 		if (session.user) session.user.role = token.role as string;
 		return session;
 	},

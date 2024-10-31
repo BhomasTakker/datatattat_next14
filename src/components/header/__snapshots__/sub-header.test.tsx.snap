@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Sub Headers Test Suite renders SubHeaders unchanged 1`] = `
+<div>
+  <div>
+    <div>
+      <ul>
+        <li>
+          <p>
+            Home
+          </p>
+          <p>
+            /
+          </p>
+        </li>
+        <li>
+          <p>
+            About
+          </p>
+          <p>
+            /about
+          </p>
+        </li>
+      </ul>
+    </div>
+    <div>
+      <ul>
+        <li>
+          <p>
+            Home
+          </p>
+          <p>
+            /
+          </p>
+        </li>
+        <li>
+          <p>
+            About
+          </p>
+          <p>
+            /about
+          </p>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+`;

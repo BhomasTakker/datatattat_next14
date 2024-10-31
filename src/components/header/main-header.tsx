@@ -1,7 +1,7 @@
 import { ClientHeader } from "./client-header";
 import { NavigationHeader } from "./navigation-header";
 
-export const MainHeader = async () => {
+export const MainHeader = () => {
 	return (
 		<header>
 			<NavigationHeader />

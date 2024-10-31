@@ -19,6 +19,7 @@ export const ClientHeader = () => {
 		const fetchData = async () => {
 			const header = await getMainHeader();
 			const subHeaders = await getSubHeaders("/new-test");
+
 			setHeader(header);
 			setSubHeaders(subHeaders);
 		};
@@ -28,7 +29,9 @@ export const ClientHeader = () => {
 	return (
 		<>
 			{header ? <NavigationMenu items={header.nav} /> : null}
-			{subHeaders ? <SubHeaders headersArray={subHeaders} /> : null}
+			{subHeaders && subHeaders.length > 0 ? (
+				<SubHeaders headersArray={subHeaders} />
+			) : null}
 		</>
 	);
 };
