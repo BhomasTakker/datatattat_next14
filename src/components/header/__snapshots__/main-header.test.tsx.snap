@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MainHeader snaps renders MainHeader unchanged 1`] = `
+<div>
+  <header>
+    <h2>
+      Navigation Header
+    </h2>
+    <h2>
+      Client Header
+    </h2>
+  </header>
+</div>
+`;
