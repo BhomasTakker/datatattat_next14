@@ -1,0 +1,10 @@
+@use "../colours/" as colours;
+@use "../units/" as units;
+
+$divider: units.$px_4 solid colours.$shadowLight2;
+
+$page_marginSm: units.$rem_4;
+$page_marginMd: units.$rem_8;
+$page_marginLg: units.$rem_10;
+$page_marginXl: units.$rem_12;
+$page_marginXxl: units.$rem_14;

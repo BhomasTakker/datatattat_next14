@@ -1,0 +1,19 @@
+@use "../../scss/abstracts/units/" as *;
+@use "../../scss/abstracts/colours/" as *;
+
+.root {
+	color: $darkGrey;
+
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: $rem_6;
+
+	.icon {
+		color: $darkGrey;
+		font-size: $rem_6;
+	}
+
+	@media screen and (min-width: $screenWidthMd) {
+	}
+}

@@ -1,11 +1,12 @@
 @use "../../../scss/abstracts/colours/" as colours;
+@use "../../../scss/abstracts/units/" as units;
 
 .root {
 	border-radius: 10%;
-	padding: 1rem 0.5rem;
+	padding: units.$rem_4 units.$rem_2;
 	&:hover,
 	&:focus-visible {
-		background-color: rgb(0, 0, 0, 0.025);
+		background-color: colours.$shadowLight0;
 	}
 	.link {
 		text-transform: uppercase;

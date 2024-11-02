@@ -1,35 +1,33 @@
 @use "../../scss/abstracts/colours/" as colours;
+@use "../../scss/abstracts/ui/" as ui;
+@use "../../scss/abstracts/units/" as units;
 
 .root {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	padding: 1rem 0.5rem;
-
-	border-bottom: 1px solid colours.$shadowLight2;
+	padding: units.$rem_4 units.$rem_0;
 
 	.datatattat {
 		color: colours.$logoDark;
-		font-size: 1.5rem;
+		font-size: units.$text_6;
 	}
 
 	.logo {
 		color: colours.$logoDark;
-		font-size: 1.5rem;
+		font-size: units.$text_6;
 	}
 
-	//
 	.simpleButton {
-		// background-color: colours.$white;
 		color: colours.$logoDark;
-		padding: 0.5rem 1rem;
-		border-radius: 5px;
+		padding: units.$rem_2 units.$rem_4;
+		border-radius: units.$px_9;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
 		cursor: pointer;
 		.logo {
-			font-size: 1.5rem;
+			font-size: units.$text_6;
 			color: colours.$textColourDark;
 		}
 		p {

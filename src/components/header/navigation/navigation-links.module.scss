@@ -1,14 +1,14 @@
 @use "../../../scss/abstracts/colours/" as colours;
-@use "../../../scss/mixins/ui/" as ui;
+@use "../../../scss/mixins/ui/" as uiMixin;
+@use "../../../scss/abstracts/ui/" as ui;
+@use "../../../scss/abstracts/units/" as units;
 
 .root {
 	display: flex;
 	justify-content: center;
-	gap: 1rem;
-
-	border-bottom: 1px solid colours.$shadowLight2;
+	gap: units.$rem_4;
 
 	overflow-x: auto;
 
-	@include ui.scrollXNoScroller();
+	@include uiMixin.scrollXNoScroller();
 }
