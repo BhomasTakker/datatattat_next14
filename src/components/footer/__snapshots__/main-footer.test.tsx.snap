@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Main Footer renders footer unchanged 1`] = `
+<div>
+  <footer
+    class="root"
+  >
+    <div
+      class="divider"
+    />
+    <div
+      class="container"
+    >
+      <p>
+        Icons
+      </p>
+    </div>
+    <div
+      class="divider"
+    />
+    <div
+      class="container"
+    >
+      <p
+        class="copyright"
+      >
+        <strong>
+          Copyright 2024 ©Datatattat.
+           
+        </strong>
+        Datatattat is not responsible for the content of external sites.
+      </p>
+    </div>
+  </footer>
+</div>
+`;

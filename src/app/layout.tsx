@@ -4,6 +4,7 @@ import "./globals.css";
 import { MainHeader } from "../components/header/main-header";
 import AuthProvider from "@/components/header/auth/auth-provider";
 import { connectToMongoDB } from "@/lib/mongo/db";
+import { MainFooter } from "@/components/footer/main-footer";
 
 const geistSans = localFont({
 	src: "./fonts/GeistVF.woff",
@@ -36,6 +37,7 @@ export default function RootLayout({
 				<body className={`${geistSans.variable} ${geistMono.variable}`}>
 					<MainHeader />
 					{children}
+					<MainFooter />
 				</body>
 			</AuthProvider>
 		</html>

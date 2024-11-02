@@ -1,0 +1,16 @@
+@use "../units/" as units;
+
+$page-title-font: Helvetica, Arial, freesans, sans-serif;
+$component-title-font: Helvetica, Arial, freesans, sans-serif;
+$title-font: Helvetica, Arial, freesans, sans-serif;
+$text-font: Helvetica, Arial, freesans, sans-serif;
+$link-font: Helvetica, Arial, freesans, sans-serif;
+
+$page-title-lg: units.$text_11;
+$page-title-sm: units.$text_10;
+
+$component-title-lg: units.$text_9;
+$component-title-sm: units.$text_7;
+
+$title-font-weight: bold;
+$text-font-weight: medium;
