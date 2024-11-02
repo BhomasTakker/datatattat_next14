@@ -26,7 +26,6 @@ describe("Main Footer", () => {
 	it("renders current year", () => {
 		render(<MainFooter />);
 		const year = new Date(Date.now()).getFullYear();
-		console.log({ year });
 		// way 1 and 2
 		// const message = screen.getByText(`${year}`, { exact: false });
 		const message = screen.getByText(new RegExp(year.toString()));
