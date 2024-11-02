@@ -1,6 +1,7 @@
 @use "../../scss/abstracts/units/" as *;
 @use "../../scss/abstracts/font/" as *;
 @use "../../scss/abstracts/ui/" as *;
+@use "../../scss/mixins/ui/" as *;
 
 .root {
 	padding: $rem_6 $rem_0;
@@ -11,22 +12,7 @@
 	}
 
 	.container {
-		padding: $rem_6 $page_marginSm;
-		// You want this as a mixin from somewhere?
-		@media screen and (min-width: $screenWidthMd) {
-			padding: $rem_6 $page_marginMd;
-		}
-
-		@media screen and (min-width: $screenWidthLg) {
-			padding: $rem_6 $page_marginLg;
-		}
-
-		@media screen and (min-width: $screenWidthXl) {
-			padding: $rem_6 $page_marginXl;
-		}
-
-		@media screen and (min-width: $screenWidthXxl) {
-			padding: $rem_6 $page_marginXxl;
-		}
+		@include pageMargin();
+		padding-block: $rem_6;
 	}
 }

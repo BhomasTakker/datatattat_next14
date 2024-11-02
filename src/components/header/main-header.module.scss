@@ -1,5 +1,6 @@
 @use "../../scss/abstracts/units/" as *;
 @use "../../scss/abstracts/ui/" as *;
+@use "../../scss/mixins/ui/" as *;
 
 .root {
 	.divider {
@@ -7,21 +8,6 @@
 	}
 
 	.container {
-		padding: $rem_0 $page_marginSm;
-		@media screen and (min-width: $screenWidthMd) {
-			padding: $rem_0 $page_marginMd;
-		}
-
-		@media screen and (min-width: $screenWidthLg) {
-			padding: $rem_0 $page_marginLg;
-		}
-
-		@media screen and (min-width: $screenWidthXl) {
-			padding: $rem_0 $page_marginXl;
-		}
-
-		@media screen and (min-width: $screenWidthXxl) {
-			padding: $rem_0 $page_marginXxl;
-		}
+		@include pageMargin();
 	}
 }
