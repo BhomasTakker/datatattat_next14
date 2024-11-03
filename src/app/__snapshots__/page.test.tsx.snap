@@ -5,9 +5,9 @@ exports[`Page snaps renders homepage unchanged 1`] = `
   <div
     class="page"
   >
-    <h1>
-      Homepage
-    </h1>
+    <h2>
+      Page Display
+    </h2>
   </div>
 </div>
 `;
