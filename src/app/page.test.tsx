@@ -1,31 +1,47 @@
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import Page from "./page";
+import { getPage } from "../actions/page/page-actions";
+
+jest.mock("../components/page/page-display", () => {
+	return {
+		PageDisplay: () => {
+			return <h2>Page Display</h2>;
+		},
+	};
+});
+
+jest.mock("../actions/page/page-actions", () => {
+	return {
+		getPage: jest.fn().mockResolvedValue({}),
+	};
+});
 
 describe("Page", () => {
-	it("renders a heading", () => {
-		render(<Page />);
+	it("renders PageDisplay Component", async () => {
+		render(await Page());
 
-		const heading = screen.getByRole("heading", {
-			level: 1,
-			name: /homepage/i,
+		const pageDisplay = screen.getByRole("heading", {
+			level: 2,
+			name: /page display/i,
 		});
 
-		expect(heading).toBeInTheDocument();
+		expect(pageDisplay).toBeInTheDocument();
 	});
 
-	it("renders the correct heading", () => {
-		render(<Page />);
+	it("renders error display when no page data received", async () => {
+		(getPage as jest.Mock).mockResolvedValueOnce(null);
+		render(await Page());
 
-		const heading = screen.getByText(/homepage/i);
+		const heading = screen.getByText(/404/i);
 
 		expect(heading).toBeInTheDocument();
 	});
 });
 
 describe("Page snaps", () => {
-	it("renders homepage unchanged", () => {
-		const { container } = render(<Page />);
+	it("renders homepage unchanged", async () => {
+		const { container } = render(await Page());
 		expect(container).toMatchSnapshot();
 	});
 });
