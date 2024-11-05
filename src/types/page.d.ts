@@ -14,6 +14,7 @@ type Content = {
 export type IPage = {
 	meta: object;
 	style: object;
+	profile: object;
 	route: string;
 	creator: ObjectId;
 
