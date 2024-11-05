@@ -1,0 +1,20 @@
+@use "../../../scss/abstracts/units/" as *;
+@use "../../../scss/abstracts/font/" as *;
+@use "../../../scss/abstracts/colours/" as *;
+
+.root {
+	display: flex;
+
+	.title {
+		margin: $rem_6 $rem_0 $rem_4;
+		font-size: $page-title-sm;
+		font-family: $page-title-font;
+		color: $titleColourDark;
+
+		justify-content: left;
+
+		@media screen and (min-width: $screenWidthMd) {
+			font-size: $page-title-lg;
+		}
+	}
+}
