@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PageDisplay renders PageDisplay unchanged 1`] = `
+<div>
+  <div>
+    <main>
+      <div
+        data-testid="test-page-head"
+      />
+      <div
+        data-testid="test-page-profile"
+      >
+        My Page Title
+      </div>
+      <div
+        data-testid="test-page-component-factory"
+      >
+        Stack
+      </div>
+    </main>
+  </div>
+</div>
+`;

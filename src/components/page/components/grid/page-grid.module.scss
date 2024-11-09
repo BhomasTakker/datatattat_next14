@@ -1,0 +1,30 @@
+@use "../../../../scss/mixins/ui/" as ui;
+@use "../../../../scss/abstracts/units/" as units;
+
+.root {
+	display: grid;
+	gap: 1rem;
+}
+
+// This isn't okay as is - it is was just a test for a display (video) and a list
+.root-display {
+	grid-template-columns: 1fr;
+
+	& > *:last-child {
+		height: 50vh;
+
+		@include ui.scrollYNoScroller();
+	}
+
+	@media screen and (min-width: units.$screenWidthLg) {
+		grid-template-columns: 2fr 1fr;
+
+		& > *:last-child {
+			height: 0;
+			min-height: 100%;
+			// works the same but new and I don't proper get it
+			// contain: size;
+			@include ui.scrollYNoScroller();
+		}
+	}
+}

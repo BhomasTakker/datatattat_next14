@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PageComponentFactory renders PageComponentFactory unchanged 1`] = `
+<div>
+  <div
+    data-testid="test-page-stack-component"
+  >
+    Page Component Stack
+  </div>
+</div>
+`;
