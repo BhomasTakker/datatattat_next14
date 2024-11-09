@@ -1,5 +1,6 @@
 import { PageComponents, PageContainer, PageContent } from "@/types/page";
 import styles from "./page-stack.module.scss";
+import { ComponentDisplay } from "@/components/component/component-display";
 
 // We should probably have 'style' in the Props type
 type PageStackProps = {
@@ -25,13 +26,9 @@ export const PageStack = ({ content }: { content: PageContent }) => {
 	// just of different elements and classes
 	const renderComponents = () => {
 		return components.map((component, index) => {
-			const { componentType, componentProps } = component;
 			return (
 				<li key={index}>
-					{`Component type:- ${componentType}`}
-					<section>{`Component props:- ${JSON.stringify(
-						componentProps
-					)}`}</section>
+					<ComponentDisplay key={index} component={component} />
 				</li>
 			);
 		});

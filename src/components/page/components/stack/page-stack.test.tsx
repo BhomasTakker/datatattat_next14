@@ -1,6 +1,24 @@
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import { PageStack, PageStackContent } from "./page-stack";
+import { PageComponent } from "@/types/page";
+
+jest.mock("../../../component/component-display", () => {
+	return {
+		__esModule: true,
+		ComponentDisplay: ({ component }: { component: PageComponent }) => {
+			const { componentType, componentProps } = component;
+			return (
+				<>
+					{`Component type:- ${componentType}`}
+					<section>{`Component props:- ${JSON.stringify(
+						componentProps
+					)}`}</section>
+				</>
+			);
+		},
+	};
+});
 
 const MOCK: PageStackContent = {
 	container: {

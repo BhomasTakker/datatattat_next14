@@ -1,6 +1,23 @@
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import { PageGrid, PageGridContent } from "./page-grid";
+import {} from "../../../component/component-display";
+import { PageComponent } from "@/types/page";
+
+jest.mock("../../../component/component-display", () => {
+	return {
+		__esModule: true,
+		ComponentDisplay: ({ component }: { component: PageComponent }) => {
+			const { componentType, componentProps } = component;
+			return (
+				<section data-testid="page-grid-item">
+					{`Component type:- ${componentType}`}
+					{`Component props:- ${JSON.stringify(componentProps)}`}
+				</section>
+			);
+		},
+	};
+});
 
 const MOCK: PageGridContent = {
 	container: {

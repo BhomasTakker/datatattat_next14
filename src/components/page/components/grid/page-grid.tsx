@@ -1,5 +1,6 @@
 import { PageComponents, PageContainer, PageContent } from "@/types/page";
 import styles from "./page-grid.module.scss";
+import { ComponentDisplay } from "@/components/component/component-display";
 
 // We should probably have 'style' in the Props type
 type PageGridProps = {
@@ -18,13 +19,9 @@ export const PageGrid = ({ content }: { content: PageContent }) => {
 
 	const renderComponents = () => {
 		return components.map((component, index) => {
-			const { componentType, componentProps } = component;
-			return (
-				<section data-testid="page-grid-item" key={index}>
-					{`Component type:- ${componentType}`}
-					{`Component props:- ${JSON.stringify(componentProps)}`}
-				</section>
-			);
+			// potentially wrap in a div - if we need to control grid items
+			// we should be able to use a pure css way?
+			return <ComponentDisplay key={index} component={component} />;
 		});
 	};
 
