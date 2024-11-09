@@ -1,22 +1,17 @@
+import { PageProfile as IPageProfile } from "@/types/page";
 import styles from "./page-profile.module.scss";
 
-interface Profile {
-	pageTitle?: string;
-	pageTitleVariant?: string; //union
-	showPageTitle?: boolean;
-}
-
-interface PageProfile {
-	profile: Profile;
+interface PageProfileProps {
+	profile: IPageProfile;
 }
 
 // Show title
 // Eventually show description, createdBy, created, updated, etc
-export const PageProfile = ({ profile }: PageProfile) => {
+export const PageProfile = ({ profile }: PageProfileProps) => {
 	const { pageTitle, showPageTitle } = profile || {};
 
 	return (
-		// Same component and styles (almost) as component
+		// set classname to be root & root-{given-variant}
 		<div className={styles.root} data-testid="page-profile-root">
 			{showPageTitle && pageTitle ? (
 				<h1 className={styles.title}>{pageTitle}</h1>

@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Page Grid Test Suite renders PageGrid unchanged 1`] = `
+<div>
+  <section
+    class="root root-test-grid"
+    data-testid="page-grid"
+  >
+    <section
+      data-testid="page-grid-item"
+    >
+      Component type:- GridItem
+      Component props:- {}
+    </section>
+  </section>
+</div>
+`;
