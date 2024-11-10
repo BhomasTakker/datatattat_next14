@@ -1,9 +1,9 @@
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 
-import { ComponentFactory } from "./component-factory";
+import { ComponentFactory } from "../components/component-factory";
 
-import { ComponentsOptions } from "./component-map";
+import { ComponentsOptions } from "../components/component-map";
 import { PageComponent } from "@/types/page";
 
 // Would need to mock a couple of options to test the default component

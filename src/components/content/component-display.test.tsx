@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import { ComponentDisplay } from "./component-display";
-import {} from "./component-factory";
+import {} from "./components/component-factory";
 import { PageComponent } from "@/types/page";
 
 jest.mock("./component-profile/component-profile", () => {
@@ -13,7 +13,7 @@ jest.mock("./component-profile/component-profile", () => {
 	};
 });
 
-jest.mock("./component-factory", () => {
+jest.mock("./components/component-factory", () => {
 	return {
 		__esModule: true,
 		ComponentFactory: ({ component }: { component: PageComponent }) => {

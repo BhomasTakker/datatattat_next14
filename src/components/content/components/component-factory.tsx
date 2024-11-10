@@ -1,7 +1,7 @@
 import {
 	ComponentsMap,
 	ComponentsOptions,
-} from "@/components/content/component-map";
+} from "@/components/content/components/component-map";
 import { PageComponent } from "@/types/page";
 
 export const ComponentFactory = ({
