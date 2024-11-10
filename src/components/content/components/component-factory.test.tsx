@@ -15,24 +15,27 @@ const MOCK = {
 };
 
 describe("ComponentFactory", () => {
-	it("should render the Article Collection component", () => {
-		render(<ComponentFactory component={MOCK.component as PageComponent} />);
+	it("should render the Article Collection component", async () => {
+		render(
+			await ComponentFactory({ component: MOCK.component as PageComponent })
+		);
 		const component = screen.getByText("Article Collection");
 		expect(component).toBeInTheDocument();
 	});
 
-	it("should render a default component if the component type is not found", () => {
+	it("should render a default component if the component type is not found", async () => {
 		// @ts-expect-error - We are testing the default component
 		MOCK.component.componentType = "Unknown";
-
-		render(<ComponentFactory component={MOCK.component as PageComponent} />);
+		render(
+			await ComponentFactory({ component: MOCK.component as PageComponent })
+		);
 		const component = screen.getByText("Component not found");
 		expect(component).toBeInTheDocument();
 	});
 
-	it("renders ComponentFactory unchanged", () => {
+	it("renders ComponentFactory unchanged", async () => {
 		const { container } = render(
-			<ComponentFactory component={MOCK.component as PageComponent} />
+			await ComponentFactory({ component: MOCK.component as PageComponent })
 		);
 		expect(container).toMatchSnapshot();
 	});

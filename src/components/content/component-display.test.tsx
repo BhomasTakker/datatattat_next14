@@ -13,6 +13,8 @@ jest.mock("./component-profile/component-profile", () => {
 	};
 });
 
+// In reality this would be an async component
+// How would you test this?
 jest.mock("./components/component-factory", () => {
 	return {
 		__esModule: true,
