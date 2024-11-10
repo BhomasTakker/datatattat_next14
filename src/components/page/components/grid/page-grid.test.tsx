@@ -1,10 +1,10 @@
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import { PageGrid, PageGridContent } from "./page-grid";
-import {} from "../../../component/component-display";
+import {} from "../../../content/component-display";
 import { PageComponent } from "@/types/page";
 
-jest.mock("../../../component/component-display", () => {
+jest.mock("../../../content/component-display", () => {
 	return {
 		__esModule: true,
 		ComponentDisplay: ({ component }: { component: PageComponent }) => {

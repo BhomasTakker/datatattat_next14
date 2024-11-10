@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react";
 import { PageStack, PageStackContent } from "./page-stack";
 import { PageComponent } from "@/types/page";
 
-jest.mock("../../../component/component-display", () => {
+jest.mock("../../../content/component-display", () => {
 	return {
 		__esModule: true,
 		ComponentDisplay: ({ component }: { component: PageComponent }) => {

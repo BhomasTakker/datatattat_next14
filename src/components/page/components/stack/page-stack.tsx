@@ -1,6 +1,6 @@
 import { PageComponents, PageContainer, PageContent } from "@/types/page";
 import styles from "./page-stack.module.scss";
-import { ComponentDisplay } from "@/components/component/component-display";
+import { ComponentDisplay } from "@/components/content/component-display";
 
 // We should probably have 'style' in the Props type
 type PageStackProps = {
