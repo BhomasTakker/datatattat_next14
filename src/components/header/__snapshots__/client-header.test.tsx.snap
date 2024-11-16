@@ -21,24 +21,5 @@ exports[`Client Header renders navigation unchanged 1`] = `
       </p>
     </li>
   </ul>
-  <ul
-    data-testid="sub-headers"
-  >
-    <li>
-      <p>
-        header1
-      </p>
-    </li>
-    <li>
-      <p>
-        header2
-      </p>
-    </li>
-    <li>
-      <p>
-        header3
-      </p>
-    </li>
-  </ul>
 </div>
 `;

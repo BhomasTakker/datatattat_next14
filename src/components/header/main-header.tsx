@@ -1,17 +1,15 @@
 import { ClientHeader } from "./client-header";
 import { NavigationHeader } from "./navigation-header";
 import styles from "./main-header.module.scss";
-export const MainHeader = () => {
+
+export interface DynamicHeader {
+	route?: string[] | undefined;
+}
+export const MainHeader = ({ route }: DynamicHeader) => {
 	return (
 		<header className={styles.root}>
-			<div className={styles.container}>
-				<NavigationHeader />
-			</div>
-			<div className={styles.divider} />
-			<div className={styles.container}>
-				<ClientHeader />
-			</div>
-			<div className={styles.divider} />
+			<NavigationHeader />
+			<ClientHeader route={route} />
 		</header>
 	);
 };

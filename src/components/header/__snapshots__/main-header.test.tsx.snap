@@ -5,26 +5,12 @@ exports[`MainHeader snaps renders MainHeader unchanged 1`] = `
   <header
     class="root"
   >
-    <div
-      class="container"
-    >
-      <h2>
-        Navigation Header
-      </h2>
-    </div>
-    <div
-      class="divider"
-    />
-    <div
-      class="container"
-    >
-      <h2>
-        Client Header
-      </h2>
-    </div>
-    <div
-      class="divider"
-    />
+    <h2>
+      Navigation Header
+    </h2>
+    <h2>
+      Client Header
+    </h2>
   </header>
 </div>
 `;

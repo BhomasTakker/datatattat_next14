@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component Display Test Suite renders ComponentDisplay unchanged 1`] = `
+<div>
+  <section
+    data-testid="component"
+  >
+    <div
+      data-testid="component-profile"
+    >
+      Componet Profile
+    </div>
+    <div
+      data-testid="component-factory"
+    >
+      Component
+    </div>
+  </section>
+</div>
+`;

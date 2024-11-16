@@ -1,4 +1,8 @@
+@use "../../../scss/abstracts/ui/" as *;
+
 .root {
+	border-bottom: $divider;
+
 	.toolbar {
 		// When few nav links then render menu centrally
 		display: flex;
