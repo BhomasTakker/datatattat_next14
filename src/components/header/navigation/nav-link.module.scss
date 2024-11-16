@@ -3,16 +3,16 @@
 
 .root {
 	border-radius: 10%;
-	padding: units.$rem_4 units.$rem_2;
+	padding: units.$rem_2 units.$rem_2;
+
+	text-transform: uppercase;
+	white-space: nowrap;
+	p {
+		color: colours.$textColourDark;
+	}
+
 	&:hover,
 	&:focus-visible {
 		background-color: colours.$shadowLight0;
-	}
-	.link {
-		text-transform: uppercase;
-		white-space: nowrap;
-		p {
-			color: colours.$textColourDark;
-		}
 	}
 }

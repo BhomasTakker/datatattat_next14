@@ -12,10 +12,8 @@ type NavLinkProps = {} & NavLinkData;
 
 export const NavLink = ({ route, label }: NavLinkProps) => {
 	return (
-		<div className={styles.root}>
-			<Link className={styles.link} href={route}>
-				<p>{label}</p>
-			</Link>
-		</div>
+		<Link className={`${styles.root}`} href={route}>
+			<p>{label}</p>
+		</Link>
 	);
 };

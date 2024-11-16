@@ -2,17 +2,13 @@
 
 exports[`Nav Link renders nav link unchanged 1`] = `
 <div>
-  <div
+  <a
     class="root"
+    href="/home"
   >
-    <a
-      class="link"
-      href="/home"
-    >
-      <p>
-        Home
-      </p>
-    </a>
-  </div>
+    <p>
+      Home
+    </p>
+  </a>
 </div>
 `;
