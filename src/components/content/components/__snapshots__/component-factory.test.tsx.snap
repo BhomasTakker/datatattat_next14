@@ -3,7 +3,7 @@
 exports[`ComponentFactory renders ComponentFactory unchanged 1`] = `
 <div>
   <div>
-    Component not found
+    Component not found:- Unknown
   </div>
 </div>
 `;

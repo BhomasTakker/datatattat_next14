@@ -16,7 +16,7 @@ export const ComponentFactory = async ({
 
 	// do better error handling
 	if (!Component) {
-		return <div>Component not found</div>;
+		return <div>{`Component not found:- ${componentType}`}</div>;
 	}
 
 	const data = await getData();

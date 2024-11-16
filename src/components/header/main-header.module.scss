@@ -1,13 +1,2 @@
-@use "../../scss/abstracts/units/" as *;
-@use "../../scss/abstracts/ui/" as *;
-@use "../../scss/mixins/ui/" as *;
-
 .root {
-	.divider {
-		border-top: $divider;
-	}
-
-	.container {
-		@include pageMargin();
-	}
 }

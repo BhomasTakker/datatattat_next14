@@ -29,7 +29,7 @@ describe("ComponentFactory", () => {
 		render(
 			await ComponentFactory({ component: MOCK.component as PageComponent })
 		);
-		const component = screen.getByText("Component not found");
+		const component = screen.getByText(/Component not found/i);
 		expect(component).toBeInTheDocument();
 	});
 

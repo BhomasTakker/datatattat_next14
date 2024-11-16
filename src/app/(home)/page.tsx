@@ -1,5 +1,5 @@
 import { getPage } from "@/actions/page/page-actions";
-import styles from "./page.module.css";
+import styles from "./page.module.scss";
 import { IPage } from "@/types/page";
 import { PageDisplay } from "@/components/page/page-display";
 

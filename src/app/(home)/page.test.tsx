@@ -1,9 +1,9 @@
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import Page from "./page";
-import { getPage } from "../actions/page/page-actions";
+import { getPage } from "../../actions/page/page-actions";
 
-jest.mock("../components/page/page-display", () => {
+jest.mock("../../components/page/page-display", () => {
 	return {
 		PageDisplay: () => {
 			return <h2>Page Display</h2>;
@@ -11,7 +11,7 @@ jest.mock("../components/page/page-display", () => {
 	};
 });
 
-jest.mock("../actions/page/page-actions", () => {
+jest.mock("../../actions/page/page-actions", () => {
 	return {
 		getPage: jest.fn().mockResolvedValue({}),
 	};

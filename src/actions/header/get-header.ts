@@ -5,12 +5,18 @@ import { cloneDeep } from "@/utils/object";
 import { HeaderType } from "@/types/header";
 import { getHeader } from "@/lib/mongo/actions/header";
 
-export const trimHeader = (route: string) => {
+// This was the bug
+// THIS is a server action
+// IT IS an async function / whether you specify or not
+// It will be a promise!
+// No need being a server function
+export const trimHeader = async (route: string) => {
 	const header = route.split("/");
 	return header.splice(0, header.length - 1).join("/");
 };
 
-export const isProtectedRoute = (route: string) => {
+// No need being a server function
+export const isProtectedRoute = async (route: string) => {
 	//This isn't great?
 	//missed a thing and got into an infinite loop
 	//We CANNOT do this on Vercel!!
@@ -25,14 +31,14 @@ export async function getMainHeader(): Promise<HeaderType> {
 }
 
 async function populateSubHeaders(route: string): Promise<HeaderType[]> {
-	if (isProtectedRoute(route)) {
+	if (await isProtectedRoute(route)) {
 		return [];
 	}
 
 	const result = await getHeader(route);
 	const header = [result];
 
-	const parentHeader = trimHeader(route);
+	const parentHeader = await trimHeader(route);
 
 	const sub = parentHeader ? await populateSubHeaders(parentHeader) : [];
 

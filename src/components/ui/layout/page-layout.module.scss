@@ -1,0 +1,24 @@
+@use "../../../scss/mixins/ui/" as *;
+
+.root {
+	font-family: var(--font-geist-sans);
+
+	a {
+		text-decoration: none;
+	}
+
+	ul {
+		list-style: none;
+	}
+
+	// h1,
+	// h2,
+	// h3,
+	// h4,
+	// h5 {
+	// 	font-family: var(--font-geist-mono);
+	// 	font-weight: bold;
+	// }
+
+	@include pageMargin();
+}

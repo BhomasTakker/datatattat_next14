@@ -51,7 +51,8 @@ jest.mock("../../actions/header/get-header", () => {
 
 describe("Client Header", () => {
 	it("renders navigation menu", async () => {
-		render(<ClientHeader />);
+		// render(<ClientHeader route={[]} />);
+		render(await ClientHeader({ route: [] }));
 		await waitFor(() => {
 			const nav = screen.queryByTestId("nav");
 			expect(nav).toBeInTheDocument();
@@ -60,7 +61,7 @@ describe("Client Header", () => {
 
 	it("does not render navigation menu when no header returned", async () => {
 		(getMainHeader as jest.Mock).mockResolvedValueOnce(undefined);
-		render(<ClientHeader />);
+		render(await ClientHeader({ route: [] }));
 		await waitFor(() => {
 			const nav = screen.queryByTestId("nav");
 			expect(nav).not.toBeInTheDocument();
@@ -68,7 +69,11 @@ describe("Client Header", () => {
 	});
 
 	it("renders sub headers", async () => {
-		render(<ClientHeader />);
+		render(
+			await ClientHeader({
+				route: ["defaults to home if no route provided..."],
+			})
+		);
 		await waitFor(() => {
 			const subHeaders = screen.queryByTestId("sub-headers");
 			expect(subHeaders).toBeInTheDocument();
@@ -77,15 +82,18 @@ describe("Client Header", () => {
 
 	it("does not render sub headers when empty array returned", async () => {
 		(getSubHeaders as jest.Mock).mockResolvedValueOnce([]);
-		render(<ClientHeader />);
+		render(await ClientHeader({}));
 		await waitFor(() => {
 			const nav = screen.queryByTestId("sub-headers");
 			expect(nav).not.toBeInTheDocument();
 		});
 	});
 
+	// This test is not correct. We aren't rendering subs
 	it("renders navigation unchanged", async () => {
-		const { container } = render(<ClientHeader />);
+		const { container } = render(
+			await ClientHeader({ route: ["test1", "test2"] })
+		);
 		await waitFor(() => {
 			screen.queryByTestId("nav");
 			screen.queryByTestId("sub-headers");

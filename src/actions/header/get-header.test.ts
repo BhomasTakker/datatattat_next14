@@ -43,20 +43,20 @@ const mockHeader = {
 
 describe("get-header action test suite", () => {
 	describe("trimHeader", () => {
-		it("Return the parent route from a given route", () => {
-			const result = trimHeader("/string/string/string/remove-me");
+		it("Return the parent route from a given route", async () => {
+			const result = await trimHeader("/string/string/string/remove-me");
 			expect(result).toEqual("/string/string/string");
 		});
 	});
 
 	describe("isProtectedRoute", () => {
-		it("Return true for protected routes", () => {
-			expect(isProtectedRoute("/")).toBe(true);
-			expect(isProtectedRoute("/users")).toBe(true);
+		it("Return true for protected routes", async () => {
+			expect(await isProtectedRoute("/")).toBe(true);
+			expect(await isProtectedRoute("/users")).toBe(true);
 		});
 
-		it("Return false for unprotected routes", () => {
-			expect(isProtectedRoute("/whatever")).toBe(false);
+		it("Return false for unprotected routes", async () => {
+			expect(await isProtectedRoute("/whatever")).toBe(false);
 		});
 	});
 
