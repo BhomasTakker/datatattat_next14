@@ -14,6 +14,12 @@ const MOCK = {
 	},
 };
 
+jest.mock("../../../actions/data/get-data", () => {
+	return {
+		getData: jest.fn().mockResolvedValue({}),
+	};
+});
+
 describe("ComponentFactory", () => {
 	it("should render the Article Collection component", async () => {
 		render(
