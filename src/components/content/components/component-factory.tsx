@@ -19,7 +19,9 @@ export const ComponentFactory = async ({
 		return <div>{`Component not found:- ${componentType}`}</div>;
 	}
 
-	const data = await getData();
+	const { _with: queryObject } = component;
+
+	const data = await getData(queryObject);
 
 	console.log({ data });
 	// Literally just a get data server action

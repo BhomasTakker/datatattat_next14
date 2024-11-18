@@ -29,7 +29,19 @@ describe("Component Display Test Suite", () => {
 	const MOCK: PageComponent = {
 		componentType: "Component",
 		componentProps: {},
-		_with: {},
+		_with: {
+			type: "",
+			query: {
+				provider: "",
+				params: {},
+				conversions: {
+					response: {},
+					sub: {},
+					conversionId: "",
+				},
+				queryId: "",
+			},
+		},
 	};
 
 	it("should render a component", () => {

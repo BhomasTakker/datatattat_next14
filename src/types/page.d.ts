@@ -5,10 +5,28 @@ export type PageContainer = {
 
 export type PageProps = object;
 
+export type Conversions = {
+	response: object;
+	sub: object;
+	conversionId: string;
+};
+
+export type WithQuery = {
+	provider: string;
+	params: object;
+	conversions: Conversions;
+	queryId: string;
+};
+
+export type With = {
+	type: string;
+	query: WithQuery;
+};
+
 export type PageComponent = {
 	componentType: string;
 	componentProps: object;
-	_with: object;
+	_with: With;
 };
 
 export type PageComponents = Array<PageComponent>;
