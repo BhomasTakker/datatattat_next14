@@ -1,5 +1,4 @@
-import { ComponentProfile } from "@/components/content/component-profile/component-profile";
-import { UnknownObject } from "./utils";
+import { ComponentPropsObject } from "./component";
 
 export type PageContainer = {
 	containerType: "Stack" | "Grid";
@@ -7,19 +6,6 @@ export type PageContainer = {
 };
 
 export type PageProps = object;
-
-export type ComponentProfileProps = {
-	componentTitle: string;
-	componentTitleLink: string;
-	showComponentTitle: boolean;
-};
-
-// Joined with ComponentProfile but should extend?
-export type ComponentProps = {
-	// this should be agiven no?
-	variant: string;
-} & ComponentProfile &
-	UnknownObject;
 
 export type Conversions = {
 	response: object;
@@ -41,7 +27,7 @@ export type With = {
 
 export type PageComponent = {
 	componentType: string;
-	componentProps: ComponentProps;
+	componentProps: ComponentPropsObject;
 	_with: With;
 };
 

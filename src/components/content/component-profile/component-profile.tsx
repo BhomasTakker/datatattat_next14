@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { ComponentProfileProps } from "../../../types/page";
 import styles from "./component-profile.module.scss";
+import { ComponentProfileProps } from "@/types/component";
 
 export const ComponentProfile = ({
 	profile,

@@ -1,6 +1,7 @@
-import { ComponentProfileProps, PageComponent } from "@/types/page";
+import { PageComponent } from "@/types/page";
 import { ComponentProfile } from "./component-profile/component-profile";
 import { ComponentFactory } from "./components/component-factory";
+import { ComponentProfileProps } from "@/types/component";
 
 export const ComponentDisplay = ({
 	component,
