@@ -1,6 +1,8 @@
 @use "../units/" as units;
 
 $page-title-font: var(--font-geist-sans), Helvetica, Arial, freesans, sans-serif;
+$component-title-font: var(--font-geist-sans), Helvetica, Arial, freesans,
+	sans-serif;
 $text-font: var(--font-geist-sans), Helvetica, Arial, freesans, sans-serif;
 
 $page-title-lg: units.$text_11;
