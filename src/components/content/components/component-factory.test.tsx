@@ -5,6 +5,7 @@ import { ComponentFactory } from "../components/component-factory";
 
 import { ComponentsOptions } from "../components/component-map";
 import { PageComponent } from "@/types/page";
+import { ArticleCollection } from "./article-collection/article-collection";
 
 // Would need to mock a couple of options to test the default component
 
@@ -17,6 +18,15 @@ const MOCK = {
 jest.mock("../../../actions/data/get-data", () => {
 	return {
 		getData: jest.fn().mockResolvedValue({}),
+	};
+});
+
+jest.mock("./article-collection/article-collection", () => {
+	return {
+		__esModule: true,
+		ArticleCollection: () => {
+			return <div data-testid="article-collection">Article Collection</div>;
+		},
 	};
 });
 

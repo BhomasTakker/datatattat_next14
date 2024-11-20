@@ -28,7 +28,12 @@ jest.mock("./components/component-factory", () => {
 describe("Component Display Test Suite", () => {
 	const MOCK: PageComponent = {
 		componentType: "Component",
-		componentProps: {},
+		componentProps: {
+			variant: "default",
+			componentTitle: "Sample Title",
+			componentTitleLink: "http://example.com",
+			showComponentTitle: true,
+		},
 		_with: {
 			type: "",
 			query: {

@@ -20,11 +20,6 @@ export const ArticleCollection = ({
 	// we really just need variant - variant determines the css class
 	// props determine the content / show meta, video, etc
 
-	console.log({ component, dataObject });
-	console.log({
-		variantTypeObject: componentProps.variantTypeObject,
-	});
-
 	const variantObject = VariantsMap.get(variant);
 
 	if (!variantObject) {
