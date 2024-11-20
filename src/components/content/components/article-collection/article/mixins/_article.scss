@@ -1,0 +1,27 @@
+@mixin testArticle() {
+	.article {
+		background-color: white;
+		.image {
+			width: 100%;
+			aspect-ratio: 16/9;
+		}
+		.container {
+			.title {
+				color: green;
+			}
+			.description {
+				color: blue;
+			}
+			.meta {
+				display: flex;
+				gap: 1rem;
+				.author {
+					color: red;
+				}
+				.date {
+					color: yellow;
+				}
+			}
+		}
+	}
+}

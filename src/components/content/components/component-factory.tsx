@@ -4,6 +4,7 @@ import {
 	ComponentsOptions,
 } from "@/components/content/components/component-map";
 import { PageComponent } from "@/types/page";
+import { UnknownObject } from "@/types/utils";
 
 export const ComponentFactory = async ({
 	component,
@@ -21,11 +22,14 @@ export const ComponentFactory = async ({
 
 	const { _with: queryObject } = component;
 
-	const data = await getData(queryObject);
+	const data = (await getData(queryObject)) as UnknownObject;
 
-	console.log({ data });
 	// Literally just a get data server action
 	// pass it to the component
 
-	return <Component component={component} />;
+	// all components take in a component object
+	// AND and a data object
+	// data object contains data and any data functions
+	// data functions can be used to refecth or manipulate queries
+	return <Component component={component} dataObject={{ data }} />;
 };
