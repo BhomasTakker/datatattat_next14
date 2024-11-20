@@ -1,0 +1,19 @@
+@use "../../../scss/abstracts/font" as text;
+@use "../../../scss/abstracts/colours" as colours;
+@use "../../../scss/abstracts/units" as units;
+
+.root {
+	display: flex;
+
+	.title {
+		margin: units.$rem_4 units.$rem_0;
+		font-size: text.$component-title-sm;
+		font-family: text.$component-title-font;
+		color: colours.$titleColourDark;
+
+		// This should be container width
+		@media screen and (min-width: units.$screenWidthMd) {
+			font-size: text.$component-title-lg;
+		}
+	}
+}

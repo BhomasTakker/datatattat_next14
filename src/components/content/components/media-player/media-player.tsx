@@ -1,6 +1,6 @@
-import { PageComponent } from "@/types/page";
+import { ComponentProps } from "@/types/component";
 
-export const MediaPlayer = ({ component }: { component: PageComponent }) => {
-	console.log({ component });
+export const MediaPlayer = ({ component, dataObject }: ComponentProps) => {
+	console.log({ component, dataObject });
 	return <div>Media Player</div>;
 };

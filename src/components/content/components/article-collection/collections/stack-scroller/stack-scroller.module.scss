@@ -1,0 +1,16 @@
+@use "../../article/mixins/index.scss" as article;
+
+.root {
+	display: flex;
+	gap: 2rem;
+	overflow-x: auto;
+	padding: 2rem 0;
+	scroll-snap-type: x mandatory;
+	scroll-behavior: smooth;
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
+
+	@include article.testArticle();
+}

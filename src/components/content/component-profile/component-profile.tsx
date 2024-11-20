@@ -1,4 +1,29 @@
-export const ComponentProfile = ({ profile }: { profile: object }) => {
-	console.log({ profile });
-	return <h2>Component Title</h2>;
+import Link from "next/link";
+import styles from "./component-profile.module.scss";
+import { ComponentProfileProps } from "@/types/component";
+
+export const ComponentProfile = ({
+	profile,
+}: {
+	profile: ComponentProfileProps;
+}) => {
+	const { componentTitle, showComponentTitle, componentTitleLink } =
+		profile || {};
+
+	const titleComponent = <h2 className={styles.title}>{componentTitle}</h2>;
+	const titleComponentToRender = componentTitleLink ? (
+		<Link href={componentTitleLink}>{titleComponent}</Link>
+	) : (
+		titleComponent
+	);
+
+	if (!showComponentTitle) {
+		return <></>;
+	}
+
+	return (
+		<div className={styles.root}>
+			{showComponentTitle && componentTitle && titleComponentToRender}
+		</div>
+	);
 };

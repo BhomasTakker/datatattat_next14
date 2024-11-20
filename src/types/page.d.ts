@@ -1,3 +1,5 @@
+import { ComponentPropsObject } from "./component";
+
 export type PageContainer = {
 	containerType: "Stack" | "Grid";
 	initData: object;
@@ -25,7 +27,7 @@ export type With = {
 
 export type PageComponent = {
 	componentType: string;
-	componentProps: object;
+	componentProps: ComponentPropsObject;
 	_with: With;
 };
 
