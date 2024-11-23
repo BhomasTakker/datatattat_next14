@@ -1,3 +1,4 @@
+import { ComponentDataOptions } from "./component-data-options";
 import { rssFetch } from "./rss/rss-fetch";
 
 const apiReturn = (data: object) => JSON.stringify(data);
@@ -9,13 +10,6 @@ type Components =
 	| typeof apiReturn
 	| typeof oembedReturn
 	| typeof customDataReturn;
-
-export enum ComponentDataOptions {
-	RSS_QUERY = "new-rss-query",
-	API_QUERY = "api-query",
-	OEMBED_QUERY = "oembed-query",
-	CUSTOM_DATA = "custom-data",
-}
 
 export const ComponentDataMap = new Map<ComponentDataOptions, Components>([
 	[ComponentDataOptions.RSS_QUERY, rssFetch],
