@@ -12,6 +12,7 @@
 		"test:update": "jest --updateSnapshot"
 	},
 	"dependencies": {
+		"jsdom": "^25.0.1",
 		"mongoose": "^8.7.2",
 		"next": "14.2.15",
 		"next-auth": "^4.24.8",
