@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react";
 
 import { PageDisplay } from "./page-display";
 import { PageContent, PageProfile } from "@/types/page";
-import { PageComponentsOptions } from "./components/page-component-factory-map";
+import { PageComponentsOptions } from "./components/page-component-factory-options";
 
 type Meta = {
 	pageTitle: string;
@@ -71,7 +71,7 @@ const MOCK = {
 };
 
 describe("PageDisplay", () => {
-	it("renders main elelment", () => {
+	it.only("renders main elelment", () => {
 		render(<PageDisplay page={MOCK} />);
 		const main = screen.getByRole("main");
 		expect(main).toBeInTheDocument();
