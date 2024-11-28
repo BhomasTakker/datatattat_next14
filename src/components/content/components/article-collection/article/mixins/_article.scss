@@ -1,25 +1,115 @@
-@mixin testArticle() {
+@use "../../../../../../scss/mixins/text/" as textMixins;
+@use "../../../../../../scss/abstracts/units/" as units;
+@use "../../../../../../scss/abstracts/colours/" as colours;
+@use "../../../../../../scss/abstracts/font/" as *;
+
+@use "./base" as base;
+
+// this is a scroller - we wouldn't need to modify width
+// width and size can always be what we set it
+// For the relevant screen size - it is not dynamically responsive
+@mixin articleCardTopDown($maxWidth: units.$rem_16, $minWidth: units.$rem_16) {
 	.article {
-		background-color: white;
+		@include base.article();
+		flex-direction: column;
+
+		max-width: $maxWidth;
+		min-width: $minWidth;
+
+		aspect-ratio: 16/18;
+
 		.image {
-			width: 100%;
+			@include base.image($maxWidth, $minWidth);
 			aspect-ratio: 16/9;
 		}
-		.container {
-			.title {
-				color: green;
+
+		.contentContainer {
+			@include base.contentContainer($maxWidth, $minWidth);
+			// aspect ratio is applied after padding etc...
+			aspect-ratio: 16/9;
+
+			.textContainer {
+				@include base.textContainer();
 			}
-			.description {
-				color: blue;
-			}
+
 			.meta {
-				display: flex;
-				gap: 1rem;
-				.author {
-					color: red;
+				@include base.meta();
+			}
+		}
+	}
+}
+
+@mixin articleCardLeftRight(
+	$maxWidth: units.$rem_16,
+	$minWidth: units.$rem_16
+) {
+	.article {
+		@include base.article();
+
+		aspect-ratio: 32/9;
+
+		.image {
+			@include base.image($maxWidth, $minWidth);
+			aspect-ratio: 16/9;
+		}
+
+		.contentContainer {
+			@include base.contentContainer($maxWidth, $minWidth);
+
+			// aspect ratio is applied after padding etc...
+			aspect-ratio: 16/9;
+
+			.textContainer {
+				@include base.textContainer();
+				gap: units.$rem_1;
+
+				.title,
+				.description {
+					margin: units.$rem_0 units.$rem_1;
 				}
-				.date {
-					color: yellow;
+
+				@container content-container (min-width: 16rem) {
+					gap: units.$rem_2;
+
+					.title,
+					.description {
+						margin: units.$rem_0 units.$rem_2;
+					}
+				}
+
+				@container content-container (min-width: 20rem) {
+					gap: units.$rem_3;
+
+					.title,
+					.description {
+						margin: units.$rem_0 units.$rem_2;
+					}
+				}
+
+				@container content-container (min-width: 24rem) {
+					gap: units.$rem_3;
+
+					.title,
+					.description {
+						margin: units.$rem_0 units.$rem_4 units.$rem_0;
+					}
+				}
+			}
+
+			.meta {
+				@include base.meta();
+				margin: units.$rem_0 units.$rem_1;
+
+				@container content-container (min-width: 16rem) {
+					margin: units.$rem_0 units.$rem_2;
+				}
+
+				@container content-container (min-width: 20rem) {
+					margin: units.$rem_0 units.$rem_2;
+				}
+
+				@container content-container (min-width: 24rem) {
+					margin: units.$rem_0 units.$rem_4 units.$rem_0;
 				}
 			}
 		}

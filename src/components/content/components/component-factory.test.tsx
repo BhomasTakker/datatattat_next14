@@ -5,7 +5,6 @@ import { ComponentFactory } from "../components/component-factory";
 
 import { ComponentsOptions } from "../components/component-map";
 import { PageComponent } from "@/types/page";
-import { ArticleCollection } from "./article-collection/article-collection";
 
 // Would need to mock a couple of options to test the default component
 

@@ -3,6 +3,7 @@
 exports[`Component Display Test Suite renders ComponentDisplay unchanged 1`] = `
 <div>
   <section
+    class="component"
     data-testid="component"
   >
     <div

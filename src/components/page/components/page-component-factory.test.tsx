@@ -1,8 +1,8 @@
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import { PageComponentFactory } from "./page-component-factory";
-import { PageComponentsOptions } from "./page-component-factory-map";
 import { PageContent } from "@/types/page";
+import { PageComponentsOptions } from "./page-component-factory-options";
 
 jest.mock("./stack/page-stack", () => {
 	return {

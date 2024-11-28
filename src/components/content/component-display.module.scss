@@ -1,0 +1,9 @@
+@use "../../scss/abstracts/units" as *;
+
+.component {
+	// over reliance on flex for this kind of thing
+	// if doing this then create a mixin
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}

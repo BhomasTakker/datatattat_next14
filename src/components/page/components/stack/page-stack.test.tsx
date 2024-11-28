@@ -33,8 +33,30 @@ const MOCK: PageStackContent = {
 
 const MOCK_COMPONENT = {
 	componentType: "ListItem",
-	componentProps: {},
-	_with: {},
+	componentProps: {
+		variant: "default",
+		componentTitle: "Sample Title",
+		componentTitleLink: "/sample-link",
+		showComponentTitle: true,
+	},
+	_with: {
+		type: "sampleType",
+		query: {
+			key: "sampleKey",
+			value: "sampleValue",
+			provider: "sampleProvider",
+			params: {},
+			conversions: [
+				{
+					response: "sampleResponse",
+					sub: "sampleSub",
+					conversionId: "sampleConversionId",
+					additionalProp: "sampleAdditionalProp",
+				},
+			],
+			queryId: "sampleQueryId",
+		},
+	},
 };
 
 describe("Page Stack Test Suite", () => {
@@ -51,6 +73,7 @@ describe("Page Stack Test Suite", () => {
 	});
 
 	it("should render a list item", () => {
+		// @ts-expect-error whatever this is
 		MOCK.components = [MOCK_COMPONENT];
 		render(<PageStack content={MOCK} />);
 		const component = screen.getByRole("listitem");
@@ -58,6 +81,7 @@ describe("Page Stack Test Suite", () => {
 	});
 
 	it("should render expected number of list items", () => {
+		// @ts-expect-error whatever this is
 		MOCK.components = [MOCK_COMPONENT, MOCK_COMPONENT, MOCK_COMPONENT];
 		render(<PageStack content={MOCK} />);
 		const components = screen.getAllByRole("listitem");
@@ -65,6 +89,7 @@ describe("Page Stack Test Suite", () => {
 	});
 
 	it("renders PageStack unchanged", () => {
+		// @ts-expect-error whatever this is
 		MOCK.components = [MOCK_COMPONENT];
 		const { container } = render(<PageStack content={MOCK} />);
 		expect(container).toMatchSnapshot();

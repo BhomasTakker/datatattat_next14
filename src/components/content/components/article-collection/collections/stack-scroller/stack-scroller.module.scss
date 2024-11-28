@@ -1,16 +1,20 @@
-@use "../../article/mixins/index.scss" as article;
-
+@use "../../article/mixins/" as article;
+@use "../../../../../../scss/abstracts/units/" as *;
+@use "../../../../../../scss/mixins/ui/" as ui;
+// articleCardTopDown / articleCardLeftRight
 .root {
 	display: flex;
-	gap: 2rem;
-	overflow-x: auto;
-	padding: 2rem 0;
-	scroll-snap-type: x mandatory;
-	scroll-behavior: smooth;
+	gap: $rem_4;
+	// padding: units.$rem_6 units.$rem_0;
+	@include ui.scrollXNoScroller();
 
-	&::-webkit-scrollbar {
-		display: none;
+	@include article.articleCardTopDown($rem_14, $rem_14);
+
+	@media screen and (min-width: $screenWidthSm) {
+		@include article.articleCardTopDown($rem_15, $rem_15);
 	}
 
-	@include article.testArticle();
+	@media screen and (min-width: $screenWidthMd) {
+		@include article.articleCardTopDown($rem_16, $rem_16);
+	}
 }

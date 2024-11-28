@@ -1,8 +1,6 @@
 import { PageContent } from "@/types/page";
-import {
-	PageContainersMap,
-	PageComponentsOptions,
-} from "./page-component-factory-map";
+import { PageContainersMap } from "./page-component-factory-map";
+import { PageComponentsOptions } from "./page-component-factory-options";
 
 export const PageComponentFactory = ({ content }: { content: PageContent }) => {
 	const { container } = content || {};

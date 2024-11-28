@@ -18,12 +18,9 @@ export const PageStack = ({ content }: { content: PageContent }) => {
 
 	const { direction: style = "column" } = props || {};
 
-	// Question is
-	// Should we have render components functions
-	// in this case a ListItem render component
-	// Point being
-	// all compenents will be rendered in largely the same way
-	// just of different elements and classes
+	////////////////////////////////////////////////////////
+	// Look at articleCollection for what we shuld do here
+	////////////////////////////////////////////////////////
 	const renderComponents = () => {
 		return components.map((component, index) => {
 			return (

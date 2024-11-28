@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react";
 
 import { PageDisplay } from "./page-display";
 import { PageContent, PageProfile } from "@/types/page";
-import { PageComponentsOptions } from "./components/page-component-factory-map";
+import { PageComponentsOptions } from "./components/page-component-factory-options";
 
 type Meta = {
 	pageTitle: string;

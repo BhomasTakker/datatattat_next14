@@ -8,7 +8,7 @@ exports[`Page Stack Test Suite renders PageStack unchanged 1`] = `
     <li>
       Component type:- ListItem
       <section>
-        Component props:- {}
+        Component props:- {"variant":"default","componentTitle":"Sample Title","componentTitleLink":"/sample-link","showComponentTitle":true}
       </section>
     </li>
   </ul>
