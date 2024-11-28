@@ -1,5 +1,4 @@
 import { StyleSheet } from "@/types/css";
-import Image from "next/image";
 
 interface ArticleImage {
 	image: string;

@@ -71,7 +71,7 @@ const MOCK = {
 };
 
 describe("PageDisplay", () => {
-	it.only("renders main elelment", () => {
+	it("renders main elelment", () => {
 		render(<PageDisplay page={MOCK} />);
 		const main = screen.getByRole("main");
 		expect(main).toBeInTheDocument();

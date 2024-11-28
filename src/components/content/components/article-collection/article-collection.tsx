@@ -10,6 +10,7 @@ export const ArticleCollection = ({
 	const articlesData = dataObject.data as Collection;
 	const { items: articles } = articlesData;
 
+	////////////////////////
 	// TODO:-
 	// update to use just variant.
 	// const variant = componentProps.variant;

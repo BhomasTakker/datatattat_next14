@@ -1,0 +1,122 @@
+@use "../../../../../../scss/mixins/text/" as textMixins;
+@use "../../../../../../scss/abstracts/units" as units;
+@use "../../../../../../scss/abstracts/colours" as colours;
+@use "../../../../../../scss/abstracts/font" as *;
+
+// layout of these isn't likely to change across implementations
+@mixin article() {
+	display: flex;
+
+	flex: 1 1 100%;
+
+	background-color: colours.$whiteSmoke;
+	color: colours.$textColourDark;
+
+	&:hover,
+	&:focus {
+		background-color: rgb(0, 0, 0, 0.1);
+	}
+}
+
+@mixin image($maxWidth, $minWidth) {
+	max-width: $maxWidth;
+	min-width: $minWidth;
+}
+
+@mixin contentContainer($maxWidth, $minWidth) {
+	// using containers like this might be unperformant
+	container: content-container / inline-size;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+
+	max-width: $maxWidth;
+	min-width: $minWidth;
+}
+
+@mixin textContainer() {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+
+	.title {
+		@include textMixins.maxLines(2);
+		font-family: $component-title-font;
+		font-weight: $title-font-weight;
+
+		margin: units.$rem_1 units.$rem_0;
+
+		font-size: clamp(1.2rem, 6cqi, 3.5rem);
+	}
+	.description {
+		display: none;
+
+		font-family: $text-font;
+		font-weight: $text-font-weight;
+
+		font-size: clamp(0.8rem, 4cqi, 2rem);
+	}
+
+	@container content-container (min-width: 16rem) {
+		.title {
+			@include textMixins.maxLines(2);
+			margin: units.$rem_2 units.$rem_0;
+		}
+		.description {
+			@include textMixins.maxLines(2);
+		}
+	}
+
+	@container content-container (min-width: 20rem) {
+		.title {
+			@include textMixins.maxLines(2);
+			margin: units.$rem_2 units.$rem_0;
+		}
+		.description {
+			@include textMixins.maxLines(3);
+		}
+	}
+
+	@container content-container (min-width: 24rem) {
+		.title {
+			margin: units.$rem_4 units.$rem_0 units.$rem_2;
+			@include textMixins.maxLines(3);
+		}
+		.description {
+			@include textMixins.maxLines(3);
+		}
+	}
+}
+
+@mixin meta() {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	padding: units.$rem_2 units.$rem_0;
+	font-size: smaller;
+	font-style: italic;
+
+	> * {
+		@include textMixins.maxLines(1);
+	}
+
+	:nth-child(2n + 2) {
+		text-align: right;
+	}
+
+	:nth-child(2n + 1) {
+	}
+
+	@container content-container (min-width: 20rem) {
+		font-size: small;
+	}
+
+	.authors {
+	}
+	.publishers {
+	}
+	.categories {
+	}
+	.time {
+	}
+}

@@ -8,8 +8,8 @@ type ArticleProps = {
 	styles: StyleSheet;
 };
 
-export const Article = async ({ article, styles }: ArticleProps) => {
-	const { title, description, avatar, src, details } = article;
+export const Article = ({ article, styles }: ArticleProps) => {
+	const { title, description, avatar, details } = article;
 	const { src: image, alt: imageAlt } = avatar || {};
 	const { categories, authors, published, publishers } = details || {};
 

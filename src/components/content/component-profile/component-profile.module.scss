@@ -1,18 +1,24 @@
 @use "../../../scss/abstracts/font" as text;
 @use "../../../scss/abstracts/colours" as colours;
-@use "../../../scss/abstracts/units" as units;
+@use "../../../scss/abstracts/units" as *;
 
 .root {
+	container: profile-container / inline-size;
 	display: flex;
 
 	.title {
-		margin: units.$rem_4 units.$rem_0;
+		// margin: $rem_4 $rem_0 $rem_0;
 		font-size: text.$component-title-sm;
 		font-family: text.$component-title-font;
 		color: colours.$titleColourDark;
 
-		// This should be container width
-		@media screen and (min-width: units.$screenWidthMd) {
+		// we cannot use variables with container queries
+		// I think this is the case / follow up on this
+		@container profile-container (min-width: 640px) {
+			font-size: text.$component-title-md;
+		}
+
+		@container profile-container (min-width: 1024px) {
 			font-size: text.$component-title-lg;
 		}
 	}

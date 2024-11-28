@@ -9,7 +9,8 @@
 		"lint": "next lint",
 		"test": "jest",
 		"test:watch": "jest --watch",
-		"test:update": "jest --updateSnapshot"
+		"test:update": "jest --updateSnapshot",
+		"test:coverage": "jest --coverage"
 	},
 	"dependencies": {
 		"jsdom": "^25.0.1",

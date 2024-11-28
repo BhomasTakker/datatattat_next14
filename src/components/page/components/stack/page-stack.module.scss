@@ -1,12 +1,16 @@
+@use "../../../../scss/abstracts/units/" as units;
+
 .root {
 	list-style: none;
-	background-color: red;
+	display: flex;
+	flex-direction: column;
+	gap: units.$rem_5;
 }
 
 .root-column {
-	background-color: blue;
+	// background-color: blue;
 }
 
 .root-row {
-	background-color: green;
+	// background-color: green;
 }

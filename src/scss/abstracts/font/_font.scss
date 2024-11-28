@@ -4,12 +4,15 @@ $page-title-font: var(--font-geist-sans), Helvetica, Arial, freesans, sans-serif
 $component-title-font: var(--font-geist-sans), Helvetica, Arial, freesans,
 	sans-serif;
 $text-font: var(--font-geist-sans), Helvetica, Arial, freesans, sans-serif;
+$italic-font: var(--font-geist-mono), Helvetica, Arial, freesans, sans-serif;
 
 $page-title-lg: units.$text_11;
-$page-title-sm: units.$text_10;
+$page-title-md: units.$text_10;
+$page-title-sm: units.$text_9;
 
 $component-title-lg: units.$text_9;
-$component-title-sm: units.$text_7;
+$component-title-md: units.$text_7;
+$component-title-sm: units.$text_5;
 
 $title-font-weight: bold;
 $text-font-weight: medium;

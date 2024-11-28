@@ -1,0 +1,9 @@
+@use "../../scss/abstracts/units/" as *;
+
+.page {
+	margin-top: $rem_5;
+
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+}
