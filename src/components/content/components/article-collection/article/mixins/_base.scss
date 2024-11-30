@@ -7,8 +7,6 @@
 @mixin article() {
 	display: flex;
 
-	flex: 1 1 100%;
-
 	background-color: colours.$whiteSmoke;
 	color: colours.$textColourDark;
 
@@ -21,6 +19,7 @@
 @mixin image($maxWidth, $minWidth) {
 	max-width: $maxWidth;
 	min-width: $minWidth;
+	width: 100%;
 }
 
 @mixin contentContainer($maxWidth, $minWidth) {
@@ -33,6 +32,7 @@
 
 	max-width: $maxWidth;
 	min-width: $minWidth;
+	width: 100%;
 }
 
 @mixin textContainer() {
@@ -58,7 +58,7 @@
 		font-size: clamp(0.8rem, 4cqi, 2rem);
 	}
 
-	@container content-container (min-width: 16rem) {
+	@container content-container (min-width: 15rem) {
 		.title {
 			@include textMixins.maxLines(2);
 			margin: units.$rem_2 units.$rem_0;

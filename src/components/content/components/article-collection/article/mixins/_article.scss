@@ -8,13 +8,14 @@
 // this is a scroller - we wouldn't need to modify width
 // width and size can always be what we set it
 // For the relevant screen size - it is not dynamically responsive
-@mixin articleCardTopDown($maxWidth: units.$rem_16, $minWidth: units.$rem_16) {
+@mixin articleCardTopDown($maxWidth, $minWidth) {
 	.article {
 		@include base.article();
 		flex-direction: column;
 
 		max-width: $maxWidth;
 		min-width: $minWidth;
+		width: 100%;
 
 		aspect-ratio: 16/18;
 

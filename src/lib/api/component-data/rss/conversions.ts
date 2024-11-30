@@ -1,9 +1,8 @@
-import { getMeta } from "@/actions/html/get-meta";
 import { Collection } from "@/types/data-structures/collection/collection";
 import { CollectionItem } from "@/types/data-structures/collection/item/item";
 import { RSSChannelType, RSSItem } from "@/types/data-structures/rss";
 
-import { concatMap, map, of, pipe } from "rxjs";
+import { map } from "rxjs";
 
 // Go over the structure of this object
 // From Rss - which we should store?
@@ -25,78 +24,6 @@ const toCollection = () => {
 	});
 };
 
-const checkString = (str: string | undefined) => {
-	return str && str.length > 0;
-};
-
-const toCollectionItem2 = () => {
-	return pipe(
-		concatMap((value: RSSItem) => {
-			return new Promise<CollectionItem>((resolve, reject) => {
-				const { enclosure, link } = value;
-				const { url } = enclosure || {};
-				const { pubDate, category, author } = value;
-				getMeta(link).then((meta) => {
-					const { description, title, url, image, imageAlt } = meta;
-
-					resolve({
-						title: title || "",
-						src: link,
-						description: description || "",
-						guid: "",
-						variant: "article",
-						details: {
-							published: pubDate,
-							categories: category ? [category] : [],
-							publishers: author ? [author] : [],
-						},
-						// rename image
-						avatar: {
-							src: image || "",
-							alt: imageAlt || "",
-						},
-					});
-				});
-			});
-		}),
-		concatMap((value) => {
-			console.log(`${value}: second pipe operator (after promise resolved)`);
-			return of(value);
-		})
-	);
-};
-
-const toCollection2 = () => {
-	return concatMap((value: RSSItem) => {
-		return new Promise<CollectionItem>((resolve, reject) => {
-			const { enclosure, link } = value;
-			const { url } = enclosure || {};
-			const { pubDate, category, author } = value;
-			getMeta(link).then((meta) => {
-				const { description, title, url, image, imageAlt } = meta;
-
-				resolve({
-					title: title || "",
-					src: link,
-					description: description || "",
-					guid: "",
-					variant: "article",
-					details: {
-						published: pubDate,
-						categories: category ? [category] : [],
-						publishers: author ? [author] : [],
-					},
-					// rename image
-					avatar: {
-						src: image || "",
-						alt: imageAlt || "",
-					},
-				});
-			});
-		});
-	});
-};
-
 // but then this and all conversions become promises
 // This should probably get the meta data for each article
 // Then form the data into a collection item
@@ -115,15 +42,6 @@ const toCollectionItem = () => {
 			contentSnippet,
 		} = data;
 		const { url = "" } = enclosure || {};
-
-		// const meta = getMeta(url);
-
-		// console.log({ articleData: data });
-
-		// const text =
-		// 	(checkString(contentSnippet) && contentSnippet) ||
-		// 	(checkString(content) && content) ||
-		// 	(checkString(description) && description);
 
 		return {
 			title: title,
