@@ -40,14 +40,19 @@ const getOGMetaDataFromHTML = async (document: Document) => {
 // get all meta data from a given url
 // Then get whatevr you require off it
 export const getMeta = async (src: string) => {
-	const response = await fetch(src);
+	try {
+		const response = await fetch(src);
 
-	if (!response.ok) {
-		throw new Error(`HTTP error! Status: ${response.status}`);
+		if (!response.ok) {
+			throw new Error(`HTTP error! Status: ${response.status}`);
+		}
+		const result = await response.text();
+
+		const dom = new JSDOM(result);
+		const meta = await getOGMetaDataFromHTML(dom.window.document);
+		return meta;
+	} catch (error) {
+		console.warn("Error fetching meta data", error);
+		return {};
 	}
-	const result = await response.text();
-
-	const dom = new JSDOM(result);
-	const meta = await getOGMetaDataFromHTML(dom.window.document);
-	return meta;
 };

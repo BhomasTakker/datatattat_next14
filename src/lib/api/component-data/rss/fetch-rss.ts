@@ -9,5 +9,10 @@ export const fetchRSS = async (endpoint: string) => {
 		timeout: 2000,
 	});
 	// if error do something!
-	return await parser.parseURL(endpoint.toString());
+	try {
+		return await parser.parseURL(endpoint.toString());
+	} catch (error) {
+		console.error("Error fetching rss", error);
+		return null;
+	}
 };

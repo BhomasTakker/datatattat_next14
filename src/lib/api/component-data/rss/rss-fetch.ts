@@ -51,17 +51,19 @@ export const rssFetch = async (query: WithQuery) => {
 		};
 	}
 
-	const fetches: DataResponse[] = [];
+	const fetches: Promise<DataResponse>[] = [];
 
 	urls.forEach(async (url) => {
 		const isValid = isStringValidURL(url);
 		if (isValid) {
 			try {
-				const prom = fetchRSS(url);
+				const prom = (fetchRSS(url) as Promise<DataResponse>) || null;
 				////////////////////////////////////
 				// add redis data fetch and cache //
 				////////////////////////////////////
-				fetches.push(prom as unknown as DataResponse);
+				if (prom) {
+					fetches.push(prom);
+				}
 			} catch (error) {
 				console.error("Error fetching rss", error);
 			}
@@ -70,6 +72,9 @@ export const rssFetch = async (query: WithQuery) => {
 
 	const responses = await Promise.all(fetches);
 
+	console.log("responses ", { fetches, responses });
+
+	// not here and go over
 	const mergedData = responses.reduce(
 		(acc, cur) => ({ ...acc, items: acc.items.concat(cur.items) || acc.items }),
 		// We should merge all into the main return

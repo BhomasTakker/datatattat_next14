@@ -1,0 +1,43 @@
+@use "../../article/mixins/" as article;
+@use "../../../../../../scss/abstracts/units/" as *;
+@use "../../../../../../scss/mixins/ui/" as ui;
+
+.root {
+	container-type: inline-size;
+	.container {
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		gap: $rem_4;
+		flex-wrap: wrap;
+
+		// card sizes segments
+		// 120 180 240 360 480 600 720 840 960 1080 1200
+		// Use a larger size for min size to reduce the number of columns
+		@include article.articleCardTopDown(1280px, 240px);
+
+		@container (min-width: 800px) {
+			gap: $rem_3;
+		}
+		@container (min-width: 1200px) {
+			gap: $rem_2;
+		}
+
+		> * {
+			flex: 1 1 100%;
+
+			@container (min-width: 400px) {
+				flex: 1 1 48%;
+			}
+			@container (min-width: 600px) {
+				flex: 1 1 30%;
+			}
+			@container (min-width: 800px) {
+				flex: 1 1 22%;
+			}
+			@container (min-width: 1000px) {
+				flex: 1 1 18%;
+			}
+		}
+	}
+}
