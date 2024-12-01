@@ -1,0 +1,10 @@
+.navLink {
+	display: flex;
+	gap: 1rem;
+
+	.input {
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+	}
+}

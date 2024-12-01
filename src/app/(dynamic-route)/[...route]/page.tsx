@@ -1,7 +1,7 @@
 import { getPage } from "@/actions/page/page-actions";
 import { IPage } from "@/types/page";
 import { PageDisplay } from "@/components/page/page-display";
-import styles from "../../(home)/page.module.scss";
+import styles from "../../page.module.scss";
 
 export default async function Page({
 	params,
