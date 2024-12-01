@@ -4,9 +4,10 @@ import styles from "./navigation-links.module.scss";
 
 type NavigationProps = {
 	navLinks: NavLinkData[];
+	edit: boolean;
 };
 
-export const NavigationLinks = ({ navLinks }: NavigationProps) => {
+export const NavigationLinks = ({ navLinks, edit }: NavigationProps) => {
 	const drawNavLinks = (links: NavLinkData[]) => {
 		return links.map((link) => {
 			const element = (
@@ -14,6 +15,7 @@ export const NavigationLinks = ({ navLinks }: NavigationProps) => {
 					route={link.route}
 					label={link.label}
 					key={link.label}
+					isEdit={edit}
 				></NavLink>
 			);
 			return element;

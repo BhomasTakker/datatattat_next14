@@ -8,11 +8,13 @@ export type NavLinkData = {
 	key?: string;
 };
 
-type NavLinkProps = {} & NavLinkData;
+type NavLinkProps = { isEdit: boolean } & NavLinkData;
 
-export const NavLink = ({ route, label }: NavLinkProps) => {
+export const NavLink = ({ route, label, isEdit }: NavLinkProps) => {
+	const routeLink = isEdit ? `/edit?route=${route}` : route;
+	// if edit...
 	return (
-		<Link className={`${styles.root}`} href={route}>
+		<Link className={`${styles.root}`} href={routeLink}>
 			<p>{label}</p>
 		</Link>
 	);

@@ -1,4 +1,6 @@
+export type HeaderNav = { label: string; route: string }[];
+
 export type HeaderType = {
 	route: string;
-	nav: { label: string; route: string }[];
+	nav: HeaderNav;
 };
