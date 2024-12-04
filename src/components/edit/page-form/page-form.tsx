@@ -21,16 +21,8 @@ const SubmitButton = () => {
 	);
 };
 
-export const PageForm = ({
-	route,
-	pageData,
-}: {
-	route: string;
-	pageData: IPage;
-}) => {
+export const PageForm = ({ pageData }: { pageData: IPage }) => {
 	const [state, formAction] = useFormState(updatePage, initialState);
-
-	console.log({ pageData });
 
 	return (
 		<form action={formAction}>

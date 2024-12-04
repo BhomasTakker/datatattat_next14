@@ -17,7 +17,7 @@ export default async function Member() {
 		<div>
 			<h1>Member page</h1>
 			<p>{user?.email}</p>
-			<p>{user?.role}</p>
+			{/* <p>{user?.role}</p> */}
 		</div>
 	);
 }

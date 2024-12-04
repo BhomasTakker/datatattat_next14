@@ -9,8 +9,10 @@ import { BiSolidUser } from "react-icons/bi";
 
 const Logo = () => {
 	return (
-		<Link className={styles.logo} aria-label="Home" href="/">
-			<AiFillHome className={styles.logo} />
+		<Link aria-label="Home" href="/">
+			<div className={styles.homeContainer}>
+				<AiFillHome className={styles.logo} />
+			</div>
 		</Link>
 	);
 };

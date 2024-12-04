@@ -22,6 +22,10 @@ const HeaderSchema = new Schema({
 		required: true,
 	},
 	nav: [NavItemSchema],
+	creator: {
+		type: Schema.Types.ObjectId,
+		required: true,
+	},
 });
 
 export default mongoose.models.Header || mongoose.model("Header", HeaderSchema);
