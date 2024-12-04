@@ -18,8 +18,6 @@ export const ClientHeader = async ({ route, edit = false }: Props) => {
 	const subHeaders =
 		joinedRoute !== "/" ? await getSubHeaders(joinedRoute) : [];
 
-	console.log("Wah wah", { route });
-
 	return (
 		<>
 			{header ? <NavigationMenu items={header.nav} edit={edit} /> : null}

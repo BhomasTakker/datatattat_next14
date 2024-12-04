@@ -17,7 +17,6 @@ type EditProps = {
 export const EditPage = async ({ route }: EditProps) => {
 	const session = (await getServerSession(options)) as Session;
 	const { user } = session;
-	console.log("server", { session });
 
 	const pageData = await getPage(route);
 	const headerData = await getSubHeaders(route);
