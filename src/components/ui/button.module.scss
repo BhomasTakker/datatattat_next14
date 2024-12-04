@@ -1,0 +1,25 @@
+@use "../../scss/abstracts/units/" as *;
+@use "../../scss/abstracts/colours/" as *;
+
+.button {
+	// probably excessive!!
+	display: flex;
+	justify-content: center;
+	gap: $rem_2;
+
+	background-color: $whiteSmoke;
+	border: none;
+	color: $textColourDark;
+	padding: $rem_3 $rem_5;
+	text-align: center;
+	text-decoration: none;
+
+	font-size: $text_3;
+	cursor: pointer;
+	border-radius: $rem_1;
+	transition: background-color 0.3s;
+
+	&:hover {
+		background-color: $gainsboro;
+	}
+}

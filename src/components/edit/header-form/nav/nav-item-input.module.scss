@@ -1,0 +1,32 @@
+@use "../../../../scss/abstracts/units/" as *;
+@use "../../../../scss/abstracts/colours/" as *;
+
+.root {
+	display: flex;
+	gap: $rem_4;
+	padding: $rem_1;
+
+	.input {
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+	}
+
+	.icon {
+		display: flex;
+		color: $darkGrey;
+		font-size: $rem_5;
+		cursor: pointer;
+		padding: $rem_2;
+		border-radius: 50%;
+
+		&:hover,
+		&:focus {
+			background-color: $shadowLight1;
+		}
+
+		> * {
+			margin: auto;
+		}
+	}
+}

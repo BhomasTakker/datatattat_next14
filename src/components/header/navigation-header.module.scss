@@ -15,9 +15,19 @@
 		font-size: units.$text_6;
 	}
 
-	.logo {
-		color: colours.$logoDark;
-		font-size: units.$text_6;
+	.homeContainer {
+		display: flex;
+		align-items: center;
+		padding: units.$rem_2;
+		border-radius: 50%;
+		.logo {
+			color: colours.$logoDark;
+			font-size: units.$text_6;
+		}
+		&:hover,
+		&:focus {
+			background-color: colours.$shadowLight1;
+		}
 	}
 
 	.simpleButton {

@@ -1,6 +1,7 @@
 import Github from "next-auth/providers/github";
 import type { ISODateString } from "next-auth";
 import { AdapterUser } from "next-auth/adapters";
+import { createNewUser, getUserBySignInEmail } from "@/lib/mongo/actions/user";
 
 const { GITHUB_ID, GITHUB_SECRET } = process.env;
 
@@ -10,19 +11,28 @@ if (!GITHUB_ID || !GITHUB_SECRET) {
 
 const providers = [
 	Github({
-		profile(profile) {
-			let userRole = "standard";
+		async profile(profile) {
+			// try catch this
+			// what do we do/return if a failure?
+			let user = await getUserBySignInEmail(profile.email || "");
 
-			if (profile.name === "BhomasTakker") {
-				userRole = "admin";
+			if (!user) {
+				user = await createNewUser({
+					signin_method: "github",
+					signin_name: profile.login,
+					signin_email: profile.email || "",
+					avatar: profile.avatar_url,
+					username: profile.name || profile.login,
+					role: "standard",
+				});
 			}
 
 			return {
 				...profile,
 				name: profile.name || profile.login,
-				role: userRole,
 				image: profile.avatar_url,
 				id: profile.id.toString(),
+				user_id: user._id.toString(),
 			};
 		},
 		clientId: GITHUB_ID,
@@ -31,7 +41,7 @@ const providers = [
 ];
 
 export type User = AdapterUser & {
-	role?: string | null;
+	user_id?: string;
 };
 
 export interface DefaultSession {
@@ -44,13 +54,16 @@ const callbacks = {
 	// @ts-expect-error - types are incorrect
 	async jwt({ token, user }) {
 		if (user) {
-			token.role = user.role;
+			token.user_id = user.user_id;
 		}
 		return token;
 	},
+
 	// @ts-expect-error - types are incorrect
 	async session({ session, token }) {
-		if (session.user) session.user.role = token.role as string;
+		if (session.user) {
+			session.user.user_id = token.user_id as string;
+		}
 		return session;
 	},
 };

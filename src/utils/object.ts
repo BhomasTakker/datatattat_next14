@@ -6,10 +6,8 @@
  * @WARN Inherent issues cloning objects like this
  */
 
-import { UnknownObject } from "@/types/utils";
-
 // TYPE:- use type or generic - which is better
-export const cloneDeepSerializable = (obj: UnknownObject | unknown[]) => {
+export const cloneDeepSerializable = (obj: unknown) => {
 	return JSON.parse(JSON.stringify(obj));
 };
 
@@ -20,7 +18,7 @@ export const cloneDeepSerializable = (obj: UnknownObject | unknown[]) => {
  * @note Uses structuredClone
  * @note Fallbacks to cloneDeepSerializable if no structuredClone
  */
-export const cloneDeep = (obj: UnknownObject | unknown[]) => {
+export const cloneDeep = (obj: unknown) => {
 	if (!obj) return obj;
 	// return cloneDeepSerializable(obj);
 	// node 17
