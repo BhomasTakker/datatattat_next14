@@ -3,12 +3,12 @@ import { options } from "@/app/api/auth/[...nextauth]/options";
 import { UserProfile } from "./user-profile/user-profile";
 import styles from "./edit-page.module.scss";
 import { ClientHeader } from "../header/client-header";
-import { PageForm } from "./page-form/page-form";
 import { HeaderForm } from "./header-form/header-form";
 import { getPage } from "@/actions/page/page-actions";
 import { getSubHeaders } from "@/actions/header/get-header";
 import { cloneDeep } from "@/utils/object";
 import { Session } from "@/types/auth/session";
+import { PageFormContainer } from "./page-form/page-form-container";
 
 type EditProps = {
 	route: string;
@@ -41,7 +41,7 @@ export const EditPage = async ({ route }: EditProps) => {
 			</section>
 			{/* Page Edit Form */}
 			<HeaderForm headerData={headerData} />
-			<PageForm pageData={cloneDeep(pageData)} />
+			<PageFormContainer pageData={cloneDeep(pageData)} />
 		</section>
 	);
 };

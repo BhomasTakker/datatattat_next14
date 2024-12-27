@@ -7,7 +7,6 @@ import { HeaderType } from "@/types/header";
 import { useState } from "react";
 import { NavList } from "./nav/nav-list";
 import { Button } from "@/components/ui/button";
-import { useSession } from "next-auth/react";
 
 export const HeaderForm = ({ headerData }: { headerData: HeaderType[] }) => {
 	const [pageState, setPageState] = useState<string | undefined>(undefined);

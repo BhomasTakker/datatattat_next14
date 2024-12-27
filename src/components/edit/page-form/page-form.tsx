@@ -1,36 +1,32 @@
-"use client";
+import { Button } from "@/components/ui/button";
+import { useContext } from "react";
+import { PageFormContext } from "./context/page-form-context";
+import { META_CONFIG } from "../config/page/meta/meta-config";
+import { PROFILE_CONFIG } from "../config/page/profile/profile-config";
+import { InputFactory } from "../inputs/input-factory";
+import { PAGE_CONFIG } from "../config/page/page-config";
+import styles from "./page-form.module.scss";
 
-import { updatePage } from "@/actions/edit/update-page";
-import { IPage } from "@/types/page";
-import { useFormState, useFormStatus } from "react-dom";
+export const PageForm = () => {
+	const { submitHandler, pageState, formIds, page } =
+		useContext(PageFormContext);
+	// We need to show a preview of the page
+	// We need to have page meta, page profile, page content forms or form inputs
+	// We need to store creator_id, page_id, page_route, page_meta, page_profile, page_content
 
-type State = {
-	message: string | null;
-};
-
-const initialState: State = {
-	message: null,
-};
-
-const SubmitButton = () => {
-	const { pending } = useFormStatus();
-	return (
-		<button type="submit" aria-disabled={pending}>
-			Submit
-		</button>
-	);
-};
-
-export const PageForm = ({ pageData }: { pageData: IPage }) => {
-	const [state, formAction] = useFormState(updatePage, initialState);
+	const { meta, profile, content } = formIds;
 
 	return (
-		<form action={formAction}>
-			<label htmlFor="page">Create Page</label>
-			<input type="text" id="page" name="page" required />
-			<SubmitButton />
+		<form onSubmit={submitHandler} className={styles.form}>
+			{/* These don't work properly unless first input is an inputList?  */}
+			<InputFactory data={{ ...META_CONFIG, id: meta }} />
+			<InputFactory data={{ ...PROFILE_CONFIG, id: profile }} />
+
+			<InputFactory data={{ ...PAGE_CONFIG, id: `${content}` }} />
+
+			<Button type="submit">Submit</Button>
 			<p aria-live="polite" role="status">
-				{state.message}
+				{pageState}
 			</p>
 		</form>
 	);

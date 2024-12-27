@@ -8,14 +8,14 @@ type PageGridProps = {
 };
 
 export type PageGridContent = {
-	container: PageContainer;
+	containerType: "Grid";
 	props: PageGridProps;
 	components: PageComponents;
 };
 
 export const PageGrid = ({ content }: { content: PageContent }) => {
-	const { props, components } = content as PageGridContent;
-	const { layout: style } = props || {};
+	const { props, components } = content;
+	const { layout: style } = (props as PageGridProps) || {};
 
 	const renderComponents = () => {
 		return components.map((component, index) => {

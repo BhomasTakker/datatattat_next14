@@ -1,0 +1,13 @@
+.title {
+	font-size: large;
+
+	&.small {
+		font-size: medium;
+	}
+	&.medium {
+		font-size: large;
+	}
+	&.large {
+		font-size: xx-large;
+	}
+}

@@ -1,12 +1,30 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
+import { options } from "@/app/api/auth/[...nextauth]/options";
+import { saveOrCreatePageByRoute } from "@/lib/mongo/actions/page";
+import { Session } from "@/types/auth/session";
+import { IPage } from "@/types/page";
+import { getServerSession } from "next-auth";
+// import { revalidatePath } from "next/cache";
 
-export async function updatePage(prevState: any, formData: FormData) {
-	// Revalidate the path of the page you just updated
-	// revalidatePath("/edit");
+export async function savePage(route: string, page: IPage) {
+	// not the correct way of protecting actions?
+	const session = (await getServerSession(options)) as Session;
+	if (!session) {
+		throw new Error("No session found");
+	}
 
-	console.log({ message: "Created or Updated Page!", prevState, formData });
+	const { user } = session;
+	const { user_id } = user;
 
-	return { message: "Created or Updated Page!" };
+	// Check user credentials against page
+	// Check data conforms to page/form schema
+
+	await saveOrCreatePageByRoute(page, user_id);
+
+	// revalidate the path?
+	// we need to remove the cache for this header call
+	// We need to force a reload onl the edit page
+
+	return { message: "Page Saved!" };
 }

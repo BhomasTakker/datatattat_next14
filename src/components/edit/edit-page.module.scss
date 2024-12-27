@@ -1,7 +1,36 @@
 @use "../../scss/abstracts/units" as *;
+@use "../../scss/abstracts/colours/" as *;
 
 .root {
 	display: flex;
 	flex-direction: column;
 	gap: $rem_4;
+
+	label {
+		padding-bottom: $rem_2;
+	}
+
+	input {
+		width: 100%;
+		padding: $rem_2;
+		background-color: $whiteSmoke;
+		border: none;
+		border-radius: $rem_1;
+		font-size: $text_3;
+
+		&:hover,
+		&:focus {
+			// border-color: #333;
+			background-color: $gainsboro;
+			border: none;
+		}
+	}
+
+	select {
+		width: 100%;
+		padding: $rem_2;
+		border: none;
+		border-radius: $rem_1;
+		background-color: $whiteSmoke;
+	}
 }

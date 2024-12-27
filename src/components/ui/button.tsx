@@ -12,12 +12,16 @@ export const Button = ({
 	children,
 	onClick,
 	classes,
+	type = "button",
 	...rest
 }: ButtonProps) => {
 	return (
 		<button
 			className={`${styles.button} ${classes ? classes.button : ""}`}
 			onClick={onClick}
+			// need use type else defaults
+			//to submit when used in a form...
+			type={type}
 			{...rest}
 		>
 			{children ? children : null}

@@ -26,6 +26,7 @@ export const convertResponse = (
 
 	let subResponse = queryData;
 
+	// run the iterable conversions on received data
 	Object.values(sub).forEach((subObject: ConversionsObject) => {
 		subResponse = createIterable(subResponse, subObject, conversionsMap);
 	});
