@@ -14,7 +14,7 @@
 	},
 	"dependencies": {
 		"jsdom": "^25.0.1",
-		"mongoose": "^8.7.2",
+		"mongoose": "^8.8.3",
 		"next": "14.2.15",
 		"next-auth": "^4.24.8",
 		"react": "^18",
