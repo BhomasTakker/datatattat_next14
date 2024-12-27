@@ -19,11 +19,9 @@ jest.mock("../../../content/component-display", () => {
 	};
 });
 
+// we need some proper mock data for tests
 const MOCK: PageGridContent = {
-	container: {
-		containerType: "Grid",
-		initData: {},
-	},
+	containerType: "Grid",
 	props: {
 		layout: "test-grid",
 	},

@@ -15,20 +15,13 @@ const ComponentSchema = new Schema(
 	},
 	{ _id: false }
 );
-const ContainerSchema = new Schema(
+
+const ContentSchema = new Schema(
 	{
 		containerType: {
 			type: String,
 			required: true,
 		},
-		initData: Object,
-	},
-	{ _id: false }
-);
-
-const ContentSchema = new Schema(
-	{
-		container: ContainerSchema,
 		// We can pass a type/ref and specify from that?
 		props: Schema.Types.Mixed,
 		components: [ComponentSchema],
@@ -36,40 +29,26 @@ const ContentSchema = new Schema(
 	{ _id: false }
 );
 
-const PageSchema = new Schema<IPage>({
-	// think added seems superflous here
-	// store data in an object
-	// we don't want to be adding things at this level
-	style: {
-		type: Object,
-		required: false,
-	},
+const PageSchema = new Schema<IPage>(
+	{
+		meta: {
+			type: Object,
+			required: false,
+		},
 
-	// remove this
-	// profile: {
-	// 	type: Object,
-	// 	required: false,
-	// },
+		route: {
+			type: String,
+			required: true,
+		},
 
-	// meta, route
-	meta: {
-		type: Object,
-		required: false,
+		creator: {
+			type: Schema.Types.ObjectId,
+			required: true,
+		},
+		content: ContentSchema,
 	},
-
-	route: {
-		type: String,
-		required: true,
-	},
-
-	creator: {
-		type: Schema.Types.ObjectId,
-		required: true,
-	},
-	createdAt: Date,
-	updatedAt: Date,
-	content: ContentSchema,
-});
+	{ timestamps: true }
+);
 
 export default mongoose.models.Page ||
 	mongoose.model<IPage>("Page", PageSchema);

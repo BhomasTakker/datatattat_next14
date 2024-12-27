@@ -17,6 +17,8 @@ type DataResponse = {
 	items: object[];
 } & UnknownObject;
 
+// Bit of a rough fix for now
+// Meta calls are better for article data
 const fetchMeta = async (items: CollectionItem[]) => {
 	const data = items.map(async (item) => {
 		const { src, details } = item;
@@ -70,13 +72,20 @@ export const rssFetch = async (query: WithQuery) => {
 		}
 	});
 
+	// error handling?
 	const responses = await Promise.all(fetches);
 
-	console.log("responses ", { fetches, responses });
+	// console.log("responses ", { fetches, responses });
 
+	////////////////////////////////////////
+	// Create merge responses or something
+	// Or rightly this would be part pf conversins
 	// not here and go over
 	const mergedData = responses.reduce(
-		(acc, cur) => ({ ...acc, items: acc.items.concat(cur.items) || acc.items }),
+		(acc, cur) => ({
+			...acc,
+			items: cur?.items ? acc.items.concat(cur.items) : acc.items,
+		}),
 		// We should merge all into the main return
 		{ ...responses[0] }
 	);

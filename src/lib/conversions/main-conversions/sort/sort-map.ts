@@ -4,9 +4,3 @@ export enum SortOptions {
 	dateTimeAscending = "dateTimeAscending",
 	dateTimeDescending = "dateTimeDescending",
 }
-export const SORT_MAP = {
-	numericAscending: SortOptions.numericAscending,
-	numericDescending: SortOptions.numericDescending,
-	dateTimeAscending: SortOptions.dateTimeAscending,
-	dateTimeDescending: SortOptions.dateTimeDescending,
-} as const;

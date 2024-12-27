@@ -1,5 +1,6 @@
 import { UnknownObject } from "./utils";
 import { PageComponent } from "./page";
+import { VariantsOptions } from "@/components/content/components/article-collection/variant-map";
 
 export type ComponentDataObject = {
 	data: UnknownObject;
@@ -19,6 +20,6 @@ export type ComponentProfileProps = {
 // Joined with ComponentProfile but should extend?
 export type ComponentPropsObject = {
 	// this should be agiven no?
-	variant: string;
+	variantType: VariantsOptions;
 } & ComponentProfileProps &
 	UnknownObject;

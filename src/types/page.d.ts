@@ -34,7 +34,7 @@ export type PageComponent = {
 export type PageComponents = Array<PageComponent>;
 
 export type PageContent = {
-	container: PageContainer;
+	containerType: "Stack" | "Grid";
 	props: PageProps;
 	components: PageComponents;
 };

@@ -8,7 +8,7 @@ type PageStackProps = {
 };
 
 export type PageStackContent = {
-	container: PageContainer;
+	containerType: string;
 	props: PageStackProps;
 	components: PageComponents;
 };

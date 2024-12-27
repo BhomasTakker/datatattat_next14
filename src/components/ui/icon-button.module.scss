@@ -1,0 +1,22 @@
+@use "../../scss/abstracts/units/" as *;
+@use "../../scss/abstracts/colours/" as *;
+
+.icon {
+	border: none;
+	background-color: transparent;
+	display: flex;
+	align-items: center;
+
+	color: $darkGrey;
+	font-size: $rem_5;
+	cursor: pointer;
+	padding: $rem_2;
+	border-radius: 50%;
+
+	height: $rem_7;
+
+	&:hover,
+	&:focus {
+		background-color: $shadowLight1;
+	}
+}

@@ -1,0 +1,37 @@
+@use "../../../../scss/abstracts/units" as *;
+@use "../../../../scss/abstracts/ui/" as *;
+@use "../../../../scss/abstracts/colours/" as *;
+
+.root {
+	display: flex;
+	flex-direction: column;
+	gap: $rem_4;
+
+	// border: 1px solid #ccc;
+	box-shadow: 0 0 $rem_1 $shadowLight3;
+
+	margin-top: $rem_4;
+	padding: $rem_4;
+
+	.title {
+	}
+
+	.input {
+		display: flex;
+		gap: $rem_2;
+
+		.icons {
+			display: flex;
+			gap: $rem_2;
+			align-items: center;
+		}
+
+		@media screen and (max-width: $screenWidthMd) {
+			flex-direction: column-reverse;
+		}
+	}
+	.input:not(:last-of-type) {
+		border-bottom: $divider;
+		padding-bottom: $rem_4;
+	}
+}

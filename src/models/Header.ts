@@ -16,16 +16,19 @@ const NavItemSchema = new Schema(
 	{ _id: false }
 );
 
-const HeaderSchema = new Schema({
-	route: {
-		type: String,
-		required: true,
+const HeaderSchema = new Schema(
+	{
+		route: {
+			type: String,
+			required: true,
+		},
+		nav: [NavItemSchema],
+		creator: {
+			type: Schema.Types.ObjectId,
+			required: true,
+		},
 	},
-	nav: [NavItemSchema],
-	creator: {
-		type: Schema.Types.ObjectId,
-		required: true,
-	},
-});
+	{ timestamps: true }
+);
 
 export default mongoose.models.Header || mongoose.model("Header", HeaderSchema);

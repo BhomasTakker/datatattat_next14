@@ -40,8 +40,8 @@ jest.mock("./components/page-component-factory", () => {
 	return {
 		__esModule: true,
 		PageComponentFactory: ({ content }: { content: PageContent }) => {
-			const { container } = content || {};
-			const { containerType } = container;
+			const { containerType } = content || {};
+
 			return (
 				<div data-testid="test-page-component-factory">{containerType}</div>
 			);
@@ -62,7 +62,7 @@ const MOCK = {
 	route: "",
 	creator: {},
 	content: {
-		container: { containerType: PageComponentsOptions.STACK, initData: {} },
+		containerType: PageComponentsOptions.STACK,
 		props: {},
 		components: [],
 	},

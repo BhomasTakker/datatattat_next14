@@ -9,19 +9,9 @@ export const ArticleCollection = ({
 	const { componentProps } = component;
 	const articlesData = dataObject.data as Collection;
 	const { items: articles } = articlesData;
+	const { variantType } = componentProps;
 
-	////////////////////////
-	// TODO:-
-	// update to use just variant.
-	// const variant = componentProps.variant;
-	// @ts-expect-error - We need to use variant - update when ready
-	const variant = componentProps?.variantTypeObject?.variantType;
-
-	// Use props as ArticleCollectionProps
-	// we really just need variant - variant determines the css class
-	// props determine the content / show meta, video, etc
-
-	const variantObject = VariantsMap.get(variant);
+	const variantObject = VariantsMap.get(variantType);
 
 	if (!variantObject) {
 		// log

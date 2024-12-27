@@ -1,0 +1,11 @@
+@use "../../../../scss/abstracts/units/" as *;
+
+.list {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: $rem_3;
+
+	.listItem {
+	}
+}

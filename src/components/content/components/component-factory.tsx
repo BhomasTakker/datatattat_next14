@@ -24,9 +24,6 @@ export const ComponentFactory = async ({
 
 	const data = (await getData(queryObject)) as UnknownObject;
 
-	// Literally just a get data server action
-	// pass it to the component
-
 	// all components take in a component object
 	// AND and a data object
 	// data object contains data and any data functions

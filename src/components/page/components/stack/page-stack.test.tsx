@@ -21,10 +21,7 @@ jest.mock("../../../content/component-display", () => {
 });
 
 const MOCK: PageStackContent = {
-	container: {
-		containerType: "Stack",
-		initData: {},
-	},
+	containerType: "Stack",
 	props: {
 		direction: "column",
 	},

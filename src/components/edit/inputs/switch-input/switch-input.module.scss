@@ -1,0 +1,70 @@
+@use "../../../../scss/abstracts/units/" as *;
+@use "../../../../scss/abstracts/colours/" as *;
+
+.input {
+	display: flex;
+
+	.container {
+		display: flex;
+		align-items: center;
+		gap: $rem_3;
+		position: relative;
+		cursor: pointer;
+		font-size: $text_4;
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+
+		input {
+			opacity: 0;
+			cursor: pointer;
+			height: 0;
+			width: 0;
+		}
+
+		.checkmark {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+
+			height: $rem_6;
+			width: $rem_6;
+			background-color: $whiteSmoke;
+			color: $textColourDark;
+
+			.icon {
+				display: none;
+			}
+		}
+
+		&:hover .checkmark {
+			background-color: $gainsboro;
+		}
+
+		&:has(input:checked) {
+			.checkmark {
+				background-color: $whiteSmoke;
+				.icon {
+					display: block;
+				}
+			}
+		}
+
+		&:has(input:disabled) {
+			opacity: 0.5;
+
+			&:hover {
+				cursor: not-allowed;
+				.checkmark {
+					background-color: $whiteSmoke;
+				}
+			}
+		}
+	}
+
+	@media screen and (max-width: $screenWidthMd) {
+		justify-content: center;
+		align-items: center;
+	}
+}
