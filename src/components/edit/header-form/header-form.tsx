@@ -8,6 +8,8 @@ import { useState } from "react";
 import { NavList } from "./nav/nav-list";
 import { Button } from "@/components/ui/button";
 
+import styles from "./header-form.module.scss";
+
 export const HeaderForm = ({ headerData }: { headerData: HeaderType[] }) => {
 	const [pageState, setPageState] = useState<string | undefined>(undefined);
 
@@ -26,7 +28,7 @@ export const HeaderForm = ({ headerData }: { headerData: HeaderType[] }) => {
 
 	return (
 		<FormProvider {...methods}>
-			<form onSubmit={onSubmit}>
+			<form onSubmit={onSubmit} className={styles.form}>
 				<NavList links={nav} />
 				<Button type="submit">Submit</Button>
 				{pageState ? (

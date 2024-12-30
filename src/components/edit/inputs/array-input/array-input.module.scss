@@ -18,12 +18,14 @@
 
 	.input {
 		display: flex;
+		flex-direction: column-reverse;
 		gap: $rem_2;
 
 		.icons {
 			display: flex;
 			gap: $rem_2;
 			align-items: center;
+			align-self: end;
 		}
 
 		@media screen and (max-width: $screenWidthMd) {

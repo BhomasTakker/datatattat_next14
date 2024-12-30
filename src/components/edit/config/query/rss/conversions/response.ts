@@ -16,6 +16,38 @@ const RESPONSE_INPUTS: GenericInput[] = [
 	},
 	{
 		// show controls etc?
+		id: "default",
+		type: EditInputs.array,
+		label: "Default Conversions",
+		title: "Default Response Conversions",
+		createObject: false,
+		disabled: true,
+
+		input: {
+			id: "default",
+			type: EditInputs.inputList,
+			label: "Response Object",
+			createObject: true,
+			inputs: [
+				{
+					id: "type",
+					type: EditInputs.text,
+					label: "Conversion Type",
+					defaultValue: "TRANSFORM",
+					disabled: true,
+				},
+				{
+					id: "id",
+					type: EditInputs.text,
+					label: "Conversion ID",
+					defaultValue: "toCollection",
+					disabled: true,
+				},
+			],
+		},
+	},
+	{
+		// show controls etc?
 		id: "conversions",
 		type: EditInputs.array,
 		label: "Add Conversion",

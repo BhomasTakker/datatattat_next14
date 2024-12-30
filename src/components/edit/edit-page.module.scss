@@ -6,6 +6,15 @@
 	flex-direction: column;
 	gap: $rem_4;
 
+	fieldset {
+		display: flex;
+		flex-direction: column;
+		// gap: $rem_1;
+		border: none;
+		padding: 0;
+		margin: 0;
+	}
+
 	label {
 		padding-bottom: $rem_2;
 	}
@@ -20,7 +29,6 @@
 
 		&:hover,
 		&:focus {
-			// border-color: #333;
 			background-color: $gainsboro;
 			border: none;
 		}
@@ -32,5 +40,14 @@
 		border: none;
 		border-radius: $rem_1;
 		background-color: $whiteSmoke;
+
+		&:hover,
+		&:focus {
+			background-color: $gainsboro;
+			// border: none;
+			option {
+				background-color: $whiteSmoke;
+			}
+		}
 	}
 }

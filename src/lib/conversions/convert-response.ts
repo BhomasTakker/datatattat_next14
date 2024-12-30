@@ -12,6 +12,8 @@ const createConversionsMap = (conversionId: string) => {
 	return mergeConversions(mainConversions, queryConversions);
 };
 
+/////////////////////////////////////////////////////////////
+// Absolutely need to run through ths redo and refactor etc
 export const convertResponse = (
 	queryData: UnknownObject,
 	conversions: Conversions

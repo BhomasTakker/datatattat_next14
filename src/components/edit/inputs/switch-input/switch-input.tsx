@@ -13,19 +13,20 @@ export const SwitchInput = ({
 
 	return (
 		<div className={styles.input}>
-			<label className={styles.container} htmlFor={id}>
-				<div className={styles.checkmark}>
-					<FaCheck className={styles.icon} />
-				</div>
-				{label}
-				<input
-					id={id}
-					{...register(id)}
-					type="checkbox"
-					defaultChecked={defaultChecked}
-					disabled={disabled}
-				/>
-			</label>
+			<fieldset disabled={disabled}>
+				<label className={styles.container} htmlFor={id}>
+					<div className={styles.checkmark}>
+						<FaCheck className={styles.icon} />
+					</div>
+					{label}
+					<input
+						id={id}
+						{...register(id)}
+						type="checkbox"
+						defaultChecked={defaultChecked}
+					/>
+				</label>
+			</fieldset>
 		</div>
 	);
 };

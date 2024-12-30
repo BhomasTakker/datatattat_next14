@@ -21,6 +21,7 @@ type InputListProps = {
 	inputs: GenericInput[];
 	template: GenericInput;
 	createObject: boolean;
+	showControls?: boolean;
 	onMove: (index: number, direction: Direction) => void;
 	onDelete: (index: number) => void;
 };
@@ -32,6 +33,7 @@ const ArrayInputList = ({
 	onMove,
 	onDelete,
 	createObject,
+	showControls = true,
 }: InputListProps) => {
 	const { id } = template;
 	return inputs.map((_, index) => {
@@ -40,17 +42,19 @@ const ArrayInputList = ({
 			: `${parentId}.[${index}]`;
 
 		return (
-			<div key={`${randomKeyGenerator()}`} className={styles.input}>
+			<li key={`${randomKeyGenerator()}`} className={styles.input}>
 				<InputFactory data={{ ...template, id: inputId }} />
-				<div className={styles.icons}>
-					<IconButton icon={FaArrowUp} onClick={() => onMove(index, "up")} />
-					<IconButton
-						icon={FaArrowDown}
-						onClick={() => onMove(index, "down")}
-					/>
-					<IconButton icon={MdDelete} onClick={() => onDelete(index)} />
-				</div>
-			</div>
+				{showControls ? (
+					<div className={styles.icons}>
+						<IconButton icon={FaArrowUp} onClick={() => onMove(index, "up")} />
+						<IconButton
+							icon={FaArrowDown}
+							onClick={() => onMove(index, "down")}
+						/>
+						<IconButton icon={MdDelete} onClick={() => onDelete(index)} />
+					</div>
+				) : null}
+			</li>
 		);
 	});
 };
@@ -61,6 +65,7 @@ export const ArrayInput = ({
 	title,
 	createObject = true,
 	defaultValue = [],
+	disabled = false,
 }: ArrayInputProps) => {
 	const { label: inputLabel, id: inputId = "" } = input;
 	const { getValues, setValue } = useFormContext();
@@ -90,18 +95,26 @@ export const ArrayInput = ({
 		id,
 	});
 
+	const showControls = disabled ? false : true;
+
 	return (
 		<div className={styles.root}>
 			<h2 className={styles.title}>{title}</h2>
-			<ArrayInputList
-				parentId={id}
-				inputs={inputList}
-				template={input}
-				onMove={onMove}
-				onDelete={onDeleteHnd}
-				createObject={createObject}
-			/>
-			<Button onClick={addInput}>{`Add New ${inputLabel}`}</Button>
+			<ul>
+				<ArrayInputList
+					parentId={id}
+					inputs={inputList}
+					template={input}
+					showControls={showControls}
+					onMove={onMove}
+					onDelete={onDeleteHnd}
+					createObject={createObject}
+				/>
+			</ul>
+
+			{showControls ? (
+				<Button onClick={addInput}>{`Add New ${inputLabel}`}</Button>
+			) : null}
 		</div>
 	);
 };

@@ -10,10 +10,12 @@ import { UnknownObject } from "@/types/utils";
 type Data = UnknownObject;
 type Conversions = ConversionMap[];
 
+// same as sub response
 type ConversionsObject = {
 	conversions: Conversions;
 	responseKey?: string;
 	iterable: boolean;
+	default: Conversions;
 };
 // then reduce your array object keys etc
 export const createResponse = (
@@ -21,9 +23,11 @@ export const createResponse = (
 	conversionsObject: ConversionsObject,
 	conversionsMap: Map<string, object>
 ) => {
-	const { conversions = [] } = conversionsObject;
+	const { conversions = [], default: defaultConversions = [] } =
+		conversionsObject;
+	const joinedConversions = [...defaultConversions, ...conversions];
 
-	if (conversions.length === 0) {
+	if (joinedConversions.length === 0) {
 		return data;
 	}
 
@@ -36,7 +40,7 @@ export const createResponse = (
 	const errorHandler = () => {};
 	const observer = createObserver(nextHandler, completeHandler, errorHandler);
 
-	const pipeFunctions = createPipeFunctions(conversions, conversionsMap);
+	const pipeFunctions = createPipeFunctions(joinedConversions, conversionsMap);
 
 	const seedData = data || {};
 

@@ -19,16 +19,17 @@ export const NumberInput = ({
 
 	return (
 		<div className={styles.input}>
-			<label htmlFor={id}>{label}</label>
-			<input
-				id={id}
-				{...register(id, { ...validation, min: 0 })}
-				type="number"
-				defaultValue={useDefault}
-				required={required}
-				disabled={disabled}
-				min={0}
-			/>
+			<fieldset disabled={disabled}>
+				<label htmlFor={id}>{label}</label>
+				<input
+					id={id}
+					{...register(id, { ...validation, min: 0 })}
+					type="number"
+					defaultValue={useDefault}
+					required={required}
+					min={0}
+				/>
+			</fieldset>
 		</div>
 	);
 };

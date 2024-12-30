@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button";
 import { FaPlus } from "react-icons/fa";
 import { useSearchParams } from "next/navigation";
 
+import styles from "./nav-list.module.scss";
+
 // Create a context - this is getting too busy
 // and a little logic heavy
 export const NavList = ({ links }: { links: HeaderNav }) => {
@@ -91,19 +93,21 @@ export const NavList = ({ links }: { links: HeaderNav }) => {
 
 	const linksArray = navLinks.map((link, index) => {
 		return (
-			<NavItemInput
-				key={`${link.label}-${link.route}`}
-				link={link}
-				index={index}
-				onMove={onMove}
-				onDelete={onDelete}
-			/>
+			<li key={`${link.label}-${link.route}`}>
+				<NavItemInput
+					key={`${link.label}-${link.route}`}
+					link={link}
+					index={index}
+					onMove={onMove}
+					onDelete={onDelete}
+				/>
+			</li>
 		);
 	});
 
 	return (
-		<section>
-			{linksArray}
+		<section className={styles.navList}>
+			<ul>{linksArray}</ul>
 			<Button onClick={() => onAdd()}>
 				<FaPlus />
 				Add
