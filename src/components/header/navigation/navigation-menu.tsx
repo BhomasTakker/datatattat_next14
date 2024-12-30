@@ -5,12 +5,10 @@ import classes from "./navigation-menu.module.scss";
 interface NavigationMenuProps {
 	items: NavLinkData[];
 	edit?: boolean;
+	prefix?: string;
 }
 
-export const NavigationMenu = ({
-	items,
-	edit = false,
-}: NavigationMenuProps) => {
+export const NavigationMenu = ({ items, prefix = "" }: NavigationMenuProps) => {
 	const showNav = items && items.length > 0;
 
 	return (
@@ -19,7 +17,7 @@ export const NavigationMenu = ({
 				// div seems unnecessary
 				<div className={classes.root}>
 					<nav className={classes.toolbar} data-testid={"nav"}>
-						<NavigationLinks navLinks={items} edit={edit} />
+						<NavigationLinks navLinks={items} prefix={prefix} />
 					</nav>
 				</div>
 			) : null}

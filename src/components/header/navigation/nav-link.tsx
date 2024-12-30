@@ -8,11 +8,10 @@ export type NavLinkData = {
 	key?: string;
 };
 
-type NavLinkProps = { isEdit: boolean } & NavLinkData;
+type NavLinkProps = { prefix?: string } & NavLinkData;
 
-export const NavLink = ({ route, label, isEdit }: NavLinkProps) => {
-	const routeLink = isEdit ? `/edit?route=${route}` : route;
-	// if edit...
+export const NavLink = ({ route, label, prefix = "" }: NavLinkProps) => {
+	const routeLink = `${prefix}${route}`;
 	return (
 		<Link className={`${styles.root}`} href={routeLink}>
 			<p>{label}</p>

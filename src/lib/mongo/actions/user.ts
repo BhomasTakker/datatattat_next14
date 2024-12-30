@@ -4,6 +4,10 @@ export const getUserBySignInEmail = async (email: string) => {
 	return await User.findOne({ signin_email: email });
 };
 
+export const getUserById = async (id: string) => {
+	return (await User.findOne({ _id: id })) as IUser;
+};
+
 export const createNewUser = async (user: IUser) => {
 	try {
 		const newUser = new User(user);
