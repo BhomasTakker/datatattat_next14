@@ -16,10 +16,13 @@ import { cloneDeep } from "@/utils/object";
 type Data = UnknownObject;
 type Conversions = ConversionMap[];
 
+// default is an extraordinarily bad name
+// why do you keep doing this?
 export type ConversionsObject = {
 	conversions: Conversions;
 	responseKey: string;
 	iterable: boolean;
+	default: Conversions;
 };
 // then reduce your array object keys etc
 export const createIterable = (
@@ -28,8 +31,16 @@ export const createIterable = (
 	conversionsObject: ConversionsObject,
 	conversionsMap: Map<string, object>
 ) => {
-	const { conversions = [], responseKey, iterable } = conversionsObject;
-	if (conversions.length === 0) {
+	const {
+		conversions = [],
+		responseKey,
+		iterable,
+		default: defaultConversions = [],
+	} = conversionsObject;
+
+	const joinedConversions = [...defaultConversions, ...conversions];
+
+	if (joinedConversions.length === 0) {
 		return data;
 	}
 	const updatedData = cloneDeep(data);
@@ -43,13 +54,13 @@ export const createIterable = (
 	};
 	const observer = createObserver(nextHandler, completeHandler, errorHandler);
 
-	const transformConversions = conversions.filter(
+	const transformConversions = joinedConversions.filter(
 		(conversion) => conversion.type === "TRANSFORM"
 	);
-	const filterConversions = conversions.filter(
+	const filterConversions = joinedConversions.filter(
 		(conversion) => conversion.type === "FILTER"
 	);
-	const sortConversions = conversions.filter(
+	const sortConversions = joinedConversions.filter(
 		(conversion) => conversion.type === "SORT"
 	);
 

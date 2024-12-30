@@ -61,6 +61,8 @@ export type ArrayInputProps = {
 	type: EditInputs.array;
 	title: string;
 	createObject?: boolean;
+
+	// Default value is anything the array can hold!!!!!
 	defaultValue?: GenericInput[];
 	input: GenericInput;
 

@@ -19,11 +19,18 @@ type DataResponse = {
 
 // Bit of a rough fix for now
 // Meta calls are better for article data
-const fetchMeta = async (items: CollectionItem[]) => {
+const fetchMeta = async (items: CollectionItem[] = []) => {
+	if (!items || !items?.map) {
+		return Promise.resolve([]);
+	}
+
 	const data = items.map(async (item) => {
 		const { src, details } = item;
 		// const { url = "" } = enclosure || {};
 		const meta = await getMeta(src);
+		if (!meta) {
+			return null;
+		}
 		const { title, description, image, imageAlt, url } = meta;
 
 		return {
@@ -102,6 +109,6 @@ export const rssFetch = async (query: WithQuery) => {
 	// we could get meta here and add to the response
 	// but we shouldn't
 	const finalData = await fetchMeta(convertedData.items);
-	// console.log("Return", { item: await finalData[0] });
-	return { ...convertedData, items: finalData };
+	// if item exists return it
+	return { ...convertedData, items: finalData.filter((item) => item) };
 };

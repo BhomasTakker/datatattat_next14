@@ -13,17 +13,18 @@ import { GenericInput } from "@/types/edit/inputs/inputs";
 // create a function etc to modify the base object
 // It could well be that the only thing to change will be the conversionId?
 // We may not even need that?
-export const RSS_CONVERSIONS = [
+export const RSS_CONVERSIONS: GenericInput[] = [
 	{
 		id: "conversions",
 		type: EditInputs.title,
 		title: "Conversions",
+		size: "large",
 	},
 	{
 		id: "conversionId",
 		type: EditInputs.text,
 		label: "Conversion Id",
-		default: "RSS:2.0",
+		defaultValue: "RSS:2.0",
 		disabled: true,
 	},
 	RESPONSE_INPUT,

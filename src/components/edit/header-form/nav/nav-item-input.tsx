@@ -27,38 +27,42 @@ export const NavItemInput = ({
 
 	return (
 		<div className={styles.root}>
-			<div className={styles.input}>
-				<label htmlFor={labelInputId}>Label</label>
-				<input
-					id={labelInputId}
-					{...register(labelInputId, {
-						required: true,
-						maxLength: 20,
-						minLength: 2,
-					})}
-					type="text"
-					defaultValue={label}
-					required
-				/>
+			<div className={styles.inputs}>
+				<div className={styles.input}>
+					<label htmlFor={labelInputId}>Label</label>
+					<input
+						id={labelInputId}
+						{...register(labelInputId, {
+							required: true,
+							maxLength: 20,
+							minLength: 2,
+						})}
+						type="text"
+						defaultValue={label}
+						required
+					/>
+				</div>
+				<div className={styles.input}>
+					<label htmlFor={routeInputId}>Route</label>
+					<input
+						id={routeInputId}
+						{...register(routeInputId, { required: true, minLength: 2 })}
+						type="text"
+						defaultValue={route}
+						required
+					/>
+				</div>
 			</div>
-			<div className={styles.input}>
-				<label htmlFor={routeInputId}>Route</label>
-				<input
-					id={routeInputId}
-					{...register(routeInputId, { required: true, minLength: 2 })}
-					type="text"
-					defaultValue={route}
-					required
-				/>
-			</div>
-			<div className={styles.icon} onClick={() => onMove(index, "up")}>
-				<FaArrowUp />
-			</div>
-			<div className={styles.icon} onClick={() => onMove(index, "down")}>
-				<FaArrowDown />
-			</div>
-			<div className={styles.icon} onClick={() => onDelete(index)}>
-				<MdDelete />
+			<div className={styles.controls}>
+				<div className={styles.icon} onClick={() => onMove(index, "up")}>
+					<FaArrowUp />
+				</div>
+				<div className={styles.icon} onClick={() => onMove(index, "down")}>
+					<FaArrowDown />
+				</div>
+				<div className={styles.icon} onClick={() => onDelete(index)}>
+					<MdDelete />
+				</div>
 			</div>
 		</div>
 	);

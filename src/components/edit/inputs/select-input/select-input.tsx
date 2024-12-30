@@ -47,7 +47,7 @@ export const SelectInput = ({
 	// defaultValue={defaultToUse}
 	return (
 		<div className={styles.root}>
-			<label htmlFor={id}>{`Choose a ${label}:`}</label>
+			<label htmlFor={id}>{`${label}`}</label>
 			<select {...register(id)} defaultValue={defaultToUse}>
 				<Options options={options} required={required} />
 			</select>

@@ -1,0 +1,7 @@
+@use "../../../../scss/abstracts/units/" as *;
+
+.navList {
+	display: flex;
+	flex-direction: column;
+	gap: $rem_5;
+}

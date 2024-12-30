@@ -5,14 +5,7 @@ export const PARAMS: GenericInput[] = [
 	{
 		id: "parameters",
 		type: EditInputs.title,
-		title: "RSS Parameters",
-	},
-	{
-		id: "testId",
-		type: EditInputs.text,
-		label: "TEST",
-		defaultValue: "testing123",
-		disabled: true,
+		title: "RSS Query Parameters",
 	},
 	{
 		id: "urls",

@@ -6,10 +6,22 @@
 	gap: $rem_4;
 	padding: $rem_1;
 
-	.input {
-		display: flex;
-		flex-direction: column;
+	.inputs {
 		width: 100%;
+		display: flex;
+		flex-direction: row;
+		gap: $rem_2;
+
+		.input {
+			display: flex;
+			flex-direction: column;
+			width: 100%;
+		}
+	}
+
+	.controls {
+		display: flex;
+		gap: $rem_2;
 	}
 
 	.icon {
@@ -27,6 +39,17 @@
 
 		> * {
 			margin: auto;
+		}
+	}
+
+	// other way around
+	@media (max-width: $screenWidthLg) {
+		flex-direction: column-reverse;
+		align-items: end;
+		gap: $rem_2;
+
+		.inputs {
+			flex-direction: column;
 		}
 	}
 }

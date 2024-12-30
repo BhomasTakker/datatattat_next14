@@ -55,6 +55,8 @@ export const PageFormContextProvider = ({
 		// Take what's changed and merge with the page object
 		const pageData = { ...page, ...data };
 
+		console.log("SAVE PAGE", pageData);
+
 		// get meta value
 		// get profile value
 		// get content value

@@ -20,24 +20,26 @@ export const TextInput = ({
 
 	return (
 		<div className={styles.root}>
-			<label htmlFor={id} className={styles.label}>
-				{label}
-			</label>
-			<input
-				className={styles.input}
-				id={id}
-				// this isn't validation it is options which include validation...
-				{...register(id, { ...validation })}
-				type="text"
-				defaultValue={useDefault}
-				required={required}
-				// Disabled on the element and not the form control
-				// results in the value being sent as part of the form
-				// i.e. This IS the form value and you vannot change it
-				// You would use form disable to enable more of a 'toggle' functionality
-				disabled={disabled}
-				// readOnly={disabled}
-			/>
+			<fieldset disabled={disabled}>
+				<label htmlFor={id} className={styles.label}>
+					{label}
+				</label>
+				<input
+					className={styles.input}
+					id={id}
+					// this isn't validation it is options which include validation...
+					{...register(id, { ...validation })}
+					type="text"
+					defaultValue={useDefault}
+					required={required}
+					// Disabled on the element and not the form control
+					// results in the value being sent as part of the form
+					// i.e. This IS the form value and you vannot change it
+					// You would use form disable to enable more of a 'toggle' functionality
+					// disabled={disabled}
+					// readOnly={disabled}
+				/>
+			</fieldset>
 		</div>
 	);
 };

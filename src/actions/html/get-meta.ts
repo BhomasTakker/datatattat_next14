@@ -3,10 +3,22 @@ import jsdom from "jsdom";
 
 const { JSDOM } = jsdom;
 
+// Probably get meta data and split/get card data from it
+export type MetaData = {
+	description?: string | null;
+	image?: string | null;
+	imageAlt?: string | null;
+	locale?: string | null;
+	site_name?: string | null;
+	title?: string | null;
+	type?: string | null;
+	url?: string | null;
+};
+
 // Move this kind  of junk
 // We probably want to store raw meta data?
 // Or form all the cdata we have into a single object
-const getOGMetaDataFromHTML = async (document: Document) => {
+const getOGMetaDataFromHTML = async (document: Document): Promise<MetaData> => {
 	return Promise.resolve({
 		// or use description
 		description: document.head
@@ -53,6 +65,6 @@ export const getMeta = async (src: string) => {
 		return meta;
 	} catch (error) {
 		console.warn("Error fetching meta data", error);
-		return {};
+		return null;
 	}
 };
