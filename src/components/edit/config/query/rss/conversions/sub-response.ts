@@ -58,6 +58,13 @@ const SUB_RESPONSE_INPUTS: GenericInput[] = [
 				createObject: true,
 				disabled: true,
 
+				defaultValue: [
+					{
+						type: "TRANSFORM",
+						id: "toCollectionItem",
+					},
+				],
+
 				input: {
 					id: "default",
 					type: EditInputs.inputList,

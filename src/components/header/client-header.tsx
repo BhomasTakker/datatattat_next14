@@ -4,13 +4,13 @@ import { SubHeaders } from "./sub-headers";
 import { DynamicHeader } from "./main-header";
 
 type Props = {
-	edit?: boolean;
+	prefix?: string;
 } & DynamicHeader;
 
 // Next 14 we will cache the header
 // Next 15 will not
 // We need to cache and bust by route
-export const ClientHeader = async ({ route, edit = false }: Props) => {
+export const ClientHeader = async ({ route, prefix = "" }: Props) => {
 	const header = await getMainHeader();
 	// createRouteFromParams return `/${joined}`
 	const joined = (route || []).join("/");
@@ -20,9 +20,9 @@ export const ClientHeader = async ({ route, edit = false }: Props) => {
 
 	return (
 		<>
-			{header ? <NavigationMenu items={header.nav} edit={edit} /> : null}
+			{header ? <NavigationMenu items={header.nav} prefix={prefix} /> : null}
 			{subHeaders && subHeaders.length > 0 ? (
-				<SubHeaders headersArray={subHeaders} edit={edit} />
+				<SubHeaders headersArray={subHeaders} prefix={prefix} />
 			) : null}
 		</>
 	);

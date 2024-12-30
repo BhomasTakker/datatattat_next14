@@ -9,45 +9,74 @@ import { getMainHeader, getSubHeaders } from "@/actions/header/get-header";
 import { cloneDeep } from "@/utils/object";
 import { Session } from "@/types/auth/session";
 import { PageFormContainer } from "./page-form/page-form-container";
+import { AdminNav } from "./admin/admin-nav";
+import { getUserById } from "@/lib/mongo/actions/user";
 
 type EditProps = {
 	route: string;
+	title: string;
+	isAdminEdit?: boolean;
 };
 
-export const EditPage = async ({ route }: EditProps) => {
+export const EditPage = async ({
+	route,
+	title,
+	isAdminEdit = false,
+}: EditProps) => {
 	const session = (await getServerSession(options)) as Session;
-	const { user } = session;
+	const { user: sessionUser } = session;
+	const { role } = await getUserById(sessionUser.user_id);
+	const isUserAdmin = role === "admin";
 
-	const pageData = await getPage(route);
+	const newHeaderData = {
+		route,
+		creator: sessionUser.user_id,
+		nav: [],
+	};
+
+	let pageData = {};
+
+	try {
+		pageData = await getPage(route);
+	} catch (err) {
+		console.warn("Page not found, creating new page");
+		pageData = {
+			creator: sessionUser.user_id,
+			route,
+		};
+	}
 
 	const mainHeader = await getMainHeader();
 	const subHeaders = await getSubHeaders(route);
 
 	const routeHeaders = route === "/" ? mainHeader : subHeaders[0];
+	const headerData =
+		routeHeaders.route.length === 0 ? newHeaderData : routeHeaders;
 
-	// we should pass in ther header data to use
-	// we should manage when etc
-	/// admon etc
+	console.log("ROUTEN HEADER ", { routeHeaders });
 
 	const routeArray = route.split("/");
+
+	const routePrefix = isAdminEdit ? "/admin?route=" : "/edit?route=";
 	// need home OR user button
 
 	// Route input? admin and user
 	return (
 		<section className={styles.root}>
-			<h1>Edit Page</h1>
+			<h1 className={styles.title}>{title}</h1>
+			{isUserAdmin ? <AdminNav levels={["/"]} isAdmin={isAdminEdit} /> : null}
 			{/* Probably create away from here */}
-			<UserProfile user={user} />
+			<UserProfile user={sessionUser} />
 			<p>
 				Current Endpoint: <span>{route}</span>
 			</p>
 			<section className={styles.header}>
 				<ClientHeader
 					route={routeArray.slice(1, routeArray.length)}
-					edit={true}
+					prefix={routePrefix}
 				/>
 			</section>
-			<HeaderForm headerData={routeHeaders || {}} />
+			<HeaderForm headerData={headerData} />
 			<PageFormContainer pageData={cloneDeep(pageData)} />
 		</section>
 	);

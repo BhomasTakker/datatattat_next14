@@ -10,10 +10,10 @@ const trimList = (list: HeaderType[]) => {
 
 export const SubHeaders = ({
 	headersArray,
-	edit,
+	prefix = "",
 }: {
 	headersArray: HeaderType[];
-	edit: boolean;
+	prefix?: string;
 }) => {
 	if (!headersArray || headersArray.length === 0) {
 		return null;
@@ -21,7 +21,7 @@ export const SubHeaders = ({
 
 	const renderSubMenu = (item: HeaderType, index: number): ReactElement => {
 		const { nav = [] } = item || {};
-		return <NavigationMenu items={nav} key={index} edit={edit} />;
+		return <NavigationMenu items={nav} key={index} prefix={prefix} />;
 	};
 
 	const renderList = (list: HeaderType[]): ReactElement => {

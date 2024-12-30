@@ -1,3 +1,6 @@
+@use "../scss/abstracts/units/" as *;
+
 .page {
 	min-height: 100svh;
+	padding-top: $rem_6;
 }

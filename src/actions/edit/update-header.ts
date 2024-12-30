@@ -40,6 +40,8 @@ export async function saveHeader(route: string, header: FieldValues) {
 		user_id
 	);
 
+	console.log("SAVE HEADER", { result, route, links });
+
 	// revalidate the path?
 	// we need to remove the cache for this header call
 	// We need to force a reload onl the edit page
