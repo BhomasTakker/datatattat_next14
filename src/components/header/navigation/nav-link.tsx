@@ -8,7 +8,7 @@ export type NavLinkData = {
 	key?: string;
 };
 
-type NavLinkProps = { prefix: string } & NavLinkData;
+type NavLinkProps = { prefix?: string } & NavLinkData;
 
 export const NavLink = ({ route, label, prefix = "" }: NavLinkProps) => {
 	const routeLink = `${prefix}${route}`;
