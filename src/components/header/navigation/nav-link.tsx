@@ -10,7 +10,7 @@ export type NavLinkData = {
 
 type NavLinkProps = { prefix: string } & NavLinkData;
 
-export const NavLink = ({ route, label, prefix }: NavLinkProps) => {
+export const NavLink = ({ route, label, prefix = "" }: NavLinkProps) => {
 	const routeLink = `${prefix}${route}`;
 	return (
 		<Link className={`${styles.root}`} href={routeLink}>
