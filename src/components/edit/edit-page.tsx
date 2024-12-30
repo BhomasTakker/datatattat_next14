@@ -5,7 +5,7 @@ import styles from "./edit-page.module.scss";
 import { ClientHeader } from "../header/client-header";
 import { HeaderForm } from "./header-form/header-form";
 import { getPage } from "@/actions/page/page-actions";
-import { getSubHeaders } from "@/actions/header/get-header";
+import { getMainHeader, getSubHeaders } from "@/actions/header/get-header";
 import { cloneDeep } from "@/utils/object";
 import { Session } from "@/types/auth/session";
 import { PageFormContainer } from "./page-form/page-form-container";
@@ -19,9 +19,18 @@ export const EditPage = async ({ route }: EditProps) => {
 	const { user } = session;
 
 	const pageData = await getPage(route);
-	const headerData = await getSubHeaders(route);
+
+	const mainHeader = await getMainHeader();
+	const subHeaders = await getSubHeaders(route);
+
+	const routeHeaders = route === "/" ? mainHeader : subHeaders[0];
+
+	// we should pass in ther header data to use
+	// we should manage when etc
+	/// admon etc
 
 	const routeArray = route.split("/");
+	// need home OR user button
 
 	// Route input? admin and user
 	return (
@@ -32,15 +41,13 @@ export const EditPage = async ({ route }: EditProps) => {
 			<p>
 				Current Endpoint: <span>{route}</span>
 			</p>
-			{/* header or Route selector - link with query string no? */}
 			<section className={styles.header}>
 				<ClientHeader
 					route={routeArray.slice(1, routeArray.length)}
 					edit={true}
 				/>
 			</section>
-			{/* Page Edit Form */}
-			<HeaderForm headerData={headerData} />
+			<HeaderForm headerData={routeHeaders || {}} />
 			<PageFormContainer pageData={cloneDeep(pageData)} />
 		</section>
 	);

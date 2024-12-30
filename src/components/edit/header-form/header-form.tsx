@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 
 import styles from "./header-form.module.scss";
 
-export const HeaderForm = ({ headerData }: { headerData: HeaderType[] }) => {
+export const HeaderForm = ({ headerData }: { headerData: HeaderType }) => {
 	const [pageState, setPageState] = useState<string | undefined>(undefined);
 
 	const methods = useForm({
@@ -18,8 +18,9 @@ export const HeaderForm = ({ headerData }: { headerData: HeaderType[] }) => {
 		// use in conjunction with unregister
 		shouldUnregister: true,
 	});
+
 	const { handleSubmit } = methods;
-	const { route, nav } = headerData[0] || {};
+	const { route, nav } = headerData;
 
 	const onSubmit = handleSubmit(async (data) => {
 		const res = await saveHeader(route, data);
