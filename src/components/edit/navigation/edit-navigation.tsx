@@ -3,6 +3,7 @@ import styles from "./edit-navigation.module.scss";
 import { NavigationMenu } from "@/components/header/navigation/navigation-menu";
 import { getMainHeader, getSubHeaders } from "@/actions/header/get-header";
 import { SubHeaders } from "@/components/header/sub-headers";
+import { PATHS } from "@/lib/routing/paths";
 
 type EditNavigationProps = {
 	route: string;
@@ -17,10 +18,10 @@ export const EditNavigation = async ({
 	const subHeaders = await getSubHeaders(route);
 
 	// Get this from somewhere
-	const homeHref = isAdminEdit ? "/admin" : `/edit`;
+	const homeHref = isAdminEdit ? PATHS.admin() : PATHS.edit();
 	const homeLabel = isAdminEdit ? "Home" : `User Home`;
 
-	const routePrefix = isAdminEdit ? "/admin?route=" : "/edit?route=";
+	const routePrefix = isAdminEdit ? PATHS.admin() : PATHS.edit();
 	return (
 		<section className={styles.header}>
 			<Link href={homeHref}>{homeLabel}</Link>

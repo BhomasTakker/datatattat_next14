@@ -11,6 +11,7 @@ import { PageFormContainer } from "./page-form/page-form-container";
 import { AdminNav } from "./admin/admin-nav";
 import { getUserById } from "@/lib/mongo/actions/user";
 import { EditNavigation } from "./navigation/edit-navigation";
+import { PATHS } from "@/lib/routing/paths";
 
 type EditProps = {
 	route: string;
@@ -26,6 +27,9 @@ const getPageOrNew = async (route: string) => {
 		const session = (await getServerSession(options)) as Session;
 		const { user: sessionUser } = session;
 
+		// Instead of creating an empty page object
+		// We should display a button to create a page
+		// Opening us to types and templates of pages / content
 		return await Promise.resolve({
 			creator: sessionUser.user_id,
 			route,
@@ -37,7 +41,7 @@ const getPageOrNew = async (route: string) => {
 };
 
 const getCurrentHeader = async (route: string) => {
-	if (route === "/") {
+	if (route === PATHS.home()) {
 		const header = await getMainHeader();
 		return header;
 	} else {
