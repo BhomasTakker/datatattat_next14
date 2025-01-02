@@ -19,12 +19,12 @@ export const SubHeaders = ({
 		return null;
 	}
 
-	const renderSubMenu = (item: HeaderType, index: number): ReactElement => {
+	const renderSubMenu = (item: HeaderType, index: number): ReactElement<any> => {
 		const { nav = [] } = item || {};
 		return <NavigationMenu items={nav} key={index} prefix={prefix} />;
 	};
 
-	const renderList = (list: HeaderType[]): ReactElement => {
+	const renderList = (list: HeaderType[]): ReactElement<any> => {
 		return <div>{list.map(renderSubMenu)}</div>;
 	};
 
