@@ -18,7 +18,7 @@ jest.mock("./head/page-head", () => {
 			children,
 		}: {
 			headData: Meta;
-			children: Array<React.ReactElement>;
+			children: Array<React.ReactElement<any>>;
 		}) => {
 			const pageTitle = headData.pageTitle;
 			document.title = pageTitle;
