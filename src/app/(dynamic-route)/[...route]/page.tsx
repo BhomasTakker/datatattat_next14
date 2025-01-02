@@ -9,7 +9,6 @@ export default async function Page({
 	params: Promise<{ route: string[] }>;
 }) {
 	const { route } = await params;
-	// createRouteFromParams return `/${joined}`
 	const joined = route.join("/");
 
 	const page = (await getPage(`/${joined}`)) as IPage;

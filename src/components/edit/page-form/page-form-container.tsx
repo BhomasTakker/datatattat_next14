@@ -7,8 +7,6 @@ import { useEffect } from "react";
 import { savePage } from "@/actions/edit/update-page";
 import { useRouter } from "next/navigation";
 
-let oldPageRoute = "";
-
 export const PageFormContainer = ({ pageData }: { pageData: IPage }) => {
 	const { route } = pageData;
 	const methods = useForm({
@@ -17,20 +15,11 @@ export const PageFormContainer = ({ pageData }: { pageData: IPage }) => {
 		shouldUnregister: true,
 		defaultValues: pageData as FieldValues,
 	});
-	// We need to reload the page when the route changes
-	// Otherwise form components don't know to update
+
 	const { refresh } = useRouter();
 
 	useEffect(() => {
-		// I don' know why this is necessary
-		// Route is triggering toooften...
-		if (oldPageRoute !== route) {
-			if (oldPageRoute !== "") {
-				refresh();
-				methods.reset(pageData);
-			}
-			oldPageRoute = route;
-		}
+		refresh();
 	}, [route]);
 
 	const submitHandler = methods.handleSubmit(async (data) => {
@@ -38,20 +27,13 @@ export const PageFormContainer = ({ pageData }: { pageData: IPage }) => {
 		// Take what's changed and merge with the page object
 		const update = { ...pageData, ...data };
 
-		console.log("SAVE PAGE", pageData);
-
-		// revalidate the page path
-		// set page state
+		// console.log("SAVE PAGE", pageData);
 		const res = await savePage(route, update);
-
-		// setPageState(res.message);
 	});
 
 	return (
 		<FormProvider {...methods}>
-			{/* <PageFormContextProvider page={pageData} methods={methods}> */}
 			<PageForm submitHandler={submitHandler} />
-			{/* </PageFormContextProvider> */}
 		</FormProvider>
 	);
 };

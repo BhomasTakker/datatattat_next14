@@ -14,17 +14,16 @@ const edit = () => {
 	return "/edit";
 };
 
+const admin = () => {
+	return "/admin";
+};
+
 const user = (username: string) => {
-	return `/user/${username}`;
+	return `/users/${username}`;
 };
 
-// rem these
-const member = () => {
-	return "/Member";
-};
-
-const clientMember = () => {
-	return "/ClientMember";
+const users = () => {
+	return "/users";
 };
 
 // Should export as an object perhaps / absolutely should!! home and edit!! lol
@@ -34,6 +33,6 @@ export const PATHS = {
 	home,
 	edit,
 	user,
-	member,
-	clientMember,
+	users,
+	admin,
 };
