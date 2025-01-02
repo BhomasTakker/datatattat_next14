@@ -5,46 +5,40 @@ import { saveOrCreateHeaderByRoute } from "@/lib/mongo/actions/header";
 import { Session } from "@/types/auth/session";
 import { getServerSession } from "next-auth";
 import { FieldValues } from "react-hook-form";
+import { checkUserAuth } from "../auth/check-user-auth";
+import { redirect } from "next/navigation";
+import { PATHS } from "@/lib/routing/paths";
+import { createLinks } from "@/utils/edit";
 
 // import { revalidatePath } from "next/cache";
 
+type Links = {
+	label: string;
+	route: string;
+}[];
+
+const save = async (route: string, nav: Links, user_id: string) => {
+	await saveOrCreateHeaderByRoute({ route, nav }, user_id);
+
+	return { message: "Header Saved!" };
+};
+
 // This is used with onSubmit Form and react-hook-form
 export async function saveHeader(route: string, header: FieldValues) {
+	try {
+		checkUserAuth(route);
+	} catch (e) {
+		console.error(e);
+		redirect(PATHS.error());
+	}
 	// not the correct way of protecting actions?
 	const session = (await getServerSession(options)) as Session;
-	if (!session) {
-		throw new Error("No session found");
-	}
 
 	const { user } = session;
 	const { user_id } = user;
 
-	///////////////////////////////////////////////////////////
-	// Create a function for this
-	// convert received data into the correct structure
-	const headerKeys = Object.keys(header);
-	const labels = headerKeys.filter((key) => key.includes("label"));
-	const routes = headerKeys.filter((key) => key.includes("route"));
+	const links = createLinks(header);
 
-	// Again copilot is being a bit too helpful here
-	const links = labels.map((label, index) => ({
-		label: header[label],
-		route: header[routes[index]],
-	}));
-	///////////////////////////////////////////////////////////
-
-	// save creator we may want to save multiple and last creator..
-	// We are assuming there is only one per header/page.
-	const result = await saveOrCreateHeaderByRoute(
-		{ route, nav: links },
-		user_id
-	);
-
-	console.log("SAVE HEADER", { result, route, links });
-
-	// revalidate the path?
-	// we need to remove the cache for this header call
-	// We need to force a reload onl the edit page
-
-	return result;
+	// we wouldn't revalidate path - but how would we update the header?
+	return await save(route, links, user_id);
 }

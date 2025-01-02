@@ -27,7 +27,6 @@ export const PageFormContainer = ({ pageData }: { pageData: IPage }) => {
 		// Take what's changed and merge with the page object
 		const update = { ...pageData, ...data };
 
-		// console.log("SAVE PAGE", pageData);
 		const res = await savePage(route, update);
 	});
 
