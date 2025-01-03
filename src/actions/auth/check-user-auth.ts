@@ -8,7 +8,14 @@ import { getServerSession } from "next-auth";
 
 const checkUserAuthorized = async (username: string, route: string) => {
 	const userHome = PATHS.user(username);
-	if (!route.startsWith(userHome)) {
+
+	if (route === userHome) {
+		return;
+	}
+
+	// to get around partial matches ie JimSmith matching JimSmith2
+	// We need to match the whole route OR the whole name + "/"
+	if (!route.startsWith(`${userHome}/`)) {
 		// log and redirect
 		throw new Error("Unauthorized");
 	}
