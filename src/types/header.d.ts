@@ -4,8 +4,8 @@ export type HeaderType = {
 	route: string;
 	nav: HeaderNav;
 
-	creator: ObjectId;
+	readonly creator: ObjectId;
 
-	createdAt: Date;
-	updatedAt: Date;
+	readonly createdAt: Date;
+	readonly updatedAt: Date;
 };

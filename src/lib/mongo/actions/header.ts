@@ -20,7 +20,7 @@ export const getHeader = async (route: string) => {
 };
 
 export const saveOrCreateHeaderByRoute = async (
-	header: HeaderType,
+	header: Omit<HeaderType, "createdAt" | "updatedAt" | "creator">,
 	creator: string
 ) => {
 	const { route, nav } = header;
