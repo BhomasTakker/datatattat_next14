@@ -4,8 +4,12 @@ import { HeaderType } from "@/types/header";
 const EMPTY_HEADER: HeaderType = {
 	route: "",
 	nav: [],
+	creator: undefined,
+	createdAt: new Date(),
+	updatedAt: new Date(),
 };
 
+// should return null
 export const getHeader = async (route: string) => {
 	if (!route) {
 		return EMPTY_HEADER;
