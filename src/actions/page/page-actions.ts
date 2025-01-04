@@ -3,6 +3,7 @@
 import { getPageByRoute } from "@/lib/mongo/actions/page";
 import { IPage } from "@/types/page";
 import { HydratedDocument } from "mongoose";
+import { redirect } from "next/navigation";
 
 export const getPage = async (route: string) => {
 	// what if bad route is passed?
@@ -11,6 +12,8 @@ export const getPage = async (route: string) => {
 	// If error thrown(bad route/unfound page data) we crash...
 	const page = await getPageByRoute(route);
 	if (!page) {
+		// error page & log?
+		redirect("/");
 		throw new Error(`Page not found for route: ${route}`);
 	}
 	return page as HydratedDocument<IPage>;

@@ -45,14 +45,6 @@ const DropDownItem = ({
 };
 
 const ProfileItem = ({ avatar, username }: PropfileItemProps) => {
-	const userIcon = (
-		<img
-			className={styles.profileImage}
-			src={avatar}
-			alt={`${username} profile picture`}
-		/>
-	);
-
 	return (
 		<li className={styles.profile}>
 			<img
@@ -82,6 +74,7 @@ export const MenuDropDown = ({
 				>
 					Profile
 				</DropDownItem>
+				<DropDownItem href={PATHS.user(username)}>User Home</DropDownItem>
 				<DropDownItem href={PATHS.edit()}>Edit</DropDownItem>
 				<DropDownItem href={PATHS.signOut(pathname)}>Sign Out</DropDownItem>
 			</ul>
