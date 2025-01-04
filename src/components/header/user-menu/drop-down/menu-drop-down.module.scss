@@ -1,0 +1,55 @@
+@use "../../../../scss/abstracts/colours/" as *;
+@use "../../../../scss/abstracts/units/" as *;
+@use "../../../../scss/abstracts/content/" as *;
+
+.dropdown {
+	position: absolute;
+	top: $px_25;
+	right: 5%;
+	width: $contentWidthMd;
+	background-color: $gainsboro;
+	border-radius: $rem_1;
+	box-shadow: $shadowLight1;
+	padding: $rem_4;
+	overflow: hidden;
+	opacity: 0;
+
+	&.open {
+		opacity: 1;
+		pointer-events: all;
+	}
+
+	.dropDownItem {
+		height: $px_21;
+		display: flex;
+		align-items: center;
+		border-radius: $rem_1;
+		padding: $rem_4;
+		gap: $rem_2;
+
+		background-color: $whiteSmoke;
+
+		&:hover {
+			background-color: $gainsboro;
+			border: 1px solid $whiteSmoke;
+			border-top: none;
+		}
+
+		.rightIcon {
+			margin-left: auto;
+		}
+	}
+
+	.profile {
+		display: flex;
+		align-items: center;
+		gap: $rem_2;
+		height: $px_21;
+		background-color: $gainsboro;
+		border: 1px solid $whiteSmoke;
+		.profileImage {
+			width: $px_21;
+			height: $px_21;
+		}
+	}
+}

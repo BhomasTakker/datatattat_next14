@@ -13,13 +13,27 @@ jest.mock("./user-menu/user-menu", () => {
 
 jest.mock("next-auth", () => {
 	return {
-		getServerSession: jest.fn().mockResolvedValue(true),
+		getServerSession: jest.fn().mockResolvedValue({
+			user: {
+				user_id: "user_id",
+			},
+		}),
 	};
 });
 
 jest.mock("../../app/api/auth/[...nextauth]/options", () => {
 	return {
 		options: {},
+	};
+});
+// copilot did this!
+jest.mock("../../lib/mongo/actions/user", () => {
+	return {
+		getUserById: jest.fn().mockResolvedValue({
+			role: "role",
+			username: "username",
+			avatar: "avatar",
+		}),
 	};
 });
 

@@ -1,51 +1,39 @@
 "use client";
 
-import { PATHS } from "@/lib/routing/paths";
-import Link from "next/link";
 import { BiSolidUser } from "react-icons/bi";
 import styles from "./user-menu.module.scss";
-import { useRef } from "react";
-import { useSession } from "next-auth/react";
-import { usePathname } from "next/navigation";
+import React, { useEffect, useState } from "react";
+import { DropDownProps, MenuDropDown } from "./drop-down/menu-drop-down";
 
-export const UserMenu = () => {
-	const { data } = useSession();
-	const pathname = usePathname();
-	const modalRef = useRef<HTMLDialogElement>(null);
+type UserMenuProps = {
+	username: string;
+	avatar: string;
+};
 
-	const openModal = () => {
-		if (modalRef.current) {
-			modalRef.current.showModal();
+export const UserMenu = ({ username, avatar }: UserMenuProps) => {
+	const [isOpen, setIsOpen] = useState(false);
+
+	useEffect(() => {
+		const closeHnd = () => setIsOpen(false);
+		if (isOpen) {
+			document.addEventListener("click", closeHnd);
 		}
-	};
-	const closeModal = () => {
-		if (modalRef.current) {
-			modalRef.current.close();
-		}
-	};
+		return () => {
+			document.removeEventListener("click", closeHnd);
+		};
+	}, [isOpen]);
 
 	return (
 		<div>
-			<button className={styles.menuButton} onClick={openModal}>
+			<button className={styles.menuButton} onClick={() => setIsOpen(!isOpen)}>
 				<BiSolidUser className={styles.logo} />
 			</button>
-			<dialog ref={modalRef} className={styles.menu} onBlur={closeModal}>
-				<ul>
-					{/* // callback to current page */}
-					<li>
-						<Link href={PATHS.signOut(pathname)}>Sign Out</Link>
-					</li>
-					<li>
-						{/* add page query? */}
-						<Link href={PATHS.edit()}>Edit</Link>
-					</li>
-					{data?.user?.name ? (
-						<li>
-							<Link href={PATHS.user(data?.user?.name || "")}>User Page</Link>
-						</li>
-					) : null}
-				</ul>
-			</dialog>
+			<MenuDropDown
+				isOpen={isOpen}
+				setIsOpen={setIsOpen}
+				username={username}
+				avatar={avatar}
+			/>
 		</div>
 	);
 };
