@@ -1,4 +1,5 @@
-import { IUser, User } from "@/models/User";
+import { User } from "@/models/User";
+import { IUser } from "@/types/user";
 
 export const getUserBySignInEmail = async (email: string) => {
 	return await User.findOne({ signin_email: email });
