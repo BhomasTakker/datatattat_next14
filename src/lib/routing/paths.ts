@@ -30,6 +30,10 @@ const error = () => {
 	return `/error`;
 };
 
+const profile = () => {
+	return `/profile`;
+};
+
 // Should export as an object perhaps / absolutely should!! home and edit!! lol
 export const PATHS = {
 	signIn,
@@ -40,4 +44,5 @@ export const PATHS = {
 	users,
 	admin,
 	error,
+	profile,
 };

@@ -10,7 +10,11 @@ import { Button } from "@/components/ui/button";
 
 import styles from "./header-form.module.scss";
 
-export const HeaderForm = ({ headerData }: { headerData: HeaderType }) => {
+type HeaderFormProps = {
+	headerData: Omit<HeaderType, "createdAt" | "updatedAt">;
+};
+
+export const HeaderForm = ({ headerData }: HeaderFormProps) => {
 	const [pageState, setPageState] = useState<string | undefined>(undefined);
 
 	const methods = useForm({

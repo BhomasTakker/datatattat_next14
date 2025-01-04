@@ -18,25 +18,3 @@
 		background-color: $shadowLight1;
 	}
 }
-
-// we should have set sizes for things like this / like article cards
-// also this needs a full redo it was / is a 'here you go' thing
-.menu {
-	width: $contentWidthSm;
-	padding: $rem_3;
-	margin-top: $rem_8;
-	margin-left: 80%;
-
-	right: $rem_1;
-	border: $rem_0;
-	border-radius: $rem_1;
-	box-shadow: 0 0 $rem_4 $shadowLight3;
-
-	& > * {
-		margin: 0 0 $rem_2 0;
-	}
-
-	::backdrop {
-		background: $shadowLight2;
-	}
-}

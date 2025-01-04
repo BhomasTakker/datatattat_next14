@@ -6,6 +6,8 @@ import { getServerSession } from "next-auth";
 import { options } from "@/app/api/auth/[...nextauth]/options";
 import { UserMenu } from "./user-menu/user-menu";
 import { BiSolidUser } from "react-icons/bi";
+import { getUserById } from "@/lib/mongo/actions/user";
+import { Session } from "@/types/auth/session";
 
 const Logo = () => {
 	return (
@@ -39,13 +41,24 @@ const SignInButton = () => {
 };
 
 export const NavigationHeader = async () => {
-	const session = await getServerSession(options);
+	const session = (await getServerSession(options)) as Session;
+
+	let menuComponent = null;
+
+	if (!session) {
+		menuComponent = <SignInButton />;
+	} else {
+		const { user } = session;
+		const { user_id } = user;
+		const { role, username, avatar } = await getUserById(user_id);
+		menuComponent = <UserMenu username={username} avatar={avatar} />;
+	}
 
 	return (
 		<nav className={styles.root}>
 			<Logo />
 			<Datatattat />
-			{!session ? <SignInButton /> : <UserMenu />}
+			{menuComponent}
 		</nav>
 	);
 };
