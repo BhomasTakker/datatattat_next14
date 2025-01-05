@@ -30,8 +30,8 @@ const error = () => {
 	return `/error`;
 };
 
-const profile = () => {
-	return `/profile`;
+const profile = (username: string) => {
+	return `${user(username)}/profile`;
 };
 
 // Should export as an object perhaps / absolutely should!! home and edit!! lol

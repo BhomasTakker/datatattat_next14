@@ -18,6 +18,7 @@ const providers = [
 
 			if (!user) {
 				user = await createNewUser({
+					signup_completed: false,
 					signin_method: "github",
 					signin_name: profile.login,
 					signin_email: profile.email || "",

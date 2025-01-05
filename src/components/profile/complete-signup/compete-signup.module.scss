@@ -1,0 +1,43 @@
+@use "../../../scss/abstracts/colours/" as *;
+@use "../../../scss/abstracts/units/" as *;
+
+.form {
+	.field {
+		display: flex;
+		flex-direction: column;
+
+		gap: $rem_2;
+
+		border: none;
+		padding: 0;
+		margin: 0;
+		padding-bottom: $rem_5;
+
+		.label {
+			// padding-bottom: $rem_2;
+		}
+		.input {
+			width: 100%;
+			padding: $rem_2;
+			background-color: $whiteSmoke;
+			border: none;
+			border-radius: $rem_1;
+			font-size: $text_3;
+
+			&:hover,
+			&:focus {
+				background-color: $gainsboro;
+				border: none;
+			}
+		}
+
+		.warn {
+			opacity: 0;
+			color: red;
+
+			&.showWarning {
+				opacity: 1;
+			}
+		}
+	}
+}

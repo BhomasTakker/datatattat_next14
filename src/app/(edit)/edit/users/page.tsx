@@ -1,14 +1,13 @@
-import { options } from "@/app/api/auth/[...nextauth]/options";
-import { getUserById } from "@/lib/mongo/actions/user";
+import isValidSession from "@/actions/auth/check-session";
+import isSignupComplete from "@/actions/signup/signup-completed";
+import { getUser } from "@/actions/user/get-user";
 import { PATHS } from "@/lib/routing/paths";
-import { Session } from "@/types/auth/session";
-import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 
 export default async function Page() {
-	const session = (await getServerSession(options)) as Session;
-	const { user: sessionUser } = session;
-	const { username } = await getUserById(sessionUser.user_id);
+	await isValidSession();
+	await isSignupComplete();
+	const { username } = await getUser();
 
 	const userHome = `${PATHS.users()}/${username}`;
 

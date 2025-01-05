@@ -69,7 +69,7 @@ export const MenuDropDown = ({
 			<ul>
 				<ProfileItem avatar={avatar} username={username} />
 				<DropDownItem
-					href={PATHS.profile()}
+					href={PATHS.profile(username)}
 					rightIcon={<BiSolidUser size="24" />}
 				>
 					Profile

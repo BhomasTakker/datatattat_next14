@@ -3,6 +3,10 @@ import mongoose, { ObjectId, Schema, model } from "mongoose";
 
 const UserSchema = new Schema<IUser>(
 	{
+		signup_completed: {
+			type: Boolean,
+			default: false,
+		},
 		username: {
 			type: String,
 			// unique: [true, "Username must be unique"],

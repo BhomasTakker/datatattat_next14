@@ -9,7 +9,15 @@ export const getUserById = async (id: string) => {
 	return (await User.findOne({ _id: id })) as IUser;
 };
 
-export const createNewUser = async (user: IUser) => {
+export const getUserByUsername = async (username: string) => {
+	return (await User.findOne({ username })) as IUser;
+};
+
+export const getAllUserByUsername = async (username: string) => {
+	return (await User.find({ username })) as IUser[];
+};
+
+export const createNewUser = async (user: Omit<IUser, "_id">) => {
 	try {
 		const newUser = new User(user);
 		return { message: "User Created", user: await newUser.save() };
