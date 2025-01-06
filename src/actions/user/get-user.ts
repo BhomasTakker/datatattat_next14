@@ -8,6 +8,11 @@ import { getServerSession } from "next-auth";
 
 export async function getSessionUser() {
 	const session = (await getServerSession(options)) as Session;
+	if (!session) {
+		// throw new Error("No session found");
+		return null;
+	}
+
 	return session.user;
 }
 
@@ -25,8 +30,11 @@ export async function getUserFromSessionId(id: string): Promise<IUser> {
 
 // getUser
 // should have a get user from session.
-export async function getUser(): Promise<IUser> {
+export async function getUser(): Promise<IUser | null> {
 	// try catch / if no session / if no user etc
 	const sessionUser = await getSessionUser();
+	if (!sessionUser) {
+		return Promise.resolve(null);
+	}
 	return getUserFromSessionId(sessionUser.user_id);
 }

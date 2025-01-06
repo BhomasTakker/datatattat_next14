@@ -5,7 +5,9 @@ import { FormProvider, useForm } from "react-hook-form";
 import styles from "./compete-signup.module.scss";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
-import { checkIsUsernameOkay } from "@/actions/signup/check-username";
+import { isUsernameValid as checkIsUsernameValid } from "@/actions/signup/check-username";
+import { confirmUsername } from "@/actions/signup/confirm-username";
+import { useRouter } from "next/navigation";
 
 type Inputs = {
 	username: string;
@@ -23,24 +25,40 @@ export const CompleteSignup = ({ username }: CompleteSignupProps) => {
 	const methods = useForm<Inputs>({
 		defaultValues: {},
 	});
-	const { register, handleSubmit } = methods;
+	const { refresh } = useRouter();
+	const { register, handleSubmit, watch } = methods;
 	const onSubmit = handleSubmit(async (data) => {
-		// const res = await saveHeader(route, data);
-		// setPageState(res.message);
-		console.log("SUBMIT ", { username: data.username });
-
-		const isValid = await checkIsUsernameOkay(data.username);
+		console.log("SUBMIT", { data });
+		const isValid = await checkIsUsernameValid(data.username);
 		setIsUsernameValid(isValid);
+
+		if (isValid) {
+			const status = await confirmUsername(data.username);
+			console.log("STATUS", { status });
+			refresh();
+		}
 	});
 
 	useEffect(() => {
 		const checkUsername = async () => {
-			const isValid = await checkIsUsernameOkay(username);
+			const isValid = await checkIsUsernameValid(username);
 			setIsUsernameValid(isValid);
-			setIsSubmitDisabled(isValid);
+			setIsSubmitDisabled(!isValid);
 		};
 		checkUsername();
 	}, []);
+
+	// Not sure I like it 100% but copilot wrote this!
+	useEffect(() => {
+		const username = watch("username");
+		// use debounce
+		const checkUsername = async () => {
+			const isValid = await checkIsUsernameValid(username);
+			setIsUsernameValid(isValid);
+			setIsSubmitDisabled(!isValid);
+		};
+		checkUsername();
+	}, [watch("username")]);
 
 	console.log("isUsernmeTaken? ", { isUsernameValid });
 

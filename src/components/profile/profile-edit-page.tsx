@@ -1,14 +1,20 @@
-import isValidSession from "@/actions/auth/check-session";
 import { CompleteSignup } from "./complete-signup/complete-signup";
-import { getUser } from "@/actions/user/get-user";
+import { UserProfile } from "./user-profile";
+import { isValidUser } from "@/actions/auth/check-valid-user";
 
 export const ProfileEditPage = async () => {
-	await isValidSession();
-	const { signup_completed, username } = await getUser();
+	// redirects if no user
+	const user = await isValidUser();
+
+	const { signup_completed, username } = user;
 
 	if (!signup_completed) {
 		return <CompleteSignup username={username} />;
 	}
 
-	return <div>Profile Edit Page</div>;
+	return (
+		<div>
+			<UserProfile user={user} />
+		</div>
+	);
 };

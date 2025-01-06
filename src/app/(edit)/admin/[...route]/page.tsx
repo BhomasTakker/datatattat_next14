@@ -3,7 +3,7 @@ import { EditPage } from "@/components/edit/edit-page";
 import { PATHS } from "@/lib/routing/paths";
 import isValidSession from "@/actions/auth/check-session";
 import isSignupComplete from "@/actions/signup/signup-completed";
-import { getUser } from "@/actions/user/get-user";
+import { isValidUser } from "@/actions/auth/check-valid-user";
 
 export const dynamic = "force-dynamic";
 
@@ -15,7 +15,7 @@ export default async function Page({ params }: PageProps) {
 	await isValidSession();
 	await isSignupComplete();
 
-	const { role } = await getUser();
+	const { role } = await isValidUser();
 
 	// need select from multiple levels of admin?
 	const adminLevel = PATHS.home();

@@ -9,9 +9,9 @@ import { cloneDeep } from "@/utils/object";
 import { Session } from "@/types/auth/session";
 import { PageFormContainer } from "./page-form/page-form-container";
 import { AdminNav } from "./admin/admin-nav";
-import { getUserById } from "@/lib/mongo/actions/user";
 import { EditNavigation } from "./navigation/edit-navigation";
 import { PATHS } from "@/lib/routing/paths";
+import { isValidUser } from "@/actions/auth/check-valid-user";
 
 type EditProps = {
 	route: string;
@@ -68,9 +68,11 @@ export const EditPage = async ({
 	title,
 	isAdminEdit = false,
 }: EditProps) => {
+	// remove me
 	const session = (await getServerSession(options)) as Session;
 	const { user: sessionUser } = session;
-	const { role } = await getUserById(sessionUser.user_id);
+
+	const { role } = await isValidUser();
 	const isUserAdmin = role === "admin";
 
 	const pageData = await getPageOrNew(route);
@@ -81,7 +83,7 @@ export const EditPage = async ({
 		<section className={styles.root}>
 			<h1 className={styles.title}>{title}</h1>
 			{isUserAdmin ? <AdminNav levels={["/"]} isAdmin={isAdminEdit} /> : null}
-			{/* Probably create away from here */}
+			{/* Probably create away from here - use user */}
 			<UserProfile user={sessionUser} />
 			<p>
 				Current Endpoint: <span>{route}</span>

@@ -23,6 +23,19 @@ export const createNewUser = async (user: Omit<IUser, "_id">) => {
 		return { message: "User Created", user: await newUser.save() };
 	} catch (err) {
 		console.error(err);
-		return { message: "Error saving header" };
+		return { message: "Error creating user" };
+	}
+};
+
+export const updateUser = async (id: string, user: Partial<IUser>) => {
+	try {
+		// create if doesn't exist. Perhaps should not be.
+		const updatedUser = await User.findOneAndUpdate({ _id: id }, user, {
+			new: true,
+		});
+		return { message: "User Updated" };
+	} catch (err) {
+		console.error(err);
+		return { message: "Error updating user" };
 	}
 };

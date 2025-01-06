@@ -14,7 +14,6 @@ export const getPage = async (route: string) => {
 	if (!page) {
 		// error page & log?
 		redirect("/");
-		throw new Error(`Page not found for route: ${route}`);
 	}
 	return page as HydratedDocument<IPage>;
 };
