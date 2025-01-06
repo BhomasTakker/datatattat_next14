@@ -29,14 +29,17 @@ exports[`User Menu renders unopened user menu unchanged 1`] = `
           class="profile"
         >
           <img
-            alt="undefined profile picture"
+            alt="John Cena profile picture"
             class="profileImage"
+            src="https://example.com/avatar.jpg"
           />
-          <h4 />
+          <h4>
+            John Cena
+          </h4>
         </li>
         <li>
           <a
-            href="/profile"
+            href="/users/John Cena/profile"
           >
             <div
               class="dropDownItem"
@@ -59,6 +62,20 @@ exports[`User Menu renders unopened user menu unchanged 1`] = `
                   />
                 </svg>
               </span>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a
+            href="/users/John Cena"
+          >
+            <div
+              class="dropDownItem"
+            >
+              User Home
+              <span
+                class="rightIcon"
+              />
             </div>
           </a>
         </li>

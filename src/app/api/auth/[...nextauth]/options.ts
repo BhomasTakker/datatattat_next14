@@ -2,6 +2,7 @@ import Github from "next-auth/providers/github";
 import type { ISODateString } from "next-auth";
 import { AdapterUser } from "next-auth/adapters";
 import { createNewUser, getUserBySignInEmail } from "@/lib/mongo/actions/user";
+import { checkAndCreateUsername } from "@/actions/signup/check-create-username";
 
 const { GITHUB_ID, GITHUB_SECRET } = process.env;
 
@@ -16,13 +17,18 @@ const providers = [
 			// what do we do/return if a failure?
 			let user = await getUserBySignInEmail(profile.email || "");
 
+			const username = profile.name || profile.login;
+			// do we need some kind of fail safe? what if this fails?
+			const uniqueUsername = await checkAndCreateUsername(username);
+
 			if (!user) {
 				user = await createNewUser({
+					signup_completed: false,
 					signin_method: "github",
 					signin_name: profile.login,
 					signin_email: profile.email || "",
 					avatar: profile.avatar_url,
-					username: profile.name || profile.login,
+					username: uniqueUsername,
 					role: "standard",
 				});
 			}

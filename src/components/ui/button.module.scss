@@ -22,4 +22,10 @@
 	&:hover {
 		background-color: $gainsboro;
 	}
+
+	&:disabled {
+		background-color: $lightGrey;
+		// color: $textColourLight;
+		cursor: not-allowed;
+	}
 }

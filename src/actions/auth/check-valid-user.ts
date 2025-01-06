@@ -1,0 +1,19 @@
+import { getUserById } from "@/lib/mongo/actions/user";
+import isValidSession from "./check-session";
+import { redirect } from "next/navigation";
+import { PATHS } from "@/lib/routing/paths";
+
+export async function isValidUser() {
+	const session = await isValidSession();
+
+	const { user: sessionUser } = session;
+	const { user_id } = sessionUser;
+
+	const user = await getUserById(user_id);
+
+	if (!user) {
+		redirect(PATHS.home());
+	}
+
+	return user;
+}

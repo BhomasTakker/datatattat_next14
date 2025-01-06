@@ -9,12 +9,33 @@ export const getUserById = async (id: string) => {
 	return (await User.findOne({ _id: id })) as IUser;
 };
 
-export const createNewUser = async (user: IUser) => {
+export const getUserByUsername = async (username: string) => {
+	return (await User.findOne({ username })) as IUser;
+};
+
+export const getAllUserByUsername = async (username: string) => {
+	return (await User.find({ username })) as IUser[];
+};
+
+export const createNewUser = async (user: Omit<IUser, "_id">) => {
 	try {
 		const newUser = new User(user);
 		return { message: "User Created", user: await newUser.save() };
 	} catch (err) {
 		console.error(err);
-		return { message: "Error saving header" };
+		return { message: "Error creating user" };
+	}
+};
+
+export const updateUser = async (id: string, user: Partial<IUser>) => {
+	try {
+		// create if doesn't exist. Perhaps should not be.
+		const updatedUser = await User.findOneAndUpdate({ _id: id }, user, {
+			new: true,
+		});
+		return { message: "User Updated" };
+	} catch (err) {
+		console.error(err);
+		return { message: "Error updating user" };
 	}
 };

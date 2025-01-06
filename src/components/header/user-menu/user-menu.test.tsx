@@ -2,6 +2,11 @@ import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import { UserMenu } from "./user-menu";
 
+const menuProps = {
+	username: "John Cena",
+	avatar: "https://example.com/avatar.jpg",
+};
+
 // We should probaly mock this guy somewhere
 jest.mock("next-auth/react", () => {
 	return {
@@ -25,7 +30,9 @@ jest.mock("next/navigation", () => {
 // mocking/spying no work....
 describe("User Menu", () => {
 	it("renders a button to open the user menu", () => {
-		render(<UserMenu />);
+		render(
+			<UserMenu username={menuProps.username} avatar={menuProps.avatar} />
+		);
 		const button = screen.getByRole("button");
 		expect(button).toBeInTheDocument();
 	});
@@ -37,7 +44,9 @@ describe("User Menu", () => {
 	// 	expect(link).toBeInTheDocument();
 	// });
 	it("renders unopened user menu unchanged", () => {
-		const { container } = render(<UserMenu />);
+		const { container } = render(
+			<UserMenu username={menuProps.username} avatar={menuProps.avatar} />
+		);
 		expect(container).toMatchSnapshot();
 	});
 

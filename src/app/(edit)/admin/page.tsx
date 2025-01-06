@@ -1,9 +1,8 @@
-import { getServerSession } from "next-auth";
 import styles from "../../page.module.scss";
 import { EditPage } from "@/components/edit/edit-page";
-import { options } from "../../api/auth/[...nextauth]/options";
-import { getUserById } from "@/lib/mongo/actions/user";
-import { Session } from "@/types/auth/session";
+import isValidSession from "@/actions/auth/check-session";
+import isSignupComplete from "@/actions/signup/signup-completed";
+import { isValidUser } from "@/actions/auth/check-valid-user";
 
 export const dynamic = "force-dynamic";
 
@@ -13,9 +12,10 @@ export const dynamic = "force-dynamic";
 // So /admin is now home page admin
 // /admin[route] is the admin edit page
 export default async function Page() {
-	const session = (await getServerSession(options)) as Session;
-	const { user: sessionUser } = session;
-	const { role } = await getUserById(sessionUser.user_id);
+	await isValidSession();
+	await isSignupComplete();
+
+	const { role } = await isValidUser();
 
 	// need select from multiple levels of admin?
 	const adminLevel = "/";
