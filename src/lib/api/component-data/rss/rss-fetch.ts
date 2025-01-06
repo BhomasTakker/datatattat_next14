@@ -50,6 +50,11 @@ const fetchMeta = async (items: CollectionItem[] = []) => {
 	return Promise.all(data);
 };
 
+////////////////////////////////////
+// When we error here we crash
+// If an rss feed timeout we're crashing
+// Maybe fixed - but thois needs a good run through
+// Refactor etc
 export const rssFetch = async (query: WithQuery) => {
 	const { params, conversions } = query;
 	const { urls } = params as RssParams;
@@ -67,6 +72,10 @@ export const rssFetch = async (query: WithQuery) => {
 		if (isValid) {
 			try {
 				const prom = (fetchRSS(url) as Promise<DataResponse>) || null;
+				prom.catch((error) => {
+					// This should stop the crash but we need to remove null from promise list
+					console.error("Error fetching rss", error);
+				});
 				////////////////////////////////////
 				// add redis data fetch and cache //
 				////////////////////////////////////
@@ -82,19 +91,22 @@ export const rssFetch = async (query: WithQuery) => {
 	// error handling?
 	const responses = await Promise.all(fetches);
 
+	// Remove any null instances / i.e. load errors
+	const cleanResponses = responses.filter((response) => response);
+
 	// console.log("responses ", { fetches, responses });
 
 	////////////////////////////////////////
 	// Create merge responses or something
 	// Or rightly this would be part pf conversins
 	// not here and go over
-	const mergedData = responses.reduce(
+	const mergedData = cleanResponses.reduce(
 		(acc, cur) => ({
 			...acc,
 			items: cur?.items ? acc.items.concat(cur.items) : acc.items,
 		}),
 		// We should merge all into the main return
-		{ ...responses[0] }
+		{ ...cleanResponses[0] }
 	);
 
 	/////////////////////////////////////////////////
