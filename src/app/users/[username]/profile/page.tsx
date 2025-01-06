@@ -16,7 +16,7 @@ export default async function UserProfile({
 	const sessionUser = await getUser();
 	const profileUser = await getUserByUsername(username);
 
-	if (sessionUser) {
+	if (sessionUser && profileUser) {
 		if (sessionUser._id.toString() === profileUser._id.toString()) {
 			return (
 				<div className={styles.page}>
