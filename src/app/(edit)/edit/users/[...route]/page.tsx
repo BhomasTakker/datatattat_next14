@@ -20,8 +20,11 @@ export default async function Page({ params }: PageProps) {
 	const { route } = await params;
 
 	const joined = route.join("/");
+	const decodedRoute = decodeURI(joined);
 
-	if (!joined.startsWith(username)) {
+	// We only need the decodedRoute to check against the username
+	// We don't need to provide a decoded route to the EditPage component
+	if (!decodedRoute.startsWith(username)) {
 		return <div>Unauthorized</div>;
 	}
 

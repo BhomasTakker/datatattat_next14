@@ -11,8 +11,8 @@ export const getPage = async (route: string) => {
 	// what if error is thrown?
 	// If error thrown(bad route/unfound page data) we crash...
 	const page = await getPageByRoute(route);
+
 	if (!page) {
-		// error page & log?
 		redirect("/");
 	}
 	return page as HydratedDocument<IPage>;

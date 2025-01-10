@@ -10,11 +10,13 @@ export const getUserById = async (id: string) => {
 };
 
 export const getUserByUsername = async (username: string) => {
-	return (await User.findOne({ username })) as IUser;
+	const decodedUsername = decodeURI(username);
+	return (await User.findOne({ username: decodedUsername })) as IUser;
 };
 
 export const getAllUserByUsername = async (username: string) => {
-	return (await User.find({ username })) as IUser[];
+	const decodedUsername = decodeURI(username);
+	return (await User.find({ username: decodedUsername })) as IUser[];
 };
 
 export const createNewUser = async (user: Omit<IUser, "_id">) => {

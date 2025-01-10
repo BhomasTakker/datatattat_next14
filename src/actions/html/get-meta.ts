@@ -1,7 +1,31 @@
 "use server";
+
+//////////////////////////////////////////
+// We had a major issue here with jsdom
+// when jsdom encounters an error i scss say
+// it logs that error - so for the Guardian
+// pretty sure it's itentional...
+// there is an error in the stylesheet for every url you load
+// This would all log causing slowdowns...
+// the fix is essentially to override
+// the default error handling of jsdom
+// by loading the virtual dom - adding an error listener
+// and no-opping it
+/////////////////////////////////////////////////
+// probably want to move this to a utils folder
+// Call get dom
+// or create a dom class etc and get meta from it
+// Ultimately, call a conversion to take specific data from html
+// this is all a scraper is doing
+/////////////////////////////////////////////////
 import jsdom from "jsdom";
 
 const { JSDOM } = jsdom;
+const virtualConsole = new jsdom.VirtualConsole();
+virtualConsole.on("error", () => {
+	// No-op to skip console errors.
+});
+/////////////////////////////////////////////////
 
 // Probably get meta data and split/get card data from it
 export type MetaData = {
@@ -60,7 +84,7 @@ export const getMeta = async (src: string) => {
 		}
 		const result = await response.text();
 
-		const dom = new JSDOM(result);
+		const dom = new JSDOM(result, { virtualConsole });
 		const meta = await getOGMetaDataFromHTML(dom.window.document);
 		return meta;
 	} catch (error) {

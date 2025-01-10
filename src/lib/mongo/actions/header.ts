@@ -14,9 +14,11 @@ export const getHeader = async (route: string) => {
 	if (!route) {
 		return EMPTY_HEADER;
 	}
+	// should we decode here?
+	const decodedRoute = decodeURIComponent(route);
 	// findOne will return an item if passed undefined for the query
 	// if passed essentially nothing it will return the first document in collection
-	return (await Header.findOne({ route }).lean()) || EMPTY_HEADER;
+	return (await Header.findOne({ route: decodedRoute }).lean()) || EMPTY_HEADER;
 };
 
 export const saveOrCreateHeaderByRoute = async (
