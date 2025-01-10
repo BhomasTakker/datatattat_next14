@@ -1,8 +1,9 @@
 import type { ISODateString } from "next-auth";
 import { AdapterUser } from "next-auth/adapters";
 import { GITHUB } from "@/lib/next-auth/providers/github";
+import { GOOGLE } from "@/lib/next-auth/providers/google";
 
-const providers = [GITHUB];
+const providers = [GITHUB, GOOGLE];
 
 export type User = AdapterUser & {
 	user_id?: string;

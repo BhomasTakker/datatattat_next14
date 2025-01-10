@@ -12,7 +12,7 @@ export const fetchRSS = async (endpoint: string) => {
 	try {
 		return await parser.parseURL(endpoint.toString());
 	} catch (error) {
-		console.error("Error fetching rss", error);
+		console.error("Error fetching rss");
 		return null;
 	}
 };

@@ -72,9 +72,9 @@ export const rssFetch = async (query: WithQuery) => {
 		if (isValid) {
 			try {
 				const prom = (fetchRSS(url) as Promise<DataResponse>) || null;
-				prom.catch((error) => {
+				prom.catch((error: Error) => {
 					// This should stop the crash but we need to remove null from promise list
-					console.error("Error fetching rss", error);
+					console.error("Error fetching rss");
 				});
 				////////////////////////////////////
 				// add redis data fetch and cache //
@@ -83,7 +83,7 @@ export const rssFetch = async (query: WithQuery) => {
 					fetches.push(prom);
 				}
 			} catch (error) {
-				console.error("Error fetching rss", error);
+				console.error("Error fetching rss");
 			}
 		}
 	});
