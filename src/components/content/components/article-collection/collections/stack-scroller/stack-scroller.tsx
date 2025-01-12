@@ -17,9 +17,6 @@ const renderArticle = (item: CollectionItem) => {
 	);
 };
 
-// We could jut return an element
-// So a Media display - that is a client component
-// Because it has controls etc.
 const renderMethod = (articles: CollectionItem[]) => {
 	return articles.map((item) => renderArticle(item));
 };
