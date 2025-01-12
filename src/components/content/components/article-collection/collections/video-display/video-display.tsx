@@ -28,6 +28,7 @@ const renderArticle = (item: CollectionItem) => {
 };
 
 const renderMethod = (articles: CollectionItem[]) => {
+	if (!articles || articles.length === 0) return null;
 	return (
 		<>
 			{renderVideoPlayer(articles[0])}
