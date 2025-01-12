@@ -1,0 +1,28 @@
+@use "../../article/mixins/" as article;
+@use "../../../../../../scss/abstracts/units/" as *;
+@use "../../../../../../scss/mixins/ui/" as ui;
+
+.root {
+	display: flex;
+	flex-direction: column;
+	gap: $rem_6;
+
+	.videoPlayer {
+		display: flex;
+		justify-content: center;
+		@include article.articleDisplay($rem_24, $rem_12);
+	}
+
+	ul {
+		display: flex;
+		gap: $rem_4;
+		@include ui.scrollXNoScroller();
+		@include article.articleCardTopDown($rem_14, $rem_14);
+		@media screen and (min-width: $screenWidthSm) {
+			@include article.articleCardTopDown($rem_15, $rem_14);
+		}
+		@media screen and (min-width: $screenWidthMd) {
+			@include article.articleCardTopDown($rem_16, $rem_14);
+		}
+	}
+}

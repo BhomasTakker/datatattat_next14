@@ -1,0 +1,25 @@
+@use "../../../../../../scss/mixins/text/" as textMixins;
+@use "../../../../../../scss/abstracts/units/" as units;
+@use "../../../../../../scss/abstracts/colours/" as colours;
+@use "../../../../../../scss/abstracts/font/" as *;
+
+@use "./base" as base;
+
+@mixin articleDisplay($maxWidth, $minWidth) {
+	.article {
+		@include base.article();
+
+		max-width: $maxWidth;
+		min-width: $minWidth;
+		width: 100%;
+
+		.image {
+			@include base.image($maxWidth, $minWidth);
+			aspect-ratio: 16/9;
+		}
+
+		.contentContainer {
+			display: none;
+		}
+	}
+}
