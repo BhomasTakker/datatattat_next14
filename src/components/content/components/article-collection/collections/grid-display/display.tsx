@@ -1,0 +1,38 @@
+import { CollectionItem } from "@/types/data-structures/collection/item/item";
+import gridDisplay5Styles from "./display-5.module.scss";
+import gridDisplay7Styles from "./display-7.module.scss";
+import { Article } from "../../article/article";
+import { InteractionsOptions } from "../../article/interaction/interactions-map";
+import { Interaction } from "../../article/interaction/interactions";
+import { StyleSheet } from "@/types/css";
+
+// currently type and styles change between collection variants
+const renderArticle = (item: CollectionItem, styles: StyleSheet) => {
+	const { src } = item;
+	return (
+		<Interaction
+			key={item.title}
+			type={InteractionsOptions.Navigate}
+			href={src || ""}
+		>
+			<Article article={item} styles={styles} />
+		</Interaction>
+	);
+};
+
+const renderMethod =
+	(styles: StyleSheet, num: number) => (articles: CollectionItem[]) => {
+		return articles.slice(0, num).map((item) => renderArticle(item, styles));
+	};
+
+// you could call a function to return object based on given params
+// What is the benefit though?
+export const gridDisplay5 = {
+	styles: gridDisplay5Styles,
+	renderMethod: renderMethod(gridDisplay5Styles, 5),
+};
+
+export const gridDisplay7 = {
+	styles: gridDisplay7Styles,
+	renderMethod: renderMethod(gridDisplay7Styles, 7),
+};

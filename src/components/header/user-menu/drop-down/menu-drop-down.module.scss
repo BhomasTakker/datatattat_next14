@@ -13,8 +13,10 @@
 	padding: $rem_4;
 	overflow: hidden;
 	opacity: 0;
+	display: none;
 
 	&.open {
+		display: block;
 		opacity: 1;
 		pointer-events: all;
 	}
