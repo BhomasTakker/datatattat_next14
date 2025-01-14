@@ -1,0 +1,6 @@
+/* https://cloudinary.com/guides/front-end-development/videojs-and-react-a-perfect-match-for-modern-video-players */
+
+.vjs-loading-spinner {
+	display: none;
+	border: none;
+}
