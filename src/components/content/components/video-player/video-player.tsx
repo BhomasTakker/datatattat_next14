@@ -1,24 +1,23 @@
-"use client";
-
 import videojs from "video.js";
 import "video.js/dist/video-js.css";
 import "videojs-youtube";
 import "./video-player-style.css";
 import styles from "./video-player.module.scss";
-// not sure if this is needed
-// import "videojs-youtube/dist/Youtube.js";
 
 import { useEffect, useRef } from "react";
 import Player from "video.js/dist/types/player";
-
-// Potentially we just need to create our own type
-type Options = {};
+import { PlayerOptions } from "./types";
+import { applyPlayerOptions } from "./utils";
 
 type VideoPlayerProps = {
-	options: Options;
+	options: PlayerOptions;
 	onReady: (player: any) => void;
 };
 
+/////////////////////////////////////////
+// Understanding of this is pretty low
+// Basic implementation of video player
+/////////////////////////////////////////
 export const VideoPlayer = ({ options, onReady }: VideoPlayerProps) => {
 	const videoRef = useRef<HTMLDivElement>(null);
 	const playerRef = useRef<Player>(null);
@@ -33,24 +32,17 @@ export const VideoPlayer = ({ options, onReady }: VideoPlayerProps) => {
 				return;
 			}
 
-			// videoElement.classList.add("vjs-big-play-centered");
 			videoRef.current.appendChild(videoElement);
 
 			const player = (playerRef.current = videojs(videoElement, options, () => {
-				videojs.log("player is ready");
 				onReady && onReady(player);
 			}));
-
-			// player.removeClass("vjs-loading-spinner");
 
 			// You could update an existing player in the `else` block here
 			// on prop change, for example:
 		} else {
 			const player = playerRef.current;
-			// did not appear to work........
-			// player.removeClass("vjs-loading-spinner");
-			// player.autoplay(options.autoplay);
-			// player.src(options.sources);
+			// applyPlayerOptions(player, options);
 			player.options(options);
 		}
 	}, [options, videoRef]);
@@ -67,36 +59,9 @@ export const VideoPlayer = ({ options, onReady }: VideoPlayerProps) => {
 		};
 	}, [playerRef]);
 
-	console.log("Video Player");
 	return (
 		<div data-vjs-player>
 			<div ref={videoRef} className={styles.player} />
-		</div>
-	);
-};
-
-// Probematic for sme reason
-export const VideoPlayer2 = ({ options, onReady }: VideoPlayerProps) => {
-	const videoRef = useRef<HTMLVideoElement>(null);
-	const playerRef = useRef<Player>(null);
-
-	useEffect(() => {
-		if (videoRef.current) {
-			playerRef.current = videojs(videoRef.current, options, () => {
-				onReady(playerRef.current);
-			});
-		}
-		return () => {
-			if (playerRef.current) {
-				playerRef.current.dispose();
-			}
-		};
-	}, [options, playerRef]);
-	return (
-		<div>
-			<div data-vjs-player>
-				<video ref={videoRef} className="video-js vjs-default-skin"></video>
-			</div>
 		</div>
 	);
 };
