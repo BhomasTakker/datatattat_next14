@@ -9,6 +9,7 @@ import { ObjectSelect } from "./object-select/object-select";
 import { SwitchInput } from "./switch-input/switch-input";
 import { AssignInputId } from "./assignId/assign-id";
 import { NumberInput } from "./number-input/number-input";
+import { InputDescription } from "./description/input-description";
 
 export enum EditInputs {
 	text = "text",
@@ -23,6 +24,7 @@ export enum EditInputs {
 	inputList = "input-list",
 	conversions = "conversions",
 	title = "title",
+	description = "description",
 	indent = "indent",
 	assign = "assign",
 	assignId = "assignId",
@@ -39,6 +41,7 @@ type InputComponentOptions =
 	| typeof SwitchInput
 	| typeof AssignInputId
 	| typeof NumberInput
+	| typeof InputDescription
 	| FC;
 
 export const inputMap = new Map<EditInputs, InputComponentOptions>([
@@ -62,6 +65,7 @@ export const inputMap = new Map<EditInputs, InputComponentOptions>([
 
 	/////////////Not an input but a title element
 	[EditInputs.title, InputTitle],
+	[EditInputs.description, InputDescription],
 	[EditInputs.indent, () => <>indent</>],
 
 	// We can do this using an input

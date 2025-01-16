@@ -62,55 +62,61 @@
 
 			.textContainer {
 				@include base.textContainer();
-				gap: units.$rem_1;
 
-				.title,
-				.description {
-					margin: units.$rem_0 units.$rem_1;
-				}
-
-				@container content-container (min-width: 16rem) {
-					gap: units.$rem_2;
+				& {
+					gap: units.$rem_1;
 
 					.title,
 					.description {
-						margin: units.$rem_0 units.$rem_2;
+						margin: units.$rem_0 units.$rem_1;
 					}
-				}
 
-				@container content-container (min-width: 20rem) {
-					gap: units.$rem_3;
+					@container content-container (min-width: 16rem) {
+						gap: units.$rem_2;
 
-					.title,
-					.description {
-						margin: units.$rem_0 units.$rem_2;
+						.title,
+						.description {
+							margin: units.$rem_0 units.$rem_2;
+						}
 					}
-				}
 
-				@container content-container (min-width: 24rem) {
-					gap: units.$rem_3;
+					@container content-container (min-width: 20rem) {
+						gap: units.$rem_3;
 
-					.title,
-					.description {
-						margin: units.$rem_0 units.$rem_4 units.$rem_0;
+						.title,
+						.description {
+							margin: units.$rem_0 units.$rem_2;
+						}
+					}
+
+					@container content-container (min-width: 24rem) {
+						gap: units.$rem_3;
+
+						.title,
+						.description {
+							margin: units.$rem_0 units.$rem_4 units.$rem_0;
+						}
 					}
 				}
 			}
 
 			.meta {
 				@include base.meta();
-				margin: units.$rem_0 units.$rem_1;
 
-				@container content-container (min-width: 16rem) {
-					margin: units.$rem_0 units.$rem_2;
-				}
+				& {
+					margin: units.$rem_0 units.$rem_1;
 
-				@container content-container (min-width: 20rem) {
-					margin: units.$rem_0 units.$rem_2;
-				}
+					@container content-container (min-width: 16rem) {
+						margin: units.$rem_0 units.$rem_2;
+					}
 
-				@container content-container (min-width: 24rem) {
-					margin: units.$rem_0 units.$rem_4 units.$rem_0;
+					@container content-container (min-width: 20rem) {
+						margin: units.$rem_0 units.$rem_2;
+					}
+
+					@container content-container (min-width: 24rem) {
+						margin: units.$rem_0 units.$rem_4 units.$rem_0;
+					}
 				}
 			}
 		}

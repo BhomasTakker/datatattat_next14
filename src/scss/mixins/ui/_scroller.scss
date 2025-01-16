@@ -1,6 +1,7 @@
 @mixin scrollYNoScroller() {
 	overflow-y: auto;
-
+	scroll-snap-type: y mandatory;
+	scroll-behavior: smooth;
 	// check this it might be old and unneccesary / or just incorrect
 	-webkit-overflow-scrolling: touch;
 

@@ -5,6 +5,7 @@ import { Article } from "../../article/article";
 import { InteractionsOptions } from "../../article/interaction/interactions-map";
 import { Interaction } from "../../article/interaction/interactions";
 import { StyleSheet } from "@/types/css";
+import { UnknownObject } from "@/types/utils";
 
 // currently type and styles change between collection variants
 const renderArticle = (item: CollectionItem, styles: StyleSheet) => {
@@ -21,7 +22,8 @@ const renderArticle = (item: CollectionItem, styles: StyleSheet) => {
 };
 
 const renderMethod =
-	(styles: StyleSheet, num: number) => (articles: CollectionItem[]) => {
+	(styles: StyleSheet, num: number) =>
+	(articles: CollectionItem[], _: UnknownObject) => {
 		return articles.slice(0, num).map((item) => renderArticle(item, styles));
 	};
 

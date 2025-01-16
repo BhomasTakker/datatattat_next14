@@ -1,6 +1,14 @@
-import { ComponentProps } from "@/types/component";
+import { ComponentProps, ComponentPropsObject } from "@/types/component";
 import { Collection } from "@/types/data-structures/collection/collection";
 import { VariantsMap } from "./variant-map";
+import { VideoDisplayOptions } from "./collections/video-display/video-display";
+
+// all of our variants will have a set of inputs
+// we can define a type for these inputs
+// Create a union type for all the possible variants
+type VariantComponentProps = VideoDisplayOptions;
+type ArticleCollectionComponentProps = VariantComponentProps &
+	ComponentPropsObject;
 
 export const ArticleCollection = ({
 	component,
@@ -9,7 +17,8 @@ export const ArticleCollection = ({
 	const { componentProps } = component;
 	const articlesData = dataObject.data as Collection;
 	const { items: articles } = articlesData;
-	const { variantType } = componentProps;
+	const { variantType, ...rest } =
+		componentProps as ArticleCollectionComponentProps;
 
 	const variantObject = VariantsMap.get(variantType);
 
@@ -18,21 +27,7 @@ export const ArticleCollection = ({
 		return null;
 	}
 
-	// Questions
-	// should we pass in props to the variantObject? / A. No
-	// Should we render a given element
 	const { renderMethod, styles } = variantObject;
 
-	// take in variant and props
-	// variant determines the css class
-	// props determine the content / show meta, video, etc
-	// the css class applies the styling to itself
-	// AND the individual articles
-	// use mixins i.e. articles.$ltrCard
-
-	// Should we pass in props to the render method? / A. I think we have to
-	// Pass props - if in there there is a limit variable
-	// Use that within the render method itself
-	// Render methods should be as simple or as complicated as they need to be
-	return <div className={styles.root}>{renderMethod(articles)}</div>;
+	return <div className={styles.root}>{renderMethod(articles, rest)}</div>;
 };

@@ -3,6 +3,7 @@ import styles from "./stack-columns.module.scss";
 import { Article } from "../../article/article";
 import { InteractionsOptions } from "../../article/interaction/interactions-map";
 import { Interaction } from "../../article/interaction/interactions";
+import { UnknownObject } from "@/types/utils";
 
 // this may be the same but for styles across collections
 const renderArticle = (item: CollectionItem) => {
@@ -21,7 +22,7 @@ const renderArticle = (item: CollectionItem) => {
 // We could jut return an element
 // So a Media display - that is a client component
 // Because it has controls etc.
-const renderMethod = (articles: CollectionItem[]) => {
+const renderMethod = (articles: CollectionItem[], _: UnknownObject) => {
 	return (
 		<div className={styles.container}>
 			{articles.map((item) => renderArticle(item))}

@@ -1,10 +1,11 @@
+import { ClickProps } from "./click";
 import { InteractionsMap, InteractionsOptions } from "./interactions-map";
 import { NavigateProps } from "./navigate";
 
 type InteractionProps = {
 	children: React.ReactNode;
 	type: InteractionsOptions; // should be options
-} & NavigateProps;
+} & (NavigateProps | ClickProps);
 
 ///////////////////////////////////////////////
 // generic me - Interaction of type Navigation
