@@ -14,19 +14,20 @@ import {
 	PlayerCollectionVariant,
 	PlayerSourceTypes,
 } from "./structs";
-import { Autoplay } from "../../../video-player/types";
 
 type VideoDisplayComponentProps = {
 	articles: CollectionItem[];
 
 	variant: PlayerCollectionVariant;
 	sourceType: PlayerSourceTypes;
+	autoplay: boolean;
 };
 
 export const VideoDisplayComponent = ({
 	articles = [],
 	variant,
 	sourceType, // use youtube as an id and then do whatever required for each option
+	autoplay,
 }: VideoDisplayComponentProps) => {
 	const playerRef = useRef<Player>(null);
 	const firstArticle = articles[0];
@@ -51,11 +52,11 @@ export const VideoDisplayComponent = ({
 
 	const options = {
 		// autoplay: PlayerAutoplayOptions.Any,
-		autoplay: "any" as Autoplay,
+		autoplay: autoplay ? PlayerAutoplayOptions.Any : false,
 		aspectRatio: "16:9",
 		controls: true,
-		width: 640,
-		height: 480,
+		// width: 640,
+		// height: 480,
 		fill: true,
 		fluid: true,
 		responsive: true,

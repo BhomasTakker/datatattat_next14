@@ -1,16 +1,24 @@
-import { ComponentProps } from "@/types/component";
+import { ComponentProps, ComponentPropsObject } from "@/types/component";
 import { Collection } from "@/types/data-structures/collection/collection";
 import { VariantsMap } from "./variant-map";
+import { VideoDisplayOptions } from "./collections/video-display/video-display";
+
+// all of our variants will have a set of inputs
+// we can define a type for these inputs
+// Create a union type for all the possible variants
+type VariantComponentProps = VideoDisplayOptions;
+type ArticleCollectionComponentProps = VariantComponentProps &
+	ComponentPropsObject;
 
 export const ArticleCollection = ({
 	component,
 	dataObject,
-	...rest
 }: ComponentProps) => {
 	const { componentProps } = component;
 	const articlesData = dataObject.data as Collection;
 	const { items: articles } = articlesData;
-	const { variantType } = componentProps;
+	const { variantType, ...rest } =
+		componentProps as ArticleCollectionComponentProps;
 
 	const variantObject = VariantsMap.get(variantType);
 
@@ -19,9 +27,7 @@ export const ArticleCollection = ({
 		return null;
 	}
 
-	console.log("Articles Collection Rest", { rest });
-
 	const { renderMethod, styles } = variantObject;
 
-	return <div className={styles.root}>{renderMethod(articles)}</div>;
+	return <div className={styles.root}>{renderMethod(articles, rest)}</div>;
 };

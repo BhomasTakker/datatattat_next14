@@ -48,6 +48,11 @@ export type TitleInputProps = {
 	size?: "small" | "medium" | "large";
 } & InputProps;
 
+export type DescriptionInputProps = {
+	type: EditInputs.description;
+	text: string;
+} & InputProps;
+
 export type ShowInputProps = {
 	id: string;
 	type: EditInputs.show;
@@ -113,6 +118,7 @@ type InputTypes =
 	| SelectInputProps
 	| ObjectSelectProps
 	| AssignInputIdProps
-	| NumberInputProps;
+	| NumberInputProps
+	| DescriptionInputProps;
 
 export type GenericInput = InputTypes;

@@ -3,6 +3,7 @@ import styles from "./stack-scroller.module.scss";
 import { Article } from "../../article/article";
 import { InteractionsOptions } from "../../article/interaction/interactions-map";
 import { Interaction } from "../../article/interaction/interactions";
+import { UnknownObject } from "@/types/utils";
 
 const renderArticle = (item: CollectionItem) => {
 	const { src } = item;
@@ -17,7 +18,7 @@ const renderArticle = (item: CollectionItem) => {
 	);
 };
 
-const renderMethod = (articles: CollectionItem[]) => {
+const renderMethod = (articles: CollectionItem[], _: UnknownObject) => {
 	return articles.map((item) => renderArticle(item));
 };
 

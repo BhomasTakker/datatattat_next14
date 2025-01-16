@@ -61,6 +61,7 @@
 
 				display: flex;
 				flex-direction: column;
+				gap: $rem_2;
 
 				@include ui.scrollXNoScroller();
 
