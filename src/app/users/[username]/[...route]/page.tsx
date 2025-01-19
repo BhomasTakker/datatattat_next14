@@ -3,12 +3,26 @@ import { IPage } from "@/types/page";
 import { PageDisplay } from "@/components/page/page-display";
 import styles from "../../../page.module.scss";
 import { PATHS } from "@/lib/routing/paths";
+import { generateMetaDataFromPage } from "@/lib/metadata/generate-metadata";
+import { userPageRevalidate } from "@/lib/revalidate/revalidate";
 
-export default async function UserHome({
-	params,
-}: {
-	params: Promise<{ username: string; route: string[] }>;
-}) {
+type Params = Promise<{ route: string[]; username: string }>;
+type Props = {
+	params: Params;
+};
+
+export const revalidate = userPageRevalidate;
+
+export const generateMetadata = async ({ params }: Props) => {
+	const { username, route } = await params;
+	const joined = route.join("/");
+	const userPage = `${PATHS.user(username)}/${joined}`;
+
+	const metadata = await generateMetaDataFromPage(userPage);
+	return metadata;
+};
+
+export default async function UserHome({ params }: Props) {
 	const { username, route } = await params;
 	const joined = route.join("/");
 	const userPage = `${PATHS.user(username)}/${joined}`;

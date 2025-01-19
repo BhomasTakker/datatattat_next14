@@ -2,12 +2,25 @@ import { getPage } from "@/actions/page/page-actions";
 import { IPage } from "@/types/page";
 import { PageDisplay } from "@/components/page/page-display";
 import styles from "../../page.module.scss";
+import { generateMetaDataFromPage } from "@/lib/metadata/generate-metadata";
+import { landingPageRevalidate } from "@/lib/revalidate/revalidate";
 
-export default async function Page({
-	params,
-}: {
-	params: Promise<{ route: string[] }>;
-}) {
+type Params = Promise<{ route: string[] }>;
+type Props = {
+	params: Params;
+};
+
+export const revalidate = landingPageRevalidate;
+
+export const generateMetadata = async ({ params }: Props) => {
+	const { route } = await params;
+	const joined = route.join("/");
+
+	const metadata = await generateMetaDataFromPage(`/${joined}`);
+	return metadata;
+};
+
+export default async function Page({ params }: Props) {
 	const { route } = await params;
 	const joined = route.join("/");
 

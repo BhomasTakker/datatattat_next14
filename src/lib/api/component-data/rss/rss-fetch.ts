@@ -79,7 +79,7 @@ export const rssFetch = async (query: WithQuery) => {
 				// we need to cach after data conversion
 				// in this instance perhaps incorrect - we need to cache the rss data
 				// the response will be multiple rss feeds
-				const prom = fetchWithCache(() => fetchRSS(url), url);
+				const prom = fetchWithCache(() => fetchRSS(url), url, 120);
 				prom.catch((error: Error) => {
 					// This should stop the crash but we need to remove null from promise list
 					console.error("Error fetching rss");
