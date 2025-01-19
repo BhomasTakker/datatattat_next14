@@ -4,19 +4,18 @@ import { useForm, FormProvider } from "react-hook-form";
 
 import { saveHeader } from "@/actions/edit/update-header";
 import { HeaderType } from "@/types/header";
-import { useState } from "react";
 import { NavList } from "./nav/nav-list";
 import { Button } from "@/components/ui/button";
 
 import styles from "./header-form.module.scss";
+import { SaveState, useSaveState } from "@/components/hooks/use-save-state";
 
 type HeaderFormProps = {
 	headerData: Omit<HeaderType, "createdAt" | "updatedAt">;
 };
 
 export const HeaderForm = ({ headerData }: HeaderFormProps) => {
-	const [pageState, setPageState] = useState<string | undefined>(undefined);
-
+	const { setSaveState, status, reset } = useSaveState();
 	const methods = useForm({
 		// read up on this / required for unregistering fields
 		// use in conjunction with unregister
@@ -27,8 +26,15 @@ export const HeaderForm = ({ headerData }: HeaderFormProps) => {
 	const { route, nav } = headerData;
 
 	const onSubmit = handleSubmit(async (data) => {
-		const res = await saveHeader(route, data);
-		setPageState(res.message);
+		setSaveState(SaveState.Saving);
+		saveHeader(route, data)
+			.then((res) => {
+				reset(5000);
+				setSaveState(SaveState.Saved);
+			})
+			.catch((err) => {
+				setSaveState(SaveState.Error);
+			});
 	});
 
 	return (
@@ -36,12 +42,8 @@ export const HeaderForm = ({ headerData }: HeaderFormProps) => {
 			<form onSubmit={onSubmit} className={styles.form}>
 				<NavList links={nav} />
 				<Button type="submit">Submit</Button>
-				{pageState ? (
-					<p aria-live="polite" role="status">
-						{pageState}
-					</p>
-				) : null}
 			</form>
+			{status}
 		</FormProvider>
 	);
 };
