@@ -6,6 +6,7 @@ import { convertResponse } from "@/lib/conversions/convert-response";
 import { getMeta } from "@/actions/html/get-meta";
 import { CollectionItem } from "@/types/data-structures/collection/item/item";
 import { Collection } from "@/types/data-structures/collection/collection";
+import { fetchWithCache } from "@/lib/redis/redis-fetch";
 
 type RssParams = {
 	urls: string[];
@@ -24,11 +25,8 @@ const fetchMeta = async (items: CollectionItem[] = []) => {
 		return Promise.resolve([]);
 	}
 
-	const data = items.map(async (item) => {
+	const getMetaItem = async (item: CollectionItem) => {
 		const { src, details } = item;
-		// const { url = "" } = enclosure || {};
-		// Think this is a massive delay
-		// We are fetching meta one after the other
 		const meta = await getMeta(src);
 		if (!meta) {
 			return null;
@@ -47,6 +45,10 @@ const fetchMeta = async (items: CollectionItem[] = []) => {
 				alt: imageAlt,
 			},
 		};
+	};
+
+	const data = items.map(async (item) => {
+		return fetchWithCache(() => getMetaItem(item), item.src);
 	});
 
 	return Promise.all(data);
@@ -73,7 +75,11 @@ export const rssFetch = async (query: WithQuery) => {
 		const isValid = isStringValidURL(url);
 		if (isValid) {
 			try {
-				const prom = (fetchRSS(url) as Promise<DataResponse>) || null;
+				// const prom = (fetchRSS(url) as Promise<DataResponse>) || null;
+				// we need to cach after data conversion
+				// in this instance perhaps incorrect - we need to cache the rss data
+				// the response will be multiple rss feeds
+				const prom = fetchWithCache(() => fetchRSS(url), url);
 				prom.catch((error: Error) => {
 					// This should stop the crash but we need to remove null from promise list
 					console.error("Error fetching rss");
