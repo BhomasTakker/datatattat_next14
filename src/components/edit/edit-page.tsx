@@ -29,7 +29,7 @@ const getPageOrNew = async (route: string) => {
 
 		// Instead of creating an empty page object
 		// We should display a button to create a page
-		// Opening us to types and templates of pages / content
+		// Opening us to types and templates/clones of pages / content
 		return await Promise.resolve({
 			creator: sessionUser.user_id,
 			route,
