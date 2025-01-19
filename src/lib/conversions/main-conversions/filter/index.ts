@@ -57,10 +57,13 @@ export const distinct = ({}: never) => {
 };
 
 export const distinctKey = ({ key }: { key: string }) => {
-	// does this match this
-	// we would need to pass a function to determine distintness / or just create a bunch
-	// i.e. distinct((data) => props[props.key])
-	return rxjsDistinct((data: never) => getNestedValue<number>(key, data));
+	return rxjsDistinct((data: never) => {
+		if (!key) {
+			return data;
+		}
+
+		return getNestedValue<number>(key, data);
+	});
 };
 
 // I guess split these up into sensible groupings

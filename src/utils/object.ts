@@ -42,6 +42,7 @@ export const getNestedValue = <T>(
 	delim: string = "."
 ) => {
 	if (!object) return object;
+	if (!key) return object;
 
 	const nestedKeys = key.split(delim);
 	let value = object;
