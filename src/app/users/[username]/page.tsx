@@ -3,12 +3,24 @@ import { IPage } from "@/types/page";
 import { PageDisplay } from "@/components/page/page-display";
 import styles from "../../page.module.scss";
 import { PATHS } from "@/lib/routing/paths";
+import { generateMetaDataFromPage } from "@/lib/metadata/generate-metadata";
+import { userPageRevalidate } from "@/lib/revalidate/revalidate";
 
-export default async function UserHome({
-	params,
-}: {
-	params: Promise<{ username: string }>;
-}) {
+type Params = Promise<{ username: string }>;
+type Props = {
+	params: Params;
+};
+
+export const revalidate = userPageRevalidate;
+
+export const generateMetadata = async ({ params }: Props) => {
+	const { username } = await params;
+
+	const metadata = await generateMetaDataFromPage(PATHS.user(username));
+	return metadata;
+};
+
+export default async function UserHome({ params }: Props) {
 	const { username } = await params;
 
 	const page = (await getPage(PATHS.user(username))) as IPage;

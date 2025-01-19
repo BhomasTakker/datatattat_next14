@@ -45,9 +45,38 @@ export type PageProfile = {
 	showPageTitle?: boolean;
 };
 
+type CardData = {
+	title: string;
+	description: string;
+	image: string;
+	["image:alt"]: string;
+	locale: string;
+	site_name: string;
+	url: string;
+};
+
+export type FavIcon = {
+	favIcon: {
+		rel: string;
+		href: string;
+		type: string;
+		sizes: string;
+	};
+};
+export type FavIcons = FavIcon[];
+export type Metadata = {
+	pageTitle: string;
+	pageDescription: string;
+	pageKeywords: string;
+	pageImage: string;
+	favIcons: FavIcons;
+	showCardData: boolean;
+	cardData: CardData;
+};
+
 // do better!
 export type IPage = {
-	meta: object;
+	meta: Metadata;
 	style: object;
 	profile: PageProfile;
 	route: string;
