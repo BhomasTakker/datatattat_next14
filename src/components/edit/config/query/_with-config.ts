@@ -2,10 +2,12 @@ import { ComponentDataOptions } from "@/lib/api/component-data/component-data-op
 import { EditInputs } from "../../inputs/inputs";
 import { RSS_QUERY_CONFIG } from "./rss/rss-config";
 import { GenericInput } from "@/types/edit/inputs/inputs";
+import { HTML_META_QUERY_CONFIG } from "./html/meta-config";
 
 enum QueryOptions {
 	NONE = "none",
 	RSS_QUERY = ComponentDataOptions.RSS_QUERY,
+	HTML_META_QUERY = ComponentDataOptions.HTML_META_QUERY,
 }
 
 type queryContainersProps = null | typeof RSS_QUERY_CONFIG;
@@ -13,6 +15,7 @@ type queryContainersProps = null | typeof RSS_QUERY_CONFIG;
 const componentQueriesMap = new Map<string, queryContainersProps>([
 	[QueryOptions.NONE, null],
 	[QueryOptions.RSS_QUERY, RSS_QUERY_CONFIG],
+	[QueryOptions.HTML_META_QUERY, HTML_META_QUERY_CONFIG],
 ]);
 
 export const WITH_CONFIG: GenericInput = {
@@ -36,7 +39,11 @@ export const WITH_CONFIG: GenericInput = {
 			label: "Select Data Source",
 			required: true,
 			defaultValue: QueryOptions.NONE,
-			options: [QueryOptions.NONE, QueryOptions.RSS_QUERY],
+			options: [
+				QueryOptions.NONE,
+				QueryOptions.RSS_QUERY,
+				QueryOptions.HTML_META_QUERY,
+			],
 			optionMap: componentQueriesMap,
 			optionId: "query",
 		},

@@ -27,6 +27,8 @@ const fetchMeta = async (items: CollectionItem[] = []) => {
 	const data = items.map(async (item) => {
 		const { src, details } = item;
 		// const { url = "" } = enclosure || {};
+		// Think this is a massive delay
+		// We are fetching meta one after the other
 		const meta = await getMeta(src);
 		if (!meta) {
 			return null;
