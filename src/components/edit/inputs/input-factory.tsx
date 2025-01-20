@@ -24,5 +24,6 @@ export const InputFactory = ({ data }: InputFactoryProps) => {
 	// console.log("This is us", { data });
 	// Need protection - incorrect type will fully blow up
 	// Should perhaps pass an object?
+	// @ts-expect-error - data needs typingFIX ME
 	return <Component {...(data as UnknownObject)} />;
 };

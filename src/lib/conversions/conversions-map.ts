@@ -23,7 +23,6 @@ export const mergeConversion = (
 	conversion1: MapType = emptyReturn,
 	conversion2: MapType = emptyReturn
 ) => {
-	// @ts-expect-error - next config? tsconfig target es6/2015 or higher
 	return new Map([...conversion1, ...conversion2]);
 };
 

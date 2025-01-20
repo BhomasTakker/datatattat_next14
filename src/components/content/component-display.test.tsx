@@ -28,6 +28,7 @@ jest.mock("./components/component-factory", () => {
 describe("Component Display Test Suite", () => {
 	const MOCK: PageComponent = {
 		componentType: "Component",
+		// @ts-expect-error - typing is not correct
 		componentProps: {
 			variant: "default",
 			componentTitle: "Sample Title",

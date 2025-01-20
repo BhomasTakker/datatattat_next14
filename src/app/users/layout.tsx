@@ -1,4 +1,4 @@
-import { MainHeader } from "../../../components/header/main-header";
+import { MainHeader } from "@/components/header/main-header";
 import { PageLayout } from "@/components/ui/layout/page-layout";
 
 export default async function RootLayout({

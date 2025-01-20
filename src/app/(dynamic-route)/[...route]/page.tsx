@@ -3,14 +3,13 @@ import { IPage } from "@/types/page";
 import { PageDisplay } from "@/components/page/page-display";
 import styles from "../../page.module.scss";
 import { generateMetaDataFromPage } from "@/lib/metadata/generate-metadata";
-import { landingPageRevalidate } from "@/lib/revalidate/revalidate";
 
 type Params = Promise<{ route: string[] }>;
 type Props = {
 	params: Params;
 };
 
-export const revalidate = landingPageRevalidate;
+export const revalidate = 120;
 
 export const generateMetadata = async ({ params }: Props) => {
 	const { route } = await params;

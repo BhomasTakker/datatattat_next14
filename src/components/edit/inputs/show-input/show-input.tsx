@@ -4,6 +4,7 @@ import { InputList } from "../input-list/input-list";
 import { getParentId } from "@/utils/edit";
 import { ShowInputProps } from "@/types/edit/inputs/inputs";
 import { FaCheck } from "react-icons/fa";
+import { EditInputs } from "../inputs";
 
 export const ShowInput = ({
 	id,
@@ -17,7 +18,9 @@ export const ShowInput = ({
 
 	const renderChildren = () => {
 		const parentId = getParentId(id);
-		return <InputList id={parentId} inputs={inputs} type={"inputList"} />;
+		return (
+			<InputList id={parentId} inputs={inputs} type={EditInputs.inputList} />
+		);
 	};
 
 	return (

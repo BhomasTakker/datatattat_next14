@@ -1,3 +1,5 @@
+// @ts-nocheck fix me
+
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import { PageStack, PageStackContent } from "./page-stack";
