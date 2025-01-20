@@ -4,14 +4,13 @@ import { PageDisplay } from "@/components/page/page-display";
 import styles from "../../../page.module.scss";
 import { PATHS } from "@/lib/routing/paths";
 import { generateMetaDataFromPage } from "@/lib/metadata/generate-metadata";
-import { userPageRevalidate } from "@/lib/revalidate/revalidate";
 
 type Params = Promise<{ route: string[]; username: string }>;
 type Props = {
 	params: Params;
 };
 
-export const revalidate = userPageRevalidate;
+export const revalidate = 120;
 
 export const generateMetadata = async ({ params }: Props) => {
 	const { username, route } = await params;

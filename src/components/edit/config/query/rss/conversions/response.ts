@@ -25,6 +25,7 @@ const RESPONSE_INPUTS: GenericInput[] = [
 
 		defaultValue: [
 			{
+				// @ts-expect-error - typing is not correct
 				type: "TRANSFORM",
 				id: "toCollection",
 			},

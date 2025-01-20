@@ -6,9 +6,6 @@ exports[`PageDisplay renders PageDisplay unchanged 1`] = `
     class="page"
   >
     <div
-      data-testid="test-page-head"
-    />
-    <div
       data-testid="test-page-profile"
     >
       My Page Title

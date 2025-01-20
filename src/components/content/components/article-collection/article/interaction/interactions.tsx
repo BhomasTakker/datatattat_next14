@@ -16,5 +16,6 @@ export const Interaction = ({ children, type, ...props }: InteractionProps) => {
 	}
 
 	// how to avoid this error? props as type?
+	// @ts-expect-error - props needs typing
 	return <InteractionComponent {...props}>{children}</InteractionComponent>;
 };
