@@ -4,7 +4,7 @@ import { connectToRedisDB } from "../redis/db";
 export const initialiseServices = () => {
 	try {
 		connectToMongoDB();
-		connectToRedisDB();
+		// connectToRedisDB();
 	} catch (error) {
 		// console.log(error);
 	}

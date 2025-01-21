@@ -12,6 +12,16 @@ export const fetchWithCache = async (
 	expiry: number = 60 * 60 * 24
 ) => {
 	try {
+		const data = await fetchFn();
+		return data;
+	} catch (err) {
+		console.log(err);
+		return null;
+	}
+
+	// just bypass caching for now
+
+	try {
 		const client = connectToRedisDB();
 		const cachedData = await client.get(key);
 		if (cachedData) {

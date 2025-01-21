@@ -7,7 +7,7 @@ let cachedConnection: Redis | null = null;
 
 export const connectToRedisDB = () => {
 	// console.log("Connecting to redis db");
-	throw new Error("Not implemented properly");
+	// throw new Error("Not implemented properly");
 	if (cachedConnection) {
 		// console.log("Using cached redis db connection");
 		return cachedConnection;
