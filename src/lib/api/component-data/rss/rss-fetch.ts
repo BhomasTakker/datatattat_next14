@@ -35,7 +35,8 @@ const fetchMeta = async (items: CollectionItem[] = []) => {
 
 		return {
 			title: title,
-			src: url,
+			// We save under src - sometimes no url!!
+			src,
 			description: description,
 			guid: "",
 			variant: "article",
