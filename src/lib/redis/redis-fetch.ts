@@ -1,4 +1,4 @@
-// @ts-ignore - Ignoring until we have a better solution for redis
+// @ts-nocheck - Ignoring until we have a better solution for redis
 
 import { UnknownObject } from "@/types/utils";
 import { connectToRedisDB } from "./db";
