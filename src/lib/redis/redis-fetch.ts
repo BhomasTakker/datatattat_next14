@@ -12,16 +12,6 @@ export const fetchWithCache = async (
 	expiry: number = 60 * 60 * 24
 ) => {
 	try {
-		const data = await fetchFn();
-		return data;
-	} catch (err) {
-		console.log(err);
-		return null;
-	}
-
-	// just bypass caching for now
-
-	try {
 		const client = connectToRedisDB();
 		const cachedData = await client.get(key);
 		if (cachedData) {
@@ -36,6 +26,8 @@ export const fetchWithCache = async (
 		// await client.expire(key.toString(), cacheExpire, "lt");
 		return data;
 	} catch (error) {
+		// We should set a delay?
+		// Or change approach/provider
 		// No more cache!
 		const data = await fetchFn();
 		return data;
