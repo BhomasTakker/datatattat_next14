@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /$
+Disallow: /
+Crawl-delay: 10
