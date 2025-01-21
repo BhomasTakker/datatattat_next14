@@ -13,6 +13,8 @@
     "test:coverage": "jest --coverage"
   },
   "dependencies": {
+    "@vercel/analytics": "^1.4.1",
+    "@vercel/speed-insights": "^1.1.0",
     "ioredis": "^5.4.2",
     "jsdom": "^26.0.0",
     "mongoose": "^8.9.5",

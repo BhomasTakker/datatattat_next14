@@ -4,6 +4,8 @@ import { geistMono, geistSans } from "@/fonts";
 import { initialiseServices } from "@/lib/services/intialise-services";
 import { Providers } from "@/components/providers/Providers";
 import "../../../scss/globals.scss";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const PageLayout = ({ children }: { children: React.ReactNode }) => {
 	initialiseServices();
@@ -15,6 +17,8 @@ export const PageLayout = ({ children }: { children: React.ReactNode }) => {
 				>
 					{children}
 					<MainFooter />
+					<Analytics />
+					<SpeedInsights />
 				</body>
 			</Providers>
 		</html>
