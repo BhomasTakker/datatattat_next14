@@ -32,7 +32,7 @@ export const metaFetch = async (query: WithQuery) => {
 
 		return {
 			title: title,
-			src: url,
+			src: metaURL,
 			description: description,
 			guid: "",
 			variant: "article",
