@@ -1,5 +1,6 @@
 import { checkAndCreateUsername } from "@/actions/signup/check-create-username";
 import { createNewUser, getUserBySignInEmail } from "@/lib/mongo/actions/user";
+import { connectToMongoDB } from "@/lib/mongo/db";
 import Github from "next-auth/providers/github";
 
 const { GITHUB_ID, GITHUB_SECRET } = process.env;
@@ -12,6 +13,7 @@ if (!GITHUB_ID || !GITHUB_SECRET) {
 export const GITHUB = Github({
 	// profile: createProfile(Providers.GITHUB),
 	async profile(profile) {
+		await connectToMongoDB()
 		// try catch and reject if fails or no email by email?
 		console.log("GITHUB get user byemail profile ", profile);
 		let user = await getUserBySignInEmail(profile.email || "");
