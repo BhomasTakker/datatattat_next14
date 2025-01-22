@@ -21,11 +21,13 @@ export const GITHUB = Github({
 		let user = await getUserBySignInEmail(profile.email || "");
 
 		const username = profile.name || profile.login;
+		console.log("GITHUB username ", { username });
 		// do we need some kind of fail safe? what if this fails?
 		// reject and dont create user
 		const uniqueUsername = await checkAndCreateUsername(username);
-
+		console.log("GITHUB uniqueUsername ", { uniqueUsername });
 		if (!user) {
+			console.log("GITHUB no user create user");
 			user = await createNewUser({
 				signup_completed: false,
 				signin_method: "github",
