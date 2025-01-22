@@ -12,7 +12,8 @@ if (!GITHUB_ID || !GITHUB_SECRET) {
 export const GITHUB = Github({
 	// profile: createProfile(Providers.GITHUB),
 	async profile(profile) {
-		// try catch and reject if fails or no email
+		// try catch and reject if fails or no email by email?
+		console.log("GITHUB get user byemail profile ", profile);
 		let user = await getUserBySignInEmail(profile.email || "");
 
 		const username = profile.name || profile.login;

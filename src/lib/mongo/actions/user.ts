@@ -2,6 +2,10 @@ import { User } from "@/models/User";
 import { IUser } from "@/types/user";
 
 export const getUserBySignInEmail = async (email: string) => {
+	console.log("getUserBySignInEmail User.findOne", email);
+	const user = await User.findOne({ signin_email: email });
+	console.log("getUserBySignInEmail User.findOne", user);
+	return user;
 	return await User.findOne({ signin_email: email });
 };
 
