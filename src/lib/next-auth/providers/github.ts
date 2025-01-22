@@ -9,25 +9,28 @@ const { GITHUB_ID, GITHUB_SECRET } = process.env;
 if (!GITHUB_ID || !GITHUB_SECRET) {
 	throw new Error("Github ID and Secret not found");
 }
-
+///////////////////////////
+// Login / timeout issue
+// Looks like mongo wasn't connected
+// so User call awaits indefinately
+// api is outside of when we call connectMongo
+// hence why we need to specifically call now
+// This is okay now but felt intermittant
+// adding logs almost seemed to inch it along to a fix
+// We need to test as this may not solve the overall issue
+////////////////////////////////////////////////////////////
 export const GITHUB = Github({
-	// profile: createProfile(Providers.GITHUB),
 	async profile(profile) {
-		console.log("awaiting mongoDB connection");
 		await connectToMongoDB();
-		console.log("made mongoDB connection");
 		// try catch and reject if fails or no email by email?
-		console.log("GITHUB get user byemail profile ", profile);
 		let user = await getUserBySignInEmail(profile.email || "");
 
 		const username = profile.name || profile.login;
-		console.log("GITHUB username ", { username });
 		// do we need some kind of fail safe? what if this fails?
 		// reject and dont create user
 		const uniqueUsername = await checkAndCreateUsername(username);
-		console.log("GITHUB uniqueUsername ", { uniqueUsername });
+
 		if (!user) {
-			console.log("GITHUB no user create user");
 			user = await createNewUser({
 				signup_completed: false,
 				signin_method: "github",

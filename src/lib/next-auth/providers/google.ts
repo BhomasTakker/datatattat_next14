@@ -1,6 +1,7 @@
 import Google from "next-auth/providers/google";
 import { createNewUser, getUserBySignInEmail } from "@/lib/mongo/actions/user";
 import { checkAndCreateUsername } from "@/actions/signup/check-create-username";
+import { connectToMongoDB } from "@/lib/mongo/db";
 
 const { GOOGLE_CLIENT_ID, GOOGLE_SECRET } = process.env;
 
@@ -33,6 +34,7 @@ iss: 'https://accounts.google.com',
 export const GOOGLE = Google({
 	// profile: createProfile(Providers.GOOGLE),
 	async profile(profile) {
+		await connectToMongoDB();
 		// try catch this
 		// what do we do/return if a failure?
 		let user = await getUserBySignInEmail(profile.email || "");
