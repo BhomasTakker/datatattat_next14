@@ -24,7 +24,9 @@ export const getAllUserByUsername = async (username: string) => {
 };
 
 export const createNewUser = async (user: Omit<IUser, "_id">) => {
+	console.log('create new user!');
 	try {
+		console.log('create new user!', {user});
 		const newUser = new User(user);
 		return { message: "User Created", user: await newUser.save() };
 	} catch (err) {
