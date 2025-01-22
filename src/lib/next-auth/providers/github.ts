@@ -13,7 +13,9 @@ if (!GITHUB_ID || !GITHUB_SECRET) {
 export const GITHUB = Github({
 	// profile: createProfile(Providers.GITHUB),
 	async profile(profile) {
-		await connectToMongoDB()
+		console.log("awaiting mongoDB connection");
+		await connectToMongoDB();
+		console.log("made mongoDB connection");
 		// try catch and reject if fails or no email by email?
 		console.log("GITHUB get user byemail profile ", profile);
 		let user = await getUserBySignInEmail(profile.email || "");
