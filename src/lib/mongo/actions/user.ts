@@ -2,10 +2,6 @@ import { User } from "@/models/User";
 import { IUser } from "@/types/user";
 
 export const getUserBySignInEmail = async (email: string) => {
-	console.log("getUserBySignInEmail User.findOne", email);
-	const user = await User.findOne({ signin_email: email });
-	console.log("getUserBySignInEmail User.findOne", user);
-	return user;
 	return await User.findOne({ signin_email: email });
 };
 
@@ -24,9 +20,7 @@ export const getAllUserByUsername = async (username: string) => {
 };
 
 export const createNewUser = async (user: Omit<IUser, "_id">) => {
-	console.log('create new user!');
 	try {
-		console.log('create new user!', {user});
 		const newUser = new User(user);
 		return { message: "User Created", user: await newUser.save() };
 	} catch (err) {
