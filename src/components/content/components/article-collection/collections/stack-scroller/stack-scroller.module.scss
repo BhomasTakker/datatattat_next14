@@ -2,19 +2,35 @@
 @use "../../../../../../scss/abstracts/units/" as *;
 @use "../../../../../../scss/mixins/ui/" as ui;
 // articleCardTopDown / articleCardLeftRight
+.template {
+}
+
 .root {
 	display: flex;
 	gap: $rem_4;
 	// padding: units.$rem_6 units.$rem_0;
 	@include ui.scrollXNoScroller();
 
+	.template {
+		width: $rem_14;
+		aspect-ratio: 16 / 9;
+	}
+
 	@include article.articleCardTopDown($rem_14, $rem_14);
 
 	@media screen and (min-width: $screenWidthSm) {
 		@include article.articleCardTopDown($rem_15, $rem_15);
+
+		.template {
+			width: $rem_15;
+		}
 	}
 
 	@media screen and (min-width: $screenWidthMd) {
 		@include article.articleCardTopDown($rem_16, $rem_16);
+
+		.template {
+			width: $rem_16;
+		}
 	}
 }
