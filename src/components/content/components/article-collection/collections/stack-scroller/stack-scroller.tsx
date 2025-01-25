@@ -10,17 +10,14 @@ const renderArticle = (item: CollectionItem) => {
 	const { src } = item;
 	return (
 		<InViewCompnent
+			key={item.title}
 			options={{
 				threshold: 0,
 				triggerOnce: true,
 			}}
 			template={<div className={styles.template} />}
 		>
-			<Interaction
-				key={item.title}
-				type={InteractionsOptions.Navigate}
-				href={src || ""}
-			>
+			<Interaction type={InteractionsOptions.Navigate} href={src || ""}>
 				<Article article={item} styles={styles} />
 			</Interaction>
 		</InViewCompnent>
