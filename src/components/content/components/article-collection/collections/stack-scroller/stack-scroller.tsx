@@ -9,21 +9,21 @@ import { InViewCompnent } from "@/components/ui/in-view/in-view";
 const renderArticle = (item: CollectionItem) => {
 	const { src } = item;
 	return (
-		<Interaction
-			key={item.title}
-			type={InteractionsOptions.Navigate}
-			href={src || ""}
+		<InViewCompnent
+			options={{
+				threshold: 0,
+				triggerOnce: true,
+			}}
+			template={<div className={styles.template} />}
 		>
-			<InViewCompnent
-				options={{
-					threshold: 0,
-					triggerOnce: true,
-				}}
-				template={<div className={styles.template} />}
+			<Interaction
+				key={item.title}
+				type={InteractionsOptions.Navigate}
+				href={src || ""}
 			>
 				<Article article={item} styles={styles} />
-			</InViewCompnent>
-		</Interaction>
+			</Interaction>
+		</InViewCompnent>
 	);
 };
 

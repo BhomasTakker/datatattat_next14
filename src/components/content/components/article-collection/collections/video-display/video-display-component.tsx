@@ -14,6 +14,7 @@ import {
 	PlayerCollectionVariant,
 	PlayerSourceTypes,
 } from "./structs";
+import { InViewCompnent } from "@/components/ui/in-view/in-view";
 
 type VideoDisplayComponentProps = {
 	articles: CollectionItem[];
@@ -92,13 +93,21 @@ export const VideoDisplayComponent = ({
 			<ul className={styles.articles}>
 				{articles.map((item) => (
 					<li key={item.title}>
-						<Interaction
-							key={item.title}
-							type={InteractionsOptions.Click}
-							onClick={() => onClickHnd(item)}
+						<InViewCompnent
+							options={{
+								threshold: 0,
+								triggerOnce: true,
+							}}
+							template={<div className={styles.template} />}
 						>
-							<Article article={item} styles={styles} />
-						</Interaction>
+							<Interaction
+								key={item.title}
+								type={InteractionsOptions.Click}
+								onClick={() => onClickHnd(item)}
+							>
+								<Article article={item} styles={styles} />
+							</Interaction>
+						</InViewCompnent>
 					</li>
 				))}
 			</ul>
