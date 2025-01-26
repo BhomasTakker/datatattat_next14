@@ -1,4 +1,3 @@
-import { CollectionItem } from "@/types/data-structures/collection/item/item";
 import gridDisplay5Styles from "./display-5.module.scss";
 import gridDisplay7Styles from "./display-7.module.scss";
 import { Article } from "../../article/article";
@@ -6,9 +5,10 @@ import { InteractionsOptions } from "../../article/interaction/interactions-map"
 import { Interaction } from "../../article/interaction/interactions";
 import { StyleSheet } from "@/types/css";
 import { UnknownObject } from "@/types/utils";
+import { ArticleRenderProps } from "../types";
 
 // currently type and styles change between collection variants
-const renderArticle = (item: CollectionItem, styles: StyleSheet) => {
+const renderArticle = (item: ArticleRenderProps, styles: StyleSheet) => {
 	const { src } = item;
 	return (
 		<Interaction
@@ -23,7 +23,7 @@ const renderArticle = (item: CollectionItem, styles: StyleSheet) => {
 
 const renderMethod =
 	(styles: StyleSheet, num: number) =>
-	(articles: CollectionItem[], _: UnknownObject) => {
+	(articles: ArticleRenderProps[], _: UnknownObject) => {
 		return articles.slice(0, num).map((item) => renderArticle(item, styles));
 	};
 

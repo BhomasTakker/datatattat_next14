@@ -1,13 +1,17 @@
-import { CollectionItem } from "@/types/data-structures/collection/item/item";
 import styles from "./stack-scroller.module.scss";
-import { Article } from "../../article/article";
 import { InteractionsOptions } from "../../article/interaction/interactions-map";
 import { Interaction } from "../../article/interaction/interactions";
 import { UnknownObject } from "@/types/utils";
 import { InViewCompnent } from "@/components/ui/in-view/in-view";
+import { WithData } from "@/components/ui/with-data/with-data";
+import { ArticleRenderProps } from "../types";
+import { articleTemplate, articleMetaLoader, articleRenderer } from "../utils";
 
-const renderArticle = (item: CollectionItem) => {
+const renderArticle = (item: ArticleRenderProps) => {
 	const { src } = item;
+
+	const template = articleTemplate(styles);
+
 	return (
 		<InViewCompnent
 			key={item.title}
@@ -15,16 +19,20 @@ const renderArticle = (item: CollectionItem) => {
 				threshold: 0,
 				triggerOnce: true,
 			}}
-			template={<div className={styles.template} />}
+			template={template}
 		>
 			<Interaction type={InteractionsOptions.Navigate} href={src || ""}>
-				<Article article={item} styles={styles} />
+				<WithData
+					getter={articleMetaLoader(item)}
+					callback={articleRenderer(styles)}
+					template={template}
+				/>
 			</Interaction>
 		</InViewCompnent>
 	);
 };
 
-const renderMethod = (articles: CollectionItem[], _: UnknownObject) => {
+const renderMethod = (articles: ArticleRenderProps[], _: UnknownObject) => {
 	return articles.map((item) => renderArticle(item));
 };
 
