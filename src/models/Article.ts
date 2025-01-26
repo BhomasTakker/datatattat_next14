@@ -66,5 +66,5 @@ const ArticleSchema = new Schema<CollectionItem>(
 	{ timestamps: true }
 );
 
-export const User =
-	mongoose.models.User || model(MODELS.Article, ArticleSchema);
+export default mongoose.models.Article ||
+	model<CollectionItem>(MODELS.Article, ArticleSchema);
