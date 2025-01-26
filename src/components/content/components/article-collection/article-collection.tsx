@@ -1,3 +1,5 @@
+"use client";
+
 import { ComponentProps, ComponentPropsObject } from "@/types/component";
 import { Collection } from "@/types/data-structures/collection/collection";
 import { VariantsMap } from "./variant-map";
@@ -10,6 +12,11 @@ type VariantComponentProps = VideoDisplayOptions;
 type ArticleCollectionComponentProps = VariantComponentProps &
 	ComponentPropsObject;
 
+/////////////////////////////////////////////////////////////////////////////////////
+// I don't see any real reason why this cannot be a 'use client' component
+// we need to render the component IF on sceen
+// Which then leads into - only preoload the first X components data
+///////////////////////////////////////////////////////////////
 export const ArticleCollection = ({
 	component,
 	dataObject,
