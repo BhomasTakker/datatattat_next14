@@ -107,5 +107,6 @@ export const FILTER_CONFIG: AssignInputIdProps = {
 			FilterOptions.topN,
 		],
 		optionMap: filterOptionsMap,
+		optionId: "props",
 	},
 };
