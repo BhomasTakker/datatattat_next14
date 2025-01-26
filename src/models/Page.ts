@@ -1,5 +1,6 @@
 import { IPage } from "@/types/page";
 import mongoose from "mongoose";
+import { MODELS } from "./models";
 
 const Schema = mongoose.Schema;
 
@@ -51,4 +52,4 @@ const PageSchema = new Schema<IPage>(
 );
 
 export default mongoose.models.Page ||
-	mongoose.model<IPage>("Page", PageSchema);
+	mongoose.model<IPage>(MODELS.Page, PageSchema);

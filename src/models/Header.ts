@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { MODELS } from "./models";
 
 const Schema = mongoose.Schema;
 
@@ -31,4 +32,5 @@ const HeaderSchema = new Schema(
 	{ timestamps: true }
 );
 
-export default mongoose.models.Header || mongoose.model("Header", HeaderSchema);
+export default mongoose.models.Header ||
+	mongoose.model(MODELS.Header, HeaderSchema);
