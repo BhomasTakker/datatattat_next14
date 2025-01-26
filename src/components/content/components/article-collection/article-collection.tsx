@@ -1,3 +1,9 @@
+"use client";
+// Not strictly required here but required down the line
+// In some instances
+// We should do this betterOr we may well make these components
+// data loading lazy and use InView etc
+
 import { ComponentProps, ComponentPropsObject } from "@/types/component";
 import { Collection } from "@/types/data-structures/collection/collection";
 import { VariantsMap } from "./variant-map";
@@ -10,6 +16,11 @@ type VariantComponentProps = VideoDisplayOptions;
 type ArticleCollectionComponentProps = VariantComponentProps &
 	ComponentPropsObject;
 
+/////////////////////////////////////////////////////////////////////////////////////
+// I don't see any real reason why this cannot be a 'use client' component
+// we need to render the component IF on sceen
+// Which then leads into - only preoload the first X components data
+///////////////////////////////////////////////////////////////
 export const ArticleCollection = ({
 	component,
 	dataObject,

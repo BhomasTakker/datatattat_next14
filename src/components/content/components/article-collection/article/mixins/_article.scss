@@ -38,6 +38,14 @@
 			}
 		}
 	}
+
+	.template {
+		max-width: $maxWidth;
+		min-width: $minWidth;
+		width: 100%;
+
+		aspect-ratio: 16/18;
+	}
 }
 
 @mixin articleCardLeftRight(
@@ -120,5 +128,13 @@
 				}
 			}
 		}
+	}
+
+	.template {
+		max-width: $maxWidth;
+		min-width: $minWidth;
+		width: 100%;
+
+		aspect-ratio: 32/9;
 	}
 }

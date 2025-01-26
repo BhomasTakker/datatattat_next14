@@ -14,6 +14,9 @@ import {
 	PlayerCollectionVariant,
 	PlayerSourceTypes,
 } from "./structs";
+import { InViewCompnent } from "@/components/ui/in-view/in-view";
+import { articleMetaLoader, articleRenderer, articleTemplate } from "../utils";
+import { WithData } from "@/components/ui/with-data/with-data";
 
 type VideoDisplayComponentProps = {
 	articles: CollectionItem[];
@@ -32,7 +35,9 @@ export const VideoDisplayComponent = ({
 	const playerRef = useRef<Player>(null);
 	const firstArticle = articles[0];
 	const src = firstArticle.src;
+	const template = articleTemplate(styles);
 
+	// These in a separate file
 	// We will ultimately need to pass or reference sourcetype
 	// based on item as we may want variant sources in the same collection
 	const onClickHnd = (item: CollectionItem) => {
@@ -92,13 +97,26 @@ export const VideoDisplayComponent = ({
 			<ul className={styles.articles}>
 				{articles.map((item) => (
 					<li key={item.title}>
-						<Interaction
-							key={item.title}
-							type={InteractionsOptions.Click}
-							onClick={() => onClickHnd(item)}
+						<InViewCompnent
+							options={{
+								threshold: 0,
+								triggerOnce: true,
+							}}
+							template={<div className={styles.template} />}
 						>
-							<Article article={item} styles={styles} />
-						</Interaction>
+							{/* Should be part of a 'wider' Article Component  */}
+							<Interaction
+								key={item.title}
+								type={InteractionsOptions.Click}
+								onClick={() => onClickHnd(item)}
+							>
+								<WithData
+									getter={articleMetaLoader(item)}
+									callback={articleRenderer(styles)}
+									template={template}
+								/>
+							</Interaction>
+						</InViewCompnent>
 					</li>
 				))}
 			</ul>

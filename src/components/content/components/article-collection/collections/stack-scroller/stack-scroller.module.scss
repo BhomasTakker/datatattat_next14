@@ -2,6 +2,9 @@
 @use "../../../../../../scss/abstracts/units/" as *;
 @use "../../../../../../scss/mixins/ui/" as ui;
 // articleCardTopDown / articleCardLeftRight
+.template {
+}
+
 .root {
 	display: flex;
 	gap: $rem_4;

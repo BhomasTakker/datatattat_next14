@@ -1,8 +1,8 @@
-import { CollectionItem } from "@/types/data-structures/collection/item/item";
 import styles from "./video-display.module.scss";
 import { VideoDisplayComponent } from "./video-display-component";
 import { PlayerCollectionVariant, PlayerSourceTypes } from "./structs";
 import { UnknownObject } from "@/types/utils";
+import { ArticleRenderProps } from "../types";
 
 export type VideoDisplayOptions = {
 	variant: PlayerCollectionVariant;
@@ -11,7 +11,7 @@ export type VideoDisplayOptions = {
 };
 
 const renderMethod = (
-	articles: CollectionItem[],
+	articles: ArticleRenderProps[],
 	// would you say UnknownObject AND this?
 	options: UnknownObject & VideoDisplayOptions
 ) => {

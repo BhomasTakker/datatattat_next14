@@ -20,8 +20,12 @@ export const ComponentFactory = async ({
 		return <div>{`Component not found:- ${componentType}`}</div>;
 	}
 
+	//////////////////////////////////////////////////////////////////////////
+	// We would in some instances perhaps want to lazy load page components
+	// Pass data in to factory?
+	// Factory shouldn't be concerned with loading data
+	// we should pass data or a data function (if possible) to the component
 	const { _with: queryObject } = component;
-
 	const data = (await getData(queryObject)) as UnknownObject;
 
 	// all components take in a component object
