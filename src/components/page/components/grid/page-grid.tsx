@@ -17,6 +17,11 @@ export const PageGrid = ({ content }: { content: PageContent }) => {
 	const { props, components } = content;
 	const { layout: style } = (props as PageGridProps) || {};
 
+	/////////////////////////////////////////////////////////////////////
+	// potentially pre load some data here i.e. first three components
+	// the rest pass a function/object to load the data client side
+	// then can lazy load the rest of the components
+	/////////////////////////////////////////////////////////////////////
 	const renderComponents = () => {
 		return components.map((component, index) => {
 			// potentially wrap in a div - if we need to control grid items

@@ -18,8 +18,14 @@ export const PageStack = ({ content }: { content: PageContent }) => {
 
 	const { direction: style = "column" } = props || {};
 
+	/////////////////////////////////////////////////////////////////////
+	// potentially pre load some data here i.e. first three components
+	// the rest pass a function/object to load the data client side
+	// then can lazy load the rest of the components
+	/////////////////////////////////////////////////////////////////////
+
 	////////////////////////////////////////////////////////
-	// Look at articleCollection for what we shuld do here
+	// Look at articleCollection for what we should do here
 	////////////////////////////////////////////////////////
 	const renderComponents = () => {
 		return components.map((component, index) => {
