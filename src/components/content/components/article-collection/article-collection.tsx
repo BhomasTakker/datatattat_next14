@@ -1,4 +1,8 @@
 "use client";
+// Not strictly required here but required down the line
+// In some instances
+// We should do this betterOr we may well make these components
+// data loading lazy and use InView etc
 
 import { ComponentProps, ComponentPropsObject } from "@/types/component";
 import { Collection } from "@/types/data-structures/collection/collection";
