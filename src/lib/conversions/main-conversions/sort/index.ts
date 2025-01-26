@@ -38,10 +38,12 @@ export const dateTimeAscending = ({ key }: { key: string }) => {
 export const dateTimeDescending = ({ key }: { key: string }) => {
 	return map((arr: UnknownString[]) =>
 		arr.sort((a, b) => {
-			return (
-				new Date(getNestedValue<string>(key, b)).getTime() -
-				new Date(getNestedValue<string>(key, a)).getTime()
-			);
+			const valueA = getNestedValue<string>(key, a);
+			const valueB = getNestedValue<string>(key, b);
+
+			const sort = Date.parse(valueB) - Date.parse(valueA);
+
+			return sort;
 		})
 	);
 };
