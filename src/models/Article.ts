@@ -58,7 +58,7 @@ const ArticleSchema = new Schema<CollectionItem>(
 		},
 		variant: {
 			type: String,
-			default: "article",
+			default: "",
 		},
 		details: DetailsSchema,
 		avatar: AvatarSchema,

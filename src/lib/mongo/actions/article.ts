@@ -1,28 +1,20 @@
+import { getMeta } from "@/actions/html/get-meta";
 import Article from "@/models/Article";
 import { CollectionItem } from "@/types/data-structures/collection/item/item";
+import { HydratedDocument } from "mongoose";
 
 export const getArticleBySrc = async (src: string) => {
 	return await Article.findOne({ src }).lean();
 };
 
 export const saveOrCreateArticleBySrc = async (article: CollectionItem) => {
-	const { src, description, details, variant, guid, avatar, title } = article;
+	const { src } = article;
 
-	const newArticle = {
-		title,
-		src,
-		description,
-		guid,
-		variant,
-		details,
-		avatar,
-	};
 	try {
 		const res = await Article.findOneAndUpdate(
 			{ src }, // find
-			newArticle, // update
+			article, // update
 			{
-				// options
 				new: true,
 				upsert: true, // Make this update into an upsert
 			}

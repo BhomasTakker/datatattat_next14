@@ -1,6 +1,6 @@
-import { getMeta, MetaData } from "@/actions/html/get-meta";
+import { getArticle } from "@/actions/data/article/get-article";
+import { MetaData } from "@/actions/html/get-meta";
 import { fetchWithCache } from "@/lib/redis/redis-fetch";
-import { Details } from "@/types/data-structures/collection/base";
 import { Collection } from "@/types/data-structures/collection/collection";
 import { WithQuery } from "@/types/page";
 import { isStringValidURL } from "@/utils/url";
@@ -22,32 +22,10 @@ export const metaFetch = async (query: WithQuery) => {
 
 	const fetches: Promise<MetaData>[] = [];
 
-	const getMetaItem = async (metaURL: string, details?: Details) => {
-		const meta = await getMeta(metaURL);
-		if (!meta) {
-			return null;
-		}
-
-		const { title, description, image, imageAlt, url } = meta;
-
-		return {
-			title: title,
-			src: metaURL,
-			description: description,
-			guid: "",
-			variant: "article",
-			details: {},
-			avatar: {
-				src: image,
-				alt: imageAlt,
-			},
-		};
-	};
-
 	urls.forEach(async (url) => {
 		const isValid = isStringValidURL(url);
 		if (isValid) {
-			const prom = fetchWithCache(() => getMetaItem(url), url);
+			const prom = fetchWithCache(() => getArticle({ src: url }), url);
 			fetches.push(prom);
 		}
 	});
@@ -57,6 +35,4 @@ export const metaFetch = async (query: WithQuery) => {
 	const cleanItems = items.filter((item) => item);
 
 	return { items: cleanItems } as Collection;
-	// should be inputs for ArticleCollection data?
-	//return { ...convertedData, items: finalData.filter((item) => item) };
 };
