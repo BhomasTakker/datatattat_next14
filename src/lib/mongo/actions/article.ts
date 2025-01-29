@@ -1,7 +1,5 @@
-import { getMeta } from "@/actions/html/get-meta";
 import Article from "@/models/Article";
 import { CollectionItem } from "@/types/data-structures/collection/item/item";
-import { HydratedDocument } from "mongoose";
 
 export const getArticleBySrc = async (src: string) => {
 	return await Article.findOne({ src }).lean();
