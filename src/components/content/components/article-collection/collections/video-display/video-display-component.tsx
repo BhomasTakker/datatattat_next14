@@ -2,7 +2,6 @@
 
 import { CollectionItem } from "@/types/data-structures/collection/item/item";
 import { VideoPlayerContainer } from "../../../video-player/video-player-container";
-import { Article } from "../../article/article";
 import { Interaction } from "../../article/interaction/interactions";
 import { InteractionsOptions } from "../../article/interaction/interactions-map";
 

@@ -44,6 +44,10 @@ export type MetaData = {
 // Or form all the cdata we have into a single object
 const getOGMetaDataFromHTML = async (document: Document): Promise<MetaData> => {
 	return Promise.resolve({
+		// We need to start doing way better
+		// use og if not use twitter or fallback to something
+		// We need to determine type of data
+		// article or media, etc
 		// or use description
 		description: document.head
 			?.querySelector('meta[property="og:description"]')
@@ -64,6 +68,9 @@ const getOGMetaDataFromHTML = async (document: Document): Promise<MetaData> => {
 		title: document.head
 			?.querySelector('meta[property="og:title"]')
 			?.getAttribute("content"),
+		// If no given type we need to determinetype
+		// article, video, etc
+		// We can get video from site name for instance
 		type: document.head
 			?.querySelector('meta[property="og:type"]')
 			?.getAttribute("content"),
@@ -86,6 +93,18 @@ export const getMeta = async (src: string) => {
 
 		const dom = new JSDOM(result, { virtualConsole });
 		const meta = await getOGMetaDataFromHTML(dom.window.document);
+
+		// Do this properly
+		// set media type if possible - video/youtube
+		if (!meta.type) {
+			// We need to determine type of data
+			// could check keywords - youtube but others?
+			// Quick and dirty
+			if (src.includes("youtube")) {
+				meta.type = "video";
+			}
+		}
+
 		return meta;
 	} catch (error) {
 		console.warn("Error fetching meta data", error);
