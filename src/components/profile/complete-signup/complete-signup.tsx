@@ -60,8 +60,6 @@ export const CompleteSignup = ({ username }: CompleteSignupProps) => {
 		checkUsername();
 	}, [watch("username")]);
 
-	console.log("isUsernmeTaken? ", { isUsernameValid });
-
 	return (
 		<FormProvider {...methods}>
 			<form onSubmit={onSubmit} className={styles.form}>
