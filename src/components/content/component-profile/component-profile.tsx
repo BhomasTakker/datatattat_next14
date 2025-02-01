@@ -2,6 +2,7 @@ import Link from "next/link";
 import styles from "./component-profile.module.scss";
 import { ComponentProfileProps } from "@/types/component";
 
+// At the moment it is internal links only!
 export const ComponentProfile = ({
 	profile,
 }: {
@@ -17,13 +18,17 @@ export const ComponentProfile = ({
 		titleComponent
 	);
 
-	if (!showComponentTitle) {
+	// if (!showComponentTitle) {
+	// 	return <></>;
+	// }
+
+	if (componentTitle === undefined || componentTitle === "") {
 		return <></>;
 	}
 
 	return (
 		<div className={styles.root}>
-			{showComponentTitle && componentTitle && titleComponentToRender}
+			{componentTitle && titleComponentToRender}
 		</div>
 	);
 };

@@ -35,6 +35,8 @@ export const COMPONENT_CONFIG: GenericInput = {
 				header: "h1",
 			},
 			{
+				// technically we need this to be within component props
+				// not be/create the component props object
 				id: "componentType",
 				type: EditInputs.objectSelect,
 				label: "Source type",
