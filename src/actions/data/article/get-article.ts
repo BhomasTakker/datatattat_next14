@@ -53,7 +53,7 @@ export const getArticle = async (item: GetArticleItem) => {
 	try {
 		await saveOrCreateArticleBySrc(newArticle);
 	} catch (err) {
-		console.log("getArticle Error", { err });
+		console.log("getArticle Error");
 	}
 
 	return newArticle as CollectionItem;
