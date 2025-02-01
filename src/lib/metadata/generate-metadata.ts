@@ -79,7 +79,7 @@ export const generateMetaDataFromPage = async (
 		pageDescription,
 		pageKeywords,
 		pageImage,
-		favIcons,
+		favIcons = [],
 		showCardData,
 		cardData,
 	} = metadata;
@@ -100,6 +100,7 @@ export const generateMetaDataFromPage = async (
 		openGraph,
 		twitter,
 		// not working yet / we are always showing a different one
+		// incorrect / we just don't have a fallback
 		icons: createIcons(favIcons),
 	};
 };
