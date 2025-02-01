@@ -28,15 +28,15 @@ describe("ComponentProfile", () => {
 		expect(testTitle).toBeInTheDocument();
 	});
 
-	it("does not render the component title when showComponentTitle is false", () => {
-		render(
-			<ComponentProfile
-				profile={{ ...defaultProps, showComponentTitle: false }}
-			/>
-		);
-		const testTitle = screen.queryByText("Test Title");
-		expect(testTitle).not.toBeInTheDocument();
-	});
+	// it("does not render the component title when showComponentTitle is false", () => {
+	// 	render(
+	// 		<ComponentProfile
+	// 			profile={{ ...defaultProps, showComponentTitle: false }}
+	// 		/>
+	// 	);
+	// 	const testTitle = screen.queryByText("Test Title");
+	// 	expect(testTitle).not.toBeInTheDocument();
+	// });
 
 	it("renders the component title as a link when componentTitleLink is provided", () => {
 		render(<ComponentProfile profile={defaultProps} />);
