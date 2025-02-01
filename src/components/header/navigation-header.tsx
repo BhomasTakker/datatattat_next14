@@ -43,15 +43,20 @@ const SignInButton = () => {
 export const NavigationHeader = async () => {
 	const session = (await getServerSession(options)) as Session;
 
-	let menuComponent = null;
+	let menuComponent = <div />;
 
 	if (!session) {
 		menuComponent = <SignInButton />;
 	} else {
+		// We can have in local storage the wrong user - from Prod or Staging etc
 		const { user } = session;
 		const { user_id } = user;
-		const { role, username, avatar } = await getUserById(user_id);
-		menuComponent = <UserMenu username={username} avatar={avatar} />;
+		const userData = await getUserById(user_id);
+
+		if (userData) {
+			const { username, avatar } = userData;
+			menuComponent = <UserMenu username={username} avatar={avatar} />;
+		}
 	}
 
 	return (

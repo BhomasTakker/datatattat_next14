@@ -50,7 +50,7 @@ export const createIterable = (
 	};
 	const completeHandler = () => {};
 	const errorHandler = (err: Error) => {
-		console.log("ERROR", err);
+		// console.log("ERROR", err);
 	};
 	const observer = createObserver(nextHandler, completeHandler, errorHandler);
 

@@ -8,7 +8,6 @@ jest.mock("next/head", () => {
 	return {
 		__esModule: true,
 		default: ({ children }: { children: Array<React.ReactElement> }) => {
-			console.log("Called!", { children });
 			return <>{children}</>;
 		},
 	};
