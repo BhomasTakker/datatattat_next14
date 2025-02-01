@@ -28,13 +28,13 @@ export const CompleteSignup = ({ username }: CompleteSignupProps) => {
 	const { refresh } = useRouter();
 	const { register, handleSubmit, watch } = methods;
 	const onSubmit = handleSubmit(async (data) => {
-		console.log("SUBMIT", { data });
+		// console.log("SUBMIT", { data });
 		const isValid = await checkIsUsernameValid(data.username);
 		setIsUsernameValid(isValid);
 
 		if (isValid) {
 			const status = await confirmUsername(data.username);
-			console.log("STATUS", { status });
+			// console.log("STATUS", { status });
 			refresh();
 		}
 	});
