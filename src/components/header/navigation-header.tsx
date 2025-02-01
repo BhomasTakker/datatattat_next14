@@ -43,7 +43,7 @@ const SignInButton = () => {
 export const NavigationHeader = async () => {
 	const session = (await getServerSession(options)) as Session;
 
-	let menuComponent = null;
+	let menuComponent = <div />;
 
 	if (!session) {
 		menuComponent = <SignInButton />;
