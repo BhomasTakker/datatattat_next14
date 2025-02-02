@@ -10,7 +10,7 @@ type Props = {
 	params: Params;
 };
 
-export const revalidate = 120;
+export const revalidate = 600;
 
 export const generateMetadata = async ({ params }: Props) => {
 	const { username } = await params;
