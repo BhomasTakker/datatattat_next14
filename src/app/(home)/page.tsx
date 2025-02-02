@@ -7,7 +7,7 @@ import { generateMetaDataFromPage } from "@/lib/metadata/generate-metadata";
 export const generateMetadata = async () => await generateMetaDataFromPage("/");
 
 // We need a revalidate strategy for everything
-export const revalidate = 120;
+export const revalidate = 600;
 
 export default async function Home() {
 	const page = (await getPage("/")) as IPage;
