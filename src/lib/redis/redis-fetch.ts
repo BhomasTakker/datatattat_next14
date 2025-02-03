@@ -11,6 +11,13 @@ export const fetchWithCache = async (
 	key: string,
 	expiry: number = 60 * 60 * 24
 ) => {
+	if (process.env.NODE_ENV === "development") {
+		// if development don't use cache
+		console.log("Don't cache-  we are in development");
+		const data = await fetchFn();
+		return data;
+	}
+
 	try {
 		const client = connectToRedisDB();
 		const cachedData = await client.get(key);
