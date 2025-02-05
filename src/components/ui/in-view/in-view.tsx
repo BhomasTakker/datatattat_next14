@@ -10,7 +10,7 @@ type InViewOptions = {
 	threshold?: number;
 	triggerOnce?: boolean;
 };
-export const InViewCompnent = (props: PropsWithChildren<InViewProps>) => {
+export const InViewComponent = (props: PropsWithChildren<InViewProps>) => {
 	const { options, children, template } = props;
 	const { threshold, triggerOnce } = options;
 	const { ref, inView } = useInView({

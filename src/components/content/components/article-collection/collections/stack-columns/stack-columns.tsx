@@ -2,7 +2,7 @@ import styles from "./stack-columns.module.scss";
 import { InteractionsOptions } from "../../article/interaction/interactions-map";
 import { Interaction } from "../../article/interaction/interactions";
 import { UnknownObject } from "@/types/utils";
-import { InViewCompnent } from "@/components/ui/in-view/in-view";
+import { InViewComponent } from "@/components/ui/in-view/in-view";
 import { ArticleRenderProps } from "../types";
 import { WithData } from "@/components/ui/with-data/with-data";
 import { articleMetaLoader, articleRenderer, articleTemplate } from "../utils";
@@ -12,7 +12,7 @@ const renderArticle = (item: ArticleRenderProps) => {
 	const { src } = item;
 	const template = articleTemplate(styles);
 	return (
-		<InViewCompnent
+		<InViewComponent
 			key={item.title}
 			options={{
 				threshold: 0,
@@ -27,7 +27,7 @@ const renderArticle = (item: ArticleRenderProps) => {
 					template={template}
 				/>
 			</Interaction>
-		</InViewCompnent>
+		</InViewComponent>
 	);
 };
 

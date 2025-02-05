@@ -4,6 +4,7 @@ import { Time } from "./time";
 
 type Props = {
 	styles: StyleSheet;
+	provider?: string;
 } & Details;
 
 export const Meta = ({
@@ -11,8 +12,10 @@ export const Meta = ({
 	authors,
 	published,
 	publishers,
+	provider,
 	styles,
 }: Props) => {
+	// remove categories and authors / or default no show
 	return (
 		<div className={styles.meta}>
 			{categories?.length ? (
@@ -21,7 +24,9 @@ export const Meta = ({
 			{authors?.length ? <p className={styles.authors}>{authors}</p> : null}
 			{publishers?.length ? (
 				<p className={styles.publishers}>{publishers}</p>
-			) : null}
+			) : (
+				<p className={styles.publishers}>{provider}</p>
+			)}
 			{published ? <Time styles={styles} time={published} /> : null}
 		</div>
 	);

@@ -2,7 +2,7 @@ import styles from "./stack-scroller.module.scss";
 import { InteractionsOptions } from "../../article/interaction/interactions-map";
 import { Interaction } from "../../article/interaction/interactions";
 import { UnknownObject } from "@/types/utils";
-import { InViewCompnent } from "@/components/ui/in-view/in-view";
+import { InViewComponent } from "@/components/ui/in-view/in-view";
 import { WithData } from "@/components/ui/with-data/with-data";
 import { ArticleRenderProps } from "../types";
 import { articleTemplate, articleMetaLoader, articleRenderer } from "../utils";
@@ -13,7 +13,7 @@ const renderArticle = (item: ArticleRenderProps) => {
 	const template = articleTemplate(styles);
 
 	return (
-		<InViewCompnent
+		<InViewComponent
 			key={item.title}
 			options={{
 				threshold: 0,
@@ -28,7 +28,7 @@ const renderArticle = (item: ArticleRenderProps) => {
 					template={template}
 				/>
 			</Interaction>
-		</InViewCompnent>
+		</InViewComponent>
 	);
 };
 

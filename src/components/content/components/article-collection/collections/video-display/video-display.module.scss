@@ -22,6 +22,9 @@
 			@media screen and (min-width: $screenWidthMd) {
 				@include article.articleCardTopDown($rem_16, $rem_14);
 			}
+			.article {
+				cursor: pointer;
+			}
 		}
 	}
 
@@ -43,6 +46,10 @@
 			}
 			@media screen and (min-width: $screenWidthMd) {
 				@include article.articleCardTopDown($rem_16, $rem_14);
+			}
+
+			.article {
+				cursor: pointer;
 			}
 		}
 
@@ -73,6 +80,9 @@
 						}
 					}
 					@include article.articleCardLeftRight($rem_16, $rem_8);
+					.article {
+						cursor: pointer;
+					}
 				}
 			}
 		}

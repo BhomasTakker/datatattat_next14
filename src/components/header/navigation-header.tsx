@@ -45,6 +45,11 @@ export const NavigationHeader = async () => {
 
 	let menuComponent = <div />;
 
+	// Warning
+	// Here may look like a bug
+	// If we have an active session in local storage i.e. for Development
+	// If we then are running in 'Production' we will not have a valid session
+	// So the user button to sign in or modify will not be shown
 	if (!session) {
 		menuComponent = <SignInButton />;
 	} else {

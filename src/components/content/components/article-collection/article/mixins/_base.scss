@@ -47,13 +47,13 @@
 
 		margin: units.$rem_1 units.$rem_0;
 
-		font-size: clamp(1.2rem, 6cqi, 3.5rem);
+		font-size: clamp(1rem, 6cqi, 3.5rem);
 	}
 	.description {
-		display: none;
-
 		font-family: $text-font;
 		font-weight: $text-font-weight;
+
+		@include textMixins.maxLines(2);
 
 		font-size: clamp(0.8rem, 4cqi, 2rem);
 	}
@@ -92,7 +92,8 @@
 @mixin meta() {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
-	padding: units.$rem_2 units.$rem_0;
+	// For some reason a tiny gap is needed to prevent the last element from overflowing
+	padding: units.$rem_2 units.$rem_1 units.$rem_2 units.$rem_0;
 	font-size: smaller;
 	font-style: italic;
 

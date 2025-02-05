@@ -9,9 +9,12 @@ type ArticleProps = {
 };
 
 export const Article = ({ article, styles }: ArticleProps) => {
-	const { title, description, avatar, details } = article;
+	const { title, description, avatar, details, src } = article;
 	const { src: image, alt: imageAlt } = avatar || {};
 	const { categories, authors, published, publishers } = details || {};
+
+	// should be done on create/save data
+	const provider = src ? new URL(src).hostname : "";
 
 	return (
 		// <Interaction type={InteractionsOptions.Navigate} href={src || ""}>
@@ -41,6 +44,7 @@ export const Article = ({ article, styles }: ArticleProps) => {
 					authors={authors}
 					published={published}
 					publishers={publishers}
+					provider={provider}
 				/>
 			</div>
 		</article>
