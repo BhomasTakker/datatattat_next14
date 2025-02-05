@@ -13,7 +13,7 @@ import {
 	PlayerCollectionVariant,
 	PlayerSourceTypes,
 } from "./structs";
-import { InViewCompnent } from "@/components/ui/in-view/in-view";
+import { InViewComponent } from "@/components/ui/in-view/in-view";
 import { articleMetaLoader, articleRenderer, articleTemplate } from "../utils";
 import { WithData } from "@/components/ui/with-data/with-data";
 
@@ -96,7 +96,7 @@ export const VideoDisplayComponent = ({
 			<ul className={styles.articles}>
 				{articles.map((item) => (
 					<li key={item.title}>
-						<InViewCompnent
+						<InViewComponent
 							options={{
 								threshold: 0,
 								triggerOnce: true,
@@ -115,7 +115,7 @@ export const VideoDisplayComponent = ({
 									template={template}
 								/>
 							</Interaction>
-						</InViewCompnent>
+						</InViewComponent>
 					</li>
 				))}
 			</ul>

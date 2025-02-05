@@ -13,7 +13,6 @@ export const fetchWithCache = async (
 ) => {
 	if (process.env.NODE_ENV === "development") {
 		// if development don't use cache
-		console.log("Don't cache-  we are in development");
 		const data = await fetchFn();
 		return data;
 	}

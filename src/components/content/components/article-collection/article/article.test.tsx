@@ -41,7 +41,7 @@ const mockStyles: StyleSheet = {
 };
 
 const mockArticle: CollectionItem = {
-	src: "test-src",
+	src: "https://www.bbc.co.uk/news",
 	guid: "test-guid",
 	variant: "test-variant",
 	title: "Test Title",
