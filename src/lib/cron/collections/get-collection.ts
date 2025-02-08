@@ -3,6 +3,7 @@
 // have a record of what was on the homepage at any given time
 
 import { saveOrCreateArticleCollectionByFeed } from "@/lib/mongo/actions/articleCollection";
+import { connectToMongoDB } from "@/lib/mongo/db";
 import { RSSArticleCollection } from "@/types/data-structures/collection/collection";
 import { RSSImage, RSSItem } from "@/types/data-structures/rss";
 import { UnknownObject } from "@/types/utils";
@@ -42,6 +43,7 @@ export const getCollection = async (
 	url: string,
 	rssFeed: DataResponse
 ): Promise<RSSArticleCollection> => {
+	await connectToMongoDB();
 	// above is convert rss to collection
 	const { feed, ...rest } = convertRssToCollection(rssFeed);
 
