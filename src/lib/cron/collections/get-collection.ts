@@ -47,6 +47,8 @@ export const getCollection = async (
 
 	// console.log("feed", feed);
 
+	console.log("load collection", { feed });
+
 	// updtateOrCreatesaveOrCreateArticleBySrc
 	const { message, result } = await saveOrCreateArticleCollectionByFeed({
 		...rest,
