@@ -25,8 +25,15 @@ export type DataResponse = {
 
 // except not quite because it is rss
 const convertRssToCollection = (rssData: DataResponse) => {
-	const { items, link, title, feed, description, lastBuildDate, image } =
-		rssData;
+	const {
+		items = [],
+		link,
+		title,
+		feed,
+		description,
+		lastBuildDate,
+		image,
+	} = rssData || {};
 	const strippedItems = items.map((item) => item.link);
 	return {
 		items: strippedItems,
