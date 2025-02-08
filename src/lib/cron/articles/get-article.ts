@@ -3,6 +3,7 @@ import {
 	getArticleBySrc,
 	saveOrCreateArticleBySrc,
 } from "@/lib/mongo/actions/article";
+import { connectToMongoDB } from "@/lib/mongo/db";
 import { CollectionItem } from "@/types/data-structures/collection/item/item";
 import { RSSItem } from "@/types/data-structures/rss";
 import { HydratedDocument } from "mongoose";
@@ -46,6 +47,8 @@ const convertRssItem = (data: RSSItem) => {
 // convert to required format
 export const getArticle = async (item: RSSItem) => {
 	const { src, details = {} } = convertRssItem(item);
+
+	await connectToMongoDB();
 
 	const article = (await getArticleBySrc(
 		src
