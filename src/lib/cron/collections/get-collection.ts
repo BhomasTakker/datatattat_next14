@@ -53,7 +53,7 @@ export const getCollection = async (
 		feed: url,
 	});
 
-	// console.log("message", { message, result });
+	console.log("loaded collection", { message, url });
 
 	return Promise.resolve(result);
 };
