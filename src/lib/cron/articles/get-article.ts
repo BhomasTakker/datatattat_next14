@@ -48,8 +48,6 @@ const convertRssItem = (data: RSSItem) => {
 export const getArticle = async (item: RSSItem) => {
 	const { src, details = {} } = convertRssItem(item);
 
-	await connectToMongoDB();
-
 	const article = (await getArticleBySrc(
 		src
 	)) as HydratedDocument<CollectionItem>;

@@ -43,7 +43,6 @@ export const getCollection = async (
 	url: string,
 	rssFeed: DataResponse
 ): Promise<RSSArticleCollection> => {
-	await connectToMongoDB();
 	// above is convert rss to collection
 	const { feed, ...rest } = convertRssToCollection(rssFeed);
 

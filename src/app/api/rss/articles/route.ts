@@ -2,6 +2,9 @@
 
 import { NEWS_ARTICLES_COLLECTION } from "@/lib/cron/articles/sources";
 import { fetchCollections } from "@/lib/cron/collections/fetch-collections";
+import { connectToMongoDB } from "@/lib/mongo/db";
+
+await connectToMongoDB();
 
 export async function GET() {
 	try {
