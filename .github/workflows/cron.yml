@@ -1,0 +1,15 @@
+name: Load article collections Cron job
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+
+jobs:
+  load-article-collections:
+    runs-on: ubuntu-latest
+    container: alpine/curl
+
+    steps:
+      - name: Run load article collections
+        run: |
+          curl -X GET https://datatattat.com/api/rss/articles
