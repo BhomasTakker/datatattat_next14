@@ -24,6 +24,11 @@ export const fetchWithCache = async (
 			return JSON.parse(cachedData);
 		}
 		const data = await fetchFn();
+
+		if (!data) {
+			// For Gods sake stop caching null!!!
+			return null;
+		}
 		// set one day cache for now :/
 		// redis upstash is better at this?
 		await client.set(key, JSON.stringify(data), "EX", expiry);
