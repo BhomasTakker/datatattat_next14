@@ -27,7 +27,7 @@
     "react-intersection-observer": "^9.15.1",
     "rss-parser": "^3.13.0",
     "rxjs": "^7.8.1",
-    "sass": "^1.83.4",
+    "sass": "^1.84.0",
     "video.js": "^8.21.0",
     "videojs-youtube": "^3.0.1"
   },
