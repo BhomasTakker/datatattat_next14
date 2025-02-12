@@ -7,6 +7,7 @@ import {
 } from "@/lib/mongo/actions/article";
 import { CollectionItem } from "@/types/data-structures/collection/item/item";
 import { HydratedDocument } from "mongoose";
+import { validateArticleData } from "./utils";
 
 // Potentially a withDb Thing or other
 type GetArticleItem = Partial<CollectionItem> & Pick<CollectionItem, "src">;
@@ -18,9 +19,6 @@ export const getArticle = async (item: GetArticleItem) => {
 		src
 	)) as HydratedDocument<CollectionItem>;
 	if (article) {
-		// We should check if we have any additional data
-		// Then update the article
-
 		return JSON.parse(JSON.stringify(article)) as CollectionItem;
 	}
 
@@ -29,13 +27,6 @@ export const getArticle = async (item: GetArticleItem) => {
 		return null;
 	}
 	const { title, description, image, imageAlt, type } = meta;
-
-	if (!title || !description || !image) {
-		// We need a better or proper check here
-		// based on type / we may not always expect an image
-		// BlueSky post or some such
-		return null;
-	}
 
 	const newArticle = {
 		title,
@@ -51,7 +42,10 @@ export const getArticle = async (item: GetArticleItem) => {
 	};
 
 	try {
-		await saveOrCreateArticleBySrc(newArticle);
+		// casting not really okay but this was annoying
+		if (validateArticleData(newArticle as CollectionItem)) {
+			await saveOrCreateArticleBySrc(newArticle as CollectionItem);
+		}
 	} catch (err) {
 		console.log("getArticle Error");
 	}

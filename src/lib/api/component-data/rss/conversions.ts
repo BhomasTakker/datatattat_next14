@@ -3,11 +3,14 @@ import { CollectionItem } from "@/types/data-structures/collection/item/item";
 import { RSSChannelType, RSSItem } from "@/types/data-structures/rss";
 
 import { map } from "rxjs";
+import { determineItemType } from "./utils";
+import { createCollectionItem } from "./collection-items";
 
 // Go over the structure of this object
 // From Rss - which we should store?
 // To ArticleCollection
 const toCollection = () => {
+	// should set collection type here
 	return map((data: RSSChannelType): Collection => {
 		const { title, items, link, description } = data;
 		return {
@@ -29,36 +32,10 @@ const toCollection = () => {
 // Then form the data into a collection item
 const toCollectionItem = () => {
 	return map((data: RSSItem): CollectionItem => {
-		const {
-			title,
-			// content potentially more likely to have html
-			content,
-			description,
-			author,
-			category,
-			link,
-			pubDate,
-			enclosure,
-			contentSnippet,
-		} = data;
-		const { url = "" } = enclosure || {};
+		const itemType = determineItemType(data);
+		const item = createCollectionItem(data, itemType);
 
-		return {
-			title: title,
-			src: link,
-			description: contentSnippet || content || description,
-			guid: "",
-			variant: "article",
-			details: {
-				published: pubDate,
-				categories: category ? [category] : [],
-				publishers: author ? [author] : [],
-			},
-			avatar: {
-				src: url,
-				alt: title,
-			},
-		};
+		return item;
 	});
 };
 
