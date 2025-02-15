@@ -129,7 +129,7 @@ export const rssFetch = async (query: WithQuery) => {
 			conversions
 		) as Collection;
 		const items = await fetchMeta(convertedData.items, ARTICLE_PRELOAD_NUMBER);
-		return { ...convertedData, items: items.filter((item) => item) };
+		return { ...convertedData, items: cleanResponses(items) };
 	};
 
 	const collections = await fetchRSSCollections({
