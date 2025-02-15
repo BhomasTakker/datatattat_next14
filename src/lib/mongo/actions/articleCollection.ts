@@ -18,7 +18,7 @@ export const saveOrCreateArticleCollectionByFeed = async (
 				new: true,
 				upsert: true, // Make this update into an upsert
 			}
-		);
+		).lean();
 
 		// console.log(res);
 

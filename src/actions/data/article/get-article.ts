@@ -8,6 +8,7 @@ import {
 import { CollectionItem } from "@/types/data-structures/collection/item/item";
 import { HydratedDocument } from "mongoose";
 import { validateArticleData } from "./utils";
+import { cloneDeep } from "@/utils/object";
 
 // Potentially a withDb Thing or other
 type GetArticleItem = Partial<CollectionItem> & Pick<CollectionItem, "src">;
@@ -19,7 +20,7 @@ export const getArticle = async (item: GetArticleItem) => {
 		src
 	)) as HydratedDocument<CollectionItem>;
 	if (article) {
-		return JSON.parse(JSON.stringify(article)) as CollectionItem;
+		return cloneDeep(article) as CollectionItem;
 	}
 
 	const meta = await getMeta(src);

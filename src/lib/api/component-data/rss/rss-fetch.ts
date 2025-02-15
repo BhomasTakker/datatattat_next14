@@ -58,6 +58,7 @@ type FetchRSSCollections<T, G> = {
 	feedCallback: (url: string, items: DataResponse) => Promise<G>;
 	onComplete: <T, G>(data: G[]) => Promise<T>;
 };
+// I think your typing is is nonsense!
 const fetchRSSCollections = async <T, G>({
 	urls,
 	feedCallback,
@@ -80,7 +81,7 @@ const fetchRSSCollections = async <T, G>({
 					await feedCallback(url, data);
 					// convert each rss return to a collection
 					// itemsCallback
-					await itemsCallback(data.items as RSSItem[]);
+					await itemsCallback(data?.items || ([] as RSSItem[]));
 					// convert each item to a collection item
 				});
 				prom.catch((error: Error) => {
@@ -135,7 +136,7 @@ export const rssFetch = async (query: WithQuery) => {
 		urls,
 		feedCallback: async (url, items) => {},
 		itemsCallback: async (items) => {},
-		// @ts-expect-error - typing for this is a mess we need to sort out properly
+		// @ts-expect-error - typing is not correct
 		onComplete: completeHandler,
 	});
 

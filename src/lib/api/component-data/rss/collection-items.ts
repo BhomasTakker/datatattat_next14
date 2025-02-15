@@ -1,6 +1,7 @@
 import { CollectionItem } from "@/types/data-structures/collection/item/item";
 import { RSSItem } from "@/types/data-structures/rss";
 import { YouTubeRSSItem } from "./types";
+import { cloneDeep } from "@/utils/object";
 
 const createMainArticle = (data: RSSItem): CollectionItem => {
 	const {
@@ -36,7 +37,10 @@ const createMainArticle = (data: RSSItem): CollectionItem => {
 		// I don't really want to do this but how do we get
 		// unique or extended data?
 		// we want media:group from youtube
-		original: data,
+		// There's a better way - just builder the thing right?
+		// Pass an object through a function that applies each stage
+		// essentially building the object
+		original: cloneDeep(data),
 	};
 };
 
