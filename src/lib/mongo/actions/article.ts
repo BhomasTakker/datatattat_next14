@@ -16,7 +16,7 @@ export const saveOrCreateArticleBySrc = async (article: CollectionItem) => {
 				new: true,
 				upsert: true, // Make this update into an upsert
 			}
-		);
+		).lean();
 
 		return { result: res, message: "Saved Article!" };
 	} catch (err) {

@@ -3,9 +3,11 @@ import { UnknownObject } from "@/types/utils";
 export type BaseInfo = {
 	title: string;
 	src: string; // URL format
-	description: string;
+	description?: string;
 	guid: string;
 	variant: string; // union
+
+	original?: UnknownObject;
 };
 
 export type Details = {

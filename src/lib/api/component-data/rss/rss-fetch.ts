@@ -1,12 +1,17 @@
 import { WithQuery } from "@/types/page";
 import { isStringValidURL } from "../../../../utils/url";
 import { UnknownObject } from "@/types/utils";
-import { fetchRSS } from "./fetch-rss";
+import { RSSParse } from "./rss-parse";
 import { convertResponse } from "@/lib/conversions/convert-response";
-import { CollectionItem } from "@/types/data-structures/collection/item/item";
 import { Collection } from "@/types/data-structures/collection/collection";
 import { fetchWithCache } from "@/lib/redis/redis-fetch";
-import { getArticle } from "@/actions/data/article/get-article";
+import { fetchMeta } from "../html/meta/get-meta";
+import {
+	cleanResponses,
+	determineFeedType,
+	getParserCustomFields,
+} from "./utils";
+import { RSSItem } from "@/types/data-structures/rss";
 
 const ARTICLE_PRELOAD_NUMBER = 10 - 1;
 const RSS_CACHE_EXPIRY = 120; // seconds
@@ -21,69 +26,69 @@ type DataResponse = {
 	items: object[];
 } & UnknownObject;
 
-/////////////////////////////////////
-// Bit of a rough fix for now
-// Meta calls are better for article data
-/////////////////////////////////////
-// Assumes that only articles are being fetched via rss
-// Perhaps we should have rss types
-// That determines what we do with the return data
-///////////////////////////////////////////////
-const fetchMeta = async (items: CollectionItem[] = []) => {
-	if (!items || !items?.map) {
-		return Promise.resolve([]);
-	}
-
-	////////////////////////////////////////////////
-	// we need to fetch meta for x number of items - n should be variable
-	// We could pass it as part of the query
-	// return some data i.e. time - including the src for the rest
-	// We probably should just send a meta loaded var?
-	// Then in Article meta wrapper we can check and load if we have to
-	// While also using InView to lazy load the article itself
-	////////////////////////////////////////////////
-	const data = items.map(async (item, i) => {
-		if (i > ARTICLE_PRELOAD_NUMBER) {
-			return Promise.resolve({ ...item, loadData: true });
-		}
-		return fetchWithCache(() => getArticle(item), item.src);
-	});
-
-	return Promise.all(data);
+const mergeCollections = (collections: DataResponse[]) => {
+	return collections.reduce(
+		(acc, cur) => ({
+			...acc,
+			items: cur?.items ? acc.items.concat(cur.items) : acc.items,
+		}),
+		// We should merge all into the main return
+		{ ...collections[0] }
+	);
 };
-
-export const rssFetch = async (query: WithQuery) => {
-	const { params, conversions } = query;
-	const { urls } = params as RssParams;
-
-	if (!urls) {
-		return {
-			// return empty
-			error: "No urls provided",
-		};
-	}
-
-	const fetches: Promise<DataResponse>[] = [];
-
-	////////////////////////////////////////////////////////
-	// Would we preload all feeds?
-	// in short term yes but long term no we shouldn't
-	// feeds here - I think we have to we have to
-	////////////////////////////////////////////////////////
-	urls.forEach(async (url) => {
+// Our conversions are currently a big bang
+// In this instance we want to convert and filter merge and sort
+// We should load the data feed by feed
+// We should convert the data here / feed and item
+// We should save the data
+// We should cache the data
+// we should filter the data
+// We should then merge the data
+// Then we should sort the data
+// We should return the data
+////////////////////////////////////
+// If we have more control over what we call and when
+// That will give us the flexibility without sacrificing performance
+// So for each feed convert([feedN], transform(), save())
+// convert(feed.items, transform(), save(), filter())
+// convert([feed1, feed2], merge(), sort())
+type FetchRSSCollections<T, G> = {
+	urls: string[];
+	itemsCallback: (items: RSSItem[]) => Promise<T>;
+	feedCallback: (url: string, items: DataResponse) => Promise<G>;
+	onComplete: <T, G>(data: G[]) => Promise<T>;
+};
+// I think your typing is is nonsense!
+const fetchRSSCollections = async <T, G>({
+	urls,
+	feedCallback,
+	itemsCallback,
+	onComplete,
+}: FetchRSSCollections<T, G>) => {
+	const collectionPromises = urls.map((url) => {
 		const isValid = isStringValidURL(url);
 		if (isValid) {
+			const sourceType = determineFeedType(new URL(url));
 			try {
-				const prom = fetchWithCache(() => fetchRSS(url), url, RSS_CACHE_EXPIRY);
+				const prom = fetchWithCache(
+					// getCollection / if youtube return data / else save and return src only
+					() => RSSParse(url, getParserCustomFields(sourceType)),
+					url,
+					RSS_CACHE_EXPIRY
+				);
+				prom.then(async (data) => {
+					// promiseCallback
+					await feedCallback(url, data);
+					// convert each rss return to a collection
+					// itemsCallback
+					await itemsCallback(data?.items || ([] as RSSItem[]));
+					// convert each item to a collection item
+				});
 				prom.catch((error: Error) => {
-					// This should stop the crash but we need to remove null from promise list
 					console.error("Error fetching rss");
 				});
-				////////////////////////////////////
-				// add redis data fetch and cache //
-				////////////////////////////////////
 				if (prom) {
-					fetches.push(prom);
+					return prom;
 				}
 			} catch (error) {
 				console.error("Error fetching rss");
@@ -91,44 +96,49 @@ export const rssFetch = async (query: WithQuery) => {
 		}
 	});
 
-	// error handling?
-	const responses = await Promise.all(fetches);
+	// onComplete
 
-	// utils at least
-	// Remove any null instances / i.e. load errors
-	const cleanResponses = responses.filter((response) => response);
+	const collections = (await Promise.all(collectionPromises)) as G[];
+	// const cleaned = cleanResponses<DataResponse>(collections);
+	// const returnCollections = await onComplete<DataResponse>(collections);
+	return await onComplete(collections);
+};
 
-	// console.log("responses ", { fetches, responses });
+// Half our problems go away if we load articleCollections rss from the database
+// We HAVE to update this to load via the article loader api
+// Caching accordingly
+// Best bet is probably to host an external api for ALL data load
+// AND conversions
+export const rssFetch = async (query: WithQuery) => {
+	const { params, conversions } = query;
+	const { urls } = params as RssParams;
 
-	////////////////////////////////////////
-	// Create merge responses or something
-	// Or rightly this would be part pf conversions
-	// not here and go over
-	// Again utils at least / merge arrays
-	////////////////////////////////////////
-	// We need a massive run through conversions and transducers
-	// That is where this goes.
-	////////////////////////////////////////
-	const mergedData = cleanResponses.reduce(
-		(acc, cur) => ({
-			...acc,
-			items: cur?.items ? acc.items.concat(cur.items) : acc.items,
-		}),
-		// We should merge all into the main return
-		{ ...cleanResponses[0] }
-	);
+	// Perhaps check and return message if failed
+	if (!urls) {
+		return {
+			// return empty
+			error: "No urls provided",
+		};
+	}
 
-	/////////////////////////////////////////////////
-	// this typing is a bit of a hack
-	// the function at leas should be generic
-	// but also we only need this because we ae having to fetch meta here
-	/////////////////////////////////////////////////
-	const convertedData = convertResponse(mergedData, conversions) as Collection;
-	/////////////////////////////////////////////////
-	// temp - should be in conversions but rxjs :( //
-	// we could get meta here and add to the response
-	// but we shouldn't
-	const finalData = await fetchMeta(convertedData.items);
-	// if item exists return it
-	return { ...convertedData, items: finalData.filter((item) => item) };
+	const completeHandler = async (data: DataResponse[]) => {
+		const cleaned = cleanResponses<DataResponse>(data);
+		const mergedData = mergeCollections(cleaned);
+		const convertedData = convertResponse(
+			mergedData,
+			conversions
+		) as Collection;
+		const items = await fetchMeta(convertedData.items, ARTICLE_PRELOAD_NUMBER);
+		return { ...convertedData, items: items.filter((item) => item) };
+	};
+
+	const collections = await fetchRSSCollections({
+		urls,
+		feedCallback: async (url, items) => {},
+		itemsCallback: async (items) => {},
+		// @ts-expect-error - typing is not correct
+		onComplete: completeHandler,
+	});
+
+	return collections;
 };
