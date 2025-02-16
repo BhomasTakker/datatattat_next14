@@ -1,5 +1,6 @@
 import { RSSArticleCollection } from "@/types/data-structures/collection/collection";
 import mongoose, { model, Schema } from "mongoose";
+import { MODELS } from "./models";
 
 const ImageSchema = new Schema(
 	{
@@ -29,7 +30,7 @@ const ArticleCollectionSchema = new Schema<RSSArticleCollection>({
 		type: String,
 	},
 	items: {
-		type: [String],
+		type: [Object],
 		required: [true, "Please provide items."],
 	},
 	lastBuildDate: {
@@ -44,4 +45,7 @@ const ArticleCollectionSchema = new Schema<RSSArticleCollection>({
 });
 
 export default mongoose.models.ArticleCollection ||
-	model<RSSArticleCollection>("ArticleCollection", ArticleCollectionSchema);
+	model<RSSArticleCollection>(
+		MODELS.ArticleCollection,
+		ArticleCollectionSchema
+	);

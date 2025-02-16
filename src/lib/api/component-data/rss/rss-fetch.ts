@@ -1,17 +1,14 @@
 import { WithQuery } from "@/types/page";
 import { isStringValidURL } from "../../../../utils/url";
 import { UnknownObject } from "@/types/utils";
-import { RSSParse } from "./rss-parse";
+import { rssParse } from "./rss-parse";
 import { convertResponse } from "@/lib/conversions/convert-response";
 import { Collection } from "@/types/data-structures/collection/collection";
 import { fetchWithCache } from "@/lib/redis/redis-fetch";
 import { fetchMeta } from "../html/meta/get-meta";
-import {
-	cleanResponses,
-	determineFeedType,
-	getParserCustomFields,
-} from "./utils";
+import { cleanResponses, determineFeedType } from "./utils";
 import { RSSItem } from "@/types/data-structures/rss";
+import { getCollection } from "@/actions/data/article-collection/get-article-collection";
 
 const ARTICLE_PRELOAD_NUMBER = 10 - 1;
 const RSS_CACHE_EXPIRY = 120; // seconds
@@ -68,21 +65,15 @@ const fetchRSSCollections = async <T, G>({
 	const collectionPromises = urls.map((url) => {
 		const isValid = isStringValidURL(url);
 		if (isValid) {
-			const sourceType = determineFeedType(new URL(url));
 			try {
 				const prom = fetchWithCache(
-					// getCollection / if youtube return data / else save and return src only
-					() => RSSParse(url, getParserCustomFields(sourceType)),
+					() => getCollection(url),
 					url,
 					RSS_CACHE_EXPIRY
 				);
 				prom.then(async (data) => {
-					// promiseCallback
 					await feedCallback(url, data);
-					// convert each rss return to a collection
-					// itemsCallback
 					await itemsCallback(data?.items || ([] as RSSItem[]));
-					// convert each item to a collection item
 				});
 				prom.catch((error: Error) => {
 					console.error("Error fetching rss");
@@ -96,27 +87,16 @@ const fetchRSSCollections = async <T, G>({
 		}
 	});
 
-	// onComplete
-
 	const collections = (await Promise.all(collectionPromises)) as G[];
-	// const cleaned = cleanResponses<DataResponse>(collections);
-	// const returnCollections = await onComplete<DataResponse>(collections);
 	return await onComplete(collections);
 };
 
-// Half our problems go away if we load articleCollections rss from the database
-// We HAVE to update this to load via the article loader api
-// Caching accordingly
-// Best bet is probably to host an external api for ALL data load
-// AND conversions
 export const rssFetch = async (query: WithQuery) => {
 	const { params, conversions } = query;
 	const { urls } = params as RssParams;
 
-	// Perhaps check and return message if failed
 	if (!urls) {
 		return {
-			// return empty
 			error: "No urls provided",
 		};
 	}
@@ -129,7 +109,7 @@ export const rssFetch = async (query: WithQuery) => {
 			conversions
 		) as Collection;
 		const items = await fetchMeta(convertedData.items, ARTICLE_PRELOAD_NUMBER);
-		return { ...convertedData, items: items.filter((item) => item) };
+		return { ...convertedData, items: cleanResponses(items) };
 	};
 
 	const collections = await fetchRSSCollections({

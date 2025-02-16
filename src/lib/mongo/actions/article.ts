@@ -19,9 +19,7 @@ export const saveOrCreateArticleBySrc = async (article: CollectionItem) => {
 		).lean();
 
 		return { result: res, message: "Saved Article!" };
-	} catch (err) {
-		console.error(err);
-		// throw?
+	} catch {
 		return { message: "Error saving article" };
 	}
 };

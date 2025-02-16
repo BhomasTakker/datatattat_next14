@@ -14,22 +14,9 @@ export const fetchMeta = async (items: MetaItem[] = [], limit: number) => {
 		return Promise.resolve([]);
 	}
 
-	////////////////////////////////////////////////
-	// we need to fetch meta for x number of items - n should be variable
-	// We could pass it as part of the query
-	// return some data i.e. time - including the src for the rest
-	// We probably should just send a meta loaded var?
-	// Then in Article meta wrapper we can check and load if we have to
-	// While also using InView to lazy load the article itself
-	////////////////////////////////////////////////
 	const data = items.map(async (item, i) => {
-		if (item?.meta) {
-			// console.log("META ITEM", item);
-		}
-
 		if (!item?.meta) {
 			item.meta = undefined;
-			// we don't need to wait for this
 			saveOrUpdateArticle(item);
 			return Promise.resolve(item);
 		}
