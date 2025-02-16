@@ -1,18 +1,18 @@
-import { RSSArticleCollection } from "@/types/data-structures/collection/collection";
 import ArticleCollection from "../../../models/ArticleCollection";
+import { RSSChannelType } from "@/types/data-structures/rss";
 
 export const getArticleCollectionByFeed = async (feed: string) => {
 	return await ArticleCollection.findOne({ feed }).lean();
 };
 
 export const saveOrCreateArticleCollectionByFeed = async (
-	collection: RSSArticleCollection
+	collection: RSSChannelType
 ) => {
-	const { feed } = collection;
+	const { feedUrl } = collection;
 
 	try {
 		const res = await ArticleCollection.findOneAndUpdate(
-			{ feed }, // find
+			{ feed: feedUrl }, // find
 			collection, // update
 			{
 				new: true,
@@ -20,12 +20,8 @@ export const saveOrCreateArticleCollectionByFeed = async (
 			}
 		).lean();
 
-		// console.log(res);
-
 		return { result: res, message: "Saved Article Collection!" };
-	} catch (err) {
-		console.error(err);
-		// throw?
+	} catch {
 		return { message: "Error saving article collection" };
 	}
 };

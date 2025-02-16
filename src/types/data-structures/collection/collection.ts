@@ -1,7 +1,7 @@
 ///// COLLECTION ///////
 ///// COLLECTION ITEM ///////
 
-import { RSSImage } from "../rss";
+import { RSSImage, RSSItem } from "../rss";
 import { BaseInfo, Details, Media, Pagination } from "./base";
 import { CollectionItem } from "./item/item";
 
@@ -15,7 +15,7 @@ export type Collection = BaseInfo & {
 
 // quick stopgap
 export type RSSArticleCollection = {
-	items: string[];
+	items: string[] | RSSItem[];
 	link?: string;
 	title?: string;
 	feed?: string;

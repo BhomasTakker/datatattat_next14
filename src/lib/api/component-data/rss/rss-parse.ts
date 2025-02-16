@@ -5,7 +5,7 @@ import Parser from "rss-parser";
 // We are crashing when load times out
 /** Fetch RSS data from src via rss-parser */
 // This should be an action and explicitly use server
-export const RSSParse = async (
+export const rssParse = async (
 	endpoint: string,
 	customFields?: UnknownObject
 ) => {
