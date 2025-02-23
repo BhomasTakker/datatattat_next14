@@ -107,7 +107,7 @@ export const getMeta = async (src: string) => {
 
 		return meta;
 	} catch (error) {
-		console.warn("Error fetching meta data", error);
+		// console.warn("Error fetching meta data", error);
 		return null;
 	}
 };

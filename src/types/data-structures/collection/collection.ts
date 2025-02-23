@@ -3,7 +3,7 @@
 
 import { RSSImage, RSSItem } from "../rss";
 import { BaseInfo, Details, Media, Pagination } from "./base";
-import { CollectionItem } from "./item/item";
+import { CollectionItem, ProviderItem } from "./item/item";
 
 export type Collection = BaseInfo & {
 	////////////////////
@@ -13,13 +13,19 @@ export type Collection = BaseInfo & {
 	items: CollectionItem[];
 };
 
+type StrippedItem = {
+	link: string;
+};
+
 // quick stopgap
 export type RSSArticleCollection = {
-	items: string[] | RSSItem[];
+	// remove string
+	items: string[] | StrippedItem[] | RSSItem[];
 	link?: string;
 	title?: string;
 	feed?: string;
 	description?: string;
 	lastBuildDate?: string;
 	image?: RSSImage;
+	provider?: ProviderItem;
 };
