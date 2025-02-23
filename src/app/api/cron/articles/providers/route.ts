@@ -1,6 +1,5 @@
 import { updateArticleProviders } from "@/lib/api/component-data/rss/collections/article-providers/update-article-providers";
 import { connectToMongoDB } from "@/lib/mongo/db";
-import { NextRequest, NextResponse } from "next/server";
 
 export const revalidate = 72000;
 
