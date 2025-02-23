@@ -30,7 +30,7 @@ const ArticleCollectionSchema = new Schema<RSSArticleCollection>({
 		type: String,
 	},
 	items: {
-		type: [Object],
+		type: [Schema.Types.Mixed as any],
 		required: [true, "Please provide items."],
 	},
 	lastBuildDate: {
@@ -41,6 +41,11 @@ const ArticleCollectionSchema = new Schema<RSSArticleCollection>({
 	},
 	feed: {
 		type: String,
+	},
+	provider: {
+		type: mongoose.Schema.Types.ObjectId,
+		required: [true, "Please provide a provider."],
+		ref: "ArticleProvider",
 	},
 });
 

@@ -3,7 +3,7 @@
 
 import { RSSImage, RSSItem } from "../rss";
 import { BaseInfo, Details, Media, Pagination } from "./base";
-import { CollectionItem } from "./item/item";
+import { CollectionItem, ProviderItem } from "./item/item";
 
 export type Collection = BaseInfo & {
 	////////////////////
@@ -22,4 +22,5 @@ export type RSSArticleCollection = {
 	description?: string;
 	lastBuildDate?: string;
 	image?: RSSImage;
+	provider?: ProviderItem;
 };
