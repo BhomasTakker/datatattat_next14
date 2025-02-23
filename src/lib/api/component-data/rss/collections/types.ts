@@ -1,3 +1,6 @@
+import { ProviderItem } from "@/types/data-structures/collection/item/item";
+import { DataResponse, RSSChannelType } from "@/types/data-structures/rss";
+
 export type ArticleSource = {
 	name: string;
 	src: string;
@@ -14,3 +17,10 @@ export type SourceObject = {
 };
 
 export type ExtraData = Omit<SourceObject, "sources">;
+
+export type GetCollection = {
+	url: string;
+	rssFeed: DataResponse;
+	extraData?: ExtraData;
+	provider?: ProviderItem;
+};

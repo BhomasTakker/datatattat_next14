@@ -1,5 +1,7 @@
 // https://www.w3schools.com/XML/xml_rss.asp
 
+import { UnknownObject } from "@/types/utils";
+
 export type RSSEnclosure = {
 	type: string;
 	length: string;
@@ -61,3 +63,19 @@ export type RSSChannelType = {
 
 	items?: RSSItem[];
 };
+
+// why and why feed feedUrl
+export type DataResponse = {
+	items: RSSItem[];
+	link?: string;
+	title?: string;
+	feed?: string;
+	description?: string;
+	lastBuildDate?: string;
+	language?: string;
+	webMaster?: string;
+	pubDate?: string;
+	generator?: string;
+	image?: RSSImage;
+	ttl?: string;
+} & UnknownObject;
