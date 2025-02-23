@@ -1,6 +1,16 @@
 import { BaseInfo, Details, Avatar } from "../base";
 
+export type ProviderItem = {
+	name: string;
+	description: string;
+	url: string;
+	rating: number;
+	leaning: number;
+	origin: string;
+};
+
 export type CollectionItem = BaseInfo & {
 	details?: Details;
 	avatar?: Avatar;
+	provider?: ProviderItem;
 };
