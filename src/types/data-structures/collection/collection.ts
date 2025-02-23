@@ -13,9 +13,14 @@ export type Collection = BaseInfo & {
 	items: CollectionItem[];
 };
 
+type StrippedItem = {
+	link: string;
+};
+
 // quick stopgap
 export type RSSArticleCollection = {
-	items: string[] | RSSItem[];
+	// remove string
+	items: string[] | StrippedItem[] | RSSItem[];
 	link?: string;
 	title?: string;
 	feed?: string;

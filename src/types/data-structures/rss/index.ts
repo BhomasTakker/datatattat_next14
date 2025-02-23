@@ -19,6 +19,7 @@ export type RSSSource = {
 export type RSSItem = {
 	title: string;
 	description: string;
+	["content:encoded"]?: string;
 	author?: string;
 	category?: string;
 	content?: string;
