@@ -58,13 +58,13 @@ export const fetchRss = async <T, G>({
 				// pass provider!!!!
 				try {
 					await feedCallback({ url: src, rssFeed: data, extraData, provider });
-				} catch {
-					console.error("Error fetching rss feed");
+				} catch (err) {
+					console.error("Error fetching rss feed", { err });
 				}
 				try {
 					await itemsCallback({ items, extraData, provider });
-				} catch {
-					console.error("Error fetching rss items");
+				} catch (err) {
+					console.error("Error fetching rss items", { err });
 				}
 			});
 			prom.catch((error: Error) => {
