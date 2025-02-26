@@ -112,15 +112,15 @@ export const getArticle = async ({ item, extraData, provider }: GetArticle) => {
 			src: image,
 			alt: imageAlt || "",
 		},
+		// incorrect here - in details
 		...extraData,
 		provider,
 	};
-
+	//0061-search-articles
 	try {
-		// console.log("saved", { src });
 		await saveOrCreateArticleBySrc(newArticle);
 	} catch (err) {
-		console.log(`Article Load Error ${src}`);
+		console.log(`Article Save Error, ${src} ${err}`);
 	}
 
 	return newArticle as CollectionItem;
