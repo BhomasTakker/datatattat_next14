@@ -82,7 +82,7 @@ const saveArticle = async (item: CollectionItem) => {
 	const { src } = item;
 	const { result, message } = await saveOrCreateArticleBySrc(item);
 	if (result) {
-		// console.log(`Saved ${src}`);
+		console.log(`Saved ${src}`);
 		return item;
 	} else {
 		console.log(`Failed to save ${src}`);

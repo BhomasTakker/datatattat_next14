@@ -42,8 +42,10 @@ export const saveOrCreateArticleCollectionByFeed2 = async (
 			}
 		).lean();
 
+		console.log("Saved Article Collection!");
 		return { result: res, message: "Saved Article Collection!" };
-	} catch {
-		return { message: "Error saving article collection" };
+	} catch (err) {
+		console.log("err Article Collection:", err);
+		return { message: "Error saving article collection." };
 	}
 };

@@ -12,13 +12,13 @@ export const rssParse = async (
 	const parser = new Parser({
 		customFields,
 		// Todo:- Config
-		timeout: 2000,
+		timeout: 5000,
 	});
 	// if error do something!
 	try {
 		return await parser.parseURL(endpoint.toString());
 	} catch (error) {
-		console.error("Error fetching rss rssParse", error);
+		console.error("Error fetching rss rssParse", endpoint, error);
 		return null;
 	}
 };
