@@ -39,19 +39,24 @@ export const getCollection = async ({
 	rssFeed,
 	extraData,
 	provider,
-}: GetCollection): Promise<RSSArticleCollection> => {
+}: GetCollection): Promise<RSSArticleCollection | null> => {
 	const { feed, ...rest } = convertRssToCollection(rssFeed);
 
 	// Need mush categories etc together
 
-	const { message, result } = await saveOrCreateArticleCollectionByFeed2({
-		...rest,
-		...extraData,
-		provider,
-		feed: url,
-	});
+	try {
+		const { message, result } = await saveOrCreateArticleCollectionByFeed2({
+			...rest,
+			...extraData,
+			provider,
+			feed: url,
+		});
 
-	return Promise.resolve(result as unknown as RSSArticleCollection);
+		return Promise.resolve(result as unknown as RSSArticleCollection);
+	} catch (e) {
+		console.log(e);
+		return Promise.resolve(null);
+	}
 };
 
 // simple fix - should be set at the 'url' data level
@@ -60,13 +65,18 @@ export const getYoutubeCollection = async ({
 	rssFeed,
 	extraData,
 	provider,
-}: GetCollection): Promise<RSSArticleCollection> => {
-	const { message, result } = await saveOrCreateArticleCollectionByFeed2({
-		...rssFeed,
-		...extraData,
-		provider,
-		feed: url,
-	});
+}: GetCollection): Promise<RSSArticleCollection | null> => {
+	try {
+		const { message, result } = await saveOrCreateArticleCollectionByFeed2({
+			...rssFeed,
+			...extraData,
+			provider,
+			feed: url,
+		});
 
-	return Promise.resolve(result as unknown as RSSArticleCollection);
+		return Promise.resolve(result as unknown as RSSArticleCollection);
+	} catch (err) {
+		console.log(err);
+		return Promise.resolve(null);
+	}
 };
