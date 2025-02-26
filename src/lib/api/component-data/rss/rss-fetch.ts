@@ -76,13 +76,16 @@ const fetchRSSCollections = async <T, G>({
 					await itemsCallback(data?.items || ([] as RSSItem[]));
 				});
 				prom.catch((error: Error) => {
-					console.error("Error fetching rss");
+					console.error(
+						"Error fetching rss collectionPromises prom catch",
+						error
+					);
 				});
 				if (prom) {
 					return prom;
 				}
 			} catch (error) {
-				console.error("Error fetching rss");
+				console.error("Error fetching rss collectionPromises", error);
 			}
 		}
 	});

@@ -18,7 +18,7 @@ export const rssParse = async (
 	try {
 		return await parser.parseURL(endpoint.toString());
 	} catch (error) {
-		console.error("Error fetching rss");
+		console.error("Error fetching rss rssParse", error);
 		return null;
 	}
 };
