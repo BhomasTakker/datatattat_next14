@@ -20,11 +20,26 @@ type NumberValidationOptions = {
 	min?: number;
 };
 
+type DateValidationOptions = {
+	required?: boolean;
+	maxLength?: number;
+	minLength?: number;
+};
+
 export type TextInputProps = {
 	id: string;
 	type: EditInputs.text;
 	defaultValue?: string;
 	validation?: TextValidationOptions;
+} & InputProps;
+
+export type DateInputProps = {
+	id: string;
+	type: EditInputs.date;
+	defaultValue?: Date;
+	min?: string | number;
+	max?: string | number;
+	validation?: DateValidationOptions;
 } & InputProps;
 
 export type NumberInputProps = {
@@ -121,6 +136,7 @@ type InputTypes =
 	| ObjectSelectProps
 	| AssignInputIdProps
 	| NumberInputProps
-	| DescriptionInputProps;
+	| DescriptionInputProps
+	| DateInputProps;
 
 export type GenericInput = InputTypes;

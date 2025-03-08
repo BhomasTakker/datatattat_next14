@@ -10,6 +10,7 @@ import { SwitchInput } from "./switch-input/switch-input";
 import { AssignInputId } from "./assignId/assign-id";
 import { NumberInput } from "./number-input/number-input";
 import { InputDescription } from "./description/input-description";
+import { DateInput } from "./date/date-input";
 
 export enum EditInputs {
 	text = "text",
@@ -28,6 +29,7 @@ export enum EditInputs {
 	indent = "indent",
 	assign = "assign",
 	assignId = "assignId",
+	date = "date",
 }
 
 type InputComponentOptions =
@@ -42,6 +44,7 @@ type InputComponentOptions =
 	| typeof AssignInputId
 	| typeof NumberInput
 	| typeof InputDescription
+	| typeof DateInput
 	| FC;
 
 export const inputMap = new Map<EditInputs, InputComponentOptions>([
@@ -56,6 +59,7 @@ export const inputMap = new Map<EditInputs, InputComponentOptions>([
 	[EditInputs.objectSelect, ObjectSelect],
 
 	[EditInputs.show, ShowInput],
+	[EditInputs.date, DateInput],
 
 	//////////
 	[EditInputs.array, ArrayInput],
