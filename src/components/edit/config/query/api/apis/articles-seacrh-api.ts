@@ -45,13 +45,13 @@ export const PARAMS: GenericInput[] = [
 	},
 	{
 		id: "before",
-		type: EditInputs.text,
+		type: EditInputs.date,
 		label: "Filter Before ",
 		required: false,
 	},
 	{
 		id: "after",
-		type: EditInputs.text,
+		type: EditInputs.date,
 		label: "Filter After ",
 		required: false,
 	},
