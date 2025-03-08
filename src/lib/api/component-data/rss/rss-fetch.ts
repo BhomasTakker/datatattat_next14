@@ -115,6 +115,8 @@ export const rssFetch = async (query: WithQuery) => {
 		return { ...convertedData, items: cleanResponses(items) };
 	};
 
+	//// BUG!!! //////////////////////////////////////
+	// Erm - you are using dummy functions in prod...
 	const collections = await fetchRSSCollections({
 		urls,
 		feedCallback: async (url, items) => {},

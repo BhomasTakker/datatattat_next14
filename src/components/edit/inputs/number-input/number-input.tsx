@@ -9,6 +9,8 @@ export const NumberInput = ({
 	validation = {},
 	required = true,
 	disabled = false,
+	min,
+	max,
 }: NumberInputProps) => {
 	const { register, getValues } = useFormContext();
 
@@ -23,11 +25,12 @@ export const NumberInput = ({
 				<label htmlFor={id}>{label}</label>
 				<input
 					id={id}
-					{...register(id, { ...validation, min: 0 })}
+					{...register(id, { ...validation, min, max })}
 					type="number"
 					defaultValue={useDefault}
 					required={required}
-					min={0}
+					min={min}
+					max={max}
 				/>
 			</fieldset>
 		</div>

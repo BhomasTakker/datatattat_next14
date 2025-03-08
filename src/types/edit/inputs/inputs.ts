@@ -30,6 +30,8 @@ export type TextInputProps = {
 export type NumberInputProps = {
 	id: string;
 	type: EditInputs.number;
+	min?: number;
+	max?: number;
 	defaultValue?: string;
 	validation?: NumberValidationOptions;
 } & InputProps;

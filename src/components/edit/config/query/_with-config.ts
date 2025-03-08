@@ -3,18 +3,25 @@ import { EditInputs } from "../../inputs/inputs";
 import { RSS_QUERY_CONFIG } from "./rss/rss-config";
 import { GenericInput } from "@/types/edit/inputs/inputs";
 import { HTML_META_QUERY_CONFIG } from "./html/meta-config";
+import { API_BASE_QUERY_CONFIG } from "./api/api-base-config";
 
 enum QueryOptions {
 	NONE = "none",
 	RSS_QUERY = ComponentDataOptions.RSS_QUERY,
+	API_QUERY = ComponentDataOptions.API_QUERY,
 	HTML_META_QUERY = ComponentDataOptions.HTML_META_QUERY,
 }
 
-type queryContainersProps = null | typeof RSS_QUERY_CONFIG;
+type queryContainersProps =
+	| null
+	| typeof RSS_QUERY_CONFIG
+	| typeof API_BASE_QUERY_CONFIG
+	| typeof HTML_META_QUERY_CONFIG;
 
 const componentQueriesMap = new Map<string, queryContainersProps>([
 	[QueryOptions.NONE, null],
 	[QueryOptions.RSS_QUERY, RSS_QUERY_CONFIG],
+	[QueryOptions.API_QUERY, API_BASE_QUERY_CONFIG],
 	[QueryOptions.HTML_META_QUERY, HTML_META_QUERY_CONFIG],
 ]);
 
@@ -42,6 +49,7 @@ export const WITH_CONFIG: GenericInput = {
 			options: [
 				QueryOptions.NONE,
 				QueryOptions.RSS_QUERY,
+				QueryOptions.API_QUERY,
 				QueryOptions.HTML_META_QUERY,
 			],
 			optionMap: componentQueriesMap,
