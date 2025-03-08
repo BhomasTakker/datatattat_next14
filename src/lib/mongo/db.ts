@@ -22,6 +22,14 @@ export async function connectToMongoDB() {
 		console.log("New mongodb connection established");
 		// Return the newly established connection
 
+		// not here / we can create a search index on Atlas
+		// view and properly investigate
+		// https://www.youtube.com/playlist?list=PL4RCxklHWZ9sEaTrqx7DOxQ5FzwDOTWFj
+		const articlesCollection = cachedConnection.collection("articles");
+		await articlesCollection.createIndexes([
+			{ name: "text", key: { title: "text" } },
+		]);
+
 		return cachedConnection;
 	} catch (error) {
 		// If an error occurs during connection, log the error and throw it

@@ -4,6 +4,7 @@ import { PROFILE_CONFIG } from "../config/page/profile/profile-config";
 import { InputFactory } from "../inputs/input-factory";
 import { PAGE_CONFIG } from "../config/page/page-config";
 import styles from "./page-form.module.scss";
+import { DebugComponent } from "./debug-component";
 
 type PageFormProps = {
 	submitHandler: (e?: React.BaseSyntheticEvent) => Promise<void>;
@@ -39,6 +40,7 @@ export const PageForm = ({ submitHandler }: PageFormProps) => {
 			<InputFactory data={{ ...PAGE_CONFIG, id: `${content}` }} />
 
 			<Button type="submit">Submit</Button>
+			<DebugComponent />
 			{/* <p aria-live="polite" role="status">
 				{pageState}
 			</p> */}
