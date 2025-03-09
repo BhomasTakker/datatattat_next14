@@ -12,6 +12,7 @@ import { AdminNav } from "./admin/admin-nav";
 import { EditNavigation } from "./navigation/edit-navigation";
 import { PATHS } from "@/lib/routing/paths";
 import { isValidUser } from "@/actions/auth/check-valid-user";
+import { connectToMongoDB } from "@/lib/mongo/db";
 
 type EditProps = {
 	route: string;
@@ -68,6 +69,8 @@ export const EditPage = async ({
 	title,
 	isAdminEdit = false,
 }: EditProps) => {
+	// Should do this better - layout perhaps?
+	await connectToMongoDB();
 	// remove me
 	const session = (await getServerSession(options)) as Session;
 	const { user: sessionUser } = session;
