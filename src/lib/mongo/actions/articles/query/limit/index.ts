@@ -11,7 +11,11 @@ export const setLimit = (
 	aggregator: Aggregator
 ) => {
 	const { limit = HARD_LIMIT } = queryParams;
-	const limitToUse = +limit <= HARD_LIMIT ? +limit : HARD_LIMIT;
+	let limitToUse = +limit <= HARD_LIMIT ? +limit : HARD_LIMIT;
+
+	if (isNaN(+limit)) {
+		limitToUse = HARD_LIMIT;
+	}
 
 	return [
 		...aggregator,
@@ -19,5 +23,4 @@ export const setLimit = (
 			$limit: limitToUse,
 		},
 	];
-	return aggregator;
 };

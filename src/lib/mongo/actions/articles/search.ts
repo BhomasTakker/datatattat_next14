@@ -6,6 +6,7 @@ export type GetLatestArticlesProps = {
 	latest?: boolean;
 	//match
 	provider?: string;
+	origin?: string;
 	variant?: string;
 	contentType?: string;
 	before?: Date;
@@ -19,7 +20,7 @@ export type GetLatestArticlesProps = {
 	// sort
 	sort?: string;
 	// limit
-	limit?: number;
+	limit?: string;
 	// count? reutn count of articles
 };
 

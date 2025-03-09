@@ -8,6 +8,7 @@ import { getServerSession } from "next-auth";
 import { checkUserAuth } from "../auth/check-user-auth";
 import { redirect } from "next/navigation";
 import { PATHS } from "@/lib/routing/paths";
+import { connectToMongoDB } from "@/lib/mongo/db";
 
 const save = async (page: IPage, id: string) => {
 	await saveOrCreatePageByRoute(page, id);
@@ -23,6 +24,8 @@ export async function savePage(route: string, page: IPage) {
 		console.error(e);
 		redirect(PATHS.error());
 	}
+	// find a bettr way
+	await connectToMongoDB();
 
 	const session = (await getServerSession(options)) as Session;
 
