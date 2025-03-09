@@ -3,7 +3,7 @@ export * from "./query-text";
 
 import { GetLatestArticlesProps } from "../../search";
 import { matchLeaning } from "./leaning";
-import { matchProviider } from "./provider";
+import { matchProvider, matchProviderOrigin } from "./provider";
 import { matchByRegion } from "./region";
 import { matchTime } from "./time";
 import { matchTrust } from "./trust";
@@ -53,8 +53,10 @@ export const match = (
 	const contentType = matchContentType(queryParams, variant);
 	const leaning = matchLeaning(queryParams, contentType);
 	const time = matchTime(queryParams, leaning);
-	const provider = matchProviider(queryParams, time);
-	const region = matchByRegion(queryParams, provider);
+	// group provider matches
+	const provider = matchProvider(queryParams, time);
+	const origin = matchProviderOrigin(queryParams, provider);
+	const region = matchByRegion(queryParams, origin);
 	// const language = matchLanguage(queryParams, region);
 
 	return region;

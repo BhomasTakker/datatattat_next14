@@ -37,6 +37,12 @@ export const PARAMS: GenericInput[] = [
 		required: false,
 	},
 	{
+		id: "origin",
+		type: EditInputs.text,
+		label: "Origin",
+		required: false,
+	},
+	{
 		// Probably a select / we only have english for now
 		id: "language",
 		type: EditInputs.text,

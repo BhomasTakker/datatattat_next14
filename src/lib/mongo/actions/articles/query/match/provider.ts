@@ -1,6 +1,6 @@
 import { GetLatestArticlesProps } from "../../search";
 
-export const matchProviider = (
+export const matchProvider = (
 	queryParams: GetLatestArticlesProps,
 	aggregator: any[]
 ) => {
@@ -15,6 +15,25 @@ export const matchProviider = (
 					"provider.name": {
 						$in: providerArray,
 					},
+				},
+			},
+		];
+	}
+	return returnAggregator;
+};
+
+export const matchProviderOrigin = (
+	queryParams: GetLatestArticlesProps,
+	aggregator: any[]
+) => {
+	const { origin } = queryParams;
+	let returnAggregator = aggregator;
+	if (origin) {
+		returnAggregator = [
+			...aggregator,
+			{
+				$match: {
+					"provider.origin": origin,
 				},
 			},
 		];
