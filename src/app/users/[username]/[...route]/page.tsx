@@ -4,6 +4,7 @@ import { PageDisplay } from "@/components/page/page-display";
 import styles from "../../../page.module.scss";
 import { PATHS } from "@/lib/routing/paths";
 import { generateMetaDataFromPage } from "@/lib/metadata/generate-metadata";
+import { MainHeader } from "@/components/header/main-header";
 
 type Params = Promise<{ route: string[]; username: string }>;
 type Props = {
@@ -23,6 +24,7 @@ export const generateMetadata = async ({ params }: Props) => {
 
 export default async function UserHome({ params }: Props) {
 	const { username, route } = await params;
+	const headerRoute = ["users", username, ...route];
 	const joined = route.join("/");
 	const userPage = `${PATHS.user(username)}/${joined}`;
 	const page = (await getPage(userPage)) as IPage;
@@ -34,8 +36,11 @@ export default async function UserHome({ params }: Props) {
 	}
 
 	return (
-		<div className={styles.page}>
-			<PageDisplay page={page} />
-		</div>
+		<>
+			<MainHeader route={headerRoute} />
+			<div className={styles.page}>
+				<PageDisplay page={page} />
+			</div>
+		</>
 	);
 }
