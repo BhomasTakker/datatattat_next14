@@ -4,6 +4,7 @@ import { PageDisplay } from "@/components/page/page-display";
 import styles from "../../page.module.scss";
 import { PATHS } from "@/lib/routing/paths";
 import { generateMetaDataFromPage } from "@/lib/metadata/generate-metadata";
+import { MainHeader } from "@/components/header/main-header";
 
 type Params = Promise<{ username: string }>;
 type Props = {
@@ -21,6 +22,7 @@ export const generateMetadata = async ({ params }: Props) => {
 
 export default async function UserHome({ params }: Props) {
 	const { username } = await params;
+	const route = ["users", username];
 
 	const page = (await getPage(PATHS.user(username))) as IPage;
 
@@ -31,8 +33,11 @@ export default async function UserHome({ params }: Props) {
 	}
 
 	return (
-		<div className={styles.page}>
-			<PageDisplay page={page} />
-		</div>
+		<>
+			<MainHeader route={route} />
+			<div className={styles.page}>
+				<PageDisplay page={page} />
+			</div>
+		</>
 	);
 }

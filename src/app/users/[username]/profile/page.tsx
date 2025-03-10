@@ -5,6 +5,7 @@ import { ProfileEditPage } from "@/components/profile/profile-edit-page";
 import { getUser } from "@/actions/user/get-user";
 import { redirect } from "next/navigation";
 import { PATHS } from "@/lib/routing/paths";
+import { MainHeader } from "@/components/header/main-header";
 
 export default async function UserProfile({
 	params,
@@ -12,6 +13,7 @@ export default async function UserProfile({
 	params: Promise<{ username: string }>;
 }) {
 	const { username } = await params;
+	const route = ["users", username];
 
 	const sessionUser = await getUser();
 	const profileUser = await getUserByUsername(username);
@@ -19,9 +21,12 @@ export default async function UserProfile({
 	if (sessionUser && profileUser) {
 		if (sessionUser._id.toString() === profileUser._id.toString()) {
 			return (
-				<div className={styles.page}>
-					<ProfileEditPage />
-				</div>
+				<>
+					<MainHeader route={route} />
+					<div className={styles.page}>
+						<ProfileEditPage />
+					</div>
+				</>
 			);
 		}
 	}
@@ -32,10 +37,13 @@ export default async function UserProfile({
 	}
 
 	return (
-		<div className={styles.page}>
-			<ProfilePage
-				user={{ username: profileUser.username, avatar: profileUser.avatar }}
-			/>
-		</div>
+		<>
+			<MainHeader route={route} />
+			<div className={styles.page}>
+				<ProfilePage
+					user={{ username: profileUser.username, avatar: profileUser.avatar }}
+				/>
+			</div>
+		</>
 	);
 }
