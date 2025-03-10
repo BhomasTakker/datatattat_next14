@@ -13,7 +13,7 @@ export const setLimit = (
 	const { limit = HARD_LIMIT } = queryParams;
 	let limitToUse = +limit <= HARD_LIMIT ? +limit : HARD_LIMIT;
 
-	if (isNaN(+limit)) {
+	if (isNaN(+limit) || !limit) {
 		limitToUse = HARD_LIMIT;
 	}
 
