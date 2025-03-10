@@ -10,6 +10,14 @@ export const PARAMS: GenericInput[] = [
 		// searches title / use - to exclude words 'to search a phrase'
 	},
 	{
+		id: "textScore",
+		type: EditInputs.number,
+		label: "Text Score",
+		required: false,
+		min: 0,
+		// searches title / use - to exclude words 'to search a phrase'
+	},
+	{
 		id: "latest",
 		type: EditInputs.switch,
 		label: "Latest",
