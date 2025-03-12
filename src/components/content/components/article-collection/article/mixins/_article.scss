@@ -31,10 +31,16 @@
 
 			.textContainer {
 				@include base.textContainer();
+				.title,
+				.description {
+					margin: units.$rem_0 units.$rem_0;
+				}
 			}
 
 			.meta {
 				@include base.meta();
+
+				margin: units.$rem_0;
 			}
 		}
 	}
