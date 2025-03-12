@@ -19,19 +19,19 @@ const mockDetails: Details = {
 };
 
 describe("Meta Component", () => {
-	it("renders categories when provided", () => {
-		render(<Meta styles={mockStyles} {...mockDetails} />);
-		const categories = screen.queryByText("Category1");
+	// it("renders categories when provided", () => {
+	// 	render(<Meta styles={mockStyles} {...mockDetails} />);
+	// 	const categories = screen.queryByText("Category1");
 
-		expect(categories).toBeInTheDocument();
-		expect(categories).toBeInTheDocument();
-	});
+	// 	expect(categories).toBeInTheDocument();
+	// 	expect(categories).toBeInTheDocument();
+	// });
 
-	it("renders authors when provided", () => {
-		render(<Meta styles={mockStyles} {...mockDetails} />);
-		const authors = screen.queryByText("Author1");
-		expect(authors).toBeInTheDocument();
-	});
+	// it("renders authors when provided", () => {
+	// 	render(<Meta styles={mockStyles} {...mockDetails} />);
+	// 	const authors = screen.queryByText("Author1");
+	// 	expect(authors).toBeInTheDocument();
+	// });
 
 	it("renders publishers when provided", () => {
 		render(<Meta styles={mockStyles} {...mockDetails} />);
@@ -45,20 +45,20 @@ describe("Meta Component", () => {
 		expect(published).toBeInTheDocument();
 	});
 
-	it("does not render categories when not provided", () => {
-		render(
-			<Meta styles={mockStyles} {...{ ...mockDetails, categories: [] }} />
-		);
-		// better test needed
-		const categories = screen.queryByText("Category1");
-		expect(categories).not.toBeInTheDocument();
-	});
+	// it("does not render categories when not provided", () => {
+	// 	render(
+	// 		<Meta styles={mockStyles} {...{ ...mockDetails, categories: [] }} />
+	// 	);
+	// 	// better test needed
+	// 	const categories = screen.queryByText("Category1");
+	// 	expect(categories).not.toBeInTheDocument();
+	// });
 
-	it("does not render authors when not provided", () => {
-		render(<Meta styles={mockStyles} {...{ ...mockDetails, authors: [] }} />);
-		const authors = screen.queryByText("Author1");
-		expect(authors).not.toBeInTheDocument();
-	});
+	// it("does not render authors when not provided", () => {
+	// 	render(<Meta styles={mockStyles} {...{ ...mockDetails, authors: [] }} />);
+	// 	const authors = screen.queryByText("Author1");
+	// 	expect(authors).not.toBeInTheDocument();
+	// });
 
 	it("does not render publishers when not provided", () => {
 		render(

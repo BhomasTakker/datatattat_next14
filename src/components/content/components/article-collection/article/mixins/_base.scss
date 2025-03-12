@@ -89,9 +89,12 @@
 	}
 }
 
+// If we assume we only show two pieces of meta data
+// We can use flex box to space them out
 @mixin meta() {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
+	display: flex;
+	justify-content: space-between;
+
 	// For some reason a tiny gap is needed to prevent the last element from overflowing
 	padding: units.$rem_2 units.$rem_1 units.$rem_2 units.$rem_0;
 	font-size: smaller;
@@ -101,23 +104,7 @@
 		@include textMixins.maxLines(1);
 	}
 
-	:nth-child(2n + 2) {
-		text-align: right;
-	}
-
-	:nth-child(2n + 1) {
-	}
-
 	@container content-container (min-width: 20rem) {
 		font-size: small;
-	}
-
-	.authors {
-	}
-	.publishers {
-	}
-	.categories {
-	}
-	.time {
 	}
 }

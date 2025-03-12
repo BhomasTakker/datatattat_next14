@@ -6,16 +6,6 @@ exports[`Meta Component renders correctly with all props 1`] = `
     class="meta"
   >
     <p
-      class="categories"
-    >
-      Category1
-    </p>
-    <p
-      class="authors"
-    >
-      Author1
-    </p>
-    <p
       class="publishers"
     >
       Publisher1
