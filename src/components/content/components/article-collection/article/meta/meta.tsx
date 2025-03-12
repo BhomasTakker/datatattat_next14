@@ -16,12 +16,13 @@ export const Meta = ({
 	styles,
 }: Props) => {
 	// remove categories and authors / or default no show
+
 	return (
 		<div className={styles.meta}>
-			{categories?.length ? (
+			{/* {categories?.length ? (
 				<p className={styles.categories}>{categories}</p>
 			) : null}
-			{authors?.length ? <p className={styles.authors}>{authors}</p> : null}
+			{authors?.length ? <p className={styles.authors}>{authors}</p> : null} */}
 			{publishers?.length ? (
 				<p className={styles.publishers}>{publishers}</p>
 			) : (
