@@ -31,6 +31,11 @@
 
 			.textContainer {
 				@include base.textContainer();
+
+				& {
+					margin-top: units.$rem_2;
+					gap: units.$rem_2;
+				}
 				.title,
 				.description {
 					margin: units.$rem_0 units.$rem_0;
@@ -79,11 +84,13 @@
 				@include base.textContainer();
 
 				& {
+					margin-top: units.$rem_0;
 					gap: units.$rem_1;
 
 					.title,
 					.description {
-						margin: units.$rem_0 units.$rem_1;
+						margin-left: units.$rem_1;
+						margin-right: units.$rem_1;
 					}
 
 					@container content-container (min-width: 16rem) {
@@ -91,7 +98,8 @@
 
 						.title,
 						.description {
-							margin: units.$rem_0 units.$rem_2;
+							margin-left: units.$rem_2;
+							margin-right: units.$rem_2;
 						}
 					}
 
@@ -100,7 +108,8 @@
 
 						.title,
 						.description {
-							margin: units.$rem_0 units.$rem_2;
+							margin-left: units.$rem_2;
+							margin-right: units.$rem_2;
 						}
 					}
 
@@ -109,7 +118,8 @@
 
 						.title,
 						.description {
-							margin: units.$rem_0 units.$rem_4 units.$rem_0;
+							margin-left: units.$rem_4;
+							margin-right: units.$rem_4;
 						}
 					}
 				}
