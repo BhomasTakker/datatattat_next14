@@ -39,8 +39,9 @@
 
 			.meta {
 				@include base.meta();
-
-				margin: units.$rem_0;
+				& {
+					margin: units.$rem_0;
+				}
 			}
 		}
 	}
