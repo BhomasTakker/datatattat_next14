@@ -19,6 +19,7 @@ const pluralise = (unit: number, str: string) => {
 	return unit > 1 ? `${unit} ${str}s` : `${unit} ${str}`;
 };
 
+// Update to use dayjs fully?
 // Article time
 export const Time = ({ time, styles }: Time) => {
 	// cretae a class to get this more easily etc
@@ -26,6 +27,10 @@ export const Time = ({ time, styles }: Time) => {
 	const now = new Date(Date.now());
 	const hours = date.getHours();
 	const minutes = date.getMinutes();
+
+	const useHours = hours < 10 ? `0${hours}` : hours;
+	const useMinutes = minutes < 10 ? `0${minutes}` : minutes;
+
 	// @ts-expect-error - arithmatic on date - seems fine?
 	const diffTime = Math.abs(now - date);
 	const diffSeconds = Math.floor(diffTime / 1000);
@@ -47,10 +52,10 @@ export const Time = ({ time, styles }: Time) => {
 		case !!diffWeeks:
 			displayTime = `${date.getDate()} ${date.toLocaleDateString("en-GB", {
 				month: "long",
-			})} ${hours}:${minutes}`;
+			})} ${useHours}:${useMinutes}`;
 			break;
 		case !!diffDays:
-			displayTime = `${days[date.getDay()]} ${hours}:${minutes}`;
+			displayTime = `${days[date.getDay()]} ${useHours}:${useMinutes}`;
 			break;
 		case !!diffHours:
 			displayTime = `${pluralise(diffHours, "hour")} ago`;
