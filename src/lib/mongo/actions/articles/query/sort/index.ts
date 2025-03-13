@@ -41,7 +41,7 @@ export const sortCollection = (
 	queryParams: GetLatestArticlesProps,
 	aggregator: Aggregator
 ) => {
-	const { sort, latest } = queryParams;
+	const { sort } = queryParams;
 
 	switch (sort) {
 		case AvailableSort.RELEVANCE:

@@ -102,6 +102,7 @@
 
 	> * {
 		@include textMixins.maxLines(1);
+		max-width: 50%;
 	}
 
 	@container content-container (min-width: 20rem) {

@@ -4,6 +4,7 @@ import { PATHS } from "@/lib/routing/paths";
 import isValidSession from "@/actions/auth/check-session";
 import isSignupComplete from "@/actions/signup/signup-completed";
 import { isValidUser } from "@/actions/auth/check-valid-user";
+import { connectToMongoDB } from "@/lib/mongo/db";
 
 export const dynamic = "force-dynamic";
 
@@ -12,6 +13,7 @@ type PageProps = {
 };
 
 export default async function Page({ params }: PageProps) {
+	await connectToMongoDB();
 	await isValidSession();
 	await isSignupComplete();
 

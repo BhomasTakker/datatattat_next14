@@ -11,6 +11,7 @@ export const NumberInput = ({
 	disabled = false,
 	min,
 	max,
+	step,
 }: NumberInputProps) => {
 	const { register, getValues } = useFormContext();
 
@@ -31,6 +32,7 @@ export const NumberInput = ({
 					required={required}
 					min={min}
 					max={max}
+					step={step}
 				/>
 			</fieldset>
 		</div>
