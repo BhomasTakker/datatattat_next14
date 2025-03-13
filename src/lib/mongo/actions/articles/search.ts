@@ -3,8 +3,6 @@ import { buildArticleSearchQuery } from "./query";
 export type GetLatestArticlesProps = {
 	query?: string;
 	textScore?: string;
-	// just use sort for now?
-	latest?: boolean;
 	//match
 	provider?: string;
 	origin?: string;
