@@ -41,7 +41,11 @@ describe("Time component", () => {
 		const hours = pastTime.getHours();
 		const minutes = pastTime.getMinutes();
 
-		const time = screen.getByText(`${day} ${hours}:${minutes}`);
+		// utils
+		const useHours = hours < 10 ? `0${hours}` : hours;
+		const useMinutes = minutes < 10 ? `0${minutes}` : minutes;
+
+		const time = screen.getByText(`${day} ${useHours}:${useMinutes}`);
 
 		expect(time).toBeInTheDocument();
 	});
@@ -55,7 +59,11 @@ describe("Time component", () => {
 		const hours = pastTime.getHours();
 		const minutes = pastTime.getMinutes();
 
-		const time = screen.getByText(`${date} ${month} ${hours}:${minutes}`);
+		// utils
+		const useHours = hours < 10 ? `0${hours}` : hours;
+		const useMinutes = minutes < 10 ? `0${minutes}` : minutes;
+
+		const time = screen.getByText(`${date} ${month} ${useHours}:${useMinutes}`);
 
 		expect(time).toBeInTheDocument();
 	});
