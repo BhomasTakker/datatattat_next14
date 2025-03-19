@@ -15,6 +15,7 @@ if (!GOOGLE_CLIENT_ID || !GOOGLE_SECRET) {
 // https://next-auth.js.org/providers/google
 // https://developers.google.com/identity/protocols/oauth2/openid-connect#expiration
 // we perhaps shouldn't use?
+// I think you need to send the refresh token to the server
 
 /*
 iss: 'https://accounts.google.com',
@@ -58,6 +59,9 @@ export const GOOGLE = Google({
 				// email_verified: profile.email_verified,
 			});
 		}
+
+		// check user creation error?
+		// redirect home and notify?
 
 		return {
 			...profile,

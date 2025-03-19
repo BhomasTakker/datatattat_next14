@@ -6,6 +6,7 @@ import { getUser } from "@/actions/user/get-user";
 import { redirect } from "next/navigation";
 import { PATHS } from "@/lib/routing/paths";
 import { MainHeader } from "@/components/header/main-header";
+import { connectToMongoDB } from "@/lib/mongo/db";
 
 export default async function UserProfile({
 	params,
@@ -15,6 +16,7 @@ export default async function UserProfile({
 	const { username } = await params;
 	const route = ["users", username];
 
+	await connectToMongoDB();
 	const sessionUser = await getUser();
 	const profileUser = await getUserByUsername(username);
 
