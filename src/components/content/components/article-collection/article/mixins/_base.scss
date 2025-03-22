@@ -41,7 +41,7 @@
 	height: 100%;
 
 	.title {
-		@include textMixins.maxLines(2);
+		@include textMixins.maxLines(3);
 		font-family: $component-title-font;
 		font-weight: $title-font-weight;
 
@@ -53,15 +53,23 @@
 		font-family: $text-font;
 		font-weight: $text-font-weight;
 
-		@include textMixins.maxLines(2);
+		// @include textMixins.maxLines(2);
+		display: none;
 
 		font-size: clamp(0.8rem, 4cqi, 2rem);
 	}
 
+	@container content-container (min-width: 12rem) {
+		.title {
+			@include textMixins.maxLines(4);
+			margin: units.$rem_0 units.$rem_0 units.$rem_2;
+		}
+	}
+
 	@container content-container (min-width: 15rem) {
 		.title {
-			@include textMixins.maxLines(2);
-			margin: units.$rem_2 units.$rem_0;
+			@include textMixins.maxLines(4);
+			margin: units.$rem_0 units.$rem_0 units.$rem_2;
 		}
 		.description {
 			@include textMixins.maxLines(2);
@@ -70,8 +78,8 @@
 
 	@container content-container (min-width: 20rem) {
 		.title {
-			@include textMixins.maxLines(2);
-			margin: units.$rem_2 units.$rem_0;
+			@include textMixins.maxLines(4);
+			margin: units.$rem_0 units.$rem_0 units.$rem_2;
 		}
 		.description {
 			@include textMixins.maxLines(3);
@@ -80,11 +88,21 @@
 
 	@container content-container (min-width: 24rem) {
 		.title {
-			margin: units.$rem_4 units.$rem_0 units.$rem_2;
-			@include textMixins.maxLines(3);
+			margin: units.$rem_0 units.$rem_0 units.$rem_2;
+			@include textMixins.maxLines(4);
 		}
 		.description {
 			@include textMixins.maxLines(3);
+		}
+	}
+
+	@container content-container (min-width: 28rem) {
+		.title {
+			margin: units.$rem_0 units.$rem_0 units.$rem_2;
+			@include textMixins.maxLines(4);
+		}
+		.description {
+			@include textMixins.maxLines(4);
 		}
 	}
 }
@@ -96,12 +114,15 @@
 	justify-content: space-between;
 
 	// For some reason a tiny gap is needed to prevent the last element from overflowing
-	padding: units.$rem_2 units.$rem_1 units.$rem_2 units.$rem_0;
+	// padding: units.$rem_0;
+	// padding-right: units.$rem_2;
+	margin: units.$rem_0 units.$rem_1;
+	padding: 0;
 	font-size: smaller;
 	font-style: italic;
 
 	> * {
-		@include textMixins.maxLines(1);
+		// @include textMixins.maxLines(1);
 		max-width: 50%;
 	}
 

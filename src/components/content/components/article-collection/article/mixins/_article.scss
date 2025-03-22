@@ -33,8 +33,8 @@
 				@include base.textContainer();
 
 				& {
-					margin-top: units.$rem_2;
-					gap: units.$rem_2;
+					margin-top: units.$rem_1;
+					gap: units.$rem_1;
 				}
 				.title,
 				.description {
@@ -44,9 +44,6 @@
 
 			.meta {
 				@include base.meta();
-				& {
-					margin: units.$rem_0;
-				}
 			}
 		}
 	}
@@ -85,41 +82,42 @@
 
 				& {
 					margin-top: units.$rem_0;
-					gap: units.$rem_1;
+					gap: units.$rem_0;
+
+					.title {
+						margin-bottom: units.$rem_0;
+					}
 
 					.title,
 					.description {
 						margin-left: units.$rem_1;
-						margin-right: units.$rem_1;
+						margin-right: units.$rem_0;
 					}
 
 					@container content-container (min-width: 16rem) {
+						gap: units.$rem_1;
+
+						.title,
+						.description {
+							margin-left: units.$rem_2;
+						}
+					}
+
+					@container content-container (min-width: 20rem) {
 						gap: units.$rem_2;
 
 						.title,
 						.description {
 							margin-left: units.$rem_2;
-							margin-right: units.$rem_2;
-						}
-					}
-
-					@container content-container (min-width: 20rem) {
-						gap: units.$rem_3;
-
-						.title,
-						.description {
-							margin-left: units.$rem_2;
-							margin-right: units.$rem_2;
 						}
 					}
 
 					@container content-container (min-width: 24rem) {
-						gap: units.$rem_3;
+						gap: units.$rem_2;
 
 						.title,
 						.description {
-							margin-left: units.$rem_4;
-							margin-right: units.$rem_4;
+							margin-left: units.$rem_3;
 						}
 					}
 				}
@@ -129,18 +127,16 @@
 				@include base.meta();
 
 				& {
-					margin: units.$rem_0 units.$rem_1;
+					margin: units.$rem_0;
+					margin-left: units.$rem_1;
+					margin-right: units.$rem_1;
 
 					@container content-container (min-width: 16rem) {
-						margin: units.$rem_0 units.$rem_2;
-					}
-
-					@container content-container (min-width: 20rem) {
-						margin: units.$rem_0 units.$rem_2;
+						margin-left: units.$rem_2;
 					}
 
 					@container content-container (min-width: 24rem) {
-						margin: units.$rem_0 units.$rem_4 units.$rem_0;
+						margin-left: units.$rem_3;
 					}
 				}
 			}
