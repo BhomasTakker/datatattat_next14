@@ -126,6 +126,10 @@
 		max-width: 50%;
 	}
 
+	.publishers {
+		@include textMixins.maxLines(1);
+	}
+
 	@container content-container (min-width: 20rem) {
 		font-size: small;
 	}
