@@ -1,4 +1,6 @@
+import { fetchWithCache } from "@/lib/redis/redis-fetch";
 import { buildArticleSearchQuery } from "./query";
+import { CollectionItem } from "@/types/data-structures/collection/item/item";
 
 export type GetLatestArticlesProps = {
 	query?: string;
@@ -24,7 +26,10 @@ export type GetLatestArticlesProps = {
 };
 
 export const searchArticles = async (params: GetLatestArticlesProps) => {
-	const articles = await buildArticleSearchQuery(params);
+	const queryCacheKey = JSON.stringify(params);
+	const articles = await fetchWithCache<CollectionItem[]>(async () => {
+		return await buildArticleSearchQuery(params);
+	}, queryCacheKey);
 
 	return {
 		// what other data - paginaton etc

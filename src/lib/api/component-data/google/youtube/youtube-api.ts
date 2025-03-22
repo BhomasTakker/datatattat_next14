@@ -1,8 +1,9 @@
 // https://www.googleapis.com/youtube/v3/search?key=AIzaSyBxY4awXympl7ix6o6FeMytctIhNY07ZnU&part=snippet&q=Spy Cops&order=relevance&safeSearch=none&type=video&videoDuration=any&videoSyndicated=any&maxResults=50
 
 import ArticleCollection from "@/models/ArticleCollection";
-import { YouTubeAPISearchResult, YouTubeItem } from "./types";
+import { YouTubeItem } from "./types";
 import { CollectionItem } from "@/types/data-structures/collection/item/item";
+import { fetchWithCache } from "@/lib/redis/redis-fetch";
 
 // https://developers.google.com/youtube/v3/docs/search/list
 const BASE_URL = "https://www.googleapis.com/youtube/v3";
@@ -109,14 +110,16 @@ export const youtubeApiFetch = async (params: YouTubeSearchParams) => {
 	}
 
 	try {
-		const response = await fetch(fetchUrl);
-		const data = (await response.json()) as YouTubeAPISearchResult;
+		const items = await fetchWithCache<CollectionItem[]>(async () => {
+			const response = await fetch(fetchUrl);
+			const data = await response.json();
+			const { items = [] } = data || {};
+			const collectionItems = convertYouTubeItems(items);
 
-		const { items = [] } = data || {};
+			return collectionItems;
+		}, fetchUrl.href);
 
-		const collectionItems = convertYouTubeItems(items);
-
-		return { items: collectionItems };
+		return { items };
 	} catch (error) {
 		console.error("Error fetching youtube data", error);
 		return {};

@@ -3,11 +3,11 @@
 import { UnknownObject } from "@/types/utils";
 import { connectToRedisDB } from "./db";
 
-type FetchFn = () => Promise<UnknownObject | null>;
+type FetchFn<T> = () => Promise<T>;
 
 // Should generic
-export const fetchWithCache = async (
-	fetchFn: FetchFn,
+export const fetchWithCache = async <T>(
+	fetchFn: FetchFn<T>,
 	key: string,
 	expiry: number = 60 * 60 * 24
 ) => {
