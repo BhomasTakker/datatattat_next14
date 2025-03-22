@@ -17,6 +17,8 @@ const VIDEO_SYNDICATED = "true";
 
 const API_KEY = process.env.YOUTUBE_API_KEY;
 
+const CACHE_TIME = 60 * 60;
+
 // 'videoCount' | <-channel sort option
 export type YouTubeSearchParams = {
 	q?: string;
@@ -110,14 +112,18 @@ export const youtubeApiFetch = async (params: YouTubeSearchParams) => {
 	}
 
 	try {
-		const items = await fetchWithCache<CollectionItem[]>(async () => {
-			const response = await fetch(fetchUrl);
-			const data = await response.json();
-			const { items = [] } = data || {};
-			const collectionItems = convertYouTubeItems(items);
+		const items = await fetchWithCache<CollectionItem[]>(
+			async () => {
+				const response = await fetch(fetchUrl);
+				const data = await response.json();
+				const { items = [] } = data || {};
+				const collectionItems = convertYouTubeItems(items);
 
-			return collectionItems;
-		}, fetchUrl.href);
+				return collectionItems;
+			},
+			fetchUrl.href,
+			CACHE_TIME
+		);
 
 		return { items };
 	} catch (error) {

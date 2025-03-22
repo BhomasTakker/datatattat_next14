@@ -26,10 +26,15 @@ export type GetLatestArticlesProps = {
 };
 
 export const searchArticles = async (params: GetLatestArticlesProps) => {
+	const CACHE_TIME = 60 * 60;
 	const queryCacheKey = JSON.stringify(params);
-	const articles = await fetchWithCache<CollectionItem[]>(async () => {
-		return await buildArticleSearchQuery(params);
-	}, queryCacheKey);
+	const articles = await fetchWithCache<CollectionItem[]>(
+		async () => {
+			return await buildArticleSearchQuery(params);
+		},
+		queryCacheKey,
+		CACHE_TIME
+	);
 
 	return {
 		// what other data - paginaton etc
