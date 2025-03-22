@@ -48,7 +48,7 @@ export type NumberInputProps = {
 	min?: number;
 	max?: number;
 	step?: number;
-	defaultValue?: string;
+	defaultValue?: number;
 	validation?: NumberValidationOptions;
 } & InputProps;
 

@@ -5,7 +5,7 @@ import { NumberInputProps } from "@/types/edit/inputs/inputs";
 export const NumberInput = ({
 	id,
 	label = "",
-	defaultValue = "",
+	defaultValue,
 	validation = {},
 	required = true,
 	disabled = false,
@@ -16,7 +16,7 @@ export const NumberInput = ({
 	const { register, getValues } = useFormContext();
 
 	// we need something like this to get the default value if in form
-	const useDefault = getValues(id) || defaultValue || "";
+	const useDefault = getValues(id) || defaultValue;
 
 	// Need to come up with error / feedback for inputs
 
