@@ -9,9 +9,10 @@ type FetchFn<T> = () => Promise<T>;
 export const fetchWithCache = async <T>(
 	fetchFn: FetchFn<T>,
 	key: string,
-	expiry: number = 60 * 60 * 24
+	expiry: number = 60 * 60 * 24,
+	enabled?: Boolean = true
 ) => {
-	if (process.env.NODE_ENV === "development") {
+	if (process.env.NODE_ENV === "development" || !enabled) {
 		// if development don't use cache
 		const data = await fetchFn();
 		return data;

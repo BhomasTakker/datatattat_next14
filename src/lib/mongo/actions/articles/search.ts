@@ -33,7 +33,8 @@ export const searchArticles = async (params: GetLatestArticlesProps) => {
 			return await buildArticleSearchQuery(params);
 		},
 		queryCacheKey,
-		CACHE_TIME
+		CACHE_TIME,
+		false
 	);
 
 	return {
