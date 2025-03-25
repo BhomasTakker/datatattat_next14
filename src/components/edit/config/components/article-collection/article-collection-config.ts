@@ -5,6 +5,7 @@ import { STACK_SCROLLER_CONFIG } from "./collections/stack/stack-scroller";
 import { ArticleCollectionVariants } from "@/components/content/components/article-collection/variant-map";
 import { GRID_DISPLAY } from "./collections/grid/gridDisplay";
 import { VIDEO_DISPLAY } from "./collections/video-display/video-display";
+import { AUDIO_DISPLAY } from "./collections/audio-display/audio-display";
 
 type articleCollectionProps =
 	| typeof STACK_SCROLLER_CONFIG
@@ -17,6 +18,7 @@ const collectionsMap = new Map<string, articleCollectionProps>([
 	[ArticleCollectionVariants.gridDisplay5, GRID_DISPLAY],
 	[ArticleCollectionVariants.gridDisplay7, GRID_DISPLAY],
 	[ArticleCollectionVariants.videoDisplay, VIDEO_DISPLAY],
+	[ArticleCollectionVariants.audioDisplay, AUDIO_DISPLAY],
 ]);
 
 // there may be a better way
