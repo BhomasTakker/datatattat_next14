@@ -122,7 +122,8 @@ export const youtubeApiFetch = async (params: YouTubeSearchParams) => {
 				return collectionItems;
 			},
 			fetchUrl.href,
-			CACHE_TIME
+			CACHE_TIME,
+			false
 		);
 
 		return { items };
