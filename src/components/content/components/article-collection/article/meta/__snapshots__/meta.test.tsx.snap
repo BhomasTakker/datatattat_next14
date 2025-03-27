@@ -13,7 +13,7 @@ exports[`Meta Component renders correctly with all props 1`] = `
     <time
       datetime="2023-10-01T00:00:00.000Z"
     >
-      1 October 2023
+      1 Oct 2023
     </time>
   </div>
 </div>
