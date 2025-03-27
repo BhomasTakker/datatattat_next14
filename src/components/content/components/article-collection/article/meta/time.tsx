@@ -5,16 +5,6 @@ type Time = {
 	styles: StyleSheet;
 };
 
-const days = [
-	"Sunday",
-	"Monday",
-	"Tuesday",
-	"Wednesday",
-	"Thursday",
-	"Friday",
-	"Saturday",
-];
-
 const pluralise = (unit: number, str: string) => {
 	return unit > 1 ? `${unit} ${str}s` : `${unit} ${str}`;
 };
@@ -53,10 +43,7 @@ export const Time = ({ time, styles }: Time) => {
 			})} ${date.getFullYear()}`;
 			break;
 		case !!diffWeeks:
-			new Intl.DateTimeFormat("en-US", { weekday: "short" }).format(date);
-			displayTime = `${new Intl.DateTimeFormat("en-US", {
-				weekday: "short",
-			}).format(date)} ${date.toLocaleDateString("en-GB", {
+			displayTime = `${date.getDate()} ${date.toLocaleDateString("en-GB", {
 				month: "short",
 			})} ${useHours}:${useMinutes}`;
 			break;
@@ -75,9 +62,7 @@ export const Time = ({ time, styles }: Time) => {
 			displayTime = "Now!";
 			break;
 		default:
-			displayTime = `${new Intl.DateTimeFormat("en-US", {
-				weekday: "short",
-			}).format(date)} ${date.toLocaleDateString("en-GB", {
+			displayTime = `${date.getDate()} ${date.toLocaleDateString("en-GB", {
 				month: "short",
 			})} ${date.getFullYear()}`;
 	}

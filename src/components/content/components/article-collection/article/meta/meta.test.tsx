@@ -41,7 +41,7 @@ describe("Meta Component", () => {
 
 	it("renders expected time when provided", () => {
 		render(<Meta styles={mockStyles} {...mockDetails} />);
-		const published = screen.getByText("1 October 2023");
+		const published = screen.getByText("1 Oct 2023");
 		expect(published).toBeInTheDocument();
 	});
 

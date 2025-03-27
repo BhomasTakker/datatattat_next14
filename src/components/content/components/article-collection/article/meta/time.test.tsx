@@ -37,7 +37,7 @@ describe("Time component", () => {
 		const pastTime = new Date(Date.now() - 3 * 24 * 60 * 60 * 1000); // 3 days ago
 		render(<Time time={pastTime} styles={styles} />);
 
-		const day = pastTime.toLocaleDateString("en-GB", { weekday: "long" });
+		const day = pastTime.toLocaleDateString("en-GB", { weekday: "short" });
 		const hours = pastTime.getHours();
 		const minutes = pastTime.getMinutes();
 
@@ -55,7 +55,7 @@ describe("Time component", () => {
 		render(<Time time={pastTime} styles={styles} />);
 
 		const date = pastTime.getDate();
-		const month = pastTime.toLocaleDateString("en-GB", { month: "long" });
+		const month = pastTime.toLocaleDateString("en-GB", { month: "short" });
 		const hours = pastTime.getHours();
 		const minutes = pastTime.getMinutes();
 
@@ -73,7 +73,7 @@ describe("Time component", () => {
 		render(<Time time={pastTime} styles={styles} />);
 
 		const date = pastTime.getDate();
-		const month = pastTime.toLocaleDateString("en-GB", { month: "long" });
+		const month = pastTime.toLocaleDateString("en-GB", { month: "short" });
 		const year = pastTime.getFullYear();
 
 		const time = screen.getByText(`${date} ${month} ${year}`);
