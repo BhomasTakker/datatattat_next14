@@ -1,5 +1,3 @@
-// https://www.googleapis.com/youtube/v3/search?key=AIzaSyBxY4awXympl7ix6o6FeMytctIhNY07ZnU&part=snippet&q=Spy Cops&order=relevance&safeSearch=none&type=video&videoDuration=any&videoSyndicated=any&maxResults=50
-
 import ArticleCollection from "@/models/ArticleCollection";
 import { YouTubeItem } from "./types";
 import { CollectionItem } from "@/types/data-structures/collection/item/item";
