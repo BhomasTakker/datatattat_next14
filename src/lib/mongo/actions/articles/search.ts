@@ -34,7 +34,7 @@ export const searchArticles = async (params: GetLatestArticlesProps) => {
 		},
 		queryCacheKey,
 		CACHE_TIME,
-		false
+		true
 	);
 
 	return {
