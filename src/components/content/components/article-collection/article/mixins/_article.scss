@@ -151,3 +151,61 @@
 		aspect-ratio: 32/9;
 	}
 }
+
+@mixin articleCardListItem(
+	$maxWidth: units.$rem_16,
+	$minWidth: units.$rem_16,
+	$aspectRatio: 16/9
+) {
+	.article {
+		@include base.article();
+
+		.image {
+			@include base.image($maxWidth, $minWidth);
+			aspect-ratio: $aspectRatio;
+		}
+
+		.contentContainer {
+			@include base.contentContainer(100%, 50%);
+
+			.textContainer {
+				@include base.textContainer();
+
+				.title {
+					@include textMixins.maxLines(1);
+					font-size: clamp(1rem, 3cqi, 1.5rem);
+				}
+
+				.description {
+					// @include textMixins.maxLines(1);
+					display: none;
+					font-size: clamp(1rem, 3cqi, 1.2rem);
+				}
+
+				& {
+					margin-top: units.$rem_0;
+					gap: units.$rem_0;
+
+					.title {
+						margin-bottom: units.$rem_0;
+					}
+
+					.title,
+					.description {
+						margin-left: units.$rem_1;
+						margin-right: units.$rem_0;
+					}
+				}
+			}
+
+			.meta {
+				@include base.meta();
+			}
+		}
+	}
+
+	.template {
+		width: 100%;
+		// some height
+	}
+}
