@@ -1,4 +1,4 @@
-import { BaseInfo, Details, Avatar } from "../base";
+import { BaseInfo, Details, Avatar, Media } from "../base";
 
 export type ProviderItem = {
 	name: string;
@@ -13,4 +13,5 @@ export type CollectionItem = BaseInfo & {
 	details?: Details;
 	avatar?: Avatar;
 	provider?: ProviderItem;
+	media?: Media;
 };

@@ -37,7 +37,10 @@ type AudioPlayerProps = {
 	audioPlayerRef: React.RefObject<HTMLAudioElement | null>;
 };
 
+//////////////////////////////////
 // far too large and complicated
+// split and refactor
+//////////////////////////////////
 export const AudioPlayer = ({ src, audioPlayerRef }: AudioPlayerProps) => {
 	const [isPlaying, setIsPlaying] = useState(false);
 	const [isMuted, setIsMuted] = useState(false);

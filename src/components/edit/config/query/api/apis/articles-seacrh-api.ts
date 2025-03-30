@@ -18,11 +18,14 @@ export const PARAMS: GenericInput[] = [
 		min: 0,
 		// searches title / use - to exclude words 'to search a phrase'
 	},
+	////////////////////////////////////////////////
+	// We need to vary inputs based on the variant
+	////////////////////////////////////////////////
 	{
 		id: "variant",
 		type: EditInputs.select,
 		label: "Variant",
-		options: ["article", "video"],
+		options: ["article", "video", "audio"],
 		defaultValue: "article",
 	},
 	{
@@ -31,6 +34,20 @@ export const PARAMS: GenericInput[] = [
 		label: "Content Type",
 		options: ["news"],
 		defaultValue: "news",
+	},
+	{
+		id: "durationHigher",
+		type: EditInputs.number,
+		label: "Duration (seconds) Higher Than",
+		min: 0,
+		required: false,
+	},
+	{
+		id: "durationLower",
+		type: EditInputs.number,
+		label: "Duration (seconds) Lower Than",
+		min: 0,
+		required: false,
 	},
 	{
 		// select? or array? / multi select
