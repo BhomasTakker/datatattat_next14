@@ -14,8 +14,6 @@ export const saveOrCreateArticleProviderByName = async (
 ) => {
 	const { name } = provider;
 
-	console.log("provider", provider);
-
 	try {
 		const res = await ArticleProvider.findOneAndUpdate(
 			{ name }, // find

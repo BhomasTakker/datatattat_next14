@@ -42,6 +42,8 @@ const AvatarSchema = new Schema(
 	{ _id: false }
 );
 
+const MediaSchema = new Schema({}, { _id: false, strict: false });
+
 const ArticleSchema = new Schema<CollectionItem>(
 	{
 		title: {
@@ -64,6 +66,7 @@ const ArticleSchema = new Schema<CollectionItem>(
 		},
 		details: DetailsSchema,
 		avatar: AvatarSchema,
+		media: MediaSchema,
 		provider: {
 			type: mongoose.Schema.Types.ObjectId,
 			required: [true, "Please provide a provider."],

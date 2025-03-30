@@ -69,6 +69,7 @@ export const generateMetaDataFromPage = async (
 	route: string
 ): Promise<Metadata> => {
 	// meta type can be got by IPage['meta]
+	// You may need to get mongo db etc here
 	const metadata = (await getMetadataForRoute(route)) as MetadataType;
 	if (!metadata) {
 		return {};

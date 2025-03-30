@@ -1,23 +1,23 @@
 import { GetLatestArticlesProps } from "../../search";
 
-export const matchTrust = (
+export const matchDuration = (
 	queryParams: GetLatestArticlesProps,
-	// Aggregator type does not like $match
 	aggregator: any[]
 ) => {
-	const { trustHigher, trustLower } = queryParams;
+	const { durationHigher, durationLower } = queryParams;
+
 	let returnAggregator = aggregator;
-	if (trustHigher) {
+	if (durationHigher) {
 		returnAggregator.push({
 			$match: {
-				"provider.rating": { $gte: +trustHigher },
+				"media.duration": { $gte: +durationHigher },
 			},
 		});
 	}
-	if (trustLower) {
+	if (durationLower) {
 		returnAggregator.push({
 			$match: {
-				"provider.rating": { $lte: +trustLower },
+				"media.duration": { $lte: +durationLower },
 			},
 		});
 	}

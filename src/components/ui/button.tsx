@@ -1,11 +1,10 @@
-import { StyleSheet } from "@/types/css";
 import styles from "./button.module.scss";
 import { ButtonHTMLAttributes } from "react";
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 	children?: React.ReactNode;
 	onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
-	classes?: StyleSheet;
+	classes?: string;
 };
 
 export const Button = ({
@@ -17,7 +16,7 @@ export const Button = ({
 }: ButtonProps) => {
 	return (
 		<button
-			className={`${styles.button} ${classes ? classes.button : ""}`}
+			className={`${styles.button} ${classes ? classes : ""}`}
 			onClick={onClick}
 			// need use type else defaults
 			//to submit when used in a form...

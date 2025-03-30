@@ -1,5 +1,7 @@
 import { GetLatestArticlesProps } from "../../search";
 
+// This is incorrect and should be fixed
+// leaning Lower will override higher
 export const matchLeaning = (
 	queryParams: GetLatestArticlesProps,
 	aggregator: any[]
@@ -7,24 +9,18 @@ export const matchLeaning = (
 	const { leaningHigher, leaningLower } = queryParams;
 	let returnAggregator = aggregator;
 	if (leaningHigher) {
-		returnAggregator = [
-			...aggregator,
-			{
-				$match: {
-					"provider.leaning": { $gte: +leaningHigher },
-				},
+		returnAggregator.push({
+			$match: {
+				"provider.leaning": { $gte: +leaningHigher },
 			},
-		];
+		});
 	}
 	if (leaningLower) {
-		returnAggregator = [
-			...aggregator,
-			{
-				$match: {
-					"provider.leaning": { $lte: +leaningLower },
-				},
+		returnAggregator.push({
+			$match: {
+				"provider.leaning": { $lte: +leaningLower },
 			},
-		];
+		});
 	}
 	return returnAggregator;
 };

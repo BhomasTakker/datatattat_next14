@@ -14,6 +14,8 @@ export type GetLatestArticlesProps = {
 	after?: Date;
 	trustHigher?: boolean;
 	trustLower?: boolean;
+	durationHigher?: string;
+	durationLower?: string;
 	leaningHigher?: boolean;
 	leaningLower?: boolean;
 	region?: string;

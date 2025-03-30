@@ -1,7 +1,9 @@
 @use "../../../scss/mixins/ui/" as *;
+@use "../../../scss/abstracts/colours/" as *;
 
 .root {
 	font-family: var(--font-geist-sans);
+	background-color: $whiterSmoke;
 
 	@include pageMargin();
 }
