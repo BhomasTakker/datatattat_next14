@@ -13,12 +13,12 @@
 		margin-top: $rem_2;
 		gap: $rem_2;
 		@include ui.scrollYNoScroller();
-		@include article.articleCardListItem($rem_8, $rem_4, 1/1);
+		@include article.articleCardListItem($rem_8, $rem_4, "1/1");
 		@media screen and (min-width: $screenWidthSm) {
-			@include article.articleCardListItem($rem_8, $rem_4, 1/1);
+			@include article.articleCardListItem($rem_8, $rem_4, "1/1");
 		}
 		@media screen and (min-width: $screenWidthMd) {
-			@include article.articleCardListItem($rem_8, $rem_4, 1/1);
+			@include article.articleCardListItem($rem_8, $rem_4, "1/1");
 		}
 
 		.article {
