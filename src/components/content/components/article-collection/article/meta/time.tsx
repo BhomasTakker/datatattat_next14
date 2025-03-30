@@ -5,16 +5,6 @@ type Time = {
 	styles: StyleSheet;
 };
 
-const days = [
-	"Sunday",
-	"Monday",
-	"Tuesday",
-	"Wednesday",
-	"Thursday",
-	"Friday",
-	"Saturday",
-];
-
 const pluralise = (unit: number, str: string) => {
 	return unit > 1 ? `${unit} ${str}s` : `${unit} ${str}`;
 };
@@ -43,19 +33,24 @@ export const Time = ({ time, styles }: Time) => {
 
 	let displayTime = "";
 
+	// Quick change seems to suit
+	// reformat this all and look at
+	// Intl.DateTimeFormat
 	switch (true) {
 		case !!diffRoughMonths:
 			displayTime = `${date.getDate()} ${date.toLocaleDateString("en-GB", {
-				month: "long",
+				month: "short",
 			})} ${date.getFullYear()}`;
 			break;
 		case !!diffWeeks:
 			displayTime = `${date.getDate()} ${date.toLocaleDateString("en-GB", {
-				month: "long",
+				month: "short",
 			})} ${useHours}:${useMinutes}`;
 			break;
 		case !!diffDays:
-			displayTime = `${days[date.getDay()]} ${useHours}:${useMinutes}`;
+			displayTime = `${new Intl.DateTimeFormat("en-US", {
+				weekday: "short",
+			}).format(date)} ${useHours}:${useMinutes}`;
 			break;
 		case !!diffHours:
 			displayTime = `${pluralise(diffHours, "hour")} ago`;
@@ -67,8 +62,8 @@ export const Time = ({ time, styles }: Time) => {
 			displayTime = "Now!";
 			break;
 		default:
-			displayTime = `${date.getDay()} ${date.toLocaleDateString("en-GB", {
-				month: "long",
+			displayTime = `${date.getDate()} ${date.toLocaleDateString("en-GB", {
+				month: "short",
 			})} ${date.getFullYear()}`;
 	}
 
