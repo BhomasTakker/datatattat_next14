@@ -10,10 +10,11 @@ export type ArticleSource = {
 // and update the model?
 // better than schema strict: false
 export type SourceObject = {
-	categories: string[];
-	region: string;
-	language: string;
-	sources: ArticleSource[];
+	categories?: string[];
+	region?: string;
+	language?: string;
+	collectionType?: string;
+	sources?: ArticleSource[];
 };
 
 export type ExtraData = Omit<SourceObject, "sources">;

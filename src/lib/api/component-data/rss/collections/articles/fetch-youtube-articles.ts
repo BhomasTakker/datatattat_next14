@@ -6,6 +6,7 @@ import {
 	ProviderItem,
 } from "@/types/data-structures/collection/item/item";
 import { saveOrCreateArticleBySrc } from "@/lib/mongo/actions/article";
+import { saveArticle } from "./save";
 
 type Items = RSSItem[];
 
@@ -40,7 +41,6 @@ const convertYouTubeRssItemToArticle = ({
 	extraData,
 	provider,
 }: ConvertYouTubeRssItemToArticle) => {
-	// console.log({ item });
 	const media = item["media:group"];
 	const mediaTitle = media["media:title"][0];
 	const mediaThumbnail = media["media:thumbnail"][0].$.url;
@@ -49,7 +49,7 @@ const convertYouTubeRssItemToArticle = ({
 	const rating = mediaCommunity["media:starRating"][0].$.average;
 	const views = mediaCommunity["media:statistics"][0].$.views;
 
-	const { region, language, categories = [] } = extraData || {};
+	const { region, language, categories = [], collectionType } = extraData || {};
 
 	const { title, description, link, pubDate, author, id, isoDate } = item;
 	const newItem = {
@@ -58,36 +58,28 @@ const convertYouTubeRssItemToArticle = ({
 		description: description || mediaDescription,
 		guid: id,
 		variant: "video",
-		type: "youtube",
+		format: "youtube",
 		avatar: {
 			src: mediaThumbnail,
 			alt: mediaTitle || "",
 		},
-		rating,
-		views,
 		details: {
+			published: pubDate,
+			publishers: [author],
 			categories,
 			region,
 			language,
-			published: pubDate,
-			publishers: [author],
+		},
+		media: {
+			format: "youtube",
+			rating,
+			views,
 		},
 		provider,
+		collectionType,
 	};
 
 	return newItem;
-};
-
-const saveArticle = async (item: CollectionItem) => {
-	const { src } = item;
-	const { result, message } = await saveOrCreateArticleBySrc(item);
-	if (result) {
-		console.log(`Saved ${src}`);
-		return item;
-	} else {
-		console.log(`Failed to save ${src}`);
-		return null;
-	}
 };
 
 export const fetchYoutubeArticles = async ({

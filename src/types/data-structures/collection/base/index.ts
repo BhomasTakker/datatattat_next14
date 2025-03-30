@@ -6,7 +6,7 @@ export type BaseInfo = {
 	description?: string;
 	guid: string;
 	variant: string; // union
-
+	collectionType?: string;
 	original?: UnknownObject;
 };
 
