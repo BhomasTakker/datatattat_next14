@@ -7,7 +7,7 @@ const ArticleVariants = {
 	audio: "audio",
 } as const;
 
-export const NEW_PARAMS: GenericInput[] = [
+export const RSS_PARAMS: GenericInput[] = [
 	{
 		id: "parameters",
 		type: EditInputs.title,

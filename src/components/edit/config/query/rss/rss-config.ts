@@ -1,5 +1,5 @@
 import { EditInputs } from "@/components/edit/inputs/inputs";
-import { NEW_PARAMS } from "./params";
+import { RSS_PARAMS } from "./rss-params";
 import { InputListProps } from "@/types/edit/inputs/inputs";
 
 export const RSS_CONFIG: InputListProps = {
@@ -15,7 +15,7 @@ export const RSS_CONFIG: InputListProps = {
 
 			createObject: true,
 
-			inputs: NEW_PARAMS,
+			inputs: RSS_PARAMS,
 		},
 	],
 };

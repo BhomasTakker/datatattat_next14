@@ -3,7 +3,7 @@ import { EditInputs } from "../../inputs/inputs";
 import { GenericInput } from "@/types/edit/inputs/inputs";
 import { HTML_META_QUERY_CONFIG } from "./html/meta-config";
 import { API_BASE_QUERY_CONFIG } from "./api/api-base-config";
-import { RSS_CONFIG } from "./rss/new-rss-config";
+import { RSS_CONFIG } from "./rss/rss-config";
 
 enum QueryOptions {
 	NONE = "none",
