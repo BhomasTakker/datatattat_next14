@@ -1,10 +1,10 @@
 import { getMeta } from "@/actions/html/get-meta";
 import { getArticleBySrc } from "@/lib/mongo/actions/article";
 import { RSSChannelType, RSSItem } from "@/types/data-structures/rss";
-import { saveArticle } from "../../rss/collections/articles/save";
 import { CollectionItem } from "@/types/data-structures/collection/item/item";
 import { cloneDeep } from "@/utils/object";
 import { filterLimit } from "../utils/limit";
+import { saveOrUpdateArticle } from "@/actions/data/article/save-article";
 
 const adaptItem = async (item: RSSItem) => {
 	const { title, description, link, pubDate, guid, content } = item;
@@ -45,7 +45,7 @@ const adaptItem = async (item: RSSItem) => {
 		},
 	};
 
-	await saveArticle(article);
+	await saveOrUpdateArticle(article);
 	return article;
 };
 
