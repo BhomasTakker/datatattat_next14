@@ -40,11 +40,6 @@ describe("Component Display Test Suite", () => {
 			query: {
 				provider: "",
 				params: {},
-				conversions: {
-					response: {},
-					sub: {},
-					conversionId: "",
-				},
 				queryId: "",
 			},
 		},

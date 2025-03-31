@@ -25,7 +25,6 @@ export enum EditInputs {
 	show = "show",
 	array = "array",
 	inputList = "input-list",
-	conversions = "conversions",
 	title = "title",
 	description = "description",
 	indent = "indent",
@@ -68,8 +67,6 @@ export const inputMap = new Map<EditInputs, InputComponentOptions>([
 	//////////
 	[EditInputs.array, ArrayInput],
 	[EditInputs.inputList, InputList],
-
-	[EditInputs.conversions, () => <>conversions</>],
 
 	/////////////Not an input but a title element
 	[EditInputs.title, InputTitle],

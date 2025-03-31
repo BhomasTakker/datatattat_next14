@@ -53,9 +53,6 @@ export type YouTubeSearchParams = {
 	// relatedToVideoId?: string;
 };
 
-ArticleCollection;
-
-// conversions ish
 const convertYouTubeItems = (items: YouTubeItem[]): CollectionItem[] => {
 	return items.map((item) => {
 		const { snippet, id } = item;

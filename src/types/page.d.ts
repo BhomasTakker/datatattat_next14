@@ -7,16 +7,9 @@ export type PageContainer = {
 
 export type PageProps = object;
 
-export type Conversions = {
-	response: object;
-	sub: object;
-	conversionId: string;
-};
-
 export type WithQuery = {
 	provider: string;
 	params: object;
-	conversions: Conversions;
 	queryId: string;
 };
 
