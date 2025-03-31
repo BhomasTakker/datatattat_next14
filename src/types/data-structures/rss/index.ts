@@ -29,7 +29,7 @@ export type RSSItem = {
 	creator?: string;
 	guid?: string;
 	isoDate?: string;
-	link: string;
+	link?: string;
 	pubDate?: string;
 	source?: string;
 	comments?: [];

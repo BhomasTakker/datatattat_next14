@@ -33,6 +33,13 @@ export type TextInputProps = {
 	validation?: TextValidationOptions;
 } & InputProps;
 
+export type URLInputProps = {
+	id: string;
+	type: EditInputs.url;
+	defaultValue?: string;
+	validation?: TextValidationOptions;
+} & InputProps;
+
 export type DateInputProps = {
 	id: string;
 	type: EditInputs.date;
@@ -128,6 +135,7 @@ export type AssignInputIdProps = {
 
 type InputTypes =
 	| TextInputProps
+	| URLInputProps
 	| SwitchInputProps
 	| TitleInputProps
 	| ShowInputProps

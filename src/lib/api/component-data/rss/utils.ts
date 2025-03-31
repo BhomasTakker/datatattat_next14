@@ -22,7 +22,7 @@ export const ArticleType = {
 } as const;
 
 export const determineItemType = (item: RSSItem) => {
-	const { link } = item;
+	const { link = "" } = item;
 	const linkURL = new URL(link);
 	if (linkURL.hostname === "www.youtube.com") {
 		return ArticleType.YouTube;

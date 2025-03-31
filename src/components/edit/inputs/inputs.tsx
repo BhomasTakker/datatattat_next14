@@ -11,9 +11,11 @@ import { AssignInputId } from "./assignId/assign-id";
 import { NumberInput } from "./number-input/number-input";
 import { InputDescription } from "./description/input-description";
 import { DateInput } from "./date/date-input";
+import { URLInput } from "./url-input/url-input";
 
 export enum EditInputs {
 	text = "text",
+	url = "url",
 	switch = "switch",
 	number = "number",
 	textToggle = "text-toggle",
@@ -35,6 +37,7 @@ export enum EditInputs {
 type InputComponentOptions =
 	| typeof InputTitle
 	| typeof TextInput
+	| typeof URLInput
 	| typeof ShowInput
 	| typeof ArrayInput
 	| typeof InputList
@@ -49,6 +52,7 @@ type InputComponentOptions =
 
 export const inputMap = new Map<EditInputs, InputComponentOptions>([
 	[EditInputs.text, TextInput],
+	[EditInputs.url, URLInput],
 	[EditInputs.switch, SwitchInput],
 	[EditInputs.number, NumberInput],
 	// For toggle we can just use a wrapper around option

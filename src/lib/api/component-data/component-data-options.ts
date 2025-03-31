@@ -1,4 +1,5 @@
 export enum ComponentDataOptions {
+	RSS = "rss-query",
 	RSS_QUERY = "new-rss-query",
 	API_QUERY = "api-query",
 	// OEMBED_QUERY = "oembed-query",

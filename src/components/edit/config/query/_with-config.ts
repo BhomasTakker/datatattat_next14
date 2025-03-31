@@ -4,10 +4,12 @@ import { RSS_QUERY_CONFIG } from "./rss/rss-config";
 import { GenericInput } from "@/types/edit/inputs/inputs";
 import { HTML_META_QUERY_CONFIG } from "./html/meta-config";
 import { API_BASE_QUERY_CONFIG } from "./api/api-base-config";
+import { RSS_CONFIG } from "./rss/new-rss-config";
 
 enum QueryOptions {
 	NONE = "none",
-	RSS_QUERY = ComponentDataOptions.RSS_QUERY,
+	// RSS_QUERY = ComponentDataOptions.RSS_QUERY,
+	RSS = ComponentDataOptions.RSS,
 	API_QUERY = ComponentDataOptions.API_QUERY,
 	HTML_META_QUERY = ComponentDataOptions.HTML_META_QUERY,
 }
@@ -20,7 +22,8 @@ type queryContainersProps =
 
 const componentQueriesMap = new Map<string, queryContainersProps>([
 	[QueryOptions.NONE, null],
-	[QueryOptions.RSS_QUERY, RSS_QUERY_CONFIG],
+	// [QueryOptions.RSS_QUERY, RSS_QUERY_CONFIG],
+	[QueryOptions.RSS, RSS_CONFIG],
 	[QueryOptions.API_QUERY, API_BASE_QUERY_CONFIG],
 	[QueryOptions.HTML_META_QUERY, HTML_META_QUERY_CONFIG],
 ]);
@@ -48,7 +51,8 @@ export const WITH_CONFIG: GenericInput = {
 			defaultValue: QueryOptions.NONE,
 			options: [
 				QueryOptions.NONE,
-				QueryOptions.RSS_QUERY,
+				// QueryOptions.RSS_QUERY,
+				QueryOptions.RSS,
 				QueryOptions.API_QUERY,
 				QueryOptions.HTML_META_QUERY,
 			],
