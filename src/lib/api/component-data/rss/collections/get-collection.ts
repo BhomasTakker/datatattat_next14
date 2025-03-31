@@ -45,6 +45,7 @@ export const getCollection = async ({
 	// Need mush categories etc together
 
 	try {
+		// @ts-expect-error - sort your types out
 		const { message, result } = await saveOrCreateArticleCollectionByFeed2({
 			...rest,
 			...extraData,
