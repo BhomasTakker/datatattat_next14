@@ -1,10 +1,10 @@
 import { RSSChannelType, RSSItem } from "@/types/data-structures/rss";
-import { YouTubeRSSItem } from "../../rss/types";
+import { YouTubeRSSItem } from "../types";
 import { getArticleBySrc } from "@/lib/mongo/actions/article";
 import { CollectionItem } from "@/types/data-structures/collection/item/item";
-import { saveArticle } from "../../rss/collections/articles/save";
 import { cloneDeep } from "@/utils/object";
 import { filterLimit } from "../utils/limit";
+import { saveOrUpdateArticle } from "@/actions/data/article/save-article";
 
 const adaptItem = async (item: YouTubeRSSItem) => {
 	const media = item["media:group"];
@@ -49,7 +49,7 @@ const adaptItem = async (item: YouTubeRSSItem) => {
 		// collectionType,
 	};
 
-	await saveArticle(article);
+	await saveOrUpdateArticle(article);
 	return article;
 };
 

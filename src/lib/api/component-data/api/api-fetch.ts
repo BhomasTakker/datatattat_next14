@@ -24,7 +24,5 @@ export const apiFetch = async (query: WithQuery) => {
 
 	const data = await api(params);
 
-	// We should pronbably be going through conversions here
-	// to make sure the data is in the right format
 	return cloneDeep(data);
 };

@@ -1,8 +1,8 @@
 import { getArticleBySrc } from "@/lib/mongo/actions/article";
 import { CollectionItem } from "@/types/data-structures/collection/item/item";
-import { saveArticle } from "../../rss/collections/articles/save";
 import { cloneDeep } from "@/utils/object";
 import { filterLimit } from "../utils/limit";
+import { saveOrUpdateArticle } from "@/actions/data/article/save-article";
 
 export type PodcastRSSItem = {
 	title: string;
@@ -151,7 +151,7 @@ const adaptItem = async (
 		// collectionType,
 	};
 
-	await saveArticle(article);
+	await saveOrUpdateArticle(article);
 	return article;
 };
 

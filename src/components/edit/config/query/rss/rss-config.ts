@@ -1,9 +1,8 @@
 import { EditInputs } from "@/components/edit/inputs/inputs";
-import { PARAMS } from "./params";
-import { RSS_CONVERSIONS } from "./conversions/conversions";
+import { RSS_PARAMS } from "./rss-params";
 import { InputListProps } from "@/types/edit/inputs/inputs";
 
-export const RSS_QUERY_CONFIG: InputListProps = {
+export const RSS_CONFIG: InputListProps = {
 	id: "rssQuery",
 	type: EditInputs.inputList,
 	label: "RSS QUERY",
@@ -16,15 +15,7 @@ export const RSS_QUERY_CONFIG: InputListProps = {
 
 			createObject: true,
 
-			inputs: PARAMS,
-		},
-		{
-			id: "conversions",
-			type: EditInputs.inputList,
-			label: "RSS QUERY CONVERSIONS",
-			createObject: true,
-
-			inputs: RSS_CONVERSIONS,
+			inputs: RSS_PARAMS,
 		},
 	],
 };

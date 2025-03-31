@@ -45,14 +45,6 @@ const MOCK_COMPONENT = {
 			value: "sampleValue",
 			provider: "sampleProvider",
 			params: {},
-			conversions: [
-				{
-					response: "sampleResponse",
-					sub: "sampleSub",
-					conversionId: "sampleConversionId",
-					additionalProp: "sampleAdditionalProp",
-				},
-			],
 			queryId: "sampleQueryId",
 		},
 	},

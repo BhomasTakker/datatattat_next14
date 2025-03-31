@@ -7,12 +7,12 @@ import { RSSArticleCollection } from "@/types/data-structures/collection/collect
 import { WithQuery } from "@/types/page";
 import { cloneDeep } from "@/utils/object";
 import { isStringValidURL } from "@/utils/url";
-import { rssParse } from "../rss/rss-parse";
+import { rssParse } from "./rss-parse";
 import { articleAdapter } from "./adapters/article-adapter";
 import { videoAdapter } from "./adapters/video-adapter";
 import { audioAdapter, PodcastRSSCollection } from "./adapters/audio-adapter";
 import { RSSChannelType } from "@/types/data-structures/rss";
-import { YouTubeRSSChannel } from "../rss/types";
+import { YouTubeRSSChannel } from "./types";
 
 // temp
 type ArticleVariant = "article" | "video" | "audio";
