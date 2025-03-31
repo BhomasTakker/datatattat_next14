@@ -11,7 +11,7 @@ const createMainArticle = (data: RSSItem): CollectionItem => {
 		description,
 		author,
 		category,
-		link,
+		link = "",
 		pubDate,
 		enclosure,
 		contentSnippet,

@@ -75,7 +75,8 @@ const getCollection = async ({ url, variant }: FetchRSSCollection) => {
 	// @ts-expect-error - how would we type this?
 	const convertedCollection = await adapter(loadedCollection);
 
-	// @ts-expect-error - again typing issue
+	// Save collection in db
+	// Need to save to cache
 	saveOrCreateArticleCollectionByFeed(convertedCollection);
 
 	return convertedCollection;
