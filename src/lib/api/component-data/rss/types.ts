@@ -1,3 +1,9 @@
+import { RSSChannelType } from "@/types/data-structures/rss";
+
+export type YouTubeRSSChannel = {
+	items: YouTubeRSSItem[];
+} & RSSChannelType;
+
 export type YouTubeRSSItem = {
 	title: string;
 	link: string;
