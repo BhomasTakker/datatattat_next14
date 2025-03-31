@@ -1,5 +1,8 @@
-import { RSSChannelType } from "@/types/data-structures/rss";
+import { getArticleBySrc } from "@/lib/mongo/actions/article";
+import { CollectionItem } from "@/types/data-structures/collection/item/item";
+import { saveArticle } from "../../rss/collections/articles/save";
 import { cloneDeep } from "@/utils/object";
+import { filterLimit } from "../utils/limit";
 
 export type PodcastRSSItem = {
 	title: string;
@@ -83,7 +86,10 @@ const convertDurationToSeconds = (duration: string) => {
 	return seconds;
 };
 
-const adaptItem = (item: PodcastRSSItem, channel: PodcastRSSCollection) => {
+const adaptItem = async (
+	item: PodcastRSSItem,
+	channel: PodcastRSSCollection
+) => {
 	const {
 		title,
 		description,
@@ -96,6 +102,16 @@ const adaptItem = (item: PodcastRSSItem, channel: PodcastRSSCollection) => {
 	} = item;
 
 	const { url, type } = enclosure || {};
+
+	if (!url) {
+		return item;
+	}
+
+	const existingArticle = await getArticleBySrc(url);
+	if (existingArticle) {
+		return existingArticle;
+	}
+
 	const { duration, episodeType, author, summary } = itunes || {};
 
 	const { itunes: collectionItunes, title: channelTitle } = channel || {};
@@ -108,9 +124,9 @@ const adaptItem = (item: PodcastRSSItem, channel: PodcastRSSCollection) => {
 		summary: collectionSummary,
 	} = collectionItunes || {};
 
-	const newItem = {
+	const article: CollectionItem = {
 		title,
-		src: enclosure.url,
+		src: url,
 		description: description || summary,
 		guid: guid,
 		variant: "audio",
@@ -122,7 +138,7 @@ const adaptItem = (item: PodcastRSSItem, channel: PodcastRSSCollection) => {
 		media: {
 			duration: convertDurationToSeconds(duration),
 			format: "podcast",
-			type: enclosure.type || "audio/mpeg",
+			type: type || "audio/mpeg",
 			collectionTitle: creator || author,
 		},
 		details: {
@@ -135,15 +151,17 @@ const adaptItem = (item: PodcastRSSItem, channel: PodcastRSSCollection) => {
 		// collectionType,
 	};
 
-	// saveArticle
-	return newItem;
+	await saveArticle(article);
+	return article;
 };
 
 export const audioAdapter = async (article: PodcastRSSCollection) => {
 	console.log("audioAdapter", article);
 	const { link, title, items = [], image, feedUrl } = article;
 
-	const promises = items.map((item) => {
+	const filteredItems = filterLimit(items) as PodcastRSSItem[];
+
+	const promises = filteredItems.map((item) => {
 		return adaptItem(item as unknown as PodcastRSSItem, article);
 	});
 	const articles = await Promise.all(promises);
@@ -154,5 +172,5 @@ export const audioAdapter = async (article: PodcastRSSCollection) => {
 		items: articles,
 		image,
 	};
-	return collection;
+	return cloneDeep(collection) as PodcastRSSCollection;
 };

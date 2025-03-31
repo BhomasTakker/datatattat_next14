@@ -1,5 +1,10 @@
 import { getMeta } from "@/actions/html/get-meta";
+import { getArticleBySrc } from "@/lib/mongo/actions/article";
 import { RSSChannelType, RSSItem } from "@/types/data-structures/rss";
+import { saveArticle } from "../../rss/collections/articles/save";
+import { CollectionItem } from "@/types/data-structures/collection/item/item";
+import { cloneDeep } from "@/utils/object";
+import { filterLimit } from "../utils/limit";
 
 const adaptItem = async (item: RSSItem) => {
 	const { title, description, link, pubDate, guid, content } = item;
@@ -8,6 +13,11 @@ const adaptItem = async (item: RSSItem) => {
 	// if exists return it
 	if (!link) {
 		return item;
+	}
+
+	const existingArticle = await getArticleBySrc(link);
+	if (existingArticle) {
+		return existingArticle;
 	}
 
 	const meta = await getMeta(link);
@@ -19,21 +29,24 @@ const adaptItem = async (item: RSSItem) => {
 
 	// You want to save each article
 
-	return {
+	const article: CollectionItem = {
 		src: link,
-		title: title || metaTitle,
-		description: description || metaDescription,
+		title: title || metaTitle || "",
+		description: description || metaDescription || "",
 		avatar: {
-			src: image,
-			alt: metaTitle,
+			src: image || "",
+			alt: metaTitle || "",
 		},
-		guid,
+		guid: guid || "",
 		// provider: checkProvider()
 		variant: "article",
 		details: {
 			published: pubDate,
 		},
 	};
+
+	await saveArticle(article);
+	return article;
 };
 
 export const articleAdapter = async ({
@@ -44,7 +57,9 @@ export const articleAdapter = async ({
 	image,
 	feedUrl,
 }: RSSChannelType) => {
-	const promises = items.map((item) => {
+	const filteredItems = filterLimit(items) as RSSItem[];
+
+	const promises = filteredItems.map((item) => {
 		return adaptItem(item);
 	});
 
@@ -59,5 +74,5 @@ export const articleAdapter = async ({
 	};
 
 	// console.log("articleAdapter", collection);
-	return collection;
+	return cloneDeep(collection) as RSSChannelType;
 };
