@@ -1,7 +1,7 @@
 import { apiFetch } from "./api/api-fetch";
 import { ComponentDataOptions } from "./component-data-options";
 import { metaFetch } from "./custom-meta/meta-fetch";
-import { fetchRss } from "./new-rss/fetch-rss";
+import { fetchRss } from "./rss/fetch-rss";
 
 type Components = typeof fetchRss | typeof apiFetch | typeof metaFetch;
 

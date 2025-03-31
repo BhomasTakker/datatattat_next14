@@ -1,5 +1,5 @@
 import { RSSChannelType, RSSItem } from "@/types/data-structures/rss";
-import { YouTubeRSSItem } from "../../rss/types";
+import { YouTubeRSSItem } from "../types";
 import { getArticleBySrc } from "@/lib/mongo/actions/article";
 import { CollectionItem } from "@/types/data-structures/collection/item/item";
 import { cloneDeep } from "@/utils/object";
