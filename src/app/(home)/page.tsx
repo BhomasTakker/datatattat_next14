@@ -3,6 +3,7 @@ import styles from "../page.module.scss";
 import { IPage } from "@/types/page";
 import { PageDisplay } from "@/components/page/page-display";
 import { generateMetaDataFromPage } from "@/lib/metadata/generate-metadata";
+import { initialiseServices } from "@/lib/services/intialise-services";
 
 export const generateMetadata = async () => await generateMetaDataFromPage("/");
 
@@ -14,6 +15,7 @@ export const generateMetadata = async () => await generateMetaDataFromPage("/");
 export const revalidate = 960;
 
 export default async function Home() {
+	await initialiseServices();
 	const page = (await getPage("/")) as IPage;
 
 	if (!page) {

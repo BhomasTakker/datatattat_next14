@@ -3,15 +3,17 @@ import { IPage } from "@/types/page";
 import { PageDisplay } from "@/components/page/page-display";
 import styles from "../../page.module.scss";
 import { generateMetaDataFromPage } from "@/lib/metadata/generate-metadata";
+import { initialiseServices } from "@/lib/services/intialise-services";
 
 type Params = Promise<{ route: string[] }>;
 type Props = {
 	params: Params;
 };
 
-export const revalidate = 600;
+export const revalidate = 960;
 
 export const generateMetadata = async ({ params }: Props) => {
+	await initialiseServices();
 	const { route } = await params;
 	const joined = route.join("/");
 
