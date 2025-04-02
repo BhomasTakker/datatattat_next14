@@ -10,11 +10,10 @@ type Props = {
 	params: Params;
 };
 
-await initialiseServices();
-
 export const revalidate = 960;
 
 export const generateMetadata = async ({ params }: Props) => {
+	await initialiseServices();
 	const { route } = await params;
 	const joined = route.join("/");
 

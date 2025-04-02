@@ -14,9 +14,8 @@ export const generateMetadata = async () => await generateMetaDataFromPage("/");
 // We can and should go lower in future and for breaking news pages etc
 export const revalidate = 960;
 
-await initialiseServices();
-
 export default async function Home() {
+	await initialiseServices();
 	const page = (await getPage("/")) as IPage;
 
 	if (!page) {
