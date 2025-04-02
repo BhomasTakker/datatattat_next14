@@ -1,9 +1,9 @@
 import { connectToMongoDB } from "../mongo/db";
 import { connectToRedisDB } from "../redis/db";
 
-export const initialiseServices = () => {
+export const initialiseServices = async () => {
 	try {
-		connectToMongoDB();
+		await connectToMongoDB();
 		connectToRedisDB();
 	} catch (error) {
 		// console.log(error);
