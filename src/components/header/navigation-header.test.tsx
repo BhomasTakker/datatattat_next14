@@ -74,7 +74,7 @@ describe("Navigation Header Test Suite", () => {
 		(getServerSession as jest.Mock).mockResolvedValueOnce(false);
 		render(await NavigationHeader());
 		await waitFor(() => {
-			const signInButton = screen.getByText("Login");
+			const signInButton = screen.getByTestId("sign-in");
 			expect(signInButton).toBeInTheDocument();
 		});
 	});
