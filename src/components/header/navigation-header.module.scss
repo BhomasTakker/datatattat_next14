@@ -31,19 +31,22 @@
 	}
 
 	.simpleButton {
-		color: colours.$logoDark;
-		padding: units.$rem_2 units.$rem_4;
-		border-radius: units.$px_9;
 		display: flex;
-		justify-content: space-between;
 		align-items: center;
+		padding: units.$rem_2;
+		border-radius: 50%;
+
 		cursor: pointer;
+
 		.logo {
 			font-size: units.$text_6;
 			color: colours.$textColourDark;
 		}
 		p {
 			color: colours.$textColourDark;
+		}
+		&:hover {
+			background-color: colours.$shadowLight1;
 		}
 	}
 }
