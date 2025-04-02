@@ -34,7 +34,11 @@ const Datatattat = () => {
 const SignInButton = () => {
 	return (
 		// callback to current page
-		<Link className={styles.simpleButton} href={PATHS.signIn("/")}>
+		<Link
+			className={styles.simpleButton}
+			href={PATHS.signIn("/")}
+			data-testid="sign-in"
+		>
 			<BiSolidUser className={styles.logo} />
 		</Link>
 	);
