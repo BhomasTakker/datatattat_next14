@@ -3,6 +3,7 @@ import { ComponentProfile } from "./component-profile/component-profile";
 import { ComponentFactory } from "./components/component-factory";
 import { ComponentProfileProps } from "@/types/component";
 import styles from "./component-display.module.scss";
+import { Suspense } from "react";
 
 export const ComponentDisplay = ({
 	component,
@@ -14,7 +15,11 @@ export const ComponentDisplay = ({
 	return (
 		<section className={styles.component} data-testid="component">
 			<ComponentProfile profile={componentProps as ComponentProfileProps} />
-			<ComponentFactory component={component} />
+
+			{/* We need to create a template component */}
+			<Suspense fallback={<div className={styles.suspense}>Loading...</div>}>
+				<ComponentFactory component={component} />
+			</Suspense>
 		</section>
 	);
 };
