@@ -4,7 +4,6 @@ import {
 	ComponentsOptions,
 } from "@/components/content/components/component-map";
 import { PageComponent } from "@/types/page";
-import { UnknownObject } from "@/types/utils";
 
 export const ComponentFactory = async ({
 	component,
@@ -26,7 +25,8 @@ export const ComponentFactory = async ({
 	// Factory shouldn't be concerned with loading data
 	// we should pass data or a data function (if possible) to the component
 	const { _with: queryObject } = component;
-	const data = (await getData(queryObject)) as UnknownObject;
+
+	const data = await getData(queryObject);
 
 	// all components take in a component object
 	// AND and a data object
