@@ -12,6 +12,16 @@ type Props = {
 
 export const revalidate = 960;
 
+// export async function generateStaticParams() {
+// 	return [
+// 		{ route: ["world"] },
+// 		{ route: ["us"] },
+// 		{ route: ["uk"] },
+// 		{ route: ["ukraine"] },
+// 		{ route: ["trade-war"] },
+// 	];
+// }
+
 export const generateMetadata = async ({ params }: Props) => {
 	await initialiseServices();
 	const { route } = await params;
@@ -22,6 +32,7 @@ export const generateMetadata = async ({ params }: Props) => {
 };
 
 export default async function Page({ params }: Props) {
+	await initialiseServices();
 	const { route } = await params;
 	const joined = route.join("/");
 
