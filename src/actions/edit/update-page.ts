@@ -57,7 +57,6 @@ export const createPageByRoute = async (route: string) => {
 	const { user_id } = user;
 
 	const res = await createNewPageByRoute(route, user_id);
-	console.log("What is this business", { res });
 	return res;
 };
 

@@ -11,7 +11,6 @@ const githubUsereturn = (profile: Profile, user: User) => {
 };
 
 const googleUserReturn = (profile: Profile, user: User) => {
-	console.log("user", user);
 	return {
 		...profile,
 		name: user.username,
