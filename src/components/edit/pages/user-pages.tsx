@@ -23,12 +23,7 @@ type UserPage = {
 // if admin?
 const UserPage = ({ page, updateHandler }: UserPage) => {
 	const onDeleteHandler = async () => {
-		console.log(`delete me ${page.route}`);
-		console.dir(page, { depth: null });
-
-		const result = await deleteByRoute(page.route);
-		// returns the deleted page
-		console.log({ result });
+		await deleteByRoute(page.route);
 
 		updateHandler();
 		// update the UI / refetch data
@@ -62,15 +57,10 @@ export const UserPages = ({ user }: UserPages) => {
 	}, []);
 
 	const onAddHandler = async (route: string) => {
-		console.log("add me");
-
-		// admin or not?
 		const newRoute = `${userRoute}/${route}`;
 
 		// We need to check this on server side
 		const result = await createPageByRoute(newRoute);
-
-		console.log("Page creation result", { result });
 
 		const success = result?.success;
 		if (!success) {
@@ -122,9 +112,6 @@ export const AdminPages = ({ user }: UserPages) => {
 	}, []);
 
 	const onAddHandler = async (route: string) => {
-		console.log("add me");
-
-		// admin or not?
 		const newRoute = `${adminRoute}${route}`;
 
 		// We need to check this on server side
