@@ -9,18 +9,33 @@ import { Button } from "@/components/ui/button";
 
 import styles from "./header-form.module.scss";
 import { SaveState, useSaveState } from "@/components/hooks/use-save-state";
+import { User } from "@/types/auth/session";
+import { getPagesForUser } from "@/actions/page/page-actions";
+import { useEffect, useState } from "react";
+import { IPage } from "@/types/page";
 
 type HeaderFormProps = {
 	headerData: Omit<HeaderType, "createdAt" | "updatedAt">;
+	user: User;
 };
 
-export const HeaderForm = ({ headerData }: HeaderFormProps) => {
+export const HeaderForm = ({ headerData, user }: HeaderFormProps) => {
 	const { setSaveState, status, reset } = useSaveState();
+	const [pages, setPages] = useState<IPage[]>([]);
+	const { user_id } = user;
 	const methods = useForm({
 		// read up on this / required for unregistering fields
 		// use in conjunction with unregister
 		shouldUnregister: true,
 	});
+	const getPages = async () => {
+		const userPages = await getPagesForUser(user_id);
+		setPages(userPages);
+	};
+
+	useEffect(() => {
+		getPages();
+	}, []);
 
 	const { handleSubmit } = methods;
 	const { route, nav } = headerData;
@@ -40,7 +55,7 @@ export const HeaderForm = ({ headerData }: HeaderFormProps) => {
 	return (
 		<FormProvider {...methods}>
 			<form onSubmit={onSubmit} className={styles.form}>
-				<NavList links={nav} />
+				<NavList links={nav} pages={pages} />
 				<Button type="submit">Submit</Button>
 			</form>
 			{status}

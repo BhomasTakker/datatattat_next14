@@ -7,10 +7,17 @@ import { FaPlus } from "react-icons/fa";
 import { useSearchParams } from "next/navigation";
 
 import styles from "./nav-list.module.scss";
+import { IPage } from "@/types/page";
 
 // Create a context - this is getting too busy
 // and a little logic heavy
-export const NavList = ({ links }: { links: HeaderNav }) => {
+export const NavList = ({
+	links,
+	pages,
+}: {
+	links: HeaderNav;
+	pages: IPage[];
+}) => {
 	const [navLinks, setNavLinks] = useState<HeaderNav>([]);
 	const { unregister, setValue, getValues } = useFormContext();
 	const searchParams = useSearchParams();
@@ -100,6 +107,7 @@ export const NavList = ({ links }: { links: HeaderNav }) => {
 					index={index}
 					onMove={onMove}
 					onDelete={onDelete}
+					pages={pages}
 				/>
 			</li>
 		);

@@ -1,5 +1,6 @@
 "use client";
 
+// This could be a generic component eaasily enough
 import { BiSolidUser } from "react-icons/bi";
 import styles from "./user-menu.module.scss";
 import React, { useEffect, useState } from "react";

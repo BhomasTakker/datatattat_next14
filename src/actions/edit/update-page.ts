@@ -1,7 +1,11 @@
 "use server";
 
 import { options } from "@/app/api/auth/[...nextauth]/options";
-import { saveOrCreatePageByRoute } from "@/lib/mongo/actions/page";
+import {
+	createNewPageByRoute,
+	deletePageByRoute,
+	saveOrCreatePageByRoute,
+} from "@/lib/mongo/actions/page";
 import { Session } from "@/types/auth/session";
 import { IPage } from "@/types/page";
 import { getServerSession } from "next-auth";
@@ -9,6 +13,7 @@ import { checkUserAuth } from "../auth/check-user-auth";
 import { redirect } from "next/navigation";
 import { PATHS } from "@/lib/routing/paths";
 import { connectToMongoDB } from "@/lib/mongo/db";
+import { cloneDeep } from "@/utils/object";
 
 const save = async (page: IPage, id: string) => {
 	await saveOrCreatePageByRoute(page, id);
@@ -18,14 +23,15 @@ const save = async (page: IPage, id: string) => {
 
 // can technically get route from page
 export async function savePage(route: string, page: IPage) {
+	// find a bettr way
+	await connectToMongoDB();
+
 	try {
 		checkUserAuth(route);
 	} catch (e) {
 		console.error(e);
 		redirect(PATHS.error());
 	}
-	// find a bettr way
-	await connectToMongoDB();
 
 	const session = (await getServerSession(options)) as Session;
 
@@ -34,3 +40,37 @@ export async function savePage(route: string, page: IPage) {
 
 	return await save(page, user_id);
 }
+
+export const createPageByRoute = async (route: string) => {
+	await connectToMongoDB();
+
+	try {
+		checkUserAuth(route);
+	} catch (e) {
+		console.error(e);
+		redirect(PATHS.error());
+	}
+
+	const session = (await getServerSession(options)) as Session;
+
+	const { user } = session;
+	const { user_id } = user;
+
+	const res = await createNewPageByRoute(route, user_id);
+	console.log("What is this business", { res });
+	return res;
+};
+
+// we should definitely check userId here
+export const deleteByRoute = async (route: string) => {
+	await connectToMongoDB();
+
+	try {
+		checkUserAuth(route);
+	} catch (e) {
+		console.error(e);
+		redirect(PATHS.error());
+	}
+	const res = await deletePageByRoute(route);
+	return cloneDeep(res);
+};

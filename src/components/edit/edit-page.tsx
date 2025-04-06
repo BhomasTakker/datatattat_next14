@@ -13,6 +13,7 @@ import { EditNavigation } from "./navigation/edit-navigation";
 import { PATHS } from "@/lib/routing/paths";
 import { isValidUser } from "@/actions/auth/check-valid-user";
 import { connectToMongoDB } from "@/lib/mongo/db";
+import { AdminPages, UserPages } from "./pages/user-pages";
 
 type EditProps = {
 	route: string;
@@ -78,6 +79,9 @@ export const EditPage = async ({
 	const { role } = await isValidUser();
 	const isUserAdmin = role === "admin";
 
+	// should probably do within each component so we aren't blocking all for one
+	// const userPages = await getPagesForUser(sessionUser.user_id);
+
 	const pageData = await getPageOrNew(route);
 
 	const headerData = await getCurrentHeader(route);
@@ -91,8 +95,14 @@ export const EditPage = async ({
 			<p>
 				Current Endpoint: <span>{route}</span>
 			</p>
+			{/* Show user pages - allow select, create, delete, etc */}
+			{isAdminEdit ? (
+				<AdminPages user={sessionUser} />
+			) : (
+				<UserPages user={sessionUser} />
+			)}
 			<EditNavigation route={route} isAdminEdit={isAdminEdit} />
-			<HeaderForm headerData={headerData} />
+			<HeaderForm headerData={headerData} user={sessionUser} />
 			<PageFormContainer pageData={cloneDeep(pageData)} />
 		</section>
 	);
