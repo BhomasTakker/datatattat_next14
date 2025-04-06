@@ -3,6 +3,7 @@
 import { options } from "@/app/api/auth/[...nextauth]/options";
 import {
 	createNewPageByRoute,
+	deletePageByRoute,
 	saveOrCreatePageByRoute,
 } from "@/lib/mongo/actions/page";
 import { Session } from "@/types/auth/session";
@@ -58,4 +59,18 @@ export const createPageByRoute = async (route: string) => {
 	const res = await createNewPageByRoute(route, user_id);
 	console.log("What is this business", { res });
 	return res;
+};
+
+// we should definitely check userId here
+export const deleteByRoute = async (route: string) => {
+	await connectToMongoDB();
+
+	try {
+		checkUserAuth(route);
+	} catch (e) {
+		console.error(e);
+		redirect(PATHS.error());
+	}
+	const res = await deletePageByRoute(route);
+	return cloneDeep(res);
 };

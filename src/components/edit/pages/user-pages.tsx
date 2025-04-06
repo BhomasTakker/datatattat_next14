@@ -5,10 +5,10 @@ import Link from "next/link";
 import styles from "./user-pages.module.scss";
 import { IconButton } from "@/components/ui/icon-button";
 import { MdDelete } from "react-icons/md";
-import { deleteByRoute, getPagesForUser } from "@/actions/page/page-actions";
+import { getPagesForUser } from "@/actions/page/page-actions";
 import { useEffect, useState } from "react";
 import { AddPageMenu } from "./add-page-menu";
-import { createPageByRoute } from "@/actions/edit/update-page";
+import { createPageByRoute, deleteByRoute } from "@/actions/edit/update-page";
 import { User } from "@/types/auth/session";
 
 type UserPages = {

@@ -46,17 +46,3 @@ export const getPagesForUser = async (userId: string) => {
 
 	return cloneDeep(pages) as HydratedDocument<IPage>[];
 };
-
-// we should definitely check userId here
-export const deleteByRoute = async (route: string) => {
-	await connectToMongoDB();
-
-	try {
-		checkUserAuth(route);
-	} catch (e) {
-		console.error(e);
-		redirect(PATHS.error());
-	}
-	const res = await deletePageByRoute(route);
-	return cloneDeep(res);
-};
