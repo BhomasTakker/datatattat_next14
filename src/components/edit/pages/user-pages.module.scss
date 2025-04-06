@@ -1,0 +1,44 @@
+@use "../../../scss/abstracts/colours/" as colours;
+@use "../../../scss/abstracts/units/" as units;
+
+.header {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	padding: units.$rem_2 units.$rem_2;
+	margin-bottom: units.$rem_2;
+	border-radius: 10%;
+	background-color: colours.$shadowLight0;
+
+	h3 {
+		color: colours.$textColourDark;
+	}
+}
+
+.list {
+	display: flex;
+	flex-direction: column;
+}
+
+.listItem {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.link {
+	// border-radius: 10%;
+	padding: units.$rem_2 units.$rem_2;
+	width: 100%;
+
+	p {
+		color: colours.$textColourDark;
+	}
+
+	&:hover,
+	&:focus-visible {
+		background-color: colours.$shadowLight1;
+	}
+}

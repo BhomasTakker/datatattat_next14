@@ -1,9 +1,17 @@
 "use server";
 
-import { getPageByRoute } from "@/lib/mongo/actions/page";
+import {
+	deletePageByRoute,
+	getPageByRoute,
+	getPagesByUserId,
+} from "@/lib/mongo/actions/page";
+import { connectToMongoDB } from "@/lib/mongo/db";
 import { IPage } from "@/types/page";
+import { cloneDeep } from "@/utils/object";
 import { HydratedDocument } from "mongoose";
 import { redirect } from "next/navigation";
+import { checkUserAuth } from "../auth/check-user-auth";
+import { PATHS } from "@/lib/routing/paths";
 
 export const getPage = async (route: string) => {
 	// what if bad route is passed?
@@ -27,4 +35,28 @@ export const getMetadataForRoute = async (route: string) => {
 	const meta = page.meta;
 
 	return meta;
+};
+
+export const getPagesForUser = async (userId: string) => {
+	// probably check you are the use?
+	const pages = await getPagesByUserId(userId);
+	if (!pages) {
+		return [];
+	}
+
+	return cloneDeep(pages) as HydratedDocument<IPage>[];
+};
+
+// we should definitely check userId here
+export const deleteByRoute = async (route: string) => {
+	await connectToMongoDB();
+
+	try {
+		checkUserAuth(route);
+	} catch (e) {
+		console.error(e);
+		redirect(PATHS.error());
+	}
+	const res = await deletePageByRoute(route);
+	return cloneDeep(res);
 };

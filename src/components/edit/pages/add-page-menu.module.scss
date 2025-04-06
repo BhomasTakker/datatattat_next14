@@ -1,0 +1,40 @@
+@use "../../../scss/abstracts/colours/" as *;
+@use "../../../scss/abstracts/units/" as *;
+
+.container {
+	display: flex;
+}
+
+.form {
+	display: flex;
+	// flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	// width: 100%;
+	// height: 100%;
+	padding: $rem_2;
+	background-color: $whiteSmoke;
+	border-radius: 5%;
+	box-shadow: $shadowLight1;
+
+	.input {
+		background-color: $whiterSmoke;
+	}
+}
+
+.menuButton {
+	border: none;
+	background-color: unset;
+	cursor: pointer;
+	padding: $rem_2;
+	border-radius: 5%;
+
+	.logo {
+		font-size: $text_6;
+		color: $textColourDark;
+	}
+
+	&:hover {
+		background-color: $shadowLight1;
+	}
+}
