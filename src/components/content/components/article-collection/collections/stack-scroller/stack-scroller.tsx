@@ -14,7 +14,7 @@ const renderArticle = (item: ArticleRenderProps) => {
 
 	return (
 		<InViewComponent
-			key={item.title}
+			key={item.src}
 			options={{
 				threshold: 0,
 				triggerOnce: true,
