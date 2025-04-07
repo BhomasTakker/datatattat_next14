@@ -1,12 +1,11 @@
 "use server";
 
-import {
-	getAllUserByUsername,
-	getUserByUsername,
-} from "@/lib/mongo/actions/user";
-import { getSessionUser, getUser } from "../user/get-user";
+import { getUserByUsername } from "@/lib/mongo/actions/user";
+import { getSessionUser } from "../user/get-user";
+import { initialiseServices } from "@/lib/services/intialise-services";
 
 export async function doesUsernameExist(username: string) {
+	await initialiseServices();
 	const user = await getUserByUsername(username);
 
 	const exists = user ? true : false;
@@ -15,6 +14,7 @@ export async function doesUsernameExist(username: string) {
 }
 
 export async function isUsernameUnique(username: string) {
+	await initialiseServices();
 	const user = await getUserByUsername(username);
 
 	const unique = user ? false : true;
@@ -24,6 +24,7 @@ export async function isUsernameUnique(username: string) {
 
 export async function isUsernameSessionUser(username: string) {
 	try {
+		await initialiseServices();
 		const user = await getUserByUsername(username);
 		const sessionUser = await getSessionUser();
 
@@ -36,6 +37,7 @@ export async function isUsernameSessionUser(username: string) {
 }
 
 export async function isUsernameValid(username: string) {
+	await initialiseServices();
 	const isUnique = await isUsernameUnique(username);
 	const isSessionUser = await isUsernameSessionUser(username);
 

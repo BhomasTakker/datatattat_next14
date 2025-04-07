@@ -4,6 +4,7 @@ import { PATHS } from "@/lib/routing/paths";
 import { cloneDeep } from "@/utils/object";
 import { HeaderType } from "@/types/header";
 import { getHeader } from "@/lib/mongo/actions/header";
+import { initialiseServices } from "@/lib/services/intialise-services";
 
 // This was the bug
 // THIS is a server action
@@ -25,6 +26,7 @@ export const isProtectedRoute = async (route: string) => {
 };
 
 export async function getMainHeader(): Promise<HeaderType> {
+	await initialiseServices();
 	const header = await getHeader(PATHS.home());
 
 	return cloneDeep(header);
@@ -34,6 +36,8 @@ async function populateSubHeaders(route: string): Promise<HeaderType[]> {
 	if (await isProtectedRoute(route)) {
 		return [];
 	}
+
+	await initialiseServices();
 
 	const result = await getHeader(route);
 	const header = [result];
@@ -46,6 +50,7 @@ async function populateSubHeaders(route: string): Promise<HeaderType[]> {
 }
 
 export async function getSubHeaders(route: string): Promise<HeaderType[]> {
+	await initialiseServices();
 	const subHeaders = await populateSubHeaders(route);
 	return cloneDeep(subHeaders);
 }
