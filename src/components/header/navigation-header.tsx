@@ -8,6 +8,7 @@ import { UserMenu } from "./user-menu/user-menu";
 import { BiSolidUser } from "react-icons/bi";
 import { getUserById } from "@/lib/mongo/actions/user";
 import { Session } from "@/types/auth/session";
+import { initialiseServices } from "@/lib/services/intialise-services";
 
 const Logo = () => {
 	return (
@@ -45,6 +46,7 @@ const SignInButton = () => {
 };
 
 export const NavigationHeader = async () => {
+	await initialiseServices();
 	const session = (await getServerSession(options)) as Session;
 
 	let menuComponent = <div />;

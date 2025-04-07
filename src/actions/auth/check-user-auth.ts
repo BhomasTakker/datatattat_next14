@@ -3,6 +3,7 @@
 import { options } from "@/app/api/auth/[...nextauth]/options";
 import { getUserById } from "@/lib/mongo/actions/user";
 import { PATHS } from "@/lib/routing/paths";
+import { initialiseServices } from "@/lib/services/intialise-services";
 import { Session } from "@/types/auth/session";
 import { getServerSession } from "next-auth";
 
@@ -33,6 +34,7 @@ export const checkUserAuth = async (route: string) => {
 	if (!session) {
 		throw new Error("No session found");
 	}
+	await initialiseServices();
 
 	const { user } = session;
 	const { user_id } = user;

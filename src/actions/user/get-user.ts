@@ -2,6 +2,7 @@
 
 import { options } from "@/app/api/auth/[...nextauth]/options";
 import { getUserById } from "@/lib/mongo/actions/user";
+import { initialiseServices } from "@/lib/services/intialise-services";
 import { Session } from "@/types/auth/session";
 import { IUser } from "@/types/user";
 import { getServerSession } from "next-auth";
@@ -17,6 +18,7 @@ export async function getSessionUser() {
 }
 
 export async function getUserFromSessionId(id: string): Promise<IUser> {
+	await initialiseServices();
 	const user = await getUserById(id);
 
 	if (!user) {
