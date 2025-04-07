@@ -95,7 +95,7 @@ export const VideoDisplayComponent = ({
 			</div>
 			<ul className={styles.articles}>
 				{articles.map((item) => (
-					<li key={item.title}>
+					<li key={item.src}>
 						<InViewComponent
 							options={{
 								threshold: 0,

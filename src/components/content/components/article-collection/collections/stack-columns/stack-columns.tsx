@@ -13,7 +13,7 @@ const renderArticle = (item: ArticleRenderProps) => {
 	const template = articleTemplate(styles);
 	return (
 		<InViewComponent
-			key={item.title}
+			key={src}
 			options={{
 				threshold: 0,
 				triggerOnce: true,
