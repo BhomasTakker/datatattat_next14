@@ -16,6 +16,7 @@ import { connectToMongoDB } from "@/lib/mongo/db";
 import { cloneDeep } from "@/utils/object";
 
 const save = async (page: IPage, id: string) => {
+	await connectToMongoDB();
 	await saveOrCreatePageByRoute(page, id);
 
 	return { message: "Page Saved!" };

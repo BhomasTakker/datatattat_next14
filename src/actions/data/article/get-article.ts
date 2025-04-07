@@ -9,12 +9,14 @@ import { CollectionItem } from "@/types/data-structures/collection/item/item";
 import { HydratedDocument } from "mongoose";
 import { validateArticleData } from "./utils";
 import { cloneDeep } from "@/utils/object";
+import { initialiseServices } from "@/lib/services/intialise-services";
 
 // Potentially a withDb Thing or other
 type GetArticleItem = Partial<CollectionItem> & Pick<CollectionItem, "src">;
 // not here
 export const getArticle = async (item: GetArticleItem) => {
 	const { src, details = {} } = item;
+	await initialiseServices();
 
 	const article = (await getArticleBySrc(
 		src
