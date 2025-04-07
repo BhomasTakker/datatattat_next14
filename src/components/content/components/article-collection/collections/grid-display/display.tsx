@@ -11,11 +11,7 @@ import { ArticleRenderProps } from "../types";
 const renderArticle = (item: ArticleRenderProps, styles: StyleSheet) => {
 	const { src } = item;
 	return (
-		<Interaction
-			key={item.title}
-			type={InteractionsOptions.Navigate}
-			href={src || ""}
-		>
+		<Interaction key={src} type={InteractionsOptions.Navigate} href={src || ""}>
 			<Article article={item} styles={styles} />
 		</Interaction>
 	);
