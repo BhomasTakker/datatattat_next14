@@ -33,7 +33,7 @@ export const API_BASE_QUERY_CONFIG: InputListProps = {
 		{
 			id: "provider",
 			type: EditInputs.objectSelect,
-			label: "Select Data Source",
+			label: "Select API",
 			required: true,
 			defaultValue: APIOptions.NONE,
 			options: [...apiMap.keys()],

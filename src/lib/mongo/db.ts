@@ -1,29 +1,7 @@
-// https://medium.com/@elhamrani.omar23/next-js-14-server-actions-with-typescript-mongodb-mongoose-4a11575b987c
-// Importing mongoose library along with Connection type from it
-import mongoose, { Connection } from "mongoose";
+import mongoose from "mongoose";
 
 // We can set indexes on atlas / we should also create a search instead of an index
 // https://www.youtube.com/playlist?list=PL4RCxklHWZ9sEaTrqx7DOxQ5FzwDOTWFj
-
-let cachedConnection: Connection | null = null;
-
-export async function connectToMongoDB_Old() {
-	if (cachedConnection) {
-		console.log("Using cached db connection");
-		return cachedConnection;
-	}
-	try {
-		const cnx = await mongoose.connect(process.env.MONGODB_URI!);
-		cachedConnection = cnx.connection;
-
-		console.log("New mongodb connection established");
-
-		return cachedConnection;
-	} catch (error) {
-		console.log(error);
-		throw error;
-	}
-}
 
 // https://github.com/vercel/next.js/blob/canary/examples/with-mongodb-mongoose/lib/dbConnect.ts
 declare global {
@@ -46,6 +24,7 @@ export async function connectToMongoDB() {
 	}
 
 	if (cached.conn) {
+		console.log("returned cached connection");
 		return cached.conn;
 	}
 	if (!cached.promise) {
@@ -59,9 +38,11 @@ export async function connectToMongoDB() {
 	try {
 		cached.conn = await cached.promise;
 	} catch (e) {
+		// log error - we have had the very occasional error
 		cached.promise = null;
 		throw e;
 	}
 
+	console.log("created new connection");
 	return cached.conn;
 }
