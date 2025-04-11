@@ -1,4 +1,3 @@
-import ArticleCollection from "@/models/ArticleCollection";
 import { YouTubeItem } from "./types";
 import { CollectionItem } from "@/types/data-structures/collection/item/item";
 import { fetchWithCache } from "@/lib/redis/redis-fetch";
@@ -97,6 +96,7 @@ export const youtubeApiFetch = async (params: YouTubeSearchParams) => {
 	}
 
 	const fetchUrl = new URL(YOUTUBE_URL);
+
 	fetchUrl.searchParams.append("key", API_KEY);
 	fetchUrl.searchParams.append("part", PART);
 	fetchUrl.searchParams.append("type", TYPE);
@@ -105,6 +105,8 @@ export const youtubeApiFetch = async (params: YouTubeSearchParams) => {
 	for (const [key, value] of Object.entries(rest)) {
 		if (value) fetchUrl.searchParams.append(key, `${value}`);
 	}
+
+	const clonedUrl = fetchUrl.toString().replace(API_KEY, "***REDACTED***");
 
 	try {
 		const items = await fetchWithCache<CollectionItem[]>(
@@ -116,7 +118,8 @@ export const youtubeApiFetch = async (params: YouTubeSearchParams) => {
 
 				return collectionItems;
 			},
-			fetchUrl.href,
+			// We are caching with the apikey!!!! REMOVE!!!!
+			clonedUrl,
 			CACHE_TIME,
 			true
 		);
