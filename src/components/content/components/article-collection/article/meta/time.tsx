@@ -53,10 +53,10 @@ export const Time = ({ time, styles }: Time) => {
 			}).format(date)} ${useHours}:${useMinutes}`;
 			break;
 		case !!diffHours:
-			displayTime = `${pluralise(diffHours, "hour")} ago`;
+			displayTime = `${pluralise(diffHours, "hr")} ago`;
 			break;
 		case !!diffMinutes:
-			displayTime = `${pluralise(diffMinutes, "minute")} ago`;
+			displayTime = `${pluralise(diffMinutes, "min")} ago`;
 			break;
 		case !!diffSeconds:
 			displayTime = "Now!";
