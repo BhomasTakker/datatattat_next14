@@ -10,7 +10,13 @@ type Props = {
 export const Meta = ({ published, publisher, styles }: Props) => {
 	return (
 		<div className={styles.meta}>
-			{publisher ? <p className={styles.publishers}>{publisher}</p> : <></>}
+			{publisher ? (
+				<p className={styles.publishers} data-testid="publisher">
+					{publisher}
+				</p>
+			) : (
+				<></>
+			)}
 			{published ? <Time styles={styles} time={published} /> : null}
 		</div>
 	);

@@ -11,11 +11,9 @@ const mockStyles: StyleSheet = {
 	publishers: "publishers",
 };
 
-const mockDetails: Details = {
-	categories: ["Category1"],
-	authors: ["Author1"],
+const mockDetails = {
 	published: "2023-10-01T00:00:00Z",
-	publishers: ["Publisher1"],
+	publisher: "Publisher1",
 };
 
 describe("Meta Component", () => {
@@ -62,10 +60,10 @@ describe("Meta Component", () => {
 
 	it("does not render publishers when not provided", () => {
 		render(
-			<Meta styles={mockStyles} {...{ ...mockDetails, publishers: [] }} />
+			<Meta styles={mockStyles} {...{ ...mockDetails, publisher: undefined }} />
 		);
-		const publishers = screen.queryByText("Publisher1");
-		expect(publishers).not.toBeInTheDocument();
+		const publisher = screen.queryByTestId("publisher");
+		expect(publisher).not.toBeInTheDocument();
 	});
 
 	it("does not render published time when not provided", () => {
