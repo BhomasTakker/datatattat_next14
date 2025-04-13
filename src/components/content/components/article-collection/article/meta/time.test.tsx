@@ -20,7 +20,7 @@ describe("Time component", () => {
 	it("displays minutes ago for time within the last hour", () => {
 		const pastTime = new Date(Date.now() - 5 * 60 * 1000); // 5 minutes ago
 		render(<Time time={pastTime} styles={styles} />);
-		const time = screen.getByText("5 minutes ago");
+		const time = screen.getByText("5 mins ago");
 		expect(time).toBeInTheDocument();
 	});
 
@@ -28,7 +28,7 @@ describe("Time component", () => {
 		const pastTime = new Date(Date.now() - 2 * 60 * 60 * 1000); // 2 hours ago
 		render(<Time time={pastTime} styles={styles} />);
 
-		const time = screen.getByText("2 hours ago");
+		const time = screen.getByText("2 hrs ago");
 
 		expect(time).toBeInTheDocument();
 	});
