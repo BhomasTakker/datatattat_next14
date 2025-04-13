@@ -9,12 +9,22 @@ type ArticleProps = {
 };
 
 export const Article = ({ article, styles }: ArticleProps) => {
-	const { title, description, avatar, details, src } = article;
+	const {
+		title,
+		description,
+		avatar,
+		details,
+		src,
+		provider: articleProvider,
+	} = article;
 	const { src: image, alt: imageAlt } = avatar || {};
-	const { categories, authors, published, publishers } = details || {};
+	const { published, publishers } = details || {};
 
 	// should be done on create/save data
 	const provider = src ? new URL(src).hostname : "";
+	const publisher = articleProvider
+		? articleProvider.name
+		: publishers?.join(", ");
 
 	return (
 		// <Interaction type={InteractionsOptions.Navigate} href={src || ""}>
@@ -40,11 +50,11 @@ export const Article = ({ article, styles }: ArticleProps) => {
 				</div>
 				<Meta
 					styles={styles}
-					categories={categories}
-					authors={authors}
 					published={published}
-					publishers={publishers}
-					provider={provider}
+					// bit of a fudge - we want to use article.provider for article
+					// publisher for youtube video
+					// OR OUR provider.name in preference to any and all alternatives
+					publisher={publisher || provider}
 				/>
 			</div>
 		</article>
