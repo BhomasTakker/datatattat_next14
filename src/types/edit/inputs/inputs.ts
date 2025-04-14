@@ -113,6 +113,7 @@ export type SelectInputProps = {
 	type: EditInputs.select;
 	defaultValue?: string;
 	options: string[];
+	deselectLabel?: string;
 	required?: boolean;
 } & InputProps;
 
