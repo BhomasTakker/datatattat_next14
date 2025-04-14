@@ -35,13 +35,6 @@ export const PARAMS: GenericInput[] = [
 		options: ["article", "video", "audio"],
 		defaultValue: "article",
 	},
-	{
-		id: "contentType",
-		type: EditInputs.select,
-		label: "Content Type",
-		options: ["news"],
-		defaultValue: "news",
-	},
 	// only for audio
 	{
 		id: "durationHigher",
@@ -61,7 +54,9 @@ export const PARAMS: GenericInput[] = [
 		// Select from available options uk, us, world, all
 		// select? or array? / multi select
 		id: "region",
-		type: EditInputs.text,
+		type: EditInputs.select,
+		options: ["uk", "us", "world"],
+		deselectLabel: "All",
 		label: "Region",
 		required: false,
 	},
