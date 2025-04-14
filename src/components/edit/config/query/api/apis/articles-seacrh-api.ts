@@ -1,6 +1,12 @@
 import { EditInputs } from "@/components/edit/inputs/inputs";
 import { GenericInput, InputListProps } from "@/types/edit/inputs/inputs";
 
+// BASE_PARAMS
+
+// ARTICLE_PARAMS
+// VIDEO_PARAMS
+// AUDIO_PARAMS
+
 export const PARAMS: GenericInput[] = [
 	{
 		id: "query",
@@ -9,6 +15,7 @@ export const PARAMS: GenericInput[] = [
 		required: false,
 		// searches title / use - to exclude words 'to search a phrase'
 	},
+	// Only when query added
 	{
 		id: "textScore",
 		type: EditInputs.number,
@@ -35,6 +42,7 @@ export const PARAMS: GenericInput[] = [
 		options: ["news"],
 		defaultValue: "news",
 	},
+	// only for audio
 	{
 		id: "durationHigher",
 		type: EditInputs.number,
@@ -50,25 +58,14 @@ export const PARAMS: GenericInput[] = [
 		required: false,
 	},
 	{
+		// Select from available options uk, us, world, all
 		// select? or array? / multi select
 		id: "region",
 		type: EditInputs.text,
 		label: "Region",
 		required: false,
 	},
-	{
-		id: "origin",
-		type: EditInputs.text,
-		label: "Origin",
-		required: false,
-	},
-	{
-		// Probably a select / we only have english for now
-		id: "language",
-		type: EditInputs.text,
-		label: "Language",
-		required: false,
-	},
+	// fix these
 	{
 		id: "before",
 		type: EditInputs.date,
@@ -79,12 +76,6 @@ export const PARAMS: GenericInput[] = [
 		id: "after",
 		type: EditInputs.date,
 		label: "Filter After ",
-		required: false,
-	},
-	{
-		id: "provider",
-		type: EditInputs.text,
-		label: "Filter providers",
 		required: false,
 	},
 	{
@@ -101,22 +92,6 @@ export const PARAMS: GenericInput[] = [
 		label: "Trust Rating Lower Than",
 		max: 100,
 		min: 0,
-		required: false,
-	},
-	{
-		id: "leaningHigher",
-		type: EditInputs.number,
-		label: "Political Leaning >",
-		max: 1,
-		min: -1,
-		required: false,
-	},
-	{
-		id: "leaningLower",
-		type: EditInputs.number,
-		label: "Political Leaning <",
-		max: 1,
-		min: -1,
 		required: false,
 	},
 	{
