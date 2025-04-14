@@ -10,7 +10,7 @@ export const matchTime = (
 		returnAggregator.push({
 			$match: {
 				"details.published": {
-					$lt: before,
+					$lt: new Date(before),
 				},
 			},
 		});
@@ -19,7 +19,7 @@ export const matchTime = (
 		returnAggregator.push({
 			$match: {
 				"details.published": {
-					$gt: after,
+					$gt: new Date(after),
 				},
 			},
 		});

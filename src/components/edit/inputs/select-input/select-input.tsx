@@ -5,14 +5,19 @@ import { SelectInputProps } from "@/types/edit/inputs/inputs";
 type OptionsProps = {
 	options: string[];
 	required?: boolean;
+	deselectLabel?: string;
 };
 
-const Options = ({ options, required }: OptionsProps) => {
+const Options = ({
+	options,
+	required = true,
+	deselectLabel = "--Deselect--",
+}: OptionsProps) => {
 	const showDefaultOption = required ? false : true;
 
 	const defaultOption = showDefaultOption ? (
 		<option key={"default-select"} value="">
-			--Deselect--
+			{deselectLabel}
 		</option>
 	) : null;
 
@@ -35,6 +40,7 @@ const Options = ({ options, required }: OptionsProps) => {
 export const SelectInput = ({
 	id,
 	label = "",
+	deselectLabel = "--Deselect--",
 	options,
 	defaultValue,
 	required,
@@ -49,7 +55,11 @@ export const SelectInput = ({
 		<div className={styles.root}>
 			<label htmlFor={id}>{`${label}`}</label>
 			<select {...register(id)} defaultValue={defaultToUse}>
-				<Options options={options} required={required} />
+				<Options
+					options={options}
+					required={required}
+					deselectLabel={deselectLabel}
+				/>
 			</select>
 		</div>
 	);
