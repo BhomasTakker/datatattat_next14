@@ -16,9 +16,12 @@ import { ArrayInputProps, GenericInput } from "@/types/edit/inputs/inputs";
 // generic input
 type Direction = "up" | "down";
 
+type InputWithKey = GenericInput & { key: string };
+type InputList = InputWithKey[];
+
 type InputListProps = {
 	parentId: string;
-	inputs: GenericInput[];
+	inputs: InputList;
 	template: GenericInput;
 	createObject: boolean;
 	showControls?: boolean;
@@ -36,13 +39,13 @@ const ArrayInputList = ({
 	showControls = true,
 }: InputListProps) => {
 	const { id } = template;
-	return inputs.map((_, index) => {
+	return inputs.map((input, index) => {
 		const inputId = createObject
 			? `${parentId}.[${index}].${id}`
 			: `${parentId}.[${index}]`;
 
 		return (
-			<li key={`${randomKeyGenerator()}`} className={styles.input}>
+			<li key={input.key} className={styles.input}>
 				<InputFactory data={{ ...template, id: inputId }} />
 				{showControls ? (
 					<div className={styles.icons}>
@@ -72,7 +75,12 @@ export const ArrayInput = ({
 
 	const inputs: GenericInput[] = getValues(id) || defaultValue || [];
 
-	const [inputList, setInputList] = useState<GenericInput[]>(inputs);
+	const inputsWithUniqueKeys: InputList = inputs.map((input) => {
+		return { ...input, key: randomKeyGenerator() };
+	});
+
+	const [inputList, setInputList] =
+		useState<GenericInput[]>(inputsWithUniqueKeys);
 
 	// We need to re-render the component to update the inputList
 	// Whenever we move an array object, or delete
@@ -103,7 +111,8 @@ export const ArrayInput = ({
 			<ul>
 				<ArrayInputList
 					parentId={id}
-					inputs={inputList}
+					// This is a cheat / inputList at this point is our updated inputList
+					inputs={inputList as InputList}
 					template={input}
 					showControls={showControls}
 					onMove={onMove}
