@@ -1,4 +1,5 @@
 import { GenericInput } from "@/types/edit/inputs/inputs";
+import { randomKeyGenerator } from "@/utils/edit";
 import { Dispatch, SetStateAction } from "react";
 import {
 	FieldValues,
@@ -49,7 +50,11 @@ export const add =
 		// we set value here to give us something to read in InputList
 		// there may be a better way to do this
 		if (createObject) {
-			setValue(id, [...inputList, { [`${inputId}`]: "" }]);
+			setValue(id, [
+				...inputList,
+				// This is creating a new InputWithId
+				{ key: randomKeyGenerator(), [`${inputId}`]: "" },
+			]);
 		} else {
 			setValue(id, [...inputList, ""]);
 		}
