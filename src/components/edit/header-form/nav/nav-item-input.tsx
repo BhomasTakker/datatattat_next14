@@ -54,7 +54,7 @@ export const NavItemInput = ({
 					<label htmlFor={routeInputId}>Route</label>
 					<select
 						id={routeInputId}
-						{...register(routeInputId, { required: true })}
+						{...register(routeInputId, { required: true, value: route })}
 					>
 						<option value="">Select a route</option>
 						{options.map((option) => {
