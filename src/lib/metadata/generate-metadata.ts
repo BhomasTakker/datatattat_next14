@@ -59,6 +59,7 @@ const createIcons = (icons: FavIcons) => {
 			sizes,
 		};
 	});
+
 	return {
 		other,
 	};
@@ -75,6 +76,8 @@ export const generateMetaDataFromPage = async (
 		return {};
 	}
 
+	console.log("metadata", metadata);
+
 	const {
 		pageTitle,
 		pageDescription,
@@ -83,7 +86,12 @@ export const generateMetaDataFromPage = async (
 		favIcons = [],
 		showCardData,
 		cardData,
+		createMetaData = false,
 	} = metadata;
+
+	if (!createMetaData) {
+		return {};
+	}
 
 	const openGraph =
 		showCardData && cardData ? createOpenGraph(cardData) : undefined;

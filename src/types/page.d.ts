@@ -65,6 +65,7 @@ export type Metadata = {
 	favIcons: FavIcons;
 	showCardData: boolean;
 	cardData: CardData;
+	createMetaData?: boolean;
 };
 
 // do better!
