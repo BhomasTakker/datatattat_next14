@@ -5,6 +5,7 @@ import { ComponentFactory } from "../components/component-factory";
 
 import { ComponentsOptions } from "../components/component-map";
 import { PageComponent } from "@/types/page";
+import { getCurrentRoute } from "../../../utils/route";
 
 // Would need to mock a couple of options to test the default component
 
@@ -17,6 +18,12 @@ const MOCK = {
 jest.mock("../../../actions/data/get-data", () => {
 	return {
 		getData: jest.fn().mockResolvedValue({}),
+	};
+});
+
+jest.mock("../../../utils/route", () => {
+	return {
+		getCurrentRoute: jest.fn().mockResolvedValue("/"),
 	};
 });
 
