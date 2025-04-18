@@ -32,7 +32,10 @@ const renderArticle = (item: ArticleRenderProps) => {
 	);
 };
 
-const renderMethod = (articles: ArticleRenderProps[], _: UnknownObject) => {
+const renderMethod = (
+	articles: ArticleRenderProps[] = [],
+	_: UnknownObject
+) => {
 	return articles.map((item) => renderArticle(item));
 };
 

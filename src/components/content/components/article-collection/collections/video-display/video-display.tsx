@@ -11,7 +11,7 @@ export type VideoDisplayOptions = {
 };
 
 const renderMethod = (
-	articles: ArticleRenderProps[],
+	articles: ArticleRenderProps[] = [],
 	// would you say UnknownObject AND this?
 	options: UnknownObject & VideoDisplayOptions
 ) => {
