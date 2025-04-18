@@ -4,6 +4,8 @@ import {
 	ComponentsOptions,
 } from "@/components/content/components/component-map";
 import { PageComponent } from "@/types/page";
+import { ClientSideComponent } from "./client-side-component-render";
+import { getCurrentRoute } from "@/utils/route";
 
 export const ComponentFactory = async ({
 	component,
@@ -17,6 +19,20 @@ export const ComponentFactory = async ({
 	// do better error handling
 	if (!Component) {
 		return <div>{`Component not found:- ${componentType}`}</div>;
+	}
+
+	const currentRoute = await getCurrentRoute();
+
+	// Feels like fallback should be client side loading?
+	const isUserRoute = currentRoute?.includes("/users/") || false;
+	if (isUserRoute) {
+		return (
+			<ClientSideComponent
+				Component={Component}
+				component={component}
+				getData={getData}
+			/>
+		);
 	}
 
 	//////////////////////////////////////////////////////////////////////////
