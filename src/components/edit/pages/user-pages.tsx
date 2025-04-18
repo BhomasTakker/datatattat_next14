@@ -47,6 +47,9 @@ export const UserPages = ({ user }: UserPages) => {
 	const { user_id, name } = user;
 	const userRoute = `/users/${name}`;
 
+	// Probably this
+	// if get fails or times out for whatever reason
+	// we are never going to try again or notify
 	const getPages = async () => {
 		const userPages = await getPagesForUser(user_id);
 		setPages(userPages);
