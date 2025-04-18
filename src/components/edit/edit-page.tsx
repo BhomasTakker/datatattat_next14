@@ -95,7 +95,6 @@ export const EditPage = async ({
 			<p>
 				Current Endpoint: <span>{route}</span>
 			</p>
-			{/* Show user pages - allow select, create, delete, etc */}
 			{isAdminEdit ? (
 				<AdminPages user={sessionUser} />
 			) : (
