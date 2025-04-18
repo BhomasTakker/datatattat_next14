@@ -34,7 +34,10 @@ const renderArticle = (item: ArticleRenderProps) => {
 // We could jut return an element
 // So a Media display - that is a client component
 // Because it has controls etc.
-const renderMethod = (articles: ArticleRenderProps[], _: UnknownObject) => {
+const renderMethod = (
+	articles: ArticleRenderProps[] = [],
+	_: UnknownObject
+) => {
 	return (
 		<div className={styles.container}>
 			{articles.map((item) => renderArticle(item))}

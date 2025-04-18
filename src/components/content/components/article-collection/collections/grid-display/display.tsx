@@ -19,7 +19,7 @@ const renderArticle = (item: ArticleRenderProps, styles: StyleSheet) => {
 
 const renderMethod =
 	(styles: StyleSheet, num: number) =>
-	(articles: ArticleRenderProps[], _: UnknownObject) => {
+	(articles: ArticleRenderProps[] = [], _: UnknownObject) => {
 		return articles.slice(0, num).map((item) => renderArticle(item, styles));
 	};
 

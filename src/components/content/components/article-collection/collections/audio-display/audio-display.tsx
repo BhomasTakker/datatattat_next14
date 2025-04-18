@@ -10,7 +10,7 @@ export type AudioDisplayOptions = {};
 // just show data - but of a type
 
 const renderMethod = (
-	articles: ArticleRenderProps[],
+	articles: ArticleRenderProps[] = [],
 	options: UnknownObject & AudioDisplayOptions
 ) => {
 	if (!articles || articles.length === 0) return null;

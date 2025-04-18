@@ -76,8 +76,6 @@ export const generateMetaDataFromPage = async (
 		return {};
 	}
 
-	console.log("metadata", metadata);
-
 	const {
 		pageTitle,
 		pageDescription,

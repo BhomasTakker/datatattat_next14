@@ -3,7 +3,7 @@ import { ContentOembed } from "./content-oembed/content-oembed";
 import { DisplayPlayer } from "./display-player/display-player";
 import { MediaPlayer } from "./media-player/media-player";
 
-type Components =
+export type ComponentType =
 	| typeof ArticleCollection
 	| typeof ContentOembed
 	| typeof DisplayPlayer
@@ -16,7 +16,7 @@ export enum ComponentsOptions {
 	MediaPlayer = "MediaPlayer",
 }
 
-export const ComponentsMap = new Map<ComponentsOptions, Components>([
+export const ComponentsMap = new Map<ComponentsOptions, ComponentType>([
 	[ComponentsOptions.ArticleCollection, ArticleCollection],
 	[ComponentsOptions.ContentOembed, ContentOembed],
 	[ComponentsOptions.DisplayPlayer, DisplayPlayer],
