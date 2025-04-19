@@ -49,4 +49,10 @@
 			background-color: colours.$shadowLight1;
 		}
 	}
+
+	.menuContainer {
+		display: flex;
+		align-items: center;
+		gap: units.$rem_2;
+	}
 }

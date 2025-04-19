@@ -42,8 +42,23 @@ exports[`Navigation Header Test Suite renders signed in navigation header unchan
         </h2>
       </a>
     </div>
-    <div>
-      User Menu
+    <div
+      class="menuContainer"
+    >
+      <a
+        href="https://ko-fi.com/Z8Z81DQMUH"
+        target="_blank"
+      >
+        <img
+          alt="Support us at ko-fi.com"
+          height="36"
+          src="https://storage.ko-fi.com/cdn/kofi6.png?v=6"
+          style="border: 0px; height: 36px;"
+        />
+      </a>
+      <div>
+        User Menu
+      </div>
     </div>
   </nav>
 </div>
@@ -91,26 +106,41 @@ exports[`Navigation Header Test Suite renders signed out navigation header uncha
         </h2>
       </a>
     </div>
-    <a
-      class="simpleButton"
-      data-testid="sign-in"
-      href="/api/auth/signin?callbackUrl=/"
+    <div
+      class="menuContainer"
     >
-      <svg
-        class="logo"
-        fill="currentColor"
-        height="1em"
-        stroke="currentColor"
-        stroke-width="0"
-        viewBox="0 0 24 24"
-        width="1em"
-        xmlns="http://www.w3.org/2000/svg"
+      <a
+        href="https://ko-fi.com/Z8Z81DQMUH"
+        target="_blank"
       >
-        <path
-          d="M7.5 6.5C7.5 8.981 9.519 11 12 11s4.5-2.019 4.5-4.5S14.481 2 12 2 7.5 4.019 7.5 6.5zM20 21h1v-1c0-3.859-3.141-7-7-7h-4c-3.86 0-7 3.141-7 7v1h17z"
+        <img
+          alt="Support us at ko-fi.com"
+          height="36"
+          src="https://storage.ko-fi.com/cdn/kofi6.png?v=6"
+          style="border: 0px; height: 36px;"
         />
-      </svg>
-    </a>
+      </a>
+      <a
+        class="simpleButton"
+        data-testid="sign-in"
+        href="/api/auth/signin?callbackUrl=/"
+      >
+        <svg
+          class="logo"
+          fill="currentColor"
+          height="1em"
+          stroke="currentColor"
+          stroke-width="0"
+          viewBox="0 0 24 24"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M7.5 6.5C7.5 8.981 9.519 11 12 11s4.5-2.019 4.5-4.5S14.481 2 12 2 7.5 4.019 7.5 6.5zM20 21h1v-1c0-3.859-3.141-7-7-7h-4c-3.86 0-7 3.141-7 7v1h17z"
+          />
+        </svg>
+      </a>
+    </div>
   </nav>
 </div>
 `;
