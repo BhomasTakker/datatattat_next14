@@ -45,6 +45,20 @@ const SignInButton = () => {
 	);
 };
 
+const KofiButton = () => {
+	return (
+		<a href="https://ko-fi.com/Z8Z81DQMUH" target="_blank">
+			<img
+				height="36"
+				style={{ border: "0px", height: "36px" }}
+				src="https://storage.ko-fi.com/cdn/kofi6.png?v=6"
+				// border="0"
+				alt="Support us at ko-fi.com"
+			/>
+		</a>
+	);
+};
+
 export const NavigationHeader = async () => {
 	await initialiseServices();
 	const session = (await getServerSession(options)) as Session;
@@ -74,7 +88,10 @@ export const NavigationHeader = async () => {
 		<nav className={styles.root}>
 			<Logo />
 			<Datatattat />
-			{menuComponent}
+			<div className={styles.menuContainer}>
+				<KofiButton />
+				{menuComponent}
+			</div>
 		</nav>
 	);
 };
