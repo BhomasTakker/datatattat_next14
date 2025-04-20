@@ -50,7 +50,7 @@ export async function isUsernameValid(username: string) {
 		return true;
 	}
 
-	if (!username.match(patterns.username)) {
+	if (!username.match(patterns.username.regex)) {
 		return false;
 	}
 

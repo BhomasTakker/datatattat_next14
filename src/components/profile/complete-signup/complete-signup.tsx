@@ -81,9 +81,8 @@ export const CompleteSignup = ({ username }: CompleteSignupProps) => {
 							{...register("username", {
 								required: "Username is required!",
 								pattern: {
-									value: patterns.username,
-									message:
-										"Username must be 3-16 characters long and can only contain letters, numbers, and hyphens.",
+									value: patterns.username.regex,
+									message: patterns.username.message,
 								},
 							})}
 						/>
