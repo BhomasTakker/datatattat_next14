@@ -43,7 +43,7 @@
 
 		.warn {
 			opacity: 0;
-			color: red;
+			color: $error;
 
 			&.showWarning {
 				opacity: 1;
