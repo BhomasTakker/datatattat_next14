@@ -3,9 +3,8 @@
 @use "../../scss/abstracts/units/" as units;
 
 .root {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
 	padding: units.$rem_5 units.$rem_0;
 
 	border-bottom: ui.$divider;
@@ -16,8 +15,8 @@
 	}
 
 	.homeContainer {
-		display: flex;
-		align-items: center;
+		display: inline-flex;
+		justify-content: center;
 		padding: units.$rem_2;
 		border-radius: 50%;
 		.logo {
@@ -53,6 +52,30 @@
 	.menuContainer {
 		display: flex;
 		align-items: center;
+		justify-content: flex-end;
 		gap: units.$rem_2;
+
+		.image {
+			display: inline-block;
+		}
+
+		.icon {
+			display: none;
+		}
+
+		@media screen and (max-width: units.$screenWidthSm) {
+			.image {
+				display: none;
+			}
+
+			.icon {
+				display: inline-block;
+			}
+		}
+	}
+
+	.logoContainer {
+		display: flex;
+		justify-content: center;
 	}
 }

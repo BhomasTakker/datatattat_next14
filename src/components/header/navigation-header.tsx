@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { AiFillHome } from "react-icons/ai";
 import styles from "./navigation-header.module.scss";
 import Link from "next/link";
@@ -9,6 +10,7 @@ import { BiSolidUser } from "react-icons/bi";
 import { getUserById } from "@/lib/mongo/actions/user";
 import { Session } from "@/types/auth/session";
 import { initialiseServices } from "@/lib/services/intialise-services";
+import kofi from "../../../public/assets/ko-fi/kofi_symbol.png";
 
 const Logo = () => {
 	return (
@@ -45,16 +47,35 @@ const SignInButton = () => {
 	);
 };
 
+const Kofi = () => {
+	return (
+		<Image
+			src={kofi}
+			alt="Kofi Logo - A cup of coffee with a heart logo"
+			height={32}
+		/>
+	);
+};
+
+const KofiImage = () => {
+	return (
+		<img
+			height="36"
+			src="https://storage.ko-fi.com/cdn/kofi6.png?v=6"
+			alt="Support us at ko-fi.com"
+		/>
+	);
+};
+
 const KofiButton = () => {
 	return (
 		<a href="https://ko-fi.com/Z8Z81DQMUH" target="_blank">
-			<img
-				height="36"
-				style={{ border: "0px", height: "36px" }}
-				src="https://storage.ko-fi.com/cdn/kofi6.png?v=6"
-				// border="0"
-				alt="Support us at ko-fi.com"
-			/>
+			<div className={styles.image}>
+				<KofiImage />
+			</div>
+			<div className={styles.icon}>
+				<Kofi />
+			</div>
 		</a>
 	);
 };
