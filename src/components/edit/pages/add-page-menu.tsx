@@ -35,7 +35,7 @@ export const AddPageMenu = ({
 				<MdAdd className={styles.logo} />
 			</button>
 			<form className={`${styles.form}`}>
-				{routePrefix}
+				<p className={styles.route}>{routePrefix}</p>
 				<input ref={inputRef} className={styles.input} type="text" max={100} />
 			</form>
 		</div>
