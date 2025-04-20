@@ -14,11 +14,13 @@ import kofi from "../../../public/assets/ko-fi/kofi_symbol.png";
 
 const Logo = () => {
 	return (
-		<Link aria-label="Home" href="/">
-			<div className={styles.homeContainer}>
-				<AiFillHome className={styles.logo} />
-			</div>
-		</Link>
+		<div>
+			<Link aria-label="Home" href="/">
+				<div className={styles.homeContainer}>
+					<AiFillHome className={styles.logo} />
+				</div>
+			</Link>
+		</div>
 	);
 };
 
