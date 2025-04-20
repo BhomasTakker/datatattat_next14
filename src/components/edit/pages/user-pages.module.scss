@@ -5,13 +5,13 @@
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	align-items: center;
 	padding: units.$rem_2 units.$rem_2;
 	margin-bottom: units.$rem_2;
 	border-radius: 10%;
 	background-color: colours.$shadowLight0;
 
 	h3 {
+		padding: units.$rem_2 units.$rem_2;
 		color: colours.$textColourDark;
 	}
 }
