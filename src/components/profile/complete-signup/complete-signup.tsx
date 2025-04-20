@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { isUsernameValid as checkIsUsernameValid } from "@/actions/signup/check-username";
 import { confirmUsername } from "@/actions/signup/confirm-username";
 import { useRouter } from "next/navigation";
+import { patterns } from "@/utils/regex";
 
 type Inputs = {
 	username: string;
@@ -26,7 +27,12 @@ export const CompleteSignup = ({ username }: CompleteSignupProps) => {
 		defaultValues: {},
 	});
 	const { refresh } = useRouter();
-	const { register, handleSubmit, watch } = methods;
+	const {
+		register,
+		handleSubmit,
+		watch,
+		formState: { errors },
+	} = methods;
 	const onSubmit = handleSubmit(async (data) => {
 		// console.log("SUBMIT", { data });
 		const isValid = await checkIsUsernameValid(data.username);
@@ -63,22 +69,36 @@ export const CompleteSignup = ({ username }: CompleteSignupProps) => {
 	return (
 		<FormProvider {...methods}>
 			<form onSubmit={onSubmit} className={styles.form}>
+				<h1 className={styles.header}>Complete Profile</h1>
 				<fieldset className={styles.field}>
-					<label htmlFor={"username"} className={styles.label}>
-						Confirm Username
-					</label>
-					<input
-						className={styles.input}
-						defaultValue={username}
-						{...register("username", { required: true })}
-					/>
-					<p
-						className={`${styles.warn} ${
-							isUsernameValid === false ? styles.showWarning : ""
-						}`}
-					>
-						Username already taken. You must pick another to continue.
-					</p>
+					<div className={styles.inputContainer}>
+						<label htmlFor={"username"} className={styles.label}>
+							<h2>Confirm Username</h2>
+						</label>
+						<input
+							className={styles.input}
+							defaultValue={username}
+							{...register("username", {
+								required: "Username is required!",
+								pattern: {
+									value: patterns.username.regex,
+									message: patterns.username.message,
+								},
+							})}
+						/>
+						{errors.username && (
+							<p className={`${styles.warn} ${styles.showWarning}`}>
+								{errors.username.message}
+							</p>
+						)}
+						<p
+							className={`${styles.warn} ${
+								isUsernameValid === false ? styles.showWarning : ""
+							}`}
+						>
+							Username invalid. You must pick another to continue.
+						</p>
+					</div>
 				</fieldset>
 				<Button type="submit" disabled={isSubmitDisabled}>
 					Submit

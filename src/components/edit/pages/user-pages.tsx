@@ -81,7 +81,7 @@ export const UserPages = ({ user }: UserPages) => {
 			<div className={styles.header}>
 				{/* Do a sort of header I guess? */}
 
-				<h1>User Pages</h1>
+				<h3>User Pages</h3>
 				<AddPageMenu
 					createPageHandler={onAddHandler}
 					routePrefix={`${userRoute}/`}

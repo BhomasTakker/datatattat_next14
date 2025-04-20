@@ -2,6 +2,16 @@
 @use "../../../scss/abstracts/units/" as *;
 
 .form {
+	.header {
+		padding: $rem_6 0 $rem_5;
+	}
+
+	.inputContainer {
+		display: flex;
+		flex-direction: column;
+		gap: $rem_2;
+	}
+
 	.field {
 		display: flex;
 		flex-direction: column;
@@ -33,7 +43,7 @@
 
 		.warn {
 			opacity: 0;
-			color: red;
+			color: $error;
 
 			&.showWarning {
 				opacity: 1;

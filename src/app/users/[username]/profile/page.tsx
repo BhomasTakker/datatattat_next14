@@ -8,6 +8,9 @@ import { PATHS } from "@/lib/routing/paths";
 import { MainHeader } from "@/components/header/main-header";
 import { connectToMongoDB } from "@/lib/mongo/db";
 
+// Profile page
+// We should have a profile page and a profile edit page
+// Go to edit to complete sign up and to update etc
 export default async function UserProfile({
 	params,
 }: {

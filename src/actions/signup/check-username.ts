@@ -3,6 +3,7 @@
 import { getUserByUsername } from "@/lib/mongo/actions/user";
 import { getSessionUser } from "../user/get-user";
 import { initialiseServices } from "@/lib/services/intialise-services";
+import { patterns } from "@/utils/regex";
 
 export async function doesUsernameExist(username: string) {
 	await initialiseServices();
@@ -38,10 +39,22 @@ export async function isUsernameSessionUser(username: string) {
 
 export async function isUsernameValid(username: string) {
 	await initialiseServices();
+	// Is username unique
 	const isUnique = await isUsernameUnique(username);
+
+	// if username is current user then it's okay for now
 	const isSessionUser = await isUsernameSessionUser(username);
 
-	if (isUnique || isSessionUser) {
+	//?
+	if (isSessionUser) {
+		return true;
+	}
+
+	if (!username.match(patterns.username.regex)) {
+		return false;
+	}
+
+	if (isUnique) {
 		return true;
 	}
 
