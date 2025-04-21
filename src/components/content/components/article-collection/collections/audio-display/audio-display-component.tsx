@@ -9,19 +9,24 @@ import { Interaction } from "../../article/interaction/interactions";
 import { InteractionsOptions } from "../../article/interaction/interactions-map";
 import { articleMetaLoader, articleRenderer, articleTemplate } from "../utils";
 import { WithData } from "@/components/ui/with-data/with-data";
-import { Article } from "../../article/article";
 import { DisplayArticle } from "./display-article";
+import {
+	AudioDisplayOptions,
+	AudioVerticalScrollerSize,
+} from "./audio-display";
 
 type AudioDisplayComponentProps = {
 	articles: CollectionItem[];
-};
+} & AudioDisplayOptions;
 
 export const AudioDisplayComponent = ({
 	articles = [],
+	...options
 }: AudioDisplayComponentProps) => {
 	const audioPlayerRef = useRef<HTMLAudioElement>(null);
 	const firstArticle = articles[0] || {};
 	const src = firstArticle.src;
+	const { size = AudioVerticalScrollerSize.medium } = options;
 	// if no src then we'll need to handle that
 	const [activeSrc, setActiveSrc] = useState(src);
 	const template = articleTemplate(styles);
@@ -35,7 +40,6 @@ export const AudioDisplayComponent = ({
 
 		// set active article
 		// store active article not src
-
 		setItem(item);
 		audioPlayer.src = item.src;
 		audioPlayer.play();
@@ -48,7 +52,7 @@ export const AudioDisplayComponent = ({
 			<div className={styles.audioPlayer}>
 				<AudioPlayer src={activeSrc} audioPlayerRef={audioPlayerRef} />
 			</div>
-			<ul className={styles.articles}>
+			<ul className={`${styles.articles} ${styles[size]}`}>
 				{articles.map((item) => (
 					<li key={item.src}>
 						<InViewComponent

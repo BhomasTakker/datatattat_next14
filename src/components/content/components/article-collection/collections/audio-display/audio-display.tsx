@@ -3,7 +3,15 @@ import { ArticleRenderProps } from "../types";
 import styles from "./audio-display.module.scss";
 import { AudioDisplayComponent } from "./audio-display-component";
 
-export type AudioDisplayOptions = {};
+export const AudioVerticalScrollerSize = {
+	large: "large",
+	medium: "medium",
+	small: "small",
+} as const;
+
+export type AudioDisplayOptions = {
+	size?: (typeof AudioVerticalScrollerSize)[keyof typeof AudioVerticalScrollerSize];
+};
 
 // we need the option of showing duration etc
 // meta component should be more dynamic

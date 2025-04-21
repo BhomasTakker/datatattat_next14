@@ -12,6 +12,17 @@
 		flex-direction: column;
 		margin-top: $rem_2;
 		gap: $rem_2;
+
+		&.small {
+			height: $screenHeightMd;
+		}
+		&.medium {
+			height: $screenHeightLg;
+		}
+		&.large {
+			height: $screenHeightXl;
+		}
+
 		@include ui.scrollYNoScroller();
 		@include article.articleCardListItem($rem_8, $rem_4, "1/1");
 		@media screen and (min-width: $screenWidthSm) {
