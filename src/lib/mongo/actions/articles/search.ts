@@ -5,28 +5,35 @@ import { CollectionItem } from "@/types/data-structures/collection/item/item";
 // This is wrong...
 // boolean for trustHigher...
 export type GetLatestArticlesProps = {
+	// must, mustNot, filter, should
 	query?: string;
+	// remove
 	textScore?: string;
-	//match
+	contentType?: string;
+
+	// can't at the moment
 	provider?: string;
 	origin?: string;
+
 	variant?: string;
-	contentType?: string;
+
 	before?: Date;
 	after?: Date;
-	trustHigher?: boolean;
-	trustLower?: boolean;
-	durationHigher?: string;
-	durationLower?: string;
+
+	// cannot query provider at the moment
+	// search index etc required
+	trustHigher?: string;
+	trustLower?: string;
 	leaningHigher?: boolean;
 	leaningLower?: boolean;
+
+	durationHigher?: string;
+	durationLower?: string;
 	region?: string;
 	language?: string;
-	// sort
+
 	sort?: string;
-	// limit
 	limit?: string;
-	// count? reutn count of articles
 };
 
 export const searchArticles = async (params: GetLatestArticlesProps) => {

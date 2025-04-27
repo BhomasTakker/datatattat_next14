@@ -31,22 +31,22 @@ const BASE_PARAMS: GenericInput[] = [
 		label: "Filter After ",
 		required: false,
 	},
-	{
-		id: "trustHigher",
-		type: EditInputs.number,
-		label: "Trust Rating Higher Than",
-		max: 100,
-		min: 0,
-		required: false,
-	},
-	{
-		id: "trustLower",
-		type: EditInputs.number,
-		label: "Trust Rating Lower Than",
-		max: 100,
-		min: 0,
-		required: false,
-	},
+	// {
+	// 	id: "trustHigher",
+	// 	type: EditInputs.number,
+	// 	label: "Trust Rating Higher Than",
+	// 	max: 100,
+	// 	min: 0,
+	// 	required: false,
+	// },
+	// {
+	// 	id: "trustLower",
+	// 	type: EditInputs.number,
+	// 	label: "Trust Rating Lower Than",
+	// 	max: 100,
+	// 	min: 0,
+	// 	required: false,
+	// },
 	{
 		id: "sort",
 		type: EditInputs.select,
@@ -129,15 +129,15 @@ export const PARAMS: GenericInput[] = [
 		required: false,
 		// searches title / use - to exclude words 'to search a phrase'
 	},
-	{
-		id: "textScore",
-		type: EditInputs.number,
-		label: "Text Score",
-		required: false,
-		step: 0.01,
-		min: 0,
-		// searches title / use - to exclude words 'to search a phrase'
-	},
+	// {
+	// 	id: "textScore",
+	// 	type: EditInputs.number,
+	// 	label: "Text Score",
+	// 	required: false,
+	// 	step: 0.01,
+	// 	min: 0,
+	// 	// searches title / use - to exclude words 'to search a phrase'
+	// },
 	...BASE_PARAMS,
 ];
 
