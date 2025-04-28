@@ -7,6 +7,14 @@ import { CollectionItem } from "@/types/data-structures/collection/item/item";
 export type GetLatestArticlesProps = {
 	// must, mustNot, filter, should
 	query?: string;
+
+	mustContain?: string[];
+	mustNotContain?: string[];
+	shouldContain?: string[];
+	filterContain?: string[];
+
+	minimumShouldMatch?: number;
+
 	// remove
 	textScore?: string;
 	contentType?: string;

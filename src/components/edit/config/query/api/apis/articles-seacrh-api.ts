@@ -129,6 +129,70 @@ export const PARAMS: GenericInput[] = [
 		required: false,
 		// searches title / use - to exclude words 'to search a phrase'
 	},
+	// split off into separate object
+	// We also want to add a regex option for inputs
+	{
+		id: "mustContain",
+		type: EditInputs.array,
+		label: "Contains",
+		title: "Contains",
+		createObject: false,
+		input: {
+			id: "must",
+			type: EditInputs.text,
+			label: "search term",
+		},
+	},
+	{
+		id: "mustNotContain",
+		type: EditInputs.array,
+		label: "Should Not Contain",
+		title: "Should Not Contain",
+		createObject: false,
+		input: {
+			id: "mustNot",
+			type: EditInputs.text,
+			label: "search term",
+		},
+	},
+	{
+		id: "shouldContain",
+		type: EditInputs.array,
+		label: "Should Contain",
+		title: "Should Contain",
+		createObject: false,
+		input: {
+			id: "should",
+			type: EditInputs.text,
+			label: "search term",
+		},
+	},
+	{
+		id: "minimumShouldMatchDescription",
+		type: EditInputs.description,
+		text: "If you have added 'should' values, you can set a minimum number of values to match. If 0 is set, 1 value should be set.",
+	},
+	{
+		id: "minimumShouldMatch",
+		type: EditInputs.number,
+		label: "Minimum Should Match",
+		required: false,
+		step: 1,
+		min: 0,
+		defaultValue: 0,
+	},
+	{
+		id: "filterContain",
+		type: EditInputs.array,
+		label: "Must Contain",
+		title: "Must Contain",
+		createObject: false,
+		input: {
+			id: "should",
+			type: EditInputs.text,
+			label: "search term",
+		},
+	},
 	// {
 	// 	id: "textScore",
 	// 	type: EditInputs.number,

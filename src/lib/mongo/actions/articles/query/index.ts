@@ -8,16 +8,12 @@ import { createSearchAggregate } from "./searchAggregate";
 
 export type Aggregator = PipelineStage[];
 
-const createAggregate = (queryParams: GetLatestArticlesProps) => {
-	const aggregate: Aggregator = [];
-
-	return createSearchAggregate(queryParams, aggregate);
-};
-
 export const buildArticleSearchQuery = async (
 	queryParams: GetLatestArticlesProps
 ) => {
-	const res = await Article.aggregate(createAggregate(queryParams));
+	const res = await Article.aggregate(
+		createSearchAggregate(queryParams, [] as Aggregator)
+	);
 
 	return res;
 };
