@@ -11,6 +11,7 @@ describe("ArticleImage Component", () => {
 		render(
 			<ArticleImage
 				image="test-image.jpg"
+				fallback="fallback-image.jpg"
 				imageAlt="Test Image"
 				styles={mockStyles}
 			/>
@@ -23,6 +24,7 @@ describe("ArticleImage Component", () => {
 		render(
 			<ArticleImage
 				image="test-image.jpg"
+				fallback="fallback-image.jpg"
 				imageAlt="Test Image"
 				styles={mockStyles}
 			/>
