@@ -5,6 +5,8 @@ import { GetLatestArticlesProps } from "../search";
 // MongoDB Atlas Search Course
 // https://learn.mongodb.com/learning-paths/atlas-search
 
+// Clean me up!!
+
 const HARD_LIMIT = 100;
 
 const getLimit = (queryParams: GetLatestArticlesProps) => {
@@ -64,6 +66,20 @@ const addDateRange = (filter: any[], queryParams: GetLatestArticlesProps) => {
 	return filter;
 };
 
+// A little ugly / do better
+const addMinimumShouldMatch = (queryParams: GetLatestArticlesProps) => {
+	const { minimumShouldMatch, shouldContain = [] } = queryParams;
+
+	if (minimumShouldMatch) {
+		const isValid = +minimumShouldMatch >= 0 && +minimumShouldMatch <= 100;
+		if (isValid && shouldContain.length >= +minimumShouldMatch) {
+			return +minimumShouldMatch;
+		}
+		return 0;
+	}
+	return 0;
+};
+
 const AvailableSort = {
 	NONE: "none",
 	RELEVANCE: "relevance",
@@ -104,7 +120,6 @@ export const createSearchAggregate = (
 		mustContain = [],
 		mustNotContain = [],
 		shouldContain = [],
-		minimumShouldMatch = 0,
 		filterContain = [],
 	} = queryParams;
 	const filter: any[] = [];
@@ -160,18 +175,20 @@ export const createSearchAggregate = (
 			// create sort
 			sort: addSort(queryParams),
 
+			// createCompoundQuery
 			compound: {
 				must: isMust ? must : undefined,
 				mustNot: isMustNot ? mustNot : undefined,
-				should: isShould ? should : undefined,
 				filter: isFilter ? filter : undefined,
+				should: isShould ? should : undefined,
+				minimumShouldMatch: addMinimumShouldMatch(queryParams),
 			},
 			count: {
 				type: "lowerBound",
 			},
 		},
 	});
-	// we need to use provider for
+	// we need to use provider for filtering trust
 	aggregaor.push({
 		$lookup: {
 			from: ArticleProvider.collection.name,
