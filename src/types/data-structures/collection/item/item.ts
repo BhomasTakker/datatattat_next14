@@ -7,6 +7,7 @@ export type ProviderItem = {
 	rating: number;
 	leaning: number;
 	origin: string;
+	logo?: string;
 };
 
 export type CollectionItem = BaseInfo & {
