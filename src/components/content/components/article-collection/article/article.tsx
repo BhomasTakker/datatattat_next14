@@ -19,6 +19,7 @@ export const Article = ({ article, styles }: ArticleProps) => {
 	} = article;
 	const { src: image, alt: imageAlt } = avatar || {};
 	const { published, publishers } = details || {};
+	const { logo = "" } = articleProvider || {};
 
 	// should be done on create/save data
 	const provider = src ? new URL(src).hostname : "";
@@ -36,6 +37,8 @@ export const Article = ({ article, styles }: ArticleProps) => {
 			{image && (
 				<ArticleImage
 					image={image}
+					// logo OR placeholder
+					fallback={logo}
 					imageAlt={
 						imageAlt ||
 						`We're sorry. This image does not have any alternative text.`
