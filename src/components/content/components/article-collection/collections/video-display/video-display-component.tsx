@@ -44,18 +44,18 @@ export const VideoDisplayComponent = ({
 		if (!video) {
 			return;
 		}
+		// This works to effectively reset the error - if there is an error
+		// @ts-expect-error null works but flags error / undefine ddoes not work...
+		video.error(null);
+		video.autoplay(true);
 		video.src({
 			src: item.src,
 			type: sourceType,
 		});
 		video.poster(item.avatar?.src);
-		// in case no autoplay
-		// Let's say we play on click for now
-		video.play();
 	};
 
 	const options = {
-		// autoplay: PlayerAutoplayOptions.Any,
 		autoplay: autoplay ? PlayerAutoplayOptions.Any : false,
 		aspectRatio: "16:9",
 		controls: true,
