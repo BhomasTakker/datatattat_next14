@@ -32,6 +32,13 @@ jest.mock("./meta/meta", () => {
 	};
 });
 
+jest.mock("../../../../../utils/html", () => {
+	return {
+		__esModule: true,
+		stripHTML: (html: string) => html,
+	};
+});
+
 const mockStyles: StyleSheet = {
 	article: "article-class",
 	contentContainer: "content-container-class",
