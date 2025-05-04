@@ -163,7 +163,7 @@
 
 		.image {
 			@include base.image($maxWidth, $minWidth);
-			aspect-ratio: $aspectW / $aspectH;
+			aspect-ratio: $aspectW "/" $aspectH;
 		}
 
 		.contentContainer {
