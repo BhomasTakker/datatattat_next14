@@ -46,6 +46,10 @@ const PageSchema = new Schema<IPage>(
 			type: Schema.Types.ObjectId,
 			required: true,
 		},
+		profile: {
+			type: Object,
+			required: false,
+		},
 		content: ContentSchema,
 	},
 	{ timestamps: true }
