@@ -2,6 +2,7 @@ import { StyleSheet } from "@/types/css";
 import { CollectionItem } from "@/types/data-structures/collection/item/item";
 import { Meta } from "./meta/meta";
 import { ArticleImage } from "./media/image";
+import { stripHTML } from "@/utils/html";
 
 type ArticleProps = {
 	article: CollectionItem;
@@ -48,8 +49,10 @@ export const Article = ({ article, styles }: ArticleProps) => {
 			)}
 			<div className={styles.contentContainer}>
 				<div className={styles.textContainer}>
-					<h3 className={styles.title}>{title}</h3>
-					<p className={styles.description}>{description}</p>
+					<h3 className={styles.title}>{stripHTML(title)}</h3>
+					{description ? (
+						<p className={styles.description}>{stripHTML(description)}</p>
+					) : null}
 				</div>
 				<Meta
 					styles={styles}
