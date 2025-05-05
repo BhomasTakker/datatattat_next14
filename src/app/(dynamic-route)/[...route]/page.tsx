@@ -12,15 +12,18 @@ type Props = {
 
 export const revalidate = 960;
 
-// export async function generateStaticParams() {
-// 	return [
-// 		{ route: ["world"] },
-// 		{ route: ["us"] },
-// 		{ route: ["uk"] },
-// 		{ route: ["ukraine"] },
-// 		{ route: ["trade-war"] },
-// 	];
-// }
+export async function generateStaticParams() {
+	// get admin routes from the database
+	return [
+		{ route: ["world"] },
+		{ route: ["us"] },
+		{ route: ["uk"] },
+		{ route: ["uk", "gangs-of-scotland"] },
+		{ route: ["ukraine"] },
+		{ route: ["world", "trade-war"] },
+		{ route: ["us", "punch-drunk"] },
+	];
+}
 
 export const generateMetadata = async ({ params }: Props) => {
 	await initialiseServices();
