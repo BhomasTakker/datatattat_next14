@@ -1,4 +1,5 @@
 User-agent: *
-Allow: /$
-Disallow: /
+
+Disallow: /user
+Disallow: /edit 
 Crawl-delay: 10
