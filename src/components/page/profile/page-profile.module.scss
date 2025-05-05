@@ -6,9 +6,10 @@
 	display: flex;
 
 	.title {
-		font-size: $page-title-sm;
+		font-size: $page-title-md;
 		font-family: $page-title-font;
 		color: $titleColourDark;
+		padding-top: $rem_6;
 
 		justify-content: left;
 
