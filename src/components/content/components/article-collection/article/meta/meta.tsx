@@ -7,12 +7,13 @@ type Props = {
 	published?: Date | string;
 };
 
+// Space added to publisher as when forced to one line we can trimm a piece of font
 export const Meta = ({ published, publisher, styles }: Props) => {
 	return (
 		<div className={styles.meta}>
 			{publisher ? (
 				<p className={styles.publishers} data-testid="publisher">
-					{publisher}
+					{`${publisher} `}
 				</p>
 			) : (
 				<></>
