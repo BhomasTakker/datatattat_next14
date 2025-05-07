@@ -31,6 +31,7 @@ const createOpenGraph = (og: CardData) => {
 const createTwitterCard = (twitter: CardData) => {
 	const { title, description } = twitter;
 	return {
+		// cardType: "summary", / summary_large_image
 		card: "summary_large_image",
 		title,
 		description,
