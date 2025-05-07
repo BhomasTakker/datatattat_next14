@@ -22,13 +22,11 @@ export const ArticleImage = ({
 	};
 
 	return (
-		<div>
-			<img
-				src={sourceImage}
-				alt={imageAlt}
-				className={styles.image}
-				onError={onErrorHandler}
-			/>
-		</div>
+		<img
+			src={sourceImage}
+			alt={imageAlt}
+			className={styles.image}
+			onError={onErrorHandler}
+		/>
 	);
 };
