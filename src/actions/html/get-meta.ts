@@ -13,6 +13,9 @@ export type MetaData = {
 };
 
 const getOGMetaFromCheerio = (str: string) => {
+	if (!str) {
+		return null;
+	}
 	const $ = cheerio.load(str);
 	const metaTags: any = {};
 
@@ -49,6 +52,10 @@ export const getMeta = async (src: string) => {
 		}
 
 		const meta = getOGMetaFromCheerio(result);
+
+		if (!meta) {
+			return null;
+		}
 
 		// Do this properly
 		// set media type if possible - video/youtube
