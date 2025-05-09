@@ -16,6 +16,7 @@ const getOGMetaFromCheerio = (str: string) => {
 	if (!str) {
 		return null;
 	}
+	// if valid URL
 	const $ = cheerio.load(str);
 	const metaTags: any = {};
 
