@@ -1,5 +1,7 @@
 import { NewsSources } from "../sources";
 
+// Surely no longer needed
+
 export const UK = {
 	categories: ["news"],
 	// news should be more type?
