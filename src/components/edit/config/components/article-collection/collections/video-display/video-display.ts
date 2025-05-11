@@ -45,12 +45,12 @@ export const VIDEO_DISPLAY: InputListProps = {
 				// PlayerSourceTypes.Mp4,
 			],
 		},
-		{
-			id: "autoplay",
-			type: EditInputs.switch,
-			label: "Autoplay",
-			defaultChecked: false,
-			// defaultValue: false,
-		},
+		// {
+		// 	id: "autoplay",
+		// 	type: EditInputs.switch,
+		// 	label: "Autoplay",
+		// 	defaultChecked: false,
+		// 	// defaultValue: false,
+		// },
 	],
 };

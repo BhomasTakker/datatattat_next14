@@ -122,13 +122,13 @@ export const PARAMS: GenericInput[] = [
 		// we are saved on comopnent props object - our parent
 		optionId: undefined, // "variantProps",
 	},
-	{
-		id: "query",
-		type: EditInputs.text,
-		label: "Text Search",
-		required: false,
-		// searches title / use - to exclude words 'to search a phrase'
-	},
+	// {
+	// 	id: "query",
+	// 	type: EditInputs.text,
+	// 	label: "Text Search",
+	// 	required: false,
+	// 	// searches title / use - to exclude words 'to search a phrase'
+	// },
 	// split off into separate object
 	// We also want to add a regex option for inputs
 	{
