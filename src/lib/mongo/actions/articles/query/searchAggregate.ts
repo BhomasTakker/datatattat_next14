@@ -26,7 +26,6 @@ export const createSearchAggregate = (
 	aggregator: Aggregator
 ) => {
 	const {
-		query,
 		variant,
 		region,
 		language,
@@ -44,7 +43,7 @@ export const createSearchAggregate = (
 	const must: any[] = [];
 	const mustNot: any[] = [];
 	const should: any[] = [];
-	// if (query) {
+
 	if (variant) addFilter(filter, variant, "variant");
 	if (region) addFilter(filter, region, "details.region");
 	if (language) addFilter(filter, language, "details.languge");
@@ -75,10 +74,6 @@ export const createSearchAggregate = (
 
 	addDateRange(filter, queryParams);
 	addDurationRange(filter, queryParams);
-
-	if (query) {
-		addFilter(must, query, "title");
-	}
 
 	const isFilter = filter.length > 0 ? { filter } : {};
 	const isMust = must.length > 0 ? { must } : {};

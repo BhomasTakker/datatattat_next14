@@ -2,12 +2,7 @@ import { fetchWithCache } from "@/lib/redis/redis-fetch";
 import { buildArticleSearchQuery } from "./query";
 import { CollectionItem } from "@/types/data-structures/collection/item/item";
 
-// This is wrong...
-// boolean for trustHigher...
 export type GetLatestArticlesProps = {
-	// must, mustNot, filter, should
-	query?: string;
-
 	mustContain?: string[];
 	mustNotContain?: string[];
 	shouldContain?: string[];
