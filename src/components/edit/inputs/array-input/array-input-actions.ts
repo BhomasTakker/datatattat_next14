@@ -51,13 +51,6 @@ export const add =
 	}: AddHOCProps) =>
 	() => {
 		const inputList: GenericInput[] = getValues(id) || [];
-		if (isDirty) {
-			// This should be temporary - it is just the quickest safest way of solving the 'corrupting' data issues
-			// on move before saving the array will move assign the stored value to the input - meaning changes are lost
-			// display message to save changes
-			console.log("Form is dirty - save changes before adding.");
-			return;
-		}
 		// we set value here to give us something to read in InputList
 		// there may be a better way to do this
 		if (createObject) {
