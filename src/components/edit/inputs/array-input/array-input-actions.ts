@@ -6,6 +6,7 @@ import {
 	UseFormGetValues,
 	UseFormSetValue,
 } from "react-hook-form";
+import { toast } from "sonner";
 
 type Direction = "up" | "down";
 
@@ -73,7 +74,12 @@ export const onDelete =
 			// This should be temporary - it is just the quickest safest way of solving the 'corrupting' data issues
 			// on move before saving the array will move assign the stored value to the input - meaning changes are lost
 			// display message to save changes
-			console.log("Form is dirty - save changes before deleting.");
+			toast("You must save your changes before deleting an item.", {
+				action: {
+					label: "Save",
+					onClick: () => {},
+				},
+			});
 			return;
 		}
 		const newArray = inputs.filter((_, i) => index !== i);
@@ -88,7 +94,13 @@ export const move =
 			// This should be temporary - it is just the quickest safest way of solving the 'corrupting' data issues
 			// on move before saving the array will move assign the stored value to the input - meaning changes are lost
 			// display message to save changes
-			console.log("Form is dirty - save changes before moving");
+			// toast.error("You must save your changes before moving an item.");
+			toast("You must save your changes before moving an item.", {
+				action: {
+					label: "Save",
+					onClick: () => {},
+				},
+			});
 			return;
 		}
 		if (index === 0 && direction === "up") return;
