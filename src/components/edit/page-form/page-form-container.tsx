@@ -6,11 +6,11 @@ import { IPage } from "@/types/page";
 import { useEffect } from "react";
 import { savePage } from "@/actions/edit/update-page";
 import { useRouter } from "next/navigation";
-import { SaveState, useSaveState } from "@/components/hooks/use-save-state";
+import { EditContextProvider } from "../context/edit-context";
+import { toast } from "sonner";
 
 export const PageFormContainer = ({ pageData }: { pageData: IPage }) => {
 	const { route } = pageData;
-	const { setSaveState, status, reset } = useSaveState();
 	const methods = useForm({
 		// read up on this / required for unregistering fields
 		// use in conjunction with unregister
@@ -27,24 +27,28 @@ export const PageFormContainer = ({ pageData }: { pageData: IPage }) => {
 	const submitHandler = methods.handleSubmit(async (data) => {
 		// This should be done on the server...
 		// Take what's changed and merge with the page object
-		setSaveState(SaveState.Saving);
 		const update = { ...pageData, ...data };
 
-		savePage(route, update)
+		const promise = savePage(route, update)
 			.then((res) => {
-				reset(5000);
 				methods.reset(data);
-				setSaveState(SaveState.Saved);
 			})
 			.catch((err) => {
-				setSaveState(SaveState.Error);
+				console.error(err);
 			});
+
+		toast.promise(promise, {
+			loading: "Saving...",
+			success: `Page has been saved!`,
+			error: "Error saving page",
+		});
 	});
 
 	return (
-		<FormProvider {...methods}>
-			<PageForm submitHandler={submitHandler} />
-			{status}
-		</FormProvider>
+		<EditContextProvider value={{ submitHandler }}>
+			<FormProvider {...methods}>
+				<PageForm submitHandler={submitHandler} />
+			</FormProvider>
+		</EditContextProvider>
 	);
 };

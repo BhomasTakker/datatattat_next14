@@ -6,7 +6,6 @@ import {
 	UseFormGetValues,
 	UseFormSetValue,
 } from "react-hook-form";
-import { toast } from "sonner";
 
 type Direction = "up" | "down";
 
@@ -26,6 +25,7 @@ type DeleteHOCProps = {
 	setInputList: Dispatch<SetStateAction<GenericInput[]>>;
 	id: string;
 	isDirty: boolean;
+	onDirty: () => void;
 };
 
 type MoveHOCProps = {
@@ -34,6 +34,7 @@ type MoveHOCProps = {
 	setInputList: Dispatch<SetStateAction<GenericInput[]>>;
 	id: string;
 	isDirty: boolean;
+	onDirty: () => void;
 };
 
 export const initialise = () => {};
@@ -68,18 +69,10 @@ export const add =
 	};
 
 export const onDelete =
-	({ inputs, setValue, setInputList, id, isDirty }: DeleteHOCProps) =>
+	({ inputs, setValue, setInputList, id, isDirty, onDirty }: DeleteHOCProps) =>
 	(index: number) => {
 		if (isDirty) {
-			// This should be temporary - it is just the quickest safest way of solving the 'corrupting' data issues
-			// on move before saving the array will move assign the stored value to the input - meaning changes are lost
-			// display message to save changes
-			toast("You must save your changes before deleting an item.", {
-				action: {
-					label: "Save",
-					onClick: () => {},
-				},
-			});
+			onDirty();
 			return;
 		}
 		const newArray = inputs.filter((_, i) => index !== i);
@@ -88,19 +81,10 @@ export const onDelete =
 	};
 
 export const move =
-	({ inputs, setValue, setInputList, id, isDirty }: MoveHOCProps) =>
+	({ inputs, setValue, setInputList, id, isDirty, onDirty }: MoveHOCProps) =>
 	(index: number, direction: Direction) => {
 		if (isDirty) {
-			// This should be temporary - it is just the quickest safest way of solving the 'corrupting' data issues
-			// on move before saving the array will move assign the stored value to the input - meaning changes are lost
-			// display message to save changes
-			// toast.error("You must save your changes before moving an item.");
-			toast("You must save your changes before moving an item.", {
-				action: {
-					label: "Save",
-					onClick: () => {},
-				},
-			});
+			onDirty();
 			return;
 		}
 		if (index === 0 && direction === "up") return;

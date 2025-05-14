@@ -8,11 +8,11 @@ import { NavList } from "./nav/nav-list";
 import { Button } from "@/components/ui/button";
 
 import styles from "./header-form.module.scss";
-import { SaveState, useSaveState } from "@/components/hooks/use-save-state";
 import { User } from "@/types/auth/session";
 import { getPagesForUser } from "@/actions/page/page-actions";
 import { useEffect, useState } from "react";
 import { IPage } from "@/types/page";
+import { toast } from "sonner";
 
 type HeaderFormProps = {
 	headerData: Omit<HeaderType, "createdAt" | "updatedAt">;
@@ -20,7 +20,6 @@ type HeaderFormProps = {
 };
 
 export const HeaderForm = ({ headerData, user }: HeaderFormProps) => {
-	const { setSaveState, status, reset } = useSaveState();
 	const [pages, setPages] = useState<IPage[]>([]);
 	const { user_id } = user;
 	const methods = useForm({
@@ -41,15 +40,13 @@ export const HeaderForm = ({ headerData, user }: HeaderFormProps) => {
 	const { route, nav } = headerData;
 
 	const onSubmit = handleSubmit(async (data) => {
-		setSaveState(SaveState.Saving);
-		saveHeader(route, data)
-			.then((res) => {
-				reset(5000);
-				setSaveState(SaveState.Saved);
-			})
-			.catch((err) => {
-				setSaveState(SaveState.Error);
-			});
+		const promise = saveHeader(route, data);
+
+		toast.promise(promise, {
+			loading: "Saving...",
+			success: `Header has been saved!`,
+			error: "Error saving HEade",
+		});
 	});
 
 	return (
@@ -58,7 +55,6 @@ export const HeaderForm = ({ headerData, user }: HeaderFormProps) => {
 				<NavList links={nav} pages={pages} />
 				<Button type="submit">Submit</Button>
 			</form>
-			{status}
 		</FormProvider>
 	);
 };
