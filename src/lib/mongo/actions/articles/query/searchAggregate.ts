@@ -44,6 +44,14 @@ export const createSearchAggregate = (
 	const mustNot: any[] = [];
 	const should: any[] = [];
 
+	// to search phrases
+	//  "\"coffee shop\" cakes"
+
+	// within the past x amount of time
+	// last hour, last 3, last 6, last 12, last 24,
+	// last 2 days, last 3 days, last 7 days, last 2 weeks, last 30 days
+	// last 3 months, last 6 months, last year, all time
+
 	if (variant) addFilter(filter, variant, "variant");
 	if (region) addFilter(filter, region, "details.region");
 	if (language) addFilter(filter, language, "details.languge");
