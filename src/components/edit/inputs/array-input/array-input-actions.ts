@@ -16,6 +16,7 @@ type AddHOCProps = {
 	id: string;
 	inputId: string;
 	createObject: boolean;
+	isDirty: boolean;
 };
 
 type DeleteHOCProps = {
@@ -23,6 +24,7 @@ type DeleteHOCProps = {
 	setValue: UseFormSetValue<FieldValues>;
 	setInputList: Dispatch<SetStateAction<GenericInput[]>>;
 	id: string;
+	isDirty: boolean;
 };
 
 type MoveHOCProps = {
@@ -30,6 +32,7 @@ type MoveHOCProps = {
 	setValue: UseFormSetValue<FieldValues>;
 	setInputList: Dispatch<SetStateAction<GenericInput[]>>;
 	id: string;
+	isDirty: boolean;
 };
 
 export const initialise = () => {};
@@ -44,9 +47,17 @@ export const add =
 		id,
 		inputId,
 		createObject,
+		isDirty,
 	}: AddHOCProps) =>
 	() => {
 		const inputList: GenericInput[] = getValues(id) || [];
+		if (isDirty) {
+			// This should be temporary - it is just the quickest safest way of solving the 'corrupting' data issues
+			// on move before saving the array will move assign the stored value to the input - meaning changes are lost
+			// display message to save changes
+			console.log("Form is dirty - save changes before adding.");
+			return;
+		}
 		// we set value here to give us something to read in InputList
 		// there may be a better way to do this
 		if (createObject) {
@@ -63,16 +74,30 @@ export const add =
 	};
 
 export const onDelete =
-	({ inputs, setValue, setInputList, id }: DeleteHOCProps) =>
+	({ inputs, setValue, setInputList, id, isDirty }: DeleteHOCProps) =>
 	(index: number) => {
+		if (isDirty) {
+			// This should be temporary - it is just the quickest safest way of solving the 'corrupting' data issues
+			// on move before saving the array will move assign the stored value to the input - meaning changes are lost
+			// display message to save changes
+			console.log("Form is dirty - save changes before deleting.");
+			return;
+		}
 		const newArray = inputs.filter((_, i) => index !== i);
 		setValue(id, newArray);
 		setInputList(newArray);
 	};
 
 export const move =
-	({ inputs, setValue, setInputList, id }: MoveHOCProps) =>
+	({ inputs, setValue, setInputList, id, isDirty }: MoveHOCProps) =>
 	(index: number, direction: Direction) => {
+		if (isDirty) {
+			// This should be temporary - it is just the quickest safest way of solving the 'corrupting' data issues
+			// on move before saving the array will move assign the stored value to the input - meaning changes are lost
+			// display message to save changes
+			console.log("Form is dirty - save changes before moving");
+			return;
+		}
 		if (index === 0 && direction === "up") return;
 		if (index === inputs.length - 1 && direction === "down") return;
 

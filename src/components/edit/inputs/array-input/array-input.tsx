@@ -71,7 +71,8 @@ export const ArrayInput = ({
 	disabled = false,
 }: ArrayInputProps) => {
 	const { label: inputLabel, id: inputId = "" } = input;
-	const { getValues, setValue } = useFormContext();
+	const { getValues, setValue, formState } = useFormContext();
+	const { isDirty } = formState;
 
 	const inputs: GenericInput[] = getValues(id) || defaultValue || [];
 
@@ -81,6 +82,7 @@ export const ArrayInput = ({
 
 	const [inputList, setInputList] =
 		useState<GenericInput[]>(inputsWithUniqueKeys);
+	// isDirty would be better coming from the array id
 
 	// We need to re-render the component to update the inputList
 	// Whenever we move an array object, or delete
@@ -94,13 +96,21 @@ export const ArrayInput = ({
 		id,
 		inputId,
 		createObject,
+		isDirty,
 	});
-	const onMove = move({ inputs: inputList, setValue, setInputList, id });
+	const onMove = move({
+		inputs: inputList,
+		setValue,
+		setInputList,
+		id,
+		isDirty,
+	});
 	const onDeleteHnd = onDelete({
 		inputs: inputList,
 		setValue,
 		setInputList,
 		id,
+		isDirty,
 	});
 
 	const showControls = disabled ? false : true;

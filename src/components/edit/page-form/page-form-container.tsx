@@ -33,6 +33,7 @@ export const PageFormContainer = ({ pageData }: { pageData: IPage }) => {
 		savePage(route, update)
 			.then((res) => {
 				reset(5000);
+				methods.reset(data);
 				setSaveState(SaveState.Saved);
 			})
 			.catch((err) => {
