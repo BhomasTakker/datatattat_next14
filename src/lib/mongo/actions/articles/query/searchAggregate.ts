@@ -7,6 +7,7 @@ import {
 	addSort,
 	addMinimumShouldMatch,
 	getLimit,
+	addWithinTimeFrame,
 } from "./search-query-functions";
 import {
 	addFields,
@@ -81,6 +82,7 @@ export const createSearchAggregate = (
 	}
 
 	addDateRange(filter, queryParams);
+	addWithinTimeFrame(filter, queryParams);
 	addDurationRange(filter, queryParams);
 
 	const isFilter = filter.length > 0 ? { filter } : {};
