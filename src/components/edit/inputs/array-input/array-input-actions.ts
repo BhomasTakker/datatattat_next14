@@ -16,6 +16,7 @@ type AddHOCProps = {
 	id: string;
 	inputId: string;
 	createObject: boolean;
+	isDirty: boolean;
 };
 
 type DeleteHOCProps = {
@@ -23,6 +24,8 @@ type DeleteHOCProps = {
 	setValue: UseFormSetValue<FieldValues>;
 	setInputList: Dispatch<SetStateAction<GenericInput[]>>;
 	id: string;
+	isDirty: boolean;
+	onDirty: () => void;
 };
 
 type MoveHOCProps = {
@@ -30,6 +33,8 @@ type MoveHOCProps = {
 	setValue: UseFormSetValue<FieldValues>;
 	setInputList: Dispatch<SetStateAction<GenericInput[]>>;
 	id: string;
+	isDirty: boolean;
+	onDirty: () => void;
 };
 
 export const initialise = () => {};
@@ -44,6 +49,7 @@ export const add =
 		id,
 		inputId,
 		createObject,
+		isDirty,
 	}: AddHOCProps) =>
 	() => {
 		const inputList: GenericInput[] = getValues(id) || [];
@@ -63,16 +69,24 @@ export const add =
 	};
 
 export const onDelete =
-	({ inputs, setValue, setInputList, id }: DeleteHOCProps) =>
+	({ inputs, setValue, setInputList, id, isDirty, onDirty }: DeleteHOCProps) =>
 	(index: number) => {
+		if (isDirty) {
+			onDirty();
+			return;
+		}
 		const newArray = inputs.filter((_, i) => index !== i);
 		setValue(id, newArray);
 		setInputList(newArray);
 	};
 
 export const move =
-	({ inputs, setValue, setInputList, id }: MoveHOCProps) =>
+	({ inputs, setValue, setInputList, id, isDirty, onDirty }: MoveHOCProps) =>
 	(index: number, direction: Direction) => {
+		if (isDirty) {
+			onDirty();
+			return;
+		}
 		if (index === 0 && direction === "up") return;
 		if (index === inputs.length - 1 && direction === "down") return;
 

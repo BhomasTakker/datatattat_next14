@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { FaArrowDown, FaArrowUp } from "react-icons/fa6";
 import { MdDelete } from "react-icons/md";
@@ -10,6 +10,8 @@ import { InputFactory } from "../input-factory";
 import { add, move, onDelete } from "./array-input-actions";
 import { randomKeyGenerator } from "@/utils/edit";
 import { ArrayInputProps, GenericInput } from "@/types/edit/inputs/inputs";
+import { EditContext } from "../../context/edit-context";
+import { toast } from "sonner";
 
 ////////////////////////////////
 // Sort types out for inputs
@@ -71,7 +73,9 @@ export const ArrayInput = ({
 	disabled = false,
 }: ArrayInputProps) => {
 	const { label: inputLabel, id: inputId = "" } = input;
-	const { getValues, setValue } = useFormContext();
+	const { getValues, setValue, formState } = useFormContext();
+	const { isDirty } = formState;
+	const { submitHandler } = useContext(EditContext);
 
 	const inputs: GenericInput[] = getValues(id) || defaultValue || [];
 
@@ -81,6 +85,7 @@ export const ArrayInput = ({
 
 	const [inputList, setInputList] =
 		useState<GenericInput[]>(inputsWithUniqueKeys);
+	// isDirty would be better coming from the array id
 
 	// We need to re-render the component to update the inputList
 	// Whenever we move an array object, or delete
@@ -94,13 +99,38 @@ export const ArrayInput = ({
 		id,
 		inputId,
 		createObject,
+		isDirty,
+		// probably something like this
 	});
-	const onMove = move({ inputs: inputList, setValue, setInputList, id });
+	const onMove = move({
+		inputs: inputList,
+		setValue,
+		setInputList,
+		id,
+		isDirty,
+		onDirty: () => {
+			toast("You must save your changes before moving an item.", {
+				action: {
+					label: "Save",
+					onClick: () => submitHandler(getValues()),
+				},
+			});
+		},
+	});
 	const onDeleteHnd = onDelete({
 		inputs: inputList,
 		setValue,
 		setInputList,
 		id,
+		isDirty,
+		onDirty: () => {
+			toast("You must save your changes before deleting an item.", {
+				action: {
+					label: "Save",
+					onClick: () => submitHandler(getValues()),
+				},
+			});
+		},
 	});
 
 	const showControls = disabled ? false : true;
