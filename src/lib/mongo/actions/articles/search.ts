@@ -20,8 +20,10 @@ export type GetLatestArticlesProps = {
 
 	variant?: string;
 
+	// time based
 	before?: Date;
 	after?: Date;
+	within?: string;
 
 	// cannot query provider at the moment
 	// search index etc required
