@@ -19,7 +19,11 @@ export const apiFetch = async (query: WithQuery) => {
 
 	const api = apiMap.get(provider);
 	if (!api) {
-		throw new Error("Invalid API provider");
+		console.error("Invalid API provider:", provider);
+		return {
+			error: "Invalid API provider",
+			items: [],
+		};
 	}
 
 	const data = await api(params);
