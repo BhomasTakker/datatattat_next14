@@ -48,7 +48,7 @@ export const AudioDisplayComponent = ({
 	return (
 		<div className={styles.container}>
 			{/* Display article */}
-			<DisplayArticle item={item} />
+			<DisplayArticle key={item.title} item={item} />
 			<div className={styles.audioPlayer}>
 				<AudioPlayer src={activeSrc} audioPlayerRef={audioPlayerRef} />
 			</div>
