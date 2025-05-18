@@ -11,7 +11,8 @@ export const getParentId = (id: string) => {
 };
 // Just simple math random uuid?
 export const randomKeyGenerator = () => {
-	return Math.random().toString(36).substring(7);
+	// Could theoretically return less than 5 characters, but the odds are low
+	return Math.random().toString(36).slice(2, 7);
 };
 
 ////////////////
