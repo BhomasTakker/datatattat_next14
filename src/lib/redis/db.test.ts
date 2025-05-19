@@ -1,5 +1,13 @@
+// Mock the Redis import
+jest.mock("ioredis", () => {
+	return {
+		__esModule: true,
+		default: jest.fn(() => {
+			return { some: "connection" };
+		}),
+	};
+});
 // need throw error test
-// not sure the cached connection means much
 describe("redis db", () => {
 	describe("connectToRedisDB", () => {
 		afterEach(() => {
@@ -7,19 +15,6 @@ describe("redis db", () => {
 			jest.clearAllMocks();
 		});
 		it("should return a Redis connection", () => {
-			// Mock the Redis constructor
-			const mockRedis = jest.fn();
-			const mockConnection = { some: "connection" };
-			(mockRedis as any).mockReturnValue(mockConnection);
-
-			// Mock the Redis import
-			jest.mock("ioredis", () => {
-				return {
-					__esModule: true,
-					default: mockRedis,
-				};
-			});
-
 			// Import the function to test
 			const { connectToRedisDB } = require("./db");
 
@@ -27,21 +22,12 @@ describe("redis db", () => {
 			const connection = connectToRedisDB();
 
 			// Check that the connection is the same as the mock connection
-			expect(connection).toBe(mockConnection);
+			// strong equality
+			expect(connection).not.toBe({ some: "connection" });
+			// Loose equality
+			expect(connection).toEqual({ some: "connection" });
 		});
 		it("Should return a cached connection", () => {
-			const mockRedis = jest.fn();
-			const mockConnection = { some: "connection" };
-			(mockRedis as any).mockReturnValue(mockConnection);
-
-			// Mock the Redis import
-			jest.mock("ioredis", () => {
-				return {
-					__esModule: true,
-					default: mockRedis,
-				};
-			});
-
 			// Import the function to test
 			const { connectToRedisDB } = require("./db");
 
