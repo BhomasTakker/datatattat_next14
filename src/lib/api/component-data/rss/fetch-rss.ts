@@ -51,7 +51,7 @@ export const getParserCustomFields = (type: string) => {
 	return {};
 };
 
-const getCollection = async ({ url, variant }: FetchRSSCollection) => {
+export const getCollection = async ({ url, variant }: FetchRSSCollection) => {
 	const articleCollection = await getArticleCollectionByFeed(url);
 	if (articleCollection) {
 		return cloneDeep(articleCollection) as RSSArticleCollection;
@@ -82,7 +82,10 @@ const getCollection = async ({ url, variant }: FetchRSSCollection) => {
 	return convertedCollection;
 };
 
-const fetchRSSCollection = async ({ url, variant }: FetchRSSCollection) => {
+export const fetchRSSCollection = async ({
+	url,
+	variant,
+}: FetchRSSCollection) => {
 	const isValid = isStringValidURL(url);
 	if (!isValid) {
 		return {
