@@ -29,6 +29,9 @@ const mockUser: MockUser = {
 };
 
 describe("user actions", () => {
+	beforeEach(() => {
+		console.error = jest.fn();
+	});
 	afterEach(() => {
 		jest.clearAllMocks();
 	});

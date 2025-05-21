@@ -12,8 +12,6 @@ import {
 	getParserCustomFields,
 } from "./fetch-rss";
 
-import * as cheerio from "cheerio";
-
 jest.mock("cheerio", () => {
 	return {
 		__esModule: true,
@@ -37,6 +35,9 @@ describe("fetch-rss", () => {
 	const mockCollection = { id: "1", items: [] };
 
 	beforeEach(() => {
+		console.error = jest.fn();
+	});
+	afterEach(() => {
 		jest.clearAllMocks();
 	});
 
