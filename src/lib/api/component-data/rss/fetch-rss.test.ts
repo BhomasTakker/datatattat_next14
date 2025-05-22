@@ -2,8 +2,6 @@ import * as articleCollectionActions from "../../../../lib/mongo/actions/article
 import * as redisFetch from "../../../../lib/redis/redis-fetch";
 import * as rssParseModule from "./rss-parse";
 import * as adapters from "./adapters/article-adapter";
-import * as videoAdapters from "./adapters/video-adapter";
-import * as audioAdapters from "./adapters/audio-adapter";
 import * as urlUtils from "../../../../utils/url";
 import {
 	getCollection,
