@@ -12,8 +12,6 @@ const TYPE = "video";
 // Restrict to videos allowed to be played outside of youtube
 const VIDEO_SYNDICATED = "true";
 
-const API_KEY = process.env.YOUTUBE_API_KEY;
-
 const CACHE_TIME = 60 * 60;
 
 // 'videoCount' | <-channel sort option
@@ -52,7 +50,7 @@ export type YouTubeSearchParams = {
 	// relatedToVideoId?: string;
 };
 
-const convertYouTubeItems = (items: YouTubeItem[]): CollectionItem[] => {
+export const convertYouTubeItems = (items: YouTubeItem[]): CollectionItem[] => {
 	return items.map((item) => {
 		const { snippet, id } = item;
 		const { title, description, thumbnails, channelTitle, publishedAt } =
@@ -90,6 +88,7 @@ const convertYouTubeItems = (items: YouTubeItem[]): CollectionItem[] => {
 
 export const youtubeApiFetch = async (params: YouTubeSearchParams) => {
 	const { ...rest } = params;
+	const API_KEY = process.env.YOUTUBE_API_KEY;
 
 	if (!API_KEY) {
 		throw new Error("No API Key found");
