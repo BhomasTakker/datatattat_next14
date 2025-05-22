@@ -6,7 +6,7 @@ import { cloneDeep } from "@/utils/object";
 import { filterLimit } from "../utils/limit";
 import { saveOrUpdateArticle } from "@/actions/data/article/save-article";
 
-const adaptItem = async (item: YouTubeRSSItem) => {
+export const adaptItem = async (item: YouTubeRSSItem) => {
 	const media = item["media:group"];
 	const mediaTitle = media["media:title"][0];
 	const mediaThumbnail = media["media:thumbnail"][0].$.url;

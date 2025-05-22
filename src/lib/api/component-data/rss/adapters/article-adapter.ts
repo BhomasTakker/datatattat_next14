@@ -6,7 +6,7 @@ import { cloneDeep } from "@/utils/object";
 import { filterLimit } from "../utils/limit";
 import { saveOrUpdateArticle } from "@/actions/data/article/save-article";
 
-const adaptItem = async (item: RSSItem) => {
+export const adaptItem = async (item: RSSItem) => {
 	const { title, description, link, pubDate, guid, content } = item;
 
 	// check db for existing article
