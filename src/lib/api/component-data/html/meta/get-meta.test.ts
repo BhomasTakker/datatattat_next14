@@ -9,7 +9,7 @@ jest.mock("../../../../../lib/redis/redis-fetch");
 
 const mockSaveOrUpdateArticle = saveOrUpdateArticle as jest.Mock;
 const mockFetchWithCache = fetchWithCache as jest.Mock;
-
+const mockedGetArticle = getArticle as jest.Mock;
 // This is just a fix
 // We need to mock Cheerio else it will fail having been 'loaded' in the code
 jest.mock("cheerio", () => {
