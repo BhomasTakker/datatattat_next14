@@ -60,7 +60,7 @@ export type PodcastRSSCollection = {
 	};
 };
 
-const convertDurationToSeconds = (duration: string) => {
+export const convertDurationToSeconds = (duration: string) => {
 	if (!duration) {
 		return undefined;
 	}
@@ -86,7 +86,7 @@ const convertDurationToSeconds = (duration: string) => {
 	return seconds;
 };
 
-const adaptItem = async (
+export const adaptItem = async (
 	item: PodcastRSSItem,
 	channel: PodcastRSSCollection
 ) => {
