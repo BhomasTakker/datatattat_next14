@@ -13,6 +13,9 @@ describe("apiFetch", () => {
 	const mockParams = { q: "test" };
 
 	beforeEach(() => {
+		console.error = jest.fn();
+	});
+	afterEach(() => {
 		jest.clearAllMocks();
 	});
 

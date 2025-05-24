@@ -1,6 +1,6 @@
 import { Profile, providers, Providers, User } from "./types";
 
-const githubUsereturn = (profile: Profile, user: User) => {
+export const githubUserReturn = (profile: Profile, user: User) => {
 	return {
 		...profile,
 		name: user.username,
@@ -10,7 +10,7 @@ const githubUsereturn = (profile: Profile, user: User) => {
 	};
 };
 
-const googleUserReturn = (profile: Profile, user: User) => {
+export const googleUserReturn = (profile: Profile, user: User) => {
 	return {
 		...profile,
 		name: user.username,
@@ -22,7 +22,7 @@ const googleUserReturn = (profile: Profile, user: User) => {
 
 const providerReturnMap = new Map<Providers, any>([
 	[providers.google, googleUserReturn],
-	[providers.github, githubUsereturn],
+	[providers.github, githubUserReturn],
 ]);
 
 export const returnUser = (profile: Profile, user: User, id: Providers) => {
