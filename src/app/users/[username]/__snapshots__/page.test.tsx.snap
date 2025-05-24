@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserHome Snaps renders Page Unchanged 1`] = `
+<div>
+  <div
+    data-testid="main-header"
+  >
+    users/testuser
+  </div>
+  <div
+    class="mocked-page-class"
+  >
+    <div
+      data-testid="page-display"
+    >
+      Test Page
+    </div>
+  </div>
+</div>
+`;
