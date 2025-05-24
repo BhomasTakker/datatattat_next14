@@ -13,31 +13,6 @@ import * as signupActions from "../../actions/signup/check-create-username";
 jest.mock("../../actions/user/get-user", () => ({
 	getUser: jest.fn(),
 }));
-jest.mock("./providers/github", () => ({
-	GITHUB: {
-		id: "github",
-		name: "GitHub",
-		type: "oauth",
-		version: "2.0",
-		scope: "read:user user:email",
-		profile(profile: Profile) {
-			return { id: profile.id, name: profile.name, email: profile.email };
-		},
-	},
-}));
-
-jest.mock("./providers/google", () => ({
-	GOOGLE: {
-		id: "google",
-		name: "Google",
-		type: "oauth",
-		version: "2.0",
-		scope: "read:user user:email",
-		profile(profile: Profile) {
-			return { id: profile.id, name: profile.name, email: profile.email };
-		},
-	},
-}));
 
 jest.mock("../mongo/actions/user");
 jest.mock("../mongo/db");
