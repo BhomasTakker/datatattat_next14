@@ -5,7 +5,7 @@ import { GoogleProfile } from "next-auth/providers/google";
 import { GithubProfile } from "next-auth/providers/github";
 import { Profile, ProviderFunction, providers, Providers, User } from "./types";
 
-const createGoogleUser = (
+export const createGoogleUser = (
 	profile: GoogleProfile,
 	id: Providers,
 	username: string
@@ -19,7 +19,7 @@ const createGoogleUser = (
 	role: "standard",
 });
 
-const createGithubUser = (
+export const createGithubUser = (
 	profile: GithubProfile,
 	id: Providers,
 	username: string
@@ -33,12 +33,12 @@ const createGithubUser = (
 	role: "standard",
 });
 
-const providerMap = new Map<Providers, ProviderFunction>([
+export const providerMap = new Map<Providers, ProviderFunction>([
 	[providers.google, createGoogleUser as ProviderFunction],
 	[providers.github, createGithubUser as ProviderFunction],
 ]);
 
-const createUserObject = (
+export const createUserObject = (
 	profile: Profile,
 	id: Providers,
 	username: string
