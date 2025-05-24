@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RootLayout Snaps renders Layout Unchanged 1`] = `
+<div>
+  <div
+    data-testid="page-display"
+  >
+    <span>
+      Test Child
+    </span>
+  </div>
+</div>
+`;
