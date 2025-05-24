@@ -39,6 +39,8 @@ export default async function UserProfile({
 	if (!profileUser) {
 		// log and redirect
 		redirect(PATHS.home());
+		// next will redirect / test needs the return value
+		return null;
 	}
 
 	return (

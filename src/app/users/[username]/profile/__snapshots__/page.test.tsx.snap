@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserProfile page renders ProfileEditPage if session user matches profile user 1`] = `
+<div>
+  <div
+    data-testid="main-header"
+  >
+    users/testuser
+  </div>
+  <div
+    class="page"
+  >
+    <div
+      data-testid="profile-edit-page"
+    >
+      Edit Page
+    </div>
+  </div>
+</div>
+`;
+
+exports[`UserProfile page renders ProfilePage if session user does not match profile user 1`] = `
+<div>
+  <div
+    data-testid="main-header"
+  >
+    users/testuser
+  </div>
+  <div
+    class="page"
+  >
+    <div
+      data-testid="profile-page"
+    >
+      testuser
+    </div>
+  </div>
+</div>
+`;
