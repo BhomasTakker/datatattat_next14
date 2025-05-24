@@ -15,6 +15,9 @@ const mockHeaderDoc = {
 
 describe("header actions", () => {
 	beforeEach(() => {
+		console.error = jest.fn();
+	});
+	afterEach(() => {
 		jest.clearAllMocks();
 	});
 
