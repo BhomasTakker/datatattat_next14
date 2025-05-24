@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import UserProfile from "./page";
 import { redirect } from "next/navigation";
 import { PATHS } from "@/lib/routing/paths";
