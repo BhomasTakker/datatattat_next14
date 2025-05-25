@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ComponentProfile Snaps matches the snapshot when componentTitle is an empty string 1`] = `<DocumentFragment />`;
+
+exports[`ComponentProfile Snaps matches the snapshot when componentTitle is undefined 1`] = `<DocumentFragment />`;
+
+exports[`ComponentProfile Snaps matches the snapshot with a title 1`] = `
+<DocumentFragment>
+  <div
+    class="root"
+  >
+    <h2
+      class="title"
+    >
+      Test Title
+    </h2>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`ComponentProfile Snaps matches the snapshot with a title link 1`] = `
+<DocumentFragment>
+  <div
+    class="root"
+  >
+    <a
+      href="/test-link"
+    >
+      <h2
+        class="title"
+      >
+        Test Title
+      </h2>
+    </a>
+  </div>
+</DocumentFragment>
+`;

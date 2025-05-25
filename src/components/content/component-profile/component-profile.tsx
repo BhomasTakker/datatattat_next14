@@ -18,12 +18,8 @@ export const ComponentProfile = ({
 		titleComponent
 	);
 
-	// if (!showComponentTitle) {
-	// 	return <></>;
-	// }
-
 	if (componentTitle === undefined || componentTitle === "") {
-		return <></>;
+		return null;
 	}
 
 	return (
