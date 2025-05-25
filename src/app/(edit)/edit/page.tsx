@@ -13,6 +13,11 @@ export default async function Page() {
 	await isSignupComplete();
 	const { username } = await isValidUser();
 
+	if (!username) {
+		console.error("User is not valid or username is missing.");
+		return null;
+	}
+
 	const userHome = `${PATHS.user(username)}`;
 
 	redirect(`${PATHS.edit()}${userHome}`);
