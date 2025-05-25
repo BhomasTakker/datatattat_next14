@@ -31,7 +31,7 @@ type InputListProps = {
 	onDelete: (index: number) => void;
 };
 
-const ArrayInputList = ({
+export const ArrayInputList = ({
 	parentId,
 	inputs,
 	template,
@@ -51,12 +51,21 @@ const ArrayInputList = ({
 				<InputFactory data={{ ...template, id: inputId }} />
 				{showControls ? (
 					<div className={styles.icons}>
-						<IconButton icon={FaArrowUp} onClick={() => onMove(index, "up")} />
 						<IconButton
+							data-testid="move-up"
+							icon={FaArrowUp}
+							onClick={() => onMove(index, "up")}
+						/>
+						<IconButton
+							data-testid="move-down"
 							icon={FaArrowDown}
 							onClick={() => onMove(index, "down")}
 						/>
-						<IconButton icon={MdDelete} onClick={() => onDelete(index)} />
+						<IconButton
+							data-testid="delete"
+							icon={MdDelete}
+							onClick={() => onDelete(index)}
+						/>
 					</div>
 				) : null}
 			</li>

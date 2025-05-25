@@ -14,17 +14,15 @@ export const PageLayout = async ({
 }) => {
 	await initialiseServices();
 	return (
-		<html lang="en">
-			<Providers>
-				<body
-					className={`${geistSans.variable} ${geistMono.variable} ${styles.root}`}
-				>
-					{children}
-					<MainFooter />
-					<Analytics />
-					<SpeedInsights />
-				</body>
-			</Providers>
-		</html>
+		<Providers>
+			<div
+				className={`${geistSans.variable} ${geistMono.variable} ${styles.root}`}
+			>
+				{children}
+				<MainFooter />
+				<Analytics />
+				<SpeedInsights />
+			</div>
+		</Providers>
 	);
 };

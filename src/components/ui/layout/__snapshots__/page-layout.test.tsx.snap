@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PageLayout Snaps renders PageLayout unchanged 1`] = `
+<div>
+  <div
+    class="geistSans-variable geistMono-variable page-layout-root"
+  >
+    <div />
+    <footer
+      data-testid="main-footer"
+    />
+    <div
+      data-testid="analytics"
+    />
+    <div
+      data-testid="speed-insights"
+    />
+  </div>
+</div>
+`;
+
+exports[`PageLayout renders children and layout elements 1`] = `
+<div>
+  <div
+    class="geistSans-variable geistMono-variable page-layout-root"
+  >
+    <div
+      data-testid="test-child"
+    >
+      Hello
+    </div>
+    <footer
+      data-testid="main-footer"
+    />
+    <div
+      data-testid="analytics"
+    />
+    <div
+      data-testid="speed-insights"
+    />
+  </div>
+</div>
+`;

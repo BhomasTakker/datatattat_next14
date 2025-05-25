@@ -1,59 +1,62 @@
-import "@testing-library/jest-dom";
-import { render, screen } from "@testing-library/react";
+import React from "react";
+import { render, fireEvent, screen } from "@testing-library/react";
 import { UserMenu } from "./user-menu";
 
-const menuProps = {
-	username: "John Cena",
-	avatar: "https://example.com/avatar.jpg",
-};
+// Mock the MenuDropDown component
+jest.mock("./drop-down/menu-drop-down", () => ({
+	MenuDropDown: ({ isOpen, username, avatar }: any) =>
+		isOpen ? (
+			<div data-testid="dropdown">
+				<span>{username}</span>
+				<img src={avatar} alt="avatar" />
+			</div>
+		) : null,
+}));
 
-// We should probaly mock this guy somewhere
-jest.mock("next-auth/react", () => {
-	return {
-		useSession: jest.fn().mockResolvedValue({
-			data: {
-				user: {
-					name: "John Cena",
-				},
-			},
-		}),
-	};
-});
+// Mock the styles import
+jest.mock("./user-menu.module.scss", () => ({
+	menuButton: "menuButton",
+	logo: "logo",
+}));
 
-jest.mock("next/navigation", () => {
-	return {
-		usePathname: jest.fn().mockResolvedValue("/mock-route"),
-	};
-});
+describe("UserMenu", () => {
+	const username = "testuser";
+	const avatar = "avatar.png";
 
-// problem with useRef - showModal does not exist.....
-// mocking/spying no work....
-describe("User Menu", () => {
-	it("renders a button to open the user menu", () => {
-		render(
-			<UserMenu username={menuProps.username} avatar={menuProps.avatar} />
-		);
+	it("renders the menu button", () => {
+		render(<UserMenu username={username} avatar={avatar} />);
+		expect(screen.getByRole("button")).toBeInTheDocument();
+	});
+
+	it("does not show dropdown by default", () => {
+		render(<UserMenu username={username} avatar={avatar} />);
+		expect(screen.queryByTestId("dropdown")).not.toBeInTheDocument();
+	});
+
+	it("shows dropdown when button is clicked", () => {
+		render(<UserMenu username={username} avatar={avatar} />);
+		fireEvent.click(screen.getByRole("button"));
+		expect(screen.getByTestId("dropdown")).toBeInTheDocument();
+		expect(screen.getByText(username)).toBeInTheDocument();
+		expect(screen.getByAltText("avatar")).toHaveAttribute("src", avatar);
+	});
+
+	it("closes dropdown when clicking outside", () => {
+		render(<UserMenu username={username} avatar={avatar} />);
+		fireEvent.click(screen.getByRole("button"));
+		expect(screen.getByTestId("dropdown")).toBeInTheDocument();
+
+		// Simulate document click
+		fireEvent.click(document);
+		expect(screen.queryByTestId("dropdown")).not.toBeInTheDocument();
+	});
+
+	it("toggles dropdown open/close on button click", () => {
+		render(<UserMenu username={username} avatar={avatar} />);
 		const button = screen.getByRole("button");
-		expect(button).toBeInTheDocument();
+		fireEvent.click(button);
+		expect(screen.getByTestId("dropdown")).toBeInTheDocument();
+		fireEvent.click(button);
+		expect(screen.queryByTestId("dropdown")).not.toBeInTheDocument();
 	});
-	// it("renders a user menu with a sign out link", () => {
-	// 	render(<UserMenu />);
-	// 	const button = screen.getByRole("button");
-	// 	button.click();
-	// 	const link = screen.queryByText(/sign out/i);
-	// 	expect(link).toBeInTheDocument();
-	// });
-	it("renders unopened user menu unchanged", () => {
-		const { container } = render(
-			<UserMenu username={menuProps.username} avatar={menuProps.avatar} />
-		);
-		expect(container).toMatchSnapshot();
-	});
-
-	// it("renders opened user menu unchanged", () => {
-	// 	const { container } = render(<UserMenu />);
-	// 	const button = screen.getByRole("button");
-	// 	button.click();
-	// 	expect(container).toMatchSnapshot();
-	// });
 });

@@ -76,6 +76,7 @@ export const CompleteSignup = ({ username }: CompleteSignupProps) => {
 							<h2>Confirm Username</h2>
 						</label>
 						<input
+							data-testid="username-input"
 							className={styles.input}
 							defaultValue={username}
 							{...register("username", {

@@ -24,6 +24,7 @@ export const DateInput = ({
 					{label}
 				</label>
 				<input
+					data-testid="date-input"
 					className={styles.input}
 					id={id}
 					// this isn't validation it is options which include validation...
