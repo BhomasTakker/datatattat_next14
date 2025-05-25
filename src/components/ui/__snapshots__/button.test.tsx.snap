@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button component Snaps renders Button unchanged 1`] = `
+<div>
+  <button
+    aria-label="my-button"
+    class="button extra-class"
+    type="button"
+  >
+    Click me
+  </button>
+</div>
+`;

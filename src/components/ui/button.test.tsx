@@ -39,4 +39,15 @@ describe("Button component", () => {
 		const { getByRole } = render(<Button />);
 		expect(getByRole("button").textContent).toBe("");
 	});
+
+	describe("Snaps", () => {
+		it("renders Button unchanged", async () => {
+			const { container } = render(
+				<Button classes="extra-class" aria-label="my-button">
+					Click me
+				</Button>
+			);
+			expect(container).toMatchSnapshot();
+		});
+	});
 });
