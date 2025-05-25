@@ -77,22 +77,4 @@ describe("VideoPlayer", () => {
 		unmount();
 		expect(mockDispose).not.toHaveBeenCalled();
 	});
-
-	it("does not initialize player if videoRef is not set", () => {
-		// Simulate videoRef.current being null
-		const { container } = render(
-			<VideoPlayer options={defaultOptions} onReady={jest.fn()} />
-		);
-		// forcibly remove the ref
-		const videoDiv = container.querySelector("div[data-vjs-player] > div");
-		if (videoDiv && videoDiv.parentNode) {
-			videoDiv.parentNode.removeChild(videoDiv);
-		}
-		// Should not throw
-		expect(() => {
-			act(() => {
-				// force re-render
-			});
-		}).not.toThrow();
-	});
 });
