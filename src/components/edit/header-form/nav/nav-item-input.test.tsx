@@ -91,4 +91,11 @@ describe("NavItemInput", () => {
 		fireEvent.click(element); // Delete icon
 		expect(onDelete).toHaveBeenCalledWith(0);
 	});
+
+	describe("Snaps", () => {
+		it("renders NavItemInput unchanged", async () => {
+			const { container } = renderWithForm();
+			expect(container).toMatchSnapshot();
+		});
+	});
 });
