@@ -73,13 +73,31 @@ export const NavItemInput = ({
 				</div>
 			</div>
 			<div className={styles.controls}>
-				<div className={styles.icon} onClick={() => onMove(index, "up")}>
+				<div
+					aria-label="Move Up"
+					aria-role="button"
+					data-testid="move-up"
+					className={styles.icon}
+					onClick={() => onMove(index, "up")}
+				>
 					<FaArrowUp />
 				</div>
-				<div className={styles.icon} onClick={() => onMove(index, "down")}>
+				<div
+					aria-label="Move Down"
+					aria-role="button"
+					data-testid="move-down"
+					className={styles.icon}
+					onClick={() => onMove(index, "down")}
+				>
 					<FaArrowDown />
 				</div>
-				<div className={styles.icon} onClick={() => onDelete(index)}>
+				<div
+					aria-label="Delete"
+					aria-role="button"
+					data-testid="delete"
+					className={styles.icon}
+					onClick={() => onDelete(index)}
+				>
 					<MdDelete />
 				</div>
 			</div>
