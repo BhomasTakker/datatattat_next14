@@ -5,5 +5,9 @@ import styles from "./input-description.module.scss";
 // Could use / amend for help, dircetions, etc
 
 export const InputDescription = ({ text }: DescriptionInputProps) => {
-	return <p className={styles.description}>{text}</p>;
+	return (
+		<p className={styles.description} data-testid="input-description">
+			{text}
+		</p>
+	);
 };
