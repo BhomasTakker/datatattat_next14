@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ArrayInput Snaps renders ArrayInput Unchanged 1`] = `
+<div>
+  <div
+    class="root"
+  >
+    <h2
+      class="title"
+    >
+      My Array
+    </h2>
+    <ul />
+    <button
+      class="button "
+      type="button"
+    >
+      Add New Test
+    </button>
+  </div>
+</div>
+`;
