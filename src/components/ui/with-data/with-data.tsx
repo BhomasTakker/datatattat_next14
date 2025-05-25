@@ -9,12 +9,21 @@ type WithData = {
 
 export const WithData = ({ getter, callback, template }: WithData) => {
 	const [data, setData] = useState<CollectionItem | null>(null);
+	const [error, setError] = useState<string | null>(null);
+
 	useEffect(() => {
 		const loadData = async () => {
-			const data = await getter();
-			setData(data);
+			try {
+				const data = await getter();
+				setData(data);
+			} catch {
+				setError("Error fetching data");
+			}
 		};
 		loadData();
 	}, []);
+	if (error) {
+		return <div>{error}</div>;
+	}
 	return data ? callback(data) : template;
 };
