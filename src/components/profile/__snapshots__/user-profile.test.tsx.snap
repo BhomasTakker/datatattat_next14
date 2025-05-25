@@ -1,0 +1,74 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserProfile Snaps authorized user matches snapshot 1`] = `
+<DocumentFragment>
+  <article
+    class="root"
+  >
+    <img
+      alt="Jane Doe avatar image"
+      class="image"
+      src="https://example.com/avatar.jpg"
+    />
+    <div
+      class="content"
+    >
+      <h2
+        class="name"
+      >
+        Jane Doe
+      </h2>
+      <div>
+        <p
+          class="role"
+        >
+          user role:- admin
+        </p>
+        <p
+          class="method"
+        >
+          email
+        </p>
+        <p
+          class="name"
+        >
+          Jane Doe
+        </p>
+        <p
+          class="email"
+        >
+          anEmail@emailProvider.com
+        </p>
+        <p
+          class="id"
+        >
+          user_id:- 12345
+        </p>
+      </div>
+    </div>
+  </article>
+</DocumentFragment>
+`;
+
+exports[`UserProfile Snaps unauthorized user matches snapshot 1`] = `
+<DocumentFragment>
+  <article
+    class="root"
+  >
+    <img
+      alt="Jane Doe avatar image"
+      class="image"
+      src="https://example.com/avatar.jpg"
+    />
+    <div
+      class="content"
+    >
+      <h2
+        class="name"
+      >
+        Jane Doe
+      </h2>
+    </div>
+  </article>
+</DocumentFragment>
+`;
