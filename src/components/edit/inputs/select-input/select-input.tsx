@@ -53,7 +53,10 @@ export const SelectInput = ({
 	// defaultValue={defaultToUse}
 	return (
 		<div className={styles.root}>
-			<label htmlFor={id}>{`${label}`}</label>
+			<label
+				htmlFor={id}
+				data-testid={"select-input-label"}
+			>{`${label}`}</label>
 			<select {...register(id)} defaultValue={defaultToUse}>
 				<Options
 					options={options}
