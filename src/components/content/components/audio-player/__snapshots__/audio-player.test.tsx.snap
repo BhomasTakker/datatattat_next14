@@ -1,0 +1,156 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AudioPlayer Snaps matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="audioPlayer"
+  >
+    <div
+      class="card"
+    />
+    <audio
+      preload="meta"
+      src="test-audio.mp3"
+    />
+    <div
+      class="progressBarContainer"
+    >
+      <input
+        class="progressBar"
+        min="0"
+        type="range"
+        value="0"
+      />
+    </div>
+    <div
+      class="controls"
+    >
+      <div
+        class="playerControls"
+      >
+        <button
+          class="button "
+          type="button"
+        >
+          <svg
+            fill="currentColor"
+            height="1em"
+            stroke="currentColor"
+            stroke-width="0"
+            viewBox="0 0 24 24"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M0 0h24v24H0z"
+              fill="none"
+            />
+            <path
+              d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"
+            />
+            <path
+              d="M9.56 13.49h.45c.21 0 .37-.05.48-.16s.16-.25.16-.43a.538.538 0 0 0-.15-.39c-.05-.05-.11-.09-.18-.11s-.16-.04-.25-.04c-.08 0-.15.01-.22.03s-.13.05-.18.1-.09.09-.12.15-.05.13-.05.2h-.85a1.06 1.06 0 0 1 .41-.85c.13-.1.27-.18.44-.23s.35-.08.54-.08c.21 0 .41.03.59.08s.33.13.46.23.23.23.3.38.11.33.11.53a.842.842 0 0 1-.17.52 1.1 1.1 0 0 1-.48.39c.24.09.42.21.54.39s.18.38.18.61c0 .2-.04.38-.12.53s-.18.29-.32.39-.29.19-.48.24-.38.08-.6.08c-.18 0-.36-.02-.53-.07s-.33-.12-.46-.23-.25-.23-.33-.38-.12-.34-.12-.55h.85c0 .08.02.15.05.22s.07.12.13.17.12.09.2.11.16.04.25.04c.1 0 .19-.01.27-.04s.15-.07.2-.12.1-.11.13-.18.04-.15.04-.24c0-.11-.02-.21-.05-.29s-.08-.15-.14-.2-.13-.09-.22-.11-.18-.04-.29-.04h-.47v-.65zM15.3 14.24c0 .32-.03.6-.1.82s-.17.42-.29.57-.28.26-.45.33-.37.1-.59.1-.41-.03-.59-.1-.33-.18-.46-.33-.23-.34-.3-.57-.11-.5-.11-.82v-.74c0-.32.03-.6.1-.82s.17-.42.29-.57.28-.26.45-.33.37-.1.59-.1.41.03.59.1.33.18.46.33.23.34.3.57.11.5.11.82v.74zm-.85-.86c0-.19-.01-.35-.04-.48s-.07-.23-.12-.31-.11-.14-.19-.17-.16-.05-.25-.05-.18.02-.25.05-.14.09-.19.17-.09.18-.12.31-.04.29-.04.48v.97c0 .19.01.35.04.48s.07.24.12.32.11.14.19.17.16.05.25.05.18-.02.25-.05.14-.09.19-.17.09-.19.11-.32c.03-.13.04-.29.04-.48v-.97z"
+            />
+          </svg>
+        </button>
+        <button
+          class="button "
+          type="button"
+        >
+          <svg
+            fill="currentColor"
+            height="1em"
+            stroke="currentColor"
+            stroke-width="0"
+            viewBox="0 0 448 512"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"
+            />
+          </svg>
+        </button>
+        <button
+          class="button "
+          type="button"
+        >
+          <svg
+            fill="currentColor"
+            height="1em"
+            stroke="currentColor"
+            stroke-width="0"
+            viewBox="0 0 24 24"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M0 0h24v24H0z"
+              fill="none"
+            />
+            <path
+              d="M18 13c0 3.31-2.69 6-6 6s-6-2.69-6-6 2.69-6 6-6v4l5-5-5-5v4c-4.42 0-8 3.58-8 8s3.58 8 8 8 8-3.58 8-8h-2z"
+            />
+            <path
+              d="M10.06 15.38c-.29 0-.62-.17-.62-.54h-.85c0 .97.9 1.23 1.45 1.23.87 0 1.51-.46 1.51-1.25 0-.66-.45-.9-.71-1 .11-.05.65-.32.65-.92 0-.21-.05-1.22-1.44-1.22-.62 0-1.4.35-1.4 1.16h.85c0-.34.31-.48.57-.48.59 0 .58.5.58.54 0 .52-.41.59-.63.59h-.46v.66h.45c.65 0 .7.42.7.64 0 .32-.21.59-.65.59zM13.85 11.68c-.14 0-1.44-.08-1.44 1.82v.74c0 1.9 1.31 1.82 1.44 1.82.14 0 1.44.09 1.44-1.82v-.74c.01-1.91-1.3-1.82-1.44-1.82zm.6 2.67c0 .77-.21 1.03-.59 1.03s-.6-.26-.6-1.03v-.97c0-.75.22-1.01.59-1.01.38 0 .6.26.6 1.01v.97z"
+            />
+          </svg>
+        </button>
+      </div>
+      <div
+        class="controlsSecondary"
+      >
+        <div
+          class="speakerContainer"
+        >
+          <button
+            class="button volumeButton"
+            type="button"
+          >
+            <svg
+              fill="currentColor"
+              height="1em"
+              stroke="currentColor"
+              stroke-width="0"
+              viewBox="0 0 24 24"
+              width="1em"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M0 0h24v24H0z"
+                fill="none"
+              />
+              <path
+                d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0 0 14 7.97v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"
+              />
+            </svg>
+          </button>
+          <button
+            class="button volumeBg"
+            type="button"
+          >
+            <input
+              class="volume"
+              max="100"
+              min="0"
+              style="--volume-width: 50%;"
+              type="range"
+              value="0"
+            />
+          </button>
+        </div>
+        <button
+          class="button timeBg"
+          type="button"
+        >
+          <div
+            class="time"
+          >
+            00:00 / 00:00
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
