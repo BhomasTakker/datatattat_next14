@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AudioDisplayComponent renders a list of articles 1`] = `
+<div>
+  <div
+    class="container"
+  >
+    <div
+      data-testid="display-article"
+    >
+      Audio 1
+    </div>
+    <div
+      class="audioPlayer"
+    >
+      <div
+        data-testid="audio-player"
+      >
+        audio1.mp3
+      </div>
+    </div>
+    <ul
+      class="articles medium"
+    >
+      <li>
+        <div
+          data-testid="interaction"
+        >
+          <div
+            data-testid="article-template"
+          />
+        </div>
+      </li>
+      <li>
+        <div
+          data-testid="interaction"
+        >
+          <div
+            data-testid="article-template"
+          />
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+`;

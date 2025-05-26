@@ -33,8 +33,12 @@ export const VideoDisplayComponent = ({
 }: VideoDisplayComponentProps) => {
 	const playerRef = useRef<Player>(null);
 	const firstArticle = articles[0];
-	const src = firstArticle.src;
+	const src = firstArticle?.src;
 	const template = articleTemplate(styles);
+
+	if (!firstArticle) {
+		return null;
+	}
 
 	// These in a separate file
 	// We will ultimately need to pass or reference sourcetype

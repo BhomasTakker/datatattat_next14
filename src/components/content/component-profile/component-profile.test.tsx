@@ -1,59 +1,101 @@
+import React from "react";
 import { render, screen } from "@testing-library/react";
 import { ComponentProfile } from "./component-profile";
 import { ComponentProfileProps } from "@/types/component";
+import "@testing-library/jest-dom";
 
-// Mock the Link component
+// Mock next/link for testing
 jest.mock("next/link", () => {
-	const MockLink = ({
-		children,
-		href,
-	}: {
-		children: React.ReactNode;
-		href: string;
-	}) => <a href={href}>{children}</a>;
-	MockLink.displayName = "Link";
-	return MockLink;
+	return ({ children, href }: any) => <a href={href}>{children}</a>;
 });
 
+const baseProfile: ComponentProfileProps = {
+	componentTitle: "Test Title",
+	showComponentTitle: true,
+	// @ts-expect-error mock data
+	componentTitleLink: undefined,
+};
+
 describe("ComponentProfile", () => {
-	const defaultProps: ComponentProfileProps = {
-		componentTitle: "Test Title",
-		showComponentTitle: true,
-		componentTitleLink: "/test-link",
-	};
-
-	it("renders the component title when showComponentTitle is true", () => {
-		render(<ComponentProfile profile={defaultProps} />);
-		const testTitle = screen.getByText("Test Title");
-		expect(testTitle).toBeInTheDocument();
+	it("renders the component title when provided", () => {
+		render(<ComponentProfile profile={baseProfile} />);
+		expect(screen.getByText("Test Title")).toBeInTheDocument();
 	});
-
-	// it("does not render the component title when showComponentTitle is false", () => {
-	// 	render(
-	// 		<ComponentProfile
-	// 			profile={{ ...defaultProps, showComponentTitle: false }}
-	// 		/>
-	// 	);
-	// 	const testTitle = screen.queryByText("Test Title");
-	// 	expect(testTitle).not.toBeInTheDocument();
-	// });
 
 	it("renders the component title as a link when componentTitleLink is provided", () => {
-		render(<ComponentProfile profile={defaultProps} />);
-		const linkElement = screen.getByRole("link", { name: "Test Title" });
-		expect(linkElement).toHaveAttribute("href", "/test-link");
+		const profile: ComponentProfileProps = {
+			...baseProfile,
+			componentTitleLink: "/test-link",
+		};
+		render(<ComponentProfile profile={profile} />);
+		const link = screen.getByRole("link", { name: "Test Title" });
+		expect(link).toBeInTheDocument();
+		expect(link).toHaveAttribute("href", "/test-link");
 	});
 
-	it("renders the component title as plain text when componentTitleLink is not provided", () => {
-		render(
-			<ComponentProfile
-				// @ts-expect-error - Testing the component without componentTitleLink
-				profile={{ ...defaultProps, componentTitleLink: undefined }}
-			/>
-		);
-		const titleElement = screen.getByText("Test Title");
-		expect(titleElement).toBeInTheDocument();
-		const linkElement = screen.queryByRole("link", { name: "Test Title" });
-		expect(linkElement).not.toBeInTheDocument();
+	it("does not render anything if componentTitle is undefined", () => {
+		const profile: ComponentProfileProps = {
+			...baseProfile,
+			// @ts-expect-error mock data
+			componentTitle: undefined,
+		};
+		const { container } = render(<ComponentProfile profile={profile} />);
+		expect(container).toBeEmptyDOMElement();
+	});
+
+	it("does not render anything if componentTitle is an empty string", () => {
+		const profile: ComponentProfileProps = {
+			...baseProfile,
+			componentTitle: "",
+		};
+		const { container } = render(<ComponentProfile profile={profile} />);
+		expect(container).toBeEmptyDOMElement();
+	});
+
+	it("renders with custom class names from styles", () => {
+		render(<ComponentProfile profile={baseProfile} />);
+		const title = screen.getByText("Test Title");
+		expect(title).toHaveClass("title");
+	});
+
+	it("renders the root div with the correct class", () => {
+		render(<ComponentProfile profile={baseProfile} />);
+		const rootDiv = screen.getByText("Test Title").closest("div");
+		expect(rootDiv).toHaveClass("root");
+	});
+
+	describe("Snaps", () => {
+		it("matches the snapshot with a title", () => {
+			const { asFragment } = render(<ComponentProfile profile={baseProfile} />);
+			expect(asFragment()).toMatchSnapshot();
+		});
+
+		it("matches the snapshot with a title link", () => {
+			const profile: ComponentProfileProps = {
+				...baseProfile,
+				componentTitleLink: "/test-link",
+			};
+			const { asFragment } = render(<ComponentProfile profile={profile} />);
+			expect(asFragment()).toMatchSnapshot();
+		});
+
+		it("matches the snapshot when componentTitle is undefined", () => {
+			const profile: ComponentProfileProps = {
+				...baseProfile,
+				// @ts-expect-error mock data
+				componentTitle: undefined,
+			};
+			const { asFragment } = render(<ComponentProfile profile={profile} />);
+			expect(asFragment()).toMatchSnapshot();
+		});
+
+		it("matches the snapshot when componentTitle is an empty string", () => {
+			const profile: ComponentProfileProps = {
+				...baseProfile,
+				componentTitle: "",
+			};
+			const { asFragment } = render(<ComponentProfile profile={profile} />);
+			expect(asFragment()).toMatchSnapshot();
+		});
 	});
 });

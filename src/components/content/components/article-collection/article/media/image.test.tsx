@@ -32,12 +32,4 @@ describe("ArticleImage Component", () => {
 		const imgElement = screen.getByAltText("Test Image");
 		expect(imgElement).toHaveClass("mock-image-class");
 	});
-
-	// what? Copilot?!?!? Bro!!
-	// it('renders without crashing', () => {
-	//   render(
-	//     <ArticleImage image="test-image.jpg" imageAlt="Test Image" styles={mockStyles} />
-	//   );
-	//   expect(container).toBeInTheDocument();
-	// });
 });
