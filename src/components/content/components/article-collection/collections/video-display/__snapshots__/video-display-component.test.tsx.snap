@@ -1,0 +1,111 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VideoDisplayComponent applies the correct container class based on variant 1`] = `
+<div>
+  <div
+    class="containerVerticalScroll"
+  >
+    <div
+      class="videoPlayer"
+    >
+      <div
+        data-options="{"autoplay":false,"aspectRatio":"16:9","controls":true,"fill":true,"fluid":true,"responsive":true,"playbackRates":[0.25,0.5,0.75,1,1.25,1.5,1.75,2],"preload":"auto","techOrder":["youtube","html5"],"poster":"poster1.jpg","sources":[{"src":"video1.mp4","type":"video/youtube"}]}"
+        data-testid="video-player-container"
+      />
+    </div>
+    <ul
+      class="articles"
+    >
+      <li>
+        <div
+          data-testid="in-view"
+        >
+          <div
+            data-testid="interaction"
+          >
+            <div
+              data-testid="with-data"
+            >
+              <div
+                data-testid="article-template"
+              />
+            </div>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div
+          data-testid="in-view"
+        >
+          <div
+            data-testid="interaction"
+          >
+            <div
+              data-testid="with-data"
+            >
+              <div
+                data-testid="article-template"
+              />
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+`;
+
+exports[`VideoDisplayComponent renders the video player and articles 1`] = `
+<div>
+  <div
+    class="containerHorizontalScroll"
+  >
+    <div
+      class="videoPlayer"
+    >
+      <div
+        data-options="{"autoplay":"any","aspectRatio":"16:9","controls":true,"fill":true,"fluid":true,"responsive":true,"playbackRates":[0.25,0.5,0.75,1,1.25,1.5,1.75,2],"preload":"auto","techOrder":["youtube","html5"],"poster":"poster1.jpg","sources":[{"src":"video1.mp4","type":"video/youtube"}]}"
+        data-testid="video-player-container"
+      />
+    </div>
+    <ul
+      class="articles"
+    >
+      <li>
+        <div
+          data-testid="in-view"
+        >
+          <div
+            data-testid="interaction"
+          >
+            <div
+              data-testid="with-data"
+            >
+              <div
+                data-testid="article-template"
+              />
+            </div>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div
+          data-testid="in-view"
+        >
+          <div
+            data-testid="interaction"
+          >
+            <div
+              data-testid="with-data"
+            >
+              <div
+                data-testid="article-template"
+              />
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+`;
