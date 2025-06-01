@@ -1,0 +1,18 @@
+import { test, expect } from "@playwright/test";
+import { PageManager } from "../page-objects.ts/page-manager";
+
+// we need vary between use live and load dev or test?
+test.beforeEach(async ({ page }) => {
+	const pm = new PageManager(page);
+	await pm.navigateTo.browserNavigateToContentPage();
+});
+
+test.describe("Page Navigation", () => {
+	test("navigate to UK", async ({ page }) => {
+		const pm = new PageManager(page);
+		// homeViaHeader, homeViaIcon, viaHeaderNav for e.g.
+		pm.navigateTo.navigateToUK();
+
+		await expect(page).toHaveURL("https://datatattat.com/uk");
+	});
+});
