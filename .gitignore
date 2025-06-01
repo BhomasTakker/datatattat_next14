@@ -37,7 +37,8 @@ next-env.d.ts
 
 # Playwright
 node_modules/
-/test-results/
-/playwright-report/
+/automation/test-results/
+/automation/test-report/
 /blob-report/
+/automation/blob-report/
 /playwright/.cache/
