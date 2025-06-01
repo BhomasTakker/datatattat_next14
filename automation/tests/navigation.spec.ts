@@ -13,6 +13,6 @@ test.describe("Page Navigation", () => {
 		// homeViaHeader, homeViaIcon, viaHeaderNav for e.g.
 		pm.navigateTo.navigateToUK();
 
-		await expect(page).toHaveURL("https://datatattat.com/uk");
+		await expect(page).toHaveURL("http://localhost:3000/uk");
 	});
 });

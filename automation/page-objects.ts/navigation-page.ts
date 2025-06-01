@@ -9,7 +9,7 @@ export class NavigationPage extends Base {
 	}
 
 	async browserNavigateToContentPage(route: string = "") {
-		await this.page.goto(`https://datatattat.com/${route}`);
+		await this.page.goto(`http://localhost:3000/${route}`);
 	}
 
 	async navigateToHome() {}
