@@ -25,7 +25,7 @@ export const UserMenu = ({ username, avatar }: UserMenuProps) => {
 	}, [isOpen]);
 
 	return (
-		<div>
+		<div data-testid="user-menu">
 			<button className={styles.menuButton} onClick={() => setIsOpen(!isOpen)}>
 				<BiSolidUser className={styles.logo} />
 			</button>
