@@ -35,7 +35,6 @@ describe.skip("PageHead", () => {
 
 	it("should render the title as datatattat if no title provided", async () => {
 		render(<PageHead headData={MOCK2} />);
-		screen.debug();
 		const title = screen.getByText(/datatattat/i);
 		expect(title).toBeInTheDocument();
 	});
