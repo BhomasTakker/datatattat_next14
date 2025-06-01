@@ -7,7 +7,7 @@ on:
     branches: [main]
 
 jobs:
-  jest-unit-test:
+  unit:
     runs-on: ubuntu-latest
 
     strategy:
@@ -23,7 +23,7 @@ jobs:
           cache: "npm"
       - run: npm i
       - run: npm test
-  test:
+  automation:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
