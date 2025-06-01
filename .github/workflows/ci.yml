@@ -35,10 +35,12 @@ jobs:
         run: npm ci
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
-      - name: Build the project
-        run: npm run build
-      - name: Start the dev server
-        run: npm run start
+      #   We need to run the dev server with required env vars
+      #   complete this
+      # - name: Build the project
+      #   run: npm run build
+      # - name: Start the dev server
+      #   run: npm run start
       - name: Run Playwright tests
         run: npx playwright test
       - uses: actions/upload-artifact@v4
