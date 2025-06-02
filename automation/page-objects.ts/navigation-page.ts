@@ -3,13 +3,15 @@ import { PageManager } from "./page-manager";
 import { Base } from "./base";
 // https://www.udemy.com/course/playwright-from-zero-to-hero/learn/lecture/39699270#overview
 
+const prod = "https://datatattat.com";
+const local = "http://localhost:3000";
 export class NavigationPage extends Base {
 	constructor(page: Page) {
 		super(page);
 	}
 
 	async browserNavigateToContentPage(route: string = "") {
-		await this.page.goto(`https://datatattat.com/${route}`);
+		await this.page.goto(`${local}/${route}`);
 	}
 
 	async navigateToHome() {}
