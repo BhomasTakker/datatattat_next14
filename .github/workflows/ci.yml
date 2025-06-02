@@ -5,10 +5,17 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
-
+  env:
+    MONGODB_URI: ${{ secrets.MONGODB_URI }}
+    REDIS_URL: ${{ secrets.REDIS_URL }}
+    YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+    AUTH_GITHUB_ID: ${{ secrets.AUTH_GITHUB_ID }}
+    AUTH_GITHUB_SECRET: ${{ secrets.AUTH_GITHUB_SECRET }}
+    GOOGLE_ID: ${{ secrets.GOOGLE_ID }}
+    GOOGLE_SECRET: ${{ secrets.GOOGLE_SECRET }}
 jobs:
   unit:
-    runs-on: ubuntu-latest=
+    runs-on: ubuntu-latest
 
     strategy:
       matrix:
