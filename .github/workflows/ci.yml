@@ -29,6 +29,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
       - name: create env file
         run: |
           touch .env
@@ -39,8 +41,6 @@ jobs:
           echo AUTH_GITHUB_SECRET=${{ secrets.AUTH_GITHUB_SECRET }} >> .env
           echo GOOGLE_ID=${{ secrets.GOOGLE_ID }} >> .env
           echo GOOGLE_SECRET=${{ secrets.GOOGLE_SECRET }} >> .env
-        with:
-          node-version: lts/*
       - name: Install dependencies
         run: npm ci
       - name: Install Playwright Browsers
