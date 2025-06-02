@@ -47,7 +47,7 @@ jobs:
           AUTH_GITHUB_SECRET: ${{ secrets.AUTH_GITHUB_SECRET }}
           GOOGLE_ID: ${{ secrets.GOOGLE_ID }}
           GOOGLE_SECRET: ${{ secrets.GOOGLE_SECRET }}
-        run: npm run start
+        run: next start
       - name: Run Playwright tests
         run: npx playwright test
       - uses: actions/upload-artifact@v4
