@@ -11,7 +11,7 @@ env:
   YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
   AUTH_GITHUB_ID: ${{ secrets.AUTH_GITHUB_ID }}
   AUTH_GITHUB_SECRET: ${{ secrets.AUTH_GITHUB_SECRET }}
-  GOOGLE_ID: ${{ secrets.GOOGLE_ID }}
+  GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
   GOOGLE_SECRET: ${{ secrets.GOOGLE_SECRET }}
   MY_SECRET: WubWubWubWubWubWubWubWubWubWubWubWubWubWubWubWub
 jobs:
