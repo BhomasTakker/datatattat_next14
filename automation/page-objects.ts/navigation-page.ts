@@ -19,7 +19,7 @@ export class NavigationPage extends Base {
 	// via Nav?
 	async navigateToUK() {
 		const pm = new PageManager(this.page);
-		const ukLink = await pm.onHeaderPage.getRouteLink("uk");
+		const ukLink = await pm.onHeaderPage.getRouteLink("UK");
 		await ukLink.click();
 	}
 

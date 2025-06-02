@@ -19,7 +19,8 @@ export class HeaderPage extends Base {
 	// get header link by route / this isn't how a user would navigate
 	async getRouteLink(route: string): Promise<Locator> {
 		const header = this.getHeader();
-		return header.locator(`a[href='/${route}']`);
+		return header.getByText(route);
+		// return header.locator(`a[href='/${route}']`);
 	}
 	async getUserMenu(): Promise<Locator> {
 		// probably add and use aria label
