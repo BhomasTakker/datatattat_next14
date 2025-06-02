@@ -14,7 +14,7 @@ test.describe("Page Navigation", () => {
 	test("navigate to UK", async ({ page }) => {
 		const pm = new PageManager(page);
 		// homeViaHeader, homeViaIcon, viaHeaderNav for e.g.
-		pm.navigateTo.navigateToUK();
+		await pm.navigateTo.navigateToUK();
 
 		await expect(page).toHaveURL(`${local}/uk`);
 	});
