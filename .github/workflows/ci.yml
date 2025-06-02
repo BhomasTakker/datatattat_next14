@@ -30,8 +30,8 @@ jobs:
           echo "YOUTUBE_API_KEY: $YOUTUBE_API_KEY"
           echo "AUTH_GITHUB_ID: $AUTH_GITHUB_ID"
           echo "AUTH_GITHUB_SECRET: $AUTH_GITHUB_SECRET"
-          echo "AUTH_GOOGLE_ID: $AUTH_GOOGLE_ID"
-          echo "AUTH_GOOGLE_SECRET: $AUTH_GOOGLE_SECRET"
+          echo "GOOGLE_ID: $GOOGLE_ID"
+          echo "GOOGLE_SECRET: $GOOGLE_SECRET"
       - uses: actions/checkout@v4
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
@@ -40,28 +40,28 @@ jobs:
           cache: "npm"
       - run: npm i
       - run: npm test
-  # automation:
-  #   timeout-minutes: 60
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #     - uses: actions/setup-node@v4
-  #       with:
-  #         node-version: lts/*
-  #     - name: Install dependencies
-  #       run: npm ci
-  #     - name: Install Playwright Browsers
-  #       run: npx playwright install --with-deps
-  #     #   We need to run the dev server with required env vars
-  #     - name: Build the project
-  #       run: npm run build
-  #     - name: Start the dev server
-  #       run: MONGODB_URI=$MONGODB_URI REDIS_URL=$REDIS_URL YOUTUBE_API_KEY=$YOUTUBE_API_KEY AUTH_GITHUB_ID=$AUTH_GITHUB_ID AUTH_GITHUB_SECRET=$AUTH_GITHUB_SECRET AUTH_GOOGLE_ID=$AUTH_GOOGLE_ID AUTH_GOOGLE_SECRET=$AUTH_GOOGLE_SECRET npm run start
-  #     - name: Run Playwright tests
-  #       run: npx playwright test
-  #     - uses: actions/upload-artifact@v4
-  #       if: ${{ !cancelled() }}
-  #       with:
-  #         name: playwright-report
-  #         path: playwright-report/
-  #         retention-days: 30
+  automation:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+      - name: Install dependencies
+        run: npm ci
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+      #   We need to run the dev server with required env vars
+      - name: Build the project
+        run: npm run build
+      - name: Start the dev server
+        run: MONGODB_URI=$MONGODB_URI REDIS_URL=$REDIS_URL YOUTUBE_API_KEY=$YOUTUBE_API_KEY AUTH_GITHUB_ID=$AUTH_GITHUB_ID AUTH_GITHUB_SECRET=$AUTH_GITHUB_SECRET GOOGLE_ID=$GOOGLE_ID GOOGLE_SECRET=$GOOGLE_SECRET next start
+      - name: Run Playwright tests
+        run: npx playwright test
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
