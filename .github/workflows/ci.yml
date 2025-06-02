@@ -13,6 +13,7 @@ env:
   AUTH_GITHUB_SECRET: ${{ secrets.AUTH_GITHUB_SECRET }}
   GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
   GOOGLE_SECRET: ${{ secrets.GOOGLE_SECRET }}
+  NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
 jobs:
   unit:
     runs-on: ubuntu-latest
