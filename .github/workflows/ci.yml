@@ -47,7 +47,7 @@ jobs:
       - name: Build the project
         run: npm run build
       - name: Start the dev server
-        run: MONGODB_URI=$MONGODB_URI REDIS_URL=$REDIS_URL YOUTUBE_API_KEY=$YOUTUBE_API_KEY AUTH_GITHUB_ID=$AUTH_GITHUB_ID AUTH_GITHUB_SECRET=$AUTH_GITHUB_SECRET AUTH_GOOGLE_ID=$AUTH_GOOGLE_ID AUTH_GOOGLE_SECRET=$AUTH_GOOGLE_SECRET npm run start
+        run: MONGODB_URI=$MONGODB_URI REDIS_URL=$REDIS_URL YOUTUBE_API_KEY=$YOUTUBE_API_KEY AUTH_GITHUB_ID=${{ env.AUTH_GITHUB_ID }} AUTH_GITHUB_SECRET=${{ secrets.AUTH_GITHUB_SECRET }} AUTH_GOOGLE_ID=$AUTH_GOOGLE_ID AUTH_GOOGLE_SECRET=$AUTH_GOOGLE_SECRET npm run start
       - name: Run Playwright tests
         run: npx playwright test
       - uses: actions/upload-artifact@v4
