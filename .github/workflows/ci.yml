@@ -13,7 +13,6 @@ env:
   AUTH_GITHUB_SECRET: ${{ secrets.AUTH_GITHUB_SECRET }}
   GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
   GOOGLE_SECRET: ${{ secrets.GOOGLE_SECRET }}
-  MY_SECRET: WubWubWubWubWubWubWubWubWubWubWubWubWubWubWubWub
 jobs:
   unit:
     runs-on: ubuntu-latest
@@ -43,12 +42,6 @@ jobs:
         run: npm ci
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
-      - name: Output
-        run: |
-          echo $MY_SECRET
-          echo ${{env.MY_SECRET}}
-          echo $MONGODB_URI
-          echo ${{env.MONGODB_URI}}
       #   We need to run the dev server with required env vars
       - name: Build the project
         run: npm run build
