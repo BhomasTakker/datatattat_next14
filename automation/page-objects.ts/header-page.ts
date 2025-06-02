@@ -12,7 +12,9 @@ export class HeaderPage extends Base {
 	// we should get the header 'title' button
 	async getTitle(): Promise<string> {
 		const header = this.getHeader();
-		return (await header.locator("h2").textContent()) || "";
+		const h2Locator = header.locator("h2");
+		const textContent = await h2Locator.textContent();
+		return textContent ? textContent.trim() : "";
 	}
 	// get header link by route / this isn't how a user would navigate
 	async getRouteLink(route: string): Promise<Locator> {
