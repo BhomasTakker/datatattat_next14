@@ -29,6 +29,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
+      - name: create env file
+        run: |
+          touch .env
+          echo MONGODB_URI=${{ secrets.MONGODB_URI }} >> .env
+          echo REDIS_URL=${{ secrets.REDIS_URL }} >> .env
+          echo YOUTUBE_API_KEY=${{ secrets.YOUTUBE_API_KEY }} >> .env
+          echo AUTH_GITHUB_ID=${{ secrets.AUTH_GITHUB_ID }} >> .env
+          echo AUTH_GITHUB_SECRET=${{ secrets.AUTH_GITHUB_SECRET }} >> .env
+          echo GOOGLE_ID=${{ secrets.GOOGLE_ID }} >> .env
+          echo GOOGLE_SECRET=${{ secrets.GOOGLE_SECRET }} >> .env
         with:
           node-version: lts/*
       - name: Install dependencies
@@ -40,14 +50,6 @@ jobs:
         run: npm run build
       - name: Start the dev server
         run: npm run start
-        env:
-          MONGODB_URI: ${{ secrets.MONGODB_URI }}
-          REDIS_URL: ${{ secrets.REDIS_URL }}
-          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
-          AUTH_GITHUB_ID: ${{ secrets.AUTH_GITHUB_ID }}
-          AUTH_GITHUB_SECRET: ${{ secrets.AUTH_GITHUB_SECRET }}
-          GOOGLE_ID: ${{ secrets.GOOGLE_ID }}
-          GOOGLE_SECRET: ${{ secrets.GOOGLE_SECRET }}
       - name: Run Playwright tests
         run: npx playwright test
       - uses: actions/upload-artifact@v4
