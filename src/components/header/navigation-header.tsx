@@ -27,7 +27,7 @@ const Logo = () => {
 const Datatattat = () => {
 	return (
 		<div className={styles.logoContainer}>
-			<Link href={"/"} key={"Home"} aria-hidden>
+			<Link href={"/"} key={"Home"} data-testid="datatattat" aria-hidden>
 				{/* Pull from state - We should have a state config */}
 				<h2 className={styles.datatattat}>DATATATTAT</h2>
 			</Link>
