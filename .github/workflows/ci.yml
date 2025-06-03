@@ -5,9 +5,17 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
-
+env:
+  MONGODB_URI: ${{ secrets.MONGODB_URI }}
+  REDIS_URL: ${{ secrets.REDIS_URL }}
+  YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+  AUTH_GITHUB_ID: ${{ secrets.AUTH_GITHUB_ID }}
+  AUTH_GITHUB_SECRET: ${{ secrets.AUTH_GITHUB_SECRET }}
+  GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+  GOOGLE_SECRET: ${{ secrets.GOOGLE_SECRET }}
+  NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
 jobs:
-  jest-unit-test:
+  unit:
     runs-on: ubuntu-latest
 
     strategy:
@@ -23,3 +31,29 @@ jobs:
           cache: "npm"
       - run: npm i
       - run: npm test
+  automation:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+      - name: Install dependencies
+        run: npm ci
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+      #   We need to run the dev server with required env vars
+      - name: Build the project
+        run: npm run build
+      # use & to run an additional step!!
+      - name: Start the dev server
+        run: npm run start &
+      - name: Run Playwright tests
+        run: npx playwright test
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30

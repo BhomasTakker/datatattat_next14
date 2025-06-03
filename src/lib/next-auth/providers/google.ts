@@ -5,9 +5,9 @@ import { returnUser } from "../user-return";
 const { GOOGLE_CLIENT_ID, GOOGLE_SECRET } = process.env;
 
 // instead of throwing an error, we could just not include the provider
-if (!GOOGLE_CLIENT_ID || !GOOGLE_SECRET) {
-	throw new Error("Google ID and Secret not found");
-}
+// if (!GOOGLE_CLIENT_ID || !GOOGLE_SECRET) {
+// 	throw new Error("Google ID and Secret not found");
+// }
 
 export const GOOGLE = Google({
 	async profile(profile) {
@@ -17,6 +17,6 @@ export const GOOGLE = Google({
 		// check user creation error?
 		// redirect home and notify?
 	},
-	clientId: GOOGLE_CLIENT_ID,
-	clientSecret: GOOGLE_SECRET,
+	clientId: GOOGLE_CLIENT_ID || "",
+	clientSecret: GOOGLE_SECRET || "",
 });

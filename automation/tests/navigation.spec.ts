@@ -7,12 +7,15 @@ test.beforeEach(async ({ page }) => {
 	await pm.navigateTo.browserNavigateToContentPage();
 });
 
+const prod = "https://datatattat.com";
+const local = "http://localhost:3000";
+
 test.describe("Page Navigation", () => {
 	test("navigate to UK", async ({ page }) => {
 		const pm = new PageManager(page);
 		// homeViaHeader, homeViaIcon, viaHeaderNav for e.g.
-		pm.navigateTo.navigateToUK();
+		await pm.navigateTo.navigateToUK();
 
-		await expect(page).toHaveURL("https://datatattat.com/uk");
+		await expect(page).toHaveURL(`${local}/uk`);
 	});
 });
