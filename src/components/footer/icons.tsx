@@ -16,12 +16,10 @@ import { SiOnlyfans } from "react-icons/si";
 import { BsSubstack } from "react-icons/bs";
 
 import styles from "./icons.module.scss";
-// we are missing logos
-// We need a better supplier
 
 import Link from "next/link";
 
-const iconsList = [
+export const iconsList = [
 	{
 		link: "https://x.com/datatattat",
 		icon: BsTwitterX,
@@ -62,10 +60,10 @@ const iconsList = [
 		link: "https://www.twitch.tv/datatattat",
 		icon: FaTwitch,
 	},
-	{
-		link: "https://www.reddit.com/user/datatattat/",
-		icon: FaSnapchat,
-	},
+	// {
+	// 	link: "https://www.reddit.com/user/datatattat/",
+	// 	icon: FaSnapchat,
+	// },
 	{
 		link: "https://www.tiktok.com/@datatattat",
 		icon: FaTiktok,
