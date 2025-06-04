@@ -11,12 +11,12 @@ test.beforeEach(async ({ page }) => {
 test.describe("Header", () => {
 	test("has title", async ({ page }) => {
 		const pm = new PageManager(page);
-		const title = pm.onHeaderPage.getTitle();
+		const title = pm.onHeaderPage.title;
 		await expect(title).toHaveText("DATATATTAT");
 	});
 	test("title takes us home", async ({ page }) => {
 		const pm = new PageManager(page);
-		const title = pm.onHeaderPage.getTitle();
+		const title = pm.onHeaderPage.title;
 		await title.click();
 		await page.waitForURL("**/");
 		// seems unnecessary?

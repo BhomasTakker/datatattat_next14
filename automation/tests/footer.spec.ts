@@ -17,14 +17,14 @@ test.describe("Footer", () => {
 
 	test("footer contains expected number of links", async ({ page }) => {
 		const pm = new PageManager(page);
-		const footer = pm.onFooterPage.getFooter();
+		const footer = pm.onFooterPage.footer;
 		const links = footer.locator("a");
 		expect(await links.count()).toEqual(iconsList.length);
 	});
 
 	test("footer links are valid", async ({ page }) => {
 		const pm = new PageManager(page);
-		const footer = pm.onFooterPage.getFooter();
+		const footer = pm.onFooterPage.footer;
 
 		// has x
 		const xLink = footer.locator('a[href="https://x.com/datatattat"]');
