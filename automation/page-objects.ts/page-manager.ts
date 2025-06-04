@@ -13,10 +13,10 @@ export class PageManager {
 
 	constructor(page: Page) {
 		this.page = page;
-		this.headerPage = new HeaderPage(page);
-		this.footerPage = new FooterPage(page);
-		this.contentPage = new ContentPage(page);
-		this.navigationPage = new NavigationPage(page);
+		this.headerPage = new HeaderPage(this.page);
+		this.footerPage = new FooterPage(this.page);
+		this.contentPage = new ContentPage(this.page);
+		this.navigationPage = new NavigationPage(this.page);
 	}
 
 	get navigateTo() {
