@@ -1,17 +1,41 @@
 import { test, expect } from "@playwright/test";
 import { PageManager } from "../page-objects.ts/page-manager";
+import { BASE_URL } from "../utils";
 
 // we need vary between use live and load dev or test?
 test.beforeEach(async ({ page }) => {
 	const pm = new PageManager(page);
-	await pm.navigateTo.browserNavigateToContentPage();
+	await pm.navigateTo.browserNavigateToContentPage("automation");
 });
 
 test.describe("Header", () => {
 	test("has title", async ({ page }) => {
 		const pm = new PageManager(page);
-		const title = await pm.onHeaderPage.getTitle();
-		expect(title).toEqual("DATATATTAT");
+		const title = pm.onHeaderPage.getTitle();
+		await expect(title).toHaveText("DATATATTAT");
+	});
+	test("title takes us home", async ({ page }) => {
+		const pm = new PageManager(page);
+		const title = pm.onHeaderPage.getTitle();
+		await title.click();
+		await page.waitForURL("**/");
+		// seems unnecessary?
+		await expect(page).toHaveURL(`${BASE_URL}`);
+	});
+	test("clicking home logo take us to the home screen", async ({ page }) => {
+		const pm = new PageManager(page);
+		const logo = await pm.onHeaderPage.getUserHomeLogoButton();
+		await logo.click();
+		await page.waitForURL("**/");
+		// seems unnecessary?
+		await expect(page).toHaveURL(`${BASE_URL}`);
+	});
+	test("can navigate via nav link", async ({ page }) => {
+		const pm = new PageManager(page);
+		const navigationLink = await pm.onHeaderPage.getRouteLink("NAVIGATION");
+		await navigationLink.click();
+		await page.waitForURL("**/navigation");
+		await expect(page).toHaveURL(`${BASE_URL}/automation/navigation`);
 	});
 
 	test("open user menu", async ({ page }) => {
@@ -27,5 +51,15 @@ test.describe("Header", () => {
 		// expect(userMenuOpen).toBe(true);
 		// const userMenuText = await userMenu.textContent();
 		// expect(userMenuText).toContain("User Menu"); // Adjust based on actual menu content
+	});
+
+	test("donate button is present", async ({ page }) => {
+		const pm = new PageManager(page);
+		const donateButton = await pm.onHeaderPage.getDonateButton();
+		expect(donateButton).toBeDefined();
+		await expect(donateButton).toHaveAttribute(
+			"href",
+			"https://ko-fi.com/Z8Z81DQMUH"
+		);
 	});
 });
