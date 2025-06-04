@@ -1,20 +1,12 @@
 import { Locator, Page } from "@playwright/test";
-import { Base } from "./base";
+import { ContentPage } from "./content-page";
 
-export class ContentPage extends Base {
-	private readonly _content: Locator;
-
-	// profile could inherit from ContentPage
+export class PageProfile extends ContentPage {
 	private readonly _profile: Locator;
 
 	constructor(page: Page) {
 		super(page);
-		this._content = this.page.locator("main");
 		this._profile = this.page.getByTestId("page-profile-root");
-	}
-
-	get content(): Locator {
-		return this._content;
 	}
 
 	get profile(): Locator {
