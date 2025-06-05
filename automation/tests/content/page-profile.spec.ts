@@ -10,13 +10,14 @@ test.beforeEach(async ({ page }) => {
 test.describe("Page Profile", () => {
 	test("profile component is defined", async ({ page }) => {
 		const pm = new PageManager(page);
-		const profile = pm.onPageProfile.profile;
+		const profile = pm.onContentPage.profile;
 		expect(profile).toBeDefined();
 	});
 
 	test("has expected title", async ({ page }) => {
 		const pm = new PageManager(page);
-		const title = pm.onPageProfile.getContentTitle();
+		const profile = pm.onContentPage.profile;
+		const title = profile.getContentTitle();
 		await expect(title).toHaveText("Automation Page");
 	});
 });
