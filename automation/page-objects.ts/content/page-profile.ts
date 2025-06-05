@@ -9,8 +9,8 @@ export class PageProfile extends Base {
 
 	constructor(page: Page, container: Locator) {
 		super(page);
-		this._profile = this.page.getByTestId("page-profile-root");
 		this._container = container;
+		this._profile = this._container.getByTestId("page-profile-root");
 	}
 
 	get profile(): Locator {
