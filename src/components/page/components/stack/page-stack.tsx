@@ -30,7 +30,7 @@ export const PageStack = ({ content }: { content: PageContent }) => {
 	const renderComponents = () => {
 		return components.map((component, index) => {
 			return (
-				<li key={index}>
+				<li key={index} data-testid="content-component">
 					<ComponentDisplay key={index} component={component} />
 				</li>
 			);
@@ -40,5 +40,9 @@ export const PageStack = ({ content }: { content: PageContent }) => {
 	const className = `${styles.root} ${styles[`root-${style}`]}`;
 
 	// Semantically this should be a list of components
-	return <ul className={className}>{renderComponents()}</ul>;
+	return (
+		<ul className={className} data-testid="page-component">
+			{renderComponents()}
+		</ul>
+	);
 };
