@@ -26,14 +26,19 @@ export const PageGrid = ({ content }: { content: PageContent }) => {
 		return components.map((component, index) => {
 			// potentially wrap in a div - if we need to control grid items
 			// we should be able to use a pure css way?
-			return <ComponentDisplay key={index} component={component} />;
+			return (
+				<div data-testid="content-component">
+					<ComponentDisplay key={index} component={component} />
+				</div>
+			);
 		});
 	};
 
 	const className = `${styles.root} ${styles[`root-${style}`]}`;
 
 	return (
-		<section data-testid="page-grid" className={className}>
+		// Would you specify page-grid test id?
+		<section data-testid="page-component" className={className}>
 			{renderComponents()}
 		</section>
 	);

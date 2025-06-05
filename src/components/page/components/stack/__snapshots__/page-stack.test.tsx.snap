@@ -4,8 +4,11 @@ exports[`Page Stack Test Suite renders PageStack unchanged 1`] = `
 <div>
   <ul
     class="root root-column"
+    data-testid="page-component"
   >
-    <li>
+    <li
+      data-testid="content-component"
+    >
       Component type:- ListItem
       <section>
         Component props:- {"variant":"default","componentTitle":"Sample Title","componentTitleLink":"/sample-link","showComponentTitle":true}

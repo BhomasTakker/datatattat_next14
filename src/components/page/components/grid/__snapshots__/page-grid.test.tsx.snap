@@ -4,14 +4,18 @@ exports[`Page Grid Test Suite renders PageGrid unchanged 1`] = `
 <div>
   <section
     class="root root-test-grid"
-    data-testid="page-grid"
+    data-testid="page-component"
   >
-    <section
-      data-testid="page-grid-item"
+    <div
+      data-testid="content-component"
     >
-      Component type:- GridItem
-      Component props:- {}
-    </section>
+      <section
+        data-testid="page-grid-item"
+      >
+        Component type:- GridItem
+        Component props:- {}
+      </section>
+    </div>
   </section>
 </div>
 `;

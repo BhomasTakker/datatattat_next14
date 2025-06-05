@@ -37,17 +37,18 @@ const MOCK_COMPONENT = {
 describe("Page Grid Test Suite", () => {
 	it("should render a page grid element", () => {
 		render(<PageGrid content={MOCK} />);
-		const component = screen.getByTestId("page-grid");
+		const component = screen.getByTestId("page-component");
 		expect(component).toBeInTheDocument();
 	});
 
 	it("should render an div with expected class", () => {
 		render(<PageGrid content={MOCK} />);
-		const component = screen.getByTestId("page-grid");
+		const component = screen.getByTestId("page-component");
 		expect(component).toHaveClass("root", "root-test-grid");
 	});
 
 	it("should render a grid item", () => {
+		// @ts-expect-error - mocking data
 		MOCK.components = [MOCK_COMPONENT];
 		render(<PageGrid content={MOCK} />);
 		const component = screen.getByTestId("page-grid-item");
@@ -55,6 +56,7 @@ describe("Page Grid Test Suite", () => {
 	});
 
 	it("should render expected number of list items", () => {
+		// @ts-expect-error - mocking data
 		MOCK.components = [MOCK_COMPONENT, MOCK_COMPONENT, MOCK_COMPONENT];
 		render(<PageGrid content={MOCK} />);
 		const components = screen.getAllByTestId("page-grid-item");
@@ -62,6 +64,7 @@ describe("Page Grid Test Suite", () => {
 	});
 
 	it("renders PageGrid unchanged", () => {
+		// @ts-expect-error - mocking data
 		MOCK.components = [MOCK_COMPONENT];
 		const { container } = render(<PageGrid content={MOCK} />);
 		expect(container).toMatchSnapshot();
