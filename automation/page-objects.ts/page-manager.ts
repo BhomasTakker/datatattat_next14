@@ -2,7 +2,8 @@ import { Page } from "@playwright/test";
 import { HeaderPage } from "./header-page";
 import { FooterPage } from "./footer-page";
 import { NavigationPage } from "./navigation-page";
-import { ContentPage } from "./content-page";
+import { ContentPage } from "./content/content-page";
+import { PageProfile } from "./content/page-profile";
 
 export class PageManager {
 	private readonly page: Page;
@@ -22,7 +23,6 @@ export class PageManager {
 	get navigateTo() {
 		return this.navigationPage;
 	}
-
 	get onHeaderPage() {
 		return this.headerPage;
 	}

@@ -16,7 +16,8 @@ test.describe("Page Profile", () => {
 
 	test("has expected title", async ({ page }) => {
 		const pm = new PageManager(page);
-		const title = pm.onContentPage.getContentTitle();
+		const profile = pm.onContentPage.profile;
+		const title = profile.getContentTitle();
 		await expect(title).toHaveText("Automation Page");
 	});
 });
