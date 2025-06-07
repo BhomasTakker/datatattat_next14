@@ -1,11 +1,12 @@
 import { test, expect } from "@playwright/test";
 import { PageManager } from "../page-objects.ts/page-manager";
 import { BASE_URL } from "../utils";
+import { AutomationPages } from "../utils/navigation";
 
 // we need vary between use live and load dev or test?
 test.beforeEach(async ({ page }) => {
 	const pm = new PageManager(page);
-	await pm.navigateTo.browserNavigateToContentPage("automation");
+	await pm.navigateTo.browserNavigateToContentPage(AutomationPages.automation);
 });
 
 test.describe("Header", () => {
@@ -35,7 +36,7 @@ test.describe("Header", () => {
 		const navigationLink = await pm.onHeaderPage.getRouteLink("NAVIGATION");
 		await navigationLink.click();
 		await page.waitForURL("**/navigation");
-		await expect(page).toHaveURL(`${BASE_URL}/automation/navigation`);
+		await expect(page).toHaveURL(`${BASE_URL}/${AutomationPages.navigation}`);
 	});
 
 	test("open user menu", async ({ page }) => {

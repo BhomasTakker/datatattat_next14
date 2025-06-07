@@ -14,6 +14,7 @@ test.describe("Page Navigation", () => {
 		// homeViaHeader, homeViaIcon, viaHeaderNav for e.g.
 		await pm.navigateTo.navigateToUK();
 
+		// update to automation
 		await expect(page).toHaveURL(`${BASE_URL}/uk`);
 	});
 });

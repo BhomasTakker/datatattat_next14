@@ -40,5 +40,9 @@ export const ArticleCollection = ({
 
 	const { renderMethod, styles } = variantObject;
 
-	return <div className={styles.root}>{renderMethod(articles, rest)}</div>;
+	return (
+		<div className={styles.root} data-testid={variantType}>
+			{renderMethod(articles, rest)}
+		</div>
+	);
 };
