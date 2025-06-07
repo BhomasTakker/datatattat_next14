@@ -19,6 +19,8 @@ export class PageComponent extends Base {
 
 	// we should pass the locator etc in
 	// have this function on Base
+	// If we extended sub components from Locator we could add this to that base
+	// that would then be available as a method on all components
 	checkClassName(className: string): Promise<boolean> {
 		return this.pageComponent.evaluate((el, className) => {
 			const classString = el.classList.toString();
