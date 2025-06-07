@@ -73,6 +73,9 @@ test.describe("Article Collection - Articles", () => {
 		});
 
 		test("all articles are rendered", async ({ page }) => {
+			const article = stackColumns.getByRole("article").last();
+			// we need to make sure the article is in view
+			await expect(article).toBeInViewport();
 			const articles = stackColumns.locator("article");
 			const articleCount = await articles.count();
 			expect(articleCount).toEqual(10);
