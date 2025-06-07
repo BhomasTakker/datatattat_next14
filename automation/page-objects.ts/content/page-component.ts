@@ -17,6 +17,8 @@ export class PageComponent extends Base {
 		return this._pageComponent;
 	}
 
+	// we should pass the locator etc in
+	// have this function on Base
 	checkClassName(className: string): Promise<boolean> {
 		return this.pageComponent.evaluate((el, className) => {
 			const classString = el.classList.toString();

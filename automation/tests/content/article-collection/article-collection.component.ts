@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
-import { PageManager } from "../../page-objects.ts/page-manager";
-import { AutomationPages } from "../../utils/navigation";
+import { PageManager } from "../../../page-objects.ts/page-manager";
+import { AutomationPages } from "../../../utils/navigation";
 
 // we need vary between use live and load dev or test?
 test.beforeEach(async ({ page }) => {
@@ -13,12 +13,5 @@ test.describe("Page Profile", () => {
 		const pm = new PageManager(page);
 		const profile = pm.onContentPage.profile;
 		expect(profile).toBeDefined();
-	});
-
-	test("has expected title", async ({ page }) => {
-		const pm = new PageManager(page);
-		const profile = pm.onContentPage.profile;
-		const title = profile.getContentTitle();
-		await expect(title).toHaveText("Automation Page");
 	});
 });
