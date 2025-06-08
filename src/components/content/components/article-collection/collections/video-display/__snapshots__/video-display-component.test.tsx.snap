@@ -4,17 +4,20 @@ exports[`VideoDisplayComponent applies the correct container class based on vari
 <div>
   <div
     class="containerVerticalScroll"
+    data-testid="VerticalScroll"
   >
     <div
       class="videoPlayer"
+      data-testid="video-player-container"
     >
       <div
         data-options="{"autoplay":false,"aspectRatio":"16:9","controls":true,"fill":true,"fluid":true,"responsive":true,"playbackRates":[0.25,0.5,0.75,1,1.25,1.5,1.75,2],"preload":"auto","techOrder":["youtube","html5"],"poster":"poster1.jpg","sources":[{"src":"video1.mp4","type":"video/youtube"}]}"
-        data-testid="video-player-container"
+        data-testid="mock-video-player-container"
       />
     </div>
     <ul
       class="articles"
+      data-testid="articles-list"
     >
       <li>
         <div
@@ -59,17 +62,20 @@ exports[`VideoDisplayComponent renders the video player and articles 1`] = `
 <div>
   <div
     class="containerHorizontalScroll"
+    data-testid="HorizontalScroll"
   >
     <div
       class="videoPlayer"
+      data-testid="video-player-container"
     >
       <div
         data-options="{"autoplay":"any","aspectRatio":"16:9","controls":true,"fill":true,"fluid":true,"responsive":true,"playbackRates":[0.25,0.5,0.75,1,1.25,1.5,1.75,2],"preload":"auto","techOrder":["youtube","html5"],"poster":"poster1.jpg","sources":[{"src":"video1.mp4","type":"video/youtube"}]}"
-        data-testid="video-player-container"
+        data-testid="mock-video-player-container"
       />
     </div>
     <ul
       class="articles"
+      data-testid="articles-list"
     >
       <li>
         <div
