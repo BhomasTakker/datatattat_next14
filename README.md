@@ -1,152 +1,126 @@
-## Datatattat
+# Datatattat
 
-# Overview
+## Overview
 
-## Datatattat is a content aggregator and broadcastor. The intention is to give users the ability to collate and organise news into collections of associated and related content. The user is free to create content pages under their username.
+Datatattat is a content aggregator and broadcastor. The intention is to give users the ability to collate and organise news into collections of associated and related content. The user is free to create content pages under their username.
 
 ##
 
 # Content
 
-## Currently we have an associated server that is collating news sources - articles, video, audio - from publically accessible rss feeds. Chron jobs are used to check certain feeds every 15 minutes. This data is then stored in a mongo db and an api has been created in order to provide the ability to search and organise the articles.
+Currently we have an associated server that is collating news sources - articles, video, audio - from publically accessible rss feeds. Chron jobs are used to check certain feeds every 15 minutes. This data is then stored in a mongo db and an api has been created in order to provide the ability to search and organise the articles.
 
 ##
 
 # CMS
 
-## There is edit functionality available to logged in members that they can use to create and organise their content. A user can create a page and the twitter/og card required to post a 'card' link to this page on social media, blog sites etc.
+There is edit functionality available to logged in members that they can use to create and organise their content. A user can create a page and the twitter/og card required to post a 'card' link to this page on social media, blog sites etc.
 
 ##
 
-# Tech Stack
+## Tech Stack
 
-## React, TypeScript, Nextjs 15
+React, TypeScript, Nextjs 15
 
-## Hosted on Vercel - Free Instance
+Hosted on Vercel - Free Instance
 
-## styling - css modules with sass
+styling - css modules with sass
 
-## testing - Jest, Playwright
+testing - Jest, Playwright
 
-## MongoDB cloud Atlas DB with Mongoose
+MongoDB cloud Atlas DB with Mongoose
 
-## Upstash Redis DB for caching
+Upstash Redis DB for caching
 
-## AWS EC2 free tier instance to host the 'cms'
+AWS EC2 free tier instance to host the 'cms'
 
-## Forms - react-hook-form
+Forms - react-hook-form
 
-## Next Auth
+Next Auth
 
-## Dependabot
+Dependabot
 
-## Github Actions
+Github Actions
 
-#
+## some libs and dependecies
 
-# some libs and dependecies
+video-js for the video player
 
-## video-js for the video player
+sonner for toast notifications
 
-## sonner for toast notifications
+cheerio for extracting html
 
-## cheerio for extracting html
+rss-parser for loading rss feeds
 
-## rss-parser for loading rss feeds
+react-icons, react-intersection-observer
 
-## react-icons, react-intersection-observer
+## CI
 
-##
+Fairly minimal implementation of unit tests and Playwrights e2es
 
-# CI
+Vercel creates a production build so any linting/typescript errors get flagged here.
 
-## Fairly minimal implementation of unit tests and Playwrights e2es
+Branching strategy is really just a 'github flow' approach. Team of 1 working generally on one thing at a time - this is the simplest easiest approach to take.
 
-## Vercel creates a production build so any linting/typescript errors get flagged here.
+## Architecture
 
-## Branching strategy is really just a 'github flow' approach. Team of 1 working generally on one thing at a time - this is the simplest easiest approach to take.
+No main approach as the site is perhaps surprisingly very simple and uses the next framework etc.
 
-# Architecture
+We use factory methods to determine what data is used and what components are rendered.
 
-## No main approach as the site is perhaps surprisingly very simple and uses the next framework etc.
+These factory methods allow us to scale data providers and frontend componets rapidly and safely.
 
-## We use factory methods to determine what data is used and what components are rendered.
+## Edit
 
-## These factory methods allow us to scale data providers and frontend componets rapidly and safely.
+The edit pages/functionality uses recursion to load a factory component that renders an input or an input collection. A 'branching' config file can be passed in to the form component to build the available inputs/options. This form is dynamic and can grow according to a users choices.
 
-# Edit
+## Next Steps
 
-##
+### CMS
 
-## The edit pages/functionality uses recursion to load a factory component that renders an input or an input collection. A 'branching' config file can be passed in to the form component to build the available inputs/options. This form is dynamic and can grow according to a users choices.
+The 'CMS' needs a lot of work. Currently providers, cron schedule, and organised feeds etc are hard coded in 'configs' which should be stored in a db so they can be updated and edited without need for deployment.
 
-#
+This would all require a UI, authentication, and proper hosting etc.
 
-#
+Rough idea at this time would be to seperate the 'edit' pages - or the whole member area of datatattat into a separate cms.
 
-# Next Steps
+### Testing
 
-#
+Unit tests were largely created with AI (copilot) for speed and convenience. Currently with around an 85% coverage. One area that needs to be looked more closely at is edit & user inputs. We need to make sure we are testing against any malicious intent and erroneous behaviour.
 
-# CMS
+#### Mock Database
 
-## The 'CMS' needs a lot of work. Currently providers, cron schedule, and organised feeds etc are hard coded in 'configs' which should be stored in a db so they can be updated and edited without need for deployment.
+Currently we are testing against a dev database hosted by Cloud Atlas - although this works it is a little problematic in that we are relying on an external service. We need to create a mock database so we can load expected and reliable data to test against.
 
-## This would all require a UI, authentication, and proper hosting etc.
+#### Visual Regression
 
-## Rough idea at this time would be to seperate the 'edit' pages - or the whole member area of datatattat into a separate cms.
+For Content testing we should be looking at adding some visual regression testing via Playwright snapshots. Potentially to be done after a mock db has been created.
 
-##
+#### Edit testing
 
-# Testing
+Currently a major flaw is that we aren't performing any testing of one of the main and most complicated areas of the site - edit forms. Currently logging in is with a Github or Google account - I am unsure of how to allow a Playwright user agent to log in at this time. At the moment I cannot think of an adequate way of achieving this.
 
-## Unit tests were largely created with AI (copilot) for speed and convenience. Currently with around an 85% coverage. One area that needs to be looked more closely at is edit & user inputs. We need to make sure we are testing against any malicious intent and erroneous behaviour.
+## Content
 
-#
+### Social Media
 
-# Mock Database
+Many social media companies allow posts, channels, threads, etc to be embeddable on third party sites by using the oembed protocol. Some providers will be added as available front end components.
 
-## Currently we are testing against a dev database hosted by Cloud Atlas - although this works it is a little problematic in that we are relying on an external service. We need to create a mock database so we can load expected and reliable data to test against.
+### Data
 
-#
+As it's name suggests datatattat isn't supposed to be entirely news/article focussed. The intention is to add tables, graphs, maps, xlsx sheets, etc, as available frontend components.
 
-# Visual Regression
+The overarching difficulty and concern of this is data - we need the ability to bring in public data from a wide variety of sources and apply it to frontend components for data visualization.
 
-## For Content testing we should be looking at adding some visual regression testing via Playwright snapshots. Potentially to be done after a mock db has been created.
-
-#
-
-## Edit testing
-
-## Currently a major flaw is that we aren't performing any testing of one of the main and most complicated areas of the site - edit forms. Currently logging in is with a Github or Google account - I am unsure of how to allow a Playwright user agent to log in at this time. At the moment I cannot think of an adequate way of achieving this.
+We would need to provide the ability to map, sort, group, and filter data dynamically. I have attempted this previously with RXJS as part of a POC
 
 #
 
-# Content
+#
 
 #
 
-# Social Media
-
-## Many social media companies allow posts, channels, threads, etc to be embeddable on third party sites by using the oembed protocol. Some providers will be added as available front end components.
-
 #
-
-# Data
-
-## As it's name suggests datatattat isn't supposed to be entirely news/article focussed. The intention is to add tables, graphs, maps, xlsx sheets, etc, as available frontend components.
-
-## The overarching difficulty and concern of this is data - we need the ability to bring in public data from a wide variety of sources and apply it to frontend components for data visualization.
-
-## We would need to provide the ability to map, sort, group, and filter data dynamically. I have attempted this previously with RXJS as part of a POC
-
-##
-
-##
-
-##
-
-##
 
 # Random notes
 
