@@ -8,7 +8,7 @@ import { PlayerCollectionVariant, PlayerSourceTypes } from "./structs";
 jest.mock("../../../video-player/video-player-container", () => ({
 	VideoPlayerContainer: ({ playerRef, options }: any) => (
 		<div
-			data-testid="video-player-container"
+			data-testid="mock-video-player-container"
 			data-options={JSON.stringify(options)}
 		/>
 	),
@@ -59,7 +59,9 @@ describe("VideoDisplayComponent", () => {
 				autoplay={true}
 			/>
 		);
-		expect(screen.getByTestId("video-player-container")).toBeInTheDocument();
+		expect(
+			screen.getByTestId("mock-video-player-container")
+		).toBeInTheDocument();
 		expect(screen.getAllByTestId("interaction")).toHaveLength(
 			mockArticles.length
 		);
@@ -78,7 +80,7 @@ describe("VideoDisplayComponent", () => {
 				autoplay={true}
 			/>
 		);
-		const container = screen.getByTestId("video-player-container");
+		const container = screen.getByTestId("mock-video-player-container");
 		const options = JSON.parse(container.getAttribute("data-options")!);
 		expect(options.autoplay).toBe("any");
 		expect(options.poster).toBe("poster1.jpg");

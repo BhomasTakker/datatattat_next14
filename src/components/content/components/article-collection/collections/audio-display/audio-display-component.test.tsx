@@ -6,7 +6,7 @@ import { CollectionItem } from "../../../../../../types/data-structures/collecti
 // Mock child components
 jest.mock("../../../audio-player/audio-player", () => ({
 	AudioPlayer: ({ src }: { src: string }) => (
-		<div data-testid="audio-player">{src}</div>
+		<div data-testid="mock-audio-player">{src}</div>
 	),
 }));
 jest.mock("./display-article", () => ({
@@ -44,7 +44,9 @@ describe("AudioDisplayComponent", () => {
 	it("renders without crashing and displays the first article", () => {
 		render(<AudioDisplayComponent articles={mockArticles} />);
 		expect(screen.getByTestId("display-article")).toHaveTextContent("Audio 1");
-		expect(screen.getByTestId("audio-player")).toHaveTextContent("audio1.mp3");
+		expect(screen.getByTestId("mock-audio-player")).toHaveTextContent(
+			"audio1.mp3"
+		);
 	});
 
 	it("renders a list of articles", () => {
@@ -68,13 +70,15 @@ describe("AudioDisplayComponent", () => {
 			);
 		});
 		// The audio player should still show the initial src due to state bug
-		expect(screen.getByTestId("audio-player")).toHaveTextContent("audio1.mp3");
+		expect(screen.getByTestId("mock-audio-player")).toHaveTextContent(
+			"audio1.mp3"
+		);
 	});
 
 	it("handles empty articles array gracefully", () => {
 		render(<AudioDisplayComponent articles={[]} />);
 		expect(screen.getByTestId("display-article")).toBeInTheDocument();
-		expect(screen.getByTestId("audio-player")).toHaveTextContent("");
+		expect(screen.getByTestId("mock-audio-player")).toHaveTextContent("");
 	});
 
 	it("applies the correct size class", () => {

@@ -7,5 +7,9 @@ type DisplayArticleProps = {
 };
 
 export const DisplayArticle = ({ item }: DisplayArticleProps) => {
-	return <Article article={item} styles={styles} />;
+	return (
+		<div data-testid="display-article">
+			<Article article={item} styles={styles} />
+		</div>
+	);
 };

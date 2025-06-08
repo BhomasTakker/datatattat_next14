@@ -89,15 +89,15 @@ export const VideoDisplayComponent = ({
 
 	return (
 		// class variant
-		<div className={containerClass}>
-			<div className={styles.videoPlayer}>
+		<div className={containerClass} data-testid={variant}>
+			<div className={styles.videoPlayer} data-testid="video-player-container">
 				<VideoPlayerContainer
 					styles={styles}
 					playerRef={playerRef}
 					options={options}
 				/>
 			</div>
-			<ul className={styles.articles}>
+			<ul className={styles.articles} data-testid="articles-list">
 				{articles.map((item) => (
 					<li key={item.src}>
 						<InViewComponent

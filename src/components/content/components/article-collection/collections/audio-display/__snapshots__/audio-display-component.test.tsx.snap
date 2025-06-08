@@ -12,15 +12,17 @@ exports[`AudioDisplayComponent renders a list of articles 1`] = `
     </div>
     <div
       class="audioPlayer"
+      data-testid="audio-player"
     >
       <div
-        data-testid="audio-player"
+        data-testid="mock-audio-player"
       >
         audio1.mp3
       </div>
     </div>
     <ul
       class="articles medium"
+      data-testid="articles-list"
     >
       <li>
         <div

@@ -2,12 +2,10 @@ import { test, expect, Locator } from "@playwright/test";
 import { PageManager } from "../../../page-objects.ts/page-manager";
 import { AutomationPages } from "../../../utils/navigation";
 import { Base } from "../../../page-objects.ts/base";
-import { waitFor } from "@testing-library/dom";
 
-let pm: PageManager;
 // we need vary between use live and load dev or test?
 test.beforeEach(async ({ page }) => {
-	pm = new PageManager(page);
+	const pm = new PageManager(page);
 	await pm.navigateTo.browserNavigateToContentPage(
 		AutomationPages.articleCollection
 	);

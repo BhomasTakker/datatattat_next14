@@ -49,10 +49,13 @@ export const AudioDisplayComponent = ({
 		<div className={styles.container}>
 			{/* Display article */}
 			<DisplayArticle key={item.title} item={item} />
-			<div className={styles.audioPlayer}>
+			<div className={styles.audioPlayer} data-testid="audio-player">
 				<AudioPlayer src={activeSrc} audioPlayerRef={audioPlayerRef} />
 			</div>
-			<ul className={`${styles.articles} ${styles[size]}`}>
+			<ul
+				className={`${styles.articles} ${styles[size]}`}
+				data-testid="articles-list"
+			>
 				{articles.map((item) => (
 					<li key={item.src}>
 						<InViewComponent
