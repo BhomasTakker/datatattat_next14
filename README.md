@@ -74,7 +74,15 @@
 
 ## These factory methods allow us to scale data providers and frontend componets rapidly and safely.
 
+# Edit
+
 ##
+
+## The edit pages/functionality uses recursion to load a factory component that renders an input or an input collection. A 'branching' config file can be passed in to the form component to build the available inputs/options. This form is dynamic and can grow according to a users choices.
+
+#
+
+#
 
 # Next Steps
 
