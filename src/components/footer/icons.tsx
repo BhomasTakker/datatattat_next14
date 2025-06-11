@@ -7,12 +7,10 @@ import { FaInstagram } from "react-icons/fa6";
 import { FaFacebook } from "react-icons/fa";
 import { FaThreads } from "react-icons/fa6";
 import { FaBluesky } from "react-icons/fa6";
-import { FaSnapchat } from "react-icons/fa6";
 import { FaTumblr } from "react-icons/fa";
 import { FaFlickr } from "react-icons/fa6";
 import { FaTiktok } from "react-icons/fa6";
 import { FaTwitch } from "react-icons/fa6";
-import { SiOnlyfans } from "react-icons/si";
 import { BsSubstack } from "react-icons/bs";
 
 import styles from "./icons.module.scss";
@@ -67,10 +65,6 @@ export const iconsList = [
 	{
 		link: "https://www.tiktok.com/@datatattat",
 		icon: FaTiktok,
-	},
-	{
-		link: "https://onlyfans.com/datatattat",
-		icon: SiOnlyfans,
 	},
 	{
 		link: "https://www.flickr.com/people/201123085@N06/",
