@@ -6,7 +6,7 @@ import {
 import ArticleProvider from "@/models/ArticleProvider";
 import { ProviderItem } from "@/types/data-structures/collection/item/item";
 
-jest.mock("../../../models/ArticleProvider");
+// const ArticleProvider = jest.mock("ArticleProvider");
 
 describe("article-provider actions", () => {
 	const mockProvider = {

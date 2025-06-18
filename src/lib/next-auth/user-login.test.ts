@@ -7,7 +7,7 @@ import {
 } from "./user-login";
 import { providers, Providers, Profile, User } from "./types";
 import * as mongoActions from "../mongo/actions/user";
-import * as mongoDb from "../mongo/db";
+// import * as mongoDb from "../mongo/db";
 import * as signupActions from "../../actions/signup/check-create-username";
 
 jest.mock("../../actions/user/get-user", () => ({
@@ -110,7 +110,7 @@ describe("loginOrSignUp", () => {
 
 	beforeEach(() => {
 		jest.clearAllMocks();
-		(mongoDb.connectToMongoDB as jest.Mock).mockResolvedValue(undefined);
+		// (mongoDb.connectToMongoDB as jest.Mock).mockResolvedValue(undefined);
 		(signupActions.checkAndCreateUsername as jest.Mock).mockImplementation(
 			async (username: string) => username + "_unique"
 		);
