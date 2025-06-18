@@ -1,6 +1,11 @@
 import mongoose from "mongoose";
 import { connectToMongoDB } from "./db";
 
+jest.mock("./db", () => ({
+	__esModule: true,
+	...jest.requireActual("./db"),
+}));
+
 jest.mock("mongoose", () => ({
 	connect: jest.fn(),
 }));

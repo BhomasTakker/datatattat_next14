@@ -11,7 +11,7 @@ import { render, screen, waitFor } from "@testing-library/react";
 const mockIsValidUser = jest.fn();
 const isValidSession = jest.fn();
 
-jest.mock("../../../../lib/mongo/db");
+// jest.mock("../../../../lib/mongo/db");
 jest.mock("../../../../actions/auth/check-session");
 jest.mock("../../../../actions/auth/check-valid-user", () => ({
 	isValidUser: () => mockIsValidUser(),

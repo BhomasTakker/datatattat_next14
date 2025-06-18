@@ -33,6 +33,10 @@ describe("PageForm", () => {
 
 	beforeEach(() => {
 		submitHandler.mockClear();
+		console.error = jest.fn();
+	});
+	afterEach(() => {
+		jest.clearAllMocks();
 	});
 
 	it("renders the form and all input factories", () => {
