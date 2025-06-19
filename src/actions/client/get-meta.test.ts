@@ -6,15 +6,6 @@ import { CollectionItem } from "@/types/data-structures/collection/item/item";
 jest.mock("../../lib/redis/redis-fetch");
 jest.mock("../data/article/get-article");
 
-jest.mock("cheerio", () => {
-	return {
-		__esModule: true,
-		load: jest.fn((str) => ({
-			text: jest.fn(() => str),
-		})),
-	};
-});
-
 describe("getClientMeta", () => {
 	const mockItem: CollectionItem = {
 		src: "test-src",

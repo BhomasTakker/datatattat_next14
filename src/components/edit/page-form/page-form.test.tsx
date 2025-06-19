@@ -18,16 +18,6 @@ jest.mock("./page-form.module.scss", () => ({
 	form: "form",
 }));
 
-// Why are we having to mck this here?
-jest.mock("cheerio", () => {
-	return {
-		__esModule: true,
-		load: jest.fn((str) => ({
-			text: jest.fn(() => str),
-		})),
-	};
-});
-
 describe("PageForm", () => {
 	const submitHandler = jest.fn().mockResolvedValue(undefined);
 

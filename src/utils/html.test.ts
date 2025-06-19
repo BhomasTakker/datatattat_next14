@@ -1,15 +1,6 @@
 import { stripHTML } from "./html";
 import * as cheerio from "cheerio";
 
-jest.mock("cheerio", () => {
-	return {
-		__esModule: true,
-		load: jest.fn((str) => ({
-			text: jest.fn(() => str),
-		})),
-	};
-});
-
 describe("html utils", () => {
 	it("should pass html string to Cheerio to be cleaned.", () => {
 		const htmlString = "<div>Hello <strong>World</strong></div>";

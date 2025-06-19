@@ -10,17 +10,6 @@ import {
 } from "../../../../../types/data-structures/rss";
 import { CollectionItem } from "@/types/data-structures/collection/item/item";
 
-// This is just a fix
-// We need to mock Cheerio else it will fail having been 'loaded' in the code
-jest.mock("cheerio", () => {
-	return {
-		__esModule: true,
-		load: jest.fn((str) => ({
-			text: jest.fn(() => str),
-		})),
-	};
-});
-
 jest.mock("./article-adapter", () => {
 	return {
 		__esModule: true, //    <----- this __esModule: true is important

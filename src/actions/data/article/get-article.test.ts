@@ -15,14 +15,6 @@ jest.mock("../../../lib/services/intialise-services");
 jest.mock("../../../utils/object", () => ({
 	cloneDeep: (obj: any) => JSON.parse(JSON.stringify(obj)),
 }));
-jest.mock("cheerio", () => {
-	return {
-		__esModule: true,
-		load: jest.fn((str) => ({
-			text: jest.fn(() => str),
-		})),
-	};
-});
 
 const mockInitialiseServices = initialiseServices as jest.Mock;
 const mockGetArticleBySrc = getArticleBySrc as jest.Mock;

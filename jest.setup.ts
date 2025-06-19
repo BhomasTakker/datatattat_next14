@@ -2,6 +2,16 @@ import "@testing-library/jest-dom";
 
 import { TextEncoder, TextDecoder } from "util";
 
+jest.mock("cheerio", () => {
+	return {
+		__esModule: true,
+		load: jest.fn((str) => ({
+			text: jest.fn(() => str),
+		})),
+	};
+});
+
+// add these mocks to a file external to this
 jest.mock("./src/lib/mongo/db", () => ({
 	__esModule: true,
 	connectToMongoDB: jest.fn().mockResolvedValue(undefined),
