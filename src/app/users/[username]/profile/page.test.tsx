@@ -30,9 +30,6 @@ jest.mock("../../../../components/header/main-header", () => ({
 		<div data-testid="main-header">{route.join("/")}</div>
 	),
 }));
-jest.mock("next/navigation", () => ({
-	redirect: jest.fn(),
-}));
 
 describe("UserProfile page", () => {
 	const username = "testuser";

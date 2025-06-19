@@ -3,7 +3,6 @@ import { updateUser } from "../../lib/mongo/actions/user";
 import { isUsernameValid } from "./check-username";
 import { isValidUser } from "../auth/check-valid-user";
 import { initialiseServices } from "../../lib/services/intialise-services";
-import { Profile } from "@/lib/next-auth/types";
 
 jest.mock("../../lib/mongo/actions/user");
 jest.mock("./check-username");
@@ -16,32 +15,6 @@ jest.mock("../../actions/user/get-user", () => ({
 
 jest.mock("../../actions/auth/check-session", () => ({
 	getUser: jest.fn(),
-}));
-
-jest.mock("../../lib/next-auth/providers/github", () => ({
-	GITHUB: {
-		id: "github",
-		name: "GitHub",
-		type: "oauth",
-		version: "2.0",
-		scope: "read:user user:email",
-		profile(profile: Profile) {
-			return { id: profile.id, name: profile.name, email: profile.email };
-		},
-	},
-}));
-
-jest.mock("../../lib/next-auth/providers/google", () => ({
-	GOOGLE: {
-		id: "google",
-		name: "Google",
-		type: "oauth",
-		version: "2.0",
-		scope: "read:user user:email",
-		profile(profile: Profile) {
-			return { id: profile.id, name: profile.name, email: profile.email };
-		},
-	},
 }));
 
 describe("confirmUsername", () => {

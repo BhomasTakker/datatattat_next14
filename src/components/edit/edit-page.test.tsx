@@ -3,9 +3,6 @@ import { render, screen } from "@testing-library/react";
 import { EditPage } from "./edit-page";
 
 // Mock all imported modules and components
-jest.mock("next-auth", () => ({
-	getServerSession: jest.fn(),
-}));
 jest.mock("../../app/api/auth/[...nextauth]/options", () => ({
 	options: {},
 }));

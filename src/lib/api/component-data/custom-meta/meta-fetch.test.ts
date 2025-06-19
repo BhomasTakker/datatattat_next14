@@ -12,17 +12,6 @@ const mockedFetchWithCache = fetchWithCache as jest.Mock;
 const mockedGetArticle = getArticle as jest.Mock;
 const mockedIsStringValidURL = isStringValidURL as jest.Mock;
 
-// This is just a fix
-// We need to mock Cheerio else it will fail having been 'loaded' in the code
-jest.mock("cheerio", () => {
-	return {
-		__esModule: true,
-		load: jest.fn((str) => ({
-			text: jest.fn(() => str),
-		})),
-	};
-});
-
 describe("metaFetch", () => {
 	beforeEach(() => {
 		jest.clearAllMocks();

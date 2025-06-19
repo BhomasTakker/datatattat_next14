@@ -17,12 +17,6 @@ jest.mock("../../../actions/page/page-actions", () => {
 	};
 });
 
-jest.mock("../../../lib/services/intialise-services", () => {
-	return {
-		initialiseServices: jest.fn().mockResolvedValue(Promise.resolve()),
-	};
-});
-
 describe("Page", () => {
 	it("renders PageDisplay Component", async () => {
 		render(await Page({ params: Promise.resolve({ route: ["route1"] }) }));

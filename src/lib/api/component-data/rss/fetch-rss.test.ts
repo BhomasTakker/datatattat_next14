@@ -10,15 +10,6 @@ import {
 	getParserCustomFields,
 } from "./fetch-rss";
 
-jest.mock("cheerio", () => {
-	return {
-		__esModule: true,
-		load: jest.fn((str) => ({
-			text: jest.fn(() => str),
-		})),
-	};
-});
-
 jest.mock("../../../../lib/mongo/actions/articleCollection");
 jest.mock("../../../../lib/redis/redis-fetch");
 jest.mock("./rss-parse");

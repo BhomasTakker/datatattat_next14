@@ -6,15 +6,6 @@ import { With } from "@/types/page";
 // Mock dependencies
 jest.mock("../../lib/api/component-data/component-data-factory");
 
-jest.mock("cheerio", () => {
-	return {
-		__esModule: true,
-		load: jest.fn((str) => ({
-			text: jest.fn(() => str),
-		})),
-	};
-});
-
 describe("getData", () => {
 	const mockType = "mockType" as unknown as ComponentDataOptions;
 	const mockQuery = { foo: "bar" };
