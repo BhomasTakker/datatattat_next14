@@ -21,12 +21,6 @@ jest.mock("next-auth", () => {
 	};
 });
 
-jest.mock("../../lib/services/intialise-services", () => {
-	return {
-		initialiseServices: jest.fn().mockResolvedValue(Promise.resolve()),
-	};
-});
-
 jest.mock("../../app/api/auth/[...nextauth]/options", () => {
 	return {
 		options: {},

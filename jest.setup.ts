@@ -2,6 +2,8 @@ import "@testing-library/jest-dom";
 
 import { TextEncoder, TextDecoder } from "util";
 
+// add these mocks to a file external to this
+// and order/structure appropriately
 jest.mock("cheerio", () => {
 	return {
 		__esModule: true,
@@ -11,7 +13,12 @@ jest.mock("cheerio", () => {
 	};
 });
 
-// add these mocks to a file external to this
+jest.mock("./src/lib/services/intialise-services", () => {
+	return {
+		initialiseServices: jest.fn().mockResolvedValue(Promise.resolve()),
+	};
+});
+
 jest.mock("./src/lib/mongo/db", () => ({
 	__esModule: true,
 	connectToMongoDB: jest.fn().mockResolvedValue(undefined),

@@ -2,6 +2,13 @@ import { connectToMongoDB } from "../mongo/db";
 import { connectToRedisDB } from "../redis/db";
 import { initialiseServices } from "./intialise-services";
 
+// 'unmock' initialise-services so we can mock its dependencies
+jest.mock("./intialise-services", () => {
+	return {
+		...jest.requireActual("./intialise-services"),
+	};
+});
+
 jest.mock("../mongo/db", () => {
 	return {
 		connectToMongoDB: jest.fn().mockResolvedValue({}),
