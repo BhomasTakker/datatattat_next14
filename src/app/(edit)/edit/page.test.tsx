@@ -7,9 +7,6 @@ import { connectToMongoDB } from "@/lib/mongo/db";
 import Page from "./page";
 import { render } from "@testing-library/react";
 
-jest.mock("next/navigation", () => ({
-	redirect: jest.fn(),
-}));
 jest.mock("../../../lib/routing/paths", () => ({
 	PATHS: {
 		user: (username: string) => `/user/${username}`,

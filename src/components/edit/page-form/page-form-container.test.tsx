@@ -7,9 +7,6 @@ import { toast } from "sonner";
 import { savePage } from "@/actions/edit/update-page";
 
 // Mock dependencies
-jest.mock("next/navigation", () => ({
-	useRouter: jest.fn(),
-}));
 jest.mock("../../../actions/edit/update-page", () => ({
 	savePage: jest.fn(),
 }));

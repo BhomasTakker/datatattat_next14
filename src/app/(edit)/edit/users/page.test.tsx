@@ -1,10 +1,8 @@
 import { redirect } from "next/navigation";
 import { PATHS } from "@/lib/routing/paths";
 import { connectToMongoDB } from "@/lib/mongo/db";
-import { isValidUser } from "@/actions/auth/check-valid-user";
 import isSignupComplete from "@/actions/signup/signup-completed";
 import Page from "./page";
-import { Profile } from "@/lib/next-auth/types";
 
 import { render, screen, waitFor } from "@testing-library/react";
 
@@ -17,9 +15,6 @@ jest.mock("../../../../actions/auth/check-valid-user", () => ({
 	isValidUser: () => mockIsValidUser(),
 }));
 jest.mock("../../../../actions/signup/signup-completed");
-jest.mock("next/navigation", () => ({
-	redirect: jest.fn(),
-}));
 jest.mock("../../../../lib/routing/paths", () => ({
 	PATHS: {
 		users: jest.fn(() => "/users"),
@@ -34,32 +29,6 @@ jest.mock("../../../../actions/user/get-user", () => ({
 jest.mock("../../../../actions/auth/check-session", () => ({
 	__esModule: true,
 	default: () => isValidSession(),
-}));
-
-jest.mock("../../../../lib/next-auth/providers/github", () => ({
-	GITHUB: {
-		id: "github",
-		name: "GitHub",
-		type: "oauth",
-		version: "2.0",
-		scope: "read:user user:email",
-		profile(profile: Profile) {
-			return { id: profile.id, name: profile.name, email: profile.email };
-		},
-	},
-}));
-
-jest.mock("../../../../lib/next-auth/providers/google", () => ({
-	GOOGLE: {
-		id: "google",
-		name: "Google",
-		type: "oauth",
-		version: "2.0",
-		scope: "read:user user:email",
-		profile(profile: Profile) {
-			return { id: profile.id, name: profile.name, email: profile.email };
-		},
-	},
 }));
 
 describe("Page", () => {
