@@ -40,9 +40,10 @@ export const ComponentFactory = async ({
 	// Pass data in to factory?
 	// Factory shouldn't be concerned with loading data
 	// we should pass data or a data function (if possible) to the component
-	const { _with: queryObject } = component;
+	const { _with: componentQueryObject, componentProps } = component;
+	const { _with: componentPropsQueryObject } = componentProps || {};
 
-	const data = await getData(queryObject);
+	const data = await getData(componentQueryObject || componentPropsQueryObject);
 
 	// all components take in a component object
 	// AND and a data object

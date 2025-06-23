@@ -16,7 +16,8 @@ export const ClientSideComponent = ({
 	Component,
 	component,
 }: ClientSideComponentProps) => {
-	const { _with: queryObject } = component;
+	const { _with: componentQueryObject, componentProps } = component;
+	const { _with: componentPropsQueryObject } = componentProps || {};
 	const [componentData, setComponentData] = useState<UnknownObject | null>(
 		null
 	);
@@ -25,7 +26,9 @@ export const ClientSideComponent = ({
 	useEffect(() => {
 		const getComponentData = async () => {
 			try {
-				const data = await getData(queryObject);
+				const data = await getData(
+					componentQueryObject || componentPropsQueryObject
+				);
 				setComponentData(data);
 			} catch {
 				setIsError(true);
