@@ -44,8 +44,9 @@ export const SelectInput = ({
 	options,
 	defaultValue,
 	required,
+	onChange = () => {},
 }: Omit<SelectInputProps, "type">) => {
-	const { register, getValues } = useFormContext();
+	const { register, getValues, setValue } = useFormContext();
 
 	const defaultToUse = getValues(id) || defaultValue || "";
 
@@ -57,7 +58,12 @@ export const SelectInput = ({
 				htmlFor={id}
 				data-testid={"select-input-label"}
 			>{`${label}`}</label>
-			<select {...register(id)} defaultValue={defaultToUse}>
+			<select
+				{...register(id, {
+					onChange: onChange,
+				})}
+				defaultValue={defaultToUse}
+			>
 				<Options
 					options={options}
 					required={required}

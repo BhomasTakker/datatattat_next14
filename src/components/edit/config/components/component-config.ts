@@ -1,16 +1,20 @@
 import { GenericInput } from "@/types/edit/inputs/inputs";
 import { EditInputs } from "../../inputs/inputs";
-import { WITH_CONFIG } from "../query/_with-config";
 import { ARTICLE_COLLECTION_CONFIG } from "./article-collection/article-collection-config";
+import { OEMBED_CONFIG } from "./oembed/oembed-config";
 
 enum ComponentOptions {
 	ArticleCollection = "ArticleCollection",
+	Oembed = "Oembed",
 }
 
-type componentContainersProps = typeof ARTICLE_COLLECTION_CONFIG;
+type componentContainersProps =
+	| typeof ARTICLE_COLLECTION_CONFIG
+	| typeof OEMBED_CONFIG;
 
 const pageContainersMap = new Map<string, componentContainersProps>([
 	[ComponentOptions.ArticleCollection, ARTICLE_COLLECTION_CONFIG],
+	[ComponentOptions.Oembed, OEMBED_CONFIG],
 ]);
 
 export const COMPONENT_CONFIG: GenericInput = {
@@ -40,17 +44,13 @@ export const COMPONENT_CONFIG: GenericInput = {
 				id: "componentType",
 				type: EditInputs.objectSelect,
 				label: "Source type",
+				resetOnChange: true,
 				defaultValue: ComponentOptions.ArticleCollection,
 				required: true,
-				options: [ComponentOptions.ArticleCollection],
+				options: [ComponentOptions.ArticleCollection, ComponentOptions.Oembed],
 				optionMap: pageContainersMap,
 				optionId: "componentProps",
 			},
-			// We may not take this approach
-			// Data forst should be the way to go
-			// What components are available should be based on the data
-			// or what data sources are available - based on component
-			WITH_CONFIG,
 		],
 	},
 };

@@ -17,9 +17,22 @@ export type ComponentProfileProps = {
 	showComponentTitle: boolean;
 };
 
+// dupes
+export type WithQuery = {
+	provider: string;
+	params: object;
+	queryId: string;
+};
+// dupe
+export type With = {
+	type: string;
+	query: WithQuery;
+};
+
 // Joined with ComponentProfile but should extend?
 export type ComponentPropsObject = {
 	// this should be agiven no?
 	variantType: VariantsOptions;
+	_with: With;
 } & ComponentProfileProps &
 	UnknownObject;

@@ -1,9 +1,10 @@
 "use client";
 
-import { PageComponent, With } from "@/types/page";
+import { PageComponent } from "@/types/page";
 import { UnknownObject } from "@/types/utils";
 import { useEffect, useState } from "react";
 import { ComponentType } from "./component-map";
+import { With } from "@/types/component";
 
 type ClientSideComponentProps = {
 	Component: ComponentType;
@@ -16,7 +17,8 @@ export const ClientSideComponent = ({
 	Component,
 	component,
 }: ClientSideComponentProps) => {
-	const { _with: queryObject } = component;
+	const { _with: componentQueryObject, componentProps } = component;
+	const { _with: componentPropsQueryObject } = componentProps || {};
 	const [componentData, setComponentData] = useState<UnknownObject | null>(
 		null
 	);
@@ -25,7 +27,9 @@ export const ClientSideComponent = ({
 	useEffect(() => {
 		const getComponentData = async () => {
 			try {
-				const data = await getData(queryObject);
+				const data = await getData(
+					componentQueryObject || componentPropsQueryObject
+				);
 				setComponentData(data);
 			} catch {
 				setIsError(true);

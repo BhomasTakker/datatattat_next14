@@ -115,10 +115,12 @@ export type SelectInputProps = {
 	options: string[];
 	deselectLabel?: string;
 	required?: boolean;
+	onChange?: () => void;
 } & InputProps;
 
 export type ObjectSelectProps = {
 	id: string;
+	resetOnChange?: boolean;
 	type: EditInputs.objectSelect;
 	defaultValue?: string;
 	options: string[];

@@ -6,6 +6,7 @@ import { ArticleCollectionVariants } from "@/components/content/components/artic
 import { GRID_DISPLAY } from "./collections/grid/gridDisplay";
 import { VIDEO_DISPLAY } from "./collections/video-display/video-display";
 import { AUDIO_DISPLAY } from "./collections/audio-display/audio-display";
+import { getWithConfig, QueryOptions } from "../../query/_with-config";
 
 type articleCollectionProps =
 	| typeof STACK_SCROLLER_CONFIG
@@ -60,5 +61,11 @@ export const ARTICLE_COLLECTION_CONFIG: InputListProps = {
 			// we are saved on comopnent props object - our parent
 			optionId: undefined, // "variantProps",
 		},
+		getWithConfig([
+			QueryOptions.NONE,
+			QueryOptions.API_QUERY,
+			QueryOptions.HTML_META_QUERY,
+			QueryOptions.RSS,
+		]),
 	],
 };

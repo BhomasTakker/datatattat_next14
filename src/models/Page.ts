@@ -12,6 +12,7 @@ const ComponentSchema = new Schema(
 		},
 
 		componentProps: Object,
+		// deprecated, use componentProps to store _with data instead
 		_with: Object,
 	},
 	{ _id: false }

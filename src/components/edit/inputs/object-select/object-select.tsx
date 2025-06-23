@@ -12,9 +12,10 @@ export const ObjectSelect = ({
 	options,
 	optionMap,
 	optionId,
+	resetOnChange = false,
 	required = true,
 }: Omit<ObjectSelectProps, "type">) => {
-	const { getValues } = useFormContext();
+	const { getValues, setValue, unregister } = useFormContext();
 
 	const initialValue = getValues(id) || defaultValue;
 
@@ -24,6 +25,18 @@ export const ObjectSelect = ({
 	const containerId = optionId ? `${parentId}.${optionId}` : parentId;
 	const selectedObject = optionMap.get(selectedOption);
 
+	// this certainly isn't perfect
+	// but we may be getting snagged on a separate issue
+	const onChangeHnd = () => {
+		if (!resetOnChange) return;
+
+		unregister(containerId, {
+			keepDefaultValue: false,
+			keepDirty: false,
+			keepDirtyValues: false,
+		});
+	};
+
 	return (
 		<div className={styles.root}>
 			<SelectInput
@@ -31,9 +44,12 @@ export const ObjectSelect = ({
 				label={label}
 				options={options}
 				required={required}
+				onChange={onChangeHnd}
 			/>
 			{selectedObject ? (
-				<InputFactory data={{ ...selectedObject, id: containerId }} />
+				<div key={selectedOption}>
+					<InputFactory data={{ ...selectedObject, id: containerId }} />
+				</div>
 			) : null}
 		</div>
 	);
