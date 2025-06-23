@@ -24,7 +24,7 @@ export async function connectToMongoDB() {
 	}
 
 	if (cached.conn) {
-		console.log("returned cached connection");
+		// console.log("returned cached connection");
 		return cached.conn;
 	}
 	if (!cached.promise) {
