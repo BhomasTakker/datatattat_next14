@@ -1,9 +1,10 @@
 "use client";
 
-import { PageComponent, With } from "@/types/page";
+import { PageComponent } from "@/types/page";
 import { UnknownObject } from "@/types/utils";
 import { useEffect, useState } from "react";
 import { ComponentType } from "./component-map";
+import { With } from "@/types/component";
 
 type ClientSideComponentProps = {
 	Component: ComponentType;
