@@ -115,6 +115,7 @@ export type SelectInputProps = {
 	options: string[];
 	deselectLabel?: string;
 	required?: boolean;
+	onChange?: () => void;
 } & InputProps;
 
 export type ObjectSelectProps = {

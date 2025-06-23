@@ -44,7 +44,7 @@ export const COMPONENT_CONFIG: GenericInput = {
 				id: "componentType",
 				type: EditInputs.objectSelect,
 				label: "Source type",
-				// resetOnChange: true,
+				resetOnChange: true,
 				defaultValue: ComponentOptions.ArticleCollection,
 				required: true,
 				options: [ComponentOptions.ArticleCollection, ComponentOptions.Oembed],

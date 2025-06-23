@@ -48,6 +48,7 @@ export const getWithConfig = (options: QueryOptions[]): GenericInput => {
 			// AND the query object is an inputList on the required object. oof
 			{
 				id: "type",
+				resetOnChange: true,
 				type: EditInputs.objectSelect,
 				label: "Select Data Source",
 				required: true,
@@ -60,35 +61,35 @@ export const getWithConfig = (options: QueryOptions[]): GenericInput => {
 	};
 };
 
-export const WITH_CONFIG: GenericInput = {
-	id: "_with",
-	type: EditInputs.inputList,
-	label: "Data Source",
-	createObject: true,
+// export const WITH_CONFIG: GenericInput = {
+// 	id: "_with",
+// 	type: EditInputs.inputList,
+// 	label: "Data Source",
+// 	createObject: true,
 
-	inputs: [
-		{
-			id: "withObjectTitle",
-			type: EditInputs.title,
-			title: "Data Source",
-		},
-		// Would effectively mean that any type will have use a query object
-		// unless you dont add an object id
-		// AND the query object is an inputList on the required object. oof
-		{
-			id: "type",
-			type: EditInputs.objectSelect,
-			label: "Select Data Source",
-			required: true,
-			defaultValue: QueryOptions.NONE,
-			options: [
-				QueryOptions.NONE,
-				QueryOptions.RSS,
-				QueryOptions.API_QUERY,
-				QueryOptions.HTML_META_QUERY,
-			],
-			optionMap: componentQueriesMap,
-			optionId: "query",
-		},
-	],
-};
+// 	inputs: [
+// 		{
+// 			id: "withObjectTitle",
+// 			type: EditInputs.title,
+// 			title: "Data Source",
+// 		},
+// 		// Would effectively mean that any type will have use a query object
+// 		// unless you dont add an object id
+// 		// AND the query object is an inputList on the required object. oof
+// 		{
+// 			id: "type",
+// 			type: EditInputs.objectSelect,
+// 			label: "Select Data Source",
+// 			required: true,
+// 			defaultValue: QueryOptions.NONE,
+// 			options: [
+// 				QueryOptions.NONE,
+// 				QueryOptions.RSS,
+// 				QueryOptions.API_QUERY,
+// 				QueryOptions.HTML_META_QUERY,
+// 			],
+// 			optionMap: componentQueriesMap,
+// 			optionId: "query",
+// 		},
+// 	],
+// };

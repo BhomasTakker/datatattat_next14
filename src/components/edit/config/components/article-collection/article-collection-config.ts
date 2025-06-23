@@ -62,6 +62,7 @@ export const ARTICLE_COLLECTION_CONFIG: InputListProps = {
 			optionId: undefined, // "variantProps",
 		},
 		getWithConfig([
+			QueryOptions.NONE,
 			QueryOptions.API_QUERY,
 			QueryOptions.HTML_META_QUERY,
 			QueryOptions.RSS,

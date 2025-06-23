@@ -4,7 +4,6 @@ import { InputFactory } from "../input-factory";
 import { getParentId } from "@/utils/edit";
 import styles from "./object-select.module.scss";
 import { ObjectSelectProps } from "@/types/edit/inputs/inputs";
-import { useEffect } from "react";
 
 export const ObjectSelect = ({
 	id,
@@ -26,16 +25,17 @@ export const ObjectSelect = ({
 	const containerId = optionId ? `${parentId}.${optionId}` : parentId;
 	const selectedObject = optionMap.get(selectedOption);
 
-	// Quick and dirty - on change value
-	// reset container??
-	// useEffect(() => {
-	// 	if (!resetOnChange) return;
+	// this certainly isn't perfect
+	// but we may be getting snagged on a separate issue
+	const onChangeHnd = () => {
+		if (!resetOnChange) return;
 
-	// 	unregister(containerId, {
-	// 		keepDefaultValue: false,
-	// 	});
-	// 	// setValue(containerId, null);
-	// }, [selectedOption]);
+		unregister(containerId, {
+			keepDefaultValue: false,
+			keepDirty: false,
+			keepDirtyValues: false,
+		});
+	};
 
 	return (
 		<div className={styles.root}>
@@ -44,14 +44,12 @@ export const ObjectSelect = ({
 				label={label}
 				options={options}
 				required={required}
-
-				// onChange={onChangeHandler}
+				onChange={onChangeHnd}
 			/>
 			{selectedObject ? (
-				<InputFactory
-					// key={selectedOption}
-					data={{ ...selectedObject, id: containerId }}
-				/>
+				<div key={selectedOption}>
+					<InputFactory data={{ ...selectedObject, id: containerId }} />
+				</div>
 			) : null}
 		</div>
 	);
