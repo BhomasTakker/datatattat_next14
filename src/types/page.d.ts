@@ -1,4 +1,4 @@
-import { ComponentPropsObject } from "./component";
+import { ComponentPropsObject, With, WithQuery } from "./component";
 
 export type PageContainer = {
 	containerType: "Stack" | "Grid";
@@ -6,17 +6,6 @@ export type PageContainer = {
 };
 
 export type PageProps = object;
-
-export type WithQuery = {
-	provider: string;
-	params: object;
-	queryId: string;
-};
-
-export type With = {
-	type: string;
-	query: WithQuery;
-};
 
 export type PageComponent = {
 	componentType: string;

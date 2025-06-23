@@ -24,10 +24,6 @@ export const PageFormContainer = ({ pageData }: { pageData: IPage }) => {
 		refresh();
 	}, [route]);
 
-	// Add this and FormProvider into the EditContextProvider
-	// Then we can manage the TWO forms - the db state and the 'client'
-	// This isn't going to work
-	// rhf requires inputs to have been initialised etc
 	const submitHandler = methods.handleSubmit(async (data) => {
 		// This should be done on the server...
 		// Take what's changed and merge with the page object
