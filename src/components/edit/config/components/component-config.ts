@@ -1,6 +1,5 @@
 import { GenericInput } from "@/types/edit/inputs/inputs";
 import { EditInputs } from "../../inputs/inputs";
-import { WITH_CONFIG } from "../query/_with-config";
 import { ARTICLE_COLLECTION_CONFIG } from "./article-collection/article-collection-config";
 import { OEMBED_CONFIG } from "./oembed/oembed-config";
 

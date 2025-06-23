@@ -21,7 +21,8 @@ export type With = {
 export type PageComponent = {
 	componentType: string;
 	componentProps: ComponentPropsObject;
-	_with: With;
+	// derecated
+	_with?: With;
 };
 
 export type PageComponents = Array<PageComponent>;
