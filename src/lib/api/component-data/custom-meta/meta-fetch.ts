@@ -2,7 +2,7 @@ import { getArticle } from "@/actions/data/article/get-article";
 import { MetaData } from "@/actions/html/get-meta";
 import { fetchWithCache } from "@/lib/redis/redis-fetch";
 import { Collection } from "@/types/data-structures/collection/collection";
-import { WithQuery } from "@/types/page";
+import { WithQuery } from "@/types/component";
 import { isStringValidURL } from "@/utils/url";
 
 type MetaParams = {

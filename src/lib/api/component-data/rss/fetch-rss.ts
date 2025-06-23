@@ -4,7 +4,7 @@ import {
 } from "@/lib/mongo/actions/articleCollection";
 import { fetchWithCache } from "@/lib/redis/redis-fetch";
 import { RSSArticleCollection } from "@/types/data-structures/collection/collection";
-import { WithQuery } from "@/types/page";
+import { WithQuery } from "@/types/component";
 import { cloneDeep } from "@/utils/object";
 import { isStringValidURL } from "@/utils/url";
 import { rssParse } from "./rss-parse";

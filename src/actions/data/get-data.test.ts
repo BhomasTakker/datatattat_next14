@@ -1,7 +1,7 @@
 import { getData } from "./get-data";
 import { ComponentDataFactory } from "@/lib/api/component-data/component-data-factory";
 import { ComponentDataOptions } from "@/lib/api/component-data/component-data-options";
-import { With } from "@/types/page";
+import { With } from "@/types/component";
 
 // Mock dependencies
 jest.mock("../../lib/api/component-data/component-data-factory");

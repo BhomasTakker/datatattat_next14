@@ -1,5 +1,5 @@
 import { searchArticles } from "@/lib/mongo/actions/articles/search";
-import { WithQuery } from "@/types/page";
+import { WithQuery } from "@/types/component";
 import { cloneDeep } from "@/utils/object";
 import { youtubeApiFetch } from "../google/youtube/youtube-api";
 

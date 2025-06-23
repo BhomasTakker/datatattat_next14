@@ -2,7 +2,7 @@
 
 import { ComponentDataFactory } from "@/lib/api/component-data/component-data-factory";
 import { ComponentDataOptions } from "@/lib/api/component-data/component-data-options";
-import { With } from "@/types/page";
+import { With } from "@/types/component";
 
 export async function getData(queryObject: With) {
 	const { type, query } = queryObject || {};
