@@ -45,9 +45,24 @@ export const SelectInput = ({
 	defaultValue,
 	required,
 }: Omit<SelectInputProps, "type">) => {
-	const { register, getValues } = useFormContext();
+	const { register, getValues, setValue } = useFormContext();
 
 	const defaultToUse = getValues(id) || defaultValue || "";
+
+	const onChangeHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
+		// Handle any additional logic on change if needed
+		// reset id to null.
+		// it will reset to whatever is the stored/saved value
+		// We may want the 'stored' value AND the state
+		///////////////////////////////////////////////////////
+		// The overall issue is that we are using the 'saved' hook-form
+		// state as the ultimate truth
+		// But this will not and should not update until a user SAVES
+		// ****************************************************
+		// We need to be able to GET changed but pre-seaved values
+		setValue(id, null);
+		console.log(`8989: Selected value: ${e.target.value}`);
+	};
 
 	// default value should be within the useForm - but...
 	// defaultValue={defaultToUse}
@@ -57,7 +72,11 @@ export const SelectInput = ({
 				htmlFor={id}
 				data-testid={"select-input-label"}
 			>{`${label}`}</label>
-			<select {...register(id)} defaultValue={defaultToUse}>
+			<select
+				{...register(id)}
+				defaultValue={defaultToUse}
+				// onChange={onChangeHandler}
+			>
 				<Options
 					options={options}
 					required={required}

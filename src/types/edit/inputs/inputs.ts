@@ -119,6 +119,7 @@ export type SelectInputProps = {
 
 export type ObjectSelectProps = {
 	id: string;
+	resetOnChange?: boolean;
 	type: EditInputs.objectSelect;
 	defaultValue?: string;
 	options: string[];
