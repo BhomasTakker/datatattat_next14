@@ -11,7 +11,7 @@ export type ComponentType =
 
 export enum ComponentsOptions {
 	ArticleCollection = "ArticleCollection",
-	ContentOembed = "ContentOembed",
+	ContentOembed = "Oembed",
 	DisplayPlayer = "DisplayPlayer",
 	MediaPlayer = "MediaPlayer",
 }
