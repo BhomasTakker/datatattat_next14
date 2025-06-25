@@ -1,28 +1,29 @@
 import { ComponentProps } from "@/types/component";
 import styles from "./content-oembed.module.scss";
 import Script from "next/script";
-import { getOembed } from "@/actions/oembed/get-oembed";
 import { ClientOembed } from "./client-component";
+import { OEmbed } from "@/types/data-structures/oembed";
+
+export type OEmbedComponentProps = {
+	oembed: OEmbed;
+	script?: string;
+};
 
 export const ContentOembed = async ({
 	component,
 	dataObject,
 }: ComponentProps) => {
-	// Ultimately check if user has - i.e. Twitter disabled
-	// get object from id
-	// call fetch oembed / with params
-	// if there is a script load it
-	// load the Oembed object
-	// Pass in params?
-	const oembedData = await getOembed("");
+	const data = dataObject.data as OEmbedComponentProps;
+	const { oembed, script } = data || {};
+	// We 'should' sanitize this - twitter etc eon't render however
+	// We need to limit providers - and trust them
+	// const { html = "" } = oembedData || {};
 
+	const { html } = oembed;
 	return (
 		<div className={styles.root}>
-			<Script
-				src="https://platform.twitter.com/widgets.js"
-				strategy="lazyOnload"
-			/>
-			{oembedData && <ClientOembed oembedData={oembedData} />}
+			{script && <Script src={script} strategy="lazyOnload" />}
+			{html && <ClientOembed html={html} />}
 		</div>
 	);
 };

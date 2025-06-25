@@ -1,18 +1,15 @@
 "use client";
 
 type ClientOembedProps = {
-	oembedData: any;
+	html: string;
 };
 
-// Take in html
-// sanitise it
-// Render it
-export const ClientOembed = ({ oembedData }: ClientOembedProps) => {
+export const ClientOembed = ({ html }: ClientOembedProps) => {
 	return (
 		<div>
 			<div
 				dangerouslySetInnerHTML={{
-					__html: oembedData ? oembedData.html : "",
+					__html: html,
 				}}
 			></div>
 		</div>
