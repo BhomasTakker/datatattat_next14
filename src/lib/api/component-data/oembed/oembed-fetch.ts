@@ -1,11 +1,11 @@
 import { getOembed } from "@/actions/oembed/get-oembed";
 import { WithQuery } from "@/types/component";
-import { getOembedObject, OembedOptions } from "./oembed-options";
+import { getOembedObject } from "./oembed-options";
 import { OEmbedComponentProps } from "@/components/content/components/content-oembed/content-oembed";
-
-export type OEmbedParams = {
-	variant: OembedOptions;
-};
+import {
+	OEmbedParams,
+	GenericOEmbedParams,
+} from "@/types/data-structures/oembed";
 
 // Make WithQuery generic so we don't have to caste
 // Not really fetch - more like get oembed data
@@ -13,7 +13,6 @@ export type OEmbedParams = {
 export const oembedFetch = async (
 	query: WithQuery
 ): Promise<OEmbedComponentProps | null> => {
-	console.log("6756 oembedFetch called with query:", query);
 	const { params } = query;
 	const { variant } = params as OEmbedParams;
 	const oembedCreator = getOembedObject(variant);
@@ -23,7 +22,7 @@ export const oembedFetch = async (
 	}
 
 	const { createUrl, script } = oembedCreator;
-	const url = createUrl(params as OEmbedParams);
+	const url = createUrl(params as GenericOEmbedParams);
 
 	if (!url) {
 		return Promise.reject("No URL provided");

@@ -1,9 +1,23 @@
-import { OEmbedParams } from "../oembed-fetch";
+import { TwitterOEmbedParams } from "@/types/data-structures/oembed";
+
+const twitterBaseUrl = "https://publish.twitter.com/oembed";
+
+const createQueryParameters = () => {
+	const params = new URLSearchParams();
+	params.set("omit_script", "1");
+	return params.toString();
+};
 
 export const twitterOembed = {
 	// config
 	script: "https://platform.twitter.com/widgets.js",
-	createUrl: (params: OEmbedParams) => {
-		return "https://publish.twitter.com/oembed?url=https://x.com/tparsi/status/1937480651868881310&omit_script=1";
+	createUrl: (params: TwitterOEmbedParams) => {
+		const { account, tweetId } = params;
+		// timeline is not currently working so we will just return a tweet
+
+		const queryParams = createQueryParameters();
+
+		const url = `https://x.com/${account}/status/${tweetId}`;
+		return `${twitterBaseUrl}?url=${encodeURIComponent(url)}&${queryParams}`;
 	},
 };

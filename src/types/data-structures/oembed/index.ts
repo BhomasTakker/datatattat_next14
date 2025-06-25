@@ -1,3 +1,18 @@
+import { OembedOptions } from "@/lib/api/component-data/oembed/oembed-options";
+
+export type OEmbedParams = {
+	variant: OembedOptions;
+};
+
+// Thought we could do a descriminating type?
+export type TwitterOEmbedParams = {
+	variant: OembedOptions.twitter;
+	account: string;
+	tweetId: string;
+} & OEmbedParams;
+
+export type GenericOEmbedParams = TwitterOEmbedParams;
+
 export type OEmbed = {
 	id: string;
 	title: string;
