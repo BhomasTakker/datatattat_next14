@@ -1,12 +1,7 @@
 import { TwitterOEmbedParams } from "@/types/data-structures/oembed";
+import { createQueryParameters } from "../oembed-query-params";
 
 const twitterBaseUrl = "https://publish.twitter.com/oembed";
-
-const createQueryParameters = () => {
-	const params = new URLSearchParams();
-	params.set("omit_script", "1");
-	return params.toString();
-};
 
 export const twitterOembed = {
 	// config

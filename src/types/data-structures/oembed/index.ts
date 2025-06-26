@@ -11,6 +11,12 @@ export type TwitterOEmbedParams = {
 	tweetId: string;
 } & OEmbedParams;
 
+export type BlueskyOEmbedParams = {
+	variant: OembedOptions.bluesky;
+	account: string;
+	postId: string;
+} & OEmbedParams;
+
 export type GenericOEmbedParams = TwitterOEmbedParams;
 
 export type OEmbed = {
