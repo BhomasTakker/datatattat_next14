@@ -6,6 +6,15 @@ import { REDIS_URL } from "./config";
 let cachedConnection: Redis | null = null;
 
 export const connectToRedisDB = () => {
+	// If we are avoiding redis in development mode, throw an error
+	// We were still initialising etc which was throwing erros when limit reached
+	// This is a bit if a fudge but it works for now
+	if (
+		process.env.NODE_ENV === "development" ||
+		process.env.ENVIRONMENT === "development"
+	) {
+		throw new Error("Redis DB connection not implemented in development mode");
+	}
 	// console.log("Connecting to redis db");
 	// throw new Error("Not implemented properly");
 	if (cachedConnection) {
@@ -18,7 +27,6 @@ export const connectToRedisDB = () => {
 		console.log("New redis db connection established");
 		return cachedConnection;
 	} catch (error) {
-		// If an error occurs during connection, log the error and throw it
 		// console.log(error);
 		throw error;
 	}

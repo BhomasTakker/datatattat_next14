@@ -12,7 +12,11 @@ export const fetchWithCache = async <T>(
 	expiry: number = 60 * 60 * 24,
 	enabled?: Boolean = true
 ) => {
-	if (process.env.NODE_ENV === "development" || !enabled) {
+	if (
+		process.env.NODE_ENV === "development" ||
+		process.env.ENVIRONMENT === "development" ||
+		!enabled
+	) {
 		// if development don't use cache
 		const data = await fetchFn();
 		return data;
