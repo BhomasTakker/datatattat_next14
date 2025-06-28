@@ -21,7 +21,7 @@ export const ContentOembed = async ({
 
 	const { html } = oembed;
 	return (
-		<div className={styles.root}>
+		<div data-testid="content-oembed" className={styles.root}>
 			{script && <Script src={script} strategy="lazyOnload" />}
 			{html && <ClientOembed html={html} />}
 		</div>

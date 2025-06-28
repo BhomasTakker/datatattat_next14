@@ -6,12 +6,11 @@ type ClientOembedProps = {
 
 export const ClientOembed = ({ html }: ClientOembedProps) => {
 	return (
-		<div>
-			<div
-				dangerouslySetInnerHTML={{
-					__html: html,
-				}}
-			></div>
-		</div>
+		<div
+			data-testid="client-oembed"
+			dangerouslySetInnerHTML={{
+				__html: html,
+			}}
+		></div>
 	);
 };
