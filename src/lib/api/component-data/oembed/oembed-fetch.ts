@@ -22,7 +22,8 @@ export const oembedFetch = async (
 	}
 
 	const { createUrl, script } = oembedCreator;
-	const url = createUrl(params as GenericOEmbedParams);
+	// @ts-expect-error we have a type issue
+	const url = createUrl(params);
 
 	if (!url) {
 		return Promise.reject("No URL provided");
