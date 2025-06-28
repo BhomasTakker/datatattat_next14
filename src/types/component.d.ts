@@ -17,13 +17,12 @@ export type ComponentProfileProps = {
 	showComponentTitle: boolean;
 };
 
-// dupes
 export type WithQuery = {
 	provider: string;
 	params: object;
 	queryId: string;
 };
-// dupe
+
 export type With = {
 	type: string;
 	query: WithQuery;
