@@ -12,6 +12,6 @@ export const OEMBED_CONFIG: InputListProps = {
 			type: EditInputs.title,
 			title: "Oembed Component",
 		},
-		getWithConfig([QueryOptions.NONE, QueryOptions.OEMBED]),
+		getWithConfig({ options: [QueryOptions.NONE, QueryOptions.OEMBED] }),
 	],
 };

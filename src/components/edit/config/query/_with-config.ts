@@ -2,7 +2,7 @@ import { ComponentDataOptions } from "@/lib/api/component-data/component-data-op
 import { EditInputs } from "../../inputs/inputs";
 import { GenericInput } from "@/types/edit/inputs/inputs";
 import { HTML_META_QUERY_CONFIG } from "./html/meta-config";
-import { API_BASE_QUERY_CONFIG } from "./api/api-base-config";
+import { APIOptions, GetAPIConfig, getAPIConfig } from "./api/api-base-config";
 import { RSS_CONFIG } from "./rss/rss-config";
 import { OEMBED_CONFIG } from "./oembed/oembed-config";
 
@@ -18,19 +18,54 @@ type queryContainersProps =
 	| null
 	| typeof RSS_CONFIG
 	| typeof OEMBED_CONFIG
-	| typeof API_BASE_QUERY_CONFIG
-	| typeof HTML_META_QUERY_CONFIG;
+	| typeof HTML_META_QUERY_CONFIG
+	| GenericInput;
 
-const componentQueriesMap = new Map<string, queryContainersProps>([
-	[QueryOptions.NONE, null],
-	[QueryOptions.RSS, RSS_CONFIG],
-	[QueryOptions.OEMBED, OEMBED_CONFIG],
-	[QueryOptions.API_QUERY, API_BASE_QUERY_CONFIG],
-	[QueryOptions.HTML_META_QUERY, HTML_META_QUERY_CONFIG],
-]);
+type ComponentQueryOptions = {
+	rssOptions?: object;
+	oembedOptions?: object;
+	apiOptions?: GetAPIConfig;
+	metaOptions?: object;
+};
+
+const getComponentQueries = ({
+	rssOptions = {},
+	oembedOptions = {},
+	apiOptions = {},
+	metaOptions = {},
+}: ComponentQueryOptions = {}) => {
+	return new Map<string, queryContainersProps>([
+		[QueryOptions.NONE, null],
+		[QueryOptions.RSS, RSS_CONFIG],
+		[QueryOptions.OEMBED, OEMBED_CONFIG],
+		[QueryOptions.API_QUERY, getAPIConfig(apiOptions)],
+		[QueryOptions.HTML_META_QUERY, HTML_META_QUERY_CONFIG],
+	]);
+};
+
+type APIConfigOptions = {
+	options: APIOptions[];
+	defaultSelection?: APIOptions;
+};
+
+type GetWithConfig = {
+	options: QueryOptions[];
+	defaultSelection?: QueryOptions;
+	apiConfigOptions?: APIConfigOptions;
+};
 
 // pass options OR id ??
-export const getWithConfig = (options: QueryOptions[]): GenericInput => {
+export const getWithConfig = ({
+	options,
+	defaultSelection = QueryOptions.NONE,
+	apiConfigOptions,
+}: GetWithConfig): GenericInput => {
+	// create a map of config options
+	// We can then use a function to return the config based on parameters
+	const componentQueriesMap = getComponentQueries({
+		apiOptions: apiConfigOptions,
+	});
+
 	return {
 		id: "_with",
 		type: EditInputs.inputList,
@@ -52,7 +87,8 @@ export const getWithConfig = (options: QueryOptions[]): GenericInput => {
 				type: EditInputs.objectSelect,
 				label: "Select Data Source",
 				required: true,
-				defaultValue: QueryOptions.NONE,
+				// default to NONE and all
+				defaultValue: defaultSelection,
 				options,
 				optionMap: componentQueriesMap,
 				optionId: "query",
