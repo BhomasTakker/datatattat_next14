@@ -2,6 +2,7 @@ import { searchArticles } from "@/lib/mongo/actions/articles/search";
 import { WithQuery } from "@/types/component";
 import { cloneDeep } from "@/utils/object";
 import { youtubeApiFetch } from "../google/youtube/youtube-api";
+import { blueSkyFetch } from "@/lib/bluesky/query";
 
 type APIOptions = typeof searchArticles | typeof youtubeApiFetch | null;
 
@@ -9,6 +10,7 @@ const apiMap = new Map<string, APIOptions>([
 	["none", null],
 	["articles-search-api", searchArticles],
 	["youtube-api", youtubeApiFetch],
+	["bluesky-api", blueSkyFetch],
 ]);
 
 // We need to specify a cache time for the data

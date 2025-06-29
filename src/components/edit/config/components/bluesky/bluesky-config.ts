@@ -12,6 +12,6 @@ export const BLUESKY_COMPONENT_CONFIG: InputListProps = {
 			type: EditInputs.title,
 			title: "Bluesky Component",
 		},
-		// getWithConfig([QueryOptions.NONE, QueryOptions.OEMBED]),
+		getWithConfig([QueryOptions.API_QUERY]),
 	],
 };
