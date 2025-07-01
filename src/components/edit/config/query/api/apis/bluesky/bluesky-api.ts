@@ -3,12 +3,15 @@ import { GenericInput, InputListProps } from "@/types/edit/inputs/inputs";
 import { BLUESKY_FEED } from "./feed";
 import { BLUESKY_AUTHOR_FEED } from "./author-feed";
 import { BLUESKY_THREAD } from "./thread";
-import { BlueskyVaraint } from "@/lib/bluesky/query/utils";
+import {
+	BlueskyVariant,
+	BlueskyVariantOptions,
+} from "@/lib/bluesky/query/utils";
 
-const variantMap = new Map<BlueskyVaraint, InputListProps>([
-	[BlueskyVaraint.Feed, BLUESKY_FEED],
-	[BlueskyVaraint.AuthorFeed, BLUESKY_AUTHOR_FEED],
-	[BlueskyVaraint.Thread, BLUESKY_THREAD],
+const variantMap = new Map<BlueskyVariantOptions, InputListProps>([
+	[BlueskyVariant.Feed, BLUESKY_FEED],
+	[BlueskyVariant.AuthorFeed, BLUESKY_AUTHOR_FEED],
+	[BlueskyVariant.Thread, BLUESKY_THREAD],
 ]);
 
 const PARAMS: GenericInput[] = [
@@ -18,11 +21,11 @@ const PARAMS: GenericInput[] = [
 		label: "Select Type",
 		required: true,
 		options: [
-			BlueskyVaraint.Feed,
-			BlueskyVaraint.AuthorFeed,
-			BlueskyVaraint.Thread,
+			BlueskyVariant.Feed,
+			BlueskyVariant.AuthorFeed,
+			BlueskyVariant.Thread,
 		],
-		defaultValue: BlueskyVaraint.Feed,
+		defaultValue: BlueskyVariant.Feed,
 		optionMap: variantMap,
 	},
 ];
