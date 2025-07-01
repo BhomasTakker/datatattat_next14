@@ -3,7 +3,7 @@ import { getPostThread, PostThreadParams } from "./thread";
 import { BlueskyVaraint } from "./utils";
 
 type BlueSkyFectchParams = {
-	variant:
+	variant?:
 		| BlueskyVaraint.Feed
 		| BlueskyVaraint.AuthorFeed
 		| BlueskyVaraint.Thread; // Type of query to perform
@@ -17,7 +17,7 @@ type BlueSkyFectchParams = {
 };
 
 export const blueSkyFetch = async (params: BlueSkyFectchParams) => {
-	const { variant, ...fetchParams } = params;
+	const { variant = BlueskyVaraint.Feed, ...fetchParams } = params;
 
 	let items = [];
 

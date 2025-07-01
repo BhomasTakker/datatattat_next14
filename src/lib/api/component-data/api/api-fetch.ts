@@ -4,7 +4,11 @@ import { cloneDeep } from "@/utils/object";
 import { youtubeApiFetch } from "../google/youtube/youtube-api";
 import { blueSkyFetch } from "@/lib/bluesky/query";
 
-type APIOptions = typeof searchArticles | typeof youtubeApiFetch | null;
+type APIOptions =
+	| typeof searchArticles
+	| typeof youtubeApiFetch
+	| typeof blueSkyFetch
+	| null;
 
 const apiMap = new Map<string, APIOptions>([
 	["none", null],
@@ -28,6 +32,10 @@ export const apiFetch = async (query: WithQuery) => {
 		};
 	}
 
+	// typing here is wrong
+	// we are unable to set required params
+	// so technically we arent this OR this OR this
+	// we are this AND this AND this....
 	const data = await api(params);
 
 	return cloneDeep(data);
