@@ -1,39 +1,51 @@
-import { AppBskyFeedPost, AtpAgent } from "@atproto/api";
+import { FeedParams, getFeed, getAuthorFeed, AuthorFeedParams } from "./feed";
+import { getPostThread, PostThreadParams } from "./thread";
+import { BlueskyVaraint } from "./utils";
 
-export const blueSkyFetch = async (params: any) => {
-	const blueSkyAgent = new AtpAgent({
-		service: "https://public.api.bsky.app",
-	});
-	// const feeds = await blueSkyAgent.app.bsky.unspecced.getPopularFeedGenerators({
-	// 	limit: 10,
-	// });
-	const feed = await blueSkyAgent.app.bsky.feed.getFeed({
-		feed: "at://did:plc:z72i7hdynmk6r22z27h6tvur/app.bsky.feed.generator/whats-hot",
-		limit: 10,
-	});
+type BlueSkyFectchParams = {
+	variant:
+		| BlueskyVaraint.Feed
+		| BlueskyVaraint.AuthorFeed
+		| BlueskyVaraint.Thread; // Type of query to perform
+	feed?: string; // Feed URI
+	actor?: string; // Author DID
+	uri?: string; // Post URI
+	cursor?: string; // Cursor for pagination
+	limit?: number; // Number of posts to fetch
+	depth?: number; // Depth of replies to fetch
+	parentHeight?: number; // Height of the parent post
+};
 
-	feed.data.feed.forEach((item: any) => {
-		const { likeCount, replyCount, record, embed } = item.post;
+export const blueSkyFetch = async (params: BlueSkyFectchParams) => {
+	const { variant, ...fetchParams } = params;
 
-		if (record.embed.video) {
-			console.log("Video embed found:", record.embed.video);
-		}
-	});
+	let items = [];
 
-	const uris = feed.data.feed.map((item: any) => {
-		const post = item.post as AppBskyFeedPost.Record;
-		if (!AppBskyFeedPost.isRecord(post.record)) return null;
-		return post.uri;
-	});
+	switch (variant) {
+		case BlueskyVaraint.Feed:
+			{
+				//feed: at://did:plc:z72i7hdynmk6r22z27h6tvur/app.bsky.feed.generator/whats-hot
+				items = await getFeed(fetchParams as FeedParams);
+			}
+			break;
+		case BlueskyVaraint.AuthorFeed:
+			{
+				// https://docs.bsky.app/docs/tutorials/viewing-feeds#author-feeds
+				// actor: did:plc:kkf4naxqmweop7dv4l2iqqf5
+				items = await getAuthorFeed(fetchParams as AuthorFeedParams);
+			}
+			break;
+		case BlueskyVaraint.Thread:
+			{
+				// uri: at://did:plc:uqgv3rourwvvqouzhihorpbl/app.bsky.feed.post/3lstpv37vfs2v
+				items = await getPostThread(fetchParams as PostThreadParams);
+			}
+			break;
+		default:
+			items = [];
+	}
 
-	// I think what we can expect is a list of posts in most circumstances
-	// We can then use those posts to effectively cretae a feed of
-	// oembd components IF bluesky oembed does not have a feed endpoint
 	return {
-		error: null,
-		test: "HELLO BLUESKY!",
-		// This check isn't working it seems
-		// fix me and clean
-		items: uris.filter((uri: string | null) => uri !== null),
+		items,
 	};
 };

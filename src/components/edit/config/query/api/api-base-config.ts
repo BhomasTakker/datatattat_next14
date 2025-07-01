@@ -2,7 +2,7 @@ import { EditInputs } from "@/components/edit/inputs/inputs";
 import { GenericInput } from "@/types/edit/inputs/inputs";
 import { ARTICLES_SEARCH_API_CONFIG } from "./apis/articles-seacrh-api";
 import { YOUTUBE_API_CONFIG } from "./apis/youtube-api";
-import { BLUESKY_API_CONFIG } from "./apis/bluesky-api";
+import { BLUESKY_API_CONFIG } from "./apis/bluesky/bluesky-api";
 
 // Should be more global type/ struct we use these options elsewhere
 
@@ -57,7 +57,6 @@ export const getAPIConfig = ({
 				defaultValue: defaultSelection || APIOptions.NONE,
 				options: options || [...apiMap.keys()],
 				optionMap: apiMap,
-				// optionId: "api",
 			},
 		],
 	};
