@@ -2,19 +2,23 @@ import { GenericInput } from "@/types/edit/inputs/inputs";
 import { EditInputs } from "../../inputs/inputs";
 import { ARTICLE_COLLECTION_CONFIG } from "./article-collection/article-collection-config";
 import { OEMBED_CONFIG } from "./oembed/oembed-config";
+import { BLUESKY_COMPONENT_CONFIG } from "./bluesky/bluesky-config";
 
 enum ComponentOptions {
 	ArticleCollection = "ArticleCollection",
 	Oembed = "Oembed",
+	BlueSky = "BlueSky",
 }
 
 type componentContainersProps =
 	| typeof ARTICLE_COLLECTION_CONFIG
 	| typeof OEMBED_CONFIG;
 
+// get from somewhere - i.e. collection?
 const pageContainersMap = new Map<string, componentContainersProps>([
 	[ComponentOptions.ArticleCollection, ARTICLE_COLLECTION_CONFIG],
 	[ComponentOptions.Oembed, OEMBED_CONFIG],
+	[ComponentOptions.BlueSky, BLUESKY_COMPONENT_CONFIG], // Assuming BlueSky uses the same component as Oembed
 ]);
 
 export const COMPONENT_CONFIG: GenericInput = {
@@ -47,7 +51,11 @@ export const COMPONENT_CONFIG: GenericInput = {
 				resetOnChange: true,
 				defaultValue: ComponentOptions.ArticleCollection,
 				required: true,
-				options: [ComponentOptions.ArticleCollection, ComponentOptions.Oembed],
+				options: [
+					ComponentOptions.ArticleCollection,
+					ComponentOptions.Oembed,
+					ComponentOptions.BlueSky,
+				],
 				optionMap: pageContainersMap,
 				optionId: "componentProps",
 			},

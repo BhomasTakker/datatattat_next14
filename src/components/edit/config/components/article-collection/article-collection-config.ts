@@ -61,11 +61,13 @@ export const ARTICLE_COLLECTION_CONFIG: InputListProps = {
 			// we are saved on comopnent props object - our parent
 			optionId: undefined, // "variantProps",
 		},
-		getWithConfig([
-			QueryOptions.NONE,
-			QueryOptions.API_QUERY,
-			QueryOptions.HTML_META_QUERY,
-			QueryOptions.RSS,
-		]),
+		getWithConfig({
+			options: [
+				QueryOptions.NONE,
+				QueryOptions.API_QUERY,
+				QueryOptions.HTML_META_QUERY,
+				QueryOptions.RSS,
+			],
+		}),
 	],
 };
