@@ -1,9 +1,10 @@
 import { FeedParams, getFeed, getAuthorFeed, AuthorFeedParams } from "./feed";
+import { searchPosts, SearchPostsParams } from "./search";
 import { getPostThread, PostThreadParams } from "./thread";
 import { BlueskyVariant } from "./utils";
 
 type BlueSkyFectchParams = {
-	variant?: "feed" | "authorFeed" | "thread"; // Type of query to perform
+	variant?: BlueskyVariant; // Type of query to perform
 	feed?: string; // Feed URI
 	actor?: string; // Author DID
 	uri?: string; // Post URI
@@ -36,6 +37,11 @@ export const blueSkyFetch = async (params: BlueSkyFectchParams) => {
 			{
 				// uri: at://did:plc:uqgv3rourwvvqouzhihorpbl/app.bsky.feed.post/3lstpv37vfs2v
 				items = await getPostThread(fetchParams as PostThreadParams);
+			}
+			break;
+		case BlueskyVariant.Search:
+			{
+				items = await searchPosts(fetchParams as SearchPostsParams);
 			}
 			break;
 		default:

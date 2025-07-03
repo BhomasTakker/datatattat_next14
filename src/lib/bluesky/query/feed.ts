@@ -1,6 +1,6 @@
 import { AppBskyFeedPost } from "@atproto/api";
 import { BlueSkyAgent } from "..";
-import { BLUESKY_SERVICE_URL } from "./utils";
+import { BLUESKY_PUBLIC_SERVICE_URL } from "./utils";
 import { FeedViewPost } from "@atproto/api/dist/client/types/app/bsky/feed/defs";
 
 const convertFeedToPostUris = (feed: FeedViewPost[]) => {
@@ -19,7 +19,7 @@ export type FeedParams = {
 	limit?: number; // Number of posts to fetch
 };
 export const getFeed = async (params: FeedParams) => {
-	const blueSkyAgent = new BlueSkyAgent(BLUESKY_SERVICE_URL);
+	const blueSkyAgent = new BlueSkyAgent(BLUESKY_PUBLIC_SERVICE_URL);
 	const { feed, cursor = "", limit = 10 } = params;
 	const result = await blueSkyAgent.getFeed(feed, limit, cursor);
 	return convertFeedToPostUris(result);
@@ -32,7 +32,7 @@ export type AuthorFeedParams = {
 };
 
 export const getAuthorFeed = async (params: AuthorFeedParams) => {
-	const blueSkyAgent = new BlueSkyAgent(BLUESKY_SERVICE_URL);
+	const blueSkyAgent = new BlueSkyAgent(BLUESKY_PUBLIC_SERVICE_URL);
 	const { actor, cursor = "", limit = 10 } = params;
 	const feed = await blueSkyAgent.getAuthorFeed(actor, limit, cursor);
 	return convertFeedToPostUris(feed);
