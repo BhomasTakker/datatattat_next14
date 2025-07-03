@@ -22,28 +22,42 @@ const convertRepliesToPostUris = (replies: any[]) => {
 //////////
 // Todo:
 ////////////////////////////////////////////////////////////////////////////
-// this will only return the direct parent - we need to recurse all the way up to the root
-// then create a list
-// filter
+// We need to properly type bluesky you fly by night hacker type
+// struct is parent.parent NOR parent.post.parent.post like you might logically think
+////////
+// Do we need any protections etc here / stress this
 ////////////////////////////////////////////////////////////////////////////
-const convertParentToPostUri = (parent: any) => {
+/**
+ * convertParentToPostUri - recursive function to convert parent posts to URIs
+ * @param parent
+ * @param uris
+ * @returns uris
+ */
+const convertParentToPostUri = (parent: any, uris: string[] = []) => {
 	const { post } = parent || {};
+
+	if (!post) {
+		return [...uris];
+	}
+
 	const { record } = post || {};
 
-	if (!AppBskyFeedPost.isRecord(record)) return null;
-	return post.uri as string;
+	if (!AppBskyFeedPost.isRecord(record)) return [...uris];
+	return convertParentToPostUri(parent.parent, [post.uri, ...uris]);
 };
+//////////////////////////////////////////////////////////////////////
 
 const convertThreadToPostUris = (thread: any) => {
 	const { post, parent, replies: threadReplies } = thread;
 	const replies = convertRepliesToPostUris(threadReplies);
-	const parentUri = convertParentToPostUri(parent);
+
+	const parentUris = convertParentToPostUri(parent);
+
 	if (!post || !AppBskyFeedPost.isRecord(post.record)) {
 		throw new Error("Invalid post data in thread");
-		return [];
 	}
 
-	const uris = [parentUri, post.uri, ...replies];
+	const uris = [...parentUris, post.uri, ...replies];
 	return uris;
 };
 
