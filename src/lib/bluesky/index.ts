@@ -1,5 +1,6 @@
-import { AppBskyFeedNS, AppBskyNS, AtpAgent } from "@atproto/api";
+import { AppBskyFeedNS, AppBskyFeedSearchPosts, AtpAgent } from "@atproto/api";
 import { FeedViewPost } from "@atproto/api/dist/client/types/app/bsky/feed/defs";
+import { SearchPostsParams } from "./query/search";
 
 // This should be more general - pass servivce as a parameter
 // the at protocol is anew protocol - like rss etc
@@ -75,6 +76,37 @@ export class BlueSkyAgent {
 			return thread.data;
 		} catch (error) {
 			console.error("Error fetching post thread:", error);
+			throw error;
+		}
+	}
+
+	// Response Schema
+	// {
+	// 	cursor: string,
+	// 	hitsTotal: integer,
+	// 	posts: app.bsky.feed.defs.postView[]
+	// }
+	public async searchPosts(params: SearchPostsParams): Promise<unknown> {
+		try {
+			const response = await this.blueSkyFeed.searchPosts(params);
+			return response.data;
+		} catch (error) {
+			console.error("Error searching posts:", error);
+			throw error;
+		}
+	}
+
+	public async login(credentials: {
+		identifier: string;
+		password: string;
+	}): Promise<void> {
+		try {
+			await this.agent.login({
+				identifier: credentials.identifier,
+				password: credentials.password,
+			});
+		} catch (error) {
+			console.error("Error logging in:", error);
 			throw error;
 		}
 	}

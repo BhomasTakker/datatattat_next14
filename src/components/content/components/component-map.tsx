@@ -25,5 +25,5 @@ export const ComponentsMap = new Map<ComponentsOptions, ComponentType>([
 	[ComponentsOptions.ContentOembed, ContentOembed],
 	[ComponentsOptions.DisplayPlayer, DisplayPlayer],
 	[ComponentsOptions.MediaPlayer, MediaPlayer],
-	[ComponentsOptions.BlueSky, BlueSkyCollection], // Assuming BlueSky uses the same component as Oembed
+	[ComponentsOptions.BlueSky, BlueSkyCollection],
 ]);

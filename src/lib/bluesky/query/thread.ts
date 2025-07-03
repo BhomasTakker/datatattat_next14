@@ -1,6 +1,6 @@
 import { AppBskyFeedPost } from "@atproto/api";
 import { BlueSkyAgent } from "..";
-import { BLUESKY_SERVICE_URL } from "./utils";
+import { BLUESKY_PUBLIC_SERVICE_URL } from "./utils";
 
 export type PostThreadParams = {
 	uri: string; // Post URI
@@ -48,7 +48,7 @@ const convertThreadToPostUris = (thread: any) => {
 };
 
 export const getPostThread = async (params: PostThreadParams) => {
-	const blueSkyAgent = new BlueSkyAgent(BLUESKY_SERVICE_URL);
+	const blueSkyAgent = new BlueSkyAgent(BLUESKY_PUBLIC_SERVICE_URL);
 	const { uri, depth = 6, parentHeight = 80 } = params;
 	const { thread } = await blueSkyAgent.getPostThread(uri, depth, parentHeight);
 	return convertThreadToPostUris(thread);
