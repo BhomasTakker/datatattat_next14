@@ -1,21 +1,7 @@
 import { AppBskyFeedPost } from "@atproto/api";
 import { BlueSkyAgent } from "..";
 import { BLUESKY_AUTHENTICATED_SERVICE_URL } from "./utils";
-
-export type SearchPostsParams = {
-	q: string; // Author DID
-	sort?: "top" | "latest"; // Cursor for pagination
-	until?: string; // Filter posts until this date
-	since?: string; // Filter posts since this date
-	mentions?: string; // Mentions - User @
-	author?: string; // Author - User @
-	lang?: string; // Language
-	domain?: string; // Domain
-	url?: string; // URL
-	tag?: string[]; // Tag
-	cursor?: string;
-	limit?: number; // Number of posts to fetch
-};
+import { SearchPostsParams } from "@/types/bluesky";
 
 type SearchResponse = {
 	posts: {

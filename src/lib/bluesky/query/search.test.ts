@@ -2,10 +2,10 @@ import {
 	convertSearchResponseToPostUris,
 	transformSearchParams,
 	searchPosts,
-	SearchPostsParams,
 } from "./search";
 import { AppBskyFeedPost } from "@atproto/api";
 import { BlueSkyAgent } from "..";
+import { SearchPostsParams } from "@/types/bluesky";
 
 // Mock BlueSkyAgent and its methods
 jest.mock("..", () => {

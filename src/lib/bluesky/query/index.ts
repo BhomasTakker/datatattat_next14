@@ -1,6 +1,7 @@
+import { PostThreadParams, SearchPostsParams } from "@/types/bluesky";
 import { FeedParams, getFeed, getAuthorFeed, AuthorFeedParams } from "./feed";
-import { searchPosts, SearchPostsParams } from "./search";
-import { getPostThread, PostThreadParams } from "./thread";
+import { searchPosts } from "./search";
+import { getPostThread } from "./thread";
 import { BlueskyVariant } from "./utils";
 
 type BlueSkyFectchParams = {

@@ -1,12 +1,7 @@
 import { AppBskyFeedPost } from "@atproto/api";
 import { BlueSkyAgent } from "..";
 import { BLUESKY_PUBLIC_SERVICE_URL } from "./utils";
-
-export type PostThreadParams = {
-	uri: string; // Post URI
-	depth?: number; // Depth of replies to fetch
-	parentHeight?: number; // Height of the parent post
-};
+import { BlueSkyThread, PostThreadParams } from "@/types/bluesky";
 
 export const convertRepliesToPostUris = (replies: any[]) => {
 	let postUris: string[] = [];
@@ -50,9 +45,13 @@ export const convertParentToPostUri = (
 };
 //////////////////////////////////////////////////////////////////////
 
-export const convertThreadToPostUris = (thread: any): string[] => {
+export const convertThreadToPostUris = (thread: BlueSkyThread): string[] => {
+	if (!thread || !thread.post) {
+		console.error("Invalid thread data");
+		return [];
+	}
 	const { post, parent, replies: threadReplies } = thread;
-	const replies = convertRepliesToPostUris(threadReplies);
+	const replies = convertRepliesToPostUris(threadReplies || []);
 
 	const parentUris = convertParentToPostUri(parent);
 
@@ -69,5 +68,7 @@ export const getPostThread = async (params: PostThreadParams) => {
 	const blueSkyAgent = new BlueSkyAgent(BLUESKY_PUBLIC_SERVICE_URL);
 	const { uri, depth = 6, parentHeight = 80 } = params;
 	const { thread } = await blueSkyAgent.getPostThread(uri, depth, parentHeight);
-	return convertThreadToPostUris(thread);
+	// We are protecting so caste 'should' be okay
+	// real type is ThreadViewPost - we have 'simplified'
+	return convertThreadToPostUris(thread as unknown as BlueSkyThread);
 };
