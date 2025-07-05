@@ -13,5 +13,8 @@ jest.mock("@atproto/api", () => {
 			getAuthorFeed: jest.fn(),
 			login: jest.fn(),
 		})),
+		AppBskyFeedPost: {
+			isRecord: jest.fn(),
+		},
 	};
 });
