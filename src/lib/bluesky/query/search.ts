@@ -26,7 +26,7 @@ type SearchResponse = {
 	cursor?: string; // Cursor for pagination
 };
 
-const convertSearchResponseToPostUris = (result: SearchResponse) => {
+export const convertSearchResponseToPostUris = (result: SearchResponse) => {
 	let postUris: string[] = [];
 	const posts = result.posts;
 	// if (!result || !Array.isArray(result.posts)) return postUris; // Ensure posts is an array
@@ -40,7 +40,7 @@ const convertSearchResponseToPostUris = (result: SearchResponse) => {
 };
 
 // Hashtags don't appear to work?
-const transformSearchParams = (params: SearchPostsParams) => {
+export const transformSearchParams = (params: SearchPostsParams) => {
 	const { tag = [], ...rest } = params;
 	let transformedTag = tag;
 	if (typeof transformedTag === "string") {
