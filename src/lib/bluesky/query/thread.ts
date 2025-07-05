@@ -8,7 +8,7 @@ export type PostThreadParams = {
 	parentHeight?: number; // Height of the parent post
 };
 
-const convertRepliesToPostUris = (replies: any[]) => {
+export const convertRepliesToPostUris = (replies: any[]) => {
 	let postUris: string[] = [];
 	if (!Array.isArray(replies)) return postUris; // Ensure replies is an array
 	replies.forEach((reply: any) => {
@@ -33,7 +33,10 @@ const convertRepliesToPostUris = (replies: any[]) => {
  * @param uris
  * @returns uris
  */
-const convertParentToPostUri = (parent: any, uris: string[] = []) => {
+export const convertParentToPostUri = (
+	parent: any,
+	uris: string[] = []
+): string[] => {
 	const { post } = parent || {};
 
 	if (!post) {
@@ -47,7 +50,7 @@ const convertParentToPostUri = (parent: any, uris: string[] = []) => {
 };
 //////////////////////////////////////////////////////////////////////
 
-const convertThreadToPostUris = (thread: any) => {
+export const convertThreadToPostUris = (thread: any) => {
 	const { post, parent, replies: threadReplies } = thread;
 	const replies = convertRepliesToPostUris(threadReplies);
 
