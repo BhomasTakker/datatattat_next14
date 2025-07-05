@@ -1,6 +1,6 @@
+import { SearchPostsParams } from "@/types/bluesky";
 import { AppBskyFeedNS, AppBskyFeedSearchPosts, AtpAgent } from "@atproto/api";
 import { FeedViewPost } from "@atproto/api/dist/client/types/app/bsky/feed/defs";
-import { SearchPostsParams } from "./query/search";
 
 // This should be more general - pass servivce as a parameter
 // the at protocol is anew protocol - like rss etc
@@ -9,6 +9,15 @@ import { SearchPostsParams } from "./query/search";
 export const agent = new AtpAgent({
 	service: "https://public.api.bsky.app",
 });
+
+//////////////////////////////////////////////////////
+// NOTE:- This is a very basic agent for BlueSky.
+// We could very well include the option for i.e.
+// agent.app.bsky.graph.getLists from a given user
+// let user select the list they want to view
+// and then use that to get the feed for that list.
+// There are a hundred other things we could do with this agent.
+///////////////////////////////////////////////////////
 
 // Really we should extend a BlueSky agent from an AtpAgent but...
 export class BlueSkyAgent {
