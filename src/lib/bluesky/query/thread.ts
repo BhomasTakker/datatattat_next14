@@ -50,14 +50,15 @@ export const convertParentToPostUri = (
 };
 //////////////////////////////////////////////////////////////////////
 
-export const convertThreadToPostUris = (thread: any) => {
+export const convertThreadToPostUris = (thread: any): string[] => {
 	const { post, parent, replies: threadReplies } = thread;
 	const replies = convertRepliesToPostUris(threadReplies);
 
 	const parentUris = convertParentToPostUri(parent);
 
 	if (!post || !AppBskyFeedPost.isRecord(post.record)) {
-		throw new Error("Invalid post data in thread");
+		console.error("Invalid post data in thread");
+		return [];
 	}
 
 	const uris = [...parentUris, post.uri, ...replies];
