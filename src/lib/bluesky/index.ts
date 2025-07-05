@@ -86,7 +86,7 @@ export class BlueSkyAgent {
 	// 	hitsTotal: integer,
 	// 	posts: app.bsky.feed.defs.postView[]
 	// }
-	public async searchPosts(params: SearchPostsParams): Promise<unknown> {
+	public async searchPosts(params: SearchPostsParams) {
 		try {
 			const response = await this.blueSkyFeed.searchPosts(params);
 			return response.data;
