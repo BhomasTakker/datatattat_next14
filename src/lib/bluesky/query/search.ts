@@ -61,7 +61,7 @@ export const searchPosts = async (params: SearchPostsParams) => {
 	try {
 		const result = (await blueSkyAgent.searchPosts(
 			transformedParams
-		)) as SearchResponse;
+		)) as unknown as SearchResponse;
 		return convertSearchResponseToPostUris(result);
 	} catch {
 		console.error("Error searching posts:", params);

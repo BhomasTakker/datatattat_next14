@@ -17,7 +17,7 @@ type BlueSkyFectchParams = {
 export const blueSkyFetch = async (params: BlueSkyFectchParams) => {
 	const { variant = BlueskyVariant.Feed, ...fetchParams } = params;
 
-	let items = [];
+	let items: string[] = [];
 
 	switch (variant) {
 		case BlueskyVariant.Feed:

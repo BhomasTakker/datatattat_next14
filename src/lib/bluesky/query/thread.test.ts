@@ -97,11 +97,21 @@ describe("thread.ts", () => {
 	});
 
 	describe("convertThreadToPostUris", () => {
-		it("throws if post is missing or invalid", () => {
-			expect(() => convertThreadToPostUris({})).toThrow();
-			expect(() =>
+		it("returns empty array if post is missing or invalid", () => {
+			expect(convertThreadToPostUris({})).toEqual([]);
+			expect(
 				convertThreadToPostUris({ post: { record: { $type: "invalid.type" } } })
-			).toThrow();
+			).toEqual([]);
+		});
+
+		it("outputs an error if post record is invalid", () => {
+			expect(
+				convertThreadToPostUris({ post: { record: { $type: "invalid.type" } } })
+			).toEqual([]);
+			const spy = jest.spyOn(console, "error").mockImplementation(() => {});
+			convertThreadToPostUris({ post: { record: { $type: "invalid.type" } } });
+			expect(spy).toHaveBeenCalledWith("Invalid post data in thread");
+			spy.mockRestore();
 		});
 
 		it("returns uris in correct order", () => {
