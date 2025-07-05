@@ -1,6 +1,6 @@
 import { ComponentDataOptions } from "@/lib/api/component-data/component-data-options";
 import { EditInputs } from "../../inputs/inputs";
-import { GenericInput } from "@/types/edit/inputs/inputs";
+import { GenericInput, InputListProps } from "@/types/edit/inputs/inputs";
 import { HTML_META_QUERY_CONFIG } from "./html/meta-config";
 import { APIOptions, GetAPIConfig, getAPIConfig } from "./api/api-base-config";
 import { RSS_CONFIG } from "./rss/rss-config";
@@ -28,7 +28,7 @@ type ComponentQueryOptions = {
 	metaOptions?: object;
 };
 
-const getComponentQueries = ({
+export const getComponentQueries = ({
 	rssOptions = {},
 	oembedOptions = {},
 	apiOptions = {},
@@ -59,7 +59,7 @@ export const getWithConfig = ({
 	options,
 	defaultSelection = QueryOptions.NONE,
 	apiConfigOptions,
-}: GetWithConfig): GenericInput => {
+}: GetWithConfig): InputListProps => {
 	// create a map of config options
 	// We can then use a function to return the config based on parameters
 	const componentQueriesMap = getComponentQueries({
@@ -96,36 +96,3 @@ export const getWithConfig = ({
 		],
 	};
 };
-
-// export const WITH_CONFIG: GenericInput = {
-// 	id: "_with",
-// 	type: EditInputs.inputList,
-// 	label: "Data Source",
-// 	createObject: true,
-
-// 	inputs: [
-// 		{
-// 			id: "withObjectTitle",
-// 			type: EditInputs.title,
-// 			title: "Data Source",
-// 		},
-// 		// Would effectively mean that any type will have use a query object
-// 		// unless you dont add an object id
-// 		// AND the query object is an inputList on the required object. oof
-// 		{
-// 			id: "type",
-// 			type: EditInputs.objectSelect,
-// 			label: "Select Data Source",
-// 			required: true,
-// 			defaultValue: QueryOptions.NONE,
-// 			options: [
-// 				QueryOptions.NONE,
-// 				QueryOptions.RSS,
-// 				QueryOptions.API_QUERY,
-// 				QueryOptions.HTML_META_QUERY,
-// 			],
-// 			optionMap: componentQueriesMap,
-// 			optionId: "query",
-// 		},
-// 	],
-// };
