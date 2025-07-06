@@ -25,10 +25,7 @@ export const ContentOembed = ({ component, dataObject }: ComponentProps) => {
 	// We 'should' determine this on a per provider basis and not use a blanket approach.
 	useEffect(() => {
 		if (script) {
-			// This is a workaround to ensure the oEmbed content is rendered correctly
-			// after hydration, as some oEmbed providers require JavaScript to render.
 			const scriptElement = document.createElement("script");
-			// scriptElement.innerHTML = oembed.html;#
 			scriptElement.src = script || "";
 			scriptElement.async = true;
 			document.body.appendChild(scriptElement);
