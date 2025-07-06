@@ -3,6 +3,7 @@ import { ContentOembed } from "../content-oembed/content-oembed";
 import { blueskyOembedByUri } from "@/lib/api/component-data/oembed/options/bluesky";
 import { getOembed } from "@/actions/oembed/get-oembed";
 import { PageComponent } from "@/types/page";
+import styles from "./bluesky-collection.module.scss";
 
 export type BlueSkyCollectionProps = {
 	items: string[];
@@ -46,5 +47,9 @@ export const BlueSkyCollection = ({
 	const oembedComponents = items.map(async (uri: string) => {
 		return <BlueSkyOembedComponent uri={uri} component={component} />;
 	});
-	return <div data-testid="bluesky-collection">{oembedComponents}</div>;
+	return (
+		<div data-testid="bluesky-collection" className={styles.root}>
+			{oembedComponents}
+		</div>
+	);
 };

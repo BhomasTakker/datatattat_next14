@@ -49,7 +49,8 @@ export class BlueSkyAgent {
 			return feed.data.feed;
 		} catch (error) {
 			console.error("Error fetching feed:", error);
-			throw error;
+			// throw error;
+			return [];
 		}
 	}
 
@@ -67,7 +68,8 @@ export class BlueSkyAgent {
 			return feed.data.feed;
 		} catch (error) {
 			console.error("Error fetching author feed:", error);
-			throw error;
+			// throw error;
+			return [];
 		}
 	}
 
@@ -85,7 +87,8 @@ export class BlueSkyAgent {
 			return thread.data;
 		} catch (error) {
 			console.error("Error fetching post thread:", error);
-			throw error;
+			// throw error;
+			return [];
 		}
 	}
 
@@ -101,7 +104,8 @@ export class BlueSkyAgent {
 			return response.data;
 		} catch (error) {
 			console.error("Error searching posts:", error);
-			throw error;
+			// throw error;
+			return [];
 		}
 	}
 

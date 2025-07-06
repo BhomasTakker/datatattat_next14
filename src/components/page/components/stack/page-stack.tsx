@@ -1,10 +1,16 @@
-import { PageComponents, PageContainer, PageContent } from "@/types/page";
+import { PageComponents, PageContent } from "@/types/page";
 import styles from "./page-stack.module.scss";
 import { ComponentDisplay } from "@/components/content/component-display";
 
-// We should probably have 'style' in the Props type
+import {
+	PageStackSizeOptions,
+	PageStackVariant,
+} from "@/types/components/page/stack";
+
 type PageStackProps = {
-	direction: string;
+	variant: PageStackVariant;
+	height: PageStackSizeOptions;
+	width: PageStackSizeOptions;
 };
 
 export type PageStackContent = {
@@ -16,7 +22,11 @@ export type PageStackContent = {
 export const PageStack = ({ content }: { content: PageContent }) => {
 	const { props, components } = content as PageStackContent;
 
-	const { direction: style = "column" } = props || {};
+	const {
+		variant = PageStackVariant.Vertical,
+		height = "Free",
+		width = "Free",
+	} = props || {};
 
 	/////////////////////////////////////////////////////////////////////
 	// potentially pre load some data here i.e. first three components
@@ -28,16 +38,23 @@ export const PageStack = ({ content }: { content: PageContent }) => {
 	// Look at articleCollection for what we should do here
 	////////////////////////////////////////////////////////
 	const renderComponents = () => {
+		const className = `
+		${styles.item}
+		${styles[`root-height-${String(height).toLowerCase()}`]} ${
+			width ? styles[`root-width-${String(width).toLowerCase()}`] : ""
+		}`;
 		return components.map((component, index) => {
 			return (
-				<li key={index} data-testid="content-component">
+				<li key={index} data-testid="content-component" className={className}>
 					<ComponentDisplay key={index} component={component} />
 				</li>
 			);
 		});
 	};
 
-	const className = `${styles.root} ${styles[`root-${style}`]}`;
+	const className = `${styles.root} ${
+		styles[`root-${String(variant).toLowerCase()}`]
+	}`;
 
 	// Semantically this should be a list of components
 	return (

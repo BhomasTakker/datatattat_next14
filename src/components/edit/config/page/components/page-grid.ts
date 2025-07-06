@@ -6,5 +6,12 @@ export const PAGE_GRID_CONFIG: InputListProps = {
 	type: EditInputs.inputList,
 	label: "Page Grid",
 
-	inputs: [],
+	inputs: [
+		{
+			id: "variant",
+			type: EditInputs.select,
+			label: "Grid Variant",
+			options: [""],
+		},
+	],
 };

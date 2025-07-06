@@ -20,7 +20,6 @@ type apiContainersProps =
 	| typeof YOUTUBE_API_CONFIG
 	| typeof BLUESKY_API_CONFIG;
 
-// Must be vryable
 const apiMap = new Map<string, apiContainersProps>([
 	[APIOptions.NONE, null],
 	[APIOptions.ARTICLES_SEARCH_API, ARTICLES_SEARCH_API_CONFIG],

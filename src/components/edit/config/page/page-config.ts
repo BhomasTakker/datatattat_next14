@@ -2,7 +2,7 @@ import { GenericInput } from "@/types/edit/inputs/inputs";
 import { EditInputs } from "../../inputs/inputs";
 import { COMPONENT_CONFIG } from "../components/component-config";
 import { PAGE_GRID_CONFIG } from "./components/page-grid";
-import { PAGE_STACK_CONFIG } from "./components/page-stack";
+import { PAGE_STACK_CONFIG } from "./components/stack/page-stack";
 
 enum pageContainers {
 	STACK = "Stack",
