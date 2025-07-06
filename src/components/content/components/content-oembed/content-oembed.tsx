@@ -2,7 +2,6 @@
 
 import { ComponentProps } from "@/types/component";
 import styles from "./content-oembed.module.scss";
-import Script from "next/script";
 import { ClientOembed } from "./client-component";
 import { OEmbed } from "@/types/data-structures/oembed";
 import { useEffect } from "react";
