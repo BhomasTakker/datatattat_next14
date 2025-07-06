@@ -1,4 +1,3 @@
-@use "../../../../scss/mixins/ui/" as ui;
 @use "../../../../scss/abstracts/units/" as units;
 
 .root {
@@ -8,20 +7,23 @@
 	flex-direction: column;
 	gap: units.$rem_8;
 
-	.item {
-		margin: auto;
-	}
-
 	&.root-horizontal {
 		flex-direction: row;
 		flex-wrap: wrap;
 		overflow: hidden;
+		gap: units.$rem_4;
+		.item {
+			margin: auto;
+			flex: 1;
+		}
 	}
+
 	&.root-vertical {
 		flex-direction: column;
 	}
 }
 
+// How much of this is actually required?
 .root-height-free {
 	height: 100%;
 }
@@ -30,35 +32,30 @@
 	height: 100%;
 	max-height: 1200px;
 	flex: 1;
-	@include ui.scrollYNoScroller();
 }
 
 .root-height-lg {
 	height: 100%;
 	max-height: 1000px;
 	flex: 1;
-	@include ui.scrollYNoScroller();
 }
 
 .root-height-md {
 	height: 100%;
 	max-height: 800px;
 	flex: 1;
-	@include ui.scrollYNoScroller();
 }
 
 .root-height-sm {
 	height: 100%;
 	max-height: 600px;
 	flex: 1 1 auto;
-	@include ui.scrollYNoScroller();
 }
 
 .root-height-xs {
 	height: 100%;
 	max-height: 400px;
 	flex: 1 1 auto;
-	@include ui.scrollYNoScroller();
 }
 
 .root-width-free {
@@ -68,29 +65,24 @@
 .root-width-xl {
 	width: 100%;
 	min-width: 1000px;
-	max-width: 1200px;
 }
 
 .root-width-lg {
 	width: 100%;
 	min-width: 800px;
-	max-width: 1000px;
 }
 
 .root-width-md {
 	width: 100%;
 	min-width: 600px;
-	max-width: 800px;
 }
 
 .root-width-sm {
 	width: 100%;
 	min-width: 400px;
-	max-width: 600px;
 }
 
 .root-width-xs {
 	width: 100%;
 	min-width: 200px;
-	max-width: 400px;
 }
