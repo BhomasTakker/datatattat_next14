@@ -1,13 +1,8 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, cleanup } from "@testing-library/react";
 import { ContentOembed, OEmbedComponentProps } from "./content-oembed";
 
-// Mock next/script since it only works in Next.js environment
-jest.mock("next/script", () => (props: any) => {
-	return <div data-testid="mock-script" {...props} />;
-});
-
-// Mock ClientOembed component
+// Mock the ClientOembed component
 jest.mock("./client-component", () => ({
 	ClientOembed: ({ html }: { html: string }) => (
 		<div
@@ -17,73 +12,76 @@ jest.mock("./client-component", () => ({
 	),
 }));
 
-const baseProps = {
-	component: {},
-	dataObject: {
-		data: {
-			oembed: {
-				html: "<blockquote>Embedded Content</blockquote>",
-			},
-		},
+// Mock styles
+jest.mock("./content-oembed.module.scss", () => ({
+	root: "mock-root-class",
+}));
+
+const baseOembed: OEmbedComponentProps = {
+	// @ts-expect-error data structure is incomplete for testing
+	oembed: {
+		html: "<blockquote>Embedded Content</blockquote>",
+		// add other OEmbed fields as needed
 	},
 };
 
+const getComponentProps = (data: Partial<OEmbedComponentProps> = {}) => ({
+	component: {},
+	dataObject: { data: { ...baseOembed, ...data } },
+});
+
 describe("ContentOembed", () => {
-	it("renders the root div with correct test id", async () => {
-		const { container } = render(await ContentOembed(baseProps as any));
-		expect(
-			container.querySelector('[data-testid="content-oembed"]')
-		).toBeInTheDocument();
+	afterEach(() => {
+		cleanup();
+		jest.clearAllMocks();
 	});
 
-	it("renders the embedded html via ClientOembed", async () => {
-		const { container } = render(await ContentOembed(baseProps as any));
-		expect(
-			container.querySelector('[data-testid="client-oembed"]')
-		).toBeInTheDocument();
-		expect(
-			container.querySelector('[data-testid="client-oembed"]')?.innerHTML
-		).toContain("Embedded Content");
+	it("renders the oEmbed html via ClientOembed", () => {
+		// @ts-expect-error mock data
+		render(<ContentOembed {...getComponentProps()} />);
+		const wrapper = screen.getByTestId("content-oembed");
+		expect(wrapper).toBeInTheDocument();
+		expect(screen.getByTestId("client-oembed").innerHTML).toContain(
+			"Embedded Content"
+		);
 	});
 
-	it("renders the Script component when script prop is provided", async () => {
-		const propsWithScript = {
-			...baseProps,
-			dataObject: {
-				data: {
-					...baseProps.dataObject.data,
-					script: "https://example.com/embed.js",
-				},
-			},
-		};
-		const { container } = render(await ContentOembed(propsWithScript as any));
+	it("does not render ClientOembed if html is missing", () => {
+		const oembed = { ...baseOembed.oembed, html: undefined as any };
+		// @ts-expect-error mock data incomplete
+		render(<ContentOembed {...getComponentProps({ oembed })} />);
 		expect(
-			container.querySelector('[data-testid="mock-script"]')
-		).toBeInTheDocument();
-		expect(
-			container.querySelector('[data-testid="mock-script"]')
-		).toHaveAttribute("src", "https://example.com/embed.js");
+			screen
+				.getByTestId("content-oembed")
+				.querySelector("[data-testid='client-oembed']")
+		).toBeNull();
 	});
 
-	it("does not render ClientOembed if html is missing", async () => {
-		const propsNoHtml = {
-			...baseProps,
-			dataObject: {
-				data: {
-					oembed: {},
-				},
-			},
-		};
-		const { container } = render(await ContentOembed(propsNoHtml as any));
-		expect(
-			container.querySelector('[data-testid="client-oembed"]')
-		).not.toBeInTheDocument();
+	it("adds and removes script tag when script prop is provided", () => {
+		const scriptUrl = "https://example.com/embed.js";
+		const removeChildSpy = jest.spyOn(document.body, "removeChild");
+		// @ts-expect-error mock data incomplete
+		render(<ContentOembed {...getComponentProps({ script: scriptUrl })} />);
+		const script = Array.from(
+			document.body.getElementsByTagName("script")
+		).find((el) => el.src === scriptUrl);
+		expect(script).toBeDefined();
+		cleanup();
+		expect(removeChildSpy).toHaveBeenCalled();
+		removeChildSpy.mockRestore();
 	});
 
-	it("does not render Script if script is not provided", async () => {
-		const { container } = render(await ContentOembed(baseProps as any));
-		expect(
-			container.querySelector('[data-testid="mock-script"]')
-		).not.toBeInTheDocument();
+	it("does not add script tag when script prop is not provided", () => {
+		// @ts-expect-error mock data incomplete
+		render(<ContentOembed {...getComponentProps()} />);
+		const scripts = Array.from(document.body.getElementsByTagName("script"));
+		expect(scripts.some((el) => el.src === "")).toBe(false);
+	});
+
+	it("applies the root class from styles", () => {
+		// @ts-expect-error mock data incomplete
+		render(<ContentOembed {...getComponentProps()} />);
+		const wrapper = screen.getByTestId("content-oembed");
+		expect(wrapper.className).toContain("mock-root-class");
 	});
 });
