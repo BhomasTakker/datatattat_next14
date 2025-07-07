@@ -118,11 +118,11 @@ describe("search.ts", () => {
 			expect(mockSearchPosts).toHaveBeenCalled();
 		});
 
-		it("should return empty posts array and log error on failure", async () => {
+		it("should return empty array and log error on failure", async () => {
 			mockSearchPosts.mockRejectedValue(new Error("fail"));
 			const params: SearchPostsParams = { q: "test" };
 			const result = await searchPosts(params);
-			expect(result).toEqual({ posts: [] });
+			expect(result).toEqual([]);
 			expect(console.error).toHaveBeenCalledWith(
 				"Error searching posts:",
 				params
