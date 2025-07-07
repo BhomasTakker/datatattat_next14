@@ -51,6 +51,6 @@ export const searchPosts = async (params: SearchPostsParams) => {
 		return convertSearchResponseToPostUris(result);
 	} catch {
 		console.error("Error searching posts:", params);
-		return [];
+		return { posts: [] };
 	}
 };

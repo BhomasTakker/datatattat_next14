@@ -87,8 +87,8 @@ export class BlueSkyAgent {
 			return thread.data;
 		} catch (error) {
 			console.error("Error fetching post thread:", error);
-			// throw error;
-			return [];
+			// throw error; / incorrect resonse,#..
+			return { thread: { post: null, parent: null, replies: [] } };
 		}
 	}
 
@@ -104,8 +104,8 @@ export class BlueSkyAgent {
 			return response.data;
 		} catch (error) {
 			console.error("Error searching posts:", error);
-			// throw error;
-			return [];
+			// throw error; / check response... / incorrect response
+			return { posts: [] };
 		}
 	}
 
