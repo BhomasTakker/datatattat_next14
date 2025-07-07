@@ -3,14 +3,86 @@
 .root {
 	list-style: none;
 	display: flex;
+
 	flex-direction: column;
 	gap: units.$rem_8;
+
+	&.root-horizontal {
+		flex-direction: row;
+		flex-wrap: wrap;
+		overflow: hidden;
+		gap: units.$rem_4;
+		.item {
+			margin: auto;
+			flex: 1;
+		}
+	}
+
+	&.root-vertical {
+		flex-direction: column;
+	}
 }
 
-.root-column {
-	// background-color: blue;
+// How much of this is actually required?
+.root-height-free {
+	height: 100%;
 }
 
-.root-row {
-	// background-color: green;
+.root-height-xl {
+	height: 100%;
+	max-height: 1200px;
+	flex: 1;
+}
+
+.root-height-lg {
+	height: 100%;
+	max-height: 1000px;
+	flex: 1;
+}
+
+.root-height-md {
+	height: 100%;
+	max-height: 800px;
+	flex: 1;
+}
+
+.root-height-sm {
+	height: 100%;
+	max-height: 600px;
+	flex: 1 1 auto;
+}
+
+.root-height-xs {
+	height: 100%;
+	max-height: 400px;
+	flex: 1 1 auto;
+}
+
+.root-width-free {
+	width: auto;
+}
+
+.root-width-xl {
+	width: 100%;
+	min-width: 1000px;
+}
+
+.root-width-lg {
+	width: 100%;
+	min-width: 800px;
+}
+
+.root-width-md {
+	width: 100%;
+	min-width: 600px;
+}
+
+.root-width-sm {
+	width: 100%;
+	min-width: 400px;
+}
+
+.root-width-xs {
+	width: 100%;
+	min-width: 200px;
 }

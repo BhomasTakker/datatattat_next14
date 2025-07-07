@@ -42,7 +42,11 @@ describe("BlueSkyAgent", () => {
 			mockAtpAgent.app.bsky.feed.getFeed.mockRejectedValue(error);
 			const spy = jest.spyOn(console, "error").mockImplementation(() => {});
 
-			await expect(agent.getFeed("feed-uri")).rejects.toThrow("fail");
+			const result = await agent.getFeed("feed-uri");
+
+			expect(result).toEqual([]);
+
+			// await expect(agent.getFeed("feed-uri")).rejects.toThrow("fail");
 			expect(spy).toHaveBeenCalledWith("Error fetching feed:", error);
 
 			spy.mockRestore();
@@ -68,9 +72,11 @@ describe("BlueSkyAgent", () => {
 			mockAtpAgent.getAuthorFeed.mockRejectedValue(error);
 			const spy = jest.spyOn(console, "error").mockImplementation(() => {});
 
-			await expect(agent.getAuthorFeed("actor")).rejects.toThrow("fail2");
-			expect(spy).toHaveBeenCalledWith("Error fetching author feed:", error);
+			const result = await agent.getAuthorFeed("actor");
+			// await expect(agent.getAuthorFeed("actor")).rejects.toThrow("fail2");
 
+			expect(result).toEqual([]);
+			expect(spy).toHaveBeenCalledWith("Error fetching author feed:", error);
 			spy.mockRestore();
 		});
 	});
@@ -89,14 +95,19 @@ describe("BlueSkyAgent", () => {
 			expect(result).toEqual({ thread: "thread-data" });
 		});
 
-		it("should throw and log error on failure", async () => {
+		it("should return an empty array and log error on failure", async () => {
 			const error = new Error("fail3");
 			mockAtpAgent.app.bsky.feed.getPostThread.mockRejectedValue(error);
 			const spy = jest.spyOn(console, "error").mockImplementation(() => {});
 
-			await expect(agent.getPostThread("uri")).rejects.toThrow("fail3");
+			// await expect(agent.getPostThread("uri")).rejects.toThrow("fail3");
+
+			const result = await agent.getPostThread("uri");
 			expect(spy).toHaveBeenCalledWith("Error fetching post thread:", error);
 
+			expect(result).toEqual({
+				thread: { post: null, parent: null, replies: [] },
+			});
 			spy.mockRestore();
 		});
 	});
@@ -114,13 +125,15 @@ describe("BlueSkyAgent", () => {
 			expect(result).toEqual({ posts: [1, 2, 3] });
 		});
 
-		it("should throw and log error on failure", async () => {
+		it("should return an empty array on failure", async () => {
 			const error = new Error("fail4");
 			mockAtpAgent.app.bsky.feed.searchPosts.mockRejectedValue(error);
 			const spy = jest.spyOn(console, "error").mockImplementation(() => {});
-
-			await expect(agent.searchPosts({} as any)).rejects.toThrow("fail4");
+			const result = await agent.searchPosts({} as any);
+			// await expect(agent.searchPosts({} as any)).rejects.toThrow("fail4");
 			expect(spy).toHaveBeenCalledWith("Error searching posts:", error);
+
+			expect(result).toEqual({ posts: [] });
 
 			spy.mockRestore();
 		});

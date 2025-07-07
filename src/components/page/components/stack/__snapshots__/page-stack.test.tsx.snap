@@ -1,12 +1,15 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`Page Stack Test Suite renders PageStack unchanged 1`] = `
 <div>
   <ul
-    class="root root-column"
+    class="root root-vertical"
     data-testid="page-component"
   >
     <li
+      class="
+		item
+		root-height-free root-width-free"
       data-testid="content-component"
     >
       Component type:- ListItem
