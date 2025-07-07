@@ -36,6 +36,9 @@ export const ContentOembed = ({ component, dataObject }: ComponentProps) => {
 		}
 	}, []);
 
+	// We should call a render function when the script loads
+	// Then we can avoid rendering the plain text
+	// if we aren't rendering/re-rendering we might not get the text only render
 	const { html } = oembed;
 	return (
 		<div data-testid="content-oembed" className={styles.root}>
