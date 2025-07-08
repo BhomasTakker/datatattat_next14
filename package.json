@@ -29,7 +29,7 @@
 		"react-intersection-observer": "^9.16.0",
 		"rss-parser": "^3.13.0",
 		"sass": "^1.89.2",
-		"sonner": "^2.0.5",
+		"sonner": "^2.0.6",
 		"video.js": "^8.23.3",
 		"videojs-youtube": "^3.0.1"
 	},
