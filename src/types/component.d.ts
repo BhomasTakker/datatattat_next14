@@ -28,6 +28,7 @@ export type With = {
 	query: WithQuery;
 };
 
+// None of these are required...
 // Joined with ComponentProfile but should extend?
 export type ComponentPropsObject = {
 	// this should be agiven no?
