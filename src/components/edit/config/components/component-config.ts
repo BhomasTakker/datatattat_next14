@@ -1,24 +1,22 @@
-import { GenericInput } from "@/types/edit/inputs/inputs";
+import { GenericInput, InputListProps } from "@/types/edit/inputs/inputs";
 import { EditInputs } from "../../inputs/inputs";
 import { ARTICLE_COLLECTION_CONFIG } from "./article-collection/article-collection-config";
 import { OEMBED_CONFIG } from "./oembed/oembed-config";
 import { BLUESKY_COMPONENT_CONFIG } from "./bluesky/bluesky-config";
+import { DISPLAY_PLAYER_CONFIG } from "./display-player/display-player-config";
 
 enum ComponentOptions {
 	ArticleCollection = "ArticleCollection",
 	Oembed = "Oembed",
 	BlueSky = "BlueSky",
+	DisplayPlayer = "DisplayPlayer",
 }
 
-type componentContainersProps =
-	| typeof ARTICLE_COLLECTION_CONFIG
-	| typeof OEMBED_CONFIG;
-
-// get from somewhere - i.e. collection?
-const pageContainersMap = new Map<string, componentContainersProps>([
+const pageContainersMap = new Map<string, InputListProps>([
 	[ComponentOptions.ArticleCollection, ARTICLE_COLLECTION_CONFIG],
 	[ComponentOptions.Oembed, OEMBED_CONFIG],
-	[ComponentOptions.BlueSky, BLUESKY_COMPONENT_CONFIG], // Assuming BlueSky uses the same component as Oembed
+	[ComponentOptions.BlueSky, BLUESKY_COMPONENT_CONFIG],
+	[ComponentOptions.DisplayPlayer, DISPLAY_PLAYER_CONFIG],
 ]);
 
 export const COMPONENT_CONFIG: GenericInput = {
@@ -38,7 +36,6 @@ export const COMPONENT_CONFIG: GenericInput = {
 				id: "componentTitle",
 				type: EditInputs.title,
 				title: "Component",
-				// element? h1 - 5, p, etc?
 				size: "large",
 				header: "h1",
 			},
@@ -51,11 +48,7 @@ export const COMPONENT_CONFIG: GenericInput = {
 				resetOnChange: true,
 				defaultValue: ComponentOptions.ArticleCollection,
 				required: true,
-				options: [
-					ComponentOptions.ArticleCollection,
-					ComponentOptions.Oembed,
-					ComponentOptions.BlueSky,
-				],
+				options: [...pageContainersMap.keys()],
 				optionMap: pageContainersMap,
 				optionId: "componentProps",
 			},
