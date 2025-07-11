@@ -21,7 +21,7 @@ export const DISPLAY_PLAYER_CONFIG: InputListProps = {
 			options: [
 				PlayerSourceTypes.Youtube,
 				// PlayerSourceTypes.Vimeo,
-				// PlayerSourceTypes.Mp4,
+				PlayerSourceTypes.Mp4,
 			],
 		},
 		{

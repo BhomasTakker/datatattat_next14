@@ -55,6 +55,7 @@ export const VideoDisplayComponent = ({
 		video.autoplay(true);
 		video.src({
 			src: item.src,
+			// take from item or use sourceType / so we can multiple sources
 			type: sourceType,
 		});
 		video.poster(item.avatar?.src);
