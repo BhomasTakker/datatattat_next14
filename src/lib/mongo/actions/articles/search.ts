@@ -14,6 +14,8 @@ export type GetLatestArticlesProps = {
 	textScore?: string;
 	contentType?: string;
 
+	categories?: string;
+
 	// can't at the moment
 	provider?: string;
 	origin?: string;
