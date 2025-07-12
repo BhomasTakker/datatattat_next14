@@ -16,6 +16,7 @@ import {
 import { InViewComponent } from "@/components/ui/in-view/in-view";
 import { articleMetaLoader, articleRenderer, articleTemplate } from "../utils";
 import { WithData } from "@/components/ui/with-data/with-data";
+import { BASE_PLAYER_OPTIONS } from "../../../video-player/options";
 
 type VideoDisplayComponentProps = {
 	articles: CollectionItem[];
@@ -54,24 +55,15 @@ export const VideoDisplayComponent = ({
 		video.autoplay(true);
 		video.src({
 			src: item.src,
+			// take from item or use sourceType / so we can multiple sources
 			type: sourceType,
 		});
 		video.poster(item.avatar?.src);
 	};
 
 	const options = {
+		...BASE_PLAYER_OPTIONS,
 		autoplay: autoplay ? PlayerAutoplayOptions.Any : false,
-		aspectRatio: "16:9",
-		controls: true,
-		// width: 640,
-		// height: 480,
-		fill: true,
-		fluid: true,
-		responsive: true,
-
-		playbackRates: [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2],
-		preload: "auto",
-		techOrder: ["youtube", "html5"],
 		poster: firstArticle.avatar?.src || "",
 		sources: [
 			{

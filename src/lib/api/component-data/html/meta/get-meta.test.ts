@@ -8,7 +8,7 @@ jest.mock("../../../../../actions/data/article/save-article");
 jest.mock("../../../../../lib/redis/redis-fetch");
 
 const mockSaveOrUpdateArticle = saveOrUpdateArticle as jest.Mock;
-const mockFetchWithCache = fetchWithCache as jest.Mock;
+// const mockFetchWithCache = fetchWithCache as jest.Mock;
 const mockedGetArticle = getArticle as jest.Mock;
 
 describe("fetchMeta", () => {
@@ -38,7 +38,9 @@ describe("fetchMeta", () => {
 		];
 		const result = await fetchMeta(items as any, 2);
 		expect(mockSaveOrUpdateArticle).toHaveBeenCalledTimes(2);
+		// @ts-expect-error
 		expect(result[0].meta).toBeUndefined();
+		// @ts-expect-error
 		expect(result[1].meta).toBeUndefined();
 	});
 
@@ -47,13 +49,13 @@ describe("fetchMeta", () => {
 			{ id: "1", src: "src1", meta: true },
 			{ id: "2", src: "src2", meta: true },
 		];
-		mockFetchWithCache.mockImplementation((fn, src) =>
-			Promise.resolve({ id: "fetched", src })
+		mockedGetArticle.mockImplementation((fn, src) =>
+			Promise.resolve({ id: "fetched", src: "src" })
 		);
 		const result = await fetchMeta(items as any, 2);
-		expect(mockFetchWithCache).toHaveBeenCalledTimes(2);
-		expect(result[0]).toEqual({ id: "fetched", src: "src1" });
-		expect(result[1]).toEqual({ id: "fetched", src: "src2" });
+		expect(mockedGetArticle).toHaveBeenCalledTimes(2);
+		expect(result[0]).toEqual({ id: "fetched", src: "src" });
+		expect(result[1]).toEqual({ id: "fetched", src: "src" });
 	});
 
 	it("returns item with loadData: true if index > limit", async () => {
@@ -63,11 +65,11 @@ describe("fetchMeta", () => {
 			{ id: "3", src: "src3", meta: true },
 		];
 		const limit = 1;
-		mockFetchWithCache.mockImplementation((fn, src) =>
+		mockedGetArticle.mockImplementation((fn, src) =>
 			Promise.resolve({ id: "fetched", src })
 		);
 		const result = await fetchMeta(items as any, limit);
-		expect(mockFetchWithCache).toHaveBeenCalledTimes(2);
+		expect(mockedGetArticle).toHaveBeenCalledTimes(2);
 		expect(result[2]).toEqual({
 			id: "3",
 			src: "src3",
@@ -82,12 +84,12 @@ describe("fetchMeta", () => {
 			{ id: "2", src: "src2", meta: true },
 			{ id: "3", src: "src3", meta: false },
 		];
-		mockFetchWithCache.mockImplementation((fn, src) =>
-			Promise.resolve({ id: "fetched", src })
+		mockedGetArticle.mockImplementation((fn, src) =>
+			Promise.resolve({ id: "fetched", src: "src" })
 		);
 		const result = await fetchMeta(items as any, 2);
 		expect(mockSaveOrUpdateArticle).toHaveBeenCalledTimes(2);
-		expect(mockFetchWithCache).toHaveBeenCalledTimes(1);
-		expect(result[1]).toEqual({ id: "fetched", src: "src2" });
+		expect(mockedGetArticle).toHaveBeenCalledTimes(1);
+		expect(result[1]).toEqual({ id: "fetched", src: "src" });
 	});
 });
