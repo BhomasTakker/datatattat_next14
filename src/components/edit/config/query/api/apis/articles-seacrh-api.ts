@@ -104,7 +104,15 @@ const VIDEO_PARAMS: InputListProps = {
 	id: "stackScroller",
 	type: EditInputs.inputList,
 	label: "Stack Scroller",
-	inputs: [],
+	inputs: [
+		{
+			id: "categories",
+			type: EditInputs.select,
+			label: "Categories",
+			required: false,
+			options: ["24/7"],
+		},
+	],
 };
 
 const AUDIO_PARAMS: InputListProps = {
@@ -146,6 +154,14 @@ export const PARAMS: GenericInput[] = [
 		// we are saved on comopnent props object - our parent
 		optionId: undefined, // "variantProps",
 	},
+	// Categpries likely dependent on variant
+	// {
+	// 	id: "categories",
+	// 	type: EditInputs.select,
+	// 	label: "Categories",
+	// 	required: false,
+	// 	options: ["24/7"],
+	// },
 	// {
 	// 	id: "query",
 	// 	type: EditInputs.text,
