@@ -25,7 +25,7 @@ export const fetchMeta = async (items: MetaItem[] = [], limit: number) => {
 			// or meta true/false etc
 			return Promise.resolve({ ...item, loadData: true });
 		}
-		return getArticle(item); //fetchWithCache(() => getArticle(item), item.src);
+		return fetchWithCache(() => getArticle(item), item.src);
 	});
 
 	return Promise.all(data);
