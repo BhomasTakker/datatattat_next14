@@ -17,7 +17,7 @@ export const DISPLAY_PLAYER_CONFIG: InputListProps = {
 			type: EditInputs.select,
 			label: "Video Source Type",
 			defaultValue: PlayerSourceTypes.Youtube,
-			required: true,
+			required: false,
 			options: [
 				PlayerSourceTypes.Youtube,
 				// PlayerSourceTypes.Vimeo,

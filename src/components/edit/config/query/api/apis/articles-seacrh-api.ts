@@ -106,9 +106,9 @@ const VIDEO_PARAMS: InputListProps = {
 	label: "Stack Scroller",
 	inputs: [
 		{
-			id: "categories",
+			id: "mediaType",
 			type: EditInputs.select,
-			label: "Categories",
+			label: "Media Type",
 			required: false,
 			options: ["24/7"],
 		},
@@ -119,6 +119,14 @@ const AUDIO_PARAMS: InputListProps = {
 	id: "audio-params",
 	type: EditInputs.inputList,
 	inputs: [
+		{
+			id: "mediaType",
+			type: EditInputs.select,
+			label: "Media Type",
+			required: false,
+			// selecting radio should 'perhaps' change the options
+			options: ["radio"],
+		},
 		{
 			id: "durationHigher",
 			type: EditInputs.number,
