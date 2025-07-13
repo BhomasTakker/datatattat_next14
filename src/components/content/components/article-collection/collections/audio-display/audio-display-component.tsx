@@ -14,6 +14,7 @@ import {
 	AudioDisplayOptions,
 	AudioVerticalScrollerSize,
 } from "./audio-display";
+import H5AudioPlayer from "react-h5-audio-player";
 
 type AudioDisplayComponentProps = {
 	articles: CollectionItem[];
@@ -23,7 +24,7 @@ export const AudioDisplayComponent = ({
 	articles = [],
 	...options
 }: AudioDisplayComponentProps) => {
-	const audioPlayerRef = useRef<HTMLAudioElement>(null);
+	const audioPlayerRef = useRef<H5AudioPlayer>(null);
 	const firstArticle = articles[0] || {};
 	const src = firstArticle.src;
 	const { size = AudioVerticalScrollerSize.medium } = options;
@@ -33,24 +34,28 @@ export const AudioDisplayComponent = ({
 	const [item, setItem] = useState(firstArticle);
 
 	const onClickHnd = (item: CollectionItem) => {
-		const audioPlayer = audioPlayerRef.current;
-		if (!audioPlayer) {
+		if (!item || !item.src) {
 			return;
 		}
-
-		// set active article
-		// store active article not src
+		// shouldn't have both
+		setActiveSrc(item.src);
 		setItem(item);
-		audioPlayer.src = item.src;
-		audioPlayer.play();
+		// we should specify autoplay
 	};
+
+	// bit of a hack to get the variant
+	const variant = (item?.media?.mediaType as string) || "default";
 
 	return (
 		<div className={styles.container}>
 			{/* Display article */}
 			<DisplayArticle key={item.title} item={item} />
 			<div className={styles.audioPlayer} data-testid="audio-player">
-				<AudioPlayer src={activeSrc} audioPlayerRef={audioPlayerRef} />
+				<AudioPlayer
+					src={activeSrc}
+					audioPlayerRef={audioPlayerRef}
+					variant={variant}
+				/>
 			</div>
 			<ul
 				className={`${styles.articles} ${styles[size]}`}
