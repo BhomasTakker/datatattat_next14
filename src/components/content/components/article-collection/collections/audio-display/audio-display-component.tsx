@@ -24,7 +24,6 @@ export const AudioDisplayComponent = ({
 	articles = [],
 	...options
 }: AudioDisplayComponentProps) => {
-	const audioPlayerRef = useRef<H5AudioPlayer>(null);
 	const firstArticle = articles[0] || {};
 	const src = firstArticle.src;
 	const { size = AudioVerticalScrollerSize.medium } = options;
@@ -51,11 +50,7 @@ export const AudioDisplayComponent = ({
 			{/* Display article */}
 			<DisplayArticle key={item.title} item={item} />
 			<div className={styles.audioPlayer} data-testid="audio-player">
-				<AudioPlayer
-					src={activeSrc}
-					audioPlayerRef={audioPlayerRef}
-					variant={variant}
-				/>
+				<AudioPlayer src={activeSrc} variant={variant} />
 			</div>
 			<ul
 				className={`${styles.articles} ${styles[size]}`}
