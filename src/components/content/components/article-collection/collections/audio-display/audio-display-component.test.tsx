@@ -69,9 +69,9 @@ describe("AudioDisplayComponent", () => {
 				"Audio 2"
 			);
 		});
-		// The audio player should still show the initial src due to state bug
+
 		expect(screen.getByTestId("mock-audio-player")).toHaveTextContent(
-			"audio1.mp3"
+			"audio2.mp3"
 		);
 	});
 
