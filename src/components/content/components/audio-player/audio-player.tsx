@@ -18,7 +18,6 @@ import { VideoDisplayComponent } from "../display-player/display-player";
 ///////////////////////////////////////////
 type AudioPlayerProps = {
 	src: string;
-	audioPlayerRef: React.RefObject<H5AudioPlayer | null>;
 	variant?: "default" | "radio" | string;
 };
 

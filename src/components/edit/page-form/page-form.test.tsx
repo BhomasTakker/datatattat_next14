@@ -2,6 +2,14 @@ import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { PageForm } from "./page-form";
 
+jest.mock("../config/page/page-config", () => ({
+	PAGE_CONFIG: [
+		{ id: "meta", label: "Meta" },
+		{ id: "profile", label: "Profile" },
+		{ id: "content", label: "Content" },
+	],
+}));
+
 // Mock dependencies
 jest.mock("../inputs/input-factory", () => ({
 	InputFactory: ({ data }: any) => (
