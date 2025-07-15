@@ -32,6 +32,7 @@ export const createSearchAggregate = (
 		language,
 		trustHigher,
 		trustLower,
+		mediaType,
 		leaningHigher,
 		leaningLower,
 		origin,
@@ -57,14 +58,15 @@ export const createSearchAggregate = (
 	if (variant) addFilter(filter, variant, "variant");
 	if (region) addFilter(filter, region, "details.region");
 	if (language) addFilter(filter, language, "details.languge");
+	if (mediaType) addFilter(filter, mediaType, "media.mediaType");
 
+	// neaten all of this up!!
 	const categoriesArray = categories
 		? categories.split(",").map((cat) => cat.trim())
 		: [];
 	if (categoriesArray && categoriesArray.length > 0) {
 		addFilter(filter, categoriesArray, "details.categories");
 	}
-	if (variant) addFilter(filter, variant, "variant");
 
 	if (mustContain && mustContain?.length > 0) {
 		mustContain.forEach((item) => {

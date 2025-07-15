@@ -8,24 +8,31 @@ import Player from "video.js/dist/types/player";
 import { PlayerSourceTypes } from "../article-collection/collections/video-display/structs";
 import { BASE_PLAYER_OPTIONS } from "../video-player/options";
 
+type VideoDisplayComponentProps = {
+	options: DisplayPlayerDataObject;
+};
+
 type DisplayPlayerDataObject = {
 	src: string;
-	sourceType: PlayerSourceTypes;
+	sourceType?: PlayerSourceTypes;
+	audioOnlyMode?: boolean; // Optional, true if audio only mode
 	poster?: string; // Optional poster image URL
 };
 
-export const DisplayPlayer = ({ component, dataObject }: ComponentProps) => {
-	const { src, sourceType, poster } =
-		component.componentProps as Partial<DisplayPlayerDataObject>;
+export const VideoDisplayComponent = ({
+	options,
+}: VideoDisplayComponentProps) => {
 	const playerRef = useRef<Player>(null);
+	const { src, sourceType, poster, audioOnlyMode } = options;
 
-	const options = {
+	const videoPlayerOptions = {
 		...BASE_PLAYER_OPTIONS,
 		poster: poster || "", // Use provided poster or [provide fallback]
+		audioOnlyMode,
 		sources: [
 			{
 				src: src || "",
-				type: sourceType as string,
+				type: sourceType || undefined,
 			},
 		],
 	};
@@ -35,8 +42,24 @@ export const DisplayPlayer = ({ component, dataObject }: ComponentProps) => {
 			<VideoPlayerContainer
 				styles={styles}
 				playerRef={playerRef}
-				options={options}
+				// @ts-ignore clean up
+				options={videoPlayerOptions}
 			/>
 		</div>
+	);
+};
+
+export const DisplayPlayer = ({ component, dataObject }: ComponentProps) => {
+	const {
+		src = "",
+		sourceType,
+		poster,
+		audioOnlyMode,
+	} = component.componentProps as Partial<DisplayPlayerDataObject>;
+
+	return (
+		<VideoDisplayComponent
+			options={{ src, sourceType, poster, audioOnlyMode }}
+		/>
 	);
 };
