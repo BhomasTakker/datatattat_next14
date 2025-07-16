@@ -14,7 +14,7 @@
 		"test:e2e": "npx playwright test"
 	},
 	"dependencies": {
-		"@atproto/api": "^0.15.25",
+		"@atproto/api": "^0.15.26",
 		"@vercel/analytics": "^1.5.0",
 		"@vercel/speed-insights": "^1.2.0",
 		"cheerio": "^1.1.0",
