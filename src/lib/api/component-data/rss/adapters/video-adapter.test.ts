@@ -69,7 +69,7 @@ describe("adaptItem", () => {
 				src: mockYouTubeRSSItem.link,
 				description: mockYouTubeRSSItem.description,
 				guid: mockYouTubeRSSItem.id,
-				variant: "youtube",
+				variant: "video",
 				avatar: {
 					src: "https://img.youtube.com/vi/test/hqdefault.jpg",
 					alt: "Test Video",
