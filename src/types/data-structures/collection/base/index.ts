@@ -22,7 +22,8 @@ export type Details = {
 
 // We can type depending on the media type
 export type Media = UnknownObject & {
-	format?: PlayerSourceTypes;
+	// We need to type this properly we should be storing video/youtube
+	format?: PlayerSourceTypes | string;
 };
 
 export type Avatar = {
