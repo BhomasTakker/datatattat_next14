@@ -1,3 +1,4 @@
+import { PlayerSourceTypes } from "@/components/content/components/article-collection/collections/video-display/structs";
 import { UnknownObject } from "@/types/utils";
 
 export type BaseInfo = {
@@ -19,7 +20,11 @@ export type Details = {
 	modified?: Date | string;
 };
 
-export type Media = UnknownObject;
+// We can type depending on the media type
+export type Media = UnknownObject & {
+	// We need to type this properly we should be storing video/youtube
+	format?: PlayerSourceTypes | string;
+};
 
 export type Avatar = {
 	src: string;

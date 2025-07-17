@@ -137,7 +137,8 @@ export const adaptItem = async (
 		},
 		media: {
 			duration: convertDurationToSeconds(duration),
-			format: "podcast",
+			// format: "podcast",
+			mediaType: "podcast",
 			type: type || "audio/mpeg",
 			collectionTitle: creator || author,
 		},

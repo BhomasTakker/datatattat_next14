@@ -63,9 +63,11 @@ export const ARTICLE_COLLECTION_CONFIG: InputListProps = {
 		},
 		getWithConfig({
 			options: [
+				// we need to  add this after we determine variant
 				QueryOptions.NONE,
 				QueryOptions.API_QUERY,
 				QueryOptions.HTML_META_QUERY,
+				QueryOptions.MANUAL_VIDEO_SOURCES,
 				QueryOptions.RSS,
 			],
 		}),

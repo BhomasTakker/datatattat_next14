@@ -40,7 +40,7 @@ export const PageForm = ({ submitHandler }: PageFormProps) => {
 			<InputFactory data={{ ...PAGE_CONFIG, id: `${content}` }} />
 
 			<Button type="submit">Submit</Button>
-			<DebugComponent />
+			{/* <DebugComponent /> */}
 			{/* <p aria-live="polite" role="status">
 				{pageState}
 			</p> */}

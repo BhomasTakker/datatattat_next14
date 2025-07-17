@@ -7,6 +7,7 @@ export const enum PlayerSourceTypes {
 	Youtube = "video/youtube",
 	Vimeo = "video/vimeo",
 	Mp4 = "video/mp4",
+	Default = "default",
 }
 
 export enum PlayerAutoplayOptions {

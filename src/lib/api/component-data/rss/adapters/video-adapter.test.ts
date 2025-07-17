@@ -79,7 +79,7 @@ describe("adaptItem", () => {
 					publishers: [mockYouTubeRSSItem.author],
 				},
 				media: {
-					format: "youtube",
+					format: "video/youtube",
 					rating: "4.5",
 					views: "1000",
 				},

@@ -19,9 +19,9 @@ jest.mock("../inputs/input-factory", () => ({
 jest.mock("../../../components/ui/button", () => ({
 	Button: (props: any) => <button {...props} />,
 }));
-jest.mock("./debug-component", () => ({
-	DebugComponent: () => <div data-testid="debug-component" />,
-}));
+// jest.mock("./debug-component", () => ({
+// 	DebugComponent: () => <div data-testid="debug-component" />,
+// }));
 jest.mock("./page-form.module.scss", () => ({
 	form: "form",
 }));
@@ -43,7 +43,7 @@ describe("PageForm", () => {
 		expect(screen.getByTestId("input-factory-profile")).toBeInTheDocument();
 		expect(screen.getByTestId("input-factory-content")).toBeInTheDocument();
 		expect(screen.getByRole("button", { name: /submit/i })).toBeInTheDocument();
-		expect(screen.getByTestId("debug-component")).toBeInTheDocument();
+		// expect(screen.getByTestId("debug-component")).toBeInTheDocument();
 	});
 
 	it("calls submitHandler on form submit", async () => {

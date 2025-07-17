@@ -41,7 +41,7 @@ export const adaptItem = async (item: YouTubeRSSItem) => {
 			publishers: [author],
 		},
 		media: {
-			format: "youtube",
+			format: "video/youtube",
 			rating,
 			views,
 		},
