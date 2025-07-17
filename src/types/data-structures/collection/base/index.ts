@@ -21,7 +21,7 @@ export type Details = {
 };
 
 // We can type depending on the media type
-export type Media = Record<string, string | string[]> & {
+export type Media = UnknownObject & {
 	format?: PlayerSourceTypes;
 };
 
