@@ -5,6 +5,7 @@ import { HTML_META_QUERY_CONFIG } from "./html/meta-config";
 import { APIOptions, GetAPIConfig, getAPIConfig } from "./api/api-base-config";
 import { RSS_CONFIG } from "./rss/rss-config";
 import { OEMBED_CONFIG } from "./oembed/oembed-config";
+import { MANUAL_VIDEO_SOURCES_QUERY_CONFIG } from "./video-sourcs/config";
 
 export enum QueryOptions {
 	NONE = "none",
@@ -12,6 +13,7 @@ export enum QueryOptions {
 	OEMBED = ComponentDataOptions.OEMBED,
 	API_QUERY = ComponentDataOptions.API_QUERY,
 	HTML_META_QUERY = ComponentDataOptions.HTML_META_QUERY,
+	MANUAL_VIDEO_SOURCES = ComponentDataOptions.MANUAL_VIDEO_SOURCES,
 }
 
 type queryContainersProps =
@@ -40,6 +42,7 @@ export const getComponentQueries = ({
 		[QueryOptions.OEMBED, OEMBED_CONFIG],
 		[QueryOptions.API_QUERY, getAPIConfig(apiOptions)],
 		[QueryOptions.HTML_META_QUERY, HTML_META_QUERY_CONFIG],
+		[QueryOptions.MANUAL_VIDEO_SOURCES, MANUAL_VIDEO_SOURCES_QUERY_CONFIG],
 	]);
 };
 
