@@ -69,7 +69,7 @@ describe("adaptItem", () => {
 				src: mockYouTubeRSSItem.link,
 				description: mockYouTubeRSSItem.description,
 				guid: mockYouTubeRSSItem.id,
-				variant: "video/youtube",
+				variant: "youtube",
 				avatar: {
 					src: "https://img.youtube.com/vi/test/hqdefault.jpg",
 					alt: "Test Video",
@@ -79,7 +79,7 @@ describe("adaptItem", () => {
 					publishers: [mockYouTubeRSSItem.author],
 				},
 				media: {
-					format: "youtube",
+					format: "video/youtube",
 					rating: "4.5",
 					views: "1000",
 				},
