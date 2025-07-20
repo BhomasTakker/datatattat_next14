@@ -40,7 +40,20 @@ export type GetLatestArticlesProps = {
 
 	durationHigher?: string;
 	durationLower?: string;
+
 	region?: string;
+	// should be temp - we want region to be a  multi select
+	// with region - this and this
+	// this or this
+	// not this and not this
+	// i.e. filter for Birmingham filter NOT Alabama i.e.
+	// with live search to select continent, country, state, city, etc
+	// all as a 'region'
+	continent?: string;
+	country?: string;
+	state?: string;
+	city?: string;
+
 	language?: string;
 
 	sort?: string;
