@@ -13,7 +13,7 @@ const BASE_PARAMS: GenericInput[] = [
 		// select? or array? / multi select
 		id: "region",
 		type: EditInputs.select,
-		options: ["uk", "us", "world"],
+		options: ["uk", "us", "world", "Europe", "Manchester"],
 		deselectLabel: "All",
 		label: "Region",
 		required: false,

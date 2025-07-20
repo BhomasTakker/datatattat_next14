@@ -1,6 +1,6 @@
 import { EditInputs } from "@/components/edit/inputs/inputs";
 import { GenericInput } from "@/types/edit/inputs/inputs";
-import { ARTICLES_SEARCH_API_CONFIG } from "./apis/articles-seacrh-api";
+import { ARTICLES_SEARCH_API_CONFIG } from "./apis/articles-search/articles-search-api";
 import { YOUTUBE_API_CONFIG } from "./apis/youtube-api";
 import { BLUESKY_API_CONFIG } from "./apis/bluesky/bluesky-api";
 
