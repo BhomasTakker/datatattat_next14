@@ -52,7 +52,9 @@ test.describe("Audio Collection", () => {
 		await expect(lastChild).toBeInViewport();
 	});
 
-	test("update display article on click new", async () => {
+	// FEAT:- Test DB Required - or Mock data / Mock server
+	// We need some expected test articles - we need a test db
+	test.skip("update display article on click new", async () => {
 		const displayArticle = audioDisplay.getByTestId("display-article");
 
 		await expect(displayArticle).toHaveText(/More aftershocks hit Myanmar/i);
