@@ -29,6 +29,10 @@ export const createSearchAggregate = (
 	const {
 		variant,
 		region,
+		continent,
+		country,
+		state,
+		city,
 		language,
 		trustHigher,
 		trustLower,
@@ -56,11 +60,24 @@ export const createSearchAggregate = (
 	// last 3 months, last 6 months, last year, all time
 
 	if (variant) addFilter(filter, variant, "variant");
-	if (region) addFilter(filter, region, "details.region");
+
 	if (language) addFilter(filter, language, "details.languge");
 	if (mediaType) addFilter(filter, mediaType, "media.mediaType");
 
-	// neaten all of this up!!
+	// eventually this OR this
+	if (region) addFilter(filter, region, "details.region");
+	if (continent) addFilter(filter, continent, "details.region");
+	if (country) addFilter(filter, country, "details.region");
+	if (state) addFilter(filter, state, "details.region");
+	if (city) addFilter(filter, city, "details.region");
+	// add continent, country, state, city, etc - all use region
+	// UK and Birmingham excludes Birmingham Alabama etc
+	// ultimately we want this AND this
+	// this OR this
+	// Not this etc
+
+	// Is this how you would do a multi select?
+	// feels a little wrong?
 	const categoriesArray = categories
 		? categories.split(",").map((cat) => cat.trim())
 		: [];

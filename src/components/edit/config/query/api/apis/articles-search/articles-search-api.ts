@@ -18,6 +18,56 @@ const BASE_PARAMS: GenericInput[] = [
 		label: "Region",
 		required: false,
 	},
+	////////////////////////////////////
+	// temp
+	// I think just use a search and multi select
+	// i.e. realtime update as you type
+	// select multiple regions i.e Europe, UK, Manchester
+	// to refine
+	// Some way of select this or this
+	// And do not select this
+	////////////////////////////////////
+	{
+		id: "continent",
+		type: EditInputs.select,
+		options: [
+			"Europe",
+			"North America",
+			"Asia",
+			"Africa",
+			"South America",
+			"Oceania",
+			"Antarctica",
+		],
+		deselectLabel: "All",
+		label: "Continent",
+		required: false,
+	},
+	{
+		id: "country",
+		type: EditInputs.select,
+		options: ["England", "NI", "Scotland", "Wales"],
+		deselectLabel: "All",
+		label: "Country",
+		required: false,
+	},
+	{
+		id: "state",
+		type: EditInputs.select,
+		options: ["North West", "West Midlands"],
+		deselectLabel: "All",
+		label: "State",
+		required: false,
+	},
+	{
+		id: "city",
+		type: EditInputs.select,
+		options: ["Manchester", "Birmingham"],
+		deselectLabel: "All",
+		label: "City",
+		required: false,
+	},
+	///////////////////////////////////////////
 	// fix these
 	{
 		id: "before",
