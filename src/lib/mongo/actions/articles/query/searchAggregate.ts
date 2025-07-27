@@ -29,6 +29,7 @@ export const createSearchAggregate = (
 	const {
 		variant,
 		region,
+		coverage,
 		continent,
 		country,
 		state,
@@ -75,6 +76,9 @@ export const createSearchAggregate = (
 	// ultimately we want this AND this
 	// this OR this
 	// Not this etc
+
+	// coverage used for scoping articles. Give me US && national news
+	if (coverage) addFilter(filter, coverage, "details.coverage");
 
 	// Is this how you would do a multi select?
 	// feels a little wrong?
