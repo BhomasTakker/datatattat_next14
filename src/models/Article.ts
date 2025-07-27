@@ -24,7 +24,7 @@ const DetailsSchema = new Schema(
 		},
 		region: [String],
 		coverage: {
-			type: String,
+			type: [String],
 			enum: ["international", "national", "regional", "local"],
 		},
 		language: String,
