@@ -67,6 +67,14 @@ const BASE_PARAMS: GenericInput[] = [
 		label: "City",
 		required: false,
 	},
+	{
+		id: "coverage",
+		type: EditInputs.select,
+		options: ["international", "national", "regional", "local"],
+		deselectLabel: "All",
+		label: "Coverage",
+		required: false,
+	},
 	///////////////////////////////////////////
 	// fix these
 	{
