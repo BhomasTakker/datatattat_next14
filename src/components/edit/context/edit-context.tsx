@@ -2,12 +2,16 @@ import { ReactNode, createContext } from "react";
 
 type EditState = {
 	submitHandler: (data: any) => void;
+	submitDraftHandler: (data: any) => void;
 };
 
 type EditInterface = {};
 
 const initialState: EditState & EditInterface = {
 	submitHandler: () => {
+		// Default implementation
+	},
+	submitDraftHandler: () => {
 		// Default implementation
 	},
 };

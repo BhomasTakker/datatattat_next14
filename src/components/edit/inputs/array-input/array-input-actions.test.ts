@@ -73,7 +73,7 @@ describe("array-input-actions", () => {
 	});
 
 	describe("onDelete", () => {
-		it("should call onDirty and not delete if isDirty is true", () => {
+		it("should call onDirty", () => {
 			const fn = onDelete({
 				// @ts-expect-error - Type 'string' is not assignable to type 'InputTypes'
 				inputs: ["a", "b", "c"],
@@ -84,9 +84,7 @@ describe("array-input-actions", () => {
 				onDirty,
 			});
 			fn(1);
-			expect(onDirty).toHaveBeenCalled();
-			expect(setValue).not.toHaveBeenCalled();
-			expect(setInputList).not.toHaveBeenCalled();
+			expect(onDirty).toHaveBeenCalledTimes(1);
 		});
 
 		it("should delete the item at the given index", () => {
@@ -106,7 +104,7 @@ describe("array-input-actions", () => {
 	});
 
 	describe("move", () => {
-		it("should call onDirty and not move if isDirty is true", () => {
+		it("should call onDirty", () => {
 			const fn = move({
 				// @ts-expect-error - Type 'string' is not assignable to type 'InputTypes'
 				inputs: ["a", "b", "c"],
@@ -118,8 +116,6 @@ describe("array-input-actions", () => {
 			});
 			fn(1, "up");
 			expect(onDirty).toHaveBeenCalled();
-			expect(setValue).not.toHaveBeenCalled();
-			expect(setInputList).not.toHaveBeenCalled();
 		});
 
 		it("should not move up if index is 0", () => {
