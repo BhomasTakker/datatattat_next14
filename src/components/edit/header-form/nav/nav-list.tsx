@@ -31,14 +31,15 @@ export const NavList = ({
 	}, [links]);
 
 	// potentially create a context provider
-	const onMove = async (index: number, direction: string) => {
+	const onMove = (index: number, direction: string) => {
 		// protect against moving out of bounds
 		if (index === 0 && direction === "up") return;
 		if (index === navLinks.length - 1 && direction === "down") return;
 
 		// We need to trigger validation to 'sav' values
 		// and protect against corruption of values
-		await handleSubmit(() => {})(); // trigger validation
+		// shouls be await
+		handleSubmit(() => {})(); // trigger validation
 
 		const newIndex = direction === "up" ? index - 1 : index + 1;
 		// const toSwap = navLinks[newIndex];
@@ -69,12 +70,12 @@ export const NavList = ({
 			return newLinks;
 		});
 	};
-	const onDelete = async (index: number) => {
+	const onDelete = (index: number) => {
 		const newItems = [...navLinks];
 
 		// We need to trigger validation to 'sav' values
 		// and protect against corruption of values
-		await handleSubmit(() => {})(); // trigger validation
+		handleSubmit(() => {})(); // trigger validation
 
 		for (let i = index; i < navLinks.length; i++) {
 			const isLastItem = i === navLinks.length - 1;
@@ -97,10 +98,10 @@ export const NavList = ({
 		setNavLinks(newItems.slice(0, newItems.length - 1));
 	};
 
-	const onAdd = async () => {
+	const onAdd = () => {
 		// We need to trigger validation to 'sav' values
 		// and protect against corruption of values
-		await handleSubmit(() => {})(); // trigger validation
+		handleSubmit(() => {})(); // trigger validation
 		// Add a new link
 		// create some starting text - route should be i.e. /new-test/
 		const newLink = { label: "", route: route };
