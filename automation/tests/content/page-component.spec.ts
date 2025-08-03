@@ -12,7 +12,7 @@ test.describe("Page Component", () => {
 	test("has expected class", async ({ page }) => {
 		const pm = new PageManager(page);
 		const pageComponent = pm.onContentPage.pageComponent;
-		const expectedClass = "page-stack";
+		const expectedClass = "root";
 		const hasClass = await pageComponent.checkClassName(expectedClass);
 		expect(hasClass).toBe(true);
 	});
