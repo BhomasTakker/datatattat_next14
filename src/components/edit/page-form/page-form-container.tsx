@@ -24,6 +24,12 @@ export const PageFormContainer = ({ pageData }: { pageData: IPage }) => {
 		refresh();
 	}, [route]);
 
+	const onSaveAsDraft = () => {
+		// Really just a dummy finction to save the form 'locally'
+		// const update = { ...pageData, ...methods.getValues() };
+		// console.log("Draft Save Update:", { update });
+	};
+
 	const submitHandler = methods.handleSubmit(async (data) => {
 		// This should be done on the server...
 		// Take what's changed and merge with the page object
@@ -45,7 +51,9 @@ export const PageFormContainer = ({ pageData }: { pageData: IPage }) => {
 	});
 
 	return (
-		<EditContextProvider value={{ submitHandler }}>
+		<EditContextProvider
+			value={{ submitHandler, submitDraftHandler: onSaveAsDraft }}
+		>
 			<FormProvider {...methods}>
 				<PageForm submitHandler={submitHandler} />
 			</FormProvider>
