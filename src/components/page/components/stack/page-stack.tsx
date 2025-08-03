@@ -1,16 +1,10 @@
 import { PageComponents, PageContent } from "@/types/page";
-import styles from "./page-stack.module.scss";
-import { ComponentDisplay } from "@/components/content/component-display";
 
-import {
-	PageStackSizeOptions,
-	PageStackVariant,
-} from "@/types/components/page/stack";
+import { PageStackCollectionVariants } from "@/types/components/page/stack";
+import { PageStackVariantMap } from "./variant-map";
 
 type PageStackProps = {
-	variant: PageStackVariant;
-	height: PageStackSizeOptions;
-	width: PageStackSizeOptions;
+	variant: PageStackCollectionVariants;
 };
 
 export type PageStackContent = {
@@ -22,11 +16,7 @@ export type PageStackContent = {
 export const PageStack = ({ content }: { content: PageContent }) => {
 	const { props, components } = content as PageStackContent;
 
-	const {
-		variant = PageStackVariant.Vertical,
-		height = "Free",
-		width = "Free",
-	} = props || {};
+	const { variant = PageStackCollectionVariants.Vertical } = props || {};
 
 	/////////////////////////////////////////////////////////////////////
 	// potentially pre load some data here i.e. first three components
@@ -34,32 +24,15 @@ export const PageStack = ({ content }: { content: PageContent }) => {
 	// then can lazy load the rest of the components
 	/////////////////////////////////////////////////////////////////////
 
-	////////////////////////////////////////////////////////
-	// Look at articleCollection for what we should do here
-	////////////////////////////////////////////////////////
-	const renderComponents = () => {
-		const className = `
-		${styles.item}
-		${styles[`root-height-${String(height).toLowerCase()}`]} ${
-			width ? styles[`root-width-${String(width).toLowerCase()}`] : ""
-		}`;
-		return components.map((component, index) => {
-			return (
-				<li key={index} data-testid="content-component" className={className}>
-					<ComponentDisplay key={index} component={component} />
-				</li>
-			);
-		});
-	};
+	const variantObject = PageStackVariantMap.get(variant);
+	if (!variantObject) {
+		return null;
+	}
 
-	const className = `${styles.root} ${
-		styles[`root-${String(variant).toLowerCase()}`]
-	}`;
-
-	// Semantically this should be a list of components
+	const { renderMethod, styles } = variantObject;
 	return (
-		<ul className={className} data-testid="page-component">
-			{renderComponents()}
+		<ul className={styles.root} data-testid="page-component">
+			{renderMethod({ components })}
 		</ul>
 	);
 };
