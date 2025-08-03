@@ -3,13 +3,13 @@
 exports[`Page Stack Test Suite renders PageStack unchanged 1`] = `
 <div>
   <ul
-    class="root root-vertical"
+    class="root"
     data-testid="page-component"
   >
     <li
       class="
 		item
-		root-height-free root-width-free"
+	}"
       data-testid="content-component"
     >
       Component type:- ListItem

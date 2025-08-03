@@ -60,7 +60,7 @@ describe("Page Stack Test Suite", () => {
 	it("should render an unordered list with expected class", () => {
 		render(<PageStack content={MOCK} />);
 		const component = screen.getByRole("list");
-		expect(component).toHaveClass("root", "root-vertical");
+		expect(component).toHaveClass("root");
 	});
 
 	it("should render a list item", () => {

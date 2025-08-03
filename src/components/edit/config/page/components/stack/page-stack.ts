@@ -1,58 +1,26 @@
 import { EditInputs } from "@/components/edit/inputs/inputs";
-import {
-	PageStackSizeOptions,
-	PageStackVariant,
-} from "@/types/components/page/stack";
+import { PageStackCollectionVariants } from "@/types/components/page/stack";
 import { InputListProps } from "@/types/edit/inputs/inputs";
 
 const VERTICAL_STACK: InputListProps = {
-	id: "vrticalStack",
+	id: "verticalStack",
 	type: EditInputs.inputList,
 	label: "Page Stack",
 
-	inputs: [
-		{
-			id: "height",
-			type: EditInputs.select,
-			label: "Component Height",
-			options: [...Object.values(PageStackSizeOptions)],
-			defaultValue: PageStackSizeOptions.Free,
-		},
-		{
-			id: "width",
-			type: EditInputs.select,
-			label: "Component Width",
-			options: [...Object.values(PageStackSizeOptions)],
-			defaultValue: PageStackSizeOptions.Free,
-		},
-	],
+	inputs: [],
 };
-const HORIZONTAL_STACK: InputListProps = {
-	id: "horizontalStack",
+
+const ROW_STACK: InputListProps = {
+	id: "rowStack",
 	type: EditInputs.inputList,
 	label: "Page Stack",
 
-	inputs: [
-		{
-			id: "height",
-			type: EditInputs.select,
-			label: "Component Height",
-			options: [...Object.values(PageStackSizeOptions)],
-			defaultValue: PageStackSizeOptions.Free,
-		},
-		{
-			id: "width",
-			type: EditInputs.select,
-			label: "Component Width",
-			options: [...Object.values(PageStackSizeOptions)],
-			defaultValue: PageStackSizeOptions.Free,
-		},
-	],
+	inputs: [],
 };
 
 const pageStackMap = new Map<string, InputListProps>([
-	[PageStackVariant.Vertical, VERTICAL_STACK],
-	[PageStackVariant.Horizontal, HORIZONTAL_STACK],
+	[PageStackCollectionVariants.Vertical, VERTICAL_STACK],
+	[PageStackCollectionVariants.RowStack, ROW_STACK],
 ]);
 
 export const PAGE_STACK_CONFIG: InputListProps = {
@@ -65,10 +33,9 @@ export const PAGE_STACK_CONFIG: InputListProps = {
 			id: "variant",
 			type: EditInputs.objectSelect,
 			label: "Stack Variant",
-			options: [...Object.values(PageStackVariant)],
+			options: [...Object.values(PageStackCollectionVariants)],
 			optionMap: pageStackMap,
-			defaultValue: PageStackVariant.Vertical,
-			// optionId: "id",
+			defaultValue: PageStackCollectionVariants.Vertical,
 		},
 	],
 };
