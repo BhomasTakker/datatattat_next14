@@ -11,7 +11,6 @@ import { add, move, onDelete } from "./array-input-actions";
 import { randomKeyGenerator } from "@/utils/edit";
 import { ArrayInputProps, GenericInput } from "@/types/edit/inputs/inputs";
 import { EditContext } from "../../context/edit-context";
-import { toast } from "sonner";
 
 ////////////////////////////////
 // Sort types out for inputs
@@ -82,9 +81,9 @@ export const ArrayInput = ({
 	disabled = false,
 }: ArrayInputProps) => {
 	const { label: inputLabel, id: inputId = "" } = input;
-	const { getValues, setValue, formState } = useFormContext();
+	const { getValues, setValue, formState, handleSubmit } = useFormContext();
 	const { isDirty } = formState;
-	const { submitHandler } = useContext(EditContext);
+	const { submitDraftHandler } = useContext(EditContext);
 
 	const inputs: GenericInput[] = getValues(id) || defaultValue || [];
 
@@ -117,14 +116,7 @@ export const ArrayInput = ({
 		setInputList,
 		id,
 		isDirty,
-		onDirty: () => {
-			toast("You must save your changes before moving an item.", {
-				action: {
-					label: "Save",
-					onClick: () => submitHandler(getValues()),
-				},
-			});
-		},
+		onDirty: handleSubmit(submitDraftHandler),
 	});
 	const onDeleteHnd = onDelete({
 		inputs: inputList,
@@ -132,14 +124,7 @@ export const ArrayInput = ({
 		setInputList,
 		id,
 		isDirty,
-		onDirty: () => {
-			toast("You must save your changes before deleting an item.", {
-				action: {
-					label: "Save",
-					onClick: () => submitHandler(getValues()),
-				},
-			});
-		},
+		onDirty: handleSubmit(submitDraftHandler),
 	});
 
 	const showControls = disabled ? false : true;

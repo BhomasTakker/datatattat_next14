@@ -73,7 +73,7 @@ export const onDelete =
 	(index: number) => {
 		if (isDirty) {
 			onDirty();
-			return;
+			// return;
 		}
 		const newArray = inputs.filter((_, i) => index !== i);
 		setValue(id, newArray);
@@ -85,7 +85,7 @@ export const move =
 	(index: number, direction: Direction) => {
 		if (isDirty) {
 			onDirty();
-			return;
+			// return;
 		}
 		if (index === 0 && direction === "up") return;
 		if (index === inputs.length - 1 && direction === "down") return;
