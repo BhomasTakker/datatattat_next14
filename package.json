@@ -11,7 +11,8 @@
 		"test:watch": "jest --watch",
 		"test:update": "jest --updateSnapshot",
 		"test:coverage": "jest --coverage",
-		"test:e2e": "npx playwright test"
+		"test:e2e": "npx playwright test",
+		"test:e2e:update": "npx playwright install"
 	},
 	"dependencies": {
 		"@atproto/api": "^0.16.0",
