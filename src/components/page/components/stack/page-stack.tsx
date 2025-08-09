@@ -2,10 +2,7 @@ import { PageComponents, PageContent } from "@/types/page";
 
 import { PageStackCollectionVariants } from "@/types/components/page/stack";
 import { PageStackVariantMap } from "./variant-map";
-
-type PageStackProps = {
-	variant: PageStackCollectionVariants;
-};
+import { PageStackProps } from "./types";
 
 export type PageStackContent = {
 	containerType: string;
@@ -32,7 +29,8 @@ export const PageStack = ({ content }: { content: PageContent }) => {
 	const { renderMethod, styles } = variantObject;
 	return (
 		<ul className={styles.root} data-testid="page-component">
-			{renderMethod({ components })}
+			{/* @ts-ignore - very generic type - we are targetting based on variant - how to type this properly */}
+			{renderMethod({ components, ...props })}
 		</ul>
 	);
 };

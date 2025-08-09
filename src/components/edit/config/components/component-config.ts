@@ -28,7 +28,7 @@ export const COMPONENT_CONFIG: GenericInput = {
 		id: "component",
 		type: EditInputs.inputList,
 		label: "Component",
-		// do not create a'component' object
+		// do not create a 'component' object
 		// i.e. create input components on parent
 		createObject: false,
 		inputs: [
