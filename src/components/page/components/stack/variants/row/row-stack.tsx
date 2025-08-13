@@ -1,7 +1,7 @@
 import { PageComponents } from "@/types/page";
 import styles from "./row-stack.module.scss";
 import { ComponentDisplay } from "@/components/content/component-display";
-import { RowStackProps } from "../../types";
+import { Row, RowStackProps } from "../../types";
 
 type RowStackComponetProps = {
 	components: PageComponents;
@@ -13,14 +13,29 @@ const renderRows = ({
 	rows = [],
 }: Omit<RowStackComponetProps, "variant">) => {
 	const rowsToRender = [];
-	const { columns: defaultColumns, maxHeight: defaultHeight } = defaultRow;
+
+	// Create a map of row configurations by index for quick lookup
+	const rowConfigMap = new Map();
+	rows.forEach((row) => {
+		if (row.index !== undefined) {
+			rowConfigMap.set(row.index, row);
+		}
+	});
+
 	let i = 0;
+	let currentRowIndex = 0;
+
 	do {
-		// if i != row.index
+		// Get row configuration for current row index, fallback to defaultRow
+		const currentRowConfig =
+			rowConfigMap.get(`${currentRowIndex}`) || defaultRow;
+
+		const { columns: rowColumns, maxHeight: rowHeight } =
+			currentRowConfig as Row;
+
 		let columnComponents = [];
-		for (let j = 0; j < defaultColumns; j++) {
+		for (let j = 0; j < rowColumns; j++) {
 			if (i >= components.length) {
-				// if we have passed the last component, break
 				break;
 			}
 			columnComponents.push(
@@ -28,16 +43,27 @@ const renderRows = ({
 					<ComponentDisplay key={j} component={components[i]} />
 				</li>
 			);
-			// increment i
-			console.log("increment i 8989", { i, j, component: components[i] });
+
 			i++;
 		}
+
+		///////////////////////////////////////////
+		// Apply row-specific styling if needed
+		// Set a height/max height?
+		// We should use set heights and widths
+		const rowStyle = {
+			height: `${rowHeight}px`,
+			// maxHeight: `${rowHeight}px`, // Uncomment if you want to enforce max height
+		};
+		///////////////////////////////////////////
+
 		const row = (
-			<li key={rowsToRender.length} className={styles.rowListItem}>
+			<li key={currentRowIndex} className={styles.rowListItem} style={rowStyle}>
 				<ul className={styles.rowList}>{columnComponents}</ul>
 			</li>
 		);
 		rowsToRender.push(row);
+		currentRowIndex++;
 	} while (i < components.length);
 
 	return rowsToRender;
@@ -52,16 +78,7 @@ const renderComponents = ({
 		${styles.item}
 	}`;
 
-	console.log("8989:renderComponent", { defaultRow, rows });
-
 	return renderRows({ components, defaultRow, rows });
-	// return components.map((component, index) => {
-	// 	return (
-	// 		<li key={index} data-testid="content-component" className={className}>
-	// 			<ComponentDisplay key={index} component={component} />
-	// 		</li>
-	// 	);
-	// });
 };
 
 export const rowStack = {
