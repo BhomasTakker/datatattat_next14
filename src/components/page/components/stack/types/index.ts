@@ -10,7 +10,9 @@ export type Row = {
 	// you wouldn't max/min height - you would set a height
 	maxHeight: number;
 	minHeight: number;
-	index?: number; // optional for default row - specifies which row this config applies to
+	// these are all actually strings!
+	// Unless we can/want to convert these after http requests use strings
+	index?: string; // optional for default row - specifies which row this config applies to
 };
 
 export type RowStackProps = {
