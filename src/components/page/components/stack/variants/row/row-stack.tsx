@@ -74,10 +74,6 @@ const renderComponents = ({
 	defaultRow,
 	rows = [],
 }: RowStackComponetProps) => {
-	const className = `
-		${styles.item}
-	}`;
-
 	return renderRows({ components, defaultRow, rows });
 };
 
