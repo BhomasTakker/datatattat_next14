@@ -10,7 +10,8 @@ import {
 const createRow = (
 	id: string,
 	label: string = "Row",
-	addIndex: boolean = false
+	addIndex: boolean = false,
+	createObject: boolean = true
 ): InputListProps => {
 	const inputs: GenericInput[] = [
 		{
@@ -51,7 +52,7 @@ const createRow = (
 		id: id,
 		type: EditInputs.inputList,
 		label: `${label}`,
-		createObject: true,
+		createObject,
 		inputs: inputs,
 	};
 };
@@ -75,7 +76,7 @@ const rows: ArrayInputProps = {
 	type: EditInputs.array,
 	label: "Rows",
 	title: "Add Row",
-	input: createRow("row", "Row", true),
+	input: createRow("row", "Row", true, false),
 };
 
 export const ROW_STACK: InputListProps = {
