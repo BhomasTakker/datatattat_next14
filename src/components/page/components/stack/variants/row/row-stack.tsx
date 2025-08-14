@@ -7,66 +7,74 @@ type RowStackComponetProps = {
 	components: PageComponents;
 } & RowStackProps;
 
-const renderRows = ({
-	components,
-	defaultRow,
-	rows = [],
-}: Omit<RowStackComponetProps, "variant">) => {
-	const rowsToRender = [];
-
+const createRowConfigMap = (rows: Row[]) => {
 	// Create a map of row configurations by index for quick lookup
-	const rowConfigMap = new Map();
+	const rowConfigMap = new Map<string, Row>();
 	rows.forEach((row) => {
-		if (row.index !== undefined) {
-			rowConfigMap.set(row.index, row);
+		const { index } = row;
+		if (index !== undefined) {
+			rowConfigMap.set(`${index}`, row);
 		}
 	});
+	return rowConfigMap;
+};
 
-	let i = 0;
-	let currentRowIndex = 0;
+// We want an item style for items?
+const createRowStyle = (row: Row) => {
+	// Create a style object for the row based on its properties
+	// height and overflow are incorrect
+	// When we apply height we are cutting off the content
+	const style: React.CSSProperties = {
+		maxHeight: `${row.maxHeight}px`, // Set height based on maxHeight
+		// Add other styles as needed
+	};
+	return style;
+};
 
-	do {
-		// Get row configuration for current row index, fallback to defaultRow
-		const currentRowConfig =
-			rowConfigMap.get(`${currentRowIndex}`) || defaultRow;
+const createColumnComponents = (
+	config: Row,
+	state: {
+		components: PageComponents;
+		componentIndex: number;
+		currentRowIndex: number;
+	}
+) => {
+	const { columns: rowColumns, maxHeight: rowHeight } = config;
+	const { components } = state;
 
-		const { columns: rowColumns, maxHeight: rowHeight } =
-			currentRowConfig as Row;
-
-		let columnComponents = [];
-		for (let j = 0; j < rowColumns; j++) {
-			if (i >= components.length) {
-				break;
-			}
-			columnComponents.push(
-				<li key={j} data-testid="content-component" className={styles.item}>
-					<ComponentDisplay key={j} component={components[i]} />
-				</li>
-			);
-
-			i++;
+	let columnComponents = [];
+	for (let j = 0; j < rowColumns; j++) {
+		if (state.componentIndex >= components.length) {
+			break;
 		}
-
-		///////////////////////////////////////////
-		// Apply row-specific styling if needed
-		// Set a height/max height?
-		// We should use set heights and widths
-		const rowStyle = {
-			height: `${rowHeight}px`,
-			// maxHeight: `${rowHeight}px`, // Uncomment if you want to enforce max height
-		};
-		///////////////////////////////////////////
-
-		const row = (
-			<li key={currentRowIndex} className={styles.rowListItem} style={rowStyle}>
-				<ul className={styles.rowList}>{columnComponents}</ul>
+		columnComponents.push(
+			<li key={j} data-testid="content-component" className={styles.item}>
+				<ComponentDisplay
+					key={j}
+					component={components[state.componentIndex]}
+				/>
 			</li>
 		);
-		rowsToRender.push(row);
-		currentRowIndex++;
-	} while (i < components.length);
 
-	return rowsToRender;
+		state.componentIndex++;
+	}
+
+	return columnComponents;
+};
+
+const createRow = (rowConfig: Row, state: any) => {
+	const columnComponents = createColumnComponents(rowConfig, state);
+	const rowStyle = createRowStyle(rowConfig);
+
+	return (
+		<li
+			key={state.currentRowIndex}
+			className={styles.rowListItem}
+			style={rowStyle}
+		>
+			<ul className={styles.rowList}>{columnComponents}</ul>
+		</li>
+	);
 };
 
 const renderComponents = ({
@@ -74,7 +82,30 @@ const renderComponents = ({
 	defaultRow,
 	rows = [],
 }: RowStackComponetProps) => {
-	return renderRows({ components, defaultRow, rows });
+	const rowsToRender = [];
+
+	// Create a map of row configurations by index for quick lookup
+	const rowConfigMap = createRowConfigMap(rows);
+
+	// Maybe not the best aproach but contained
+	const state = {
+		components,
+		componentIndex: 0,
+		currentRowIndex: 0,
+	};
+
+	// we could createa  failsafe count and ditch if we exceed
+	while (state.componentIndex < components.length) {
+		// If we have no more rows to render, we can break
+		const currentRowConfig =
+			rowConfigMap.get(`${state.currentRowIndex}`) || defaultRow;
+
+		const row = createRow(currentRowConfig, state);
+		rowsToRender.push(row);
+		state.currentRowIndex++;
+	}
+
+	return rowsToRender;
 };
 
 export const rowStack = {
