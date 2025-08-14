@@ -2,7 +2,6 @@ import { PageComponent, PageComponents } from "@/types/page";
 import styles from "./row-stack.module.scss";
 import { ComponentDisplay } from "@/components/content/component-display";
 import { Row, RowStackProps } from "../../types";
-import { render } from "@testing-library/react";
 
 type RowStackComponetProps = {
 	components: PageComponents;
