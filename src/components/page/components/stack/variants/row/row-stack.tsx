@@ -1,7 +1,8 @@
-import { PageComponents } from "@/types/page";
+import { PageComponent, PageComponents } from "@/types/page";
 import styles from "./row-stack.module.scss";
 import { ComponentDisplay } from "@/components/content/component-display";
 import { Row, RowStackProps } from "../../types";
+import { render } from "@testing-library/react";
 
 type RowStackComponetProps = {
 	components: PageComponents;
@@ -31,6 +32,14 @@ const createRowStyle = (row: Row) => {
 	return style;
 };
 
+const renderColumn = (key: number, component: PageComponent) => {
+	return (
+		<li key={key} data-testid="content-component" className={styles.item}>
+			<ComponentDisplay component={component} />
+		</li>
+	);
+};
+
 const createColumnComponents = (
 	config: Row,
 	state: {
@@ -48,12 +57,7 @@ const createColumnComponents = (
 			break;
 		}
 		columnComponents.push(
-			<li key={j} data-testid="content-component" className={styles.item}>
-				<ComponentDisplay
-					key={j}
-					component={components[state.componentIndex]}
-				/>
-			</li>
+			renderColumn(state.componentIndex, components[state.componentIndex])
 		);
 
 		state.componentIndex++;
@@ -94,7 +98,7 @@ const renderComponents = ({
 		currentRowIndex: 0,
 	};
 
-	// we could createa  failsafe count and ditch if we exceed
+	// we could create a failsafe count and ditch if we exceed
 	while (state.componentIndex < components.length) {
 		// If we have no more rows to render, we can break
 		const currentRowConfig =
