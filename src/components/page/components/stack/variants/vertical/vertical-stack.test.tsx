@@ -200,7 +200,7 @@ describe("vertical-stack", () => {
 				'[data-testid="mocked-component-display"]'
 			);
 			expect(componentDisplays).toHaveLength(3);
-			
+
 			// Verify the content of each component
 			expect(componentDisplays[0]).toHaveTextContent("component1");
 			expect(componentDisplays[1]).toHaveTextContent("component2");
