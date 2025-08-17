@@ -2,6 +2,9 @@
 @use "../../../../../../scss/mixins/ui/" as ui;
 
 .root {
+	display: flex;
+	flex-direction: column;
+	gap: $spacingMd;
 }
 
 .item {
