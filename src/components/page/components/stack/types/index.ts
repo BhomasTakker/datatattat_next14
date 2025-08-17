@@ -15,6 +15,11 @@ export type Row = {
 	index?: string; // optional for default row - specifies which row this config applies to
 };
 
+export type Column = {
+	minWidth: number;
+	maxHeight: number;
+};
+
 export type RowStackProps = {
 	variant: PageStackCollectionVariants.RowStack;
 	defaultRow: Row; // Default configuration used for any row not specifically configured

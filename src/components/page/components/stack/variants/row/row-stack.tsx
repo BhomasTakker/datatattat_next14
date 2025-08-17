@@ -1,7 +1,7 @@
 import { PageComponent, PageComponents } from "@/types/page";
 import styles from "./row-stack.module.scss";
 import { ComponentDisplay } from "@/components/content/component-display";
-import { Row, RowStackProps } from "../../types";
+import { Column, Row, RowStackProps } from "../../types";
 
 type RowStackComponetProps = {
 	components: PageComponents;
@@ -25,15 +25,32 @@ const createRowStyle = (row: Row) => {
 	// height and overflow are incorrect
 	// When we apply height we are cutting off the content
 	const style: React.CSSProperties = {
-		maxHeight: `${row.maxHeight}px`, // Set height based on maxHeight
+		// maxHeight: `${row.maxHeight}px`, // Set height based on maxHeight
+		// Add other styles as needed
+	};
+	return style;
+};
+
+const createColumnStyle = (column: Column) => {
+	const { minWidth, maxHeight } = column;
+	// Create a style object for the column based on its properties
+	const style: React.CSSProperties = {
+		minWidth: `${minWidth}px`, // Set width based on minWidth
+		maxHeight: `${maxHeight}px`, // Set height based on maxHeight
 		// Add other styles as needed
 	};
 	return style;
 };
 
 const renderColumn = (key: number, component: PageComponent) => {
+	const columnStyle = createColumnStyle({ minWidth: 400, maxHeight: 800 });
 	return (
-		<li key={key} data-testid="content-component" className={styles.item}>
+		<li
+			key={key}
+			data-testid="content-component"
+			className={styles.item}
+			style={columnStyle}
+		>
 			<ComponentDisplay component={component} />
 		</li>
 	);
