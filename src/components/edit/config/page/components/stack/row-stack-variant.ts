@@ -6,6 +6,7 @@ import {
 	InputListProps,
 	TitleInputProps,
 } from "@/types/edit/inputs/inputs";
+import { useContainerHeight, useContainerWidth } from "../../../shared/content";
 
 const createRow = (
 	id: string,
@@ -22,22 +23,8 @@ const createRow = (
 			max: 12,
 			min: 1,
 		},
-		{
-			id: "maxHeight",
-			type: EditInputs.number,
-			label: "Max Height",
-			defaultValue: 100,
-			max: 1000,
-			min: 100,
-		},
-		{
-			id: "minHeight",
-			type: EditInputs.number,
-			label: "Min Height",
-			defaultValue: 100,
-			max: 1000,
-			min: 100,
-		},
+		useContainerWidth("minWidth", "Container Width"),
+		useContainerHeight("maxHeight", "Container Height"),
 	];
 	if (addIndex) {
 		inputs.unshift({

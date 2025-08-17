@@ -1,7 +1,13 @@
 import { PageComponent, PageComponents } from "@/types/page";
 import styles from "./row-stack.module.scss";
 import { ComponentDisplay } from "@/components/content/component-display";
-import { Column, Row, RowStackProps } from "../../types";
+import {
+	Column,
+	ContainerHeight,
+	ContainerWidth,
+	Row,
+	RowStackProps,
+} from "../../types";
 
 type RowStackComponetProps = {
 	components: PageComponents;
@@ -33,17 +39,27 @@ const createRowStyle = (row: Row) => {
 
 const createColumnStyle = (column: Column) => {
 	const { minWidth, maxHeight } = column;
+	// Map minWidth to a valid key if needed
+	const widthKey = typeof minWidth === "string" ? minWidth : "MD"; // fallback to "MD" or map accordingly
+	const heightKey = typeof maxHeight === "string" ? maxHeight : "MD"; // fallback to "MD" or map accordingly
+
+	const width = ContainerWidth[widthKey as keyof typeof ContainerWidth];
+	const height = ContainerHeight[heightKey as keyof typeof ContainerHeight];
 	// Create a style object for the column based on its properties
 	const style: React.CSSProperties = {
-		minWidth: `${minWidth}px`, // Set width based on minWidth
-		maxHeight: `${maxHeight}px`, // Set height based on maxHeight
+		minWidth: `${width}px`, // Set width based on minWidth
+		maxHeight: `${height}px`, // Set height based on maxHeight
 		// Add other styles as needed
 	};
 	return style;
 };
 
-const renderColumn = (key: number, component: PageComponent) => {
-	const columnStyle = createColumnStyle({ minWidth: 400, maxHeight: 800 });
+const renderColumn = (
+	key: number,
+	component: PageComponent,
+	config: Column
+) => {
+	const columnStyle = createColumnStyle(config);
 	return (
 		<li
 			key={key}
@@ -73,7 +89,11 @@ const createColumnComponents = (
 			break;
 		}
 		columnComponents.push(
-			renderColumn(state.componentIndex, components[state.componentIndex])
+			renderColumn(
+				state.componentIndex,
+				components[state.componentIndex],
+				config
+			)
 		);
 
 		state.componentIndex++;
