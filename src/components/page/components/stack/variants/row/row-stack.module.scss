@@ -1,0 +1,27 @@
+@use "../../../../../../scss/abstracts/units/" as *;
+@use "../../../../../../scss/mixins/ui/" as ui;
+
+.root {
+	display: flex;
+	flex-direction: column;
+	gap: $spacingMd;
+}
+
+.item {
+	overflow: hidden;
+	@include ui.scrollYNoScroller();
+}
+
+.rowListItem {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.rowList {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	flex-wrap: wrap;
+	gap: $spacingMd;
+}

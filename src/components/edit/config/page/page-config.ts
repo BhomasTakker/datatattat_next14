@@ -29,7 +29,7 @@ export const PAGE_CONFIG: GenericInput = {
 			label: "Page Container",
 			defaultValue: pageContainers.STACK,
 			required: true,
-			options: [pageContainers.STACK, pageContainers.GRID],
+			options: [pageContainers.STACK],
 			optionMap: pageContainersMap,
 			// save to/create on props object
 			optionId: "props",
