@@ -14,7 +14,19 @@ export const ContainerWidth = {
 	XXL: "1280",
 } as const;
 
+export const ContainerWidthOptions = {
+	XXS: "XXS",
+	XS: "XS",
+	SM: "SM",
+	MD: "MD",
+	LG: "LG",
+	XL: "XL",
+	XXL: "XXL",
+} as const;
+
 type ContainerWidth = (typeof ContainerWidth)[keyof typeof ContainerWidth];
+
+export type ContainerWidthOptions = keyof typeof ContainerWidth;
 
 export const ContainerHeight = {
 	XXS: "240",
@@ -26,23 +38,38 @@ export const ContainerHeight = {
 	XXL: "960",
 } as const;
 
+export const ContainerHeightOptions = {
+	XXS: "XXS",
+	XS: "XS",
+	SM: "SM",
+	MD: "MD",
+	LG: "LG",
+	XL: "XL",
+	XXL: "XXL",
+} as const;
+
 type ContainerHeight = (typeof ContainerHeight)[keyof typeof ContainerHeight];
+
+type ContainerHeightOptions = keyof typeof ContainerHeight;
+export const containerWidthOptions: ContainerWidthOptions[] = Object.keys(
+	ContainerWidth
+) as ContainerWidthOptions[];
 
 // Row configuration for row-stack layout
 export type Row = {
 	columns: number;
 	evenColumns: boolean;
 	// you wouldn't max/min height - you would set a height
-	maxHeight: ContainerHeight;
-	minWidth: ContainerWidth;
+	maxHeight: ContainerHeightOptions;
+	minWidth: ContainerWidthOptions;
 	// these are all actually strings!
 	// Unless we can/want to convert these after http requests use strings
 	index?: string; // optional for default row - specifies which row this config applies to
 };
 
 export type Column = {
-	minWidth: ContainerWidth;
-	maxHeight: ContainerHeight;
+	minWidth: ContainerWidthOptions;
+	maxHeight: ContainerHeightOptions;
 	evenColumns: boolean;
 };
 
