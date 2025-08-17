@@ -23,6 +23,12 @@ const createRow = (
 			max: 12,
 			min: 1,
 		},
+		{
+			id: "evenColumns",
+			type: EditInputs.switch,
+			label: "Even Width",
+			defaultChecked: false,
+		},
 		useContainerWidth("minWidth", "Container Width"),
 		useContainerHeight("maxHeight", "Container Height"),
 	];

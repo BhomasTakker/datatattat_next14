@@ -31,6 +31,7 @@ type ContainerHeight = (typeof ContainerHeight)[keyof typeof ContainerHeight];
 // Row configuration for row-stack layout
 export type Row = {
 	columns: number;
+	evenColumns: boolean;
 	// you wouldn't max/min height - you would set a height
 	maxHeight: ContainerHeight;
 	minWidth: ContainerWidth;
@@ -42,6 +43,7 @@ export type Row = {
 export type Column = {
 	minWidth: ContainerWidth;
 	maxHeight: ContainerHeight;
+	evenColumns: boolean;
 };
 
 export type RowStackProps = {

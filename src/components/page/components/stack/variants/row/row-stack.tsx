@@ -37,18 +37,23 @@ const createRowStyle = (row: Row) => {
 	return style;
 };
 
+// Potentially we should create classes
 const createColumnStyle = (column: Column) => {
-	const { minWidth, maxHeight } = column;
+	const { minWidth, maxHeight, evenColumns } = column;
 	// Map minWidth to a valid key if needed
 	const widthKey = typeof minWidth === "string" ? minWidth : "MD"; // fallback to "MD" or map accordingly
 	const heightKey = typeof maxHeight === "string" ? maxHeight : "MD"; // fallback to "MD" or map accordingly
 
 	const width = ContainerWidth[widthKey as keyof typeof ContainerWidth];
 	const height = ContainerHeight[heightKey as keyof typeof ContainerHeight];
+
+	const flex = evenColumns ? { flex: 1 } : { flexGrow: 1 };
+
 	// Create a style object for the column based on its properties
 	const style: React.CSSProperties = {
 		minWidth: `${width}px`, // Set width based on minWidth
 		maxHeight: `${height}px`, // Set height based on maxHeight
+		...flex, // Apply flex properties
 		// Add other styles as needed
 	};
 	return style;
