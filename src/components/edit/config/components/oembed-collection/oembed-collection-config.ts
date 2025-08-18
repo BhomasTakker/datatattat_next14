@@ -39,7 +39,7 @@ export const OEMBED_COLLECTION_CONFIG: InputListProps = {
 		getWithConfig({
 			options: [
 				// we need to  add this after we determine variant
-				QueryOptions.OEMBED,
+				QueryOptions.OEMBED_LIST,
 			],
 		}),
 	],

@@ -3,7 +3,6 @@
 import { ComponentProps } from "@/types/component";
 import { OEmbed } from "@/types/data-structures/oembed";
 import { useEffect } from "react";
-import { ClientOembed } from "../content-oembed/client-component";
 import { OembedCollectionVariants, VariantsMap } from "./variant-map";
 
 export type OEmbedCollectionProps = {
@@ -12,9 +11,12 @@ export type OEmbedCollectionProps = {
 };
 
 type OembedComponentProps = {
-	variant: OembedCollectionVariants;
+	variantType: OembedCollectionVariants;
 };
 
+// We should/could have bluesky api come through this?
+// It looks like it would be very easy to integrate
+// then we can get rid of the bluesky specific code
 export const OembedCollection = ({ component, dataObject }: ComponentProps) => {
 	const { componentProps } = component;
 	const { collection, script } = dataObject.data as OEmbedCollectionProps;
@@ -34,10 +36,10 @@ export const OembedCollection = ({ component, dataObject }: ComponentProps) => {
 		}
 	}, []);
 
-	const { variant, ...rest } =
+	const { variantType, ...rest } =
 		componentProps as unknown as OembedComponentProps;
 
-	const variantObject = VariantsMap.get(variant);
+	const variantObject = VariantsMap.get(variantType);
 
 	if (!variantObject) {
 		return null;
@@ -46,7 +48,7 @@ export const OembedCollection = ({ component, dataObject }: ComponentProps) => {
 	const { renderMethod, styles } = variantObject;
 
 	return (
-		<div className={styles.root} data-testid={variant}>
+		<div className={styles.root} data-testid={variantType}>
 			{renderMethod(collection, rest)}
 		</div>
 	);

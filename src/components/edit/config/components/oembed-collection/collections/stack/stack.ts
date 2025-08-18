@@ -5,5 +5,11 @@ export const OEMBED_STACK_CONFIG: InputListProps = {
 	id: "stack",
 	type: EditInputs.inputList,
 	label: "Stack",
-	inputs: [],
+	inputs: [
+		{
+			id: "oembedComponentTitle",
+			type: EditInputs.title,
+			title: "Oembed Component",
+		},
+	],
 };

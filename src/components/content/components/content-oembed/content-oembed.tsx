@@ -14,7 +14,7 @@ export type OEmbedComponentProps = {
 export const ContentOembed = ({ component, dataObject }: ComponentProps) => {
 	const data = dataObject.data as OEmbedComponentProps;
 	const { oembed, script } = data || {};
-	// We 'should' sanitize this - twitter etc eon't render however
+	// We 'should' sanitize this
 	// We need to limit providers - and trust them
 	// const { html = "" } = oembedData || {};
 
@@ -30,7 +30,6 @@ export const ContentOembed = ({ component, dataObject }: ComponentProps) => {
 			document.body.appendChild(scriptElement);
 
 			return () => {
-				// Cleanup if necessary
 				document.body.removeChild(scriptElement);
 			};
 		}
@@ -43,7 +42,6 @@ export const ContentOembed = ({ component, dataObject }: ComponentProps) => {
 	return (
 		<div data-testid="content-oembed" className={styles.root}>
 			{html && <ClientOembed html={html} />}
-			{/* {script && <Script src={script} strategy="lazyOnload" />} */}
 		</div>
 	);
 };
