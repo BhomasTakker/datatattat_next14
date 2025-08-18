@@ -14,7 +14,7 @@ const renderOembed = (item: OEmbed) => {
 	);
 };
 
-const renderMethod = (collection: any[] = [], props: OembedStackProps) => {
+const renderMethod = (collection: OEmbed[] = [], props: OembedStackProps) => {
 	return (
 		<ul className={`${styles.list}`}>
 			{collection.map((item) => renderOembed(item))}
