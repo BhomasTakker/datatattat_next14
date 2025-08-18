@@ -1,5 +1,10 @@
 "use client";
 
+// We need to keep a collection of correct uris...
+// BlueSky Feed - at://did:plc:5kibbwi53pd7kzwqnfesekny/app.bsky.feed.generator/aaaltgwr5a6vs
+// thread at://did:plc:shxqhlplcrwpegumqqltpvzz/app.bsky.feed.post/3lwpibwqspz2l
+// author id - did:plc:shxqhlplcrwpegumqqltpvzz
+//////////////////////////////////////////////////////
 import { ComponentProps } from "@/types/component";
 import { OEmbed } from "@/types/data-structures/oembed";
 import { useEffect } from "react";
