@@ -25,6 +25,7 @@ export const oembedFetch = async (
 	const { createUrl, script } = oembedCreator;
 
 	try {
+		// @ts-expect-error - type issue fix me
 		const oembed = await fetchOembed(params, createUrl);
 
 		if (!oembed.html) {

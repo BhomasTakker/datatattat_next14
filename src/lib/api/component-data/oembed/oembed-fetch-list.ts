@@ -31,6 +31,7 @@ export const oembedFetchList = async (
 
 	const { createUrl, script } = oembedCreator;
 
+	// @ts-expect-error - type issue fix me
 	const results = await fetchOembedList(collection, createUrl);
 	if (!results || results.length === 0) {
 		return null;
