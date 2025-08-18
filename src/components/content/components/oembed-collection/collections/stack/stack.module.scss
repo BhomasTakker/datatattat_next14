@@ -1,2 +1,12 @@
 .root {
+	.list {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		width: 100%;
+		li {
+			// sm, md, etc
+			width: 600px;
+		}
+	}
 }

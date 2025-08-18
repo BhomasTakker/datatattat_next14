@@ -21,7 +21,6 @@ export const OembedCollection = ({ component, dataObject }: ComponentProps) => {
 	const { componentProps } = component;
 	const { collection, script } = dataObject.data as OEmbedCollectionProps;
 
-	// could be an oembed hook
 	useEffect(() => {
 		if (script) {
 			const scriptElement = document.createElement("script");
@@ -30,7 +29,6 @@ export const OembedCollection = ({ component, dataObject }: ComponentProps) => {
 			document.body.appendChild(scriptElement);
 
 			return () => {
-				// Cleanup if necessary
 				document.body.removeChild(scriptElement);
 			};
 		}

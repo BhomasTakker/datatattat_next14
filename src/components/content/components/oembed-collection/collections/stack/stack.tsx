@@ -1,23 +1,25 @@
 import { OEmbed } from "@/types/data-structures/oembed";
 import { ClientOembed } from "../../../content-oembed/client-component";
 import styles from "./stack.module.scss";
-import { UnknownObject } from "@/types/utils";
+
+type OembedStackProps = {};
 
 const renderOembed = (item: OEmbed) => {
 	const { src, html } = item;
 
-	console.log("Rendering Oembed:", { item });
-
-	// const template = articleTemplate(styles);
 	return (
-		<div data-testid="content-oembed" className={styles.root}>
+		<li data-testid="content-oembed" className={styles.root}>
 			{html && <ClientOembed html={html} />}
-		</div>
+		</li>
 	);
 };
 
-const renderMethod = (collection: any[] = [], _: UnknownObject) => {
-	return collection.map((item) => renderOembed(item));
+const renderMethod = (collection: any[] = [], props: OembedStackProps) => {
+	return (
+		<ul className={`${styles.list}`}>
+			{collection.map((item) => renderOembed(item))}
+		</ul>
+	);
 };
 
 const oembedStack = {
