@@ -6,6 +6,7 @@ import {
 	OEmbedParams,
 	GenericOEmbedParams,
 } from "@/types/data-structures/oembed";
+import { fetchOembed } from "./utils";
 
 // Make WithQuery generic so we don't have to caste
 // Not really fetch - more like get oembed data
@@ -22,15 +23,9 @@ export const oembedFetch = async (
 	}
 
 	const { createUrl, script } = oembedCreator;
-	// @ts-expect-error we have a type issue
-	const url = createUrl(params);
-
-	if (!url) {
-		return Promise.reject("No URL provided");
-	}
 
 	try {
-		const oembed = await getOembed(url);
+		const oembed = await fetchOembed(params, createUrl);
 
 		if (!oembed.html) {
 			return Promise.reject("No HTML found in oEmbed response");

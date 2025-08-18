@@ -3,6 +3,9 @@ import { FeedParams, getFeed, getAuthorFeed, AuthorFeedParams } from "./feed";
 import { searchPosts } from "./search";
 import { getPostThread } from "./thread";
 import { BlueskyVariant } from "./utils";
+import { blueskyOembedByUri } from "@/lib/api/component-data/oembed/options/bluesky";
+import { fetchOembedList } from "@/lib/api/component-data/oembed/utils";
+import { OEmbed } from "@/types/data-structures/oembed";
 
 type BlueSkyFectchParams = {
 	variant?: BlueskyVariant; // Type of query to perform
@@ -49,7 +52,13 @@ export const blueSkyFetch = async (params: BlueSkyFectchParams) => {
 			items = [];
 	}
 
+	const { script, createUrl } = blueskyOembedByUri;
+	const results = await fetchOembedList(items, createUrl);
+
+	const filteredResults = results.filter((item) => item !== null) as OEmbed[];
+
 	return {
-		items,
+		items: filteredResults,
+		script: script,
 	};
 };

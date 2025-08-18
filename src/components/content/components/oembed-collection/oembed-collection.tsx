@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import { OembedCollectionVariants, VariantsMap } from "./variant-map";
 
 export type OEmbedCollectionProps = {
-	collection: OEmbed[];
+	items: OEmbed[];
 	script?: string;
 };
 
@@ -19,7 +19,7 @@ type OembedComponentProps = {
 // then we can get rid of the bluesky specific code
 export const OembedCollection = ({ component, dataObject }: ComponentProps) => {
 	const { componentProps } = component;
-	const { collection, script } = dataObject.data as OEmbedCollectionProps;
+	const { items, script } = dataObject.data as OEmbedCollectionProps;
 
 	useEffect(() => {
 		if (script) {
@@ -47,7 +47,7 @@ export const OembedCollection = ({ component, dataObject }: ComponentProps) => {
 
 	return (
 		<div className={styles.root} data-testid={variantType}>
-			{renderMethod(collection, rest)}
+			{renderMethod(items, rest)}
 		</div>
 	);
 };

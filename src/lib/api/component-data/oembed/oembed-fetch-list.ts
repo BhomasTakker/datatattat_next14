@@ -1,8 +1,8 @@
-import { getOembed } from "@/actions/oembed/get-oembed";
 import { WithQuery } from "@/types/component";
 import { getOembedObject } from "./oembed-options";
-import { OEmbedParams } from "@/types/data-structures/oembed";
+import { OEmbed, OEmbedParams } from "@/types/data-structures/oembed";
 import { UnknownObject } from "@/types/utils";
+import { fetchOembedList } from "./utils";
 
 type OembedListParams = {
 	variant: OEmbedParams["variant"];
@@ -10,7 +10,7 @@ type OembedListParams = {
 };
 
 type OembedListComponentProps = {
-	collection: UnknownObject[];
+	items: OEmbed[];
 	script: string;
 };
 
@@ -31,33 +31,15 @@ export const oembedFetchList = async (
 
 	const { createUrl, script } = oembedCreator;
 
-	// this would be our loop
-	// split createUrl params from an array
-	// then await Promise.all
-
-	const fetchPromises = collection.map((item) => {
-		// @ts-expect-error we have a type issue
-		const url = createUrl(item);
-		if (!url) {
-			return Promise.reject("No URL provided");
-		}
-		return getOembed(url);
-	});
-
-	// @ts-expect-error we have a type issue
-	const url = createUrl(params);
-
-	if (!url) {
-		return Promise.reject("No URL provided");
-	}
-
-	const results = await Promise.all(fetchPromises);
+	const results = await fetchOembedList(collection, createUrl);
 	if (!results || results.length === 0) {
 		return null;
 	}
 
+	const filteredResults = results.filter((item) => item !== null) as OEmbed[];
+
 	return {
-		collection: results,
+		items: filteredResults,
 		script: script,
 	};
 };

@@ -3,6 +3,7 @@ import { EditInputs } from "../../../inputs/inputs";
 import { getWithConfig, QueryOptions } from "../../query/_with-config";
 import { OembedCollectionVariants } from "@/components/content/components/oembed-collection/variant-map";
 import { OEMBED_STACK_CONFIG } from "./collections/stack/stack";
+import { APIOptions } from "../../query/api/api-base-config";
 
 type oembedCollectionProps = typeof OEMBED_STACK_CONFIG;
 
@@ -37,10 +38,12 @@ export const OEMBED_COLLECTION_CONFIG: InputListProps = {
 			optionId: undefined, // "variantProps",
 		},
 		getWithConfig({
-			options: [
-				// we need to  add this after we determine variant
-				QueryOptions.OEMBED_LIST,
-			],
+			options: [QueryOptions.OEMBED_LIST, QueryOptions.API_QUERY],
+			defaultSelection: QueryOptions.OEMBED_LIST,
+			apiConfigOptions: {
+				options: [APIOptions.BLUESKY_API],
+				defaultSelection: APIOptions.BLUESKY_API,
+			},
 		}),
 	],
 };

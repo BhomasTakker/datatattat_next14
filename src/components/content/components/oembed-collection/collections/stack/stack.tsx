@@ -5,7 +5,7 @@ import styles from "./stack.module.scss";
 type OembedStackProps = {};
 
 const renderOembed = (item: OEmbed) => {
-	const { src, html } = item;
+	const { src, html } = item || {};
 
 	return (
 		<li data-testid="content-oembed" className={styles.root}>
