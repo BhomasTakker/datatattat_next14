@@ -1,5 +1,4 @@
 import { ArticleCollection } from "./article-collection/article-collection";
-import { BlueSkyCollection } from "./bluesky-collection/bluesky-collection";
 import { ContentOembed } from "./content-oembed/content-oembed";
 import { DisplayPlayer } from "./display-player/display-player";
 import { MediaPlayer } from "./media-player/media-player";
@@ -9,8 +8,7 @@ export type ComponentType =
 	| typeof ArticleCollection
 	| typeof ContentOembed
 	| typeof DisplayPlayer
-	| typeof MediaPlayer
-	| typeof BlueSkyCollection;
+	| typeof MediaPlayer;
 
 export enum ComponentsOptions {
 	ArticleCollection = "ArticleCollection",
@@ -29,5 +27,4 @@ export const ComponentsMap = new Map<ComponentsOptions, ComponentType>([
 
 	[ComponentsOptions.DisplayPlayer, DisplayPlayer],
 	[ComponentsOptions.MediaPlayer, MediaPlayer],
-	[ComponentsOptions.BlueSky, BlueSkyCollection],
 ]);
