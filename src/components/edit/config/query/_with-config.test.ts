@@ -9,9 +9,6 @@ import { EditInputs } from "../../inputs/inputs";
 jest.mock("./rss/rss-config", () => ({
 	RSS_CONFIG: { id: "rss-config" },
 }));
-jest.mock("./oembed/oembed-config", () => ({
-	OEMBED_CONFIG: { id: "oembed-config" },
-}));
 jest.mock("./html/meta-config", () => ({
 	HTML_META_QUERY_CONFIG: { id: "html-meta-config" },
 }));
@@ -26,7 +23,6 @@ describe("getComponentQueries", () => {
 		expect(queries).toBeInstanceOf(Map);
 		expect(queries.has(QueryOptions.NONE)).toBe(true);
 		expect(queries.has(QueryOptions.RSS)).toBe(true);
-		expect(queries.has(QueryOptions.OEMBED)).toBe(true);
 		expect(queries.has(QueryOptions.API_QUERY)).toBe(true);
 		expect(queries.has(QueryOptions.HTML_META_QUERY)).toBe(true);
 	});
@@ -36,7 +32,6 @@ describe("getComponentQueries", () => {
 		const queries = getComponentQueries({ apiOptions: { foo: "bar" } });
 		expect(queries.get(QueryOptions.NONE)).toBeNull();
 		expect(queries.get(QueryOptions.RSS)).toEqual({ id: "rss-config" });
-		expect(queries.get(QueryOptions.OEMBED)).toEqual({ id: "oembed-config" });
 		expect(queries.get(QueryOptions.API_QUERY)).toMatchObject({
 			id: "api-config",
 			foo: "bar",
@@ -77,11 +72,11 @@ describe("getWithConfig", () => {
 
 	it("uses defaultSelection if provided", () => {
 		const config = getWithConfig({
-			options: [QueryOptions.RSS, QueryOptions.OEMBED],
-			defaultSelection: QueryOptions.OEMBED,
+			options: [QueryOptions.RSS, QueryOptions.API_QUERY],
+			defaultSelection: QueryOptions.API_QUERY,
 		});
 		// @ts-expect-error we know the input has a defaultValue property
-		expect(config.inputs[1].defaultValue).toBe(QueryOptions.OEMBED);
+		expect(config.inputs[1].defaultValue).toBe(QueryOptions.API_QUERY);
 	});
 
 	it("passes apiConfigOptions to getComponentQueries", () => {
