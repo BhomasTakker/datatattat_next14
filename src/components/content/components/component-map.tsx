@@ -1,12 +1,10 @@
 import { ArticleCollection } from "./article-collection/article-collection";
-import { ContentOembed } from "./content-oembed/content-oembed";
 import { DisplayPlayer } from "./display-player/display-player";
 import { MediaPlayer } from "./media-player/media-player";
 import { OembedCollection } from "./oembed-collection/oembed-collection";
 
 export type ComponentType =
 	| typeof ArticleCollection
-	| typeof ContentOembed
 	| typeof DisplayPlayer
 	| typeof MediaPlayer;
 
@@ -22,7 +20,6 @@ export enum ComponentsOptions {
 
 export const ComponentsMap = new Map<ComponentsOptions, ComponentType>([
 	[ComponentsOptions.ArticleCollection, ArticleCollection],
-	[ComponentsOptions.ContentOembed, ContentOembed],
 	[ComponentsOptions.OembedCollection, OembedCollection],
 
 	[ComponentsOptions.DisplayPlayer, DisplayPlayer],
