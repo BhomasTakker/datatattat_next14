@@ -28,18 +28,12 @@ describe("oembedFetch", () => {
 		jest.clearAllMocks();
 	});
 
-	it("returns null and logs error if no oEmbed creator found", async () => {
+	it("rejects if no oEmbed creator found", async () => {
 		mockGetOembedObject.mockReturnValue(undefined);
-		const consoleSpy = jest
-			.spyOn(console, "error")
-			.mockImplementation(() => {});
-		const result = await oembedFetch(mockQuery as any);
-		expect(result).toBeNull();
-		expect(consoleSpy).toHaveBeenCalledWith(
-			"No oEmbed creator found for variant:",
-			"youtube"
+
+		await expect(oembedFetch(mockQuery as any)).rejects.toEqual(
+			"No oEmbed creator found for variant:youtube"
 		);
-		consoleSpy.mockRestore();
 	});
 
 	it("rejects if createUrl returns falsy value", async () => {
@@ -47,7 +41,7 @@ describe("oembedFetch", () => {
 		mockOembedCreator.createUrl.mockReturnValue(undefined);
 
 		await expect(oembedFetch(mockQuery as any)).rejects.toEqual(
-			"No URL provided"
+			"There was an error fetching oEmbed data"
 		);
 	});
 
@@ -74,20 +68,13 @@ describe("oembedFetch", () => {
 		});
 	});
 
-	it("returns null and logs error if getOembed throws", async () => {
+	it("rejects if getOembed throws", async () => {
 		mockGetOembedObject.mockReturnValue(mockOembedCreator);
 		mockOembedCreator.createUrl.mockReturnValue("http://test.url");
 		mockGetOembed.mockRejectedValue(new Error("Network error"));
-		const consoleSpy = jest
-			.spyOn(console, "error")
-			.mockImplementation(() => {});
 
-		const result = await oembedFetch(mockQuery as any);
-		expect(result).toBeNull();
-		expect(consoleSpy).toHaveBeenCalledWith(
-			"Error fetching oEmbed data:",
-			expect.any(Error)
+		await expect(oembedFetch(mockQuery as any)).rejects.toEqual(
+			"There was an error fetching oEmbed data"
 		);
-		consoleSpy.mockRestore();
 	});
 });

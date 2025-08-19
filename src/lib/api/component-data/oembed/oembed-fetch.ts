@@ -1,11 +1,7 @@
-import { getOembed } from "@/actions/oembed/get-oembed";
 import { WithQuery } from "@/types/component";
 import { getOembedObject } from "./oembed-options";
 import { OEmbedComponentProps } from "@/components/content/components/content-oembed/content-oembed";
-import {
-	OEmbedParams,
-	GenericOEmbedParams,
-} from "@/types/data-structures/oembed";
+import { OEmbedParams } from "@/types/data-structures/oembed";
 import { fetchOembed } from "./utils";
 
 // Make WithQuery generic so we don't have to caste
@@ -18,8 +14,7 @@ export const oembedFetch = async (
 	const { variant } = params as OEmbedParams;
 	const oembedCreator = getOembedObject(variant);
 	if (!oembedCreator) {
-		console.error("No oEmbed creator found for variant:", variant);
-		return null;
+		return Promise.reject("No oEmbed creator found for variant:" + variant);
 	}
 
 	const { createUrl, script } = oembedCreator;
@@ -34,7 +29,6 @@ export const oembedFetch = async (
 
 		return { oembed, script: script };
 	} catch (err) {
-		console.error("Error fetching oEmbed data:", err);
-		return null;
+		return Promise.reject("There was an error fetching oEmbed data");
 	}
 };
