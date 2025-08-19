@@ -24,23 +24,34 @@ type OembedComponentProps = {
 // then we can get rid of the bluesky specific code
 export const OembedCollection = ({ component, dataObject }: ComponentProps) => {
 	const { componentProps } = component;
-	const { items, script } = dataObject.data as OEmbedCollectionProps;
+	const { items = [], script = "" } =
+		(dataObject?.data as OEmbedCollectionProps) || {};
 
 	useEffect(() => {
 		if (script) {
-			const scriptElement = document.createElement("script");
-			scriptElement.src = script || "";
-			scriptElement.async = true;
-			document.body.appendChild(scriptElement);
+			let scriptElement = null;
+			try {
+				scriptElement = document.createElement("script");
+				scriptElement.src = script || "";
+				scriptElement.async = true;
+				scriptElement.onload = () => {
+					// console.log("Oembed script loaded successfully.");
+				};
+			} catch (error) {
+				console.error("Error creating script element:", error);
+			}
+			if (scriptElement) {
+				document.body.appendChild(scriptElement);
 
-			return () => {
-				document.body.removeChild(scriptElement);
-			};
+				return () => {
+					document.body.removeChild(scriptElement);
+				};
+			}
 		}
 	}, []);
 
 	const { variantType, ...rest } =
-		componentProps as unknown as OembedComponentProps;
+		(componentProps as unknown as OembedComponentProps) || {};
 
 	const variantObject = VariantsMap.get(variantType);
 
