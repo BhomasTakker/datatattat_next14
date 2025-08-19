@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`DisplayPlayer Snaps renders DisplayPlayer unchanged 1`] = `
+<div>
+  <div
+    class="mock-display-player-root"
+    data-testid="display-player"
+  >
+    <div
+      data-options="{"autoplay":false,"aspectRatio":"16:9","controls":true,"fill":true,"fluid":true,"responsive":true,"poster":"https://example.com/poster.jpg","playbackRates":[0.5,1,1.5,2],"preload":"auto","techOrder":["html5","youtube"],"sources":[{"src":"https://example.com/video.mp4","type":"video/mp4"}],"audioOnlyMode":false,"audioPosterMode":false}"
+      data-styles="mock-display-player-root"
+      data-testid="video-player-container"
+    >
+      Mock Video Player Container
+    </div>
+  </div>
+</div>
+`;
+
+exports[`DisplayPlayer Snaps renders VideoDisplayComponent unchanged 1`] = `
+<div>
+  <div
+    class="mock-display-player-root"
+    data-testid="display-player"
+  >
+    <div
+      data-options="{"autoplay":false,"aspectRatio":"16:9","controls":true,"fill":true,"fluid":true,"responsive":true,"poster":"https://example.com/poster.jpg","playbackRates":[0.5,1,1.5,2],"preload":"auto","techOrder":["html5","youtube"],"sources":[{"src":"https://example.com/video.mp4","type":"video/mp4"}],"audioOnlyMode":false,"audioPosterMode":false}"
+      data-styles="mock-display-player-root"
+      data-testid="video-player-container"
+    >
+      Mock Video Player Container
+    </div>
+  </div>
+</div>
+`;
