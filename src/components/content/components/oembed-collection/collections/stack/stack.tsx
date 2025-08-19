@@ -8,7 +8,7 @@ const renderOembed = (item: OEmbed) => {
 	const { src, html } = item || {};
 
 	return (
-		<li data-testid="content-oembed" className={styles.root}>
+		<li key={item.id} data-testid="content-oembed" className={styles.root}>
 			{html && <ClientOembed html={html} />}
 		</li>
 	);
