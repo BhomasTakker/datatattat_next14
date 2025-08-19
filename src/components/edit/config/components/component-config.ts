@@ -1,12 +1,12 @@
 import { GenericInput, InputListProps } from "@/types/edit/inputs/inputs";
 import { EditInputs } from "../../inputs/inputs";
 import { ARTICLE_COLLECTION_CONFIG } from "./article-collection/article-collection-config";
-import { OEMBED_CONFIG } from "./oembed/oembed-config";
-import { BLUESKY_COMPONENT_CONFIG } from "./bluesky/bluesky-config";
 import { DISPLAY_PLAYER_CONFIG } from "./display-player/display-player-config";
+import { OEMBED_COLLECTION_CONFIG } from "./oembed-collection/oembed-collection-config";
 
 enum ComponentOptions {
 	ArticleCollection = "ArticleCollection",
+	OembedCollection = "OembedCollection",
 	Oembed = "Oembed",
 	BlueSky = "BlueSky",
 	DisplayPlayer = "DisplayPlayer",
@@ -14,8 +14,7 @@ enum ComponentOptions {
 
 const pageContainersMap = new Map<string, InputListProps>([
 	[ComponentOptions.ArticleCollection, ARTICLE_COLLECTION_CONFIG],
-	[ComponentOptions.Oembed, OEMBED_CONFIG],
-	[ComponentOptions.BlueSky, BLUESKY_COMPONENT_CONFIG],
+	[ComponentOptions.OembedCollection, OEMBED_COLLECTION_CONFIG],
 	[ComponentOptions.DisplayPlayer, DISPLAY_PLAYER_CONFIG],
 ]);
 

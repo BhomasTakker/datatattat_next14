@@ -1,10 +1,11 @@
 import { EditInputs } from "@/components/edit/inputs/inputs";
-import { GenericInput } from "@/types/edit/inputs/inputs";
+import { GenericInput, InputListProps } from "@/types/edit/inputs/inputs";
 
-export const TWITTER_OEMBED_CONFIG: GenericInput = {
+export const TWITTER_OEMBED_CONFIG: InputListProps = {
 	id: "twitterOembedParams",
 	type: EditInputs.inputList,
 	label: "Twitter Oembed Parameters",
+	createObject: false,
 
 	inputs: [
 		{
