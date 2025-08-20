@@ -32,15 +32,15 @@ jest.mock("../../../../../../components/page/components/stack/types", () => ({
 	},
 	getContainerWidth: jest.fn((size: string) => {
 		const widthMap: Record<string, string> = {
-			XXS: "180",
-			XS: "240",
-			SM: "320",
-			MD: "640",
-			LG: "768",
-			XL: "1024",
-			XXL: "1280",
+			XXS: "305",
+			XS: "350",
+			SM: "400",
+			MD: "480",
+			LG: "560",
+			XL: "750",
+			XXL: "900",
 		};
-		return widthMap[size] || "640";
+		return widthMap[size] || "480";
 	}),
 }));
 
@@ -107,7 +107,7 @@ describe("oembedMasonry", () => {
 			const masonryGrid = container.querySelector("ul");
 			expect(masonryGrid).toBeInTheDocument();
 			expect(masonryGrid).toHaveClass("masonry-grid");
-			expect(masonryGrid).toHaveStyle({ "--column-width": "640px" });
+			expect(masonryGrid).toHaveStyle({ "--column-width": "480px" });
 		});
 
 		it("should render all oembed items", () => {
@@ -133,10 +133,10 @@ describe("oembedMasonry", () => {
 				minWidth: ContainerWidthOptions;
 				expectedWidth: string;
 			}> = [
-				{ minWidth: "XS", expectedWidth: "240px" },
-				{ minWidth: "SM", expectedWidth: "320px" },
-				{ minWidth: "LG", expectedWidth: "768px" },
-				{ minWidth: "XL", expectedWidth: "1024px" },
+				{ minWidth: "XS", expectedWidth: "350px" },
+				{ minWidth: "SM", expectedWidth: "400px" },
+				{ minWidth: "LG", expectedWidth: "560px" },
+				{ minWidth: "XL", expectedWidth: "750px" },
 			];
 
 			testCases.forEach(({ minWidth, expectedWidth }) => {
@@ -159,7 +159,7 @@ describe("oembedMasonry", () => {
 			);
 
 			const masonryGrid = container.querySelector("ul");
-			expect(masonryGrid).toHaveStyle({ "--column-width": "640px" });
+			expect(masonryGrid).toHaveStyle({ "--column-width": "480px" });
 		});
 
 		it("should render empty list when no collection provided", () => {
