@@ -1,0 +1,7 @@
+@use "../../../../../../scss/abstracts/units" as *;
+
+.root {
+	.masonryGrid {
+		columns: var(--column-width);
+	}
+}

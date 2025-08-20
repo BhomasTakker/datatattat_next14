@@ -2,7 +2,7 @@ import { OEmbed } from "@/types/data-structures/oembed";
 import { ClientOembed } from "../../../content-oembed/client-component";
 import styles from "./stack.module.scss";
 
-type OembedStackProps = {};
+export type OembedStackProps = {};
 
 const renderOembed = (item: OEmbed) => {
 	const { src, html } = item || {};
