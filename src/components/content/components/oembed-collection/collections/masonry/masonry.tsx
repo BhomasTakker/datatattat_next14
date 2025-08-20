@@ -3,7 +3,7 @@ import { ClientOembed } from "../../../content-oembed/client-component";
 import styles from "./masonry.module.scss";
 import { ContainerWidthOptions } from "@/components/page/components/stack/types";
 
-type OembedMasonryProps = {
+export type OembedMasonryProps = {
 	minWidth: ContainerWidthOptions; // e.g. "xs", "sm", "md", "lg", "xl"
 };
 
@@ -28,8 +28,8 @@ const Sizes = {
 	XXL: "900",
 } as const;
 
-const renderMethod = (collection: OEmbed[] = [], props: OembedMasonryProps) => {
-	const { minWidth = "MD" } = props;
+const renderMethod = (collection: OEmbed[] = [], props: unknown) => {
+	const { minWidth = "MD" } = props as OembedMasonryProps;
 	const columnWidth = Sizes[minWidth];
 
 	return (
