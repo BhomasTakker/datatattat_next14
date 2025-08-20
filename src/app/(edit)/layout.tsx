@@ -6,7 +6,6 @@ export default async function RootLayout({
 	children,
 }: Readonly<{
 	children: React.ReactNode;
-	params: Promise<{ route: string[] }>;
 }>) {
 	return (
 		<PageLayout>
