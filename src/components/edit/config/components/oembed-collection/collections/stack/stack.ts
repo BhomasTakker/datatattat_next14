@@ -9,7 +9,7 @@ export const OEMBED_STACK_CONFIG: InputListProps = {
 		{
 			id: "oembedComponentTitle",
 			type: EditInputs.title,
-			title: "Oembed Component",
+			title: "Oembed Stack Component",
 		},
 	],
 };

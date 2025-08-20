@@ -82,3 +82,10 @@ export type RowStackProps = {
 export type PageStackProps = {
 	variant: PageStackCollectionVariants;
 } & (VerticalStackProps | RowStackProps);
+
+export const getContainerWidth = (size: ContainerWidthOptions) => {
+	return ContainerWidth[size];
+};
+export const getContainerHeight = (size: ContainerHeightOptions) => {
+	return ContainerHeight[size];
+};
