@@ -13,6 +13,5 @@ export const OEMBED_MASONRY_CONFIG: InputListProps = {
 			title: "Oembed Masonry Component",
 		},
 		useContainerWidth("minWidth", "Container Width"),
-		// we want a minWidth  xs, sm, etc
 	],
 };

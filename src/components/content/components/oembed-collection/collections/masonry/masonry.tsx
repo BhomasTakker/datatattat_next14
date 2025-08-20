@@ -1,10 +1,7 @@
 import { OEmbed } from "@/types/data-structures/oembed";
 import { ClientOembed } from "../../../content-oembed/client-component";
 import styles from "./masonry.module.scss";
-import {
-	ContainerWidthOptions,
-	getContainerWidth,
-} from "@/components/page/components/stack/types";
+import { ContainerWidthOptions } from "@/components/page/components/stack/types";
 
 type OembedMasonryProps = {
 	minWidth: ContainerWidthOptions; // e.g. "xs", "sm", "md", "lg", "xl"
@@ -20,9 +17,20 @@ const renderOembed = (item: OEmbed) => {
 	);
 };
 
+// Oembed Minimum Sizes?
+const Sizes = {
+	XXS: "305",
+	XS: "350",
+	SM: "400",
+	MD: "480",
+	LG: "560",
+	XL: "750",
+	XXL: "900",
+} as const;
+
 const renderMethod = (collection: OEmbed[] = [], props: OembedMasonryProps) => {
 	const { minWidth = "MD" } = props;
-	const columnWidth = getContainerWidth(minWidth);
+	const columnWidth = Sizes[minWidth];
 
 	return (
 		<ul
