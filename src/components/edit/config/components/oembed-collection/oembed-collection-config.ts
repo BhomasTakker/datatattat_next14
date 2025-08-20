@@ -4,11 +4,13 @@ import { getWithConfig, QueryOptions } from "../../query/_with-config";
 import { OembedCollectionVariants } from "@/components/content/components/oembed-collection/variant-map";
 import { OEMBED_STACK_CONFIG } from "./collections/stack/stack";
 import { APIOptions } from "../../query/api/api-base-config";
+import { OEMBED_MASONRY_CONFIG } from "./collections/masonry";
 
 type oembedCollectionProps = typeof OEMBED_STACK_CONFIG;
 
 const collectionsMap = new Map<string, oembedCollectionProps>([
 	[OembedCollectionVariants.OembedStack, OEMBED_STACK_CONFIG],
+	[OembedCollectionVariants.OembedMasonry, OEMBED_MASONRY_CONFIG],
 ]);
 
 // there may be a better way

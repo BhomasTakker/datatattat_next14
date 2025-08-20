@@ -50,8 +50,7 @@ export const OembedCollection = ({ component, dataObject }: ComponentProps) => {
 		}
 	}, []);
 
-	const { variantType, ...rest } =
-		(componentProps as unknown as OembedComponentProps) || {};
+	const { variantType, ...rest } = componentProps || {};
 
 	const variantObject = VariantsMap.get(variantType);
 

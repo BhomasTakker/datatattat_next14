@@ -3,8 +3,8 @@ import styles from "./row-stack.module.scss";
 import { ComponentDisplay } from "@/components/content/component-display";
 import {
 	Column,
-	ContainerHeight,
-	ContainerWidth,
+	getContainerHeight,
+	getContainerWidth,
 	Row,
 	RowStackProps,
 } from "../../types";
@@ -39,13 +39,10 @@ const createRowStyle = (row: Row) => {
 
 // Potentially we should create classes
 const createColumnStyle = (column: Column) => {
-	const { minWidth, maxHeight, evenColumns } = column;
-	// Map minWidth to a valid key if needed
-	const widthKey = typeof minWidth === "string" ? minWidth : "MD"; // fallback to "MD" or map accordingly
-	const heightKey = typeof maxHeight === "string" ? maxHeight : "MD"; // fallback to "MD" or map accordingly
+	const { minWidth = "MD", maxHeight = "MD", evenColumns } = column;
 
-	const width = ContainerWidth[widthKey as keyof typeof ContainerWidth];
-	const height = ContainerHeight[heightKey as keyof typeof ContainerHeight];
+	const width = getContainerWidth(minWidth);
+	const height = getContainerHeight(maxHeight);
 
 	const flex = evenColumns ? { flex: 1 } : { flexGrow: 1 };
 
