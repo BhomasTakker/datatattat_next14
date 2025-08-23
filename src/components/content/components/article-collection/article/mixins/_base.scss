@@ -42,12 +42,11 @@
 
 	.title {
 		@include textMixins.maxLines(3);
-		font-family: $text-font;
-		font-weight: $title-font-weight;
+		font: $titleMd;
+		line-height: 1.2em;
+		margin: 0.25rem 0 0.25rem;
 
-		margin: units.$rem_1 units.$rem_0;
-
-		font-size: clamp(0.75rem, 6cqi, 3.5rem);
+		font-size: clamp(0.75rem, 6cqi, 2.5rem);
 	}
 	.description {
 		font-family: $text-font;
@@ -62,14 +61,14 @@
 	@container content-container (min-width: 12rem) {
 		.title {
 			@include textMixins.maxLines(4);
-			margin: units.$rem_0 units.$rem_0 units.$rem_2;
+			line-height: 1.1em;
 		}
 	}
 
 	@container content-container (min-width: 15rem) {
 		.title {
 			@include textMixins.maxLines(4);
-			margin: units.$rem_0 units.$rem_0 units.$rem_2;
+			line-height: 1.1em;
 		}
 		.description {
 			@include textMixins.maxLines(2);
@@ -79,7 +78,7 @@
 	@container content-container (min-width: 20rem) {
 		.title {
 			@include textMixins.maxLines(4);
-			margin: units.$rem_0 units.$rem_0 units.$rem_2;
+			line-height: 1.1em;
 		}
 		.description {
 			@include textMixins.maxLines(3);
@@ -88,7 +87,7 @@
 
 	@container content-container (min-width: 24rem) {
 		.title {
-			margin: units.$rem_0 units.$rem_0 units.$rem_2;
+			line-height: 1em;
 			@include textMixins.maxLines(4);
 		}
 		.description {
@@ -98,7 +97,7 @@
 
 	@container content-container (min-width: 28rem) {
 		.title {
-			margin: units.$rem_0 units.$rem_0 units.$rem_2;
+			line-height: 1em;
 			@include textMixins.maxLines(4);
 		}
 		.description {
