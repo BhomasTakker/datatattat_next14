@@ -6,7 +6,7 @@
 	top: $contentHeightXs5;
 	right: 5%;
 	width: $contentWidthLg;
-	background-color: $gainsboro;
+	background-color: $background-dark;
 	border-radius: $spacingXxs;
 	box-shadow: $shadowLight1;
 	padding: $spacingMd;
@@ -28,11 +28,11 @@
 		padding: $spacingMd;
 		gap: $spacingXs;
 
-		background-color: $whiteSmoke;
+		background-color: $background-light;
 
 		&:hover {
-			background-color: $gainsboro;
-			border: 1px solid $whiteSmoke;
+			background-color: $shadowLight1;
+			border: 1px solid $background-light;
 			border-top: none;
 		}
 
@@ -46,8 +46,8 @@
 		align-items: center;
 		gap: $spacingXs;
 		height: $contentHeightXs5;
-		background-color: $gainsboro;
-		border: 1px solid $whiteSmoke;
+		background-color: $background-dark;
+		border: 1px solid $background-light;
 		.profileImage {
 			width: $contentWidthXs5;
 			height: $contentHeightXs5;

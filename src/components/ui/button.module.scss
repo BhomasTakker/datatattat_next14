@@ -8,7 +8,7 @@
 	justify-content: center;
 	gap: $spacingXs;
 
-	background-color: $whiteSmoke;
+	background-color: $background-light;
 	border: none;
 	color: $text-sharp;
 	padding: $spacingSm $spacingXl;
@@ -21,11 +21,12 @@
 	transition: background-color 0.3s;
 
 	&:hover {
-		background-color: $gainsboro;
+		background-color: $shadowLight1;
 	}
 
 	&:disabled {
-		background-color: $lightGrey;
+		background-color: $shadowLight2;
+		color: $text-muted;
 		cursor: not-allowed;
 	}
 }

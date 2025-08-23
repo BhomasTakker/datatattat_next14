@@ -7,7 +7,7 @@
 @mixin article() {
 	display: flex;
 
-	background-color: $whiteSmoke;
+	background-color: $background-light;
 	color: $text;
 
 	&:hover,

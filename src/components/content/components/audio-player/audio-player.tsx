@@ -68,9 +68,6 @@ const renderPlayer = ({ src, variant }: RendeProps) => {
 
 export const AudioPlayer = ({ src, variant }: AudioPlayerProps) => {
 	return (
-		<div className={styles.audioPlayer}>
-			<div className={styles.card}></div>
-			{renderPlayer({ src, variant })}
-		</div>
+		<div className={styles.audioPlayer}>{renderPlayer({ src, variant })}</div>
 	);
 };

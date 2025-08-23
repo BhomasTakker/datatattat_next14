@@ -38,7 +38,7 @@
 
 			height: $spacingXxxl;
 			width: $spacingXxxl;
-			background-color: $whiteSmoke;
+			background-color: $background-light;
 			color: $text;
 
 			.icon {
@@ -47,12 +47,12 @@
 		}
 
 		&:hover .checkmark {
-			background-color: $gainsboro;
+			background-color: $shadowLight1;
 		}
 
 		&:has(input:checked) {
 			.checkmark {
-				background-color: $whiteSmoke;
+				background-color: $background-light;
 				.icon {
 					display: block;
 				}
