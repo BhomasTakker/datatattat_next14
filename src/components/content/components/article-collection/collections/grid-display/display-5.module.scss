@@ -48,6 +48,8 @@
 		:nth-child(4),
 		:nth-child(5) {
 			grid-column: unset;
+			@include article.clearArticle;
+			@include article.articleCardTopDown($contentWidthXl2, $contentWidthXs);
 		}
 	}
 }

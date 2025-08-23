@@ -69,6 +69,14 @@
 // We are applying the correct styles
 // Then potentially the incorrect
 // Then fixing
+// Fix With
+// .article {
+// 	all: initial;
+// 	* {
+// 		all: unset;
+// 	}
+// }
+// Before using mixin to populate .article
 /////////////////////////////////////////
 @mixin articleCardLeftRight(
 	$maxWidth: $contentWidthMd,
@@ -92,46 +100,43 @@
 
 			.textContainer {
 				@include base.textContainer();
+				margin-top: 0;
+				gap: 0;
 
-				& {
-					margin-top: 0;
-					gap: 0;
+				.title {
+					margin-bottom: 0;
+				}
 
-					.title {
-						margin-bottom: 0;
-					}
+				.title,
+				.description {
+					margin-left: $spacingXxs;
+					margin-right: 0;
+				}
+
+				@container content-container (min-width: 16rem) {
+					gap: $spacingXxs;
 
 					.title,
 					.description {
-						margin-left: $spacingXxs;
-						margin-right: 0;
+						margin-left: $spacingXs;
 					}
+				}
 
-					@container content-container (min-width: 16rem) {
-						gap: $spacingXxs;
+				@container content-container (min-width: 20rem) {
+					gap: $spacingXs;
 
-						.title,
-						.description {
-							margin-left: $spacingXs;
-						}
+					.title,
+					.description {
+						margin-left: $spacingXs;
 					}
+				}
 
-					@container content-container (min-width: 20rem) {
-						gap: $spacingXs;
+				@container content-container (min-width: 24rem) {
+					gap: $spacingXs;
 
-						.title,
-						.description {
-							margin-left: $spacingXs;
-						}
-					}
-
-					@container content-container (min-width: 24rem) {
-						gap: $spacingXs;
-
-						.title,
-						.description {
-							margin-left: $spacingSm;
-						}
+					.title,
+					.description {
+						margin-left: $spacingSm;
 					}
 				}
 			}
@@ -139,18 +144,16 @@
 			.meta {
 				@include base.meta();
 
-				& {
-					margin: 0;
-					margin-left: $spacingXxs;
-					margin-right: $spacingXxs;
+				margin: 0;
+				margin-left: $spacingXxs;
+				margin-right: $spacingXxs;
 
-					@container content-container (min-width: 16rem) {
-						margin-left: $spacingXs;
-					}
+				@container content-container (min-width: 16rem) {
+					margin-left: $spacingXs;
+				}
 
-					@container content-container (min-width: 24rem) {
-						margin-left: $spacingSm;
-					}
+				@container content-container (min-width: 24rem) {
+					margin-left: $spacingSm;
 				}
 			}
 		}
@@ -184,10 +187,13 @@
 
 			.textContainer {
 				@include base.textContainer();
+				margin-top: 0;
+				gap: 0;
 
 				.title {
 					@include textMixins.maxLines(1);
 					font-size: clamp(1rem, 3cqi, 1.5rem);
+					margin-bottom: 0;
 				}
 
 				.description {
@@ -195,19 +201,10 @@
 					font-size: clamp(1rem, 3cqi, 1.2rem);
 				}
 
-				& {
-					margin-top: 0;
-					gap: 0;
-
-					.title {
-						margin-bottom: 0;
-					}
-
-					.title,
-					.description {
-						margin-left: $spacingXxs;
-						margin-right: 0;
-					}
+				.title,
+				.description {
+					margin-left: $spacingXxs;
+					margin-right: 0;
 				}
 			}
 
@@ -219,6 +216,14 @@
 
 	.template {
 		width: 100%;
-		// some height
+	}
+}
+
+@mixin clearArticle {
+	.article {
+		all: initial;
+		* {
+			all: unset;
+		}
 	}
 }
