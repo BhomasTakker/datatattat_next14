@@ -31,11 +31,8 @@
 
 			.textContainer {
 				@include base.textContainer();
+				gap: $spacingXxs;
 
-				& {
-					margin-top: $spacingXxs;
-					gap: $spacingXs;
-				}
 				.title,
 				.description {
 					margin: 0 0;
@@ -57,6 +54,14 @@
 	}
 }
 
+// ///////////// BUG //////////////// //
+// I think we need to actually apply a class
+// to the content container of leftToRight
+// I think that's the 'bleeding' css issue
+// We are applying the correct styles
+// Then potentially the incorrect
+// Then fixing
+/////////////////////////////////////////
 @mixin articleCardLeftRight(
 	$maxWidth: $contentWidthMd,
 	$minWidth: $contentWidthMd

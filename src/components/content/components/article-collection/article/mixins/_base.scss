@@ -39,20 +39,20 @@
 	display: flex;
 	flex-direction: column;
 	height: 100%;
+	margin: $spacingXxs 0 0;
 
 	.title {
 		@include textMixins.maxLines(3);
 		font: $titleMd;
 		line-height: 1.2em;
-		padding: $spacingXxs 0 $spacingXxs;
 
-		font-size: clamp(0.75rem, 6cqi, 2.5rem);
+		font-size: clamp(0.85rem, 6cqi, 2.5rem);
 	}
 	.description {
 		font: $textMd;
 
 		display: none;
-		font-size: clamp(0.75rem, 4cqi, 1.75rem);
+		font-size: clamp(0.8rem, 4cqi, 1.75rem);
 	}
 
 	@container content-container (min-width: 12rem) {
