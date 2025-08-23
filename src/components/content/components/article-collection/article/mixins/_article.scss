@@ -31,11 +31,19 @@
 
 			.textContainer {
 				@include base.textContainer();
-				gap: $spacingXxs;
+				gap: $spacingXxxs;
 
 				.title,
 				.description {
 					margin: 0 0;
+				}
+
+				@container content-container (min-width: 20rem) {
+					gap: $spacingXxs;
+				}
+
+				@container content-container (min-width: 24rem) {
+					gap: $spacingXs;
 				}
 			}
 
