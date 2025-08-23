@@ -153,8 +153,8 @@
 }
 
 @mixin articleCardListItem(
-	$maxWidth: $contentHeightMd,
-	$minWidth: $contentHeightMd,
+	$maxWidth: $contentWidthMd,
+	$minWidth: $contentWidthMd,
 	$aspectW: 16,
 	$aspectH: 9
 ) {
