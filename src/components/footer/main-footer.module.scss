@@ -3,7 +3,7 @@
 @use "../../scss/abstracts/ui/" as *;
 
 .root {
-	padding: $rem_6 $rem_0;
+	padding: $spacingXxxl 0;
 	font-family: $text-font;
 
 	.divider {
@@ -11,6 +11,6 @@
 	}
 
 	.container {
-		padding-block: $rem_6;
+		padding-block: $spacingXxxl;
 	}
 }

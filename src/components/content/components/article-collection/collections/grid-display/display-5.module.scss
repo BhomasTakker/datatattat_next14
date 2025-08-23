@@ -4,12 +4,12 @@
 .root {
 	display: grid;
 	grid-template-columns: repeat(1, 1fr);
-	gap: $rem_5;
+	gap: $spacingLg;
 
-	@include article.articleCardLeftRight($rem_21, $rem_12);
+	@include article.articleCardLeftRight($contentWidthXl6, $contentWidthSm);
 
 	:first-child {
-		@include article.articleCardTopDown($rem_25, $rem_12);
+		@include article.articleCardTopDown($contentWidthXl7, $contentWidthSm);
 	}
 
 	@media screen and (min-width: $screenWidthLg) {
@@ -18,18 +18,18 @@
 		:first-child {
 			grid-column: 1 / 3;
 			grid-row: 1 / 3;
-			@include article.articleCardTopDown($rem_21, $rem_12);
+			@include article.articleCardTopDown($contentWidthXl6, $contentWidthSm);
 		}
 
 		:nth-child(2),
 		:nth-child(3) {
-			@include article.articleCardTopDown($rem_21, $rem_12);
+			@include article.articleCardTopDown($contentWidthXl6, $contentWidthSm);
 		}
 
 		:nth-child(4),
 		:nth-child(5) {
 			grid-column: 1 / 4;
-			@include article.articleCardLeftRight($rem_21, $rem_12);
+			@include article.articleCardLeftRight($contentWidthXl6, $contentWidthSm);
 		}
 	}
 
@@ -37,12 +37,12 @@
 		grid-template-columns: repeat(4, 1fr);
 		grid-template-rows: repeat(2, 1fr);
 
-		@include article.articleCardTopDown($rem_16, $rem_10);
+		@include article.articleCardTopDown($contentWidthXl2, $contentWidthXs2);
 
 		:first-child {
 			grid-row: 1 / 3;
 			grid-column: 1 / 3;
-			@include article.articleCardTopDown($rem_21, $rem_12);
+			@include article.articleCardTopDown($contentWidthXl6, $contentWidthSm);
 		}
 
 		:nth-child(4),

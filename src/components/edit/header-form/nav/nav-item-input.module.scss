@@ -1,16 +1,17 @@
 @use "../../../../scss/abstracts/units/" as *;
 @use "../../../../scss/abstracts/colours/" as *;
+@use "../../../../scss/abstracts/font/" as *;
 
 .root {
 	display: flex;
-	gap: $rem_4;
-	padding: $rem_1;
+	gap: $spacingMd;
+	padding: $spacingXxs;
 
 	.inputs {
 		width: 100%;
 		display: flex;
 		flex-direction: row;
-		gap: $rem_2;
+		gap: $spacingXs;
 
 		.input {
 			display: flex;
@@ -21,15 +22,15 @@
 
 	.controls {
 		display: flex;
-		gap: $rem_2;
+		gap: $spacingXs;
 	}
 
 	.icon {
 		display: flex;
 		color: $darkGrey;
-		font-size: $rem_5;
+		font: $titleMd;
 		cursor: pointer;
-		padding: $rem_2;
+		padding: $spacingXs;
 		border-radius: 50%;
 
 		&:hover,
@@ -46,7 +47,7 @@
 	@media (max-width: $screenWidthLg) {
 		flex-direction: column-reverse;
 		align-items: end;
-		gap: $rem_2;
+		gap: $spacingXs;
 
 		.inputs {
 			flex-direction: column;

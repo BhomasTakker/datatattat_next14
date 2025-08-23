@@ -1,11 +1,11 @@
 @use "../../../scss/abstracts/colours/" as colours;
 @use "../../../scss/mixins/ui/" as uiMixin;
 @use "../../../scss/abstracts/ui/" as ui;
-@use "../../../scss/abstracts/units/" as units;
+@use "../../../scss/abstracts/units/" as *;
 
 .root {
 	display: flex;
-	gap: units.$rem_4;
+	gap: $spacingMd;
 
 	overflow-x: auto;
 

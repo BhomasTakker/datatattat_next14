@@ -1,4 +1,4 @@
-@use "../../../scss/abstracts/font" as text;
+@use "../../../scss/abstracts/font" as *;
 @use "../../../scss/abstracts/colours" as colours;
 @use "../../../scss/abstracts/units" as *;
 
@@ -7,19 +7,17 @@
 	display: flex;
 
 	.title {
-		// margin: $rem_4 $rem_0 $rem_0;
-		font-size: text.$component-title-sm;
-		font-family: text.$component-title-font;
+		font: $titleXs;
 		color: colours.$titleColourDark;
 
 		// we cannot use variables with container queries
 		// I think this is the case / follow up on this
 		@container profile-container (min-width: 640px) {
-			font-size: text.$component-title-md;
+			font: $titleSm;
 		}
 
 		@container profile-container (min-width: 1024px) {
-			font-size: text.$component-title-lg;
+			font: $titleMd;
 		}
 	}
 }

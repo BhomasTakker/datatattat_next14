@@ -13,9 +13,6 @@ $whiterSmoke: #fafafa;
 
 $backgroundMain: $whiteSmoke;
 
-$textColourDark: $darkestGrey;
-$textColourLight: $gainsboro;
-
 $titleColourDark: $darkestGrey;
 $titleColourLight: $gainsboro;
 
@@ -32,3 +29,9 @@ $shadowLight5: #28282850;
 $error: #ff0000;
 $warning: #ffcc00;
 $success: #00ff00;
+
+// new text colour
+$text-1: hsl(0, 0%, 10%);
+
+$textColourDark: $text-1;
+$textColourLight: $gainsboro;

@@ -6,19 +6,21 @@
 	display: flex;
 
 	.title {
-		font-size: $page-title-md;
-		font-family: $page-title-font;
+		font: $titleSm;
+		font-family: $text-font;
 		color: $titleColourDark;
-		padding-top: $rem_6;
+		padding: $spacingXxs 0 $spacingXxs;
 
 		justify-content: left;
 
 		@media screen and (min-width: $screenWidthSm) {
-			font-size: $page-title-md;
+			font: $titleMd;
+			padding: $spacingXs 0 $spacingXs;
 		}
 
 		@media screen and (min-width: $screenWidthMd) {
-			font-size: $page-title-lg;
+			font: $titleXl;
+			padding: $spacingSm 0 $spacingSm;
 		}
 	}
 }

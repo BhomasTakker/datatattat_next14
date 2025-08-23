@@ -1,27 +1,28 @@
 @use "../../scss/abstracts/colours/" as colours;
 @use "../../scss/abstracts/ui/" as ui;
-@use "../../scss/abstracts/units/" as units;
+@use "../../scss/abstracts/units/" as *;
+@use "../../scss/abstracts/font/" as *;
 
 .root {
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
-	padding: units.$rem_5 units.$rem_0;
+	padding: $spacingLg 0;
 
 	border-bottom: ui.$divider;
 
 	.datatattat {
 		color: colours.$logoDark;
-		font-size: units.$text_6;
+		font: $titleXl;
 	}
 
 	.homeContainer {
 		display: inline-flex;
 		justify-content: center;
-		padding: units.$rem_2;
+		padding: $spacingXs;
 		border-radius: 50%;
 		.logo {
 			color: colours.$logoDark;
-			font-size: units.$text_6;
+			font-size: $title-md;
 		}
 		&:hover,
 		&:focus {
@@ -32,13 +33,13 @@
 	.simpleButton {
 		display: flex;
 		align-items: center;
-		padding: units.$rem_2;
+		padding: $spacingXs;
 		border-radius: 50%;
 
 		cursor: pointer;
 
 		.logo {
-			font-size: units.$text_6;
+			font-size: $title-md;
 			color: colours.$textColourDark;
 		}
 		p {
@@ -53,7 +54,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: flex-end;
-		gap: units.$rem_2;
+		gap: $spacingXs;
 
 		.image {
 			display: inline-block;
@@ -63,7 +64,7 @@
 			display: none;
 		}
 
-		@media screen and (max-width: units.$screenWidthSm) {
+		@media screen and (max-width: $screenWidthSm) {
 			.image {
 				display: none;
 			}

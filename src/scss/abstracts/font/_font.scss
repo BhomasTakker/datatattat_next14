@@ -1,18 +1,54 @@
 @use "../units/" as units;
 
-$page-title-font: var(--font-geist-sans), Helvetica, Arial, freesans, sans-serif;
-$component-title-font: var(--font-geist-sans), Helvetica, Arial, freesans,
-	sans-serif;
 $text-font: var(--font-geist-sans), Helvetica, Arial, freesans, sans-serif;
-$italic-font: var(--font-geist-mono), Helvetica, Arial, freesans, sans-serif;
 
-$page-title-lg: units.$text_11;
-$page-title-md: units.$text_10;
-$page-title-sm: units.$text_9;
+$text-dark: hsl(0, 0%, 10%);
+$text-normal: hsl(0, 0%, 25%);
+$text-light: hsl(0, 0%, 40%);
 
-$component-title-lg: units.$text_9;
-$component-title-md: units.$text_7;
-$component-title-sm: units.$text_5;
+$text-xs2: 0.625rem;
+$text-xs: 0.75rem;
+$text-sm: 0.875rem;
+$text-md: 1rem;
+$text-lg: 1.125rem;
+$text-xl: 1.25rem;
+$text-xl2: 1.5rem;
+$text-xl3: 1.75rem;
 
-$title-font-weight: bold;
-$text-font-weight: medium;
+$title-xs3: 0.875rem;
+$title-xs2: 1rem;
+$title-xs: 1.125rem;
+$title-sm: 1.25rem;
+$title-md: 1.5rem;
+$title-lg: 1.75rem;
+$title-xl: 1.875rem;
+$title-xl2: 2rem;
+$title-xl3: 2.5rem;
+
+$titleXl3: bold 2.5rem/1.2em $text-font;
+$titleXl2: bold 2rem/1.2em $text-font;
+$titleXl: bold 1.875rem/1.2em $text-font;
+$titleLg: bold 1.75rem/1.2em $text-font;
+$titleMd: bold 1.5rem/1.2em $text-font;
+$titleSm: bold 1.25rem/1.2em $text-font;
+$titleXs: bold 1.125rem/1.2em $text-font;
+$titleXs2: bold 1rem/1.2em $text-font;
+$titleXs3: bold 0.875rem/1.2em $text-font;
+
+$textXl3: normal 1.75rem/1.2em $text-font;
+$textXl2: normal 1.5rem/1.2em $text-font;
+$textXl: normal 1.25rem/1.2em $text-font;
+$textLg: normal 1.125rem/1.2em $text-font;
+$textMd: normal 1rem/1.2em $text-font;
+$textSm: normal 0.875rem/1.2em $text-font;
+$textXs: normal 0.75rem/1.2em $text-font;
+$textXs2: normal 0.625rem/1.2em $text-font;
+
+//https://modernfontstacks.com/
+// Antique
+// font-family: Superclarendon, 'Bookman Old Style', 'URW Bookman', 'URW Bookman L', 'Georgia Pro', Georgia, serif;
+// font-weight: normal;
+
+// System-UI
+// font-family: system-ui, sans-serif;
+// font-weight: normal;

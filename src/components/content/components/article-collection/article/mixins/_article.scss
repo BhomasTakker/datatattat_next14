@@ -1,5 +1,5 @@
 @use "../../../../../../scss/mixins/text/" as textMixins;
-@use "../../../../../../scss/abstracts/units/" as units;
+@use "../../../../../../scss/abstracts/units/" as *;
 @use "../../../../../../scss/abstracts/colours/" as colours;
 @use "../../../../../../scss/abstracts/font/" as *;
 
@@ -33,12 +33,12 @@
 				@include base.textContainer();
 
 				& {
-					margin-top: units.$rem_1;
-					gap: units.$rem_1;
+					margin-top: $spacingXxs;
+					gap: $spacingXs;
 				}
 				.title,
 				.description {
-					margin: units.$rem_0 units.$rem_0;
+					margin: 0 0;
 				}
 			}
 
@@ -58,8 +58,8 @@
 }
 
 @mixin articleCardLeftRight(
-	$maxWidth: units.$rem_16,
-	$minWidth: units.$rem_16
+	$maxWidth: $contentWidthMd,
+	$minWidth: $contentWidthMd
 ) {
 	.article {
 		@include base.article();
@@ -81,43 +81,43 @@
 				@include base.textContainer();
 
 				& {
-					margin-top: units.$rem_0;
-					gap: units.$rem_0;
+					margin-top: 0;
+					gap: 0;
 
 					.title {
-						margin-bottom: units.$rem_0;
+						margin-bottom: 0;
 					}
 
 					.title,
 					.description {
-						margin-left: units.$rem_1;
-						margin-right: units.$rem_0;
+						margin-left: $spacingXxs;
+						margin-right: 0;
 					}
 
 					@container content-container (min-width: 16rem) {
-						gap: units.$rem_1;
+						gap: $spacingXxs;
 
 						.title,
 						.description {
-							margin-left: units.$rem_2;
+							margin-left: $spacingXs;
 						}
 					}
 
 					@container content-container (min-width: 20rem) {
-						gap: units.$rem_2;
+						gap: $spacingXs;
 
 						.title,
 						.description {
-							margin-left: units.$rem_2;
+							margin-left: $spacingXs;
 						}
 					}
 
 					@container content-container (min-width: 24rem) {
-						gap: units.$rem_2;
+						gap: $spacingXs;
 
 						.title,
 						.description {
-							margin-left: units.$rem_3;
+							margin-left: $spacingSm;
 						}
 					}
 				}
@@ -127,16 +127,16 @@
 				@include base.meta();
 
 				& {
-					margin: units.$rem_0;
-					margin-left: units.$rem_1;
-					margin-right: units.$rem_1;
+					margin: 0;
+					margin-left: $spacingXxs;
+					margin-right: $spacingXxs;
 
 					@container content-container (min-width: 16rem) {
-						margin-left: units.$rem_2;
+						margin-left: $spacingXs;
 					}
 
 					@container content-container (min-width: 24rem) {
-						margin-left: units.$rem_3;
+						margin-left: $spacingSm;
 					}
 				}
 			}
@@ -153,8 +153,8 @@
 }
 
 @mixin articleCardListItem(
-	$maxWidth: units.$rem_16,
-	$minWidth: units.$rem_16,
+	$maxWidth: $contentWidthMd,
+	$minWidth: $contentWidthMd,
 	$aspectW: 16,
 	$aspectH: 9
 ) {
@@ -178,23 +178,22 @@
 				}
 
 				.description {
-					// @include textMixins.maxLines(1);
 					display: none;
 					font-size: clamp(1rem, 3cqi, 1.2rem);
 				}
 
 				& {
-					margin-top: units.$rem_0;
-					gap: units.$rem_0;
+					margin-top: 0;
+					gap: 0;
 
 					.title {
-						margin-bottom: units.$rem_0;
+						margin-bottom: 0;
 					}
 
 					.title,
 					.description {
-						margin-left: units.$rem_1;
-						margin-right: units.$rem_0;
+						margin-left: $spacingXxs;
+						margin-right: 0;
 					}
 				}
 			}

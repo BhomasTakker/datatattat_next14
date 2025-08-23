@@ -3,7 +3,7 @@
 @use "../../../../../../scss/abstracts/units/" as *;
 @use "../../../../../../scss/mixins/text/" as textMixins;
 
-@include article.articleCardListItem($rem_11, $rem_8, 1, 1);
+@include article.articleCardListItem($contentWidthSm, $contentWidthXs, 1, 1);
 
 .article:hover {
 	cursor: unset;

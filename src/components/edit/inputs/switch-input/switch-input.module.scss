@@ -1,5 +1,6 @@
 @use "../../../../scss/abstracts/units/" as *;
 @use "../../../../scss/abstracts/colours/" as *;
+@use "../../../../scss/abstracts/font/" as *;
 
 .input {
 	display: flex;
@@ -7,10 +8,10 @@
 	.container {
 		display: flex;
 		align-items: center;
-		gap: $rem_3;
+		gap: $spacingSm;
 		position: relative;
 		cursor: pointer;
-		font-size: $text_4;
+		font-size: $text-lg;
 		-webkit-user-select: none;
 		-moz-user-select: none;
 		-ms-user-select: none;
@@ -28,8 +29,8 @@
 			align-items: center;
 			justify-content: center;
 
-			height: $rem_6;
-			width: $rem_6;
+			height: $spacingXxxl;
+			width: $spacingXxxl;
 			background-color: $whiteSmoke;
 			color: $textColourDark;
 

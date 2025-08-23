@@ -1,22 +1,23 @@
 @use "../../scss/abstracts/units/" as *;
 @use "../../scss/abstracts/colours/" as *;
+@use "../../scss/abstracts/font/" as *;
 
 .button {
 	// probably excessive!!
 	display: flex;
 	justify-content: center;
-	gap: $rem_2;
+	gap: $spacingXs;
 
 	background-color: $whiteSmoke;
 	border: none;
 	color: $textColourDark;
-	padding: $rem_3 $rem_5;
+	padding: $spacingSm $spacingXl;
 	text-align: center;
 	text-decoration: none;
 
-	font-size: $text_3;
+	font-size: $text-md;
 	cursor: pointer;
-	border-radius: $rem_1;
+	border-radius: $spacingXxs;
 	transition: background-color 0.3s;
 
 	&:hover {
@@ -25,7 +26,6 @@
 
 	&:disabled {
 		background-color: $lightGrey;
-		// color: $textColourLight;
 		cursor: not-allowed;
 	}
 }

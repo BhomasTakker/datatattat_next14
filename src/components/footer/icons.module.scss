@@ -7,11 +7,11 @@
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
-	gap: $rem_6;
+	gap: $spacingXxxl;
 
 	.icon {
 		color: $darkGrey;
-		font-size: $rem_6;
+		font-size: $spacingXxxl;
 	}
 
 	@media screen and (min-width: $screenWidthMd) {

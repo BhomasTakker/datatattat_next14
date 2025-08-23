@@ -1,17 +1,17 @@
 @use "../../../scss/abstracts/colours/" as colours;
-@use "../../../scss/abstracts/units/" as units;
+@use "../../../scss/abstracts/units/" as *;
 
 .header {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	padding: units.$rem_2 units.$rem_2;
-	margin-bottom: units.$rem_2;
+	padding: $spacingXs $spacingXs;
+	margin-bottom: $spacingXs;
 	border-radius: 10%;
 	background-color: colours.$shadowLight0;
 
 	h3 {
-		padding: units.$rem_2 units.$rem_2;
+		padding: $spacingXs $spacingXs;
 		color: colours.$textColourDark;
 	}
 }
@@ -30,7 +30,7 @@
 
 .link {
 	// border-radius: 10%;
-	padding: units.$rem_2 units.$rem_2;
+	padding: $spacingXs $spacingXs;
 	width: 100%;
 
 	p {

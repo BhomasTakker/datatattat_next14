@@ -1,38 +1,38 @@
 @use "../../../scss/abstracts/colours/" as *;
 @use "../../../scss/abstracts/units/" as *;
+@use "../../../scss/abstracts/font/" as *;
 
 .form {
 	.header {
-		padding: $rem_6 0 $rem_5;
+		padding: $spacingXxxl 0 $spacingXl;
 	}
 
 	.inputContainer {
 		display: flex;
 		flex-direction: column;
-		gap: $rem_2;
+		gap: $spacingXs;
 	}
 
 	.field {
 		display: flex;
 		flex-direction: column;
 
-		gap: $rem_2;
+		gap: $spacingXs;
 
 		border: none;
 		padding: 0;
 		margin: 0;
-		padding-bottom: $rem_5;
+		padding-bottom: $spacingXl;
 
 		.label {
-			// padding-bottom: $rem_2;
 		}
 		.input {
 			width: 100%;
-			padding: $rem_2;
+			padding: $spacingXs;
 			background-color: $whiteSmoke;
 			border: none;
-			border-radius: $rem_1;
-			font-size: $text_3;
+			border-radius: $spacingXxs;
+			font-size: $text-md;
 
 			&:hover,
 			&:focus {

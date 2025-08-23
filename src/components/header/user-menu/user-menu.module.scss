@@ -1,16 +1,16 @@
 @use "../../../scss/abstracts/colours/" as *;
 @use "../../../scss/abstracts/units/" as *;
-@use "../../../scss/abstracts/content/" as *;
+@use "../../../scss/abstracts/font/" as *;
 
 .menuButton {
 	border: none;
 	background-color: unset;
 	cursor: pointer;
-	padding: $rem_2;
+	padding: $spacingXs;
 	border-radius: 50%;
 
 	.logo {
-		font-size: $text_6;
+		font-size: $title-md;
 		color: $textColourDark;
 	}
 
