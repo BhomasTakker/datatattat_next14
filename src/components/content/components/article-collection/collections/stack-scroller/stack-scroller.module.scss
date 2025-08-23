@@ -1,23 +1,23 @@
 @use "../../article/mixins/" as article;
 @use "../../../../../../scss/abstracts/units/" as *;
 @use "../../../../../../scss/mixins/ui/" as ui;
-// articleCardTopDown / articleCardLeftRight
+
 .template {
 }
 
 .root {
 	display: flex;
-	gap: $rem_4;
-	// padding: units.$rem_6 units.$rem_0;
+	gap: $spacingMd;
+
 	@include ui.scrollXNoScroller();
 
-	@include article.articleCardTopDown($rem_14, $rem_14);
+	@include article.articleCardTopDown($contentWidthMd, $contentWidthMd);
 
 	@media screen and (min-width: $screenWidthSm) {
-		@include article.articleCardTopDown($rem_15, $rem_15);
+		@include article.articleCardTopDown($contentWidthXl, $contentWidthXl);
 	}
 
 	@media screen and (min-width: $screenWidthMd) {
-		@include article.articleCardTopDown($rem_16, $rem_16);
+		@include article.articleCardTopDown($contentWidthXl2, $contentWidthXl2);
 	}
 }
