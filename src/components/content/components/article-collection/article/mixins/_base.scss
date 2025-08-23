@@ -1,5 +1,5 @@
 @use "../../../../../../scss/mixins/text/" as textMixins;
-@use "../../../../../../scss/abstracts/units" as units;
+@use "../../../../../../scss/abstracts/units" as *;
 @use "../../../../../../scss/abstracts/colours" as colours;
 @use "../../../../../../scss/abstracts/font" as *;
 
@@ -44,18 +44,15 @@
 		@include textMixins.maxLines(3);
 		font: $titleMd;
 		line-height: 1.2em;
-		margin: 0.25rem 0 0.25rem;
+		padding: $spacingXxs 0 $spacingXxs;
 
 		font-size: clamp(0.75rem, 6cqi, 2.5rem);
 	}
 	.description {
-		font-family: $text-font;
-		font-weight: $text-font-weight;
+		font: $textMd;
 
-		// @include textMixins.maxLines(2);
 		display: none;
-
-		font-size: clamp(0.8rem, 4cqi, 2rem);
+		font-size: clamp(0.75rem, 4cqi, 1.75rem);
 	}
 
 	@container content-container (min-width: 12rem) {
@@ -113,9 +110,7 @@
 	justify-content: space-between;
 
 	// For some reason a tiny gap is needed to prevent the last element from overflowing
-	// padding: units.$rem_0;
-	// padding-right: units.$rem_2;
-	margin: units.$rem_0 units.$rem_1;
+	margin: 0 $spacingXxs;
 	padding: 0;
 	font-size: smaller;
 	font-style: italic;
