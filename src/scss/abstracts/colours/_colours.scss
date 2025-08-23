@@ -1,28 +1,18 @@
-$black: #000000;
-$white: #ffffff;
-
-$darkestGrey: #282828;
 $darkGrey: #505050;
-$dimGrey: #696969;
-$grey: #808080;
 $lightGrey: #d3d3d3;
-$silver: #c0c0c0;
 $gainsboro: #dcdcdc;
 $whiteSmoke: #f5f5f5;
 $whiterSmoke: #fafafa;
 
-$backgroundMain: $whiteSmoke;
+$highlight: hsla(0, 0%, 5%, 0.1);
 
-$shadowLight0: #28282805;
-$shadowLight1: #28282810;
-$shadowLight2: #28282820;
-$shadowLight3: #28282830;
-$shadowLight4: #28282840;
-$shadowLight5: #28282850;
+$shadowLight0: hsla(0, 0%, 5%, 0.05);
+$shadowLight1: hsla(0, 0%, 5%, 0.1);
+$shadowLight2: hsla(0, 0%, 5%, 0.2);
+$shadowLight3: hsla(0, 0%, 5%, 0.3);
 
-$error: #ff0000;
-$warning: #ffcc00;
-$success: #00ff00;
+$error-strong: hsl(0, 100%, 50%);
+$error: hsl(0, 65%, 50%);
 
 $background: hsl(0, 0%, 90%);
 $background-light: hsl(0, 0%, 95%);
