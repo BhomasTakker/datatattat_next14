@@ -3,7 +3,7 @@
 
 .root {
 	font-family: var(--font-geist-sans);
-	background-color: $whiterSmoke;
+	background-color: $background-main;
 
 	@include pageMargin();
 }

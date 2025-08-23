@@ -29,14 +29,14 @@
 		.input {
 			width: 100%;
 			padding: $spacingXs;
-			background-color: $whiteSmoke;
+			background-color: $background-light;
 			border: none;
 			border-radius: $spacingXxs;
 			font-size: $text-md;
 
 			&:hover,
 			&:focus {
-				background-color: $gainsboro;
+				background-color: $shadowLight1;
 				border: none;
 			}
 		}

@@ -33,12 +33,20 @@
 				@include base.textContainer();
 
 				& {
-					margin-top: $spacingXxs;
-					gap: $spacingXs;
-				}
-				.title,
-				.description {
-					margin: 0 0;
+					gap: $spacingXxxs;
+
+					.title,
+					.description {
+						margin: 0 0;
+					}
+
+					@container content-container (min-width: 20rem) {
+						gap: $spacingXxs;
+					}
+
+					@container content-container (min-width: 24rem) {
+						gap: $spacingXs;
+					}
 				}
 			}
 
@@ -57,6 +65,22 @@
 	}
 }
 
+// ///////////// BUG //////////////// //
+// I think we need to actually apply a class
+// to the content container of leftToRight
+// I think that's the 'bleeding' css issue
+// We are applying the correct styles
+// Then potentially the incorrect
+// Then fixing
+// Fix With
+// .article {
+// 	all: initial;
+// 	* {
+// 		all: unset;
+// 	}
+// }
+// Before using mixin to populate .article
+/////////////////////////////////////////
 @mixin articleCardLeftRight(
 	$maxWidth: $contentWidthMd,
 	$minWidth: $contentWidthMd
@@ -79,7 +103,6 @@
 
 			.textContainer {
 				@include base.textContainer();
-
 				& {
 					margin-top: 0;
 					gap: 0;
@@ -125,7 +148,6 @@
 
 			.meta {
 				@include base.meta();
-
 				& {
 					margin: 0;
 					margin-left: $spacingXxs;
@@ -171,23 +193,19 @@
 
 			.textContainer {
 				@include base.textContainer();
-
-				.title {
-					@include textMixins.maxLines(1);
-					font-size: clamp(1rem, 3cqi, 1.5rem);
-				}
-
-				.description {
-					display: none;
-					font-size: clamp(1rem, 3cqi, 1.2rem);
-				}
-
 				& {
 					margin-top: 0;
 					gap: 0;
 
 					.title {
+						@include textMixins.maxLines(1);
+						font-size: clamp(1rem, 3cqi, 1.5rem);
 						margin-bottom: 0;
+					}
+
+					.description {
+						display: none;
+						font-size: clamp(1rem, 3cqi, 1.2rem);
 					}
 
 					.title,
@@ -206,6 +224,14 @@
 
 	.template {
 		width: 100%;
-		// some height
+	}
+}
+
+@mixin clearArticle {
+	.article {
+		all: initial;
+		* {
+			all: unset;
+		}
 	}
 }

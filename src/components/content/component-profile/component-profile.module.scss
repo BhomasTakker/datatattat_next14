@@ -1,5 +1,4 @@
 @use "../../../scss/abstracts/font" as *;
-@use "../../../scss/abstracts/colours" as colours;
 @use "../../../scss/abstracts/units" as *;
 
 .root {
@@ -8,7 +7,7 @@
 
 	.title {
 		font: $titleXs;
-		color: colours.$titleColourDark;
+		color: $text;
 
 		// we cannot use variables with container queries
 		// I think this is the case / follow up on this

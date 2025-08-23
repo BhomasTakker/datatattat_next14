@@ -1,5 +1,6 @@
-@use "../../../scss/abstracts/colours/" as colours;
+@use "../../../scss/abstracts/colours/" as *;
 @use "../../../scss/abstracts/units/" as *;
+@use "../../../scss/abstracts/font/" as *;
 
 .root {
 	border-radius: 10%;
@@ -8,11 +9,11 @@
 	text-transform: uppercase;
 	white-space: nowrap;
 	p {
-		color: colours.$textColourDark;
+		color: $text;
 	}
 
 	&:hover,
 	&:focus-visible {
-		background-color: colours.$shadowLight0;
+		background-color: $shadowLight0;
 	}
 }

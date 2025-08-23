@@ -55,6 +55,7 @@
 		:nth-child(4),
 		:nth-child(5) {
 			grid-column: unset;
+			@include article.clearArticle;
 			@include article.articleCardTopDown($contentWidthXl2, $contentWidthXs);
 		}
 
@@ -72,11 +73,13 @@
 		grid-template-columns: repeat(5, 1fr);
 		grid-template-rows: repeat(2, 1fr);
 
+		@include article.clearArticle;
 		@include article.articleCardTopDown($contentWidthXl2, $contentWidthXs);
 
 		:first-child {
 			grid-row: 1 / 3;
 			grid-column: 1 / 3;
+			@include article.clearArticle;
 			@include article.articleCardTopDown($contentWidthXl6, $contentWidthSm);
 		}
 
@@ -87,6 +90,8 @@
 		:nth-child(6),
 		:nth-child(7) {
 			grid-column: unset;
+			@include article.clearArticle;
+			@include article.articleCardTopDown($contentWidthXl2, $contentWidthXs);
 		}
 	}
 }

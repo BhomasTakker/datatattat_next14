@@ -6,20 +6,24 @@
 	display: flex;
 
 	.title {
-		font: $titleSm;
-		font-family: $text-font;
-		color: $titleColourDark;
+		font: $titleMd;
+		color: $text-sharp;
 		padding: $spacingXxs 0 $spacingXxs;
 
 		justify-content: left;
 
 		@media screen and (min-width: $screenWidthSm) {
-			font: $titleMd;
+			font: $titleLg;
 			padding: $spacingXs 0 $spacingXs;
 		}
 
 		@media screen and (min-width: $screenWidthMd) {
 			font: $titleXl;
+			padding: $spacingSm 0 $spacingSm;
+		}
+
+		@media screen and (min-width: $screenWidthLg) {
+			font: $titleXl2;
 			padding: $spacingSm 0 $spacingSm;
 		}
 	}

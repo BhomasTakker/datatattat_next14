@@ -1,4 +1,4 @@
-@use "../../scss/abstracts/colours/" as colours;
+@use "../../scss/abstracts/colours/" as *;
 @use "../../scss/abstracts/ui/" as ui;
 @use "../../scss/abstracts/units/" as *;
 @use "../../scss/abstracts/font/" as *;
@@ -11,7 +11,7 @@
 	border-bottom: ui.$divider;
 
 	.datatattat {
-		color: colours.$logoDark;
+		color: $text-sharp;
 		font: $titleXl;
 	}
 
@@ -21,12 +21,12 @@
 		padding: $spacingXs;
 		border-radius: 50%;
 		.logo {
-			color: colours.$logoDark;
+			color: $text;
 			font-size: $title-md;
 		}
 		&:hover,
 		&:focus {
-			background-color: colours.$shadowLight1;
+			background-color: $shadowLight1;
 		}
 	}
 
@@ -40,13 +40,13 @@
 
 		.logo {
 			font-size: $title-md;
-			color: colours.$textColourDark;
+			color: $text-sharp;
 		}
 		p {
-			color: colours.$textColourDark;
+			color: $text;
 		}
 		&:hover {
-			background-color: colours.$shadowLight1;
+			background-color: $shadowLight1;
 		}
 	}
 

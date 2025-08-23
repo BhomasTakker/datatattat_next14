@@ -31,8 +31,8 @@
 
 			height: $spacingXxxl;
 			width: $spacingXxxl;
-			background-color: $whiteSmoke;
-			color: $textColourDark;
+			background-color: $background-light;
+			color: $text-sharp;
 
 			.icon {
 				display: none;
@@ -40,12 +40,12 @@
 		}
 
 		&:hover .checkmark {
-			background-color: $gainsboro;
+			background-color: $shadowLight1;
 		}
 
 		&:has(input:checked) {
 			.checkmark {
-				background-color: $whiteSmoke;
+				background-color: $background-light;
 				.icon {
 					display: block;
 				}
@@ -58,7 +58,7 @@
 			&:hover {
 				cursor: not-allowed;
 				.checkmark {
-					background-color: $whiteSmoke;
+					background-color: $background-light;
 				}
 			}
 		}

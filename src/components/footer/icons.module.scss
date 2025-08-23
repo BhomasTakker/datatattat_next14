@@ -1,17 +1,16 @@
 @use "../../scss/abstracts/units/" as *;
 @use "../../scss/abstracts/colours/" as *;
+@use "../../scss/abstracts/font/" as *;
 
 .root {
-	color: $darkGrey;
-
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
 	gap: $spacingXxxl;
 
 	.icon {
-		color: $darkGrey;
-		font-size: $spacingXxxl;
+		font: $titleXl3;
+		color: $text;
 	}
 
 	@media screen and (min-width: $screenWidthMd) {

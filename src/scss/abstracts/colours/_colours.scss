@@ -1,37 +1,14 @@
-$black: #000000;
-$white: #ffffff;
+$shadowLight0: hsla(0, 0%, 5%, 0.05);
+$shadowLight1: hsla(0, 0%, 5%, 0.1);
+$shadowLight2: hsla(0, 0%, 5%, 0.2);
+$shadowLight3: hsla(0, 0%, 5%, 0.3);
 
-$darkestGrey: #282828;
-$darkGrey: #505050;
-$dimGrey: #696969;
-$grey: #808080;
-$lightGrey: #d3d3d3;
-$silver: #c0c0c0;
-$gainsboro: #dcdcdc;
-$whiteSmoke: #f5f5f5;
-$whiterSmoke: #fafafa;
+$background-main: hsl(0, 0%, 98%);
+$background: hsl(0, 0%, 86%);
+$background-light: hsl(0, 0%, 96%);
+$background-dark: hsl(0, 0%, 86%);
 
-$backgroundMain: $whiteSmoke;
+$error-strong: hsl(0, 100%, 50%);
+$error: hsl(0, 65%, 50%);
 
-$titleColourDark: $darkestGrey;
-$titleColourLight: $gainsboro;
-
-$logoDark: $darkGrey;
-$logoLight: $gainsboro;
-
-$shadowLight0: #28282805;
-$shadowLight1: #28282810;
-$shadowLight2: #28282820;
-$shadowLight3: #28282830;
-$shadowLight4: #28282840;
-$shadowLight5: #28282850;
-
-$error: #ff0000;
-$warning: #ffcc00;
-$success: #00ff00;
-
-// new text colour
-$text-1: hsl(0, 0%, 10%);
-
-$textColourDark: $text-1;
-$textColourLight: $gainsboro;
+$gradient: linear-gradient(0deg, var($shadowLight2), var($shadowLight1));
