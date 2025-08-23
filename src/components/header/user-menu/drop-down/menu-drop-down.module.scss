@@ -3,7 +3,7 @@
 
 .dropdown {
 	position: absolute;
-	top: $contentHeightXs2;
+	top: $contentHeightXs5;
 	right: 5%;
 	width: $contentWidthLg;
 	background-color: $gainsboro;
@@ -21,7 +21,7 @@
 	}
 
 	.dropDownItem {
-		height: $contentHeightXs3;
+		height: $contentHeightXs5;
 		display: flex;
 		align-items: center;
 		border-radius: $spacingXxs;
@@ -45,12 +45,12 @@
 		display: flex;
 		align-items: center;
 		gap: $spacingXs;
-		height: $contentHeightXs3;
+		height: $contentHeightXs5;
 		background-color: $gainsboro;
 		border: 1px solid $whiteSmoke;
 		.profileImage {
-			width: $contentWidthXs3;
-			height: $contentHeightXs3;
+			width: $contentWidthXs5;
+			height: $contentHeightXs5;
 		}
 	}
 }

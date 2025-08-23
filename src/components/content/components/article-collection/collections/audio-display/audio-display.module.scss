@@ -25,23 +25,23 @@
 
 		@include ui.scrollYNoScroller();
 		@include article.articleCardListItem(
-			$contentWidthXs,
 			$contentWidthXs4,
+			$contentWidthXs7,
 			1,
 			1
 		);
 		@media screen and (min-width: $screenWidthSm) {
 			@include article.articleCardListItem(
-				$contentWidthXs,
 				$contentWidthXs4,
+				$contentWidthXs7,
 				1,
 				1
 			);
 		}
 		@media screen and (min-width: $screenWidthMd) {
 			@include article.articleCardListItem(
-				$contentWidthXs,
 				$contentWidthXs4,
+				$contentWidthXs7,
 				1,
 				1
 			);
