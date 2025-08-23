@@ -2,7 +2,7 @@
 
 .root {
 	display: flex;
-	gap: $rem_4;
+	gap: $spacingMd;
 
 	.image {
 		width: 100px;
@@ -10,7 +10,7 @@
 	.content {
 		display: flex;
 		flex-direction: column;
-		gap: $rem_2;
+		gap: $spacingXs;
 
 		.name {
 		}

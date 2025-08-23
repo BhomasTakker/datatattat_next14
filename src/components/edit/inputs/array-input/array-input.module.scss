@@ -5,13 +5,13 @@
 .root {
 	display: flex;
 	flex-direction: column;
-	gap: $rem_4;
+	gap: $spacingMd;
 
 	// border: 1px solid #ccc;
-	box-shadow: 0 0 $rem_1 $shadowLight3;
+	box-shadow: 0 0 $spacingXxs $shadowLight3;
 
-	margin-top: $rem_4;
-	padding: $rem_4;
+	margin-top: $spacingMd;
+	padding: $spacingMd;
 
 	.title {
 	}
@@ -19,11 +19,11 @@
 	.input {
 		display: flex;
 		flex-direction: column-reverse;
-		gap: $rem_2;
+		gap: $spacingXs;
 
 		.icons {
 			display: flex;
-			gap: $rem_2;
+			gap: $spacingXs;
 			align-items: center;
 			align-self: end;
 		}
@@ -34,6 +34,6 @@
 	}
 	.input:not(:last-of-type) {
 		border-bottom: $divider;
-		padding-bottom: $rem_4;
+		padding-bottom: $spacingMd;
 	}
 }

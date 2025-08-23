@@ -1,7 +1,7 @@
 @use "../colours/" as colours;
-@use "../units/" as units;
+@use "../units/" as *;
 
-$divider: units.$px_4 solid colours.$shadowLight2;
+$divider: 1px solid colours.$shadowLight2;
 
 $page_marginSm: 2.5%;
 $page_marginMd: 5%;

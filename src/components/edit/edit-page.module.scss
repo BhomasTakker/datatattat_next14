@@ -4,8 +4,7 @@
 .root {
 	display: flex;
 	flex-direction: column;
-	gap: $rem_4;
-	// padding-top: $rem_4;
+	gap: $spacingMd;
 
 	.title {
 		font-size: $text_10;
@@ -14,22 +13,21 @@
 	fieldset {
 		display: flex;
 		flex-direction: column;
-		// gap: $rem_1;
 		border: none;
 		padding: 0;
 		margin: 0;
 	}
 
 	label {
-		padding-bottom: $rem_2;
+		padding-bottom: $spacingXs;
 	}
 
 	input {
 		width: 100%;
-		padding: $rem_2;
+		padding: $spacingXs;
 		background-color: $whiteSmoke;
 		border: none;
-		border-radius: $rem_1;
+		border-radius: $spacingXxs;
 		font-size: $text_3;
 
 		&:hover,
@@ -41,9 +39,9 @@
 
 	select {
 		width: 100%;
-		padding: $rem_2;
+		padding: $spacingXs;
 		border: none;
-		border-radius: $rem_1;
+		border-radius: $spacingXxs;
 		background-color: $whiteSmoke;
 
 		&:hover,

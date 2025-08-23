@@ -8,7 +8,7 @@
 .form {
 	display: flex;
 	flex-direction: column;
-	padding: $rem_2;
+	padding: $spacingXs;
 	background-color: $whiteSmoke;
 	border-radius: 5%;
 	box-shadow: $shadowLight1;
@@ -29,7 +29,7 @@
 	.warn {
 		color: $error;
 		font-style: italic;
-		margin-top: $rem_1;
+		margin-top: $spacingXxs;
 	}
 }
 
@@ -37,7 +37,7 @@
 	border: none;
 	background-color: unset;
 	cursor: pointer;
-	padding: $rem_2;
+	padding: $spacingXs;
 	border-radius: 5%;
 
 	.logo {

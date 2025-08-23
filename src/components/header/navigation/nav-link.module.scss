@@ -1,9 +1,9 @@
 @use "../../../scss/abstracts/colours/" as colours;
-@use "../../../scss/abstracts/units/" as units;
+@use "../../../scss/abstracts/units/" as *;
 
 .root {
 	border-radius: 10%;
-	padding: units.$rem_5 units.$rem_2;
+	padding: $spacingLg $spacingXs;
 
 	text-transform: uppercase;
 	white-space: nowrap;
