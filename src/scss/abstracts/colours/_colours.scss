@@ -13,12 +13,6 @@ $whiterSmoke: #fafafa;
 
 $backgroundMain: $whiteSmoke;
 
-$titleColourDark: $darkestGrey;
-$titleColourLight: $gainsboro;
-
-$logoDark: $darkGrey;
-$logoLight: $gainsboro;
-
 $shadowLight0: #28282805;
 $shadowLight1: #28282810;
 $shadowLight2: #28282820;
@@ -30,8 +24,11 @@ $error: #ff0000;
 $warning: #ffcc00;
 $success: #00ff00;
 
-// new text colour
-$text-1: hsl(0, 0%, 10%);
+$background: hsl(0, 0%, 90%);
+$background-light: hsl(0, 0%, 95%);
+$background-dark: hsl(0, 0%, 80%);
 
-$textColourDark: $text-1;
-$textColourLight: $gainsboro;
+$border: hsl(0, 0%, 70%);
+$border-light: hsl(0, 0%, 85%);
+
+$gradient: linear-gradient(0deg, var($background-dark), var($background-light));

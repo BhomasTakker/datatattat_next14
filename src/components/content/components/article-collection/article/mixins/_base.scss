@@ -1,14 +1,14 @@
 @use "../../../../../../scss/mixins/text/" as textMixins;
 @use "../../../../../../scss/abstracts/units" as *;
-@use "../../../../../../scss/abstracts/colours" as colours;
+@use "../../../../../../scss/abstracts/colours" as *;
 @use "../../../../../../scss/abstracts/font" as *;
 
 // layout of these isn't likely to change across implementations
 @mixin article() {
 	display: flex;
 
-	background-color: colours.$whiteSmoke;
-	color: colours.$textColourDark;
+	background-color: $whiteSmoke;
+	color: $text;
 
 	&:hover,
 	&:focus {
@@ -50,9 +50,9 @@
 	}
 	.description {
 		font: $textMd;
-
+		color: $text-muted;
 		display: none;
-		font-size: clamp(0.8rem, 4cqi, 1.75rem);
+		font-size: clamp(0.85rem, 4cqi, 1.75rem);
 	}
 
 	@container content-container (min-width: 12rem) {
