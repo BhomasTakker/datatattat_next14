@@ -1,5 +1,6 @@
 @use "../../../../scss/abstracts/units/" as *;
 @use "../../../../scss/abstracts/colours/" as *;
+@use "../../../../scss/abstracts/font/" as *;
 
 .input {
 	display: flex;
@@ -10,7 +11,7 @@
 		gap: $spacingSm;
 		position: relative;
 		cursor: pointer;
-		font-size: $text_4;
+		font-size: $text-lg;
 		-webkit-user-select: none;
 		-moz-user-select: none;
 		-ms-user-select: none;

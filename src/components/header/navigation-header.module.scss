@@ -1,6 +1,7 @@
 @use "../../scss/abstracts/colours/" as colours;
 @use "../../scss/abstracts/ui/" as ui;
 @use "../../scss/abstracts/units/" as *;
+@use "../../scss/abstracts/font/" as *;
 
 .root {
 	display: grid;
@@ -11,7 +12,7 @@
 
 	.datatattat {
 		color: colours.$logoDark;
-		font-size: $text_6;
+		font: $titleXl;
 	}
 
 	.homeContainer {
@@ -21,7 +22,7 @@
 		border-radius: 50%;
 		.logo {
 			color: colours.$logoDark;
-			font-size: $text_6;
+			font-size: $title-md;
 		}
 		&:hover,
 		&:focus {
@@ -38,7 +39,7 @@
 		cursor: pointer;
 
 		.logo {
-			font-size: $text_6;
+			font-size: $title-md;
 			color: colours.$textColourDark;
 		}
 		p {

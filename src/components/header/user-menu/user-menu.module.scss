@@ -1,5 +1,6 @@
 @use "../../../scss/abstracts/colours/" as *;
 @use "../../../scss/abstracts/units/" as *;
+@use "../../../scss/abstracts/font/" as *;
 
 .menuButton {
 	border: none;
@@ -9,7 +10,7 @@
 	border-radius: 50%;
 
 	.logo {
-		font-size: $text_6;
+		font-size: $title-md;
 		color: $textColourDark;
 	}
 

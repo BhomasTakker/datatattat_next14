@@ -1,5 +1,6 @@
 @use "../../scss/abstracts/units" as *;
 @use "../../scss/abstracts/colours/" as *;
+@use "../../scss/abstracts/font/" as *;
 
 .root {
 	display: flex;
@@ -7,7 +8,8 @@
 	gap: $spacingMd;
 
 	.title {
-		font-size: $text_10;
+		font: $titleXl3;
+		padding-top: $spacingMd;
 	}
 
 	fieldset {
@@ -28,7 +30,7 @@
 		background-color: $whiteSmoke;
 		border: none;
 		border-radius: $spacingXxs;
-		font-size: $text_3;
+		font: $textMd;
 
 		&:hover,
 		&:focus {
@@ -47,7 +49,6 @@
 		&:hover,
 		&:focus {
 			background-color: $gainsboro;
-			// border: none;
 			option {
 				background-color: $whiteSmoke;
 			}

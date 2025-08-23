@@ -1,5 +1,6 @@
 @use "../../../scss/abstracts/colours/" as *;
 @use "../../../scss/abstracts/units/" as *;
+@use "../../../scss/abstracts/font/" as *;
 
 .form {
 	.header {
@@ -31,7 +32,7 @@
 			background-color: $whiteSmoke;
 			border: none;
 			border-radius: $spacingXxs;
-			font-size: $text_3;
+			font-size: $text-md;
 
 			&:hover,
 			&:focus {

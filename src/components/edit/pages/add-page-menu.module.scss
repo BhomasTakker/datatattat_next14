@@ -1,5 +1,6 @@
 @use "../../../scss/abstracts/colours/" as *;
 @use "../../../scss/abstracts/units/" as *;
+@use "../../../scss/abstracts/font/" as *;
 
 .container {
 	display: flex;
@@ -41,7 +42,7 @@
 	border-radius: 5%;
 
 	.logo {
-		font-size: $text_6;
+		font-size: $title-md;
 		color: $textColourDark;
 	}
 
