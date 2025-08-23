@@ -42,7 +42,7 @@
 
 	.title {
 		@include textMixins.maxLines(3);
-		font-family: $component-title-font;
+		font-family: $text-font;
 		font-weight: $title-font-weight;
 
 		margin: units.$rem_1 units.$rem_0;

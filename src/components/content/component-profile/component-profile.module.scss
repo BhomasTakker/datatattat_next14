@@ -9,7 +9,7 @@
 	.title {
 		// margin: $rem_4 $rem_0 $rem_0;
 		font-size: text.$component-title-sm;
-		font-family: text.$component-title-font;
+		font-family: text.$text-font;
 		color: colours.$titleColourDark;
 
 		// we cannot use variables with container queries
