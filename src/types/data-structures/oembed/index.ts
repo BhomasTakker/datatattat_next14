@@ -23,6 +23,12 @@ export type TikTokOEmbedParams = {
 	videoId: string;
 } & OEmbedParams;
 
+export type SpotifyOEmbedParams = {
+	variant: OembedOptions.spotify;
+	asset: string;
+	contentId: string;
+} & OEmbedParams;
+
 export type GenericOEmbedParams = TwitterOEmbedParams;
 
 export type OEmbed = {
