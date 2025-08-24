@@ -17,6 +17,18 @@ export type BlueskyOEmbedParams = {
 	postId: string;
 } & OEmbedParams;
 
+export type TikTokOEmbedParams = {
+	variant: OembedOptions.tiktok;
+	account: string;
+	videoId: string;
+} & OEmbedParams;
+
+export type SpotifyOEmbedParams = {
+	variant: OembedOptions.spotify;
+	asset: string;
+	contentId: string;
+} & OEmbedParams;
+
 export type GenericOEmbedParams = TwitterOEmbedParams;
 
 export type OEmbed = {

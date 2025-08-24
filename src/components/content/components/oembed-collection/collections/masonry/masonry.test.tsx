@@ -5,7 +5,7 @@ import type { OEmbed } from "@/types/data-structures/oembed";
 import { ContainerWidthOptions } from "@/components/page/components/stack/types";
 
 // Mock the ClientOembed component
-jest.mock("../../../content-oembed/client-component", () => ({
+jest.mock("../../content-oembed/client-component", () => ({
 	ClientOembed: ({ html }: { html: string }) => (
 		<div
 			data-testid="client-oembed"

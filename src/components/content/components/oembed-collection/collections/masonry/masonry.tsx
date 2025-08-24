@@ -1,5 +1,5 @@
 import { OEmbed } from "@/types/data-structures/oembed";
-import { ClientOembed } from "../../../content-oembed/client-component";
+import { ClientOembed } from "../../content-oembed/client-component";
 import styles from "./masonry.module.scss";
 import { ContainerWidthOptions } from "@/components/page/components/stack/types";
 
