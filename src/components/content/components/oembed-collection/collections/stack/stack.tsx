@@ -1,5 +1,5 @@
 import { OEmbed } from "@/types/data-structures/oembed";
-import { ClientOembed } from "../../../content-oembed/client-component";
+import { ClientOembed } from "../../content-oembed/client-component";
 import styles from "./stack.module.scss";
 
 export type OembedStackProps = {};
