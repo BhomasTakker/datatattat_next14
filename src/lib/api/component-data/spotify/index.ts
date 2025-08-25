@@ -3,7 +3,7 @@ import { fetchOembedList } from "@/lib/api/component-data/oembed/utils";
 import { OEmbed } from "@/types/data-structures/oembed";
 import { SpotifyVariant } from "./query/utils";
 import { spotifyOembedByResponse } from "../oembed/options/spotify";
-import { SearchParams } from "@/types/api/spotify";
+import { EpisodeItem, SearchParams } from "@/types/api/spotify";
 
 type SpotifyFetchParams = {
 	variant?: SpotifyVariant; // Type of query to perform
@@ -19,7 +19,7 @@ type SpotifyFetchParams = {
 export const spotifyFetch = async (params: SpotifyFetchParams) => {
 	const { variant = SpotifyVariant.Search, ...fetchParams } = params;
 
-	let items: any[] = [];
+	let items: EpisodeItem[] = [];
 
 	switch (variant) {
 		case SpotifyVariant.Search:
@@ -34,6 +34,7 @@ export const spotifyFetch = async (params: SpotifyFetchParams) => {
 	const { script, createUrl } = spotifyOembedByResponse;
 	const results = await fetchOembedList(items, createUrl);
 
+	// We could filter audio and video?
 	const filteredResults = results.filter((item) => {
 		if (!item) return false;
 
