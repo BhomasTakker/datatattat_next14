@@ -1,5 +1,8 @@
 import { EditInputs } from "@/components/edit/inputs/inputs";
-import { SearchTypes } from "@/types/api/spotify";
+import {
+	SearchTypes,
+	SpotifySearchResultsSortOptions,
+} from "@/types/api/spotify";
 import { InputListProps } from "@/types/edit/inputs/inputs";
 
 export const SPOTIFY_SEARCH: InputListProps = {
@@ -58,6 +61,19 @@ export const SPOTIFY_SEARCH: InputListProps = {
 			label: "Include external",
 			options: ["audio"],
 			required: false,
+		},
+		// Conversions for filter
+		{
+			id: "sort",
+			type: EditInputs.select,
+			label: "Sort by",
+			options: [
+				SpotifySearchResultsSortOptions.relevance,
+				SpotifySearchResultsSortOptions.created_date,
+				SpotifySearchResultsSortOptions.duration,
+			],
+			defaultValue: SpotifySearchResultsSortOptions.relevance,
+			required: true,
 		},
 	],
 };

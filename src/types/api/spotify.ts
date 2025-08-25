@@ -26,6 +26,16 @@ export type SearchParams = {
 	include_external?: "audio";
 };
 
+export enum SpotifySearchResultsSortOptions {
+	relevance = "relevance",
+	created_date = "created_date",
+	duration = "duration",
+}
+
+export type SpotifySearchProps = {
+	sort: SpotifySearchResultsSortOptions;
+} & SearchParams;
+
 export type EpisodeItem = {
 	// audio_preview_url: string; deprecated
 	description: string;

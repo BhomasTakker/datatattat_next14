@@ -1,11 +1,15 @@
-import { SearchParams, SearchResponse } from "@/types/api/spotify";
+import {
+	SearchParams,
+	SearchResponse,
+	SpotifySearchProps,
+} from "@/types/api/spotify";
 import { getSpotifyAccessToken } from "./get-access-token";
 
 // config
 const SPOTIFY_SEARCH_URL = "https://api.spotify.com/v1/search";
 
 // you could make this a util
-// if in given object add
+// if in given object add?
 const createUrl = ({
 	q,
 	type,
@@ -25,7 +29,7 @@ const createUrl = ({
 	return fetchUrl;
 };
 
-export const search = async (params: SearchParams) => {
+export const search = async (params: SpotifySearchProps) => {
 	const accessToken = await getSpotifyAccessToken();
 
 	if (!accessToken) {
