@@ -2,19 +2,13 @@ import { search } from "./query/search";
 import { fetchOembedList } from "@/lib/api/component-data/oembed/utils";
 import { SpotifyVariant } from "./query/utils";
 import { spotifyOembedByResponse } from "../oembed/options/spotify";
-import { EpisodeItem, SearchParams } from "@/types/api/spotify";
+import { EpisodeItem, SpotifySearchProps } from "@/types/api/spotify";
 import { spotifyConversion, oembedConversion } from "./conversions/episode";
 
+// Check this - we can get from somewhere
 type SpotifyFetchParams = {
 	variant?: SpotifyVariant; // Type of query to perform
-	feed?: string; // Feed URI
-	actor?: string; // Author DID
-	uri?: string; // Post URI
-	cursor?: string; // Cursor for pagination
-	limit?: number; // Number of posts to fetch
-	depth?: number; // Depth of replies to fetch
-	parentHeight?: number; // Height of the parent post
-};
+} & SpotifySearchProps;
 
 export const spotifyFetch = async (params: SpotifyFetchParams) => {
 	const { variant = SpotifyVariant.Search, ...fetchParams } = params;
@@ -24,7 +18,7 @@ export const spotifyFetch = async (params: SpotifyFetchParams) => {
 	switch (variant) {
 		case SpotifyVariant.Search:
 			{
-				items = await search(fetchParams as SearchParams);
+				items = await search(fetchParams);
 			}
 			break;
 		default:
@@ -35,7 +29,7 @@ export const spotifyFetch = async (params: SpotifyFetchParams) => {
 
 	// create conversions function
 	// provide spotify search conversion options
-	const filteredItems = spotifyConversion(items);
+	const filteredItems = spotifyConversion(items, params);
 
 	const results = await fetchOembedList(filteredItems, createUrl);
 

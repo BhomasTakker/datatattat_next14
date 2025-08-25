@@ -1,25 +1,58 @@
 import { composeTransducers, processWithTransducer } from "@/data/conversions";
-import { createDateSortTransducer } from "@/data/conversions/transducers/sort";
+import { getSortTransducer } from "@/data/conversions/transducers/sort";
 import {
-	filterTransducer,
-	mapTransducer,
-} from "@/data/conversions/transducers/transducers";
-import { EpisodeItem } from "@/types/api/spotify";
+	SortDirection,
+	SortType,
+} from "@/data/conversions/transducers/sort/types";
+
+import { filterTransducer } from "@/data/conversions/transducers/transducers";
+import {
+	EpisodeItem,
+	SpotifySearchProps,
+	SpotifySearchResultsSortOptions,
+} from "@/types/api/spotify";
 import { OEmbed } from "@/types/data-structures/oembed";
 
-export const spotifyConversion = (items: EpisodeItem[]) => {
-	const mapFilter = mapTransducer<EpisodeItem, EpisodeItem, EpisodeItem[]>(
-		(item) => {
-			return item;
-		}
-	);
+/////////////////////////////////////
+// This would be a conversions util?
+// get from map of available sorts
+// pass in id and params
+/////////////////////////////////////
+// With conversions
+// We would specify the id to apply the sort function to
+/////////////////////////////////////
+const getSort = (params: SpotifySearchProps) => {
+	const { sort, direction = SortDirection.Descending } = params;
 
-	const sortNewDescending = createDateSortTransducer<EpisodeItem>({
-		id: "release_date",
-		type: "ascending",
-	});
+	if (!sort) return [];
+	switch (sort) {
+		case SpotifySearchResultsSortOptions.released:
+			const transducer = getSortTransducer(
+				SortType.Date,
+				"release_date",
+				direction
+			);
+			return transducer ? [transducer] : [];
+		case SpotifySearchResultsSortOptions.duration:
+			const durationTransducer = getSortTransducer(
+				SortType.Number,
+				"duration_ms",
+				direction
+			);
+			return durationTransducer ? [durationTransducer] : [];
+		case SpotifySearchResultsSortOptions.relevance:
+		default:
+			return [];
+	}
+};
 
-	const transducer = composeTransducers(mapFilter, sortNewDescending);
+export const spotifyConversion = (
+	items: EpisodeItem[],
+	params: SpotifySearchProps
+) => {
+	const sort = getSort(params);
+
+	const transducer = composeTransducers(...sort);
 	const result = processWithTransducer(items, transducer);
 	return result;
 };
@@ -27,6 +60,7 @@ export const spotifyConversion = (items: EpisodeItem[]) => {
 export const oembedConversion = (items: (OEmbed | null)[]) => {
 	const validItems = items.filter((item): item is OEmbed => item !== null);
 
+	// spotify has a video player but no other way for us to omit it
 	const filterAudio = filterTransducer<OEmbed, OEmbed[]>(
 		(item) => item.type !== "video"
 	);

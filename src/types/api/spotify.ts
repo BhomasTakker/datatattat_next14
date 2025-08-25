@@ -1,3 +1,5 @@
+import { SortDirection } from "@/data/conversions/transducers/sort/types";
+
 export enum SearchTypes {
 	Album = "album",
 	Artist = "artist",
@@ -28,12 +30,13 @@ export type SearchParams = {
 
 export enum SpotifySearchResultsSortOptions {
 	relevance = "relevance",
-	created_date = "created_date",
+	released = "released",
 	duration = "duration",
 }
 
 export type SpotifySearchProps = {
 	sort: SpotifySearchResultsSortOptions;
+	direction?: SortDirection;
 } & SearchParams;
 
 export type EpisodeItem = {

@@ -5,6 +5,26 @@ import {
 } from "@/types/api/spotify";
 import { InputListProps } from "@/types/edit/inputs/inputs";
 
+export const NUMERIC_SORT_CONFIG: InputListProps = {
+	id: "numeric_sort",
+	type: EditInputs.inputList,
+	// label: "Released Date",
+	inputs: [
+		{
+			id: "direction",
+			type: EditInputs.select,
+			label: "Sort Direction",
+			options: ["ascending", "descending"],
+		},
+	],
+};
+
+const sortMap = new Map<string, InputListProps | null>([
+	[SpotifySearchResultsSortOptions.relevance, null],
+	[SpotifySearchResultsSortOptions.released, NUMERIC_SORT_CONFIG],
+	[SpotifySearchResultsSortOptions.duration, NUMERIC_SORT_CONFIG],
+]);
+
 export const SPOTIFY_SEARCH: InputListProps = {
 	id: "spotifySearch",
 	type: EditInputs.inputList,
@@ -65,15 +85,13 @@ export const SPOTIFY_SEARCH: InputListProps = {
 		// Conversions for filter
 		{
 			id: "sort",
-			type: EditInputs.select,
+			type: EditInputs.objectSelect,
 			label: "Sort by",
-			options: [
-				SpotifySearchResultsSortOptions.relevance,
-				SpotifySearchResultsSortOptions.created_date,
-				SpotifySearchResultsSortOptions.duration,
-			],
+			optionMap: sortMap,
+			options: [...sortMap.keys()],
 			defaultValue: SpotifySearchResultsSortOptions.relevance,
 			required: true,
+			// optionId: "sort",
 		},
 	],
 };
