@@ -52,6 +52,8 @@ export const spotifyConversion = (
 ) => {
 	const sort = getSort(params);
 
+	// filters
+
 	const transducer = composeTransducers(...sort);
 	const result = processWithTransducer(items, transducer);
 	return result;
