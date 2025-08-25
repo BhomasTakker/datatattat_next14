@@ -10,7 +10,7 @@ const SPOTIFY_SEARCH_URL = "https://api.spotify.com/v1/search";
 
 // you could make this a util
 // if in given object add?
-const createUrl = ({
+const createSearchUrl = ({
 	q,
 	type,
 	market,
@@ -37,7 +37,7 @@ export const search = async (params: SpotifySearchProps) => {
 		return [];
 	}
 
-	const fetchUrl = createUrl(params);
+	const fetchUrl = createSearchUrl(params);
 
 	const response = await fetch(fetchUrl.toString(), {
 		headers: {
