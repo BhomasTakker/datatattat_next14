@@ -4,7 +4,7 @@ import {
 	sortTransducer,
 	createTakeTransducer,
 	createSkipTransducer,
-} from "./transducers";
+} from "./transducers/transducers";
 
 // Example data structures for demonstration
 interface Song {

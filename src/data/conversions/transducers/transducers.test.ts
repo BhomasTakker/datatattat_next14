@@ -4,7 +4,7 @@ import {
 	sortTransducer,
 	createTakeTransducer,
 	createSkipTransducer,
-} from "./transducers/transducers";
+} from "./transducers";
 
 describe("Transducers", () => {
 	// Helper reducer functions for testing

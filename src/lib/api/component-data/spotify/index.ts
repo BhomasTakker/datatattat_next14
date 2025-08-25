@@ -12,7 +12,7 @@ import {
 	sortTransducer,
 	mapTransducer,
 	filterTransducer,
-} from "@/data/conversions/transducers";
+} from "@/data/conversions/transducers/transducers";
 
 type SpotifyFetchParams = {
 	variant?: SpotifyVariant; // Type of query to perform

@@ -5,7 +5,7 @@ import {
 	sortTransducer,
 	createTakeTransducer,
 	createSkipTransducer,
-} from "./transducers";
+} from "./transducers/transducers";
 
 describe("Transducer Utilities", () => {
 	describe("processWithTransducer", () => {

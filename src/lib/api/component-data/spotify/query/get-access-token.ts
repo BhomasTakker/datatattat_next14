@@ -2,6 +2,7 @@
 
 const CLIENT_ID = process.env.SPOTIFY_CLIENT_ID || "";
 const CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET || "";
+const SPOTIFY_TOKEN_PATH = "https://accounts.spotify.com/api/token";
 
 // dupe with mongo
 // can we create a utils for this kind of thing?
@@ -29,7 +30,7 @@ export const getSpotifyAccessToken = async () => {
 	const expired = cached.expires && Date.now() > cached.expires;
 
 	if (!cached.promise || expired) {
-		cached.promise = fetch("https://accounts.spotify.com/api/token", {
+		cached.promise = fetch(SPOTIFY_TOKEN_PATH, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/x-www-form-urlencoded",
