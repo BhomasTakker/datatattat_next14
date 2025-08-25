@@ -15,12 +15,10 @@ type SearchResponse = {
 export const convertSearchResponseToPostUris = (result: SearchResponse) => {
 	let postUris: string[] = [];
 	const posts = result.posts;
-	// if (!result || !Array.isArray(result.posts)) return postUris; // Ensure posts is an array
+
 	posts.forEach((post) => {
 		if (!AppBskyFeedPost.isRecord(post.record)) return;
-		// if (post && post.uri) {
 		postUris.push(post.uri);
-		// }
 	});
 	return postUris;
 };
@@ -42,6 +40,7 @@ export const searchPosts = async (params: SearchPostsParams) => {
 			process.env.BLUESKY_AUTHOR_IDENTIFIER || "datatattat.bsky.social",
 		password: process.env.BLUESKY_AUTHOR_PASSWORD || "",
 	});
+	// Why is this / we need to comment this?
 	const transformedParams = transformSearchParams(params);
 
 	try {
