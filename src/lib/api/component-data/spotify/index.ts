@@ -1,19 +1,9 @@
 import { search } from "./query/search";
 import { fetchOembedList } from "@/lib/api/component-data/oembed/utils";
-import { OEmbed } from "@/types/data-structures/oembed";
 import { SpotifyVariant } from "./query/utils";
 import { spotifyOembedByResponse } from "../oembed/options/spotify";
 import { EpisodeItem, SearchParams } from "@/types/api/spotify";
-import {
-	composeTransducers,
-	processWithTransducer,
-} from "../../../../data/conversions";
-import {
-	sortTransducer,
-	mapTransducer,
-	filterTransducer,
-} from "@/data/conversions/transducers/transducers";
-import { createDateSortTransducer } from "@/data/conversions/transducers/sort";
+import { spotifyConversion, oembedConversion } from "./conversions/episode";
 
 type SpotifyFetchParams = {
 	variant?: SpotifyVariant; // Type of query to perform
@@ -24,34 +14,6 @@ type SpotifyFetchParams = {
 	limit?: number; // Number of posts to fetch
 	depth?: number; // Depth of replies to fetch
 	parentHeight?: number; // Height of the parent post
-};
-
-const spotifyConversion = (items: EpisodeItem[]) => {
-	const mapFilter = mapTransducer<EpisodeItem, EpisodeItem, EpisodeItem[]>(
-		(item) => {
-			return item;
-		}
-	);
-
-	const sortNewDescending = createDateSortTransducer<EpisodeItem>({
-		id: "release_date",
-		type: "ascending",
-	});
-
-	const transducer = composeTransducers(mapFilter, sortNewDescending);
-	const result = processWithTransducer(items, transducer);
-	return result;
-};
-
-const oembedConversion = (items: (OEmbed | null)[]) => {
-	const validItems = items.filter((item): item is OEmbed => item !== null);
-
-	const filterAudio = filterTransducer<OEmbed, OEmbed[]>(
-		(item) => item.type !== "video"
-	);
-	const transducer = composeTransducers(filterAudio);
-	const result = processWithTransducer(validItems, transducer);
-	return result;
 };
 
 export const spotifyFetch = async (params: SpotifyFetchParams) => {
@@ -71,12 +33,14 @@ export const spotifyFetch = async (params: SpotifyFetchParams) => {
 
 	const { script, createUrl } = spotifyOembedByResponse;
 
-	// filter
+	// create conversions function
+	// provide spotify search conversion options
 	const filteredItems = spotifyConversion(items);
 
-	// Elsewhere function / oembed load etc
 	const results = await fetchOembedList(filteredItems, createUrl);
 
+	// create conversions function
+	// provide oembed conversion options
 	const filteredResults = oembedConversion(results);
 
 	return {
