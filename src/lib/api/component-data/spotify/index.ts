@@ -13,6 +13,7 @@ import {
 	mapTransducer,
 	filterTransducer,
 } from "@/data/conversions/transducers/transducers";
+import { createDateSortTransducer } from "@/data/conversions/transducers/sort";
 
 type SpotifyFetchParams = {
 	variant?: SpotifyVariant; // Type of query to perform
@@ -25,19 +26,6 @@ type SpotifyFetchParams = {
 	parentHeight?: number; // Height of the parent post
 };
 
-const createDateSortTransducer = ({
-	id,
-	type,
-}: {
-	id: Partial<keyof EpisodeItem>;
-	type: "ascending" | "descending";
-}) =>
-	sortTransducer<EpisodeItem>((a, b) => {
-		return type === "ascending"
-			? Date.parse(String(a[id])) - Date.parse(String(b[id]))
-			: Date.parse(String(b[id])) - Date.parse(String(a[id]));
-	});
-
 const spotifyConversion = (items: EpisodeItem[]) => {
 	const mapFilter = mapTransducer<EpisodeItem, EpisodeItem, EpisodeItem[]>(
 		(item) => {
@@ -45,7 +33,7 @@ const spotifyConversion = (items: EpisodeItem[]) => {
 		}
 	);
 
-	const sortNewDescending = createDateSortTransducer({
+	const sortNewDescending = createDateSortTransducer<EpisodeItem>({
 		id: "release_date",
 		type: "ascending",
 	});
