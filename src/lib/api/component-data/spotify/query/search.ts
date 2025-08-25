@@ -1,32 +1,20 @@
-import { get } from "http";
+import { SearchParams, SearchResponse } from "@/types/api/spotify";
 import { getSpotifyAccessToken } from "./get-access-token";
 
-export type SearchParams = {
-	q: string;
-};
-
-export type EpisodeItem = {
-	id: string;
-	type: string;
-	title: string;
-	description: string;
-	thumbnail: string;
-};
-
-type SearchResponse = {
-	episodes: {
-		href: string;
-		next: string;
-		limit: number;
-		offset: number;
-		previous: string | null;
-		total: number;
-		items: EpisodeItem[];
-	};
-};
+// we need to provide a sort
+// potentially filter
+// the spotify api is pretty lame for filtering etc
 
 export const search = async (params: SearchParams) => {
 	// console.log("Searching spotify with params:", params);
+	const {
+		q,
+		type,
+		market,
+		limit: searchLimit,
+		offset: searchOffset,
+		include_external,
+	} = params;
 	const accessToken = await getSpotifyAccessToken();
 
 	if (!accessToken) {
@@ -34,10 +22,8 @@ export const search = async (params: SearchParams) => {
 		return [];
 	}
 
-	console.log("Access token:", accessToken);
-
 	const response = await fetch(
-		`https://api.spotify.com/v1/search?q=${params.q || "Ukraine"}&type=episode`,
+		`https://api.spotify.com/v1/search?q=${q}&type=${type}`,
 		{
 			headers: {
 				Authorization: `Bearer ${accessToken}`,
@@ -50,11 +36,9 @@ export const search = async (params: SearchParams) => {
 		return [];
 	}
 
-	// console.log("Search response:", response);
-
 	const data = (await response.json()) as SearchResponse;
 	const { episodes, ...rest } = data;
 	const { href, next, limit, offset, previous, total, items = [] } = episodes;
-	// console.log("Search response:", rest, episodes);
+
 	return items;
 };

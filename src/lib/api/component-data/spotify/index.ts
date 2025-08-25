@@ -1,8 +1,9 @@
-import { search, SearchParams } from "./query/search";
+import { search } from "./query/search";
 import { fetchOembedList } from "@/lib/api/component-data/oembed/utils";
 import { OEmbed } from "@/types/data-structures/oembed";
 import { SpotifyVariant } from "./query/utils";
 import { spotifyOembedByResponse } from "../oembed/options/spotify";
+import { SearchParams } from "@/types/api/spotify";
 
 type SpotifyFetchParams = {
 	variant?: SpotifyVariant; // Type of query to perform
