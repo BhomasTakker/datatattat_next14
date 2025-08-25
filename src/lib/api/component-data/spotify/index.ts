@@ -4,6 +4,13 @@ import { OEmbed } from "@/types/data-structures/oembed";
 import { SpotifyVariant } from "./query/utils";
 import { spotifyOembedByResponse } from "../oembed/options/spotify";
 import { EpisodeItem, SearchParams } from "@/types/api/spotify";
+import {
+	composeTransducers,
+	filterTransducer,
+	mapTransducer,
+	processWithTransducer,
+	sortTransducer,
+} from "./conversions";
 
 type SpotifyFetchParams = {
 	variant?: SpotifyVariant; // Type of query to perform
@@ -14,6 +21,47 @@ type SpotifyFetchParams = {
 	limit?: number; // Number of posts to fetch
 	depth?: number; // Depth of replies to fetch
 	parentHeight?: number; // Height of the parent post
+};
+
+const createDateSortTransducer = ({
+	id,
+	type,
+}: {
+	id: Partial<keyof EpisodeItem>;
+	type: "ascending" | "descending";
+}) =>
+	sortTransducer<EpisodeItem>((a, b) => {
+		return type === "ascending"
+			? Date.parse(String(a[id])) - Date.parse(String(b[id]))
+			: Date.parse(String(b[id])) - Date.parse(String(a[id]));
+	});
+
+const spotifyConversion = (items: EpisodeItem[]) => {
+	const mapFilter = mapTransducer<EpisodeItem, EpisodeItem, EpisodeItem[]>(
+		(item) => {
+			return item;
+		}
+	);
+
+	const sortNewDescending = createDateSortTransducer({
+		id: "release_date",
+		type: "ascending",
+	});
+
+	const transducer = composeTransducers(mapFilter, sortNewDescending);
+	const result = processWithTransducer(items, transducer);
+	return result;
+};
+
+const oembedConversion = (items: (OEmbed | null)[]) => {
+	const validItems = items.filter((item): item is OEmbed => item !== null);
+
+	const filterAudio = filterTransducer<OEmbed, OEmbed[]>(
+		(item) => item.type !== "video"
+	);
+	const transducer = composeTransducers(filterAudio);
+	const result = processWithTransducer(validItems, transducer);
+	return result;
 };
 
 export const spotifyFetch = async (params: SpotifyFetchParams) => {
@@ -32,18 +80,14 @@ export const spotifyFetch = async (params: SpotifyFetchParams) => {
 	}
 
 	const { script, createUrl } = spotifyOembedByResponse;
-	const results = await fetchOembedList(items, createUrl);
 
-	// We could filter audio and video?
-	const filteredResults = results.filter((item) => {
-		if (!item) return false;
+	// filter
+	const filteredItems = spotifyConversion(items);
 
-		// For spotify we can filter out video
-		// video embeds are a different size etc
-		if (item.type === "video") return false;
+	// Elsewhere function / oembed load etc
+	const results = await fetchOembedList(filteredItems, createUrl);
 
-		return true;
-	}) as OEmbed[];
+	const filteredResults = oembedConversion(results);
 
 	return {
 		items: filteredResults,

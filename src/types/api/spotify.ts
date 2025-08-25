@@ -27,13 +27,39 @@ export type SearchParams = {
 };
 
 export type EpisodeItem = {
-	id: string;
-	type: SearchType;
-	title: string;
+	// audio_preview_url: string; deprecated
 	description: string;
-	thumbnail: string;
+	html_description: string;
+	duration_ms: number;
+	explicit: boolean;
+	external_urls: {
+		spotify: string;
+	};
+	href: string;
+	id: string;
+	images: {
+		url: string;
+		width: number;
+		height: number;
+	}[];
+	isExternallyHosted: boolean;
+	is_playable: boolean;
+	languages: string[];
+	name: string;
+	release_date: string;
+	release_date_precision: "day" | "month" | "year";
+	resume_point: {
+		fully_played: boolean;
+		resume_position_ms: number;
+	};
+	type: SearchType;
+	uri: string;
+	restrictions: {
+		reason: "market" | "product" | "explicit";
+	};
 };
 
+// can be Episode, Track, Playlist, Search etc
 export type SearchResponse = {
 	episodes: {
 		href: string;
