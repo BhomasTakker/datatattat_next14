@@ -6,11 +6,13 @@ import { spotifyOembedByResponse } from "../oembed/options/spotify";
 import { EpisodeItem, SearchParams } from "@/types/api/spotify";
 import {
 	composeTransducers,
-	filterTransducer,
-	mapTransducer,
 	processWithTransducer,
-	sortTransducer,
 } from "../../../../data/conversions";
+import {
+	sortTransducer,
+	mapTransducer,
+	filterTransducer,
+} from "@/data/conversions/transducers";
 
 type SpotifyFetchParams = {
 	variant?: SpotifyVariant; // Type of query to perform

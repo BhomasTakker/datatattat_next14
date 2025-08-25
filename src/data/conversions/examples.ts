@@ -1,12 +1,10 @@
+import { composeTransducers, processWithTransducer } from "./index";
 import {
-	composeTransducers,
-	mapTransducer,
 	filterTransducer,
 	sortTransducer,
 	createTakeTransducer,
 	createSkipTransducer,
-	processWithTransducer,
-} from "./index";
+} from "./transducers";
 
 // Example data structures for demonstration
 interface Song {
