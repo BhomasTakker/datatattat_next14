@@ -3,11 +3,13 @@ import { WithQuery } from "@/types/component";
 import { cloneDeep } from "@/utils/object";
 import { youtubeApiFetch } from "../google/youtube/youtube-api";
 import { blueSkyFetch } from "@/lib/bluesky/query";
+import { spotifyFetch } from "../spotify";
 
 type APIOptions =
 	| typeof searchArticles
 	| typeof youtubeApiFetch
 	| typeof blueSkyFetch
+	| typeof spotifyFetch
 	| null;
 
 const apiMap = new Map<string, APIOptions>([
@@ -15,6 +17,7 @@ const apiMap = new Map<string, APIOptions>([
 	["articles-search-api", searchArticles],
 	["youtube-api", youtubeApiFetch],
 	["bluesky-api", blueSkyFetch],
+	["spotify-api", spotifyFetch],
 ]);
 
 // We need to specify a cache time for the data

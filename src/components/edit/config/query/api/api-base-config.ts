@@ -3,6 +3,7 @@ import { GenericInput } from "@/types/edit/inputs/inputs";
 import { ARTICLES_SEARCH_API_CONFIG } from "./apis/articles-search/articles-search-api";
 import { YOUTUBE_API_CONFIG } from "./apis/youtube-api";
 import { BLUESKY_API_CONFIG } from "./apis/bluesky/bluesky-api";
+import { SPOTIFY_API_CONFIG } from "./apis/spotify/spotify-api";
 
 // Should be more global type/ struct we use these options elsewhere
 
@@ -11,6 +12,7 @@ export enum APIOptions {
 	ARTICLES_SEARCH_API = "articles-search-api",
 	YOUTUBE_API = "youtube-api",
 	BLUESKY_API = "bluesky-api",
+	SPOTIFY_API = "spotify-api",
 }
 
 // All just InputListProps
@@ -18,13 +20,15 @@ type apiContainersProps =
 	| null
 	| typeof ARTICLES_SEARCH_API_CONFIG
 	| typeof YOUTUBE_API_CONFIG
-	| typeof BLUESKY_API_CONFIG;
+	| typeof BLUESKY_API_CONFIG
+	| typeof SPOTIFY_API_CONFIG;
 
 const apiMap = new Map<string, apiContainersProps>([
 	[APIOptions.NONE, null],
 	[APIOptions.ARTICLES_SEARCH_API, ARTICLES_SEARCH_API_CONFIG],
 	[APIOptions.YOUTUBE_API, YOUTUBE_API_CONFIG],
-	[APIOptions.BLUESKY_API, BLUESKY_API_CONFIG], // Placeholder for future BlueSky API config
+	[APIOptions.BLUESKY_API, BLUESKY_API_CONFIG],
+	[APIOptions.SPOTIFY_API, SPOTIFY_API_CONFIG],
 ]);
 
 export type GetAPIConfig = {
