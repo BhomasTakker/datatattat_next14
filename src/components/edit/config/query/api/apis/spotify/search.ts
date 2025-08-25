@@ -43,6 +43,8 @@ export const SPOTIFY_SEARCH: InputListProps = {
 			type: EditInputs.number,
 			label: "Limit",
 			required: false,
+			min: 1,
+			max: 50,
 		},
 		{
 			id: "offset",
