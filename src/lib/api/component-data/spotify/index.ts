@@ -29,10 +29,14 @@ export const spotifyFetch = async (params: SpotifyFetchParams) => {
 
 	// create conversions function
 	// provide spotify search conversion options
-	const filteredItems = spotifyConversion(items, params);
+	const filteredItems = spotifyConversion(items, params) as EpisodeItem[];
 
 	const results = await fetchOembedList(filteredItems, createUrl);
 
+	// We wouldn't necessarily do this
+	// We may want the original data
+	// to i.e. make cards from
+	//
 	// create conversions function
 	// provide oembed conversion options
 	const filteredResults = oembedConversion(results);

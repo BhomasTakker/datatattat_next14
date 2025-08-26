@@ -1,6 +1,6 @@
 import { SpotifyOEmbedParams } from "@/types/data-structures/oembed";
 import { createQueryParameters } from "../oembed-query-params";
-import { EpisodeItem } from "../../spotify/query/search";
+import { EpisodeItem } from "@/types/api/spotify";
 
 const spotifyBaseUrl = "https://open.spotify.com/oembed";
 

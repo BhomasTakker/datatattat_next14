@@ -15,10 +15,6 @@ export type OEmbedCollectionProps = {
 	script?: string;
 };
 
-type OembedComponentProps = {
-	variantType: OembedCollectionVariants;
-};
-
 // We should/could have bluesky api come through this?
 // It looks like it would be very easy to integrate
 // then we can get rid of the bluesky specific code
