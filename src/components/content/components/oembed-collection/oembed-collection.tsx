@@ -8,7 +8,7 @@
 import { ComponentProps } from "@/types/component";
 import { OEmbed } from "@/types/data-structures/oembed";
 import { useEffect } from "react";
-import { OembedCollectionVariants, VariantsMap } from "./variant-map";
+import { VariantsMap } from "./variant-map";
 
 export type OEmbedCollectionProps = {
 	items: OEmbed[];
