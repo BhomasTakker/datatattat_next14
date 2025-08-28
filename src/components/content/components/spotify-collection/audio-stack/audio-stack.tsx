@@ -1,16 +1,11 @@
-import { OEmbed } from "@/types/data-structures/oembed";
 import styles from "./audio-stack.module.scss";
+import { AudioStackClientComponent } from "./audio-stack-client";
+import { EpisodeItem } from "@/types/api/spotify";
 
-export type OembedStackProps = {};
+export type AudioStackProps = {};
 
-type SpotifyOembed = {
-	iframe_url: string;
-} & OEmbed;
-
-const renderMethod = (items: SpotifyOembed[] = [], props: OembedStackProps) => {
-	console.log("AUIO:STACK", { items, props });
-
-	return <div>Spotify Audio Stack</div>;
+const renderMethod = (items: EpisodeItem[] = [], props: AudioStackProps) => {
+	return <AudioStackClientComponent items={items} />;
 };
 
 const spotifyAudioStack = {
