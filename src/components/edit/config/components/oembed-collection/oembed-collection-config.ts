@@ -43,7 +43,7 @@ export const OEMBED_COLLECTION_CONFIG: InputListProps = {
 			options: [QueryOptions.OEMBED_LIST, QueryOptions.API_QUERY],
 			defaultSelection: QueryOptions.OEMBED_LIST,
 			apiConfigOptions: {
-				options: [APIOptions.BLUESKY_API, APIOptions.SPOTIFY_API],
+				options: [APIOptions.BLUESKY_API],
 				defaultSelection: APIOptions.BLUESKY_API,
 			},
 		}),

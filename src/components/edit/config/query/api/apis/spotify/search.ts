@@ -45,15 +45,7 @@ export const SPOTIFY_SEARCH: InputListProps = {
 			id: "type",
 			type: EditInputs.select,
 			label: "Search type",
-			options: [
-				SearchTypes.Album,
-				SearchTypes.Artist,
-				SearchTypes.Episode,
-				SearchTypes.Playlist,
-				SearchTypes.Show,
-				SearchTypes.Track,
-				SearchTypes.Audiobook,
-			],
+			options: [SearchTypes.Episode, SearchTypes.Track],
 		},
 		{
 			id: "market",
