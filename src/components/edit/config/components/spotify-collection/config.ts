@@ -28,7 +28,7 @@ export const SPOTIFY_COLLECTION_CONFIG: InputListProps = {
 			id: "variantType",
 			type: EditInputs.objectSelect,
 			label: "Spotify Collection Variant",
-			defaultValue: "oembed-stack",
+			defaultValue: SpotifyCollectionVariants.SpotifyOembed,
 			required: true,
 			options,
 			optionMap: collectionsMap,
