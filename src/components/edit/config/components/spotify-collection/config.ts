@@ -2,11 +2,13 @@ import { InputListProps } from "@/types/edit/inputs/inputs";
 import { EditInputs } from "../../../inputs/inputs";
 import { SpotifyCollectionVariants } from "@/components/content/components/spotify-collection/variant-map";
 import { SPOTIFY_OEMBED_CONFIG } from "./collections/oembed";
+import { SPOTIFY_AUDIO_STACK_CONFIG } from "./collections/audio-stack";
 
 type spotifyCollectionProps = typeof SPOTIFY_OEMBED_CONFIG;
 
 const collectionsMap = new Map<string, spotifyCollectionProps>([
 	[SpotifyCollectionVariants.SpotifyOembed, SPOTIFY_OEMBED_CONFIG],
+	[SpotifyCollectionVariants.SpotifyAudioStack, SPOTIFY_AUDIO_STACK_CONFIG],
 ]);
 
 // there may be a better way
