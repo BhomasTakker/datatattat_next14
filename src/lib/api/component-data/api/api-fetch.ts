@@ -39,6 +39,7 @@ export const apiFetch = async (query: WithQuery) => {
 	// we are unable to set required params
 	// so technically we arent this OR this OR this
 	// we are this AND this AND this....
+	// @ts-expect-error - type is incorrect but wrong to do this....
 	const data = await api(params);
 
 	return cloneDeep(data);
