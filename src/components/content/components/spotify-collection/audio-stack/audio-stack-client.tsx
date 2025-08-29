@@ -51,7 +51,7 @@ const SpotifyArticle = ({ item, onClick, index }: SpotifyArticleProps) => {
 
 export const AudioStackClientComponent = ({ items }: AudioStackClientProps) => {
 	const [initialItem, setInitialItem] = useState(items[0]);
-	const { script, createUrl } = spotifyOembedByResponse;
+	const { createUrl } = spotifyOembedByResponse;
 	const [displayComponent, setDisplayComponent] = useState<JSX.Element | null>(
 		null
 	);
@@ -77,8 +77,6 @@ export const AudioStackClientComponent = ({ items }: AudioStackClientProps) => {
 	const handleArticleClick = (index: number) => {
 		setInitialItem(items[index]);
 	};
-
-	console.log("Initial item:", initialItem);
 
 	// We should convert to Article using converfsions
 	const articles = items.map((item, index) => {
