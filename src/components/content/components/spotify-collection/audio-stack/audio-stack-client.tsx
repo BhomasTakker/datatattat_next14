@@ -10,24 +10,7 @@ import styles from "./audio-stack.module.scss";
 import { Interaction } from "../../article-collection/article/interaction/interactions";
 import { InteractionsOptions } from "../../article-collection/article/interaction/interactions-map";
 import { InViewComponent } from "@/components/ui/in-view/in-view";
-import { CollectionItem } from "@/types/data-structures/collection/item/item";
-
-type SpotifyCollectionItem = CollectionItem & {
-	id: string;
-	media: {
-		type: SearchType;
-	};
-};
-
-type AudioStackClientProps = {
-	items: SpotifyCollectionItem[];
-};
-
-type SpotifyArticleProps = {
-	item: SpotifyCollectionItem;
-	onClick: (index: number) => void;
-	index: number;
-};
+import { AudioStackClientProps, SpotifyArticleProps } from "./types";
 
 const SpotifyArticle = ({ item, onClick, index }: SpotifyArticleProps) => {
 	return (
