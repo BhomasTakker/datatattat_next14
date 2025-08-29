@@ -1,6 +1,6 @@
 import { SpotifyOEmbedParams } from "@/types/data-structures/oembed";
 import { createQueryParameters } from "../oembed-query-params";
-import { EpisodeItem } from "@/types/api/spotify";
+import { EpisodeItem, SearchType } from "@/types/api/spotify";
 
 const spotifyBaseUrl = "https://open.spotify.com/oembed";
 
@@ -16,9 +16,14 @@ export const spotifyOembed = {
 	},
 };
 
+type Item = {
+	id: string;
+	type: SearchType;
+};
+
 export const spotifyOembedByResponse = {
 	script: "",
-	createUrl: (item: EpisodeItem) => {
+	createUrl: (item: Item) => {
 		const { id, type } = item;
 		const queryParams = createQueryParameters();
 
