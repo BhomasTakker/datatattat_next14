@@ -1,9 +1,7 @@
 import { search } from "./query/search";
-import { fetchOembedList } from "@/lib/api/component-data/oembed/utils";
 import { SpotifyVariant } from "./query/utils";
-import { spotifyOembedByResponse } from "../oembed/options/spotify";
 import { EpisodeItem, SpotifySearchProps } from "@/types/api/spotify";
-import { spotifyConversion, oembedConversion } from "./conversions/episode";
+import { spotifyConversion } from "./conversions/episode";
 
 // Check this - we can get from somewhere
 type SpotifyFetchParams = {
@@ -25,24 +23,9 @@ export const spotifyFetch = async (params: SpotifyFetchParams) => {
 			items = [];
 	}
 
-	const { script, createUrl } = spotifyOembedByResponse;
-
-	// create conversions function
-	// provide spotify search conversion options
 	const filteredItems = spotifyConversion(items, params) as EpisodeItem[];
 
-	const results = await fetchOembedList(filteredItems, createUrl);
-
-	// We wouldn't necessarily do this
-	// We may want the original data
-	// to i.e. make cards from
-	//
-	// create conversions function
-	// provide oembed conversion options
-	const filteredResults = oembedConversion(results);
-
 	return {
-		items: filteredResults,
-		script: script,
+		items: filteredItems,
 	};
 };
