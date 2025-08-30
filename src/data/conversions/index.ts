@@ -1,11 +1,14 @@
 // Helper function to apply transducers to arrays
-export const processWithTransducer = <T>(
-	data: T[],
+export const processWithTransducer = <TInput, TOutput>(
+	data: TInput[],
 	transducer: (
-		reducer: (acc: T[], value: T) => T[]
-	) => (acc: T[], value: T) => T[]
-): T[] => {
-	const arrayReducer = (acc: T[], value: T): T[] => [...acc, value];
+		reducer: (acc: TOutput[], value: TInput) => TOutput[]
+	) => (acc: TOutput[], value: TInput) => TOutput[]
+): TOutput[] => {
+	const arrayReducer = (acc: TOutput[], value: TInput): TOutput[] => [
+		...acc,
+		value as unknown as TOutput,
+	];
 	const transformedReducer = transducer(arrayReducer);
 	return data.reduce(transformedReducer, []);
 };

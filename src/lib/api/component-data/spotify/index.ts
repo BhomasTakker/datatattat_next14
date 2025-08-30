@@ -23,7 +23,7 @@ export const spotifyFetch = async (params: SpotifyFetchParams) => {
 			items = [];
 	}
 
-	const filteredItems = spotifyConversion(items, params) as EpisodeItem[];
+	const filteredItems = spotifyConversion(items, params);
 
 	return {
 		items: filteredItems,

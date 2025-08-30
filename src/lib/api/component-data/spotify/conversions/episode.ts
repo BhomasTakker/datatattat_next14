@@ -1,7 +1,7 @@
 import { SpotifyCollectionItem } from "@/components/content/components/spotify-collection/audio-stack/types";
 import { composeTransducers, processWithTransducer } from "@/data/conversions";
 import { filterTransducer } from "@/data/conversions/transducers/transducers";
-import { SpotifySearchProps } from "@/types/api/spotify";
+import { EpisodeItem, SpotifySearchProps } from "@/types/api/spotify";
 import { OEmbed } from "@/types/data-structures/oembed";
 import { getSort } from "./sort";
 import { mapEpisodeToCollectionItem } from "./map";
@@ -16,7 +16,7 @@ import { mapEpisodeToCollectionItem } from "./map";
 /////////////////////////////////////
 
 export const spotifyConversion = (
-	items: SpotifyCollectionItem[],
+	items: EpisodeItem[],
 	params: SpotifySearchProps
 ) => {
 	const sort = getSort(params);
