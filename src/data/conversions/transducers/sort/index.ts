@@ -1,5 +1,6 @@
 // use export * from 'xxx';
 // We would expect a lot maybe?
+import { getNestedValue } from "@/utils/object";
 import { sortTransducer } from "../transducers";
 import { SortDirection, SortType } from "./types";
 
@@ -29,26 +30,28 @@ export const createDateSortTransducer = <T>({
 	id,
 	type,
 }: {
-	id: Partial<keyof T>;
+	id: string;
 	type: SortDirection;
 }) =>
 	sortTransducer<T>((a, b) => {
 		return type === SortDirection.Ascending
-			? Date.parse(String(a[id])) - Date.parse(String(b[id]))
-			: Date.parse(String(b[id])) - Date.parse(String(a[id]));
+			? Date.parse(String(getNestedValue(id, a))) -
+					Date.parse(String(getNestedValue(id, b)))
+			: Date.parse(String(getNestedValue(id, b))) -
+					Date.parse(String(getNestedValue(id, a)));
 	});
 
 export const createNumberSortTransducer = <T>({
 	id,
 	type,
 }: {
-	id: Partial<keyof T>;
+	id: string;
 	type: SortDirection;
 }) =>
 	sortTransducer<T>((a, b) => {
 		return type === SortDirection.Ascending
-			? Number(a[id]) - Number(b[id])
-			: Number(b[id]) - Number(a[id]);
+			? Number(getNestedValue(id, a)) - Number(getNestedValue(id, b))
+			: Number(getNestedValue(id, b)) - Number(getNestedValue(id, a));
 	});
 
 // separate off?
@@ -58,11 +61,11 @@ const sortMap = new Map([
 	// [SortType.String, createStringSortTransducer],
 ]);
 
-export const getSortTransducer = (
+export const getSortTransducer = <T>(
 	sortType: SortType,
 	id: string,
 	direction: SortDirection
 ) => {
 	const sortTransducer = sortMap.get(sortType);
-	return sortTransducer ? sortTransducer({ id, type: direction }) : null;
+	return sortTransducer ? sortTransducer<T>({ id, type: direction }) : null;
 };
