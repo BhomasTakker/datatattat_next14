@@ -39,6 +39,12 @@ export const oembedFetchList = async (
 
 	const filteredResults = results.filter((item) => item !== null) as OEmbed[];
 
+	// For Spotify for example
+	// We need to set a regex pattern on html - height="\d+" => height="800" - or set height
+	// create conversions function
+	// provide oembed conversion options
+	// const filteredResults = oembedConversion(results);
+
 	return {
 		items: filteredResults,
 		script: script,

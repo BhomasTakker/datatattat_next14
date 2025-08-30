@@ -1,0 +1,54 @@
+@use "../../article-collection/article/mixins/" as article;
+@use "../../../../../scss/abstracts/units/" as *;
+@use "../../../../../scss/mixins/ui/" as ui;
+
+.root {
+	.audioPlayer {
+		width: 100%;
+	}
+
+	.articles {
+		display: flex;
+		flex-direction: column;
+		margin-top: $spacingXs;
+		gap: $spacingXs;
+
+		&.small {
+			height: $screenHeightMd;
+		}
+		&.medium {
+			height: $screenHeightLg;
+		}
+		&.large {
+			height: $screenHeightXl;
+		}
+
+		@include ui.scrollYNoScroller();
+		@include article.articleCardListItem(
+			$contentWidthXs4,
+			$contentWidthXs7,
+			1,
+			1
+		);
+		@media screen and (min-width: $screenWidthSm) {
+			@include article.articleCardListItem(
+				$contentWidthXs4,
+				$contentWidthXs7,
+				1,
+				1
+			);
+		}
+		@media screen and (min-width: $screenWidthMd) {
+			@include article.articleCardListItem(
+				$contentWidthXs4,
+				$contentWidthXs7,
+				1,
+				1
+			);
+		}
+
+		.article {
+			cursor: pointer;
+		}
+	}
+}

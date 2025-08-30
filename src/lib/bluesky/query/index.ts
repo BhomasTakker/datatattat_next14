@@ -53,6 +53,9 @@ export const blueSkyFetch = async (params: BlueSkyFectchParams) => {
 	}
 
 	const { script, createUrl } = blueskyOembedByUri;
+
+	// shouldn't be fetching Oembed here!!
+	// We may want use of the api data outside of Oembeds.
 	const results = await fetchOembedList(items, createUrl);
 
 	const filteredResults = results.filter((item) => item !== null) as OEmbed[];

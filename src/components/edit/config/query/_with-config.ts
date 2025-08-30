@@ -6,10 +6,12 @@ import { APIOptions, GetAPIConfig, getAPIConfig } from "./api/api-base-config";
 import { RSS_CONFIG } from "./rss/rss-config";
 import { MANUAL_VIDEO_SOURCES_QUERY_CONFIG } from "./video-sourcs/config";
 import { OEMBED_LIST_CONFIG } from "./oembed/oembed-list-config";
+import { SPOTIFY_COLLECTION_OEMBED_CONFIG } from "./oembed/providers/spotify";
 
 export enum QueryOptions {
 	NONE = "none",
 	RSS = ComponentDataOptions.RSS,
+	SPOTIFY_OEMBED = ComponentDataOptions.SPOTIFY_OEMBED,
 	OEMBED_LIST = ComponentDataOptions.OEMBED_LIST,
 	API_QUERY = ComponentDataOptions.API_QUERY,
 	HTML_META_QUERY = ComponentDataOptions.HTML_META_QUERY,
@@ -39,6 +41,7 @@ export const getComponentQueries = ({
 		[QueryOptions.NONE, null],
 		[QueryOptions.RSS, RSS_CONFIG],
 		[QueryOptions.OEMBED_LIST, OEMBED_LIST_CONFIG],
+		[QueryOptions.SPOTIFY_OEMBED, SPOTIFY_COLLECTION_OEMBED_CONFIG],
 		[QueryOptions.API_QUERY, getAPIConfig(apiOptions)],
 		[QueryOptions.HTML_META_QUERY, HTML_META_QUERY_CONFIG],
 		[QueryOptions.MANUAL_VIDEO_SOURCES, MANUAL_VIDEO_SOURCES_QUERY_CONFIG],

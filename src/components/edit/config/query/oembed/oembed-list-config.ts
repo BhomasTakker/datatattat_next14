@@ -39,7 +39,6 @@ const pageContainersMap = new Map<string, pageContainersProps>([
 	[OembedOptions.twitter, createOembedArray(TWITTER_OEMBED_CONFIG)],
 	[OembedOptions.bluesky, createOembedArray(BLUESKY_OEMBED_CONFIG)],
 	[OembedOptions.tiktok, createOembedArray(TIKTOK_OEMBED_CONFIG)],
-	[OembedOptions.spotify, createOembedArray(SPOTIFY_OEMBED_CONFIG)],
 ]);
 
 const oembedListParams: ObjectSelectProps = {

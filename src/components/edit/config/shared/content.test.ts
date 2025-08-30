@@ -1,6 +1,9 @@
 import { EditInputs } from "../../inputs/inputs";
-import { containerHeightOptions, containerWidthOptions } from "./options";
 import { useContainerWidth, useContainerHeight } from "./content";
+import {
+	ContainerHeightOptions,
+	ContainerWidthOptions,
+} from "@/components/page/components/stack/types";
 
 describe("content.ts", () => {
 	describe("useContainerWidth", () => {
@@ -14,8 +17,8 @@ describe("content.ts", () => {
 				id,
 				type: EditInputs.select,
 				label,
-				defaultValue: containerWidthOptions.MD,
-				options: Object.values(containerWidthOptions),
+				defaultValue: ContainerWidthOptions.MD,
+				options: Object.values(ContainerWidthOptions),
 			});
 		});
 
@@ -28,12 +31,12 @@ describe("content.ts", () => {
 		it("should use MD as default value", () => {
 			const result = useContainerWidth("test-id", "test-label");
 
-			expect(result.defaultValue).toBe(containerWidthOptions.MD);
+			expect(result.defaultValue).toBe(ContainerWidthOptions.MD);
 		});
 
 		it("should include all container width options", () => {
 			const result = useContainerWidth("test-id", "test-label");
-			const expectedOptions = Object.values(containerWidthOptions);
+			const expectedOptions = Object.values(ContainerWidthOptions);
 
 			expect(result.options).toEqual(expectedOptions);
 			expect(result.options).toHaveLength(7); // XXS, XS, SM, MD, LG, XL, XXL
@@ -73,8 +76,8 @@ describe("content.ts", () => {
 				id,
 				type: EditInputs.select,
 				label,
-				defaultValue: containerHeightOptions.MD,
-				options: Object.values(containerHeightOptions),
+				defaultValue: ContainerHeightOptions.MD,
+				options: Object.values(ContainerHeightOptions),
 			});
 		});
 
@@ -87,12 +90,12 @@ describe("content.ts", () => {
 		it("should use MD as default value", () => {
 			const result = useContainerHeight("test-id", "test-label");
 
-			expect(result.defaultValue).toBe(containerHeightOptions.MD);
+			expect(result.defaultValue).toBe(ContainerHeightOptions.MD);
 		});
 
 		it("should include all container height options", () => {
 			const result = useContainerHeight("test-id", "test-label");
-			const expectedOptions = Object.values(containerHeightOptions);
+			const expectedOptions = Object.values(ContainerHeightOptions);
 
 			expect(result.options).toEqual(expectedOptions);
 			expect(result.options).toHaveLength(7); // XXS, XS, SM, MD, LG, XL, XXL
@@ -128,11 +131,11 @@ describe("content.ts", () => {
 
 			expect(widthResult.type).toBe(heightResult.type);
 			expect(widthResult.options).toEqual(heightResult.options);
-			expect(widthResult.defaultValue).toBe(containerWidthOptions.MD);
-			expect(heightResult.defaultValue).toBe(containerHeightOptions.MD);
+			expect(widthResult.defaultValue).toBe(ContainerWidthOptions.MD);
+			expect(heightResult.defaultValue).toBe(ContainerHeightOptions.MD);
 		});
 
-		it("should use the same options since containerWidthOptions and containerHeightOptions have same values", () => {
+		it("should use the same options since ContainerWidthOptions and ContainerHeightOptions have same values", () => {
 			const widthResult = useContainerWidth("test-id", "test-label");
 			const heightResult = useContainerHeight("test-id", "test-label");
 
