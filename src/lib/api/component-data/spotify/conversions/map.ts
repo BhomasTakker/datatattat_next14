@@ -7,7 +7,6 @@ export const mapEpisodeToCollectionItem = mapTransducer<
 	SpotifyCollectionItem,
 	SpotifyCollectionItem[]
 >((item) => {
-	console.log("Mapping item:", item);
 	return {
 		id: item.id,
 		title: item.name,
