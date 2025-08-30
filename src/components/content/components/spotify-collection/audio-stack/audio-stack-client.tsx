@@ -11,7 +11,12 @@ import { Interaction } from "../../article-collection/article/interaction/intera
 import { InteractionsOptions } from "../../article-collection/article/interaction/interactions-map";
 import { InViewComponent } from "@/components/ui/in-view/in-view";
 import { AudioStackClientProps, SpotifyArticleProps } from "./types";
+import {
+	ContainerHeightOptions,
+	getContainerHeight,
+} from "@/components/page/components/stack/types";
 
+// this is a use client
 const SpotifyArticle = ({ item, onClick, index }: SpotifyArticleProps) => {
 	return (
 		<InViewComponent
@@ -32,13 +37,17 @@ const SpotifyArticle = ({ item, onClick, index }: SpotifyArticleProps) => {
 	);
 };
 
-export const AudioStackClientComponent = ({ items }: AudioStackClientProps) => {
+export const AudioStackClientComponent = ({
+	items,
+	height = ContainerHeightOptions.MD,
+}: AudioStackClientProps) => {
 	const [initialItem, setInitialItem] = useState(items[0]);
 	const { createUrl } = spotifyOembedByResponse;
 	const [displayComponent, setDisplayComponent] = useState<JSX.Element | null>(
 		null
 	);
 
+	// Could effectively create a DisplayComponent which could be client component
 	useEffect(() => {
 		const fetchDisplayOembed = async () => {
 			const { id, media } = initialItem || {};
@@ -61,6 +70,11 @@ export const AudioStackClientComponent = ({ items }: AudioStackClientProps) => {
 		setInitialItem(items[index]);
 	};
 
+	if (items.length === 0) {
+		console.error("No items received");
+		return null;
+	}
+
 	// We should convert to Article using converfsions
 	const articles = items.map((item, index) => {
 		return (
@@ -74,10 +88,17 @@ export const AudioStackClientComponent = ({ items }: AudioStackClientProps) => {
 		);
 	});
 
+	const containerHeight = getContainerHeight(height);
+
 	return (
 		<div>
 			{displayComponent}
-			<ul className={styles.articles}>{articles}</ul>
+			<ul
+				className={styles.articles}
+				style={{ height: `${containerHeight}px` }}
+			>
+				{articles}
+			</ul>
 		</div>
 	);
 };

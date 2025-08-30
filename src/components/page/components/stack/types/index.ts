@@ -50,7 +50,7 @@ export const ContainerHeightOptions = {
 
 type ContainerHeight = (typeof ContainerHeight)[keyof typeof ContainerHeight];
 
-type ContainerHeightOptions = keyof typeof ContainerHeight;
+export type ContainerHeightOptions = keyof typeof ContainerHeight;
 export const containerWidthOptions: ContainerWidthOptions[] = Object.keys(
 	ContainerWidth
 ) as ContainerWidthOptions[];

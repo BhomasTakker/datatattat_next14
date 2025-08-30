@@ -1,3 +1,4 @@
+import { ContainerHeightOptions } from "@/components/page/components/stack/types";
 import { SearchType } from "@/types/api/spotify";
 import { CollectionItem } from "@/types/data-structures/collection/item/item";
 
@@ -10,6 +11,7 @@ export type SpotifyCollectionItem = CollectionItem & {
 
 export type AudioStackClientProps = {
 	items: SpotifyCollectionItem[];
+	height: ContainerHeightOptions;
 };
 
 export type SpotifyArticleProps = {
