@@ -4,6 +4,7 @@ import {
 	GenericInput,
 	InputListProps,
 	ObjectSelectProps,
+	SelectInputProps,
 } from "@/types/edit/inputs/inputs";
 import { OembedOptions } from "@/lib/api/component-data/oembed/oembed-options";
 import { BLUESKY_OEMBED_CONFIG } from "./providers/bluesky";
@@ -51,12 +52,19 @@ const oembedListParams: ObjectSelectProps = {
 	optionMap: pageContainersMap,
 };
 
+const oembedDirectionParams: SelectInputProps = {
+	id: "direction",
+	type: EditInputs.select,
+	label: "Sort Direction",
+	options: ["normal", "reverse"],
+};
+
 const params: InputListProps = {
 	id: "params",
 	type: EditInputs.inputList,
 	label: "OEMBED QUERY",
 
-	inputs: [oembedListParams],
+	inputs: [oembedDirectionParams, oembedListParams],
 };
 
 export const OEMBED_LIST_CONFIG: InputListProps = {

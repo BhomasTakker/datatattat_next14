@@ -4,8 +4,14 @@ import { OEmbed, OEmbedParams } from "@/types/data-structures/oembed";
 import { UnknownObject } from "@/types/utils";
 import { fetchOembedList } from "./utils";
 
+enum OembedDirection {
+	Normal = "normal",
+	Reverse = "reverse",
+}
+
 type OembedListParams = {
 	variant: OEmbedParams["variant"];
+	direction: OembedDirection;
 	collection: UnknownObject[];
 };
 
@@ -14,15 +20,12 @@ type OembedListComponentProps = {
 	script: string;
 };
 
-// Make WithQuery generic so we don't have to caste
-// Not really fetch - more like get oembed data
-// We need to use selected variant to get required data
 export const oembedFetchList = async (
 	query: WithQuery
 ): Promise<OembedListComponentProps | null> => {
 	const { params } = query;
 
-	const { variant, collection } = params as OembedListParams;
+	const { variant, collection, direction } = params as OembedListParams;
 	const oembedCreator = getOembedObject(variant);
 	if (!oembedCreator) {
 		console.error("No oEmbed creator found for variant:", variant);
@@ -39,14 +42,13 @@ export const oembedFetchList = async (
 
 	const filteredResults = results.filter((item) => item !== null) as OEmbed[];
 
-	// For Spotify for example
-	// We need to set a regex pattern on html - height="\d+" => height="800" - or set height
-	// create conversions function
-	// provide oembed conversion options
-	// const filteredResults = oembedConversion(results);
+	const sortedItems =
+		direction === OembedDirection.Reverse
+			? filteredResults.reverse()
+			: filteredResults;
 
 	return {
-		items: filteredResults,
+		items: sortedItems,
 		script: script,
 	};
 };
