@@ -52,7 +52,10 @@ describe("Sort Transducers", () => {
 			]);
 
 			// Verify getNestedValue was called with correct parameters
-			expect(mockGetNestedValue).toHaveBeenCalledWith("date", expect.any(Object));
+			expect(mockGetNestedValue).toHaveBeenCalledWith(
+				"date",
+				expect.any(Object)
+			);
 		});
 
 		it("should sort dates in descending order", () => {
@@ -159,7 +162,10 @@ describe("Sort Transducers", () => {
 				{ id: 1, value: 30 },
 			]);
 
-			expect(mockGetNestedValue).toHaveBeenCalledWith("value", expect.any(Object));
+			expect(mockGetNestedValue).toHaveBeenCalledWith(
+				"value",
+				expect.any(Object)
+			);
 		});
 
 		it("should sort numbers in descending order", () => {
@@ -447,10 +453,13 @@ describe("Sort Transducers", () => {
 			});
 
 			const reducer = transducer(arrayReducer);
-			const result = testData.reduce(reducer, []) as Array<{ id: number; value: number }>;
+			const result = testData.reduce(reducer, []) as Array<{
+				id: number;
+				value: number;
+			}>;
 
 			expect(result).toHaveLength(3);
-			expect(result.every(item => item.value === 10)).toBe(true);
+			expect(result.every((item) => item.value === 10)).toBe(true);
 		});
 
 		it("should handle null and undefined values from getNestedValue", () => {
