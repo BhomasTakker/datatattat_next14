@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`ComponentProfile Snaps matches the snapshot when componentTitle is an empty string 1`] = `<DocumentFragment />`;
 
