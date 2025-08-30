@@ -50,21 +50,27 @@ export const AudioStackClientComponent = ({
 	// Could effectively create a DisplayComponent which could be client component
 	useEffect(() => {
 		const fetchDisplayOembed = async () => {
-			const { id, media } = initialItem || {};
+			try {
+				const { id, media } = initialItem || {};
 
-			if (!media) return;
+				if (!media) return;
 
-			const result = await fetchOembed<{ id: string; type: SearchType }>(
-				{ id: id, type: media.type },
-				createUrl
-			);
+				const result = await fetchOembed<{ id: string; type: SearchType }>(
+					{ id: id, type: media.type },
+					createUrl
+				);
 
-			const { html } = result;
+				const { html } = result;
 
-			setDisplayComponent(<ClientOembed html={html} />);
+				setDisplayComponent(<ClientOembed html={html} />);
+			} catch (error) {
+				console.error("Failed to fetch oembed data:", error);
+				// Optionally set a fallback component or leave displayComponent as null
+				setDisplayComponent(null);
+			}
 		};
 		fetchDisplayOembed();
-	}, [initialItem]);
+	}, [initialItem, createUrl]);
 
 	const handleArticleClick = (index: number) => {
 		setInitialItem(items[index]);
