@@ -41,7 +41,7 @@ export const AudioStackClientComponent = ({ items }: AudioStackClientProps) => {
 
 	useEffect(() => {
 		const fetchDisplayOembed = async () => {
-			const { id, media } = initialItem;
+			const { id, media } = initialItem || {};
 
 			if (!media) return;
 
