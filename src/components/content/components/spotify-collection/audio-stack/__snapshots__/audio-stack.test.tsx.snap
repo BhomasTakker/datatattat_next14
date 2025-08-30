@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`Audio Stack Component Test Suite renderMethod renders spotifyAudioStack unchanged 1`] = `
+<div>
+  <div
+    data-testid="audio-stack-client"
+  >
+    <div
+      data-testid="height-option"
+    >
+      MD
+    </div>
+    <div
+      data-testid="items-count"
+    >
+      2
+    </div>
+    <div
+      data-testid="item-test-track-1"
+    >
+      Test Song 1
+    </div>
+    <div
+      data-testid="item-test-track-2"
+    >
+      Test Song 2
+    </div>
+  </div>
+</div>
+`;
