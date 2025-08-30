@@ -1,17 +1,10 @@
+import { SpotifyCollectionItem } from "@/components/content/components/spotify-collection/audio-stack/types";
 import { composeTransducers, processWithTransducer } from "@/data/conversions";
-import { getSortTransducer } from "@/data/conversions/transducers/sort";
-import {
-	SortDirection,
-	SortType,
-} from "@/data/conversions/transducers/sort/types";
-
 import { filterTransducer } from "@/data/conversions/transducers/transducers";
-import {
-	EpisodeItem,
-	SpotifySearchProps,
-	SpotifySearchResultsSortOptions,
-} from "@/types/api/spotify";
+import { SpotifySearchProps } from "@/types/api/spotify";
 import { OEmbed } from "@/types/data-structures/oembed";
+import { getSort } from "./sort";
+import { mapEpisodeToCollectionItem } from "./map";
 
 /////////////////////////////////////
 // This would be a conversions util?
@@ -21,40 +14,21 @@ import { OEmbed } from "@/types/data-structures/oembed";
 // With conversions
 // We would specify the id to apply the sort function to
 /////////////////////////////////////
-const getSort = (params: SpotifySearchProps) => {
-	const { sort, direction = SortDirection.Descending } = params;
-
-	if (!sort) return [];
-	switch (sort) {
-		case SpotifySearchResultsSortOptions.released:
-			const transducer = getSortTransducer(
-				SortType.Date,
-				"release_date",
-				direction
-			);
-			return transducer ? [transducer] : [];
-		case SpotifySearchResultsSortOptions.duration:
-			const durationTransducer = getSortTransducer(
-				SortType.Number,
-				"duration_ms",
-				direction
-			);
-			return durationTransducer ? [durationTransducer] : [];
-		case SpotifySearchResultsSortOptions.relevance:
-		default:
-			return [];
-	}
-};
 
 export const spotifyConversion = (
-	items: EpisodeItem[],
+	items: SpotifyCollectionItem[],
 	params: SpotifySearchProps
 ) => {
 	const sort = getSort(params);
 
-	// filters
-
-	const transducer = composeTransducers(...sort);
+	// compose our transducer
+	const transducer = composeTransducers<SpotifyCollectionItem[]>(
+		mapEpisodeToCollectionItem,
+		// there may or may not be a sort applied
+		// should probably apply a no-op if not i.e. return 0
+		...sort
+	);
+	// apply the transducer
 	const result = processWithTransducer(items, transducer);
 	return result;
 };
