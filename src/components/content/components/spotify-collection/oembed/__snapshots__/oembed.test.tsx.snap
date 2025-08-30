@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`spotifyOembed Snaps renders spotifyOembed renderMethod unchanged 1`] = `
+<div>
+  <div>
+    <div
+      data-testid="spotify-oembed-component"
+    >
+      <div
+        data-testid="item-id"
+      >
+        test-id
+      </div>
+      <div
+        data-testid="item-iframe-url"
+      >
+        https://open.spotify.com/embed/track/123
+      </div>
+      <div
+        data-testid="height"
+      >
+        LG
+      </div>
+    </div>
+  </div>
+</div>
+`;
