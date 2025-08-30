@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`SpotifyCollection Test Suite Snapshot Testing should match snapshot for SpotifyAudioStack variant 1`] = `
+<div
+  class="mock-audio-stack-root-styles"
+  data-testid="spotify-audio-stack"
+>
+  <div
+    data-testid="mock-audio-stack"
+  >
+    <div
+      data-testid="mock-audio-item"
+    >
+      Test Song 1
+    </div>
+    <div
+      data-testid="mock-audio-item"
+    >
+      Test Album 1
+    </div>
+    <div
+      data-testid="height-option"
+    />
+  </div>
+</div>
+`;
+
+exports[`SpotifyCollection Test Suite Snapshot Testing should match snapshot for SpotifyOembed variant 1`] = `
+<div
+  class="mock-oembed-root-styles"
+  data-testid="spotify-oembed"
+>
+  <div
+    data-testid="mock-spotify-oembed"
+  >
+    <div
+      data-testid="mock-oembed-item"
+    >
+      Test Spotify Album
+    </div>
+    <div
+      data-testid="mock-oembed-item"
+    >
+      Test Spotify Track
+    </div>
+    <div
+      data-testid="height-option"
+    />
+  </div>
+</div>
+`;
+
+exports[`SpotifyCollection Test Suite Snapshot Testing should match snapshot for null case 1`] = `null`;
