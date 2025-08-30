@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`SpotifyOembedComponent component structure matches snapshot for album content 1`] = `
+<div>
+  <div>
+    <div
+      data-testid="client-oembed"
+    >
+      <iframe
+        height="360"
+        src="https://open.spotify.com/embed/album/123"
+      />
+    </div>
+  </div>
+</div>
+`;
