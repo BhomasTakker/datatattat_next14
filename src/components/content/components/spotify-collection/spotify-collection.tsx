@@ -1,6 +1,4 @@
 import { ComponentProps } from "@/types/component";
-import { ClientOembed } from "../oembed-collection/content-oembed/client-component";
-import { OEmbed } from "@/types/data-structures/oembed";
 import { VariantsMap } from "./variant-map";
 
 type SpotifyCollectionProps = {

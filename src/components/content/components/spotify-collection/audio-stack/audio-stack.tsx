@@ -2,6 +2,7 @@ import styles from "./audio-stack.module.scss";
 import { AudioStackClientComponent } from "./audio-stack-client";
 import { SpotifyCollectionItem } from "./types";
 import { ContainerHeightOptions } from "@/components/page/components/stack/types";
+import { UnknownObject } from "@/types/utils";
 
 export type AudioStackProps = {
 	height: ContainerHeightOptions;
@@ -9,9 +10,10 @@ export type AudioStackProps = {
 
 const renderMethod = (
 	items: SpotifyCollectionItem[] = [],
-	props: AudioStackProps
+	options: UnknownObject
 ) => {
-	return <AudioStackClientComponent items={items} height={props.height} />;
+	const { height } = options as AudioStackProps;
+	return <AudioStackClientComponent items={items} height={height} />;
 };
 
 const spotifyAudioStack = {
