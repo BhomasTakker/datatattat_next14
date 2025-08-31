@@ -1,10 +1,12 @@
 import { ObjectId } from "mongoose";
 import { GithubProfile } from "next-auth/providers/github";
 import { GoogleProfile } from "next-auth/providers/google";
+import { SpotifyProfile } from "next-auth/providers/spotify";
 
 export const providers = {
 	google: "google",
 	github: "github",
+	spotify: "spotify",
 } as const;
 
 export type Providers = (typeof providers)[keyof typeof providers];
@@ -26,4 +28,4 @@ export type User = {
 	_id: ObjectId;
 };
 
-export type Profile = GoogleProfile | GithubProfile;
+export type Profile = GoogleProfile | GithubProfile | SpotifyProfile;

@@ -1,41 +1,17 @@
 import { checkAndCreateUsername } from "@/actions/signup/check-create-username";
 import { createNewUser, getUserBySignInEmail } from "../mongo/actions/user";
 import { connectToMongoDB } from "../mongo/db";
-import { GoogleProfile } from "next-auth/providers/google";
-import { GithubProfile } from "next-auth/providers/github";
 import { Profile, ProviderFunction, providers, Providers, User } from "./types";
-
-export const createGoogleUser = (
-	profile: GoogleProfile,
-	id: Providers,
-	username: string
-) => ({
-	signup_completed: false,
-	signin_method: id,
-	signin_name: profile.name,
-	signin_email: profile.email || "", // shouldn't be nothing surely?
-	avatar: profile.picture,
-	username,
-	role: "standard",
-});
-
-export const createGithubUser = (
-	profile: GithubProfile,
-	id: Providers,
-	username: string
-) => ({
-	signup_completed: false,
-	signin_method: id,
-	signin_name: profile.login,
-	signin_email: profile.email || "", // shouldn't be nothing surely?
-	avatar: profile.avatar_url,
-	username,
-	role: "standard",
-});
+import {
+	createGoogleUser,
+	createGithubUser,
+	createSpotifyUser,
+} from "./create-users";
 
 export const providerMap = new Map<Providers, ProviderFunction>([
 	[providers.google, createGoogleUser as ProviderFunction],
 	[providers.github, createGithubUser as ProviderFunction],
+	[providers.spotify, createSpotifyUser as ProviderFunction],
 ]);
 
 export const createUserObject = (

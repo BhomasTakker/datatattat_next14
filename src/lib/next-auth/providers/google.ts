@@ -4,11 +4,6 @@ import { returnUser } from "../user-return";
 
 const { GOOGLE_CLIENT_ID, GOOGLE_SECRET } = process.env;
 
-// instead of throwing an error, we could just not include the provider
-// if (!GOOGLE_CLIENT_ID || !GOOGLE_SECRET) {
-// 	throw new Error("Google ID and Secret not found");
-// }
-
 export const GOOGLE = Google({
 	async profile(profile) {
 		// try catch me and redirect to home
