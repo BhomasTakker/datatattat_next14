@@ -1,14 +1,9 @@
-import {
-	createGoogleUser,
-	createGithubUser,
-	createUserObject,
-	loginOrSignUp,
-	providerMap,
-} from "./user-login";
+import { createUserObject, loginOrSignUp, providerMap } from "./user-login";
 import { providers, Providers, Profile, User } from "./types";
 import * as mongoActions from "../mongo/actions/user";
 // import * as mongoDb from "../mongo/db";
 import * as signupActions from "../../actions/signup/check-create-username";
+import { createGithubUser, createGoogleUser, createSpotifyUser } from "./create-users";
 
 jest.mock("../../actions/user/get-user", () => ({
 	getUser: jest.fn(),
@@ -30,6 +25,12 @@ const githubProfile = {
 	login: "githubuser",
 	email: "github@example.com",
 	avatar_url: "http://avatar.com/github.png",
+} as any;
+
+const spotifyProfile = {
+	login: "spotifyuser",
+	email: "spotify@example.com",
+	avatar_url: "http://avatar.com/spotify.png",
 } as any;
 
 describe("createGoogleUser", () => {
@@ -68,12 +69,30 @@ describe("createGithubUser", () => {
 	});
 });
 
+describe("createSpotifyUser", () => {
+	it("should create a user object from Spotify profile", () => {
+		const user = createSpotifyUser(spotifyProfile, providers.spotify, "testuser");
+		expect(user).toEqual({
+			signup_completed: false,
+			signin_method: providers.spotify,
+			signin_name: spotifyProfile.login,
+			signin_email: spotifyProfile.email,
+			avatar: spotifyProfile.avatar_url,
+			username: "testuser",
+			role: "standard",
+		});
+	});
+});
+
 describe("providerMap", () => {
 	it("should map google provider to createGoogleUser", () => {
 		expect(providerMap.get(providers.google)).toBeInstanceOf(Function);
 	});
 	it("should map github provider to createGithubUser", () => {
 		expect(providerMap.get(providers.github)).toBeInstanceOf(Function);
+	});
+	it("should map spotify provider to createSpotifyUser", () => {
+		expect(providerMap.get(providers.spotify)).toBeInstanceOf(Function);
 	});
 });
 
@@ -95,6 +114,16 @@ describe("createUserObject", () => {
 			"uniqueuser"
 		);
 		expect(user.signin_method).toBe(providers.github);
+		expect(user.username).toBe("uniqueuser");
+	});
+
+	it("should create user object for spotify", () => {
+		const user = createUserObject(
+			spotifyProfile,
+			providers.spotify,
+			"uniqueuser"
+		);
+		expect(user.signin_method).toBe(providers.spotify);
 		expect(user.username).toBe("uniqueuser");
 	});
 
@@ -157,5 +186,17 @@ describe("loginOrSignUp", () => {
 		expect(signupActions.checkAndCreateUsername).toHaveBeenCalledWith(
 			"ghlogin"
 		);
+	});
+
+	it("should create new user for spotify login", async () => {
+		(mongoActions.getUserBySignInEmail as jest.Mock).mockResolvedValue(null);
+		(mongoActions.createNewUser as jest.Mock).mockImplementation(
+			async (userObj: any) => ({ ...userObj, _id: "3" })
+		);
+		const user = await loginOrSignUp(spotifyProfile, providers.spotify);
+		expect(mongoActions.createNewUser).toHaveBeenCalled();
+		expect(user._id).toBe("3");
+		expect(user.signin_method).toBe(providers.spotify);
+		expect(user.username).toContain("_unique");
 	});
 });
