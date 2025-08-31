@@ -3,7 +3,11 @@ import { providers, Providers, Profile, User } from "./types";
 import * as mongoActions from "../mongo/actions/user";
 // import * as mongoDb from "../mongo/db";
 import * as signupActions from "../../actions/signup/check-create-username";
-import { createGithubUser, createGoogleUser, createSpotifyUser } from "./create-users";
+import {
+	createGithubUser,
+	createGoogleUser,
+	createSpotifyUser,
+} from "./create-users";
 
 jest.mock("../../actions/user/get-user", () => ({
 	getUser: jest.fn(),
@@ -71,7 +75,11 @@ describe("createGithubUser", () => {
 
 describe("createSpotifyUser", () => {
 	it("should create a user object from Spotify profile", () => {
-		const user = createSpotifyUser(spotifyProfile, providers.spotify, "testuser");
+		const user = createSpotifyUser(
+			spotifyProfile,
+			providers.spotify,
+			"testuser"
+		);
 		expect(user).toEqual({
 			signup_completed: false,
 			signin_method: providers.spotify,
