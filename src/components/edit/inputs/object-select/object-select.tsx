@@ -4,6 +4,8 @@ import { InputFactory } from "../input-factory";
 import { getParentId } from "@/utils/edit";
 import styles from "./object-select.module.scss";
 import { ObjectSelectProps } from "@/types/edit/inputs/inputs";
+import { useContext } from "react";
+import { EditContext } from "../../context/edit-context";
 
 export const ObjectSelect = ({
 	id,
@@ -15,7 +17,8 @@ export const ObjectSelect = ({
 	resetOnChange = false,
 	required = true,
 }: Omit<ObjectSelectProps, "type">) => {
-	const { getValues, setValue, unregister } = useFormContext();
+	const { getValues, unregister, handleSubmit } = useFormContext();
+	const { submitDraftHandler } = useContext(EditContext);
 
 	const initialValue = getValues(id) || defaultValue;
 
@@ -25,9 +28,8 @@ export const ObjectSelect = ({
 	const containerId = optionId ? `${parentId}.${optionId}` : parentId;
 	const selectedObject = optionMap.get(selectedOption);
 
-	// this certainly isn't perfect
-	// but we may be getting snagged on a separate issue
 	const onChangeHnd = () => {
+		handleSubmit(submitDraftHandler)();
 		if (!resetOnChange) return;
 
 		unregister(containerId, {
