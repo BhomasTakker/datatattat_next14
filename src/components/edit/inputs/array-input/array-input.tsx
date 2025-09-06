@@ -12,9 +12,6 @@ import { randomKeyGenerator } from "@/utils/edit";
 import { ArrayInputProps, GenericInput } from "@/types/edit/inputs/inputs";
 import { EditContext } from "../../context/edit-context";
 
-////////////////////////////////
-// Sort types out for inputs
-// generic input
 type Direction = "up" | "down";
 
 type InputWithKey = GenericInput & { key: string };
@@ -93,13 +90,7 @@ export const ArrayInput = ({
 
 	const [inputList, setInputList] =
 		useState<GenericInput[]>(inputsWithUniqueKeys);
-	// isDirty would be better coming from the array id
 
-	// We need to re-render the component to update the inputList
-	// Whenever we move an array object, or delete
-	// it should re-render the component
-	// because we are updating the inputList state
-	// console.log("re-rendering");
 	const addInput = add({
 		setValue,
 		getValues,
@@ -108,11 +99,13 @@ export const ArrayInput = ({
 		inputId,
 		createObject,
 		isDirty,
-		// probably something like this
+		// should be onAdd etc - we have removed the isDirty check
+		onDirty: handleSubmit(submitDraftHandler),
 	});
 	const onMove = move({
 		inputs: inputList,
 		setValue,
+		getValues,
 		setInputList,
 		id,
 		isDirty,
@@ -121,6 +114,7 @@ export const ArrayInput = ({
 	const onDeleteHnd = onDelete({
 		inputs: inputList,
 		setValue,
+		getValues,
 		setInputList,
 		id,
 		isDirty,
@@ -135,7 +129,6 @@ export const ArrayInput = ({
 			<ul>
 				<ArrayInputList
 					parentId={id}
-					// This is a cheat / inputList at this point is our updated inputList
 					inputs={inputList as InputList}
 					template={input}
 					showControls={showControls}

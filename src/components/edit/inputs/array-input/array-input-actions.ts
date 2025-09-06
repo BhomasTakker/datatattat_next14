@@ -17,11 +17,13 @@ type AddHOCProps = {
 	inputId: string;
 	createObject: boolean;
 	isDirty: boolean;
+	onDirty: () => void;
 };
 
 type DeleteHOCProps = {
 	inputs: GenericInput[];
 	setValue: UseFormSetValue<FieldValues>;
+	getValues: UseFormGetValues<FieldValues>;
 	setInputList: Dispatch<SetStateAction<GenericInput[]>>;
 	id: string;
 	isDirty: boolean;
@@ -31,6 +33,7 @@ type DeleteHOCProps = {
 type MoveHOCProps = {
 	inputs: GenericInput[];
 	setValue: UseFormSetValue<FieldValues>;
+	getValues: UseFormGetValues<FieldValues>;
 	setInputList: Dispatch<SetStateAction<GenericInput[]>>;
 	id: string;
 	isDirty: boolean;
@@ -39,8 +42,6 @@ type MoveHOCProps = {
 
 export const initialise = () => {};
 
-// Not sure about create object?
-// The name at least is poor
 export const add =
 	({
 		setValue,
@@ -50,11 +51,11 @@ export const add =
 		inputId,
 		createObject,
 		isDirty,
+		onDirty,
 	}: AddHOCProps) =>
 	() => {
 		const inputList: GenericInput[] = getValues(id) || [];
-		// we set value here to give us something to read in InputList
-		// there may be a better way to do this
+		onDirty();
 		if (createObject) {
 			setValue(id, [
 				...inputList,
@@ -69,33 +70,44 @@ export const add =
 	};
 
 export const onDelete =
-	({ inputs, setValue, setInputList, id, isDirty, onDirty }: DeleteHOCProps) =>
+	({
+		inputs,
+		setValue,
+		getValues,
+		setInputList,
+		id,
+		isDirty,
+		onDirty,
+	}: DeleteHOCProps) =>
 	(index: number) => {
-		if (isDirty) {
-			onDirty();
-			// return;
-		}
-		const newArray = inputs.filter((_, i) => index !== i);
+		onDirty();
+		// }
+		const inputList: GenericInput[] = getValues(id) || [];
+		const newArray = inputList.filter((_, i) => index !== i);
 		setValue(id, newArray);
 		setInputList(newArray);
 	};
 
 export const move =
-	({ inputs, setValue, setInputList, id, isDirty, onDirty }: MoveHOCProps) =>
+	({
+		inputs,
+		setValue,
+		getValues,
+		setInputList,
+		id,
+		isDirty,
+		onDirty,
+	}: MoveHOCProps) =>
 	(index: number, direction: Direction) => {
-		if (isDirty) {
-			onDirty();
-			// return;
-		}
+		const inputList: GenericInput[] = getValues(id) || [];
 		if (index === 0 && direction === "up") return;
-		if (index === inputs.length - 1 && direction === "down") return;
+		if (index === inputList.length - 1 && direction === "down") return;
 
-		// technically we should perhaps setValues
-		// WITHIN the useState setter function
-		// for both move and delete
+		onDirty();
 		const newIndex = direction === "up" ? index - 1 : index + 1;
-		const item = inputs[index];
-		const removed = inputs.toSpliced(index, 1);
+
+		const item = inputList[index];
+		const removed = inputList.toSpliced(index, 1);
 		const moved = removed.toSpliced(newIndex, 0, item);
 		setValue(id, moved);
 		setInputList(moved);

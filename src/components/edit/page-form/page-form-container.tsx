@@ -1,6 +1,11 @@
 "use client";
 
-import { FieldValues, FormProvider, useForm } from "react-hook-form";
+import {
+	FieldValues,
+	FormProvider,
+	SubmitHandler,
+	useForm,
+} from "react-hook-form";
 import { PageForm } from "./page-form";
 import { IPage } from "@/types/page";
 import { useEffect } from "react";
@@ -24,11 +29,7 @@ export const PageFormContainer = ({ pageData }: { pageData: IPage }) => {
 		refresh();
 	}, [route]);
 
-	const onSaveAsDraft = () => {
-		// Really just a dummy finction to save the form 'locally'
-		// const update = { ...pageData, ...methods.getValues() };
-		// console.log("Draft Save Update:", { update });
-	};
+	const onSaveAsDraft = (args: SubmitHandler<FieldValues>) => {};
 
 	const submitHandler = methods.handleSubmit(async (data) => {
 		// This should be done on the server...
