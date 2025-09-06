@@ -46,6 +46,7 @@ export const ContainerHeightOptions = {
 	LG: "LG",
 	XL: "XL",
 	XXL: "XXL",
+	FULL: "FULL",
 } as const;
 
 type ContainerHeight = (typeof ContainerHeight)[keyof typeof ContainerHeight];
