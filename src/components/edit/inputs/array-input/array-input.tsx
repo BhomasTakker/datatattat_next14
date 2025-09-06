@@ -99,6 +99,7 @@ export const ArrayInput = ({
 		inputId,
 		createObject,
 		isDirty,
+		// should be onAdd etc - we have removed the isDirty check
 		onDirty: handleSubmit(submitDraftHandler),
 	});
 	const onMove = move({
