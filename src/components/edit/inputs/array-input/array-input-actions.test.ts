@@ -30,8 +30,10 @@ describe("array-input-actions", () => {
 				inputId: "foo",
 				createObject: true,
 				isDirty: false,
+				onDirty,
 			});
 			fn();
+			expect(onDirty).toHaveBeenCalled();
 			expect(setValue).toHaveBeenCalledWith("test", [
 				{ key: "a", foo: "bar" },
 				{ key: "random-key", foo: "" },
@@ -49,8 +51,10 @@ describe("array-input-actions", () => {
 				inputId: "foo",
 				createObject: false,
 				isDirty: false,
+				onDirty,
 			});
 			fn();
+			expect(onDirty).toHaveBeenCalled();
 			expect(setValue).toHaveBeenCalledWith("test", ["a", "b", ""]);
 			expect(setInputList).toHaveBeenCalled();
 		});
@@ -65,8 +69,10 @@ describe("array-input-actions", () => {
 				inputId: "foo",
 				createObject: false,
 				isDirty: false,
+				onDirty,
 			});
 			fn();
+			expect(onDirty).toHaveBeenCalled();
 			expect(setValue).toHaveBeenCalledWith("test", [""]);
 			expect(setInputList).toHaveBeenCalled();
 		});
@@ -74,10 +80,12 @@ describe("array-input-actions", () => {
 
 	describe("onDelete", () => {
 		it("should call onDirty", () => {
+			getValues.mockReturnValue(["a", "b", "c"]);
 			const fn = onDelete({
 				// @ts-expect-error - Type 'string' is not assignable to type 'InputTypes'
 				inputs: ["a", "b", "c"],
 				setValue,
+				getValues,
 				setInputList,
 				id: "test",
 				isDirty: true,
@@ -88,10 +96,12 @@ describe("array-input-actions", () => {
 		});
 
 		it("should delete the item at the given index", () => {
+			getValues.mockReturnValue(["a", "b", "c"]);
 			const fn = onDelete({
 				// @ts-expect-error - Type 'string' is not assignable to type 'InputTypes'
 				inputs: ["a", "b", "c"],
 				setValue,
+				getValues,
 				setInputList,
 				id: "test",
 				isDirty: false,
@@ -105,10 +115,12 @@ describe("array-input-actions", () => {
 
 	describe("move", () => {
 		it("should call onDirty", () => {
+			getValues.mockReturnValue(["a", "b", "c"]);
 			const fn = move({
 				// @ts-expect-error - Type 'string' is not assignable to type 'InputTypes'
 				inputs: ["a", "b", "c"],
 				setValue,
+				getValues,
 				setInputList,
 				id: "test",
 				isDirty: true,
@@ -119,10 +131,12 @@ describe("array-input-actions", () => {
 		});
 
 		it("should not move up if index is 0", () => {
+			getValues.mockReturnValue(["a", "b", "c"]);
 			const fn = move({
 				// @ts-expect-error - Type 'string' is not assignable to type 'InputTypes'
 				inputs: ["a", "b", "c"],
 				setValue,
+				getValues,
 				setInputList,
 				id: "test",
 				isDirty: false,
@@ -134,10 +148,12 @@ describe("array-input-actions", () => {
 		});
 
 		it("should not move down if index is last", () => {
+			getValues.mockReturnValue(["a", "b", "c"]);
 			const fn = move({
 				// @ts-expect-error - Type 'string' is not assignable to type 'InputTypes'
 				inputs: ["a", "b", "c"],
 				setValue,
+				getValues,
 				setInputList,
 				id: "test",
 				isDirty: false,
@@ -149,10 +165,12 @@ describe("array-input-actions", () => {
 		});
 
 		it("should move item up", () => {
+			getValues.mockReturnValue(["a", "b", "c"]);
 			const fn = move({
 				// @ts-expect-error - Type 'string' is not assignable to type 'InputTypes'
 				inputs: ["a", "b", "c"],
 				setValue,
+				getValues,
 				setInputList,
 				id: "test",
 				isDirty: false,
@@ -164,10 +182,12 @@ describe("array-input-actions", () => {
 		});
 
 		it("should move item down", () => {
+			getValues.mockReturnValue(["a", "b", "c"]);
 			const fn = move({
 				// @ts-expect-error - Type 'string' is not assignable to type 'InputTypes'
 				inputs: ["a", "b", "c"],
 				setValue,
+				getValues,
 				setInputList,
 				id: "test",
 				isDirty: false,
