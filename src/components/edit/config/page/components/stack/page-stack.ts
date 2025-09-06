@@ -2,15 +2,7 @@ import { EditInputs } from "@/components/edit/inputs/inputs";
 import { PageStackCollectionVariants } from "@/types/components/page/stack";
 import { InputListProps } from "@/types/edit/inputs/inputs";
 import { ROW_STACK } from "./row-stack-variant";
-
-// We should have a dummy / empty
-const VERTICAL_STACK: InputListProps = {
-	id: "verticalStack",
-	type: EditInputs.inputList,
-	label: "Page Stack",
-
-	inputs: [],
-};
+import { VERTICAL_STACK } from "./vertical-stack-variant";
 
 const pageStackMap = new Map<string, InputListProps>([
 	[PageStackCollectionVariants.Vertical, VERTICAL_STACK],
