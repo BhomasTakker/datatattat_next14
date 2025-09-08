@@ -6,10 +6,10 @@
 	grid-template-columns: repeat(1, 1fr);
 	gap: $spacingLg;
 
-	@include article.articleCardLeftRight($contentWidthXl6, $contentWidthSm);
+	@include article.articleCardLeftRight($contentWidthXl6, $contentWidthXs);
 
 	:first-child {
-		@include article.articleCardTopDown($contentWidthXl7, $contentWidthSm);
+		@include article.articleCardTopDown($contentWidthXl7, $contentWidthXs);
 	}
 
 	@media screen and (min-width: $screenWidthLg) {
