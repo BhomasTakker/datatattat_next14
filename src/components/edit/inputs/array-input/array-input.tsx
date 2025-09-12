@@ -77,6 +77,7 @@ export const ArrayInput = ({
 	defaultValue = [],
 	disabled = false,
 }: ArrayInputProps) => {
+	const [key, setKey] = useState(randomKeyGenerator());
 	const { label: inputLabel, id: inputId = "" } = input;
 	const { getValues, setValue, formState, handleSubmit } = useFormContext();
 	const { isDirty } = formState;
@@ -91,6 +92,8 @@ export const ArrayInput = ({
 	const [inputList, setInputList] =
 		useState<GenericInput[]>(inputsWithUniqueKeys);
 
+	const updateKey = () => setKey(randomKeyGenerator());
+
 	const addInput = add({
 		setValue,
 		getValues,
@@ -103,6 +106,7 @@ export const ArrayInput = ({
 		onDirty: handleSubmit(submitDraftHandler),
 	});
 	const onMove = move({
+		onUpdate: updateKey,
 		inputs: inputList,
 		setValue,
 		getValues,
@@ -112,6 +116,7 @@ export const ArrayInput = ({
 		onDirty: handleSubmit(submitDraftHandler),
 	});
 	const onDeleteHnd = onDelete({
+		onUpdate: updateKey,
 		inputs: inputList,
 		setValue,
 		getValues,
@@ -124,7 +129,7 @@ export const ArrayInput = ({
 	const showControls = disabled ? false : true;
 
 	return (
-		<div className={styles.root}>
+		<div className={styles.root} key={key}>
 			<h2 className={styles.title}>{title}</h2>
 			<ul>
 				<ArrayInputList

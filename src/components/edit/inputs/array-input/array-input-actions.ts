@@ -22,6 +22,7 @@ type AddHOCProps = {
 
 type DeleteHOCProps = {
 	inputs: GenericInput[];
+	onUpdate: () => void;
 	setValue: UseFormSetValue<FieldValues>;
 	getValues: UseFormGetValues<FieldValues>;
 	setInputList: Dispatch<SetStateAction<GenericInput[]>>;
@@ -32,6 +33,7 @@ type DeleteHOCProps = {
 
 type MoveHOCProps = {
 	inputs: GenericInput[];
+	onUpdate: () => void;
 	setValue: UseFormSetValue<FieldValues>;
 	getValues: UseFormGetValues<FieldValues>;
 	setInputList: Dispatch<SetStateAction<GenericInput[]>>;
@@ -76,23 +78,27 @@ export const onDelete =
 		getValues,
 		setInputList,
 		id,
+		onUpdate,
 		isDirty,
 		onDirty,
 	}: DeleteHOCProps) =>
 	(index: number) => {
 		onDirty();
-		// }
+		onUpdate();
+
 		const inputList: GenericInput[] = getValues(id) || [];
 		const newArray = inputList.filter((_, i) => index !== i);
+
 		setValue(id, newArray);
 		setInputList(newArray);
 	};
 
 export const move =
 	({
-		inputs,
+		inputs, // original inputs
 		setValue,
 		getValues,
+		onUpdate,
 		setInputList,
 		id,
 		isDirty,
@@ -104,11 +110,13 @@ export const move =
 		if (index === inputList.length - 1 && direction === "down") return;
 
 		onDirty();
+		onUpdate();
 		const newIndex = direction === "up" ? index - 1 : index + 1;
 
 		const item = inputList[index];
 		const removed = inputList.toSpliced(index, 1);
 		const moved = removed.toSpliced(newIndex, 0, item);
+
 		setValue(id, moved);
 		setInputList(moved);
 	};
