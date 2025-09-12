@@ -10,12 +10,14 @@ describe("array-input-actions", () => {
 	let getValues: jest.Mock;
 	let setInputList: jest.Mock;
 	let onDirty: jest.Mock;
+	let onUpdate: jest.Mock;
 
 	beforeEach(() => {
 		setValue = jest.fn();
 		getValues = jest.fn();
 		setInputList = jest.fn();
 		onDirty = jest.fn();
+		onUpdate = jest.fn();
 		jest.clearAllMocks();
 	});
 
@@ -90,9 +92,27 @@ describe("array-input-actions", () => {
 				id: "test",
 				isDirty: true,
 				onDirty,
+				onUpdate,
 			});
 			fn(1);
 			expect(onDirty).toHaveBeenCalledTimes(1);
+		});
+
+		it("should call onUpdate", () => {
+			getValues.mockReturnValue(["a", "b", "c"]);
+			const fn = onDelete({
+				// @ts-expect-error - Type 'string' is not assignable to type 'InputTypes'
+				inputs: ["a", "b", "c"],
+				setValue,
+				getValues,
+				setInputList,
+				id: "test",
+				isDirty: true,
+				onDirty,
+				onUpdate,
+			});
+			fn(1);
+			expect(onUpdate).toHaveBeenCalledTimes(1);
 		});
 
 		it("should delete the item at the given index", () => {
@@ -106,6 +126,7 @@ describe("array-input-actions", () => {
 				id: "test",
 				isDirty: false,
 				onDirty,
+				onUpdate,
 			});
 			fn(1);
 			expect(setValue).toHaveBeenCalledWith("test", ["a", "c"]);
@@ -125,9 +146,27 @@ describe("array-input-actions", () => {
 				id: "test",
 				isDirty: true,
 				onDirty,
+				onUpdate,
 			});
 			fn(1, "up");
 			expect(onDirty).toHaveBeenCalled();
+		});
+
+		it("should call onUpdate", () => {
+			getValues.mockReturnValue(["a", "b", "c"]);
+			const fn = move({
+				// @ts-expect-error - Type 'string' is not assignable to type 'InputTypes'
+				inputs: ["a", "b", "c"],
+				setValue,
+				getValues,
+				setInputList,
+				id: "test",
+				isDirty: true,
+				onDirty,
+				onUpdate,
+			});
+			fn(1, "up");
+			expect(onUpdate).toHaveBeenCalled();
 		});
 
 		it("should not move up if index is 0", () => {
@@ -141,6 +180,7 @@ describe("array-input-actions", () => {
 				id: "test",
 				isDirty: false,
 				onDirty,
+				onUpdate,
 			});
 			fn(0, "up");
 			expect(setValue).not.toHaveBeenCalled();
@@ -158,6 +198,7 @@ describe("array-input-actions", () => {
 				id: "test",
 				isDirty: false,
 				onDirty,
+				onUpdate,
 			});
 			fn(2, "down");
 			expect(setValue).not.toHaveBeenCalled();
@@ -175,6 +216,7 @@ describe("array-input-actions", () => {
 				id: "test",
 				isDirty: false,
 				onDirty,
+				onUpdate,
 			});
 			fn(1, "up");
 			expect(setValue).toHaveBeenCalledWith("test", ["b", "a", "c"]);
@@ -192,6 +234,7 @@ describe("array-input-actions", () => {
 				id: "test",
 				isDirty: false,
 				onDirty,
+				onUpdate,
 			});
 			fn(1, "down");
 			expect(setValue).toHaveBeenCalledWith("test", ["a", "c", "b"]);
