@@ -4,6 +4,7 @@ import { ARTICLE_COLLECTION_CONFIG } from "./article-collection/article-collecti
 import { DISPLAY_PLAYER_CONFIG } from "./display-player/display-player-config";
 import { OEMBED_COLLECTION_CONFIG } from "./oembed-collection/oembed-collection-config";
 import { SPOTIFY_COLLECTION_CONFIG } from "./spotify-collection/config";
+import { componentProfile } from "../shared/component-profile";
 
 enum ComponentOptions {
 	ArticleCollection = "ArticleCollection",
@@ -41,6 +42,7 @@ export const COMPONENT_CONFIG: GenericInput = {
 				size: "large",
 				header: "h1",
 			},
+			componentProfile,
 			{
 				// technically we need this to be within component props
 				// not be/create the component props object
