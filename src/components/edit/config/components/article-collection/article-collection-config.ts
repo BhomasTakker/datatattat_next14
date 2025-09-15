@@ -37,19 +37,6 @@ export const ARTICLE_COLLECTION_CONFIG: InputListProps = {
 			type: EditInputs.title,
 			title: "Article Collection",
 		},
-		// Need component title
-		{
-			id: "componentTitle",
-			type: EditInputs.text,
-			label: "Component Title",
-			required: false,
-		},
-		{
-			id: "componentTitleLink",
-			type: EditInputs.text,
-			label: "Component Title Link",
-			required: false,
-		},
 		{
 			id: "variantType",
 			type: EditInputs.objectSelect,
