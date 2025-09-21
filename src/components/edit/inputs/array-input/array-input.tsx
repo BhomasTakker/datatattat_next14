@@ -75,9 +75,11 @@ const ArrayItem = ({
 	createObject,
 	showControls = true,
 }: ArrayItemProps) => {
-	const [isCollapsed, setIsCollapsed] = useState(false);
-
 	const inputId = `${parentId}.[${index}].arrayItem`;
+	const isCollapsedId = `${inputId}.isCollapsed`;
+	const { getValues, setValue } = useFormContext();
+	const currentIsCollapsed = !!getValues(isCollapsedId) || false;
+	const [isCollapsed, setIsCollapsed] = useState(currentIsCollapsed);
 
 	const inputOptions: TextInputProps = {
 		id: `${inputId}.identifier`,
@@ -87,6 +89,11 @@ const ArrayItem = ({
 	};
 	const identifierInput = <InputFactory data={inputOptions} />;
 
+	const onToggle = () => {
+		setIsCollapsed((prev) => !prev);
+		setValue(isCollapsedId, !isCollapsed);
+	};
+
 	return (
 		<li key={input.key} className={styles.input}>
 			<div className={styles.controls}>
@@ -94,10 +101,7 @@ const ArrayItem = ({
 				{showControls ? (
 					<div className={styles.icons}>
 						{isCollapsible ? (
-							<CollapsibleIcons
-								isCollapsed={isCollapsed}
-								onToggle={() => setIsCollapsed((prev) => !prev)}
-							/>
+							<CollapsibleIcons isCollapsed={isCollapsed} onToggle={onToggle} />
 						) : null}
 						<IconButton
 							data-testid="move-up"
