@@ -14,13 +14,9 @@ import { IconButton } from "@/components/ui/icon-button";
 import { InputFactory } from "../input-factory";
 import { add, move, onDelete } from "./array-input-actions";
 import { randomKeyGenerator } from "@/utils/edit";
-import {
-	ArrayInputProps,
-	GenericInput,
-	TextInputProps,
-} from "@/types/edit/inputs/inputs";
+import { ArrayInputProps, GenericInput } from "@/types/edit/inputs/inputs";
 import { EditContext } from "../../context/edit-context";
-import { EditInputs } from "../inputs";
+import { createIdentifier } from "./utils";
 
 type Direction = "up" | "down";
 
@@ -81,13 +77,7 @@ const ArrayItem = ({
 	const currentIsCollapsed = !!getValues(isCollapsedId) || false;
 	const [isCollapsed, setIsCollapsed] = useState(currentIsCollapsed);
 
-	const inputOptions: TextInputProps = {
-		id: `${inputId}.identifier`,
-		type: EditInputs.text,
-		label: "",
-		defaultValue: "Array Item",
-	};
-	const identifierInput = <InputFactory data={inputOptions} />;
+	const identifierInput = createIdentifier(inputId);
 
 	const onToggle = () => {
 		setIsCollapsed((prev) => !prev);
