@@ -21,11 +21,34 @@
 		flex-direction: column;
 		gap: $spacingXs;
 
+		.inputContainer {
+			display: grid;
+			grid-template-rows: 1fr;
+			// have scss mixin or abstract for transitions
+			transition: grid-template-rows 750ms ease-in-out;
+
+			&.collapsed {
+				grid-template-rows: 0fr;
+
+				& > div {
+					overflow: hidden;
+				}
+			}
+		}
+
 		.icons {
 			display: flex;
 			gap: $spacingXs;
 			align-items: center;
 			align-self: end;
+			width: 100%;
+
+			.collapsible {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				width: 100%;
+			}
 		}
 
 		@media screen and (max-width: $screenWidthMd) {

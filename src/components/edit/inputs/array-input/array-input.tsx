@@ -1,7 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { useContext, useState } from "react";
 import { useFormContext } from "react-hook-form";
-import { FaArrowDown, FaArrowUp } from "react-icons/fa6";
+import {
+	FaArrowDown,
+	FaArrowUp,
+	FaAngleDown,
+	FaAngleLeft,
+} from "react-icons/fa6";
 import { MdDelete } from "react-icons/md";
 
 import styles from "./array-input.module.scss";
@@ -27,6 +32,89 @@ type InputListProps = {
 	onDelete: (index: number) => void;
 };
 
+type CollapsibleIconsProps = {
+	isCollapsed: boolean;
+	onToggle: () => void;
+};
+
+const CollapsibleIcons = ({ isCollapsed, onToggle }: CollapsibleIconsProps) => {
+	return (
+		<div className={styles.collapsible}>
+			<h3>Id go here</h3>
+			<IconButton
+				data-testid="collapse"
+				icon={isCollapsed ? FaAngleLeft : FaAngleDown}
+				onClick={onToggle}
+			/>
+		</div>
+	);
+};
+
+type ArrayItemProps = {
+	index: number;
+	input: InputWithKey;
+	collapsible?: boolean;
+} & Omit<InputListProps, "inputs">;
+
+const ArrayItem = ({
+	parentId,
+	index,
+	input,
+	template,
+	collapsible = false,
+	onMove,
+	onDelete,
+	createObject,
+	showControls = true,
+}: ArrayItemProps) => {
+	const [isCollapsed, setIsCollapsed] = useState(false);
+
+	const { id } = template;
+	const inputId = createObject
+		? `${parentId}.[${index}].${id}`
+		: `${parentId}.[${index}]`;
+
+	return (
+		<li key={input.key} className={styles.input}>
+			{/* if collapsible / show id */}
+			{showControls ? (
+				<div className={styles.icons}>
+					{collapsible ? (
+						<CollapsibleIcons
+							isCollapsed={isCollapsed}
+							onToggle={() => setIsCollapsed((prev) => !prev)}
+						/>
+					) : null}
+					<IconButton
+						data-testid="move-up"
+						icon={FaArrowUp}
+						onClick={() => onMove(index, "up")}
+					/>
+					<IconButton
+						data-testid="move-down"
+						icon={FaArrowDown}
+						onClick={() => onMove(index, "down")}
+					/>
+					<IconButton
+						data-testid="delete"
+						icon={MdDelete}
+						onClick={() => onDelete(index)}
+					/>
+				</div>
+			) : null}
+			<div
+				className={`${styles.inputContainer} ${
+					isCollapsed ? styles.collapsed : ""
+				}`}
+			>
+				<div>
+					<InputFactory data={{ ...template, id: inputId }} />
+				</div>
+			</div>
+		</li>
+	);
+};
+
 export const ArrayInputList = ({
 	parentId,
 	inputs,
@@ -36,38 +124,22 @@ export const ArrayInputList = ({
 	createObject,
 	showControls = true,
 }: InputListProps) => {
-	const { id } = template;
-	return inputs.map((input, index) => {
-		const inputId = createObject
-			? `${parentId}.[${index}].${id}`
-			: `${parentId}.[${index}]`;
+	const collapsible = true;
 
-		return (
-			<li key={input.key} className={styles.input}>
-				{/* if collapsible / show id */}
-				{showControls ? (
-					<div className={styles.icons}>
-						<IconButton
-							data-testid="move-up"
-							icon={FaArrowUp}
-							onClick={() => onMove(index, "up")}
-						/>
-						<IconButton
-							data-testid="move-down"
-							icon={FaArrowDown}
-							onClick={() => onMove(index, "down")}
-						/>
-						<IconButton
-							data-testid="delete"
-							icon={MdDelete}
-							onClick={() => onDelete(index)}
-						/>
-					</div>
-				) : null}
-				<InputFactory data={{ ...template, id: inputId }} />
-			</li>
-		);
-	});
+	return inputs.map((input, index) => (
+		<ArrayItem
+			key={input.key}
+			index={index}
+			input={input}
+			parentId={parentId}
+			template={template}
+			onMove={onMove}
+			onDelete={onDelete}
+			createObject={createObject}
+			showControls={showControls}
+			collapsible={collapsible}
+		/>
+	));
 };
 
 export const ArrayInput = ({
