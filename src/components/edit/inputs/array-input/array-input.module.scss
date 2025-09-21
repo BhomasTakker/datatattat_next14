@@ -7,7 +7,6 @@
 	flex-direction: column;
 	gap: $spacingMd;
 
-	// border: 1px solid #ccc;
 	box-shadow: 0 0 $spacingXxs $shadowLight3;
 
 	margin-top: $spacingMd;
@@ -36,17 +35,21 @@
 			}
 		}
 
+		.controls {
+			display: flex;
+			justify-content: flex-end;
+			margin-bottom: $spacingXs;
+		}
+
 		.icons {
 			display: flex;
 			gap: $spacingXs;
 			align-items: center;
 			justify-content: flex-end;
-			width: 100%;
 
 			.collapsible {
 				display: flex;
 				align-items: center;
-				justify-content: space-between;
 				width: 100%;
 			}
 		}

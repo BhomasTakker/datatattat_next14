@@ -28,6 +28,7 @@ export const COMPONENT_CONFIG: GenericInput = {
 	label: "Components",
 	title: "Add Component",
 	isCollapsible: true,
+	showIdentifier: true,
 	input: {
 		id: "component",
 		type: EditInputs.inputList,

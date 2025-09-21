@@ -34,6 +34,7 @@ type InputListProps = {
 	createObject: boolean;
 	showControls?: boolean;
 	isCollapsible: boolean;
+	showIdentifier: boolean;
 	onMove: (index: number, direction: Direction) => void;
 	onDelete: (index: number) => void;
 };
@@ -41,26 +42,11 @@ type InputListProps = {
 type CollapsibleIconsProps = {
 	isCollapsed: boolean;
 	onToggle: () => void;
-	id: string;
-	showIdentifier?: boolean;
 };
 
-const CollapsibleIcons = ({
-	isCollapsed,
-	onToggle,
-	id,
-	showIdentifier,
-}: CollapsibleIconsProps) => {
-	const inputOptions: TextInputProps = {
-		id: `${id}.identifier`,
-		type: EditInputs.text,
-		label: "",
-		defaultValue: "Array Item",
-	};
-	const identifierInput = <InputFactory data={inputOptions} />;
+const CollapsibleIcons = ({ isCollapsed, onToggle }: CollapsibleIconsProps) => {
 	return (
 		<div className={styles.collapsible}>
-			{showIdentifier ? identifierInput : null}
 			<IconButton
 				data-testid="collapse"
 				icon={isCollapsed ? FaAngleLeft : FaAngleDown}
@@ -74,6 +60,7 @@ type ArrayItemProps = {
 	index: number;
 	input: InputWithKey;
 	isCollapsible?: boolean;
+	showIdentifier?: boolean;
 } & Omit<InputListProps, "inputs">;
 
 const ArrayItem = ({
@@ -82,6 +69,7 @@ const ArrayItem = ({
 	input,
 	template,
 	isCollapsible = false,
+	showIdentifier,
 	onMove,
 	onDelete,
 	createObject,
@@ -91,36 +79,44 @@ const ArrayItem = ({
 
 	const inputId = `${parentId}.[${index}].arrayItem`;
 
+	const inputOptions: TextInputProps = {
+		id: `${inputId}.identifier`,
+		type: EditInputs.text,
+		label: "",
+		defaultValue: "Array Item",
+	};
+	const identifierInput = <InputFactory data={inputOptions} />;
+
 	return (
 		<li key={input.key} className={styles.input}>
-			{/* if collapsible / show id */}
-			{showControls ? (
-				<div className={styles.icons}>
-					{isCollapsible ? (
-						<CollapsibleIcons
-							isCollapsed={isCollapsed}
-							onToggle={() => setIsCollapsed((prev) => !prev)}
-							id={inputId}
-							showIdentifier={true}
+			<div className={styles.controls}>
+				{showIdentifier ? identifierInput : null}
+				{showControls ? (
+					<div className={styles.icons}>
+						{isCollapsible ? (
+							<CollapsibleIcons
+								isCollapsed={isCollapsed}
+								onToggle={() => setIsCollapsed((prev) => !prev)}
+							/>
+						) : null}
+						<IconButton
+							data-testid="move-up"
+							icon={FaArrowUp}
+							onClick={() => onMove(index, "up")}
 						/>
-					) : null}
-					<IconButton
-						data-testid="move-up"
-						icon={FaArrowUp}
-						onClick={() => onMove(index, "up")}
-					/>
-					<IconButton
-						data-testid="move-down"
-						icon={FaArrowDown}
-						onClick={() => onMove(index, "down")}
-					/>
-					<IconButton
-						data-testid="delete"
-						icon={MdDelete}
-						onClick={() => onDelete(index)}
-					/>
-				</div>
-			) : null}
+						<IconButton
+							data-testid="move-down"
+							icon={FaArrowDown}
+							onClick={() => onMove(index, "down")}
+						/>
+						<IconButton
+							data-testid="delete"
+							icon={MdDelete}
+							onClick={() => onDelete(index)}
+						/>
+					</div>
+				) : null}
+			</div>
 			<div
 				className={`${styles.inputContainer} ${
 					isCollapsed ? styles.collapsed : ""
@@ -143,6 +139,7 @@ export const ArrayInputList = ({
 	createObject,
 	showControls = true,
 	isCollapsible,
+	showIdentifier,
 }: InputListProps) => {
 	return inputs.map((input, index) => (
 		<ArrayItem
@@ -156,6 +153,7 @@ export const ArrayInputList = ({
 			createObject={createObject}
 			showControls={showControls}
 			isCollapsible={isCollapsible}
+			showIdentifier={showIdentifier}
 		/>
 	));
 };
@@ -168,6 +166,7 @@ export const ArrayInput = ({
 	defaultValue = [],
 	disabled = false,
 	isCollapsible = false,
+	showIdentifier = false,
 }: ArrayInputProps) => {
 	const [key, setKey] = useState(randomKeyGenerator());
 	const { label: inputLabel, id: inputId = "" } = input;
@@ -233,6 +232,7 @@ export const ArrayInput = ({
 					onDelete={onDeleteHnd}
 					createObject={createObject}
 					isCollapsible={isCollapsible}
+					showIdentifier={showIdentifier}
 				/>
 			</ul>
 
