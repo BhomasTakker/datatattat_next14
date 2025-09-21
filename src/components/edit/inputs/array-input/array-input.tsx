@@ -44,7 +44,7 @@ export const ArrayInputList = ({
 
 		return (
 			<li key={input.key} className={styles.input}>
-				<InputFactory data={{ ...template, id: inputId }} />
+				{/* if collapsible / show id */}
 				{showControls ? (
 					<div className={styles.icons}>
 						<IconButton
@@ -64,6 +64,7 @@ export const ArrayInputList = ({
 						/>
 					</div>
 				) : null}
+				<InputFactory data={{ ...template, id: inputId }} />
 			</li>
 		);
 	});
