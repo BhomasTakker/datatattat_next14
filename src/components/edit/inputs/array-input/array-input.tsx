@@ -33,6 +33,7 @@ type InputListProps = {
 	template: GenericInput;
 	createObject: boolean;
 	showControls?: boolean;
+	isCollapsible: boolean;
 	onMove: (index: number, direction: Direction) => void;
 	onDelete: (index: number) => void;
 };
@@ -72,7 +73,7 @@ const CollapsibleIcons = ({
 type ArrayItemProps = {
 	index: number;
 	input: InputWithKey;
-	collapsible?: boolean;
+	isCollapsible?: boolean;
 } & Omit<InputListProps, "inputs">;
 
 const ArrayItem = ({
@@ -80,7 +81,7 @@ const ArrayItem = ({
 	index,
 	input,
 	template,
-	collapsible = false,
+	isCollapsible = false,
 	onMove,
 	onDelete,
 	createObject,
@@ -95,7 +96,7 @@ const ArrayItem = ({
 			{/* if collapsible / show id */}
 			{showControls ? (
 				<div className={styles.icons}>
-					{collapsible ? (
+					{isCollapsible ? (
 						<CollapsibleIcons
 							isCollapsed={isCollapsed}
 							onToggle={() => setIsCollapsed((prev) => !prev)}
@@ -141,9 +142,8 @@ export const ArrayInputList = ({
 	onDelete,
 	createObject,
 	showControls = true,
+	isCollapsible,
 }: InputListProps) => {
-	const collapsible = true;
-
 	return inputs.map((input, index) => (
 		<ArrayItem
 			key={input.key}
@@ -155,7 +155,7 @@ export const ArrayInputList = ({
 			onDelete={onDelete}
 			createObject={createObject}
 			showControls={showControls}
-			collapsible={collapsible}
+			isCollapsible={isCollapsible}
 		/>
 	));
 };
@@ -167,6 +167,7 @@ export const ArrayInput = ({
 	createObject = true,
 	defaultValue = [],
 	disabled = false,
+	isCollapsible = false,
 }: ArrayInputProps) => {
 	const [key, setKey] = useState(randomKeyGenerator());
 	const { label: inputLabel, id: inputId = "" } = input;
@@ -231,6 +232,7 @@ export const ArrayInput = ({
 					onMove={onMove}
 					onDelete={onDeleteHnd}
 					createObject={createObject}
+					isCollapsible={isCollapsible}
 				/>
 			</ul>
 

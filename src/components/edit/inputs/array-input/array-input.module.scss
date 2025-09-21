@@ -40,7 +40,7 @@
 			display: flex;
 			gap: $spacingXs;
 			align-items: center;
-			align-self: end;
+			justify-content: flex-end;
 			width: 100%;
 
 			.collapsible {

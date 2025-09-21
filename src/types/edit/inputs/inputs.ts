@@ -91,6 +91,7 @@ export type ArrayInputProps = {
 	type: EditInputs.array;
 	title: string;
 	createObject?: boolean;
+	isCollapsible?: boolean;
 
 	// Default value is anything the array can hold!!!!!
 	defaultValue?: GenericInput[];
