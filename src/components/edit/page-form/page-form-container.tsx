@@ -30,6 +30,9 @@ export const PageFormContainer = ({ pageData }: { pageData: IPage }) => {
 	}, [route]);
 
 	const onSaveAsDraft = (args: SubmitHandler<FieldValues>) => {};
+	const debugHandler = (args: SubmitHandler<FieldValues>) => {
+		console.log("HOOK:FORM DEBUG", { args });
+	};
 
 	const submitHandler = methods.handleSubmit(async (data) => {
 		// This should be done on the server...
@@ -53,7 +56,11 @@ export const PageFormContainer = ({ pageData }: { pageData: IPage }) => {
 
 	return (
 		<EditContextProvider
-			value={{ submitHandler, submitDraftHandler: onSaveAsDraft }}
+			value={{
+				submitHandler,
+				submitDraftHandler: onSaveAsDraft,
+				submitDebugHandler: debugHandler,
+			}}
 		>
 			<FormProvider {...methods}>
 				<PageForm submitHandler={submitHandler} />

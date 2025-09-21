@@ -7,7 +7,6 @@
 	flex-direction: column;
 	gap: $spacingMd;
 
-	// border: 1px solid #ccc;
 	box-shadow: 0 0 $spacingXxs $shadowLight3;
 
 	margin-top: $spacingMd;
@@ -18,14 +17,41 @@
 
 	.input {
 		display: flex;
-		flex-direction: column-reverse;
+		flex-direction: column;
 		gap: $spacingXs;
+
+		.inputContainer {
+			display: grid;
+			grid-template-rows: 1fr;
+			// have scss mixin or abstract for transitions
+			transition: grid-template-rows 750ms ease-in-out;
+
+			&.collapsed {
+				grid-template-rows: 0fr;
+
+				& > div {
+					overflow: hidden;
+				}
+			}
+		}
+
+		.controls {
+			display: flex;
+			justify-content: flex-end;
+			margin-bottom: $spacingXs;
+		}
 
 		.icons {
 			display: flex;
 			gap: $spacingXs;
 			align-items: center;
-			align-self: end;
+			justify-content: flex-end;
+
+			.collapsible {
+				display: flex;
+				align-items: center;
+				width: 100%;
+			}
 		}
 
 		@media screen and (max-width: $screenWidthMd) {

@@ -19,9 +19,9 @@ jest.mock("../inputs/input-factory", () => ({
 jest.mock("../../../components/ui/button", () => ({
 	Button: (props: any) => <button {...props} />,
 }));
-// jest.mock("./debug-component", () => ({
-// 	DebugComponent: () => <div data-testid="debug-component" />,
-// }));
+jest.mock("./debug-component", () => ({
+	DebugComponent: () => <div data-testid="debug-component" />,
+}));
 jest.mock("./page-form.module.scss", () => ({
 	form: "form",
 }));

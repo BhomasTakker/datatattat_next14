@@ -1,7 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { useContext, useState } from "react";
 import { useFormContext } from "react-hook-form";
-import { FaArrowDown, FaArrowUp } from "react-icons/fa6";
+import {
+	FaArrowDown,
+	FaArrowUp,
+	FaAngleDown,
+	FaAngleLeft,
+} from "react-icons/fa6";
 import { MdDelete } from "react-icons/md";
 
 import styles from "./array-input.module.scss";
@@ -11,6 +16,7 @@ import { add, move, onDelete } from "./array-input-actions";
 import { randomKeyGenerator } from "@/utils/edit";
 import { ArrayInputProps, GenericInput } from "@/types/edit/inputs/inputs";
 import { EditContext } from "../../context/edit-context";
+import { createIdentifier } from "./utils";
 
 type Direction = "up" | "down";
 
@@ -23,30 +29,70 @@ type InputListProps = {
 	template: GenericInput;
 	createObject: boolean;
 	showControls?: boolean;
+	isCollapsible: boolean;
+	showIdentifier: boolean;
 	onMove: (index: number, direction: Direction) => void;
 	onDelete: (index: number) => void;
 };
 
-export const ArrayInputList = ({
+type CollapsibleIconsProps = {
+	isCollapsed: boolean;
+	onToggle: () => void;
+};
+
+const CollapsibleIcons = ({ isCollapsed, onToggle }: CollapsibleIconsProps) => {
+	return (
+		<div className={styles.collapsible}>
+			<IconButton
+				data-testid="collapse"
+				icon={isCollapsed ? FaAngleDown : FaAngleLeft}
+				onClick={onToggle}
+			/>
+		</div>
+	);
+};
+
+type ArrayItemProps = {
+	index: number;
+	input: InputWithKey;
+	isCollapsible?: boolean;
+	showIdentifier?: boolean;
+} & Omit<InputListProps, "inputs">;
+
+const ArrayItem = ({
 	parentId,
-	inputs,
+	index,
+	input,
 	template,
+	isCollapsible = false,
+	showIdentifier,
 	onMove,
 	onDelete,
 	createObject,
 	showControls = true,
-}: InputListProps) => {
-	const { id } = template;
-	return inputs.map((input, index) => {
-		const inputId = createObject
-			? `${parentId}.[${index}].${id}`
-			: `${parentId}.[${index}]`;
+}: ArrayItemProps) => {
+	const inputId = `${parentId}.[${index}].arrayItem`;
+	const isCollapsedId = `${inputId}.isCollapsed`;
+	const { getValues, setValue } = useFormContext();
+	const currentIsCollapsed = !!getValues(isCollapsedId) || false;
+	const [isCollapsed, setIsCollapsed] = useState(currentIsCollapsed);
 
-		return (
-			<li key={input.key} className={styles.input}>
-				<InputFactory data={{ ...template, id: inputId }} />
+	const identifierInput = createIdentifier(inputId);
+
+	const onToggle = () => {
+		setIsCollapsed((prev) => !prev);
+		setValue(isCollapsedId, !isCollapsed);
+	};
+
+	return (
+		<li key={input.key} className={styles.input}>
+			<div className={styles.controls}>
+				{showIdentifier ? identifierInput : null}
 				{showControls ? (
 					<div className={styles.icons}>
+						{isCollapsible ? (
+							<CollapsibleIcons isCollapsed={isCollapsed} onToggle={onToggle} />
+						) : null}
 						<IconButton
 							data-testid="move-up"
 							icon={FaArrowUp}
@@ -64,9 +110,46 @@ export const ArrayInputList = ({
 						/>
 					</div>
 				) : null}
-			</li>
-		);
-	});
+			</div>
+			<div
+				className={`${styles.inputContainer} ${
+					isCollapsed ? styles.collapsed : ""
+				}`}
+			>
+				<div>
+					<InputFactory data={{ ...template, id: inputId }} />
+				</div>
+			</div>
+		</li>
+	);
+};
+
+export const ArrayInputList = ({
+	parentId,
+	inputs,
+	template,
+	onMove,
+	onDelete,
+	createObject,
+	showControls = true,
+	isCollapsible,
+	showIdentifier,
+}: InputListProps) => {
+	return inputs.map((input, index) => (
+		<ArrayItem
+			key={input.key}
+			index={index}
+			input={input}
+			parentId={parentId}
+			template={template}
+			onMove={onMove}
+			onDelete={onDelete}
+			createObject={createObject}
+			showControls={showControls}
+			isCollapsible={isCollapsible}
+			showIdentifier={showIdentifier}
+		/>
+	));
 };
 
 export const ArrayInput = ({
@@ -76,6 +159,8 @@ export const ArrayInput = ({
 	createObject = true,
 	defaultValue = [],
 	disabled = false,
+	isCollapsible = false,
+	showIdentifier = false,
 }: ArrayInputProps) => {
 	const [key, setKey] = useState(randomKeyGenerator());
 	const { label: inputLabel, id: inputId = "" } = input;
@@ -140,6 +225,8 @@ export const ArrayInput = ({
 					onMove={onMove}
 					onDelete={onDeleteHnd}
 					createObject={createObject}
+					isCollapsible={isCollapsible}
+					showIdentifier={showIdentifier}
 				/>
 			</ul>
 
