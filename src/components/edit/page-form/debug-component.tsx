@@ -1,15 +1,25 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { useForm } from "react-hook-form";
+import { useContext } from "react";
+import { useForm, useFormContext } from "react-hook-form";
+import { EditContext } from "../context/edit-context";
 
 export const DebugComponent = () => {
-	const methods = useForm();
-	const debugHandler = () => {
-		console.log("HOOK:FORM DEBUG", {
-			values: methods.getValues(),
-		});
-	};
+	console.log("HOOK:FORM RENDER: DebugComponent");
+	const { handleSubmit } = useFormContext();
+	const { submitDebugHandler } = useContext(EditContext);
 
-	return <Button onClick={debugHandler}>Debug</Button>;
+	return (
+		<Button
+			onClick={() => {
+				console.log("HOOK:FORM How so??");
+				if (submitDebugHandler) {
+					handleSubmit(submitDebugHandler)();
+				}
+			}}
+		>
+			Debug
+		</Button>
+	);
 };

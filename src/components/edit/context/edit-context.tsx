@@ -3,6 +3,7 @@ import { ReactNode, createContext } from "react";
 type EditState = {
 	submitHandler: (data: any) => void;
 	submitDraftHandler: (data: any) => void;
+	submitDebugHandler?: (data: any) => void;
 };
 
 type EditInterface = {};
@@ -12,6 +13,9 @@ const initialState: EditState & EditInterface = {
 		// Default implementation
 	},
 	submitDraftHandler: () => {
+		// Default implementation
+	},
+	submitDebugHandler: () => {
 		// Default implementation
 	},
 };
