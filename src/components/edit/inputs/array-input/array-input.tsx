@@ -14,8 +14,13 @@ import { IconButton } from "@/components/ui/icon-button";
 import { InputFactory } from "../input-factory";
 import { add, move, onDelete } from "./array-input-actions";
 import { randomKeyGenerator } from "@/utils/edit";
-import { ArrayInputProps, GenericInput } from "@/types/edit/inputs/inputs";
+import {
+	ArrayInputProps,
+	GenericInput,
+	TextInputProps,
+} from "@/types/edit/inputs/inputs";
 import { EditContext } from "../../context/edit-context";
+import { EditInputs } from "../inputs";
 
 type Direction = "up" | "down";
 
@@ -35,12 +40,26 @@ type InputListProps = {
 type CollapsibleIconsProps = {
 	isCollapsed: boolean;
 	onToggle: () => void;
+	id: string;
+	showIdentifier?: boolean;
 };
 
-const CollapsibleIcons = ({ isCollapsed, onToggle }: CollapsibleIconsProps) => {
+const CollapsibleIcons = ({
+	isCollapsed,
+	onToggle,
+	id,
+	showIdentifier,
+}: CollapsibleIconsProps) => {
+	const inputOptions: TextInputProps = {
+		id: `${id}.identifier`,
+		type: EditInputs.text,
+		label: "",
+		defaultValue: "Array Item",
+	};
+	const identifierInput = <InputFactory data={inputOptions} />;
 	return (
 		<div className={styles.collapsible}>
-			<h3>Id go here</h3>
+			{showIdentifier ? identifierInput : null}
 			<IconButton
 				data-testid="collapse"
 				icon={isCollapsed ? FaAngleLeft : FaAngleDown}
@@ -69,10 +88,7 @@ const ArrayItem = ({
 }: ArrayItemProps) => {
 	const [isCollapsed, setIsCollapsed] = useState(false);
 
-	const { id } = template;
-	const inputId = createObject
-		? `${parentId}.[${index}].${id}`
-		: `${parentId}.[${index}]`;
+	const inputId = `${parentId}.[${index}].arrayItem`;
 
 	return (
 		<li key={input.key} className={styles.input}>
@@ -83,6 +99,8 @@ const ArrayItem = ({
 						<CollapsibleIcons
 							isCollapsed={isCollapsed}
 							onToggle={() => setIsCollapsed((prev) => !prev)}
+							id={inputId}
+							showIdentifier={true}
 						/>
 					) : null}
 					<IconButton
