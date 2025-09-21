@@ -49,7 +49,7 @@ const CollapsibleIcons = ({ isCollapsed, onToggle }: CollapsibleIconsProps) => {
 		<div className={styles.collapsible}>
 			<IconButton
 				data-testid="collapse"
-				icon={isCollapsed ? FaAngleLeft : FaAngleDown}
+				icon={isCollapsed ? FaAngleDown : FaAngleLeft}
 				onClick={onToggle}
 			/>
 		</div>
