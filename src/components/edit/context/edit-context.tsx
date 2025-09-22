@@ -4,6 +4,7 @@ type EditState = {
 	submitHandler: (data: any) => void;
 	submitDraftHandler: (data: any) => void;
 	submitDebugHandler?: (data: any) => void;
+	saveAsTemplateHandler?: (data: any) => void;
 };
 
 type EditInterface = {};
@@ -16,6 +17,9 @@ const initialState: EditState & EditInterface = {
 		// Default implementation
 	},
 	submitDebugHandler: () => {
+		// Default implementation
+	},
+	saveAsTemplateHandler: () => {
 		// Default implementation
 	},
 };

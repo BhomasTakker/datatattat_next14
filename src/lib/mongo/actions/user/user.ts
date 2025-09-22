@@ -36,6 +36,11 @@ export const updateUser = async (id: string, user: Partial<IUser>) => {
 		const updatedUser = await User.findOneAndUpdate({ _id: id }, user, {
 			new: true,
 		});
+
+		if (!updatedUser) {
+			return { message: "User not found" };
+		}
+
 		return { message: "User Updated" };
 	} catch (err) {
 		console.error(err);

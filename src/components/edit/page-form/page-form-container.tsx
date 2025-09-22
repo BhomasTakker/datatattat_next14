@@ -9,7 +9,7 @@ import {
 import { PageForm } from "./page-form";
 import { IPage } from "@/types/page";
 import { useEffect } from "react";
-import { savePage } from "@/actions/edit/update-page";
+import { savePage, saveTemplate } from "@/actions/edit/update-page";
 import { useRouter } from "next/navigation";
 import { EditContextProvider } from "../context/edit-context";
 import { toast } from "sonner";
@@ -54,16 +54,39 @@ export const PageFormContainer = ({ pageData }: { pageData: IPage }) => {
 		});
 	});
 
+	const saveOrCreateTemplateHandler = methods.handleSubmit(async (data) => {
+		const update = { ...pageData, ...data };
+
+		// saveTemplate
+		const promise = saveTemplate("example_id", update)
+			.then((res) => {
+				methods.reset(data);
+			})
+			.catch((err) => {
+				console.error(err);
+			});
+
+		toast.promise(promise, {
+			loading: "Saving Template...",
+			success: `Template has been saved!`,
+			error: "Error saving template",
+		});
+	});
+
 	return (
 		<EditContextProvider
 			value={{
 				submitHandler,
+				saveAsTemplateHandler: saveOrCreateTemplateHandler,
 				submitDraftHandler: onSaveAsDraft,
 				submitDebugHandler: debugHandler,
 			}}
 		>
 			<FormProvider {...methods}>
-				<PageForm submitHandler={submitHandler} />
+				<PageForm
+					submitHandler={submitHandler}
+					saveAsTemplateHandler={saveOrCreateTemplateHandler}
+				/>
 			</FormProvider>
 		</EditContextProvider>
 	);
