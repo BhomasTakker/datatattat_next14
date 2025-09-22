@@ -38,6 +38,11 @@ const UserSchema = new Schema<IUser>(
 			type: String,
 			default: "standard",
 		},
+		templates: {
+			type: Schema.Types.Mixed,
+			required: false,
+			default: {},
+		},
 	},
 	{ timestamps: true }
 );

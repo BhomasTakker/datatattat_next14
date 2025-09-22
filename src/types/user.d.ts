@@ -1,4 +1,5 @@
 import { ObjectId } from "mongoose";
+import { IPage } from "./page";
 
 export interface IUser {
 	signup_completed: boolean;
@@ -10,6 +11,8 @@ export interface IUser {
 
 	username: string;
 	role: string;
+
+	templates: Record<string, IPage>; // a map of template name to page object
 
 	readonly _id: ObjectId;
 }
