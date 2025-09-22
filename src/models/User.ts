@@ -39,9 +39,18 @@ const UserSchema = new Schema<IUser>(
 			default: "standard",
 		},
 		templates: {
-			type: Schema.Types.Mixed,
-			required: false,
-			default: {},
+			pages: {
+				type: Map,
+				of: Schema.Types.Mixed,
+				required: false,
+				default: new Map(),
+			},
+			components: {
+				type: Map,
+				of: Schema.Types.Mixed,
+				required: false,
+				default: new Map(),
+			},
 		},
 	},
 	{ timestamps: true }
