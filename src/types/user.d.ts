@@ -12,7 +12,10 @@ export interface IUser {
 	username: string;
 	role: string;
 
-	templates: Record<string, IPage>; // a map of template name to page object
+	templates: {
+		pages?: Record<string, IPage>; // a map of template name to page object
+		components?: Record<string, IPage>; // a map of template name to component object
+	};
 
 	readonly _id: ObjectId;
 }
