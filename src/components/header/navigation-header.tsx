@@ -7,7 +7,7 @@ import { getServerSession } from "next-auth";
 import { options } from "@/app/api/auth/[...nextauth]/options";
 import { UserMenu } from "./user-menu/user-menu";
 import { BiSolidUser } from "react-icons/bi";
-import { getUserById } from "@/lib/mongo/actions/user";
+import { getUserById } from "@/lib/mongo/actions/user/user";
 import { Session } from "@/types/auth/session";
 import { initialiseServices } from "@/lib/services/intialise-services";
 import kofi from "../../../public/assets/ko-fi/kofi_symbol.png";

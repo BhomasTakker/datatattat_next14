@@ -1,6 +1,6 @@
 "use server";
 
-import { updateUser } from "@/lib/mongo/actions/user";
+import { updateUser } from "@/lib/mongo/actions/user/user";
 import { isUsernameValid } from "./check-username";
 import { isValidUser } from "../auth/check-valid-user";
 import { initialiseServices } from "@/lib/services/intialise-services";

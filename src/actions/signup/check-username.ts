@@ -1,6 +1,6 @@
 "use server";
 
-import { getUserByUsername } from "@/lib/mongo/actions/user";
+import { getUserByUsername } from "@/lib/mongo/actions/user/user";
 import { getSessionUser } from "../user/get-user";
 import { initialiseServices } from "@/lib/services/intialise-services";
 import { patterns } from "@/utils/regex";

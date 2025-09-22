@@ -1,5 +1,8 @@
 import { checkAndCreateUsername } from "@/actions/signup/check-create-username";
-import { createNewUser, getUserBySignInEmail } from "../mongo/actions/user";
+import {
+	createNewUser,
+	getUserBySignInEmail,
+} from "../mongo/actions/user/user";
 import { connectToMongoDB } from "../mongo/db";
 import { Profile, ProviderFunction, providers, Providers, User } from "./types";
 import {

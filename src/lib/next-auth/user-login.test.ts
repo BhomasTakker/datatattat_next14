@@ -1,6 +1,6 @@
 import { createUserObject, loginOrSignUp, providerMap } from "./user-login";
 import { providers, Providers, Profile, User } from "./types";
-import * as mongoActions from "../mongo/actions/user";
+import * as mongoActions from "../mongo/actions/user/user";
 // import * as mongoDb from "../mongo/db";
 import * as signupActions from "../../actions/signup/check-create-username";
 import {
@@ -13,7 +13,7 @@ jest.mock("../../actions/user/get-user", () => ({
 	getUser: jest.fn(),
 }));
 
-jest.mock("../mongo/actions/user");
+jest.mock("../mongo/actions/user/user");
 jest.mock("../mongo/db");
 jest.mock("../../actions/signup/check-create-username");
 

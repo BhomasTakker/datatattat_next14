@@ -4,11 +4,11 @@ import UserProfile from "./page";
 import { redirect } from "next/navigation";
 import { PATHS } from "@/lib/routing/paths";
 const mockGetUserByUsername =
-	require("../../../../lib/mongo/actions/user").getUserByUsername;
+	require("../../../../lib/mongo/actions/user/user").getUserByUsername;
 const mockGetUser = require("../../../../actions/user/get-user").getUser;
 
 // Mock dependencies
-jest.mock("../../../../lib/mongo/actions/user", () => ({
+jest.mock("../../../../lib/mongo/actions/user/user", () => ({
 	getUserByUsername: jest.fn(),
 }));
 jest.mock("../../../../actions/user/get-user", () => ({

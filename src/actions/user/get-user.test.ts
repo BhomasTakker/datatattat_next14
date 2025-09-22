@@ -1,6 +1,6 @@
 import * as getUserFunctions from "./get-user";
 import { getServerSession } from "next-auth";
-import { getUserById } from "@/lib/mongo/actions/user";
+import { getUserById } from "@/lib/mongo/actions/user/user";
 import { initialiseServices } from "@/lib/services/intialise-services";
 import { Session } from "@/types/auth/session";
 import { IUser } from "@/types/user";
@@ -20,7 +20,7 @@ const getUserFromSessionIdSpy = jest.spyOn(
 // const getUserSpy = jest.spyOn(getUserFunctions, "getUser");
 
 // Mock dependencies
-jest.mock("../../lib/mongo/actions/user", () => ({
+jest.mock("../../lib/mongo/actions/user/user", () => ({
 	getUserById: jest.fn(),
 }));
 jest.mock("../../lib/services/intialise-services", () => ({

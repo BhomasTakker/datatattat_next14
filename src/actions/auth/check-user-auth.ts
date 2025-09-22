@@ -1,7 +1,7 @@
 "use server";
 
 import { options } from "@/app/api/auth/[...nextauth]/options";
-import { getUserById } from "@/lib/mongo/actions/user";
+import { getUserById } from "@/lib/mongo/actions/user/user";
 import { PATHS } from "@/lib/routing/paths";
 import { initialiseServices } from "@/lib/services/intialise-services";
 import { Session } from "@/types/auth/session";
