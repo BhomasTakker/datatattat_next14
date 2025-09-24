@@ -40,16 +40,14 @@ const UserSchema = new Schema<IUser>(
 		},
 		templates: {
 			pages: {
-				type: Map,
-				of: Schema.Types.Mixed,
+				type: Schema.Types.Mixed,
 				required: false,
-				default: new Map(),
+				default: {},
 			},
 			components: {
-				type: Map,
-				of: Schema.Types.Mixed,
+				type: Schema.Types.Mixed,
 				required: false,
-				default: new Map(),
+				default: {},
 			},
 		},
 	},

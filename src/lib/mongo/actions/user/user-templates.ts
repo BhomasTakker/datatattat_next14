@@ -18,6 +18,15 @@ const cleanPageData = (page: IPage) => {
 	return clonedPage;
 };
 
+export const getTemplateByKey = async (key: string, userId: string) => {
+	const user = await getUserById(userId);
+	if (!user) {
+		throw new Error("User not found");
+	}
+
+	return user.templates?.pages?.[key] || null;
+};
+
 // page template / componentTemplate
 export const saveOrCreateTemplateByKey = async (
 	key: string,
