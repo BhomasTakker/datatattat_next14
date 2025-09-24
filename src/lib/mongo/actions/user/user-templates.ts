@@ -33,25 +33,19 @@ export const saveOrCreateTemplateByKey = async (
 	page: IPage,
 	userId: string
 ) => {
-	console.log("Saving template:", { key, page, userId });
 	const user = await getUserById(userId);
 	if (!user) {
 		throw new Error("User not found");
 	}
-	console.log("User found:", user);
 
 	const clonedPage = cleanPageData(page);
 
 	const pages = { ...(user.templates?.pages || {}), [key]: clonedPage };
 
 	const templates = { ...user.templates, pages };
-	console.log("PAGES:", pages);
-	console.log("User templates updated:", templates, userId);
 
 	// Pass the templates object directly
 	const result = await updateUser(userId, { templates });
-
-	console.log("Result of updateUser:", result);
 
 	return result;
 };

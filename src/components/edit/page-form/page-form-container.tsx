@@ -16,7 +16,6 @@ import {
 } from "@/actions/edit/update-page";
 import { useRouter } from "next/navigation";
 import { EditContextProvider } from "../context/edit-context";
-import { toast } from "sonner";
 import { randomKeyGenerator } from "@/utils/edit";
 import { initToastPromise, ToastType } from "@/lib/sonner/toast";
 
@@ -63,6 +62,7 @@ export const PageFormInteractionController = ({
 		refresh();
 	}, [route]);
 
+	// maybe create via a useReducer or someting
 	// Draft save - For saving in local memory
 	const onSaveAsDraft = (args: SubmitHandler<FieldValues>) => {};
 
@@ -102,15 +102,6 @@ export const PageFormInteractionController = ({
 	});
 
 	const loadTemplateHandler = async (templateId: string) => {
-		// const template = await loadTemplate(templateId);
-
-		// if (template) {
-		// 	toast.success("Template loaded!");
-		// 	setTemplate(template);
-		// 	// Update template data
-		// } else {
-		// 	toast.error("Template not found");
-		// }
 		initToastPromise({
 			cb: () => loadTemplate(templateId),
 			id: ToastType.LoadTemplate,
