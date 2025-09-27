@@ -1,4 +1,6 @@
 import styles from "./modal.module.scss";
+import { IconButton } from "@/components/ui/icon-button";
+import { IoMdClose } from "react-icons/io";
 
 type FormModalProps = {
 	isOpen: boolean;
@@ -11,9 +13,9 @@ export const FormModal = ({ isOpen, onClose, children }: FormModalProps) => {
 	return (
 		<div className={styles.root}>
 			<div className={styles.content}>
-				<button className={styles.closeButton} onClick={onClose}>
-					X
-				</button>
+				<div className={styles.closeButton}>
+					<IconButton data-testid="close" icon={IoMdClose} onClick={onClose} />
+				</div>
 				{children}
 			</div>
 		</div>
