@@ -1,7 +1,7 @@
 "use server";
 
 import { options } from "@/app/api/auth/[...nextauth]/options";
-import { getUserById } from "@/lib/mongo/actions/user/user";
+import { getLeanUserById } from "@/lib/mongo/actions/user/user";
 import { initialiseServices } from "@/lib/services/intialise-services";
 import { Session } from "@/types/auth/session";
 import { IUser } from "@/types/user";
@@ -19,10 +19,9 @@ export async function getSessionUser() {
 
 export async function getUserFromSessionId(id: string): Promise<IUser> {
 	await initialiseServices();
-	const user = await getUserById(id);
+	const user = await getLeanUserById(id);
 
 	if (!user) {
-		// Log error
 		throw new Error("User not found");
 		//redirect?
 	}
@@ -31,7 +30,6 @@ export async function getUserFromSessionId(id: string): Promise<IUser> {
 }
 
 // getUser
-// should have a get user from session.
 export async function getUser(): Promise<IUser | null> {
 	// try catch / if no session / if no user etc
 	const sessionUser = await getSessionUser();

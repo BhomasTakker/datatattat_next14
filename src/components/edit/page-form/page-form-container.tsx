@@ -19,7 +19,46 @@ import { EditContextProvider } from "../context/edit-context";
 import { randomKeyGenerator } from "@/utils/edit";
 import { initToastPromise, ToastType } from "@/lib/sonner/toast";
 import { FormModal } from "../form-modal/modal";
-import { SaveTemplateForm } from "../save-template-form/save-template-form";
+import { SaveTemplateForm } from "../template/save-template-form";
+import { LoadTemplateForm } from "../template/load-template-form";
+
+const getFormData = (el: HTMLFormElement) => {
+	const formData = new FormData(el);
+	return Object.fromEntries(formData.entries());
+};
+
+const getTemplateId = (el: HTMLFormElement) => {
+	const data = getFormData(el);
+
+	const { templateId } = data;
+	if (!templateId) {
+		console.error("No template ID provided");
+		return null;
+	}
+	// regex test a-z - only allow letters, numbers, underscores, and hyphens
+
+	if (typeof templateId !== "string") {
+		console.error("Invalid template ID");
+		return null;
+	}
+
+	return templateId;
+};
+
+const checkFormIdValid = (templateId: string | null) => {
+	if (!templateId) return false;
+
+	// regex test a-z - only allow letters, numbers, underscores, and hyphens
+	const validId = /^[a-zA-Z0-9_-]+$/.test(templateId);
+	if (!validId) {
+		console.error(
+			"Invalid template ID. Only letters, numbers, underscores, and hyphens are allowed."
+		);
+		return false;
+	}
+
+	return true;
+};
 
 export const PageFormContainer = ({ pageData }: { pageData: IPage }) => {
 	const [templateData, setTemplateData] = useState({} as IPage);
@@ -94,63 +133,48 @@ export const PageFormInteractionController = ({
 	const saveOrCreateTemplateHandler = methods.handleSubmit(async (data) => {
 		const update = { ...pageData, ...data };
 		setShowSaveTemplateModal(true);
-		// initToastPromise({
-		// 	cb: () => saveTemplate("example_id", update),
-		// 	id: ToastType.SaveTemplate,
-		// 	onComplete: (_res) => {
-		// 		methods.reset(data);
-		// 	},
-		// 	onError: (err) => {
-		// 		console.error(err);
-		// 	},
-		// });
 	});
 
 	const loadTemplateHandler = async (templateId: string) => {
 		setShowLoadTemplateModal(true);
-		// initToastPromise({
-		// 	cb: () => loadTemplate(templateId),
-		// 	id: ToastType.LoadTemplate,
-		// 	onComplete: (template) => setTemplate(template),
-		// });
+	};
+
+	const loadTemplateFormSubmitHandler = async (
+		e: React.FormEvent<HTMLFormElement>
+	) => {
+		e.preventDefault();
+
+		const templateId = getTemplateId(e.target as HTMLFormElement);
+		if (!templateId) return;
+
+		initToastPromise({
+			cb: () => loadTemplate(templateId),
+			id: ToastType.LoadTemplate,
+			onComplete: (template) => setTemplate(template),
+		});
 	};
 
 	const saveTemplateFormSubmitHandler = (
 		e: React.FormEvent<HTMLFormElement>
 	) => {
 		e.preventDefault();
-		const formData = new FormData(e.target as HTMLFormElement);
-		const data = Object.fromEntries(formData.entries());
+		const formData = getFormData(e.target as HTMLFormElement);
+		const templateId = getTemplateId(e.target as HTMLFormElement);
+		if (!templateId) return;
 
-		const { templateId } = data;
-		if (!templateId) {
-			console.error("No template ID provided");
-			return;
-		}
-		// regex test a-z - only allow letters, numbers, underscores, and hyphens
+		if (!checkFormIdValid(templateId)) return;
 
-		if (typeof templateId !== "string") {
-			console.error("Invalid template ID");
-			return;
-		}
-
-		const validId = /^[a-zA-Z0-9_-]+$/.test(templateId);
-		if (!validId) {
-			console.error(
-				"Invalid template ID. Only letters, numbers, underscores, and hyphens are allowed."
-			);
-			return;
-		}
 		// how to get the current form data here?
 		const currentData = methods.getValues();
 		const update = { ...pageData, ...currentData };
+
 		setShowSaveTemplateModal(false);
 		initToastPromise({
 			// if none use dummy timeout function
 			cb: () => saveTemplate(templateId, update),
 			id: ToastType.SaveTemplate,
 			onComplete: (_res) => {
-				methods.reset(data);
+				methods.reset(formData);
 			},
 			onError: (err) => {
 				console.error(err);
@@ -167,12 +191,6 @@ export const PageFormInteractionController = ({
 				submitDebugHandler: debugHandler,
 			}}
 		>
-			{/* <FormModal
-				isOpen={showSaveTemplateModal}
-				onClose={() => setShowSaveTemplateModal(false)}
-			>
-				<SaveTemplateForm submitHandler={saveTemplateFormSubmitHandler} />
-			</FormModal> */}
 			<FormModal
 				isOpen={showSaveTemplateModal}
 				onClose={() => setShowSaveTemplateModal(false)}
@@ -184,7 +202,7 @@ export const PageFormInteractionController = ({
 				onClose={() => setShowLoadTemplateModal(false)}
 			>
 				<h2>Load Template Form</h2>
-				{/* <LoadTemplateForm submitHandler={loadTemplateFormSubmitHandler} /> */}
+				<LoadTemplateForm submitHandler={loadTemplateFormSubmitHandler} />
 			</FormModal>
 			<FormProvider {...methods}>
 				<PageForm
