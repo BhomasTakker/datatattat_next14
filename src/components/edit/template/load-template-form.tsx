@@ -1,4 +1,4 @@
-import { getUserTemplates } from "@/actions/edit/update-page";
+import { getUserTemplates } from "@/actions/edit/template";
 import { useEffect, useState } from "react";
 
 type SaveTemplateFormProps = {
@@ -15,7 +15,7 @@ export const LoadTemplateForm = ({ submitHandler }: SaveTemplateFormProps) => {
 		const fetchTemplates = async () => {
 			const userTemplates = await getUserTemplates();
 			const pages = userTemplates.pages || {};
-			setTemplates(Object.keys(userTemplates) || []);
+			setTemplates(Object.keys(pages) || []);
 		};
 
 		fetchTemplates();

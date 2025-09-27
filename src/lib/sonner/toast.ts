@@ -4,6 +4,7 @@ export enum ToastType {
 	SavePage = "save-page",
 	SaveTemplate = "save-template",
 	LoadTemplate = "load-template",
+	ConfirmSaveTemplate = "confirm-save-template",
 	SaveHeader = "save-header",
 }
 
@@ -32,13 +33,31 @@ const ToastMessages = {
 		success: "Header has been saved!",
 		error: "Error saving header",
 	},
+	confirmSaveTemplate: {
+		id: ToastType.ConfirmSaveTemplate,
+		label: "Confirm?",
+		success: "Template has been confirmed!",
+		message: "Template exists. Overwrite?",
+		duration: 5000,
+		position: "top-center",
+	},
 } as const;
 
 type ToastMessage = {
 	id: string;
-	loading: string;
-	success: string;
-	error: string;
+	loading?: string;
+	success?: string;
+	error?: string;
+	label?: string;
+	message?: string;
+	duration?: number;
+	position?:
+		| "top-left"
+		| "top-right"
+		| "bottom-left"
+		| "bottom-right"
+		| "top-center"
+		| "bottom-center";
 };
 
 const ToastMessagesMap = new Map<ToastType, ToastMessage>([
@@ -46,6 +65,7 @@ const ToastMessagesMap = new Map<ToastType, ToastMessage>([
 	[ToastType.SaveTemplate, ToastMessages.saveTemplate],
 	[ToastType.SaveHeader, ToastMessages.saveHeader],
 	[ToastType.LoadTemplate, ToastMessages.loadTemplate],
+	[ToastType.ConfirmSaveTemplate, ToastMessages.confirmSaveTemplate],
 ]);
 
 type ToastPromiseParams = {
@@ -81,5 +101,38 @@ export const initToastPromise = ({
 		loading: toastMessage.loading,
 		success: toastMessage.success,
 		error: toastMessage.error,
+	});
+};
+
+export const createToastAction = ({
+	cb,
+	onComplete,
+	onError,
+	id,
+}: ToastPromiseParams) => {
+	const toastMessage = ToastMessagesMap.get(id);
+
+	if (!toastMessage) {
+		console.error(`No toast message found for id: ${id}`);
+		return;
+	}
+
+	toast(toastMessage.message, {
+		duration: toastMessage.duration,
+		action: {
+			label: toastMessage.label,
+			onClick: () => {
+				cb()
+					.then((res) => {
+						toast.success(toastMessage.success);
+						onComplete?.(res);
+					})
+					.catch((err) => {
+						toast.error(toastMessage.error);
+						onError?.(err);
+					});
+			},
+		},
+		position: toastMessage.position,
 	});
 };

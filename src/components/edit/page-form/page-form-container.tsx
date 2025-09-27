@@ -9,18 +9,23 @@ import {
 import { PageForm } from "./page-form";
 import { IPage } from "@/types/page";
 import { useEffect, useState } from "react";
-import {
-	loadTemplate,
-	savePage,
-	saveTemplate,
-} from "@/actions/edit/update-page";
+import { savePage } from "@/actions/edit/update-page";
 import { useRouter } from "next/navigation";
 import { EditContextProvider } from "../context/edit-context";
 import { randomKeyGenerator } from "@/utils/edit";
-import { initToastPromise, ToastType } from "@/lib/sonner/toast";
+import {
+	createToastAction,
+	initToastPromise,
+	ToastType,
+} from "@/lib/sonner/toast";
 import { FormModal } from "../form-modal/modal";
 import { SaveTemplateForm } from "../template/save-template-form";
 import { LoadTemplateForm } from "../template/load-template-form";
+import {
+	checkTemplateNameUnique,
+	loadTemplate,
+	saveTemplate,
+} from "@/actions/edit/template";
 
 const getFormData = (el: HTMLFormElement) => {
 	const formData = new FormData(el);
@@ -154,7 +159,7 @@ export const PageFormInteractionController = ({
 		});
 	};
 
-	const saveTemplateFormSubmitHandler = (
+	const saveTemplateFormSubmitHandler = async (
 		e: React.FormEvent<HTMLFormElement>
 	) => {
 		e.preventDefault();
@@ -167,6 +172,25 @@ export const PageFormInteractionController = ({
 		// how to get the current form data here?
 		const currentData = methods.getValues();
 		const update = { ...pageData, ...currentData };
+
+		// check if unique id
+		const isUniqueId = await checkTemplateNameUnique(templateId);
+		if (!isUniqueId) {
+			createToastAction({
+				cb: async () => {
+					setShowSaveTemplateModal(false);
+					await saveTemplate(templateId, update);
+				},
+				id: ToastType.ConfirmSaveTemplate,
+				onComplete: (_res) => {
+					methods.reset(formData);
+				},
+				onError: (err) => {
+					console.error(err);
+				},
+			});
+			return;
+		}
 
 		setShowSaveTemplateModal(false);
 		initToastPromise({
