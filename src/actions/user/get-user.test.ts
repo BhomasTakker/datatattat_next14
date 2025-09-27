@@ -1,6 +1,6 @@
 import * as getUserFunctions from "./get-user";
 import { getServerSession } from "next-auth";
-import { getUserById } from "@/lib/mongo/actions/user/user";
+import { getLeanUserById } from "@/lib/mongo/actions/user/user";
 import { initialiseServices } from "@/lib/services/intialise-services";
 import { Session } from "@/types/auth/session";
 import { IUser } from "@/types/user";
@@ -12,7 +12,9 @@ jest.mock("./get-user", () => {
 		...jest.requireActual("./get-user"),
 	};
 });
+
 const getSessionUserSpy = jest.spyOn(getUserFunctions, "getSessionUser");
+
 const getUserFromSessionIdSpy = jest.spyOn(
 	getUserFunctions,
 	"getUserFromSessionId"
@@ -20,8 +22,11 @@ const getUserFromSessionIdSpy = jest.spyOn(
 // const getUserSpy = jest.spyOn(getUserFunctions, "getUser");
 
 // Mock dependencies
+jest.mock("next-auth", () => ({
+	getServerSession: jest.fn(),
+}));
 jest.mock("../../lib/mongo/actions/user/user", () => ({
-	getUserById: jest.fn(),
+	getLeanUserById: jest.fn(),
 }));
 jest.mock("../../lib/services/intialise-services", () => ({
 	initialiseServices: jest.fn(),
@@ -49,18 +54,18 @@ describe("getUserFromSessionId", () => {
 		jest.clearAllMocks();
 	});
 
-	it("calls initialiseServices and getUserById with correct id", async () => {
+	it("calls initialiseServices and getLeanUserById with correct id", async () => {
 		const mockUser = { _id: "123", name: "Test" } as unknown as IUser;
-		(getUserById as jest.Mock).mockResolvedValueOnce(mockUser);
+		(getLeanUserById as jest.Mock).mockResolvedValueOnce(mockUser);
 
 		const result = await getUserFromSessionId("123");
 		expect(initialiseServices).toHaveBeenCalled();
-		expect(getUserById).toHaveBeenCalledWith("123");
+		expect(getLeanUserById).toHaveBeenCalledWith("123");
 		expect(result).toBe(mockUser);
 	});
 
 	it("throws error if user not found", async () => {
-		(getUserById as jest.Mock).mockResolvedValueOnce(null);
+		(getLeanUserById as jest.Mock).mockResolvedValueOnce(null);
 
 		await expect(getUserFromSessionId("notfound")).rejects.toThrow(
 			"User not found"
