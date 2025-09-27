@@ -40,7 +40,7 @@ export const PageForm = ({
 	return (
 		<form onSubmit={submitHandler} className={styles.form}>
 			{/* These don't work properly unless first input is an inputList?  */}
-			<Button onClick={saveAsTemplateHandler}>Save Template</Button>
+			<Button onClick={saveAsTemplateHandler}>Save As Template</Button>
 			<Button onClick={() => loadTemplateHandler("example_id")}>
 				Load Template
 			</Button>

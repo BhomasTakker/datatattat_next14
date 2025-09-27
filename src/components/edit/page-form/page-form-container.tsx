@@ -18,6 +18,8 @@ import { useRouter } from "next/navigation";
 import { EditContextProvider } from "../context/edit-context";
 import { randomKeyGenerator } from "@/utils/edit";
 import { initToastPromise, ToastType } from "@/lib/sonner/toast";
+import { FormModal } from "../form-modal/modal";
+import { SaveTemplateForm } from "../save-template-form/save-template-form";
 
 export const PageFormContainer = ({ pageData }: { pageData: IPage }) => {
 	const [templateData, setTemplateData] = useState({} as IPage);
@@ -47,6 +49,9 @@ export const PageFormInteractionController = ({
 	pageData: IPage;
 	setTemplate: (data: IPage) => void;
 }) => {
+	// set modal state - to initialise load/save
+	const [showSaveTemplateModal, setShowSaveTemplateModal] = useState(false);
+	const [showLoadTemplateModal, setShowLoadTemplateModal] = useState(false);
 	const { route } = pageData;
 
 	const methods = useForm({
@@ -88,9 +93,61 @@ export const PageFormInteractionController = ({
 	// Save Page as template - Save all fields as a template to be loaded on request
 	const saveOrCreateTemplateHandler = methods.handleSubmit(async (data) => {
 		const update = { ...pageData, ...data };
+		setShowSaveTemplateModal(true);
+		// initToastPromise({
+		// 	cb: () => saveTemplate("example_id", update),
+		// 	id: ToastType.SaveTemplate,
+		// 	onComplete: (_res) => {
+		// 		methods.reset(data);
+		// 	},
+		// 	onError: (err) => {
+		// 		console.error(err);
+		// 	},
+		// });
+	});
 
+	const loadTemplateHandler = async (templateId: string) => {
+		setShowLoadTemplateModal(true);
+		// initToastPromise({
+		// 	cb: () => loadTemplate(templateId),
+		// 	id: ToastType.LoadTemplate,
+		// 	onComplete: (template) => setTemplate(template),
+		// });
+	};
+
+	const saveTemplateFormSubmitHandler = (
+		e: React.FormEvent<HTMLFormElement>
+	) => {
+		e.preventDefault();
+		const formData = new FormData(e.target as HTMLFormElement);
+		const data = Object.fromEntries(formData.entries());
+
+		const { templateId } = data;
+		if (!templateId) {
+			console.error("No template ID provided");
+			return;
+		}
+		// regex test a-z - only allow letters, numbers, underscores, and hyphens
+
+		if (typeof templateId !== "string") {
+			console.error("Invalid template ID");
+			return;
+		}
+
+		const validId = /^[a-zA-Z0-9_-]+$/.test(templateId);
+		if (!validId) {
+			console.error(
+				"Invalid template ID. Only letters, numbers, underscores, and hyphens are allowed."
+			);
+			return;
+		}
+		// how to get the current form data here?
+		const currentData = methods.getValues();
+		const update = { ...pageData, ...currentData };
+		setShowSaveTemplateModal(false);
 		initToastPromise({
-			cb: () => saveTemplate("example_id", update),
+			// if none use dummy timeout function
+			cb: () => saveTemplate(templateId, update),
 			id: ToastType.SaveTemplate,
 			onComplete: (_res) => {
 				methods.reset(data);
@@ -98,14 +155,6 @@ export const PageFormInteractionController = ({
 			onError: (err) => {
 				console.error(err);
 			},
-		});
-	});
-
-	const loadTemplateHandler = async (templateId: string) => {
-		initToastPromise({
-			cb: () => loadTemplate(templateId),
-			id: ToastType.LoadTemplate,
-			onComplete: (template) => setTemplate(template),
 		});
 	};
 
@@ -118,6 +167,25 @@ export const PageFormInteractionController = ({
 				submitDebugHandler: debugHandler,
 			}}
 		>
+			{/* <FormModal
+				isOpen={showSaveTemplateModal}
+				onClose={() => setShowSaveTemplateModal(false)}
+			>
+				<SaveTemplateForm submitHandler={saveTemplateFormSubmitHandler} />
+			</FormModal> */}
+			<FormModal
+				isOpen={showSaveTemplateModal}
+				onClose={() => setShowSaveTemplateModal(false)}
+			>
+				<SaveTemplateForm submitHandler={saveTemplateFormSubmitHandler} />
+			</FormModal>
+			<FormModal
+				isOpen={showLoadTemplateModal}
+				onClose={() => setShowLoadTemplateModal(false)}
+			>
+				<h2>Load Template Form</h2>
+				{/* <LoadTemplateForm submitHandler={loadTemplateFormSubmitHandler} /> */}
+			</FormModal>
 			<FormProvider {...methods}>
 				<PageForm
 					submitHandler={submitHandler}
