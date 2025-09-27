@@ -7,7 +7,7 @@ import { initialiseServices } from "@/lib/services/intialise-services";
 import { Session } from "@/types/auth/session";
 import { getServerSession } from "next-auth";
 
-const checkUserAuthorized = async (username: string, route: string) => {
+export const checkUserAuthorized = async (username: string, route: string) => {
 	const userHome = PATHS.user(username);
 
 	if (route === userHome) {
@@ -22,7 +22,7 @@ const checkUserAuthorized = async (username: string, route: string) => {
 	}
 };
 
-const checkAdminAuthorized = async (role: string) => {
+export const checkAdminAuthorized = async (role: string) => {
 	if (role !== "admin") {
 		throw new Error("Unauthorized");
 	}
