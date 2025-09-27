@@ -225,7 +225,6 @@ export const PageFormInteractionController = ({
 				isOpen={showLoadTemplateModal}
 				onClose={() => setShowLoadTemplateModal(false)}
 			>
-				<h2>Load Template Form</h2>
 				<LoadTemplateForm submitHandler={loadTemplateFormSubmitHandler} />
 			</FormModal>
 			<FormProvider {...methods}>

@@ -21,6 +21,11 @@
 		position: relative;
 	}
 
+	label p {
+		margin: 0 0 $spacingXxxs 0;
+		font: $titleXs2;
+	}
+
 	.closeButton {
 		align-self: flex-end;
 		cursor: pointer;

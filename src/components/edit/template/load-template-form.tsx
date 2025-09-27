@@ -25,8 +25,9 @@ export const LoadTemplateForm = ({ submitHandler }: SaveTemplateFormProps) => {
 
 	return (
 		<form className={styles.root} onSubmit={submitHandler}>
+			<h2>Load Template</h2>
 			<label>
-				Template ID:
+				<p>Template ID:</p>
 				<select name="templateId">
 					{templates.map((template) => (
 						<option key={template} value={template}>

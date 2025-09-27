@@ -8,8 +8,9 @@ type SaveTemplateFormProps = {
 export const SaveTemplateForm = ({ submitHandler }: SaveTemplateFormProps) => {
 	return (
 		<form className={styles.root} onSubmit={submitHandler}>
+			<h2>Save Template</h2>
 			<label>
-				Template ID:
+				<p>Template ID:</p>
 				<input type="text" name="templateId" />
 			</label>
 			<Button type="submit">Save Template</Button>
