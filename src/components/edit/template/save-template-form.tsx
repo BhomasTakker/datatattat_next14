@@ -1,15 +1,18 @@
+import { Button } from "@/components/ui/button";
+import styles from "./form.module.scss";
+
 type SaveTemplateFormProps = {
 	submitHandler: (e: React.FormEvent<HTMLFormElement>) => void;
 };
 
 export const SaveTemplateForm = ({ submitHandler }: SaveTemplateFormProps) => {
 	return (
-		<form onSubmit={submitHandler}>
+		<form className={styles.root} onSubmit={submitHandler}>
 			<label>
 				Template ID:
 				<input type="text" name="templateId" />
 			</label>
-			<button type="submit">Save Template</button>
+			<Button type="submit">Save Template</Button>
 		</form>
 	);
 };

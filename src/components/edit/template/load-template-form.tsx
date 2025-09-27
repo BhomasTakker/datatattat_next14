@@ -1,5 +1,7 @@
 import { getUserTemplates } from "@/actions/edit/template";
+import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
+import styles from "./form.module.scss";
 
 type SaveTemplateFormProps = {
 	submitHandler: (e: React.FormEvent<HTMLFormElement>) => void;
@@ -22,7 +24,7 @@ export const LoadTemplateForm = ({ submitHandler }: SaveTemplateFormProps) => {
 	}, []);
 
 	return (
-		<form onSubmit={submitHandler}>
+		<form className={styles.root} onSubmit={submitHandler}>
 			<label>
 				Template ID:
 				<select name="templateId">
@@ -33,7 +35,7 @@ export const LoadTemplateForm = ({ submitHandler }: SaveTemplateFormProps) => {
 					))}
 				</select>
 			</label>
-			<button type="submit">Load Template</button>
+			<Button type="submit">Load Template</Button>
 		</form>
 	);
 };
