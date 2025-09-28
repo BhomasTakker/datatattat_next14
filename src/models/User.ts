@@ -38,6 +38,18 @@ const UserSchema = new Schema<IUser>(
 			type: String,
 			default: "standard",
 		},
+		templates: {
+			pages: {
+				type: Schema.Types.Mixed,
+				required: false,
+				default: {},
+			},
+			components: {
+				type: Schema.Types.Mixed,
+				required: false,
+				default: {},
+			},
+		},
 	},
 	{ timestamps: true }
 );

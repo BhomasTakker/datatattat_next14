@@ -6,10 +6,10 @@ import {
 	createNewUser,
 	updateUser,
 } from "./user";
-import { User } from "../../../models/User";
-import { IUser } from "../../../types/user";
+import { User } from "../../../../models/User";
+import { IUser } from "../../../../types/user";
 
-jest.mock("../../../models/User", () => ({
+jest.mock("../../../../models/User", () => ({
 	__esModule: true,
 	default: {
 		findOne: jest.fn(),

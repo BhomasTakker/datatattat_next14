@@ -1,0 +1,7 @@
+@use "../../../scss/abstracts/units/" as *;
+
+.root {
+	display: flex;
+	flex-direction: column;
+	gap: $spacingSm;
+}

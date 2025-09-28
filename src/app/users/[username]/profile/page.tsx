@@ -1,5 +1,5 @@
 import styles from "../../../page.module.scss";
-import { getUserByUsername } from "@/lib/mongo/actions/user";
+import { getUserByUsername } from "@/lib/mongo/actions/user/user";
 import { ProfilePage } from "@/components/profile/profile-page";
 import { ProfileEditPage } from "@/components/profile/profile-edit-page";
 import { getUser } from "@/actions/user/get-user";

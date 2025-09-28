@@ -1,10 +1,10 @@
 import { confirmUsername } from "./confirm-username";
-import { updateUser } from "../../lib/mongo/actions/user";
+import { updateUser } from "../../lib/mongo/actions/user/user";
 import { isUsernameValid } from "./check-username";
 import { isValidUser } from "../auth/check-valid-user";
 import { initialiseServices } from "../../lib/services/intialise-services";
 
-jest.mock("../../lib/mongo/actions/user");
+jest.mock("../../lib/mongo/actions/user/user");
 jest.mock("./check-username");
 jest.mock("../auth/check-valid-user");
 jest.mock("../../lib/services/intialise-services");

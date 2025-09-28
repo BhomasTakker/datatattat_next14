@@ -27,7 +27,7 @@ jest.mock("../../app/api/auth/[...nextauth]/options", () => {
 	};
 });
 // copilot did this!
-jest.mock("../../lib/mongo/actions/user", () => {
+jest.mock("../../lib/mongo/actions/user/user", () => {
 	return {
 		getUserById: jest.fn().mockResolvedValue({
 			role: "role",

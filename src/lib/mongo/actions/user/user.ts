@@ -9,6 +9,9 @@ export const getUserById = async (id: string) => {
 	return (await User.findOne({ _id: id })) as IUser;
 };
 
+export const getLeanUserById = async (id: string) => {
+	return (await User.findOne({ _id: id }).lean()) as unknown as IUser;
+};
 export const getUserByUsername = async (username: string) => {
 	const decodedUsername = decodeURI(username);
 	return (await User.findOne({ username: decodedUsername })) as IUser;
@@ -36,6 +39,11 @@ export const updateUser = async (id: string, user: Partial<IUser>) => {
 		const updatedUser = await User.findOneAndUpdate({ _id: id }, user, {
 			new: true,
 		});
+
+		if (!updatedUser) {
+			return { message: "User not found" };
+		}
+
 		return { message: "User Updated" };
 	} catch (err) {
 		console.error(err);

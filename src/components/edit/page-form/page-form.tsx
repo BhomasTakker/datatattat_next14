@@ -8,6 +8,8 @@ import { DebugComponent } from "./debug-component";
 
 type PageFormProps = {
 	submitHandler: (e?: React.BaseSyntheticEvent) => Promise<void>;
+	saveAsTemplateHandler: (e?: React.BaseSyntheticEvent) => Promise<void>;
+	loadTemplateHandler: (templateId: string) => Promise<void>;
 };
 
 // get from config
@@ -25,7 +27,11 @@ const formIds = {
 	route: ROUTE,
 };
 
-export const PageForm = ({ submitHandler }: PageFormProps) => {
+export const PageForm = ({
+	submitHandler,
+	saveAsTemplateHandler,
+	loadTemplateHandler,
+}: PageFormProps) => {
 	// const { submitHandler, pageState, formIds } = useContext(PageFormContext);
 	// We need to show a preview of the page
 
@@ -34,11 +40,14 @@ export const PageForm = ({ submitHandler }: PageFormProps) => {
 	return (
 		<form onSubmit={submitHandler} className={styles.form}>
 			{/* These don't work properly unless first input is an inputList?  */}
+			<Button onClick={saveAsTemplateHandler}>Save As Template</Button>
+			<Button onClick={() => loadTemplateHandler("example_id")}>
+				Load Template
+			</Button>
 			<InputFactory data={{ ...META_CONFIG, id: meta }} />
 			<InputFactory data={{ ...PROFILE_CONFIG, id: profile }} />
 
 			<InputFactory data={{ ...PAGE_CONFIG, id: `${content}` }} />
-
 			<Button type="submit">Submit</Button>
 			<DebugComponent />
 		</form>

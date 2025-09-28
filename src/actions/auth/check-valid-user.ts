@@ -1,4 +1,4 @@
-import { getUserById } from "@/lib/mongo/actions/user";
+import { getUserById } from "@/lib/mongo/actions/user/user";
 import isValidSession from "./check-session";
 import { redirect } from "next/navigation";
 import { PATHS } from "@/lib/routing/paths";

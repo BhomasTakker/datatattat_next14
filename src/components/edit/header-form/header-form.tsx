@@ -12,7 +12,7 @@ import { User } from "@/types/auth/session";
 import { getPagesForUser } from "@/actions/page/page-actions";
 import { useEffect, useState } from "react";
 import { IPage } from "@/types/page";
-import { toast } from "sonner";
+import { initToastPromise, ToastType } from "@/lib/sonner/toast";
 
 type HeaderFormProps = {
 	headerData: Omit<HeaderType, "createdAt" | "updatedAt">;
@@ -40,12 +40,9 @@ export const HeaderForm = ({ headerData, user }: HeaderFormProps) => {
 	const { route, nav } = headerData;
 
 	const onSubmit = handleSubmit(async (data) => {
-		const promise = saveHeader(route, data);
-
-		toast.promise(promise, {
-			loading: "Saving...",
-			success: `Header has been saved!`,
-			error: "Error saving HEade",
+		initToastPromise({
+			cb: () => saveHeader(route, data),
+			id: ToastType.SaveHeader,
 		});
 	});
 
