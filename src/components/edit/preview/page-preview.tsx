@@ -6,6 +6,13 @@ type Props = {
 	pageData: IPage;
 };
 
+/**
+ *
+ * @param param0
+ * @returns
+ * @description Note:- Currently BlueSky and X fail to render correctly - this will be the same for other social media / embeds - Seems when multiple?
+ */
+
 export const PagePreview = ({ pageData }: Props) => {
 	const { content } = pageData || {};
 	return (
