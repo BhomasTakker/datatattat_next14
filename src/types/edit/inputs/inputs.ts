@@ -1,3 +1,4 @@
+import { Ctas } from "@/components/edit/inputs/ctas/ctas";
 import { EditInputs } from "@/components/edit/inputs/inputs";
 
 export type InputProps = {
@@ -25,6 +26,12 @@ type DateValidationOptions = {
 	maxLength?: number;
 	minLength?: number;
 };
+
+export type InputCtasProps = {
+	id: string;
+	type: EditInputs.ctas;
+	ctas: { id: Ctas }[];
+} & InputProps;
 
 export type TextInputProps = {
 	id: string;
@@ -151,6 +158,7 @@ type InputTypes =
 	| AssignInputIdProps
 	| NumberInputProps
 	| DescriptionInputProps
-	| DateInputProps;
+	| DateInputProps
+	| InputCtasProps;
 
 export type GenericInput = InputTypes;

@@ -12,8 +12,10 @@ import { NumberInput } from "./number-input/number-input";
 import { InputDescription } from "./description/input-description";
 import { DateInput } from "./date/date-input";
 import { URLInput } from "./url-input/url-input";
+import { InputCtas } from "./ctas/input-ctas";
 
 export enum EditInputs {
+	ctas = "ctas",
 	text = "text",
 	url = "url",
 	switch = "switch",
@@ -47,6 +49,7 @@ type InputComponentOptions =
 	| typeof NumberInput
 	| typeof InputDescription
 	| typeof DateInput
+	| typeof InputCtas
 	| FC;
 
 export const inputMap = new Map<EditInputs, InputComponentOptions>([
@@ -77,6 +80,9 @@ export const inputMap = new Map<EditInputs, InputComponentOptions>([
 	// setting a default value
 	// and disabling it
 	[EditInputs.assign, () => <>assign</>],
+
+	///////////////////////////
+	[EditInputs.ctas, InputCtas],
 
 	// bit of a hack fix
 	// It is possible to get in a bit of a tizz with objectSelects, inputLists, and arrays

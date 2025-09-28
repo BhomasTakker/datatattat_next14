@@ -5,6 +5,7 @@ import { DISPLAY_PLAYER_CONFIG } from "./display-player/display-player-config";
 import { OEMBED_COLLECTION_CONFIG } from "./oembed-collection/oembed-collection-config";
 import { SPOTIFY_COLLECTION_CONFIG } from "./spotify-collection/config";
 import { componentProfile } from "../shared/component-profile";
+import { Ctas } from "../../inputs/ctas/ctas";
 
 enum ComponentOptions {
 	ArticleCollection = "ArticleCollection",
@@ -37,6 +38,16 @@ export const COMPONENT_CONFIG: GenericInput = {
 		// i.e. create input components on parent
 		createObject: false,
 		inputs: [
+			{
+				id: "componentCtas",
+				type: EditInputs.ctas,
+				ctas: [
+					{ id: Ctas.Button1 },
+					{
+						id: Ctas.Button2,
+					},
+				],
+			},
 			{
 				id: "componentTitle",
 				type: EditInputs.title,
