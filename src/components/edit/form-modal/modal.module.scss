@@ -21,6 +21,8 @@
 		position: relative;
 		max-height: 90vh;
 		max-width: 95vw;
+		min-width: $containerWidthSm;
+		min-height: $containerHeightSm;
 		overflow: hidden; /* Prevent overflow outside modal */
 
 		.modalBody {
