@@ -13,6 +13,7 @@ import {
 	loadTemplate,
 	saveTemplate,
 } from "@/actions/edit/template";
+import { PagePreview } from "../preview/page-preview";
 
 type ModalContainerProps = {
 	methods: UseFormReturn<FieldValues, any, FieldValues>;
@@ -160,7 +161,7 @@ export const ModalContainer = ({
 				isOpen={showPreviewModal}
 				onClose={() => setPreviewModal(false)}
 			>
-				<div>Preview Modal - to be implemented</div>
+				<PagePreview pageData={pageData} />
 			</FormModal>
 		</>
 	);

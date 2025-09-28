@@ -7,8 +7,10 @@ import { Suspense } from "react";
 
 export const ComponentDisplay = ({
 	component,
+	isClient = false,
 }: {
 	component: PageComponent;
+	isClient?: boolean;
 }) => {
 	const { componentProps } = component;
 
@@ -18,7 +20,7 @@ export const ComponentDisplay = ({
 
 			{/* We need to create a template component */}
 			<Suspense fallback={<div className={styles.suspense}>Loading...</div>}>
-				<ComponentFactory component={component} />
+				<ComponentFactory component={component} isClient={isClient} />
 			</Suspense>
 		</section>
 	);

@@ -19,7 +19,7 @@ export const FormModal = ({ isOpen, onClose, children }: FormModalProps) => {
 				<div className={styles.closeButton}>
 					<IconButton data-testid="close" icon={IoMdClose} onClick={onClose} />
 				</div>
-				{children}
+				<div className={styles.modalBody}>{children}</div>
 			</div>
 		</div>
 	);

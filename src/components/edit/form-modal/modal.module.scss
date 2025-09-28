@@ -19,6 +19,16 @@
 		padding: $spacingLg;
 		border-radius: $spacingXs;
 		position: relative;
+		max-height: 90vh;
+		max-width: 95vw;
+		overflow: hidden; /* Prevent overflow outside modal */
+
+		.modalBody {
+			flex: 1; /* Take up remaining space */
+			overflow-y: auto; /* Enable vertical scrolling if content overflows */
+			width: 100%; /* Ensure it takes full width of the modal */
+			min-height: 0; /* Allow flexbox shrinking */
+		}
 	}
 
 	label p {

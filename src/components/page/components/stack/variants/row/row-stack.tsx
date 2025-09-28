@@ -11,6 +11,7 @@ import {
 
 type RowStackComponetProps = {
 	components: PageComponents;
+	isClient?: boolean;
 } & RowStackProps;
 
 const createRowConfigMap = (rows: Row[]) => {
@@ -59,7 +60,8 @@ const createColumnStyle = (column: Column) => {
 const renderColumn = (
 	key: number,
 	component: PageComponent,
-	config: Column
+	config: Column,
+	isClient: boolean
 ) => {
 	const columnStyle = createColumnStyle(config);
 	return (
@@ -69,7 +71,7 @@ const renderColumn = (
 			className={styles.item}
 			style={columnStyle}
 		>
-			<ComponentDisplay component={component} />
+			<ComponentDisplay component={component} isClient={isClient} />
 		</li>
 	);
 };
@@ -80,7 +82,8 @@ const createColumnComponents = (
 		components: PageComponents;
 		componentIndex: number;
 		currentRowIndex: number;
-	}
+	},
+	isClient: boolean
 ) => {
 	const { columns: rowColumns, maxHeight: rowHeight } = config;
 	const { components } = state;
@@ -94,7 +97,8 @@ const createColumnComponents = (
 			renderColumn(
 				state.componentIndex,
 				components[state.componentIndex],
-				config
+				config,
+				isClient
 			)
 		);
 
@@ -104,8 +108,8 @@ const createColumnComponents = (
 	return columnComponents;
 };
 
-const createRow = (rowConfig: Row, state: any) => {
-	const columnComponents = createColumnComponents(rowConfig, state);
+const createRow = (rowConfig: Row, state: any, isClient: boolean) => {
+	const columnComponents = createColumnComponents(rowConfig, state, isClient);
 	const rowStyle = createRowStyle(rowConfig);
 
 	return (
@@ -123,6 +127,7 @@ const renderComponents = ({
 	components,
 	defaultRow,
 	rows = [],
+	isClient = false,
 }: RowStackComponetProps) => {
 	const rowsToRender = [];
 
@@ -142,7 +147,7 @@ const renderComponents = ({
 		const currentRowConfig =
 			rowConfigMap.get(`${state.currentRowIndex}`) || defaultRow;
 
-		const row = createRow(currentRowConfig, state);
+		const row = createRow(currentRowConfig, state, isClient);
 		rowsToRender.push(row);
 		state.currentRowIndex++;
 	}

@@ -10,7 +10,13 @@ export type PageStackContent = {
 	components: PageComponents;
 };
 
-export const PageStack = ({ content }: { content: PageContent }) => {
+export const PageStack = ({
+	content,
+	isClient,
+}: {
+	content: PageContent;
+	isClient: boolean;
+}) => {
 	const { props, components } = content as PageStackContent;
 
 	const { variant = PageStackCollectionVariants.Vertical } = props || {};
@@ -30,7 +36,7 @@ export const PageStack = ({ content }: { content: PageContent }) => {
 	return (
 		<ul className={styles.root} data-testid="page-component">
 			{/* @ts-ignore - very generic type - we are targetting based on variant - how to type this properly */}
-			{renderMethod({ components, ...props })}
+			{renderMethod({ components, isClient, ...props })}
 		</ul>
 	);
 };

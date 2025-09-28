@@ -6,9 +6,15 @@ import { ContainerHeightOptions, getContainerHeight } from "../../types";
 type StackProps = {
 	components: PageComponents;
 	height: ContainerHeightOptions;
+	//
+	isClient?: boolean;
 };
 
-const renderComponents = ({ components, height }: StackProps) => {
+const renderComponents = ({
+	components,
+	height,
+	isClient = false,
+}: StackProps) => {
 	const className = `
 		${styles.item}
 	}`;
@@ -24,7 +30,11 @@ const renderComponents = ({ components, height }: StackProps) => {
 				className={className}
 				style={{ maxHeight: componentHeight }}
 			>
-				<ComponentDisplay key={index} component={component} />
+				<ComponentDisplay
+					key={index}
+					component={component}
+					isClient={isClient}
+				/>
 			</li>
 		);
 	});
