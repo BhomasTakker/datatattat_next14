@@ -8,15 +8,18 @@ type FormModalProps = {
 	children: React.ReactNode;
 };
 
+const blockHandler = (e: React.MouseEvent) => e.stopPropagation();
+
 export const FormModal = ({ isOpen, onClose, children }: FormModalProps) => {
 	if (!isOpen) return null;
+
 	return (
-		<div className={styles.root}>
-			<div className={styles.content}>
+		<div className={styles.root} onClick={onClose}>
+			<div className={styles.content} onClick={blockHandler}>
 				<div className={styles.closeButton}>
 					<IconButton data-testid="close" icon={IoMdClose} onClick={onClose} />
 				</div>
-				{children}
+				<div className={styles.modalBody}>{children}</div>
 			</div>
 		</div>
 	);

@@ -13,7 +13,13 @@ export type PageGridContent = {
 	components: PageComponents;
 };
 
-export const PageGrid = ({ content }: { content: PageContent }) => {
+export const PageGrid = ({
+	content,
+	isClient,
+}: {
+	content: PageContent;
+	isClient: boolean;
+}) => {
 	const { props, components } = content;
 	const { layout: style } = (props as PageGridProps) || {};
 
@@ -28,7 +34,11 @@ export const PageGrid = ({ content }: { content: PageContent }) => {
 			// we should be able to use a pure css way?
 			return (
 				<div data-testid="content-component">
-					<ComponentDisplay key={index} component={component} />
+					<ComponentDisplay
+						key={index}
+						component={component}
+						isClient={isClient}
+					/>
 				</div>
 			);
 		});
