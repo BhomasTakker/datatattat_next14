@@ -24,13 +24,6 @@ export const PAGE_CONFIG: GenericInput = {
 
 	inputs: [
 		{
-			// add button here to save as page template - no we would want to save meta and page properties too no?
-			// add button here to demo page
-			id: "title",
-			type: EditInputs.title,
-			title: "Add Page interaction buttons here",
-		},
-		{
 			id: "containerType",
 			type: EditInputs.objectSelect,
 			label: "Page Container",
