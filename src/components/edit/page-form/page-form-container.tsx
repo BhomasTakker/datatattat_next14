@@ -47,6 +47,8 @@ export const PageFormInteractionController = ({
 	// set modal state - to initialise load/save
 	const [showSaveTemplateModal, setShowSaveTemplateModal] = useState(false);
 	const [showLoadTemplateModal, setShowLoadTemplateModal] = useState(false);
+	const [showPreviewModal, setPreviewModal] = useState(false);
+
 	const { route } = pageData;
 
 	const methods = useForm({
@@ -91,8 +93,12 @@ export const PageFormInteractionController = ({
 		setShowSaveTemplateModal(true);
 	});
 
-	const loadTemplateHandler = async (templateId: string) => {
+	const loadTemplateHandler = (templateId: string) => {
 		setShowLoadTemplateModal(true);
+	};
+
+	const previewHandler = (e?: React.BaseSyntheticEvent) => {
+		setPreviewModal(true);
 	};
 
 	return (
@@ -111,13 +117,16 @@ export const PageFormInteractionController = ({
 				setShowSaveTemplateModal={setShowSaveTemplateModal}
 				showLoadTemplateModal={showLoadTemplateModal}
 				setShowLoadTemplateModal={setShowLoadTemplateModal}
+				showPreviewModal={showPreviewModal}
 				setTemplate={setTemplate}
+				setPreviewModal={setPreviewModal}
 			/>
 			<FormProvider {...methods}>
 				<PageForm
 					submitHandler={submitHandler}
 					saveAsTemplateHandler={saveOrCreateTemplateHandler}
 					loadTemplateHandler={loadTemplateHandler}
+					previewHandler={previewHandler}
 				/>
 			</FormProvider>
 		</EditContextProvider>

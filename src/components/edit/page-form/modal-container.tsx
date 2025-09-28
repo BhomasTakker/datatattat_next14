@@ -22,6 +22,8 @@ type ModalContainerProps = {
 	showLoadTemplateModal: boolean;
 	setShowLoadTemplateModal: (val: boolean) => void;
 	setTemplate: (template: IPage) => void;
+	showPreviewModal: boolean;
+	setPreviewModal: (val: boolean) => void;
 };
 
 //////////////////
@@ -75,6 +77,8 @@ export const ModalContainer = ({
 	showLoadTemplateModal,
 	setShowLoadTemplateModal,
 	setTemplate,
+	showPreviewModal,
+	setPreviewModal,
 }: ModalContainerProps) => {
 	const loadTemplateFormSubmitHandler = async (
 		e: React.FormEvent<HTMLFormElement>
@@ -151,6 +155,12 @@ export const ModalContainer = ({
 				onClose={() => setShowLoadTemplateModal(false)}
 			>
 				<LoadTemplateForm submitHandler={loadTemplateFormSubmitHandler} />
+			</FormModal>
+			<FormModal
+				isOpen={showPreviewModal}
+				onClose={() => setPreviewModal(false)}
+			>
+				<div>Preview Modal - to be implemented</div>
 			</FormModal>
 		</>
 	);
