@@ -5,6 +5,11 @@ import { PageDisplay } from "./page-display";
 import { PageContent, PageProfile } from "@/types/page";
 import { PageComponentsOptions } from "./components/page-component-factory-options";
 
+// Mock the getCurrentRoute utility
+jest.mock("../../utils/route", () => ({
+	getCurrentRoute: jest.fn().mockResolvedValue("/test-route"),
+}));
+
 type Meta = {
 	pageTitle: string;
 	description: string;
@@ -39,7 +44,13 @@ jest.mock("./profile/page-profile", () => {
 jest.mock("./components/page-component-factory", () => {
 	return {
 		__esModule: true,
-		PageComponentFactory: ({ content }: { content: PageContent }) => {
+		PageComponentFactory: ({
+			content,
+			isClient,
+		}: {
+			content: PageContent;
+			isClient: boolean;
+		}) => {
 			const { containerType } = content || {};
 
 			return (
@@ -52,6 +63,20 @@ jest.mock("./components/page-component-factory", () => {
 const MOCK = {
 	meta: {
 		pageTitle: "My Page Title",
+		pageDescription: "Test description",
+		pageKeywords: "test, keywords",
+		pageImage: "test-image.jpg",
+		favIcons: [],
+		showCardData: false,
+		cardData: {
+			title: "Test Title",
+			description: "Test Description",
+			image: "test.jpg",
+			["image:alt"]: "Test Alt",
+			locale: "en",
+			site_name: "Test Site",
+			url: "http://test.com",
+		},
 	},
 	style: {},
 	profile: {
@@ -60,7 +85,7 @@ const MOCK = {
 		showPageTitle: true,
 	},
 	route: "",
-	creator: {},
+	creator: {} as any,
 	content: {
 		containerType: PageComponentsOptions.STACK,
 		props: {},
@@ -71,8 +96,8 @@ const MOCK = {
 };
 
 describe("PageDisplay", () => {
-	it("renders main elelment", () => {
-		render(<PageDisplay page={MOCK} />);
+	it("renders main element", async () => {
+		render(await PageDisplay({ page: MOCK }));
 		const main = screen.getByRole("main");
 		expect(main).toBeInTheDocument();
 	});
@@ -88,22 +113,22 @@ describe("PageDisplay", () => {
 		expect(pageHead).toBeInTheDocument();
 	});
 
-	it("renders page profile", () => {
-		render(<PageDisplay page={MOCK} />);
+	it("renders page profile", async () => {
+		render(await PageDisplay({ page: MOCK }));
 		const pageProfile = screen.getByTestId("test-page-profile");
 		expect(pageProfile).toBeInTheDocument();
 	});
 
-	it("renders page component factory with content", () => {
-		render(<PageDisplay page={MOCK} />);
+	it("renders page component factory with content", async () => {
+		render(await PageDisplay({ page: MOCK }));
 		const pageComponentFactory = screen.getByTestId(
 			"test-page-component-factory"
 		);
 		expect(pageComponentFactory).toBeInTheDocument();
 	});
 
-	it("renders PageDisplay unchanged", () => {
-		const { container } = render(<PageDisplay page={MOCK} />);
+	it("renders PageDisplay unchanged", async () => {
+		const { container } = render(await PageDisplay({ page: MOCK }));
 		expect(container).toMatchSnapshot();
 	});
 });
