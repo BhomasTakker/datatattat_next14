@@ -98,18 +98,85 @@ describe("thread.ts", () => {
 
 	describe("convertThreadToPostUris", () => {
 		it("returns empty array if post is missing or invalid", () => {
-			expect(convertThreadToPostUris({})).toEqual([]);
 			expect(
-				convertThreadToPostUris({ post: { record: { $type: "invalid.type" } } })
+				convertThreadToPostUris({
+					post: {
+						uri: "",
+						cid: "",
+						author: {
+							did: "",
+							handle: "",
+							displayName: undefined,
+							description: undefined,
+							avatar: undefined,
+							associated: undefined,
+							labels: undefined,
+							createdAt: undefined,
+						},
+						record: {
+							createdAt: "",
+							langs: [],
+							reply: undefined,
+							text: "",
+						},
+						replyCount: 0,
+						repostCount: 0,
+						likeCount: 0,
+						quoteCount: 0,
+						indexedAt: "",
+						label: [],
+					},
+					parent: {
+						post: {
+							uri: "",
+							cid: "",
+							author: {
+								did: "",
+								handle: "",
+								displayName: undefined,
+								description: undefined,
+								avatar: undefined,
+								associated: undefined,
+								labels: undefined,
+								createdAt: undefined,
+							},
+							record: {
+								createdAt: "",
+								langs: [],
+								reply: undefined,
+								text: "",
+							},
+							replyCount: 0,
+							repostCount: 0,
+							likeCount: 0,
+							quoteCount: 0,
+							indexedAt: "",
+							label: [],
+						},
+						parent: undefined,
+						threadContext: undefined,
+					},
+					replies: [],
+					uri: "",
+				})
+			).toEqual([]);
+			expect(
+				convertThreadToPostUris({
+					post: { record: { $type: "invalid.type" } },
+				} as any)
 			).toEqual([]);
 		});
 
 		it("outputs an error if post record is invalid", () => {
 			expect(
-				convertThreadToPostUris({ post: { record: { $type: "invalid.type" } } })
+				convertThreadToPostUris({
+					post: { record: { $type: "invalid.type" } },
+				} as any)
 			).toEqual([]);
 			const spy = jest.spyOn(console, "error").mockImplementation(() => {});
-			convertThreadToPostUris({ post: { record: { $type: "invalid.type" } } });
+			convertThreadToPostUris({
+				post: { record: { $type: "invalid.type" } },
+			} as any);
 			expect(spy).toHaveBeenCalledWith("Invalid post data in thread");
 			spy.mockRestore();
 		});
