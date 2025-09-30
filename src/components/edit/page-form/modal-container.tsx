@@ -14,6 +14,9 @@ import {
 	saveTemplate,
 } from "@/actions/edit/template";
 import { PagePreview } from "../preview/page-preview";
+import { EditContext } from "../context/edit-context";
+import { useContext } from "react";
+import { ComponentPreview } from "../preview/component-preview";
 
 type ModalContainerProps = {
 	methods: UseFormReturn<FieldValues, any, FieldValues>;
@@ -81,6 +84,9 @@ export const ModalContainer = ({
 	showPreviewModal,
 	setPreviewModal,
 }: ModalContainerProps) => {
+	const { componentPreviewData, setComponentPreviewData } =
+		useContext(EditContext);
+
 	const loadTemplateFormSubmitHandler = async (
 		e: React.FormEvent<HTMLFormElement>
 	) => {
@@ -145,6 +151,8 @@ export const ModalContainer = ({
 
 	return (
 		<>
+			{/* All modals should be initialised etc by one object */}
+			{/* Just send data or id to load a modal? */}
 			<FormModal
 				isOpen={showSaveTemplateModal}
 				onClose={() => setShowSaveTemplateModal(false)}
@@ -162,6 +170,12 @@ export const ModalContainer = ({
 				onClose={() => setPreviewModal(false)}
 			>
 				<PagePreview pageData={pageData} />
+			</FormModal>
+			<FormModal
+				isOpen={!!componentPreviewData}
+				onClose={() => setComponentPreviewData(null)}
+			>
+				<ComponentPreview data={componentPreviewData} />
 			</FormModal>
 		</>
 	);
