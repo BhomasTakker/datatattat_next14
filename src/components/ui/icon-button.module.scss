@@ -3,6 +3,8 @@
 @use "../../scss/abstracts/font/" as *;
 
 .icon {
+	position: relative;
+
 	border: none;
 	background-color: transparent;
 	display: flex;
@@ -19,5 +21,28 @@
 	&:hover,
 	&:focus {
 		background-color: $shadowLight1;
+	}
+
+	&:hover {
+		.tooltip {
+			visibility: visible;
+		}
+	}
+
+	.tooltip {
+		visibility: hidden;
+		width: $contentWidthXs;
+		background-color: $background-light;
+		color: $text-sharp;
+		text-align: center;
+		padding: $spacingXxxs 0;
+		border: 1px solid $text-sharp;
+		border-radius: $spacingXxxs;
+		position: absolute;
+		z-index: 1; /* Ensure tooltip is displayed above content */
+		bottom: 100%;
+		left: 65%;
+		margin-left: calc(-#{$contentHeightXs} / 2);
+		font: $textMd;
 	}
 }
