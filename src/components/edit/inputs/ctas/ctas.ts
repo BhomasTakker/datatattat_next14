@@ -1,13 +1,14 @@
 import { GenericInput } from "@/types/edit/inputs/inputs";
 import { FC } from "react";
 import { FieldValues, UseFormReturn } from "react-hook-form";
-import { FaAccusoft, FaAirbnb } from "react-icons/fa";
+import { FaSave, FaUpload, FaCopy } from "react-icons/fa";
 import { EditContextType } from "../../context/edit-context";
 import { getParentId } from "@/utils/edit";
 
 export enum Ctas {
-	Button1 = "button1",
-	Button2 = "button2",
+	ComponentPreview = "componentPreview",
+	SaveComponentAsTemplate = "saveComponentAsTemplate",
+	LoadComponentFromTemplate = "loadComponentFromTemplate",
 }
 
 type Cta = {
@@ -19,11 +20,13 @@ type Cta = {
 		context: EditContextType
 	) => void;
 	icon: FC;
+	tooltip?: string;
 };
 
-const button1: Cta = {
-	label: "Button 1",
-	id: Ctas.Button1,
+const componentPreview: Cta = {
+	label: "Component Preview",
+	id: Ctas.ComponentPreview,
+	tooltip: "Preview the component",
 	action: (ctx, methods, context) => {
 		const { setComponentPreviewData } = context;
 		const { getValues } = methods;
@@ -33,24 +36,39 @@ const button1: Cta = {
 
 		setComponentPreviewData(data);
 	},
-	icon: FaAccusoft,
+	icon: FaCopy,
 };
 
-const button2: Cta = {
-	label: "Button 2",
-	id: Ctas.Button2,
+const saveComponentAsTemplate: Cta = {
+	label: "Save Component as Template",
+	id: Ctas.SaveComponentAsTemplate,
+	tooltip: "Save component as template",
 	action: (ctx, methods, context) =>
-		console.log("Button 2 clicked", {
+		console.log("Save Component as Template clicked", {
 			ctx,
 			example: methods.getValues(),
 			context,
 		}),
-	icon: FaAirbnb,
+	icon: FaSave,
+};
+
+const loadComponentFromTemplate: Cta = {
+	label: "Load Component from Template",
+	id: Ctas.LoadComponentFromTemplate,
+	tooltip: "Load template",
+	action: (ctx, methods, context) =>
+		console.log("Load Component from Template clicked", {
+			ctx,
+			example: methods.getValues(),
+			context,
+		}),
+	icon: FaUpload,
 };
 
 const ctasMap = new Map<Ctas, Cta>([
-	[Ctas.Button1, button1],
-	[Ctas.Button2, button2],
+	[Ctas.ComponentPreview, componentPreview],
+	[Ctas.SaveComponentAsTemplate, saveComponentAsTemplate],
+	[Ctas.LoadComponentFromTemplate, loadComponentFromTemplate],
 ]);
 
 export const getCtaById = (id: Ctas) => {

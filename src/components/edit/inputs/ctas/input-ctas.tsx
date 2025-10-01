@@ -16,13 +16,14 @@ const InputCta = ({ id, input }: CtaButtonProps) => {
 	const context = useContext(EditContext);
 	const ctaConfig = getCtaById(id);
 	if (!ctaConfig) return null;
-	const { icon: CtaIcon, id: configId, action, label } = ctaConfig;
+	const { icon: CtaIcon, id: configId, action, label, tooltip } = ctaConfig;
 
 	return (
 		<IconButton
 			data-testid={`cta-button-${configId}`}
 			icon={CtaIcon}
 			onClick={() => action(input, methods, context)}
+			tooltip={tooltip}
 		/>
 	);
 };
