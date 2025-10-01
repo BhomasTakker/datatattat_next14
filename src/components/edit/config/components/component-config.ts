@@ -43,10 +43,10 @@ export const COMPONENT_CONFIG: GenericInput = {
 				type: EditInputs.ctas,
 				ctas: [
 					{ id: Ctas.ComponentPreview },
-					{
-						id: Ctas.LoadComponentFromTemplate,
-					},
-					{ id: Ctas.SaveComponentAsTemplate },
+					// {
+					// 	id: Ctas.LoadComponentFromTemplate,
+					// },
+					// { id: Ctas.SaveComponentAsTemplate },
 				],
 			},
 			{
