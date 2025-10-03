@@ -9,6 +9,7 @@ import {
 	ToastType,
 } from "@/lib/sonner/toast";
 import {
+	checkComponentTemplateNameUnique,
 	checkTemplateNameUnique,
 	loadTemplate,
 	saveTemplate,
@@ -17,6 +18,7 @@ import { PagePreview } from "../preview/page-preview";
 import { EditContext } from "../context/edit-context";
 import { useContext } from "react";
 import { ComponentPreview } from "../preview/component-preview";
+import { saveComponentAsTemplate } from "@/actions/edit/template/component-template";
 
 type ModalContainerProps = {
 	methods: UseFormReturn<FieldValues, any, FieldValues>;
@@ -132,7 +134,8 @@ export const ModalContainer = ({
 				},
 				id: ToastType.ConfirmSaveTemplate,
 				onComplete: (_res) => {
-					methods.reset(formData);
+					// I don't think this should be here
+					// methods.reset(formData);
 				},
 				onError: (err) => {
 					console.error(err);
@@ -165,27 +168,30 @@ export const ModalContainer = ({
 
 		if (!checkFormIdValid(templateId)) return;
 
-		// check if unique id
-		// const isUniqueId = await checkTemplateNameUnique(templateId);
-		// if (!isUniqueId) {
-		// 	createToastAction({
-		// 		cb: async () => {
-		// 			setShowSaveTemplateModal(false);
-		// 			await saveTemplate(templateId, update);
-		// 		},
-		// 		id: ToastType.ConfirmSaveTemplate,
-		// 		onComplete: (_res) => {
-		// 			methods.reset(formData);
-		// 		},
-		// 		onError: (err) => {
-		// 			console.error(err);
-		// 		},
-		// 	});
-		// 	return;
-		// }
-
 		if (!saveComponentAsTemplateData) {
 			console.error("No component data to save as template");
+			return;
+		}
+
+		// check if unique id
+		const isUniqueId = await checkComponentTemplateNameUnique(templateId);
+		if (!isUniqueId) {
+			createToastAction({
+				cb: async () => {
+					setSaveComponentAsTemplateData(null);
+					await saveComponentAsTemplate(
+						templateId,
+						saveComponentAsTemplateData
+					);
+				},
+				id: ToastType.ConfirmSaveTemplate,
+				onComplete: (_res) => {
+					// methods.reset(formData);
+				},
+				onError: (err) => {
+					console.error(err);
+				},
+			});
 			return;
 		}
 
@@ -193,7 +199,7 @@ export const ModalContainer = ({
 		initToastPromise({
 			// if none use dummy timeout function
 			cb: () => {
-				console.log("Saving component as template...");
+				saveComponentAsTemplate(templateId, saveComponentAsTemplateData);
 				return Promise.resolve();
 			}, // saveComponentAsTemplate(templateId, update),
 			id: ToastType.SaveTemplate,

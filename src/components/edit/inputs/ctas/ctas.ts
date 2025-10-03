@@ -47,13 +47,7 @@ const saveComponentAsTemplate: Cta = {
 		const parent = getParentId(ctx.id || "");
 		const { getValues } = methods;
 		const data = getValues(parent);
-		console.log("Save Component as Template clicked", {
-			ctx,
-			example: data,
-			context,
-		});
 		const { setSaveComponentAsTemplateData } = context;
-		// For now just set the id to the component id
 		setSaveComponentAsTemplateData(data);
 	},
 

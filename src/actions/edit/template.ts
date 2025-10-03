@@ -52,3 +52,8 @@ export async function checkTemplateNameUnique(name: string) {
 	const templates = await getUserTemplates();
 	return !templates.pages?.[name];
 }
+
+export async function checkComponentTemplateNameUnique(name: string) {
+	const templates = await getUserTemplates();
+	return !templates.components?.[name];
+}
