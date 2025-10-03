@@ -43,12 +43,20 @@ const saveComponentAsTemplate: Cta = {
 	label: "Save Component as Template",
 	id: Ctas.SaveComponentAsTemplate,
 	tooltip: "Save component as template",
-	action: (ctx, methods, context) =>
+	action: (ctx, methods, context) => {
+		const parent = getParentId(ctx.id || "");
+		const { getValues } = methods;
+		const data = getValues(parent);
 		console.log("Save Component as Template clicked", {
 			ctx,
-			example: methods.getValues(),
+			example: data,
 			context,
-		}),
+		});
+		const { setSaveComponentAsTemplateData } = context;
+		// For now just set the id to the component id
+		setSaveComponentAsTemplateData(data);
+	},
+
 	icon: FaSave,
 };
 
@@ -56,12 +64,10 @@ const loadComponentFromTemplate: Cta = {
 	label: "Load Component from Template",
 	id: Ctas.LoadComponentFromTemplate,
 	tooltip: "Load template",
-	action: (ctx, methods, context) =>
-		console.log("Load Component from Template clicked", {
-			ctx,
-			example: methods.getValues(),
-			context,
-		}),
+	action: (ctx, methods, context) => {
+		const { setShowComponentLoadTemplateModal } = context;
+		setShowComponentLoadTemplateModal(true);
+	},
 	icon: FaUpload,
 };
 

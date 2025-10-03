@@ -11,6 +11,7 @@ import {
 } from "@/lib/mongo/actions/user/user-templates";
 import { getUserFromSessionId } from "../user/get-user";
 
+// Page Template Actions
 // we will save user templates to the user object
 export async function saveTemplate(name: string, page: IPage) {
 	// find a bettr way

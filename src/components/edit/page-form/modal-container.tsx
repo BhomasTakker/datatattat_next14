@@ -84,8 +84,14 @@ export const ModalContainer = ({
 	showPreviewModal,
 	setPreviewModal,
 }: ModalContainerProps) => {
-	const { componentPreviewData, setComponentPreviewData } =
-		useContext(EditContext);
+	const {
+		componentPreviewData,
+		setComponentPreviewData,
+		saveComponentAsTemplateData,
+		setSaveComponentAsTemplateData,
+		showComponentLoadTemplateModal,
+		setShowComponentLoadTemplateModal,
+	} = useContext(EditContext);
 
 	const loadTemplateFormSubmitHandler = async (
 		e: React.FormEvent<HTMLFormElement>
@@ -149,6 +155,57 @@ export const ModalContainer = ({
 		});
 	};
 
+	const saveComponentTemplateFormSubmitHandler = async (
+		e: React.FormEvent<HTMLFormElement>
+	) => {
+		e.preventDefault();
+
+		const templateId = getTemplateId(e.target as HTMLFormElement);
+		if (!templateId) return;
+
+		if (!checkFormIdValid(templateId)) return;
+
+		// check if unique id
+		// const isUniqueId = await checkTemplateNameUnique(templateId);
+		// if (!isUniqueId) {
+		// 	createToastAction({
+		// 		cb: async () => {
+		// 			setShowSaveTemplateModal(false);
+		// 			await saveTemplate(templateId, update);
+		// 		},
+		// 		id: ToastType.ConfirmSaveTemplate,
+		// 		onComplete: (_res) => {
+		// 			methods.reset(formData);
+		// 		},
+		// 		onError: (err) => {
+		// 			console.error(err);
+		// 		},
+		// 	});
+		// 	return;
+		// }
+
+		if (!saveComponentAsTemplateData) {
+			console.error("No component data to save as template");
+			return;
+		}
+
+		setShowSaveTemplateModal(false);
+		initToastPromise({
+			// if none use dummy timeout function
+			cb: () => {
+				console.log("Saving component as template...");
+				return Promise.resolve();
+			}, // saveComponentAsTemplate(templateId, update),
+			id: ToastType.SaveTemplate,
+			onComplete: (_res) => {
+				setSaveComponentAsTemplateData(null);
+			},
+			onError: (err) => {
+				console.error(err);
+			},
+		});
+	};
+
 	return (
 		<>
 			{/* All modals should be initialised etc by one object */}
@@ -176,6 +233,21 @@ export const ModalContainer = ({
 				onClose={() => setComponentPreviewData(null)}
 			>
 				<ComponentPreview data={componentPreviewData} />
+			</FormModal>
+			{/*  */}
+			<FormModal
+				isOpen={!!saveComponentAsTemplateData}
+				onClose={() => setSaveComponentAsTemplateData(null)}
+			>
+				<SaveTemplateForm
+					submitHandler={saveComponentTemplateFormSubmitHandler}
+				/>
+			</FormModal>
+			<FormModal
+				isOpen={showComponentLoadTemplateModal}
+				onClose={() => setShowComponentLoadTemplateModal(false)}
+			>
+				<LoadTemplateForm submitHandler={loadTemplateFormSubmitHandler} />
 			</FormModal>
 		</>
 	);
