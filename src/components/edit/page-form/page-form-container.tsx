@@ -7,7 +7,7 @@ import {
 	useForm,
 } from "react-hook-form";
 import { PageForm } from "./page-form";
-import { IPage } from "@/types/page";
+import { IPage, PageComponent } from "@/types/page";
 import { useEffect, useState } from "react";
 import { savePage } from "@/actions/edit/update-page";
 import { useRouter } from "next/navigation";
@@ -18,13 +18,35 @@ import { ModalContainer } from "./modal-container";
 
 export const PageFormContainer = ({ pageData }: { pageData: IPage }) => {
 	const [templateData, setTemplateData] = useState({} as IPage);
+	const [componentTemplateData, setComponentTemplateData] = useState(
+		{} as PageComponent
+	);
 	const [key, setKey] = useState(randomKeyGenerator());
 
+	///////////////////////////////////////////////////////////////
+	// reset form when page template data changes
+	// We should set default data - but effectively when this change default data updates
+	// This will be passed in to the form etc as default values
+	// Then we update the key to force a full rerender of the form
 	useEffect(() => {
+		// this will cause a full rerender of the form
 		if (Object.keys(templateData).length > 0) {
 			setKey(randomKeyGenerator());
 		}
 	}, [templateData]);
+
+	// reset form when component template data changes
+	useEffect(() => {
+		// We need to setValues of the provided component
+		// Then we need to get the form data
+		// use the new page data as the tmplate data
+		// update the key to force a re-render of the form
+
+		// this will cause a full rerender of the form
+		if (Object.keys(componentTemplateData).length > 0) {
+			setKey(randomKeyGenerator());
+		}
+	}, [componentTemplateData]);
 
 	const defaultData = { ...pageData, ...templateData };
 
@@ -33,6 +55,7 @@ export const PageFormContainer = ({ pageData }: { pageData: IPage }) => {
 			key={key}
 			pageData={defaultData}
 			setTemplate={setTemplateData}
+			setComponentTemplate={setComponentTemplateData}
 		/>
 	);
 };
@@ -40,9 +63,11 @@ export const PageFormContainer = ({ pageData }: { pageData: IPage }) => {
 export const PageFormInteractionController = ({
 	pageData,
 	setTemplate,
+	setComponentTemplate,
 }: {
 	pageData: IPage;
 	setTemplate: (data: IPage) => void;
+	setComponentTemplate: (data: PageComponent) => void;
 }) => {
 	// set modal state - to initialise load/save
 	const [showSaveTemplateModal, setShowSaveTemplateModal] = useState(false);
@@ -73,6 +98,7 @@ export const PageFormInteractionController = ({
 		console.log("HOOK:FORM DEBUG", { args });
 	};
 
+	// Form submit etc should be initialised in the context, etc
 	// Main submit handler
 	const submitHandler = methods.handleSubmit(async (data) => {
 		// This should be done on the server...
@@ -119,6 +145,7 @@ export const PageFormInteractionController = ({
 				setShowLoadTemplateModal={setShowLoadTemplateModal}
 				showPreviewModal={showPreviewModal}
 				setTemplate={setTemplate}
+				setComponentTemplate={setComponentTemplate}
 				setPreviewModal={setPreviewModal}
 			/>
 			<FormProvider {...methods}>

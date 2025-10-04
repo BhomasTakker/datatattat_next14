@@ -2,7 +2,7 @@ import { FieldValues, UseFormReturn } from "react-hook-form";
 import { FormModal } from "../form-modal/modal";
 import { LoadTemplateForm } from "../template/load-template-form";
 import { SaveTemplateForm } from "../template/save-template-form";
-import { IPage } from "@/types/page";
+import { IPage, PageComponent } from "@/types/page";
 import {
 	createToastAction,
 	initToastPromise,
@@ -17,6 +17,12 @@ import { PagePreview } from "../preview/page-preview";
 import { EditContext } from "../context/edit-context";
 import { useContext } from "react";
 import { ComponentPreview } from "../preview/component-preview";
+import {
+	checkComponentTemplateNameUnique,
+	loadComponentTemplate,
+	saveComponentAsTemplate,
+} from "@/actions/edit/template/component-template";
+import { LoadComponentTemplateForm } from "../template/load-component-template-form";
 
 type ModalContainerProps = {
 	methods: UseFormReturn<FieldValues, any, FieldValues>;
@@ -26,6 +32,7 @@ type ModalContainerProps = {
 	showLoadTemplateModal: boolean;
 	setShowLoadTemplateModal: (val: boolean) => void;
 	setTemplate: (template: IPage) => void;
+	setComponentTemplate: (component: PageComponent) => void;
 	showPreviewModal: boolean;
 	setPreviewModal: (val: boolean) => void;
 };
@@ -81,11 +88,18 @@ export const ModalContainer = ({
 	showLoadTemplateModal,
 	setShowLoadTemplateModal,
 	setTemplate,
+	setComponentTemplate,
 	showPreviewModal,
 	setPreviewModal,
 }: ModalContainerProps) => {
-	const { componentPreviewData, setComponentPreviewData } =
-		useContext(EditContext);
+	const {
+		componentPreviewData,
+		setComponentPreviewData,
+		saveComponentAsTemplateData,
+		setSaveComponentAsTemplateData,
+		showComponentLoadTemplateModal,
+		setShowComponentLoadTemplateModal,
+	} = useContext(EditContext);
 
 	const loadTemplateFormSubmitHandler = async (
 		e: React.FormEvent<HTMLFormElement>
@@ -126,7 +140,8 @@ export const ModalContainer = ({
 				},
 				id: ToastType.ConfirmSaveTemplate,
 				onComplete: (_res) => {
-					methods.reset(formData);
+					// I don't think this should be here
+					// methods.reset(formData);
 				},
 				onError: (err) => {
 					console.error(err);
@@ -142,6 +157,88 @@ export const ModalContainer = ({
 			id: ToastType.SaveTemplate,
 			onComplete: (_res) => {
 				methods.reset(formData);
+			},
+			onError: (err) => {
+				console.error(err);
+			},
+		});
+	};
+
+	const getAndSetComponentData = async (templateId: string) => {
+		const component = await loadComponentTemplate(templateId);
+
+		if (!component) {
+			return null;
+		}
+
+		const id = showComponentLoadTemplateModal.templateId;
+		console.log("2121: ID", id);
+		methods.setValue(id, component);
+		const formData = methods.getValues();
+
+		return formData;
+	};
+
+	const loadComponentTemplateFormSubmitHandler = async (
+		e: React.FormEvent<HTMLFormElement>
+	) => {
+		e.preventDefault();
+		const templateId = getTemplateId(e.target as HTMLFormElement);
+		if (!templateId) return;
+		initToastPromise({
+			cb: () => getAndSetComponentData(templateId),
+			id: ToastType.LoadTemplate,
+			onComplete: (template) => setTemplate(template),
+		});
+	};
+
+	const saveComponentTemplateFormSubmitHandler = async (
+		e: React.FormEvent<HTMLFormElement>
+	) => {
+		e.preventDefault();
+
+		const templateId = getTemplateId(e.target as HTMLFormElement);
+		if (!templateId) return;
+
+		if (!checkFormIdValid(templateId)) return;
+
+		if (!saveComponentAsTemplateData) {
+			console.error("No component data to save as template");
+			return;
+		}
+
+		// check if unique id
+		const isUniqueId = await checkComponentTemplateNameUnique(templateId);
+		if (!isUniqueId) {
+			createToastAction({
+				cb: async () => {
+					setSaveComponentAsTemplateData(null);
+					await saveComponentAsTemplate(
+						templateId,
+						saveComponentAsTemplateData
+					);
+				},
+				id: ToastType.ConfirmSaveTemplate,
+				onComplete: (_res) => {
+					// methods.reset(formData);
+				},
+				onError: (err) => {
+					console.error(err);
+				},
+			});
+			return;
+		}
+
+		setShowSaveTemplateModal(false);
+		initToastPromise({
+			// if none use dummy timeout function
+			cb: () => {
+				saveComponentAsTemplate(templateId, saveComponentAsTemplateData);
+				return Promise.resolve();
+			},
+			id: ToastType.SaveTemplate,
+			onComplete: (_res) => {
+				setSaveComponentAsTemplateData(null);
 			},
 			onError: (err) => {
 				console.error(err);
@@ -176,6 +273,28 @@ export const ModalContainer = ({
 				onClose={() => setComponentPreviewData(null)}
 			>
 				<ComponentPreview data={componentPreviewData} />
+			</FormModal>
+			{/*  */}
+			<FormModal
+				isOpen={!!saveComponentAsTemplateData}
+				onClose={() => setSaveComponentAsTemplateData(null)}
+			>
+				<SaveTemplateForm
+					submitHandler={saveComponentTemplateFormSubmitHandler}
+				/>
+			</FormModal>
+			<FormModal
+				isOpen={showComponentLoadTemplateModal.showModal}
+				onClose={() =>
+					setShowComponentLoadTemplateModal({
+						showModal: false,
+						templateId: "",
+					})
+				}
+			>
+				<LoadComponentTemplateForm
+					submitHandler={loadComponentTemplateFormSubmitHandler}
+				/>
 			</FormModal>
 		</>
 	);

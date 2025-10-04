@@ -14,7 +14,7 @@ export interface IUser {
 
 	templates: {
 		pages?: Record<string, IPage>; // a map of template name to page object
-		components?: Record<string, IPage>; // a map of template name to component object
+		components?: Record<string, PageComponent>; // a map of template name to component object
 	};
 
 	readonly _id: ObjectId;

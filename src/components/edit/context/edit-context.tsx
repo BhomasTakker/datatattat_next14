@@ -11,6 +11,13 @@ type EditState = {
 type EditInterface = {
 	componentPreviewData: PageComponent | null;
 	setComponentPreviewData: (data: PageComponent | null) => void;
+	saveComponentAsTemplateData: PageComponent | null;
+	setSaveComponentAsTemplateData: (data: PageComponent | null) => void;
+	showComponentLoadTemplateModal: { showModal: boolean; templateId: string };
+	setShowComponentLoadTemplateModal: (data: {
+		showModal: boolean;
+		templateId: string;
+	}) => void;
 };
 
 export type EditContextType = EditState & EditInterface;
@@ -28,8 +35,20 @@ const initialState: EditState & EditInterface = {
 	saveAsTemplateHandler: () => {
 		// Default implementation
 	},
+	// Probably have a context just for this/modals later
 	componentPreviewData: null,
 	setComponentPreviewData: (data: PageComponent | null) => {
+		// Default implementation
+	},
+	saveComponentAsTemplateData: null,
+	setSaveComponentAsTemplateData: (data: PageComponent | null) => {
+		// Default implementation
+	},
+	showComponentLoadTemplateModal: { showModal: false, templateId: "" },
+	setShowComponentLoadTemplateModal: (data: {
+		showModal: boolean;
+		templateId: string;
+	}) => {
 		// Default implementation
 	},
 };
@@ -43,10 +62,22 @@ export const EditContextProvider = ({
 }) => {
 	const [componentPreviewData, setComponentPreviewData] =
 		useState<PageComponent | null>(null);
+	const [saveComponentAsTemplateData, setSaveComponentAsTemplateData] =
+		useState<PageComponent | null>(null);
+	const [showComponentLoadTemplateModal, setShowComponentLoadTemplateModal] =
+		useState({ showModal: false, templateId: "" });
 
 	return (
 		<EditContext.Provider
-			value={{ ...value, componentPreviewData, setComponentPreviewData }}
+			value={{
+				...value,
+				componentPreviewData,
+				setComponentPreviewData,
+				saveComponentAsTemplateData,
+				setSaveComponentAsTemplateData,
+				showComponentLoadTemplateModal,
+				setShowComponentLoadTemplateModal,
+			}}
 		>
 			{children}
 		</EditContext.Provider>
