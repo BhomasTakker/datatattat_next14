@@ -1,5 +1,6 @@
 "use client";
 
+import { InViewComponent } from "@/components/ui/in-view/in-view";
 import styles from "./client-component.module.scss";
 
 type ClientOembedProps = {
@@ -8,12 +9,20 @@ type ClientOembedProps = {
 
 export const ClientOembed = ({ html }: ClientOembedProps) => {
 	return (
-		<div
-			className={styles.root}
-			data-testid="client-oembed"
-			dangerouslySetInnerHTML={{
-				__html: html,
+		<InViewComponent
+			options={{
+				threshold: 0,
+				triggerOnce: true,
 			}}
-		></div>
+			template={<div className={styles.root}></div>}
+		>
+			<div
+				className={styles.root}
+				data-testid="client-oembed"
+				dangerouslySetInnerHTML={{
+					__html: html,
+				}}
+			></div>
+		</InViewComponent>
 	);
 };
