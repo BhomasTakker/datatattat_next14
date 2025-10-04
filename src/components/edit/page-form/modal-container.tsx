@@ -2,14 +2,13 @@ import { FieldValues, UseFormReturn } from "react-hook-form";
 import { FormModal } from "../form-modal/modal";
 import { LoadTemplateForm } from "../template/load-template-form";
 import { SaveTemplateForm } from "../template/save-template-form";
-import { IPage } from "@/types/page";
+import { IPage, PageComponent } from "@/types/page";
 import {
 	createToastAction,
 	initToastPromise,
 	ToastType,
 } from "@/lib/sonner/toast";
 import {
-	checkComponentTemplateNameUnique,
 	checkTemplateNameUnique,
 	loadTemplate,
 	saveTemplate,
@@ -18,7 +17,12 @@ import { PagePreview } from "../preview/page-preview";
 import { EditContext } from "../context/edit-context";
 import { useContext } from "react";
 import { ComponentPreview } from "../preview/component-preview";
-import { saveComponentAsTemplate } from "@/actions/edit/template/component-template";
+import {
+	checkComponentTemplateNameUnique,
+	loadComponentTemplate,
+	saveComponentAsTemplate,
+} from "@/actions/edit/template/component-template";
+import { LoadComponentTemplateForm } from "../template/load-component-template-form";
 
 type ModalContainerProps = {
 	methods: UseFormReturn<FieldValues, any, FieldValues>;
@@ -28,6 +32,7 @@ type ModalContainerProps = {
 	showLoadTemplateModal: boolean;
 	setShowLoadTemplateModal: (val: boolean) => void;
 	setTemplate: (template: IPage) => void;
+	setComponentTemplate: (component: PageComponent) => void;
 	showPreviewModal: boolean;
 	setPreviewModal: (val: boolean) => void;
 };
@@ -83,6 +88,7 @@ export const ModalContainer = ({
 	showLoadTemplateModal,
 	setShowLoadTemplateModal,
 	setTemplate,
+	setComponentTemplate,
 	showPreviewModal,
 	setPreviewModal,
 }: ModalContainerProps) => {
@@ -158,6 +164,34 @@ export const ModalContainer = ({
 		});
 	};
 
+	const getAndSetComponentData = async (templateId: string) => {
+		const component = await loadComponentTemplate(templateId);
+
+		if (!component) {
+			return null;
+		}
+
+		const id = showComponentLoadTemplateModal.templateId;
+		console.log("2121: ID", id);
+		methods.setValue(id, component);
+		const formData = methods.getValues();
+
+		return formData;
+	};
+
+	const loadComponentTemplateFormSubmitHandler = async (
+		e: React.FormEvent<HTMLFormElement>
+	) => {
+		e.preventDefault();
+		const templateId = getTemplateId(e.target as HTMLFormElement);
+		if (!templateId) return;
+		initToastPromise({
+			cb: () => getAndSetComponentData(templateId),
+			id: ToastType.LoadTemplate,
+			onComplete: (template) => setTemplate(template),
+		});
+	};
+
 	const saveComponentTemplateFormSubmitHandler = async (
 		e: React.FormEvent<HTMLFormElement>
 	) => {
@@ -201,7 +235,7 @@ export const ModalContainer = ({
 			cb: () => {
 				saveComponentAsTemplate(templateId, saveComponentAsTemplateData);
 				return Promise.resolve();
-			}, // saveComponentAsTemplate(templateId, update),
+			},
 			id: ToastType.SaveTemplate,
 			onComplete: (_res) => {
 				setSaveComponentAsTemplateData(null);
@@ -250,10 +284,17 @@ export const ModalContainer = ({
 				/>
 			</FormModal>
 			<FormModal
-				isOpen={showComponentLoadTemplateModal}
-				onClose={() => setShowComponentLoadTemplateModal(false)}
+				isOpen={showComponentLoadTemplateModal.showModal}
+				onClose={() =>
+					setShowComponentLoadTemplateModal({
+						showModal: false,
+						templateId: "",
+					})
+				}
 			>
-				<LoadTemplateForm submitHandler={loadTemplateFormSubmitHandler} />
+				<LoadComponentTemplateForm
+					submitHandler={loadComponentTemplateFormSubmitHandler}
+				/>
 			</FormModal>
 		</>
 	);

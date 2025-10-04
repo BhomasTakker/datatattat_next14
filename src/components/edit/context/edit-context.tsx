@@ -13,8 +13,11 @@ type EditInterface = {
 	setComponentPreviewData: (data: PageComponent | null) => void;
 	saveComponentAsTemplateData: PageComponent | null;
 	setSaveComponentAsTemplateData: (data: PageComponent | null) => void;
-	showComponentLoadTemplateModal: boolean;
-	setShowComponentLoadTemplateModal: (show: boolean) => void;
+	showComponentLoadTemplateModal: { showModal: boolean; templateId: string };
+	setShowComponentLoadTemplateModal: (data: {
+		showModal: boolean;
+		templateId: string;
+	}) => void;
 };
 
 export type EditContextType = EditState & EditInterface;
@@ -41,8 +44,11 @@ const initialState: EditState & EditInterface = {
 	setSaveComponentAsTemplateData: (data: PageComponent | null) => {
 		// Default implementation
 	},
-	showComponentLoadTemplateModal: false,
-	setShowComponentLoadTemplateModal: (show: boolean) => {
+	showComponentLoadTemplateModal: { showModal: false, templateId: "" },
+	setShowComponentLoadTemplateModal: (data: {
+		showModal: boolean;
+		templateId: string;
+	}) => {
 		// Default implementation
 	},
 };
@@ -59,7 +65,7 @@ export const EditContextProvider = ({
 	const [saveComponentAsTemplateData, setSaveComponentAsTemplateData] =
 		useState<PageComponent | null>(null);
 	const [showComponentLoadTemplateModal, setShowComponentLoadTemplateModal] =
-		useState(false);
+		useState({ showModal: false, templateId: "" });
 
 	return (
 		<EditContext.Provider

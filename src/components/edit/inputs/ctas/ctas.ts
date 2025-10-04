@@ -60,7 +60,11 @@ const loadComponentFromTemplate: Cta = {
 	tooltip: "Load template",
 	action: (ctx, methods, context) => {
 		const { setShowComponentLoadTemplateModal } = context;
-		setShowComponentLoadTemplateModal(true);
+		const parent = getParentId(ctx.id || "");
+		setShowComponentLoadTemplateModal({
+			showModal: true,
+			templateId: parent,
+		});
 	},
 	icon: FaUpload,
 };
