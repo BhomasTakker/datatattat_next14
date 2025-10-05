@@ -156,6 +156,7 @@ export const ArrayInputList = ({
 	));
 };
 
+// We should split this component into smaller components
 export const ArrayInput = ({
 	input,
 	id,
