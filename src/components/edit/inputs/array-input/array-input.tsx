@@ -71,13 +71,17 @@ const ArrayItem = ({
 	createObject,
 	showControls = true,
 }: ArrayItemProps) => {
-	const inputId = `${parentId}.[${index}].arrayItem`;
-	const isCollapsedId = `${inputId}.isCollapsed`;
+	const { id } = template;
+	const inputId = createObject
+		? `${parentId}.[${index}].${id}`
+		: `${parentId}.[${index}]`;
+	const arrayInputId = `${parentId}.[${index}].arrayItem`;
+	const isCollapsedId = `${arrayInputId}.isCollapsed`;
 	const { getValues, setValue } = useFormContext();
 	const currentIsCollapsed = !!getValues(isCollapsedId) || false;
 	const [isCollapsed, setIsCollapsed] = useState(currentIsCollapsed);
 
-	const identifierInput = createIdentifier(inputId);
+	const identifierInput = createIdentifier(arrayInputId);
 
 	const onToggle = () => {
 		setIsCollapsed((prev) => !prev);
@@ -152,6 +156,7 @@ export const ArrayInputList = ({
 	));
 };
 
+// We should split this component into smaller components
 export const ArrayInput = ({
 	input,
 	id,
