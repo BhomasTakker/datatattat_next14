@@ -59,6 +59,7 @@ const TestWrapper: React.FC<{
 	};
 
 	return (
+		// @ts-expect-error - Ignore type error for simplicity in this test context
 		<EditContext.Provider value={editContextValue}>
 			<FormProvider {...methods}>{children}</FormProvider>
 		</EditContext.Provider>
@@ -245,10 +246,10 @@ describe("ArrayInputList", () => {
 		);
 
 		expect(
-			screen.getByTestId(/input-factory-parent\.\[0\]\.arrayItem/)
+			screen.getByTestId(/input-factory-parent\.\[0\]\.template-input/)
 		).toBeInTheDocument();
 		expect(
-			screen.getByTestId(/input-factory-parent\.\[1\]\.arrayItem/)
+			screen.getByTestId(/input-factory-parent\.\[1\]\.template-input/)
 		).toBeInTheDocument();
 	});
 
