@@ -13,6 +13,8 @@ export const VERTICAL_STACK: InputListProps = {
 			ContainerHeightOptions.SM,
 			ContainerHeightOptions.MD,
 			ContainerHeightOptions.LG,
+			ContainerHeightOptions.XL,
+			ContainerHeightOptions.XXL,
 			ContainerHeightOptions.FULL,
 		]),
 	],
