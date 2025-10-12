@@ -13,6 +13,11 @@ export const BLUESKY_AUTHOR_FEED: InputListProps = {
 			title: "BlueSky Author Feed Params",
 		},
 		{
+			id: "authorIdInfo",
+			type: EditInputs.description,
+			text: "You can get the author id by editing the url with the required user handle (Don't include <>). https://bsky.social/xrpc/com.atproto.identity.resolveHandle?handle=<user_handle>.bsky.social. When adding the author id make sure to add the whole id - i.e. did:plc:<id>",
+		},
+		{
 			id: "actor",
 			type: EditInputs.text,
 			label: "Author ID",
