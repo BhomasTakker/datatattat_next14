@@ -69,6 +69,9 @@ const renderColumn = (
 			key={key}
 			data-testid="content-component"
 			className={styles.item}
+			// convert to using css variables for height and width i.e.
+			// style={{ "--component-width": `${columnWidth}px`, "--component-height": `${columnHeight}px` } as React.CSSProperties}
+			// style={{ width: `${columnWidth}px`, height: `${columnHeight}px` }}
 			style={columnStyle}
 		>
 			<ComponentDisplay component={component} isClient={isClient} />

@@ -28,7 +28,7 @@ const renderComponents = ({
 				key={index}
 				data-testid="content-component"
 				className={className}
-				style={{ maxHeight: componentHeight }}
+				style={{ "--component-height": componentHeight } as React.CSSProperties}
 			>
 				<ComponentDisplay
 					key={index}

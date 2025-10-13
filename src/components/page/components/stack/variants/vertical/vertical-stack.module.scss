@@ -11,4 +11,9 @@
 
 .item {
 	@include ui.scrollYNoScroller();
+	max-height: var(--component-height, 100%);
+
+	@media screen and (max-width: $screenWidthSm) {
+		max-height: 100%;
+	}
 }

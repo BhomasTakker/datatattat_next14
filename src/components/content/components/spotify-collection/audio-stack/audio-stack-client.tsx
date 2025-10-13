@@ -101,6 +101,7 @@ export const AudioStackClientComponent = ({
 			{displayComponent}
 			<ul
 				className={styles.articles}
+				// convert to using css variables for height
 				style={{ height: `${containerHeight}px` }}
 			>
 				{articles}
