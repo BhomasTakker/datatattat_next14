@@ -11,7 +11,7 @@ exports[`Page Stack Test Suite renders PageStack unchanged 1`] = `
 		item
 	}"
       data-testid="content-component"
-      style="max-height: 100%;"
+      style="--component-height: 100%;"
     >
       Component type:- ListItem
       <section>
