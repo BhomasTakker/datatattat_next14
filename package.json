@@ -15,7 +15,7 @@
 		"test:e2e:update": "npx playwright install"
 	},
 	"dependencies": {
-		"@atproto/api": "^0.17.0",
+		"@atproto/api": "^0.17.2",
 		"@vercel/analytics": "^1.5.0",
 		"@vercel/speed-insights": "^1.2.0",
 		"cheerio": "^1.1.2",
