@@ -1,4 +1,4 @@
-import { InputListProps, ShowInputProps } from "@/types/edit/inputs/inputs";
+import { InputListProps } from "@/types/edit/inputs/inputs";
 import { EditInputs } from "../../../inputs/inputs";
 import { CARD_DATA } from "./card-data-config";
 import { FAV_ICON } from "./fav-icon-config";
@@ -14,7 +14,6 @@ export const META_CONFIG: InputListProps = {
 			id: "createMetaData",
 			type: EditInputs.show,
 			label: "Create Page Meta Data",
-			defaultChecked: false,
 			inputs: [
 				{
 					id: "cardData",
