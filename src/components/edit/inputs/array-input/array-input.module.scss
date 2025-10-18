@@ -53,10 +53,6 @@
 				width: 100%;
 			}
 		}
-
-		@media screen and (max-width: $screenWidthMd) {
-			flex-direction: column-reverse;
-		}
 	}
 	.input:not(:last-of-type) {
 		border-bottom: $divider;
