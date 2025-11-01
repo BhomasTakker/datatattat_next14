@@ -8,8 +8,16 @@ import ArticleCollection from "../../../models/ArticleCollection";
 jest.mock("../../../models/ArticleCollection");
 
 describe("articleCollection actions", () => {
+	const mockDate = new Date("2025-11-01T12:00:00.000Z");
+
+	beforeEach(() => {
+		jest.useFakeTimers();
+		jest.setSystemTime(mockDate);
+	});
+
 	afterEach(() => {
 		jest.clearAllMocks();
+		jest.useRealTimers();
 	});
 
 	describe("getArticleCollectionByFeed", () => {
@@ -40,7 +48,7 @@ describe("articleCollection actions", () => {
 			);
 			expect(ArticleCollection.findOneAndUpdate).toHaveBeenCalledWith(
 				{ feed: "feed-url" },
-				collection,
+				{ ...collection, updatedAt: mockDate },
 				{ new: true, upsert: true }
 			);
 			expect(result).toEqual({
@@ -76,7 +84,7 @@ describe("articleCollection actions", () => {
 			);
 			expect(ArticleCollection.findOneAndUpdate).toHaveBeenCalledWith(
 				{ feed: "feed-2" },
-				collection,
+				{ ...collection, updatedAt: mockDate },
 				{ new: true, upsert: true }
 			);
 			expect(result).toEqual({
