@@ -88,12 +88,13 @@ describe("generateMetaDataFromPage", () => {
 
 		expect(result.twitter).toEqual({
 			card: "summary_large_image",
+			site: "@datatattat",
 			title: "Card Title",
 			description: "Card Description",
 			creator: "@datatattat",
 			images: [
 				{
-					url: "card.png",
+					url: "https://Examplecard.png",
 					alt: "Card Alt",
 				},
 			],
