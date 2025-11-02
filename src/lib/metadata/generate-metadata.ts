@@ -30,17 +30,20 @@ const createOpenGraph = (og: CardData) => {
 
 const createTwitterCard = (twitter: CardData) => {
 	const { title, description } = twitter;
+	// Ensure image URL is absolute
+	const imageUrl = twitter.image.startsWith("http")
+		? twitter.image
+		: `https://${twitter.site_name}${twitter.image}`;
+
 	return {
-		// cardType: "summary", / summary_large_image
 		card: "summary_large_image",
+		site: "@datatattat",
 		title,
 		description,
-		// siteId: '1467726470533754880',
 		creator: "@datatattat",
-		// creatorId: '1467726470533754880',
 		images: [
 			{
-				url: twitter.image,
+				url: imageUrl,
 				alt: twitter["image:alt"],
 			},
 		],
@@ -96,6 +99,9 @@ export const generateMetaDataFromPage = async (
 		showCardData && cardData ? createOpenGraph(cardData) : undefined;
 	const twitter =
 		showCardData && cardData ? createTwitterCard(cardData) : undefined;
+
+	// here
+	console.log("Generating meta for ", route);
 
 	return {
 		title: pageTitle,
