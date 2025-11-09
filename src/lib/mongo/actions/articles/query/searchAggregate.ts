@@ -15,14 +15,17 @@ import {
 	matchLeaning,
 	matchOrigin,
 	matchTrust,
+	addProviderMatchBeforeLookup,
 } from "./aggregator-functions";
+import { getArticleProviderByName } from "../../article-provider";
+import mongoose from "mongoose";
 
 // MongoDB Atlas Search Course
 // https://learn.mongodb.com/learning-paths/atlas-search
 
 // Clean me up!!
 
-export const createSearchAggregate = (
+export const createSearchAggregate = async (
 	queryParams: GetLatestArticlesProps,
 	aggregator: Aggregator
 ) => {
@@ -41,6 +44,7 @@ export const createSearchAggregate = (
 		leaningHigher,
 		leaningLower,
 		origin,
+		provider,
 		categories,
 		mustContain = [],
 		mustNotContain = [],
@@ -143,6 +147,17 @@ export const createSearchAggregate = (
 			},
 		},
 	});
+
+	// Resolve provider name to ObjectId and add match BEFORE lookup for performance
+	let providerObjectId: mongoose.Types.ObjectId | undefined;
+	if (provider) {
+		const providerDoc = await getArticleProviderByName(provider);
+		if (providerDoc && !Array.isArray(providerDoc)) {
+			providerObjectId = providerDoc._id as mongoose.Types.ObjectId;
+		}
+	}
+	addProviderMatchBeforeLookup(aggregator, providerObjectId);
+
 	// we need to use provider for filtering trust
 	addProviderLookup(aggregator);
 	addFields(aggregator);

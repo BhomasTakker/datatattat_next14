@@ -1,5 +1,19 @@
 import ArticleProvider from "@/models/ArticleProvider";
 import { Aggregator } from ".";
+import mongoose from "mongoose";
+
+export const addProviderMatchBeforeLookup = (
+	aggregator: Aggregator,
+	providerObjectId: mongoose.Types.ObjectId | undefined
+) => {
+	if (providerObjectId) {
+		aggregator.push({
+			$match: {
+				provider: providerObjectId,
+			},
+		});
+	}
+};
 
 export const addProviderLookup = (aggregator: Aggregator) => {
 	aggregator.push({
