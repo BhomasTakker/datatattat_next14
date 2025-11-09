@@ -1,5 +1,6 @@
 import {
 	getArticleProviderByName,
+	getArticleProviderByNameFuzzy,
 	getArticleProviderByDomain,
 	saveOrCreateArticleProviderByName,
 } from "./article-provider";
@@ -41,6 +42,53 @@ describe("article-provider actions", () => {
 			});
 
 			const result = await getArticleProviderByName("UnknownProvider");
+			expect(result).toBeNull();
+		});
+	});
+
+	describe("getArticleProviderByNameFuzzy", () => {
+		it("should return provider with case-insensitive match", async () => {
+			(ArticleProvider.findOne as jest.Mock).mockReturnValueOnce({
+				lean: jest.fn().mockResolvedValueOnce(mockProvider),
+			});
+
+			const result = await getArticleProviderByNameFuzzy("testprovider");
+			expect(ArticleProvider.findOne).toHaveBeenCalledWith({
+				name: { $regex: new RegExp("testprovider", "i") },
+			});
+			expect(result).toEqual(mockProvider);
+		});
+
+		it("should return provider with partial match", async () => {
+			(ArticleProvider.findOne as jest.Mock).mockReturnValueOnce({
+				lean: jest.fn().mockResolvedValueOnce(mockProvider),
+			});
+
+			const result = await getArticleProviderByNameFuzzy("Test");
+			expect(ArticleProvider.findOne).toHaveBeenCalledWith({
+				name: { $regex: new RegExp("Test", "i") },
+			});
+			expect(result).toEqual(mockProvider);
+		});
+
+		it("should return provider with uppercase input", async () => {
+			(ArticleProvider.findOne as jest.Mock).mockReturnValueOnce({
+				lean: jest.fn().mockResolvedValueOnce(mockProvider),
+			});
+
+			const result = await getArticleProviderByNameFuzzy("TESTPROVIDER");
+			expect(ArticleProvider.findOne).toHaveBeenCalledWith({
+				name: { $regex: new RegExp("TESTPROVIDER", "i") },
+			});
+			expect(result).toEqual(mockProvider);
+		});
+
+		it("should return null when no fuzzy match found", async () => {
+			(ArticleProvider.findOne as jest.Mock).mockReturnValueOnce({
+				lean: jest.fn().mockResolvedValueOnce(null),
+			});
+
+			const result = await getArticleProviderByNameFuzzy("NonExistent");
 			expect(result).toBeNull();
 		});
 	});

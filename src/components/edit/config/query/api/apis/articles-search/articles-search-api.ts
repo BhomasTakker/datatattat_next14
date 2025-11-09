@@ -107,6 +107,20 @@ const BASE_PARAMS: GenericInput[] = [
 		],
 		required: false,
 	},
+	// provider options?
+	{
+		id: "provider",
+		type: EditInputs.array,
+		label: "Filter By Provider",
+		title: "Provider",
+		createObject: false,
+		// we should turn off array item controls for this
+		input: {
+			id: "provider",
+			type: EditInputs.text,
+			label: "provider name",
+		},
+	},
 	{
 		id: "trustHigher",
 		type: EditInputs.number,
@@ -123,6 +137,7 @@ const BASE_PARAMS: GenericInput[] = [
 		min: 0,
 		required: false,
 	},
+	/////
 	{
 		id: "sort",
 		type: EditInputs.select,

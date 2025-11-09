@@ -4,7 +4,18 @@ import {
 	matchTrust,
 	matchLeaning,
 	matchOrigin,
+	addProviderMatchBeforeLookup,
 } from "./aggregator-functions";
+import mongoose from "mongoose";
+
+// Mock mongoose ObjectId
+jest.mock("mongoose", () => ({
+	Types: {
+		ObjectId: jest.fn().mockImplementation(() => ({
+			toString: () => "507f1f77bcf86cd799439011",
+		})),
+	},
+}));
 
 describe("aggregator-functions", () => {
 	let aggregator: any[];
@@ -126,6 +137,50 @@ describe("aggregator-functions", () => {
 			expect(aggregator[0].$match.$expr.$and).toEqual([
 				{ $eq: ["$provider.origin", "US"] },
 			]);
+		});
+	});
+
+	describe("addProviderMatchBeforeLookup", () => {
+		it("should not push anything if providerObjectIds is undefined", () => {
+			addProviderMatchBeforeLookup(aggregator, undefined);
+			expect(aggregator.length).toBe(0);
+		});
+
+		it("should push a $match stage with single ObjectId", () => {
+			const objectId = new mongoose.Types.ObjectId();
+			addProviderMatchBeforeLookup(aggregator, objectId);
+			expect(aggregator.length).toBe(1);
+			expect(aggregator[0]).toHaveProperty("$match");
+			expect(aggregator[0].$match.provider).toEqual(objectId);
+		});
+
+		it("should push a $match stage with single ObjectId in array", () => {
+			const objectId = new mongoose.Types.ObjectId();
+			addProviderMatchBeforeLookup(aggregator, [objectId]);
+			expect(aggregator.length).toBe(1);
+			expect(aggregator[0]).toHaveProperty("$match");
+			expect(aggregator[0].$match.provider).toEqual(objectId);
+		});
+
+		it("should push a $match stage with $in for multiple ObjectIds", () => {
+			const objectId1 = new mongoose.Types.ObjectId();
+			const objectId2 = new mongoose.Types.ObjectId();
+			const objectId3 = new mongoose.Types.ObjectId();
+			addProviderMatchBeforeLookup(aggregator, [
+				objectId1,
+				objectId2,
+				objectId3,
+			]);
+			expect(aggregator.length).toBe(1);
+			expect(aggregator[0]).toHaveProperty("$match");
+			expect(aggregator[0].$match.provider).toEqual({
+				$in: [objectId1, objectId2, objectId3],
+			});
+		});
+
+		it("should handle empty array", () => {
+			addProviderMatchBeforeLookup(aggregator, []);
+			expect(aggregator.length).toBe(0);
 		});
 	});
 });

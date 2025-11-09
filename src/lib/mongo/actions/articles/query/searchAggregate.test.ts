@@ -1,6 +1,12 @@
 import { createSearchAggregate } from "./searchAggregate";
 import * as searchQueryFunctions from "./search-query-functions";
 import * as aggregatorFunctions from "./aggregator-functions";
+import * as articleProvider from "../../article-provider";
+
+// Mock article provider functions
+jest.mock("../../article-provider", () => ({
+	getArticleProviderByNameFuzzy: jest.fn().mockResolvedValue(null),
+}));
 
 // In order to spy on these we needed to mock the module first
 // https://stackoverflow.com/questions/67872622/jest-spyon-not-working-on-index-file-cannot-redefine-property
@@ -28,7 +34,7 @@ describe("createSearchAggregate", () => {
 		jest.clearAllMocks();
 	});
 
-	it("should add filters for variant, region, and language", () => {
+	it("should add filters for variant, region, and language", async () => {
 		const spyAddFilter = jest.spyOn(searchQueryFunctions, "addFilter");
 		const queryParams = {
 			variant: "news",
@@ -36,7 +42,7 @@ describe("createSearchAggregate", () => {
 			language: "en",
 		} as any;
 
-		createSearchAggregate(queryParams, aggregator);
+		await createSearchAggregate(queryParams, aggregator);
 
 		expect(spyAddFilter).toHaveBeenCalledWith(
 			expect.any(Array),
@@ -55,7 +61,7 @@ describe("createSearchAggregate", () => {
 		);
 	});
 
-	it("should add must, mustNot, should, and filterContain filters", () => {
+	it("should add must, mustNot, should, and filterContain filters", async () => {
 		const spyAddFilter = jest.spyOn(searchQueryFunctions, "addFilter");
 		const queryParams = {
 			mustContain: ["foo"],
@@ -64,7 +70,7 @@ describe("createSearchAggregate", () => {
 			filterContain: ["qux"],
 		} as any;
 
-		createSearchAggregate(queryParams, aggregator);
+		await createSearchAggregate(queryParams, aggregator);
 
 		expect(spyAddFilter).toHaveBeenCalledWith(
 			expect.any(Array),
@@ -89,7 +95,7 @@ describe("createSearchAggregate", () => {
 		);
 	});
 
-	it("should call addDateRange, addWithinTimeFrame, and addDurationRange", () => {
+	it("should call addDateRange, addWithinTimeFrame, and addDurationRange", async () => {
 		const spyAddDateRange = jest.spyOn(searchQueryFunctions, "addDateRange");
 		const spyAddWithinTimeFrame = jest.spyOn(
 			searchQueryFunctions,
@@ -101,7 +107,7 @@ describe("createSearchAggregate", () => {
 		);
 		const queryParams = {} as any;
 
-		createSearchAggregate(queryParams, aggregator);
+		await createSearchAggregate(queryParams, aggregator);
 
 		expect(spyAddDateRange).toHaveBeenCalledWith(
 			expect.any(Array),
@@ -117,16 +123,16 @@ describe("createSearchAggregate", () => {
 		);
 	});
 
-	it("should push $search and $limit stages to aggregator", () => {
+	it("should push $search and $limit stages to aggregator", async () => {
 		const queryParams = {} as any;
-		const result = createSearchAggregate(queryParams, aggregator);
+		const result = await createSearchAggregate(queryParams, aggregator);
 
 		expect(aggregator.some((stage) => stage.$search)).toBe(true);
 		expect(aggregator.some((stage) => stage.$limit !== undefined)).toBe(true);
 		expect(result).toBe(aggregator);
 	});
 
-	it("should call addProviderLookup, addFields, and matchTrust", () => {
+	it("should call addProviderLookup, addFields, and matchTrust", async () => {
 		const spyAddProviderLookup = jest.spyOn(
 			aggregatorFunctions,
 			"addProviderLookup"
@@ -138,35 +144,37 @@ describe("createSearchAggregate", () => {
 			trustLower: 1,
 		} as any;
 
-		createSearchAggregate(queryParams, aggregator);
+		await createSearchAggregate(queryParams, aggregator);
 
 		expect(spyAddProviderLookup).toHaveBeenCalledWith(aggregator);
 		expect(spyAddFields).toHaveBeenCalledWith(aggregator);
 		expect(spyMatchTrust).toHaveBeenCalledWith(aggregator, 5, 1);
 	});
 
-	it("should set minimumShouldMatch in $search compound", () => {
+	it("should set minimumShouldMatch in $search compound", async () => {
 		jest
 			.spyOn(searchQueryFunctions, "addMinimumShouldMatch")
 			.mockReturnValue(2);
 		const queryParams = {} as any;
 
-		createSearchAggregate(queryParams, aggregator);
+		await createSearchAggregate(queryParams, aggregator);
 
 		const searchStage = aggregator.find((stage) => stage.$search);
 		expect(searchStage.$search.compound.minimumShouldMatch).toBe(2);
 	});
 
-	it("should handle empty queryParams gracefully", () => {
-		expect(() => createSearchAggregate({} as any, aggregator)).not.toThrow();
+	it("should handle empty queryParams gracefully", async () => {
+		await expect(
+			createSearchAggregate({} as any, aggregator)
+		).resolves.not.toThrow();
 	});
 
-	it("should use getLimit for $limit stage", () => {
+	it("should use getLimit for $limit stage", async () => {
 		// jest.spyOn(searchQueryFunctions, "getLimit")
 		getLimitSpy.mockReturnValueOnce(42);
 		const queryParams = {} as any;
 
-		createSearchAggregate(queryParams, aggregator);
+		await createSearchAggregate(queryParams, aggregator);
 
 		const limitStage = aggregator.find((stage) => stage.$limit !== undefined);
 		expect(limitStage.$limit).toBe(42);
