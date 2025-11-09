@@ -17,7 +17,7 @@ import {
 	matchTrust,
 	addProviderMatchBeforeLookup,
 } from "./aggregator-functions";
-import { getArticleProviderByName } from "../../article-provider";
+import { getArticleProviderByNameFuzzy } from "../../article-provider";
 import mongoose from "mongoose";
 
 // MongoDB Atlas Search Course
@@ -149,9 +149,10 @@ export const createSearchAggregate = async (
 	});
 
 	// Resolve provider name to ObjectId and add match BEFORE lookup for performance
+	// Uses fuzzy matching (case-insensitive partial match)
 	let providerObjectId: mongoose.Types.ObjectId | undefined;
 	if (provider) {
-		const providerDoc = await getArticleProviderByName(provider);
+		const providerDoc = await getArticleProviderByNameFuzzy(provider);
 		if (providerDoc && !Array.isArray(providerDoc)) {
 			providerObjectId = providerDoc._id as mongoose.Types.ObjectId;
 		}
