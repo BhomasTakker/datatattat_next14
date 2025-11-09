@@ -148,6 +148,7 @@ export const createSearchAggregate = async (
 		},
 	});
 
+	// This needs refactor - too long - move provider logic out to file/function etc
 	// Resolve provider name(s) to ObjectId(s) and add match BEFORE lookup for performance
 	// Uses fuzzy matching (case-insensitive partial match)
 	// Supports single provider or array of providers (OR logic)
