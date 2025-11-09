@@ -17,15 +17,25 @@ export const addProviderMatchBeforeLookup = (
 	// Skip if empty array
 	if (isArray && providerObjectIds.length === 0) return;
 
-	const hasMultiple = isArray && providerObjectIds.length > 1;
+	// Determine the match value based on input type
+	let matchValue: mongoose.Types.ObjectId | { $in: mongoose.Types.ObjectId[] };
+
+	if (isArray) {
+		// Multiple providers: use $in for OR logic
+		// Single provider in array: extract the first element
+		if (providerObjectIds.length === 1) {
+			matchValue = providerObjectIds[0];
+		} else {
+			matchValue = { $in: providerObjectIds };
+		}
+	} else {
+		// Single provider passed directly
+		matchValue = providerObjectIds;
+	}
 
 	aggregator.push({
 		$match: {
-			provider: hasMultiple
-				? { $in: providerObjectIds } // Multiple providers (OR)
-				: isArray
-				? providerObjectIds[0] // Single provider in array
-				: providerObjectIds, // Single provider
+			provider: matchValue,
 		},
 	});
 };
