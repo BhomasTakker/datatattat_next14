@@ -148,16 +148,35 @@ export const createSearchAggregate = async (
 		},
 	});
 
-	// Resolve provider name to ObjectId and add match BEFORE lookup for performance
+	// Resolve provider name(s) to ObjectId(s) and add match BEFORE lookup for performance
 	// Uses fuzzy matching (case-insensitive partial match)
-	let providerObjectId: mongoose.Types.ObjectId | undefined;
+	// Supports single provider or array of providers (OR logic)
+	let providerObjectIds:
+		| mongoose.Types.ObjectId
+		| mongoose.Types.ObjectId[]
+		| undefined;
 	if (provider) {
-		const providerDoc = await getArticleProviderByNameFuzzy(provider);
-		if (providerDoc && !Array.isArray(providerDoc)) {
-			providerObjectId = providerDoc._id as mongoose.Types.ObjectId;
+		const providers = Array.isArray(provider) ? provider : [provider];
+
+		// Resolve all provider names to ObjectIds in parallel
+		const providerDocs = await Promise.all(
+			providers.map((name) => getArticleProviderByNameFuzzy(name))
+		);
+
+		// Filter out nulls and extract ObjectIds
+		const validObjectIds: mongoose.Types.ObjectId[] = [];
+		providerDocs.forEach((doc) => {
+			if (doc && !Array.isArray(doc) && doc._id) {
+				validObjectIds.push(doc._id as mongoose.Types.ObjectId);
+			}
+		});
+
+		if (validObjectIds.length > 0) {
+			providerObjectIds =
+				validObjectIds.length === 1 ? validObjectIds[0] : validObjectIds;
 		}
 	}
-	addProviderMatchBeforeLookup(aggregator, providerObjectId);
+	addProviderMatchBeforeLookup(aggregator, providerObjectIds);
 
 	// we need to use provider for filtering trust
 	addProviderLookup(aggregator);

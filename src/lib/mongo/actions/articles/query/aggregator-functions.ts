@@ -4,15 +4,30 @@ import mongoose from "mongoose";
 
 export const addProviderMatchBeforeLookup = (
 	aggregator: Aggregator,
-	providerObjectId: mongoose.Types.ObjectId | undefined
+	providerObjectIds:
+		| mongoose.Types.ObjectId
+		| mongoose.Types.ObjectId[]
+		| undefined
 ) => {
-	if (providerObjectId) {
-		aggregator.push({
-			$match: {
-				provider: providerObjectId,
-			},
-		});
-	}
+	if (!providerObjectIds) return;
+
+	// Handle both single ObjectId and array of ObjectIds
+	const isArray = Array.isArray(providerObjectIds);
+
+	// Skip if empty array
+	if (isArray && providerObjectIds.length === 0) return;
+
+	const hasMultiple = isArray && providerObjectIds.length > 1;
+
+	aggregator.push({
+		$match: {
+			provider: hasMultiple
+				? { $in: providerObjectIds } // Multiple providers (OR)
+				: isArray
+				? providerObjectIds[0] // Single provider in array
+				: providerObjectIds, // Single provider
+		},
+	});
 };
 
 export const addProviderLookup = (aggregator: Aggregator) => {

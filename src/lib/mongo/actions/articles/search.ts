@@ -21,7 +21,7 @@ export type GetLatestArticlesProps = {
 	mediaType?: string;
 
 	// can't at the moment
-	provider?: string;
+	provider?: string | string[]; // Support single or multiple providers
 	origin?: string;
 
 	variant?: string;
