@@ -6,6 +6,7 @@
 // layout of these isn't likely to change across implementations
 @mixin article() {
 	display: flex;
+	cursor: pointer;
 
 	background-color: $background-light;
 	color: $text;
