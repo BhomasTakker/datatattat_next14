@@ -14,7 +14,7 @@ export const saveOrCreateArticleCollectionByFeed = async (
 	try {
 		const res = await ArticleCollection.findOneAndUpdate(
 			{ feed: feedUrl }, // find
-			{ ...collection, updatedAt: new Date() }, // update with current timestamp
+			{ ...collection },
 			{
 				new: true,
 				upsert: true, // Make this update into an upsert
@@ -35,7 +35,7 @@ export const saveOrCreateArticleCollectionByFeed2 = async (
 	try {
 		const res = await ArticleCollection.findOneAndUpdate(
 			{ feed }, // find
-			{ ...collection, updatedAt: new Date() }, // update with current timestamp
+			{ ...collection },
 			{
 				new: true,
 				upsert: true, // Make this update into an upsert

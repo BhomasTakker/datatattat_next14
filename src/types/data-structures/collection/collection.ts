@@ -28,6 +28,4 @@ export type RSSArticleCollection = {
 	lastBuildDate?: string;
 	image?: RSSImage;
 	provider?: ProviderItem;
-	updatedAt?: Date;
-	createdAt?: Date;
 };
