@@ -48,7 +48,7 @@ describe("articleCollection actions", () => {
 			);
 			expect(ArticleCollection.findOneAndUpdate).toHaveBeenCalledWith(
 				{ feed: "feed-url" },
-				{ ...collection, updatedAt: mockDate },
+				{ ...collection },
 				{ new: true, upsert: true }
 			);
 			expect(result).toEqual({
@@ -84,7 +84,7 @@ describe("articleCollection actions", () => {
 			);
 			expect(ArticleCollection.findOneAndUpdate).toHaveBeenCalledWith(
 				{ feed: "feed-2" },
-				{ ...collection, updatedAt: mockDate },
+				{ ...collection },
 				{ new: true, upsert: true }
 			);
 			expect(result).toEqual({
