@@ -1,0 +1,12 @@
+@use "../../../scss/abstracts/ui/" as *;
+
+// currenltly the same as src/components/header/navigation/navigation-menu.module.scss
+.root {
+	border-bottom: $divider;
+
+	.toolbar {
+		// When few nav links then render menu centrally
+		display: flex;
+		justify-content: center;
+	}
+}
