@@ -1,6 +1,6 @@
 import isSignupComplete from "@/actions/signup/signup-completed";
 import isValidSession from "@/actions/auth/check-session";
-import { isAdminUser, isValidUser } from "@/actions/auth/check-valid-user";
+import { isAdminUser } from "@/actions/auth/check-valid-user";
 import { connectToMongoDB } from "@/lib/mongo/db";
 
 // export const dynamic = "force-dynamic";
