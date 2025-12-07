@@ -25,7 +25,6 @@ export default async function Page() {
 	await isValidSession();
 	await isSignupComplete();
 	const { username } = await isAdminUser();
-	const adminLevel = "/";
 
 	if (!username) {
 		console.error("User is not valid or username is missing.");
