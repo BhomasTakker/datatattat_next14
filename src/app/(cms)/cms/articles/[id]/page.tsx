@@ -24,9 +24,8 @@ export default async function Page({ params }: Props) {
 		id: id,
 	});
 
-	if (!article) {
+	if (!article?._id) {
 		redirect("/cms/articles");
-		return null;
 	}
 
 	return (
