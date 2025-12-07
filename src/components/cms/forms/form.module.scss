@@ -1,7 +1,10 @@
 @use "../../../scss/abstracts/units/" as *;
+@use "../../../scss/mixins/edit" as editMixins;
 
 .form {
 	display: flex;
 	flex-direction: column;
 	gap: $spacingLg;
+
+	@include editMixins.form();
 }

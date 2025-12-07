@@ -1,6 +1,7 @@
 @use "../../scss/abstracts/units" as *;
 @use "../../scss/abstracts/colours/" as *;
 @use "../../scss/abstracts/font/" as *;
+@use "../../scss/mixins/edit" as editMixins;
 
 .root {
 	display: flex;
@@ -12,46 +13,5 @@
 		padding-top: $spacingMd;
 	}
 
-	fieldset {
-		display: flex;
-		flex-direction: column;
-		border: none;
-		padding: 0;
-		margin: 0;
-	}
-
-	label {
-		padding-bottom: $spacingXs;
-	}
-
-	input {
-		width: 100%;
-		padding: $spacingXs;
-		background-color: $background-light;
-		border: none;
-		border-radius: $spacingXxs;
-		font: $textMd;
-
-		&:hover,
-		&:focus {
-			background-color: $shadowLight1;
-			border: none;
-		}
-	}
-
-	select {
-		width: 100%;
-		padding: $spacingXs;
-		border: none;
-		border-radius: $spacingXxs;
-		background-color: $background-light;
-
-		&:hover,
-		&:focus {
-			background-color: $shadowLight1;
-			option {
-				background-color: $background-light;
-			}
-		}
-	}
+	@include editMixins.form();
 }
