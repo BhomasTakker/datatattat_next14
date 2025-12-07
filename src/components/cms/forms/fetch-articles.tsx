@@ -6,9 +6,11 @@ import { FormProvider, useForm } from "react-hook-form";
 import { FETCH_ARTICLES_CONFIG } from "../config/fetch-articles.config";
 import styles from "./form.module.scss";
 import { getArticle } from "@/actions/cms/article";
+import { useRouter } from "next/navigation";
 
 export const FetchArticlesCMSForm = () => {
 	const methods = useForm();
+	const router = useRouter();
 
 	const submitHandler = methods.handleSubmit(async (data) => {
 		const article = await getArticle({
@@ -16,8 +18,8 @@ export const FetchArticlesCMSForm = () => {
 			title: data.title,
 			id: data.id,
 		});
-		console.log("Fetched Article:", article);
-		console.log("Article ID: ", article?._id);
+
+		router.push(`/cms/articles/${article?._id}`);
 	});
 
 	return (

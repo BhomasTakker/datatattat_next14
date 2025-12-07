@@ -1,6 +1,7 @@
 "use server";
 
 import { getCMSHeaders, getRoute } from "@/components/cms/utils";
+import { CollectionItem } from "@/types/data-structures/collection/item/item";
 
 type FetchArticleFormData = {
 	src?: string;
@@ -36,7 +37,7 @@ export async function getArticle(data: FetchArticleFormData) {
 		method: "GET",
 		headers: getCMSHeaders(),
 	})
-		.then((res) => res.json())
+		.then((res) => res.json() as Promise<CollectionItem>)
 		.catch((err) => {
 			console.error("Error fetching article:", err);
 			return null;

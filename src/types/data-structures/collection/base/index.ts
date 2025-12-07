@@ -8,6 +8,7 @@ type Management = {
 };
 
 export type BaseInfo = {
+	_id?: string;
 	title: string;
 	src: string; // URL format
 	description?: string;
