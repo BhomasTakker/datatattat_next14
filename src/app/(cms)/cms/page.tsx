@@ -31,25 +31,6 @@ export default async function Page() {
 		return null;
 	}
 
-	const stuff = await fetch(
-		`${CMS_ROUTE}/articles/get?src=https://www.bbc.com/news/articles/cpvjglwlyx9o`,
-		{
-			method: "GET",
-			headers: {
-				"Content-Type": "application/json",
-				"x-api-key": CMS_API_KEY,
-			},
-			// body: JSON.stringify({ disabled: true }),
-		}
-	)
-		.then((res) => res.json())
-		.catch((err) => {
-			console.error("Error fetching article:", err);
-			return null;
-		});
-
-	console.log("Update response:", { stuff });
-
 	return (
 		<div>
 			<h1>CMS Page for {username}</h1>

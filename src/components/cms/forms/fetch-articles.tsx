@@ -5,12 +5,19 @@ import { Button } from "@/components/ui/button";
 import { FormProvider, useForm } from "react-hook-form";
 import { FETCH_ARTICLES_CONFIG } from "../config/fetch-articles.config";
 import styles from "./form.module.scss";
+import { getArticle } from "@/actions/cms/article";
 
 export const FetchArticlesCMSForm = () => {
 	const methods = useForm();
 
 	const submitHandler = methods.handleSubmit(async (data) => {
-		console.log("Save Me!", { data });
+		const article = await getArticle({
+			src: data.src,
+			title: data.title,
+			id: data.id,
+		});
+		console.log("Fetched Article:", article);
+		console.log("Article ID: ", article?._id);
 	});
 
 	return (

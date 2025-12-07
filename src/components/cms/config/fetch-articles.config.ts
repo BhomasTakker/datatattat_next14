@@ -5,7 +5,7 @@ export const FETCH_ARTICLES_CONFIG: InputListProps = {
 	id: "articles",
 	type: EditInputs.inputList,
 	label: "Profile Object",
-	// createObject: false,
+	createObject: false,
 
 	inputs: [
 		{
@@ -20,7 +20,7 @@ export const FETCH_ARTICLES_CONFIG: InputListProps = {
 			required: false,
 		},
 		{
-			id: "source",
+			id: "src",
 			type: EditInputs.text,
 			label: "Get by Source",
 			required: false,
