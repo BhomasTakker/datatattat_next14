@@ -77,6 +77,14 @@ const ArticleSchema = new Schema<CollectionItem>(
 			required: [true, "Please provide a provider."],
 			ref: "ArticleProvider",
 		},
+		// Management fields
+		disabled: {
+			type: Boolean,
+			default: false,
+		},
+		ttl: {
+			type: Number, // Time-to-live in seconds or timestamp
+		},
 	},
 	{ timestamps: true }
 );

@@ -1,6 +1,12 @@
 import { PlayerSourceTypes } from "@/components/content/components/article-collection/collections/video-display/structs";
 import { UnknownObject } from "@/types/utils";
 
+type Management = {
+	disabled?: boolean;
+	// Would you add this here?
+	ttl?: number; // Time-to-live in seconds or timestamp
+};
+
 export type BaseInfo = {
 	title: string;
 	src: string; // URL format
@@ -9,7 +15,7 @@ export type BaseInfo = {
 	variant: string; // union
 	collectionType?: string;
 	original?: UnknownObject;
-};
+} & Management;
 
 export type Details = {
 	docs?: string[];
