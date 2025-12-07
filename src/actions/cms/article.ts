@@ -22,6 +22,7 @@ const createQueryString = (data: FetchArticleFormData) => {
 			queryString = `?src=${data.src}`;
 			break;
 		case paramCheck(data.title):
+			// not working - I think  we need to encodeURIComponent somewhere?
 			queryString = `?title=${data.title}`;
 			break;
 		default:
