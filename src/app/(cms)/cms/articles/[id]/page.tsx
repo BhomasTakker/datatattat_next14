@@ -5,6 +5,7 @@ import { connectToMongoDB } from "@/lib/mongo/db";
 import styles from "../page.module.scss";
 import { getArticle } from "@/actions/cms/article";
 import { redirect } from "next/navigation";
+import { ArticleCMSForm } from "@/components/cms/forms/article/article-form";
 
 type Params = Promise<{ id: string }>;
 type Props = {
@@ -30,10 +31,7 @@ export default async function Page({ params }: Props) {
 
 	return (
 		<section className={styles.root}>
-			<h1>CMS Article Editor</h1>
-			<div>Load Article Form with article {article?._id}</div>
-			<div>Title: {article?.title}</div>
-			<div>Source: {article?.src}</div>
+			<ArticleCMSForm article={article} />
 		</section>
 	);
 }

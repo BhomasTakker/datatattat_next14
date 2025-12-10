@@ -1,0 +1,24 @@
+@use "./mixins/" as article;
+@use "../../../../../scss/abstracts/colours/" as *;
+@use "../../../../../scss/abstracts/units/" as *;
+@use "../../../../../scss/mixins/text/" as textMixins;
+
+@include article.articleCardLeftRight($contentWidthXl6, $contentWidthXs);
+
+.article:hover {
+	cursor: unset;
+	background-color: $background-light;
+}
+.article {
+	.contentContainer {
+		.textContainer {
+			.title {
+				@include textMixins.maxLines(3);
+			}
+			.description {
+				display: unset;
+				@include textMixins.maxLines(3);
+			}
+		}
+	}
+}
