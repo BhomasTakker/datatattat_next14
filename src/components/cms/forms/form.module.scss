@@ -7,4 +7,13 @@
 	gap: $spacingLg;
 
 	@include editMixins.form();
+
+	.buttons {
+		display: flex;
+		gap: $spacingMd;
+
+		> button {
+			flex: 1;
+		}
+	}
 }
