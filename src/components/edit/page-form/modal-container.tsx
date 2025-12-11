@@ -172,7 +172,6 @@ export const ModalContainer = ({
 		}
 
 		const id = showComponentLoadTemplateModal.templateId;
-		console.log("2121: ID", id);
 		methods.setValue(id, component);
 		const formData = methods.getValues();
 

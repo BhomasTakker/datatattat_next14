@@ -76,6 +76,10 @@ export const searchArticles = async (params: GetLatestArticlesProps) => {
 		true
 	);
 
+	//////////////////////////
+	// Conversions for unique title etc
+	// FEAT: unique titles only - add conversions
+	//////////////////////////
 	return {
 		// what other data - paginaton etc
 		items: articles,

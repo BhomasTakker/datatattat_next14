@@ -53,11 +53,11 @@ const ArticleSchema = new Schema<CollectionItem>(
 		title: {
 			type: String,
 			required: [true, "Please provide a title."],
-			unique: [true, "Title must be unique"],
 		},
 		src: {
 			type: String,
 			required: [true, "Please provide a src."],
+			unique: true,
 		},
 		description: {
 			type: String,
@@ -76,6 +76,11 @@ const ArticleSchema = new Schema<CollectionItem>(
 			type: mongoose.Schema.Types.ObjectId,
 			required: [true, "Please provide a provider."],
 			ref: "ArticleProvider",
+		},
+		// Management fields
+		disabled: {
+			type: Boolean,
+			default: false,
 		},
 	},
 	{ timestamps: true }

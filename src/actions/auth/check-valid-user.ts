@@ -20,3 +20,13 @@ export async function isValidUser() {
 
 	return user;
 }
+
+export async function isAdminUser() {
+	const user = await isValidUser();
+
+	if (user.role !== "admin") {
+		redirect(PATHS.home());
+	}
+
+	return user;
+}

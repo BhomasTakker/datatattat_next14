@@ -1,0 +1,16 @@
+@use "../../../../scss/abstracts/units" as *;
+@use "../../../../scss/abstracts/colours/" as *;
+@use "../../../../scss/abstracts/font/" as *;
+
+// this is like a generic form style - could be reused elsewhere
+
+.root {
+	display: flex;
+	flex-direction: column;
+	gap: $spacingMd;
+
+	.title {
+		font: $titleXl3;
+		padding-top: $spacingMd;
+	}
+}

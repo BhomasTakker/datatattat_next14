@@ -1,7 +1,12 @@
 import { PlayerSourceTypes } from "@/components/content/components/article-collection/collections/video-display/structs";
 import { UnknownObject } from "@/types/utils";
 
+type Management = {
+	disabled?: boolean;
+};
+
 export type BaseInfo = {
+	_id?: string;
 	title: string;
 	src: string; // URL format
 	description?: string;
@@ -9,7 +14,7 @@ export type BaseInfo = {
 	variant: string; // union
 	collectionType?: string;
 	original?: UnknownObject;
-};
+} & Management;
 
 export type Details = {
 	docs?: string[];

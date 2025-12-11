@@ -1,5 +1,6 @@
 import { toast } from "sonner";
 
+// Create an Edit Toast file etc
 export enum ToastType {
 	SavePage = "save-page",
 	SaveTemplate = "save-template",
@@ -8,6 +9,9 @@ export enum ToastType {
 	SaveHeader = "save-header",
 }
 
+// You could have a lot?
+// CMS, Edit, etc
+// And save page 1,2,3,4
 const ToastMessages = {
 	savePage: {
 		id: ToastType.SavePage,
@@ -43,7 +47,7 @@ const ToastMessages = {
 	},
 } as const;
 
-type ToastMessage = {
+export type ToastMessage = {
 	id: string;
 	loading?: string;
 	success?: string;
@@ -60,7 +64,7 @@ type ToastMessage = {
 		| "bottom-center";
 };
 
-const ToastMessagesMap = new Map<ToastType, ToastMessage>([
+const ToastMessagesMap = new Map<string, ToastMessage>([
 	[ToastType.SavePage, ToastMessages.savePage],
 	[ToastType.SaveTemplate, ToastMessages.saveTemplate],
 	[ToastType.SaveHeader, ToastMessages.saveHeader],
@@ -68,11 +72,17 @@ const ToastMessagesMap = new Map<ToastType, ToastMessage>([
 	[ToastType.ConfirmSaveTemplate, ToastMessages.confirmSaveTemplate],
 ]);
 
+export const mergeToastMaps = (newMap: Map<string, ToastMessage>) => {
+	newMap.forEach((value, key) => {
+		ToastMessagesMap.set(key, value);
+	});
+};
+
 type ToastPromiseParams = {
 	cb: () => Promise<any>;
 	onComplete?: (res: any) => void;
 	onError?: (err: any) => void;
-	id: ToastType;
+	id: string;
 };
 
 export const initToastPromise = ({
