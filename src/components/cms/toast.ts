@@ -4,6 +4,8 @@ import { ToastMessage } from "@/lib/sonner/toast";
 export enum CMSToastType {
 	DeleteArticle = "delete-article",
 	SaveArticle = "save-article",
+	SaveArticleProvider = "save-article-provider",
+	DeleteArticleProvider = "delete-article-provider",
 }
 
 // You could have a lot?
@@ -24,12 +26,31 @@ const ToastMessages = {
 		success: "Article has been updated!",
 		error: "Error updating article",
 	},
+	saveArticleProvider: {
+		id: CMSToastType.SaveArticleProvider,
+		loading: "Saving Article Provider...",
+		success: "Article Provider has been updated!",
+		error: "Error updating article provider",
+	},
+	confirmDeleteArticleProvider: {
+		id: CMSToastType.DeleteArticle,
+		label: "Confirm",
+		success: "Article Provider has been deleted!",
+		message: "Delete Article Provider? This action cannot be undone.",
+		duration: 5000,
+		position: "top-center",
+	},
 } as const;
 
 // We need to assign these options to the actual toast
 export const ToastMessagesMap = new Map<CMSToastType, ToastMessage>([
 	[CMSToastType.DeleteArticle, ToastMessages.confirmDeleteArticle],
 	[CMSToastType.SaveArticle, ToastMessages.saveArticle],
+	[CMSToastType.SaveArticleProvider, ToastMessages.saveArticleProvider],
+	[
+		CMSToastType.DeleteArticleProvider,
+		ToastMessages.confirmDeleteArticleProvider,
+	],
 ]);
 
 // call initialise
