@@ -1,0 +1,102 @@
+"use client";
+
+import { useRouter } from "next/navigation";
+
+import { InputFactory } from "@/components/edit/inputs/input-factory";
+import { Button } from "@/components/ui/button";
+import { FormProvider, useForm } from "react-hook-form";
+
+import styles from "../form.module.scss";
+import { ProviderItem } from "@/types/data-structures/collection/item/item";
+import { createToastAction, initToastPromise } from "@/lib/sonner/toast";
+import { CMSToastType } from "../../toast";
+import { ARTICLE_PROVIDER_CONFIG } from "../../config/article-povider.config";
+import { use } from "react";
+
+type ArticleProviderCMSFormProps = {
+	provider: ProviderItem & { _id?: string };
+	disabled: boolean;
+	useNavigate?: boolean;
+};
+
+export const ArticleProviderCMSForm = ({
+	provider,
+	disabled,
+	useNavigate = false,
+}: ArticleProviderCMSFormProps) => {
+	const router = useRouter();
+	const methods = useForm({
+		defaultValues: {
+			...provider,
+		},
+		disabled,
+	});
+
+	const submitHandler = methods.handleSubmit(async (data) => {
+		initToastPromise({
+			cb: () =>
+				updateArticleProvider({
+					...data,
+				}),
+			id: CMSToastType.SaveArticleProvider,
+			onComplete: (provider) =>
+				console.log("Article provider saved:", provider),
+		});
+	});
+
+	const deleteArticleProviderHandler = async () => {
+		console.log(`Deleting article provider with id: ${provider._id}`);
+		createToastAction({
+			cb: () => deleteArticleProvider(provider._id as string),
+			id: CMSToastType.DeleteArticleProvider,
+			onComplete: (_res) =>
+				Promise.resolve(console.log("Article Provider Deleted.")),
+			onError: (err) => console.error(err),
+		});
+	};
+
+	const gotoProviderHandler = () => {
+		if (provider._id) {
+			router.push(`/cms/articles/providers/${provider._id}`);
+		}
+	};
+
+	return (
+		<FormProvider {...methods}>
+			<form onSubmit={submitHandler} className={styles.form}>
+				<h2>Article Provider CMS Form</h2>
+				<InputFactory data={{ ...ARTICLE_PROVIDER_CONFIG }} />
+				<div className={styles.buttons}>
+					{!disabled && <Button type="submit">Submit</Button>}
+					{!disabled && (
+						<Button onClick={deleteArticleProviderHandler}>Delete</Button>
+					)}
+					{useNavigate && (
+						<Button onClick={gotoProviderHandler}>Go To Provider</Button>
+					)}
+				</div>
+			</form>
+		</FormProvider>
+	);
+};
+
+//////////////////////////////////////////////
+// Dummy handlers for updating and deleting //
+//////////////////////////////////////////////
+const updateArticleProvider = async (data: any) => {
+	console.log("Updating article provider:", data);
+	return new Promise((resolve) => {
+		setTimeout(() => {
+			resolve(data);
+		}, 1000);
+	});
+};
+
+const deleteArticleProvider = async (id: string) => {
+	console.log("Deleting article provider with id:", id);
+	return new Promise((resolve) => {
+		setTimeout(() => {
+			resolve({ success: true, id });
+		}, 1000);
+	});
+};

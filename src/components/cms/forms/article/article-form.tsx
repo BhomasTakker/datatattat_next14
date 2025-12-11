@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { FormProvider, useForm } from "react-hook-form";
 
 import styles from "../form.module.scss";
-import { ARTICLE_CONFIG } from "../../config/article.config";
+import { ARTICLE_CONFIG } from "../../config/article/article.config";
 import { CollectionItem } from "@/types/data-structures/collection/item/item";
 
 import { Article } from "@/components/content/components/article-collection/article/article";

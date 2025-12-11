@@ -1,5 +1,9 @@
 import { EditInputs } from "@/components/edit/inputs/inputs";
 import { InputListProps } from "@/types/edit/inputs/inputs";
+import { AVATAR } from "./avatar.config";
+import { DETAILS } from "./details.config";
+import { MANAGEMENT } from "./management.config";
+import { ARTICLE_VARIANT } from "./variant/variant.config";
 
 export const ARTICLE_CONFIG: InputListProps = {
 	id: "article",
@@ -26,24 +30,32 @@ export const ARTICLE_CONFIG: InputListProps = {
 		},
 		{
 			id: "src",
-			type: EditInputs.text,
-			label: "Source",
+			type: EditInputs.url,
+			label: "Source URL",
 			disabled: true,
 		},
 		{
-			id: "variant",
+			id: "guid",
 			type: EditInputs.text,
-			label: "Variant",
+			label: "GUID",
 			disabled: true,
 		},
-		// we should show provider and it should be populated
-		// details
-		// media
+		ARTICLE_VARIANT,
 		{
-			id: "disabled",
-			type: EditInputs.switch,
-			label: "Disabled",
-			defaultChecked: false,
+			// there is a date time input but converting to it?
+			id: "createdAt",
+			type: EditInputs.text,
+			label: "Created",
+			disabled: true,
 		},
+		{
+			id: "updatedAt",
+			type: EditInputs.text,
+			label: "Last Updated",
+			disabled: true,
+		},
+		...DETAILS,
+		...AVATAR,
+		...MANAGEMENT,
 	],
 };
