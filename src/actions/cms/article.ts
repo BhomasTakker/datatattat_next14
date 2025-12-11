@@ -34,7 +34,7 @@ const createQueryString = (data: FetchArticleFormData) => {
 export async function getArticle(data: FetchArticleFormData) {
 	const queryString = createQueryString(data);
 
-	return await fetch(`${getRoute("/articles/get")}${queryString}`, {
+	return fetch(`${getRoute("/articles/get")}${queryString}`, {
 		method: "GET",
 		headers: getCMSHeaders(),
 	})
@@ -42,5 +42,40 @@ export async function getArticle(data: FetchArticleFormData) {
 		.catch((err) => {
 			console.error("Error fetching article:", err);
 			return null;
+		});
+}
+
+export async function updateArticle(data: CollectionItem) {
+	const _id = data._id;
+	if (!_id) {
+		throw new Error("Article ID is required for update.");
+	}
+
+	return await fetch(`${getRoute("/articles/update/")}${_id}`, {
+		method: "PUT",
+		headers: getCMSHeaders(),
+		body: JSON.stringify(data),
+	})
+		.then((res) => res.json() as Promise<CollectionItem>)
+		.catch((err) => {
+			//create errors etc sounds like a good idea
+			console.error("Error updating article:", err);
+			throw err;
+		});
+}
+
+export async function deleteArticle(id: string) {
+	if (!id) {
+		throw new Error("Article ID is required for deletion.");
+	}
+
+	return await fetch(`${getRoute("/articles/delete/")}${id}`, {
+		method: "DELETE",
+		headers: getCMSHeaders(),
+	})
+		.then((res) => res.json())
+		.catch((err) => {
+			console.error("Error deleting article:", err);
+			throw err;
 		});
 }
