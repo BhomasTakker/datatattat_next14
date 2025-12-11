@@ -45,12 +45,5 @@ export const ARTICLE_CONFIG: InputListProps = {
 			label: "Disabled",
 			defaultChecked: false,
 		},
-		{
-			id: "ttl",
-			// select number input
-			type: EditInputs.number,
-			label: "Time to Live (TTL)",
-			disabled: true,
-		},
 	],
 };
