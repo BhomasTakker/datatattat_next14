@@ -82,9 +82,6 @@ const ArticleSchema = new Schema<CollectionItem>(
 			type: Boolean,
 			default: false,
 		},
-		ttl: {
-			type: Number, // Time-to-live in seconds or timestamp
-		},
 	},
 	{ timestamps: true }
 );
