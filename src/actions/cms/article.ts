@@ -84,6 +84,10 @@ export async function getArticles(data: FetchArticlesQuery) {
 		});
 }
 
+// When we get articles
+// Older articles may not have all fields populated
+// OR may have strings where objects/arrays are expected
+// So we need to do some data cleaning here eventually
 export async function getArticle(data: FetchArticleFormData) {
 	const queryString = createQueryString(data);
 
@@ -91,7 +95,9 @@ export async function getArticle(data: FetchArticleFormData) {
 		method: "GET",
 		headers: getCMSHeaders(),
 	})
-		.then((res) => res.json() as Promise<CollectionItem>)
+		.then((res) => {
+			return res.json() as Promise<CollectionItem>;
+		})
 		.catch((err) => {
 			console.error("Error fetching article:", err);
 			return null;

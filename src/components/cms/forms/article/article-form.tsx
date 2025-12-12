@@ -38,7 +38,6 @@ export const ArticleCMSForm = ({ article }: ArticleCMSFormProps) => {
 
 	// I don't think this is really an option for Articles
 	const deleteArticleHandler = async () => {
-		console.log(`Deleting article with id: ${article._id}`);
 		createToastAction({
 			cb: () => deleteArticle(article._id as string),
 			id: CMSToastType.DeleteArticle,
