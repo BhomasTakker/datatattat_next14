@@ -4,7 +4,7 @@ import isSignupComplete from "@/actions/signup/signup-completed";
 import { connectToMongoDB } from "@/lib/mongo/db";
 import styles from "../page.module.scss";
 import { FetchProvidersCMSForm } from "@/components/cms/forms/article-provider/fetch-article-provider-form";
-import { getProviders } from "@/actions/cms/provider";
+import { getProviders, gotoProvider } from "@/actions/cms/provider";
 import { PaginatedTable } from "@/components/content/components/table/paginated-table";
 
 export default async function Page() {
@@ -26,6 +26,7 @@ export default async function Page() {
 					columns={columns}
 					paginatedData={providers}
 					fetchPaginatedData={getProviders}
+					onSelect={gotoProvider}
 				/>
 			)}
 			<FetchProvidersCMSForm />

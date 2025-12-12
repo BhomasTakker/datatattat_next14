@@ -4,7 +4,7 @@ import { isAdminUser } from "@/actions/auth/check-valid-user";
 import { connectToMongoDB } from "@/lib/mongo/db";
 import { FetchArticlesCMSForm } from "@/components/cms/forms/fetch-articles";
 import styles from "./page.module.scss";
-import { getArticles } from "@/actions/cms/article";
+import { getArticles, gotoArticle } from "@/actions/cms/article";
 import { PaginatedTable } from "@/components/content/components/table/paginated-table";
 
 export default async function Page() {
@@ -28,6 +28,7 @@ export default async function Page() {
 					columns={columns}
 					paginatedData={articles}
 					fetchPaginatedData={getArticles}
+					onSelect={gotoArticle}
 				/>
 			)}
 			<FetchArticlesCMSForm />
