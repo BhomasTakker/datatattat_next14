@@ -64,12 +64,15 @@ const createProvidersQueryString = (data: FetchProvidersQuery) => {
 	return `?${params.toString()}`;
 };
 
+// There should be a base / generic paginated type somewhere
 type PaginatedData = {
 	data: ProviderItem[];
-	total: number;
-	page: number;
-	pages: number;
-	limit: number;
+	pagination: {
+		total: number;
+		page: number;
+		pages: number;
+		limit: number;
+	};
 };
 
 export async function getProviders(data: FetchProvidersQuery) {

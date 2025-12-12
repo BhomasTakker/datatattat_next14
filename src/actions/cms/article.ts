@@ -56,12 +56,15 @@ const createArticlesQueryString = (data: FetchArticlesQuery) => {
 	return `?${params.toString()}`;
 };
 
+// There should be a base / generic paginated type somewhere
 type PaginatedArticlesData = {
 	data: CollectionItem[];
-	total: number;
-	page: number;
-	pages: number;
-	limit: number;
+	pagination: {
+		total: number;
+		page: number;
+		pages: number;
+		limit: number;
+	};
 };
 
 export async function getArticles(data: FetchArticlesQuery) {
