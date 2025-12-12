@@ -23,12 +23,14 @@ type PaginatedTable = {
 		limit?: string;
 		[key: string]: any;
 	}) => Promise<PaginatedData | null>;
+	onSelect?: (item: Record<string, unknown>) => void;
 };
 
 export const PaginatedTable = ({
 	columns,
 	paginatedData,
 	query,
+	onSelect,
 	fetchPaginatedData,
 }: PaginatedTable) => {
 	const { data } = paginatedData;
@@ -79,7 +81,7 @@ export const PaginatedTable = ({
 				update={submitPaginationHandler}
 				pagination={pagination}
 			/>
-			<SimpleTable columns={columns} data={tableData} />
+			<SimpleTable columns={columns} data={tableData} onSelect={onSelect} />
 		</div>
 	);
 };
