@@ -51,7 +51,6 @@ export const ArticleCMSForm = ({ article }: ArticleCMSFormProps) => {
 		<FormProvider {...methods}>
 			<Article article={article} styles={articleStyles} />
 			<form onSubmit={submitHandler} className={styles.form}>
-				<h2>Fetch Articles CMS Form</h2>
 				<InputFactory data={{ ...ARTICLE_CONFIG }} />
 				<div className={styles.buttons}>
 					<Button type="submit">Submit</Button>

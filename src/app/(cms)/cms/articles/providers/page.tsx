@@ -6,6 +6,7 @@ import styles from "../page.module.scss";
 import { FetchProvidersCMSForm } from "@/components/cms/forms/article-provider/fetch-article-provider-form";
 import { getProviders, gotoProvider } from "@/actions/cms/provider";
 import { PaginatedTable } from "@/components/content/components/table/paginated-table";
+import { CMSTitle } from "@/components/cms/title/cms-title";
 
 export default async function Page() {
 	// this all seems like it should be in middleware not a page?
@@ -20,7 +21,10 @@ export default async function Page() {
 
 	return (
 		<section className={styles.root}>
-			<h1>CMS Providers</h1>
+			<CMSTitle
+				title="CMS Providers"
+				description="Manage and organize providers"
+			/>
 			{providers && (
 				<PaginatedTable
 					columns={columns}

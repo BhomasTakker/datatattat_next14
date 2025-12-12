@@ -2,6 +2,7 @@ import isSignupComplete from "@/actions/signup/signup-completed";
 import isValidSession from "@/actions/auth/check-session";
 import { isAdminUser } from "@/actions/auth/check-valid-user";
 import { connectToMongoDB } from "@/lib/mongo/db";
+import { CMSTitle } from "@/components/cms/title/cms-title";
 
 export default async function Page() {
 	await connectToMongoDB();
@@ -16,7 +17,7 @@ export default async function Page() {
 
 	return (
 		<div>
-			<h1>CMS Page for {username}</h1>
+			<CMSTitle title="CMS" />
 		</div>
 	);
 }

@@ -8,6 +8,7 @@ import { ArticleProviderCMSForm } from "@/components/cms/forms/article-provider/
 import { getProvider } from "@/actions/cms/provider";
 import { getArticles, gotoArticle } from "@/actions/cms/article";
 import { PaginatedTable } from "@/components/content/components/table/paginated-table";
+import { CMSTitle } from "@/components/cms/title/cms-title";
 
 type Params = Promise<{ id: string }>;
 type Props = {
@@ -37,9 +38,10 @@ export default async function Page({ params }: Props) {
 	const columns = ["title", "src", "variant", "createdAt"];
 
 	console.log("Fetched articles for provider:", articles);
-
+	const { name, description } = articleProvider;
 	return (
 		<section className={styles.root}>
+			<CMSTitle title={`Provider: ${name}`} description={`${description}`} />
 			{articles && (
 				<PaginatedTable
 					columns={columns}

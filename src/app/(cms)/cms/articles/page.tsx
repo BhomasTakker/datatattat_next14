@@ -6,6 +6,7 @@ import { FetchArticlesCMSForm } from "@/components/cms/forms/fetch-articles";
 import styles from "./page.module.scss";
 import { getArticles, gotoArticle } from "@/actions/cms/article";
 import { PaginatedTable } from "@/components/content/components/table/paginated-table";
+import { CMSTitle } from "@/components/cms/title/cms-title";
 
 export default async function Page() {
 	// this all seems like it should be in middleware not a page?
@@ -16,13 +17,14 @@ export default async function Page() {
 
 	const articles = await getArticles({});
 
-	console.log("Fetched articles for search:", articles);
-
 	const columns = ["title", "src", "variant", "createdAt"];
 
 	return (
 		<section className={styles.root}>
-			<h1>CMS Articles</h1>
+			<CMSTitle
+				title="CMS Articles"
+				description="Manage and organize your article content"
+			/>
 			{articles && (
 				<PaginatedTable
 					columns={columns}

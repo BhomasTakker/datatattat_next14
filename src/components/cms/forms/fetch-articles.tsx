@@ -26,7 +26,6 @@ export const FetchArticlesCMSForm = () => {
 	return (
 		<FormProvider {...methods}>
 			<form onSubmit={submitHandler} className={styles.form}>
-				<h2>Fetch Articles CMS Form</h2>
 				<InputFactory data={{ ...FETCH_ARTICLES_CONFIG }} />
 				<Button type="submit">Submit</Button>
 			</form>
