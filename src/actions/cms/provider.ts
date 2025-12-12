@@ -9,6 +9,20 @@ type FetchProviderFormData = {
 	id?: string;
 };
 
+type FetchProvidersQuery = {
+	name?: string;
+	id?: string;
+	url?: string;
+	origin?: string;
+	leaning?: string;
+	minRating?: string | number;
+	maxRating?: string | number;
+	page?: string;
+	limit?: string;
+	sortBy?: string;
+	sortOrder?: "desc" | "asc";
+};
+
 const paramCheck = (param: string | undefined) =>
 	param !== undefined && param.length > 0;
 
@@ -29,6 +43,48 @@ const createQueryString = (data: FetchProviderFormData) => {
 	}
 	return queryString;
 };
+
+const createProvidersQueryString = (data: FetchProvidersQuery) => {
+	const params = new URLSearchParams();
+
+	if (data.name) params.append("name", data.name);
+	if (data.url) params.append("url", data.url);
+	if (data.origin) params.append("origin", data.origin);
+	if (data.leaning) params.append("leaning", data.leaning);
+	if (data.minRating !== undefined)
+		params.append("minRating", String(data.minRating));
+	if (data.maxRating !== undefined)
+		params.append("maxRating", String(data.maxRating));
+
+	params.append("page", data.page || "1");
+	params.append("limit", data.limit || "10");
+	params.append("sortBy", data.sortBy || "createdAt");
+	params.append("sortOrder", data.sortOrder || "desc");
+
+	return `?${params.toString()}`;
+};
+
+type PaginatedData = {
+	data: ProviderItem[];
+	total: number;
+	page: number;
+	pages: number;
+	limit: number;
+};
+
+export async function getProviders(data: FetchProvidersQuery) {
+	const queryString = createProvidersQueryString(data);
+
+	return fetch(`${getRoute("/articles/providers/search")}${queryString}`, {
+		method: "GET",
+		headers: getCMSHeaders(),
+	})
+		.then((res) => res.json() as Promise<PaginatedData>)
+		.catch((err) => {
+			console.error("Error fetching providers:", err);
+			return null;
+		});
+}
 
 export async function getProvider(data: FetchProviderFormData) {
 	const queryString = createQueryString(data);

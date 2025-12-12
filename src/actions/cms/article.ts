@@ -31,6 +31,53 @@ const createQueryString = (data: FetchArticleFormData) => {
 	return queryString;
 };
 
+type FetchArticlesQuery = {
+	title?: string;
+	id?: string;
+	src?: string;
+	page?: string;
+	limit?: string;
+	sortBy?: string;
+	sortOrder?: "desc" | "asc";
+};
+
+const createArticlesQueryString = (data: FetchArticlesQuery) => {
+	const params = new URLSearchParams();
+
+	if (data.title) params.append("title", data.title);
+	if (data.src) params.append("src", data.src);
+	if (data.id) params.append("id", data.id);
+
+	params.append("page", data.page || "1");
+	params.append("limit", data.limit || "10");
+	params.append("sortBy", data.sortBy || "createdAt");
+	params.append("sortOrder", data.sortOrder || "desc");
+
+	return `?${params.toString()}`;
+};
+
+type PaginatedArticlesData = {
+	data: CollectionItem[];
+	total: number;
+	page: number;
+	pages: number;
+	limit: number;
+};
+
+export async function getArticles(data: FetchArticlesQuery) {
+	const queryString = createArticlesQueryString(data);
+
+	return fetch(`${getRoute("/articles/search")}${queryString}`, {
+		method: "GET",
+		headers: getCMSHeaders(),
+	})
+		.then((res) => res.json() as Promise<PaginatedArticlesData>)
+		.catch((err) => {
+			console.error("Error fetching articles:", err);
+			return null;
+		});
+}
+
 export async function getArticle(data: FetchArticleFormData) {
 	const queryString = createQueryString(data);
 

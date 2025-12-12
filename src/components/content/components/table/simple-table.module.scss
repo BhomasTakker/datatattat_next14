@@ -1,0 +1,45 @@
+@use "../../../../scss/abstracts/colours/" as colours;
+@use "../../../../scss/abstracts/units/" as units;
+@use "../../../../scss/abstracts/ui/" as ui;
+
+.table {
+	width: 100%;
+	border-collapse: collapse;
+	border: ui.$divider;
+	background-color: white;
+	table-layout: fixed;
+
+	th,
+	td {
+		padding: units.$spacingMd units.$spacingLg;
+		text-align: left;
+		border-bottom: ui.$divider;
+		// max-width: 250px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	.thead {
+		background-color: colours.$background-light;
+		font-weight: 600;
+
+		th {
+			border-bottom: 2px solid colours.$background-dark;
+		}
+	}
+
+	.tbody {
+		tr {
+			transition: background-color 0.2s;
+
+			&:hover {
+				background-color: colours.$background-main;
+			}
+
+			&:last-child td {
+				border-bottom: none;
+			}
+		}
+	}
+}

@@ -3,9 +3,7 @@ import isValidSession from "@/actions/auth/check-session";
 import { isAdminUser } from "@/actions/auth/check-valid-user";
 import { connectToMongoDB } from "@/lib/mongo/db";
 import styles from "../../page.module.scss";
-import { getArticle } from "@/actions/cms/article";
 import { redirect } from "next/navigation";
-import { ArticleCMSForm } from "@/components/cms/forms/article/article-form";
 import { ArticleProviderCMSForm } from "@/components/cms/forms/article-provider/article-provider-form";
 import { getProvider } from "@/actions/cms/provider";
 
