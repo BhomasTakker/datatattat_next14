@@ -33,6 +33,7 @@ const createQueryString = (data: FetchArticleFormData) => {
 
 type FetchArticlesQuery = {
 	title?: string;
+	providerId?: string;
 	id?: string;
 	src?: string;
 	page?: string;
@@ -47,6 +48,7 @@ const createArticlesQueryString = (data: FetchArticlesQuery) => {
 	if (data.title) params.append("title", data.title);
 	if (data.src) params.append("src", data.src);
 	if (data.id) params.append("id", data.id);
+	if (data.providerId) params.append("provider", data.providerId);
 
 	params.append("page", data.page || "1");
 	params.append("limit", data.limit || "10");

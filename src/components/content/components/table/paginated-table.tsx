@@ -17,6 +17,7 @@ type PaginatedData = {
 type PaginatedTable = {
 	paginatedData: PaginatedData;
 	columns: string[];
+	query?: { [key: string]: any };
 	fetchPaginatedData: (data: {
 		page?: string;
 		limit?: string;
@@ -27,6 +28,7 @@ type PaginatedTable = {
 export const PaginatedTable = ({
 	columns,
 	paginatedData,
+	query,
 	fetchPaginatedData,
 }: PaginatedTable) => {
 	const { data } = paginatedData;
@@ -59,6 +61,7 @@ export const PaginatedTable = ({
 	useEffect(() => {
 		const fetchData = async () => {
 			const result = await fetchPaginatedData({
+				...query,
 				page: currentPage.toString(),
 				limit: currentLimit.toString(),
 			});

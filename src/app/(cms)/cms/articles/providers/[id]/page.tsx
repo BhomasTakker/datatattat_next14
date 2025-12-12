@@ -6,6 +6,8 @@ import styles from "../../page.module.scss";
 import { redirect } from "next/navigation";
 import { ArticleProviderCMSForm } from "@/components/cms/forms/article-provider/article-provider-form";
 import { getProvider } from "@/actions/cms/provider";
+import { getArticles } from "@/actions/cms/article";
+import { PaginatedTable } from "@/components/content/components/table/paginated-table";
 
 type Params = Promise<{ id: string }>;
 type Props = {
@@ -28,9 +30,24 @@ export default async function Page({ params }: Props) {
 	if (!articleProvider?._id) {
 		redirect("/cms/articles/providers/");
 	}
+	const articles = await getArticles({
+		providerId: articleProvider?._id,
+	});
+
+	const columns = ["title", "src", "variant", "createdAt"];
+
+	console.log("Fetched articles for provider:", articles);
 
 	return (
 		<section className={styles.root}>
+			{articles && (
+				<PaginatedTable
+					columns={columns}
+					paginatedData={articles}
+					fetchPaginatedData={getArticles}
+					query={{ providerId: articleProvider?._id }}
+				/>
+			)}
 			<ArticleProviderCMSForm
 				provider={articleProvider}
 				disabled={false}
