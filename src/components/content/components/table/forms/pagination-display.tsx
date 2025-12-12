@@ -7,23 +7,27 @@ export const PaginationDisplay = ({
 	pagination: Pagination;
 }) => {
 	return (
-		<div className={styles.paginationInfo}>
+		<dl className={styles.paginationInfo}>
 			<div className={styles.infoItem}>
-				<span className={styles.infoLabel}>Page:</span>
-				<span className={styles.infoValue}>
+				<dt className={styles.infoLabel}>Page:</dt>
+				<dd className={styles.infoValue}>
 					{pagination.page} of {pagination.pages}
-				</span>
+				</dd>
 			</div>
-			<div className={styles.infoDivider}>|</div>
+			<span className={styles.infoDivider} aria-hidden="true">
+				|
+			</span>
 			<div className={styles.infoItem}>
-				<span className={styles.infoLabel}>Page Size:</span>
-				<span className={styles.infoValue}>{pagination.limit}</span>
+				<dt className={styles.infoLabel}>Page Size:</dt>
+				<dd className={styles.infoValue}>{pagination.limit}</dd>
 			</div>
-			<div className={styles.infoDivider}>|</div>
+			<span className={styles.infoDivider} aria-hidden="true">
+				|
+			</span>
 			<div className={styles.infoItem}>
-				<span className={styles.infoLabel}>Total Documents:</span>
-				<span className={styles.infoValue}>{pagination.total}</span>
+				<dt className={styles.infoLabel}>Total Documents:</dt>
+				<dd className={styles.infoValue}>{pagination.total}</dd>
 			</div>
-		</div>
+		</dl>
 	);
 };
