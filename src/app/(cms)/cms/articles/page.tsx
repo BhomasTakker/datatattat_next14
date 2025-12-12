@@ -4,8 +4,8 @@ import { isAdminUser } from "@/actions/auth/check-valid-user";
 import { connectToMongoDB } from "@/lib/mongo/db";
 import { FetchArticlesCMSForm } from "@/components/cms/forms/fetch-articles";
 import styles from "./page.module.scss";
-import { SimpleTable } from "@/components/content/components/table/simple-table";
 import { getArticles } from "@/actions/cms/article";
+import { PaginatedTable } from "@/components/content/components/table/paginated-table";
 
 export default async function Page() {
 	// this all seems like it should be in middleware not a page?
@@ -23,7 +23,13 @@ export default async function Page() {
 	return (
 		<section className={styles.root}>
 			<h1>CMS Articles</h1>
-			{articles && <SimpleTable columns={columns} data={articles.data} />}
+			{articles && (
+				<PaginatedTable
+					columns={columns}
+					paginatedData={articles}
+					fetchPaginatedData={getArticles}
+				/>
+			)}
 			<FetchArticlesCMSForm />
 		</section>
 	);

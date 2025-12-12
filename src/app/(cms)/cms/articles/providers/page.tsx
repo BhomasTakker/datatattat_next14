@@ -22,7 +22,11 @@ export default async function Page() {
 		<section className={styles.root}>
 			<h1>CMS Providers</h1>
 			{providers && (
-				<PaginatedTable columns={columns} paginatedData={providers} />
+				<PaginatedTable
+					columns={columns}
+					paginatedData={providers}
+					fetchPaginatedData={getProviders}
+				/>
 			)}
 			<FetchProvidersCMSForm />
 		</section>

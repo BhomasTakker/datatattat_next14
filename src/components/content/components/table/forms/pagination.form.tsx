@@ -4,24 +4,41 @@ import { InputFactory } from "@/components/edit/inputs/input-factory";
 import { Button } from "@/components/ui/button";
 import { FormProvider, useForm } from "react-hook-form";
 import styles from "./pagination.form.module.scss";
-import { getArticle } from "@/actions/cms/article";
-import { useRouter } from "next/navigation";
 import { PAGINATION_FORM_CONFIG } from "./pagination.form.config";
-import next from "next";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { PaginationDisplay } from "./pagination-display";
+
+type UpdatePagination = {
+	limit?: number;
+	page?: number;
+};
+
+export type Pagination = {
+	total: number;
+	page: number;
+	pages: number;
+	limit: number;
+};
 
 type PaginationForm = {
 	next: () => void;
 	prev: () => void;
-	goToPage: (page: number) => void;
+	// goToPage: (page: number) => void;
+	update: (data: UpdatePagination) => void;
+	pagination: Pagination;
 };
 
-export const PaginationForm = ({ next, prev, goToPage }: PaginationForm) => {
+export const PaginationForm = ({
+	next,
+	prev,
+	update,
+	pagination,
+}: PaginationForm) => {
 	const methods = useForm();
-	const router = useRouter();
 
 	const submitHandler = methods.handleSubmit(async (data) => {
 		// In this instance we 'should' be able to pass the loaded atricle
-		router.push(`/cms/articles/${67}`);
+		update({ page: data.page, limit: data.limit });
 	});
 
 	const prevHandler = methods.handleSubmit(async (data) => {
@@ -34,13 +51,29 @@ export const PaginationForm = ({ next, prev, goToPage }: PaginationForm) => {
 		next();
 	});
 
+	// We need a - generic header bar form layout??
 	return (
 		<FormProvider {...methods}>
 			<form onSubmit={submitHandler} className={styles.form}>
-				<h2>Pagination Form</h2>
-				<InputFactory data={PAGINATION_FORM_CONFIG} />
-				<Button onClick={prevHandler}>Previous</Button>
-				<Button onClick={nextHandler}>Next</Button>
+				<div className={styles.paginationControls}>
+					<div className={styles.pageNavigation}>
+						<Button onClick={prevHandler} classes={styles.navButton}>
+							<FaChevronLeft />
+							<span>Previous</span>
+						</Button>
+						<Button onClick={nextHandler} classes={styles.navButton}>
+							<span>Next</span>
+							<FaChevronRight />
+						</Button>
+					</div>
+					<div className={styles.paginationInputs}>
+						<InputFactory data={PAGINATION_FORM_CONFIG} />
+					</div>
+					<Button type="submit" classes={styles.submitButton}>
+						Apply
+					</Button>
+				</div>
+				<PaginationDisplay pagination={pagination} />
 			</form>
 		</FormProvider>
 	);

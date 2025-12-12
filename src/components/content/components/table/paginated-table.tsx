@@ -1,10 +1,8 @@
 "use client";
 
-import { getProviders } from "@/actions/cms/provider";
 import { PaginationForm } from "./forms/pagination.form";
 import { SimpleTable } from "./simple-table";
 import { useEffect, useState } from "react";
-import { set } from "mongoose";
 
 type PaginatedData = {
 	data: Record<string, unknown>[];
@@ -19,13 +17,25 @@ type PaginatedData = {
 type PaginatedTable = {
 	paginatedData: PaginatedData;
 	columns: string[];
+	fetchPaginatedData: (data: {
+		page?: string;
+		limit?: string;
+		[key: string]: any;
+	}) => Promise<PaginatedData | null>;
 };
 
-export const PaginatedTable = ({ columns, paginatedData }: PaginatedTable) => {
-	const { data, pagination } = paginatedData;
-	const { page, pages, limit, total } = pagination;
+export const PaginatedTable = ({
+	columns,
+	paginatedData,
+	fetchPaginatedData,
+}: PaginatedTable) => {
+	const { data } = paginatedData;
+	// const { page, pages, limit, total } = pagination;
+	const { page, pages, limit } = paginatedData.pagination;
 	const [currentPage, setCurrentPage] = useState(page);
 	const [tableData, setTableData] = useState(data);
+	const [currentLimit, setCurrentLimit] = useState(limit);
+	const [pagination, setPagination] = useState(paginatedData.pagination);
 
 	const nextHandler = async () => {
 		if (currentPage < pages) {
@@ -37,20 +47,34 @@ export const PaginatedTable = ({ columns, paginatedData }: PaginatedTable) => {
 		setCurrentPage((prev) => (prev > 1 ? prev - 1 : 1));
 	};
 
+	const submitPaginationHandler = (data: { page?: number; limit?: number }) => {
+		if (data.page) setCurrentPage(data.page);
+		if (data.limit && data.limit !== currentLimit) {
+			setCurrentLimit(data.limit);
+			// form set limit etc
+			setCurrentPage(data.page || 1); // Reset to first page when limit changes
+		}
+	};
+
 	useEffect(() => {
 		const fetchData = async () => {
-			const providers = await getProviders({ page: currentPage.toString() });
-			if (providers && providers.data) setTableData(providers.data);
+			const result = await fetchPaginatedData({
+				page: currentPage.toString(),
+				limit: currentLimit.toString(),
+			});
+			if (result && result.data) setTableData(result.data);
+			if (result && result.pagination) setPagination(result.pagination);
 		};
 		fetchData();
-	}, [currentPage]);
+	}, [currentPage, currentLimit]);
 
 	return (
 		<div>
 			<PaginationForm
 				next={nextHandler}
 				prev={prevHandler}
-				goToPage={(page) => {}}
+				update={submitPaginationHandler}
+				pagination={pagination}
 			/>
 			<SimpleTable columns={columns} data={tableData} />
 		</div>

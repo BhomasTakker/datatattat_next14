@@ -4,9 +4,104 @@
 .form {
 	display: flex;
 	flex-direction: column;
-	gap: $spacingLg;
+	gap: $spacingMd;
 
 	@include editMixins.form();
+
+	.paginationControls {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: $spacingLg;
+		padding: $spacingMd;
+		background-color: var(--background-secondary, #f5f5f5);
+		border-radius: 8px;
+		flex-wrap: wrap;
+
+		@media (max-width: 768px) {
+			flex-direction: column;
+			align-items: stretch;
+		}
+	}
+
+	.pageNavigation {
+		display: flex;
+		gap: $spacingMd;
+		align-items: center;
+
+		@media (max-width: 768px) {
+			justify-content: center;
+		}
+	}
+
+	.navButton {
+		display: flex;
+		align-items: center;
+		gap: $spacingSm;
+		min-width: 100px;
+		justify-content: center;
+	}
+
+	.paginationInputs {
+		display: flex;
+		gap: $spacingMd;
+		align-items: center;
+		flex: 1;
+		justify-content: center;
+
+		:global(ul) {
+			display: flex;
+			flex-direction: row;
+			gap: $spacingMd;
+			list-style: none;
+			padding: 0;
+			margin: 0;
+			align-items: center;
+		}
+
+		:global(li) {
+			margin: 0;
+
+			fieldset {
+				display: flex;
+				flex-direction: row;
+				gap: $spacingMd;
+				align-items: center;
+			}
+		}
+
+		:global(label) {
+			display: flex;
+			flex-direction: column;
+			gap: $spacingSm;
+			font-size: 0.875rem;
+			font-weight: 500;
+			padding: 4px;
+		}
+
+		:global(input[type="number"]) {
+			width: 80px;
+			// height: auto;
+			padding: $spacingSm $spacingMd;
+			border: 1px solid var(--border-color, #ccc);
+			border-radius: 4px;
+			font-size: 0.875rem;
+			padding: $spacingXxs $spacingMd;
+		}
+
+		@media (max-width: 768px) {
+			flex-direction: column;
+			align-items: stretch;
+		}
+	}
+
+	.submitButton {
+		min-width: 100px;
+
+		@media (max-width: 768px) {
+			width: 100%;
+		}
+	}
 
 	.buttons {
 		display: flex;
