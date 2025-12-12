@@ -13,8 +13,6 @@ export const FetchProvidersCMSForm = () => {
 	const router = useRouter();
 
 	const submitHandler = methods.handleSubmit(async (data) => {
-		console.log("Fetching provider with data:", data);
-
 		const provider = await getProvider({
 			url: data.url,
 			name: data.name,
