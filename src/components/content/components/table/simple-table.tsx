@@ -23,7 +23,11 @@ export const SimpleTable = <T extends Record<string, any>>({
 			<tbody className={styles.tbody}>
 				{data.map((item, index) => {
 					return (
-						<tr key={index} onClick={() => onSelect && onSelect(item)}>
+						<tr
+							key={index}
+							onClick={() => onSelect && onSelect(item)}
+							className={styles.tr + (onSelect ? ` ${styles.clickable}` : "")}
+						>
 							{columns.map((key) => (
 								<td key={`${index}-${key}`}>{item[key]}</td>
 							))}
