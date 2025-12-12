@@ -21,7 +21,7 @@ export const FetchProvidersCMSForm = () => {
 			id: data.id,
 		});
 
-		// In this instance we 'should' be able to pass the loaded atricle
+		// In this instance we 'should' be able to pass the loaded article
 		router.push(`/cms/articles/providers/${provider?._id}`);
 	});
 

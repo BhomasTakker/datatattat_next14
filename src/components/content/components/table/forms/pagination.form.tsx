@@ -37,17 +37,14 @@ export const PaginationForm = ({
 	const methods = useForm();
 
 	const submitHandler = methods.handleSubmit(async (data) => {
-		// In this instance we 'should' be able to pass the loaded atricle
 		update({ page: data.page, limit: data.limit });
 	});
 
-	const prevHandler = methods.handleSubmit(async (data) => {
-		// In this instance we 'should' be able to pass the loaded atricle
+	const prevHandler = methods.handleSubmit(async (_data) => {
 		prev();
 	});
 
-	const nextHandler = methods.handleSubmit(async (data) => {
-		// In this instance we 'should' be able to pass the loaded atricle
+	const nextHandler = methods.handleSubmit(async (_data) => {
 		next();
 	});
 

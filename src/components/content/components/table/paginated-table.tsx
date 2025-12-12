@@ -34,7 +34,7 @@ export const PaginatedTable = ({
 	fetchPaginatedData,
 }: PaginatedTable) => {
 	const { data } = paginatedData;
-	// const { page, pages, limit, total } = pagination;
+
 	const { page, pages, limit } = paginatedData.pagination;
 	const [currentPage, setCurrentPage] = useState(page);
 	const [tableData, setTableData] = useState(data);

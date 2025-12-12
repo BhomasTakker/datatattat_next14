@@ -37,7 +37,6 @@ export default async function Page({ params }: Props) {
 
 	const columns = ["title", "src", "variant", "createdAt"];
 
-	console.log("Fetched articles for provider:", articles);
 	const { name, description } = articleProvider;
 	return (
 		<section className={styles.root}>

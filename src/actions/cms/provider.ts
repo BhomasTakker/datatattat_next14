@@ -143,7 +143,7 @@ export async function gotoProvider(
 	data: Record<string, unknown> & { _id?: string }
 ) {
 	if (!data._id) {
-		return Promise.resolve();
+		return;
 	}
 
 	redirect(`/cms/articles/providers/${data._id}`);

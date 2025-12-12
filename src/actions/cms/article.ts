@@ -143,7 +143,7 @@ export async function gotoArticle(
 	data: Record<string, unknown> & { _id?: string }
 ) {
 	if (!data._id) {
-		return Promise.resolve();
+		return;
 	}
 	redirect(`/cms/articles/${data._id}`);
 }

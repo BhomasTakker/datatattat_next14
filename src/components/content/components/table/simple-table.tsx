@@ -24,12 +24,14 @@ export const SimpleTable = <T extends Record<string, any>>({
 				{data.map((item, index) => {
 					return (
 						<tr
-							key={index}
+							key={item.id || item._id || index}
 							onClick={() => onSelect && onSelect(item)}
 							className={styles.tr + (onSelect ? ` ${styles.clickable}` : "")}
 						>
 							{columns.map((key) => (
-								<td key={`${index}-${key}`}>{item[key]}</td>
+								<td key={`${item.id || item._id || index}-${key}`}>
+									{item[key]}
+								</td>
 							))}
 						</tr>
 					);
