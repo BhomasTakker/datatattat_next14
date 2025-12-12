@@ -2,6 +2,7 @@
 
 import { getCMSHeaders, getRoute } from "@/components/cms/utils";
 import { CollectionItem } from "@/types/data-structures/collection/item/item";
+import { redirect } from "next/navigation";
 
 type FetchArticleFormData = {
 	src?: string;
@@ -130,4 +131,13 @@ export async function deleteArticle(id: string) {
 			console.error("Error deleting article:", err);
 			throw err;
 		});
+}
+
+export async function gotoArticle(
+	data: Record<string, unknown> & { _id?: string }
+) {
+	if (!data._id) {
+		return Promise.resolve();
+	}
+	redirect(`/cms/articles/${data._id}`);
 }

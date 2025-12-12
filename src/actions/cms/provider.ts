@@ -2,6 +2,7 @@
 
 import { getCMSHeaders, getRoute } from "@/components/cms/utils";
 import { ProviderItem } from "@/types/data-structures/collection/item/item";
+import { redirect } from "next/navigation";
 
 type FetchProviderFormData = {
 	name?: string;
@@ -136,4 +137,14 @@ export async function deleteProvider(id: string) {
 			console.error("Error deleting provider:", err);
 			throw err;
 		});
+}
+
+export async function gotoProvider(
+	data: Record<string, unknown> & { _id?: string }
+) {
+	if (!data._id) {
+		return Promise.resolve();
+	}
+
+	redirect(`/cms/articles/providers/${data._id}`);
 }
