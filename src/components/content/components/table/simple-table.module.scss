@@ -42,7 +42,7 @@
 			}
 
 			&.clickable {
-				:hover {
+				&:hover {
 					cursor: pointer;
 					background-color: colours.$background-main;
 				}
