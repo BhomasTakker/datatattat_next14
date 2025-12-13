@@ -23,7 +23,6 @@ const createQueryString = (data: FetchArticleFormData) => {
 			queryString = `?src=${data.src}`;
 			break;
 		case paramCheck(data.title):
-			// not working - I think  we need to encodeURIComponent somewhere?
 			queryString = `?title=${encodeURIComponent(data.title || "")}`;
 			break;
 		default:
@@ -84,10 +83,6 @@ export async function getArticles(data: FetchArticlesQuery) {
 		});
 }
 
-// When we get articles
-// Older articles may not have all fields populated
-// OR may have strings where objects/arrays are expected
-// So we need to do some data cleaning here eventually
 export async function getArticle(data: FetchArticleFormData) {
 	const queryString = createQueryString(data);
 
