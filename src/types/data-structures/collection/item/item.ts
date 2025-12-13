@@ -1,6 +1,7 @@
 import { BaseInfo, Details, Avatar, Media } from "../base";
 
 export type ProviderItem = {
+	_id?: string;
 	name: string;
 	description: string;
 	url: string;

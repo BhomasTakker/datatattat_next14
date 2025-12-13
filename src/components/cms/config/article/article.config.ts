@@ -12,11 +12,6 @@ export const ARTICLE_CONFIG: InputListProps = {
 	createObject: false,
 	inputs: [
 		{
-			id: "ArticlePropertiesTitle",
-			type: EditInputs.title,
-			title: "Article",
-		},
-		{
 			id: "title",
 			type: EditInputs.text,
 			label: "Title",

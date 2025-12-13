@@ -7,6 +7,7 @@ import { getArticle } from "@/actions/cms/article";
 import { redirect } from "next/navigation";
 import { ArticleCMSForm } from "@/components/cms/forms/article/article-form";
 import { ArticleProviderCMSForm } from "@/components/cms/forms/article-provider/article-provider-form";
+import { CMSTitle } from "@/components/cms/title/cms-title";
 
 type Params = Promise<{ id: string }>;
 type Props = {
@@ -30,8 +31,11 @@ export default async function Page({ params }: Props) {
 		redirect("/cms/articles");
 	}
 
+	const { title, description } = article;
+
 	return (
 		<section className={styles.root}>
+			<CMSTitle title={`Article: ${title}`} description={description} />
 			{article.provider && (
 				<ArticleProviderCMSForm
 					provider={article.provider}

@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 
 import { InputFactory } from "@/components/edit/inputs/input-factory";
+import { updateProvider, deleteProvider } from "@/actions/cms/provider";
 import { Button } from "@/components/ui/button";
 import { FormProvider, useForm } from "react-hook-form";
 
@@ -35,7 +36,7 @@ export const ArticleProviderCMSForm = ({
 	const submitHandler = methods.handleSubmit(async (data) => {
 		initToastPromise({
 			cb: () =>
-				updateArticleProvider({
+				updateProvider({
 					...data,
 				}),
 			id: CMSToastType.SaveArticleProvider,
@@ -45,9 +46,8 @@ export const ArticleProviderCMSForm = ({
 	});
 
 	const deleteArticleProviderHandler = async () => {
-		console.log(`Deleting article provider with id: ${provider._id}`);
 		createToastAction({
-			cb: () => deleteArticleProvider(provider._id as string),
+			cb: () => deleteProvider(provider._id as string),
 			id: CMSToastType.DeleteArticleProvider,
 			onComplete: (_res) =>
 				Promise.resolve(console.log("Article Provider Deleted.")),
@@ -78,25 +78,4 @@ export const ArticleProviderCMSForm = ({
 			</form>
 		</FormProvider>
 	);
-};
-
-//////////////////////////////////////////////
-// Dummy handlers for updating and deleting //
-//////////////////////////////////////////////
-const updateArticleProvider = async (data: any) => {
-	console.log("Updating article provider:", data);
-	return new Promise((resolve) => {
-		setTimeout(() => {
-			resolve(data);
-		}, 1000);
-	});
-};
-
-const deleteArticleProvider = async (id: string) => {
-	console.log("Deleting article provider with id:", id);
-	return new Promise((resolve) => {
-		setTimeout(() => {
-			resolve({ success: true, id });
-		}, 1000);
-	});
 };

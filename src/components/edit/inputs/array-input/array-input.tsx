@@ -139,6 +139,10 @@ export const ArrayInputList = ({
 	isCollapsible,
 	showIdentifier,
 }: InputListProps) => {
+	if (!Array.isArray(inputs)) {
+		// We should send and catch a component error for empty
+		return null;
+	}
 	return inputs.map((input, index) => (
 		<ArrayItem
 			key={input.key}
@@ -173,7 +177,8 @@ export const ArrayInput = ({
 	const { isDirty } = formState;
 	const { submitDraftHandler } = useContext(EditContext);
 
-	const inputs: GenericInput[] = getValues(id) || defaultValue || [];
+	const rawInputs = getValues(id) || defaultValue || [];
+	const inputs: GenericInput[] = Array.isArray(rawInputs) ? rawInputs : [];
 
 	const inputsWithUniqueKeys: InputList = inputs.map((input) => {
 		return { ...input, key: randomKeyGenerator() };
