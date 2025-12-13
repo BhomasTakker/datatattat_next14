@@ -71,7 +71,7 @@ export const PaginatedTable = ({
 			if (result && result.pagination) setPagination(result.pagination);
 		};
 		fetchData();
-	}, [currentPage, currentLimit]);
+	}, [currentPage, currentLimit, query, fetchPaginatedData]);
 
 	return (
 		<div>
