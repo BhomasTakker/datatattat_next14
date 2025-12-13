@@ -1,4 +1,6 @@
 @use "../../../../../scss/abstracts/units/" as *;
+@use "../../../../../scss/abstracts/colours" as *;
+@use "../../../../../scss/abstracts/font" as *;
 @use "../../../../../scss/mixins/edit" as editMixins;
 
 .paginationInfo {
@@ -7,10 +9,10 @@
 	justify-content: center;
 	gap: $spacingMd;
 	padding: $spacingSm $spacingMd;
-	background-color: var(--background-tertiary, #fafafa);
-	border: 1px solid var(--border-color, #e0e0e0);
+	background-color: $background-light;
+	border: 1px solid $shadowLight2;
 	border-radius: 6px;
-	font-size: 0.875rem;
+	font-size: $text-sm;
 	flex-wrap: wrap;
 
 	@media (max-width: 768px) {
@@ -25,17 +27,17 @@
 }
 
 .infoLabel {
-	color: var(--text-secondary, #666);
+	color: $text-light;
 	font-weight: 500;
 }
 
 .infoValue {
-	color: var(--text-primary, #333);
+	color: $text-muted;
 	font-weight: 600;
 }
 
 .infoDivider {
-	color: var(--border-color, #ccc);
+	color: $shadowLight2;
 	margin: 0 $spacingXs;
 
 	@media (max-width: 768px) {

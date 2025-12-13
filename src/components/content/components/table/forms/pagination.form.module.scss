@@ -1,4 +1,6 @@
 @use "../../../../../scss/abstracts/units/" as *;
+@use "../../../../../scss/abstracts/font/" as *;
+@use "../../../../../scss/abstracts/colours" as *;
 @use "../../../../../scss/mixins/edit" as editMixins;
 
 .form {
@@ -14,7 +16,7 @@
 		justify-content: space-between;
 		gap: $spacingLg;
 		padding: $spacingMd;
-		background-color: var(--background-secondary, #f5f5f5);
+		background-color: $background-light;
 		border-radius: 8px;
 		flex-wrap: wrap;
 
@@ -38,7 +40,7 @@
 		display: flex;
 		align-items: center;
 		gap: $spacingSm;
-		min-width: 100px;
+		min-width: $contentWidthXs;
 		justify-content: center;
 	}
 
@@ -74,18 +76,21 @@
 			display: flex;
 			flex-direction: column;
 			gap: $spacingSm;
-			font-size: 0.875rem;
-			font-weight: 500;
+			font-size: $text-sm;
 			padding: 4px;
+			color: $text-muted;
+			font-weight: 500;
 		}
 
 		:global(input[type="number"]) {
-			width: 80px;
+			width: $contentWidthXs2;
 			// height: auto;
 			padding: $spacingSm $spacingMd;
 			border: 1px solid var(--border-color, #ccc);
 			border-radius: 4px;
-			font-size: 0.875rem;
+			font-size: $text-sm;
+			color: $text-sharp;
+			font-weight: 500;
 		}
 
 		@media (max-width: 768px) {
@@ -95,7 +100,7 @@
 	}
 
 	.submitButton {
-		min-width: 100px;
+		min-width: $contentWidthXs;
 
 		@media (max-width: 768px) {
 			width: 100%;
