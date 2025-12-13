@@ -10,6 +10,8 @@ export default async function Page() {
 
 	const articles = await getArticles({});
 
+	// cms utils, cms config.
+	// should be stored somewhere?
 	const columns = ["title", "src", "variant", "createdAt"];
 
 	return (
