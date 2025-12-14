@@ -1,0 +1,118 @@
+@use "../../../../../scss/abstracts/units/" as *;
+@use "../../../../../scss/abstracts/font/" as *;
+@use "../../../../../scss/abstracts/colours" as *;
+@use "../../../../../scss/mixins/edit" as editMixins;
+
+.form {
+	display: flex;
+	flex-direction: column;
+	gap: $spacingMd;
+
+	@include editMixins.form();
+
+	.paginationControls {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: $spacingLg;
+		padding: $spacingMd;
+		background-color: $background-light;
+		border-radius: 8px;
+		flex-wrap: wrap;
+
+		@media (max-width: $screenWidthMd) {
+			flex-direction: column;
+			align-items: stretch;
+		}
+	}
+
+	.pageNavigation {
+		display: flex;
+		gap: $spacingMd;
+		align-items: center;
+
+		@media (max-width: $screenWidthMd) {
+			justify-content: center;
+		}
+	}
+
+	.navButton {
+		display: flex;
+		align-items: center;
+		gap: $spacingSm;
+		min-width: $contentWidthXs;
+		justify-content: center;
+	}
+
+	.paginationInputs {
+		display: flex;
+		gap: $spacingMd;
+		align-items: center;
+		flex: 1;
+		justify-content: center;
+
+		:global(ul) {
+			display: flex;
+			flex-direction: row;
+			gap: $spacingMd;
+			list-style: none;
+			padding: 0;
+			margin: 0;
+			align-items: center;
+		}
+
+		:global(li) {
+			margin: 0;
+
+			fieldset {
+				display: flex;
+				flex-direction: row;
+				gap: $spacingMd;
+				align-items: center;
+			}
+		}
+
+		:global(label) {
+			display: flex;
+			flex-direction: column;
+			gap: $spacingSm;
+			font-size: $text-sm;
+			padding: 4px;
+			color: $text-muted;
+			font-weight: 500;
+		}
+
+		:global(input[type="number"]) {
+			width: $contentWidthXs2;
+			// height: auto;
+			padding: $spacingSm $spacingMd;
+			border: 1px solid $shadowLight2;
+			border-radius: 4px;
+			font-size: $text-sm;
+			color: $text-sharp;
+			font-weight: 500;
+		}
+
+		@media (max-width: $screenWidthMd) {
+			flex-direction: column;
+			align-items: stretch;
+		}
+	}
+
+	.submitButton {
+		min-width: $contentWidthXs;
+
+		@media (max-width: $screenWidthMd) {
+			width: 100%;
+		}
+	}
+
+	.buttons {
+		display: flex;
+		gap: $spacingMd;
+
+		> button {
+			flex: 1;
+		}
+	}
+}

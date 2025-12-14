@@ -1,0 +1,46 @@
+@use "../../../../../scss/abstracts/units/" as *;
+@use "../../../../../scss/abstracts/colours" as *;
+@use "../../../../../scss/abstracts/font" as *;
+@use "../../../../../scss/mixins/edit" as editMixins;
+
+.paginationInfo {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: $spacingMd;
+	padding: $spacingSm $spacingMd;
+	background-color: $background-light;
+	border: 1px solid $shadowLight2;
+	border-radius: 6px;
+	font-size: $text-sm;
+	flex-wrap: wrap;
+
+	@media (max-width: $screenWidthMd) {
+		gap: $spacingSm;
+	}
+}
+
+.infoItem {
+	display: flex;
+	align-items: center;
+	gap: $spacingXs;
+}
+
+.infoLabel {
+	color: $text-light;
+	font-weight: 500;
+}
+
+.infoValue {
+	color: $text-muted;
+	font-weight: 600;
+}
+
+.infoDivider {
+	color: $shadowLight2;
+	margin: 0 $spacingXs;
+
+	@media (max-width: $screenWidthMd) {
+		display: none;
+	}
+}

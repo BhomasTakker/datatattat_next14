@@ -2,7 +2,10 @@ import { NavigationLinks } from "@/components/header/navigation/navigation-links
 import styles from "./navigation.module.scss";
 
 // pass in I guess
-const navLinks = [{ label: "Articles", route: "/cms/articles" }];
+const navLinks = [
+	{ label: "Articles", route: "/cms/articles" },
+	{ label: "Providers", route: "/cms/articles/providers" },
+];
 
 export const CMSNavigation = () => {
 	return (

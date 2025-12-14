@@ -1,0 +1,49 @@
+@use "../../../scss/abstracts/units" as *;
+@use "../../../scss/abstracts/colours/" as *;
+@use "../../../scss/abstracts/font/" as *;
+@use "../../../scss/mixins/text/" as *;
+
+.header {
+	display: flex;
+	flex-direction: column;
+	gap: $spacingSm;
+	padding: $spacingLg $spacingMd;
+	background: linear-gradient(
+		135deg,
+		$cms-primary-light 0%,
+		$cms-secondary-light 100%
+	);
+	border-radius: 12px;
+	border-left: 4px solid $cms-primary;
+	margin-bottom: $spacingMd;
+
+	.titleWrapper {
+		display: flex;
+		align-items: center;
+		gap: $spacingMd;
+
+		.icon {
+			font-size: $title-xl2;
+			min-width: $title-xl2;
+			color: $cms-primary;
+			flex-shrink: 0;
+		}
+
+		.title {
+			font: $titleXl3;
+			margin: 0;
+			color: $text-sharp;
+			flex: 1;
+			min-width: 0;
+			@include maxLines(2);
+		}
+	}
+
+	.description {
+		margin: 0;
+		padding-left: calc($spacingXxxl + #{$spacingMd});
+		color: $text;
+		font-size: $text-md;
+		@include maxLines(3);
+	}
+}

@@ -38,7 +38,6 @@ export const ArticleCMSForm = ({ article }: ArticleCMSFormProps) => {
 
 	// I don't think this is really an option for Articles
 	const deleteArticleHandler = async () => {
-		console.log(`Deleting article with id: ${article._id}`);
 		createToastAction({
 			cb: () => deleteArticle(article._id as string),
 			id: CMSToastType.DeleteArticle,
@@ -51,7 +50,6 @@ export const ArticleCMSForm = ({ article }: ArticleCMSFormProps) => {
 		<FormProvider {...methods}>
 			<Article article={article} styles={articleStyles} />
 			<form onSubmit={submitHandler} className={styles.form}>
-				<h2>Fetch Articles CMS Form</h2>
 				<InputFactory data={{ ...ARTICLE_CONFIG }} />
 				<div className={styles.buttons}>
 					<Button type="submit">Submit</Button>

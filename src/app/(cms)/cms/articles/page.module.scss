@@ -5,6 +5,7 @@
 // this is like a generic form style - could be reused elsewhere
 
 .root {
+	padding-top: $spacingMd;
 	display: flex;
 	flex-direction: column;
 	gap: $spacingMd;
