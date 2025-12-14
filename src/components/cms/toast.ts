@@ -6,6 +6,8 @@ export enum CMSToastType {
 	SaveArticle = "save-article",
 	SaveArticleProvider = "save-article-provider",
 	DeleteArticleProvider = "delete-article-provider",
+	SaveArticleSource = "save-article-source",
+	DeleteArticleSource = "delete-article-source",
 }
 
 // You could have a lot?
@@ -33,10 +35,24 @@ const ToastMessages = {
 		error: "Error updating article provider",
 	},
 	confirmDeleteArticleProvider: {
-		id: CMSToastType.DeleteArticle,
+		id: CMSToastType.DeleteArticleProvider,
 		label: "Confirm",
 		success: "Article Provider has been deleted!",
 		message: "Delete Article Provider? This action cannot be undone.",
+		duration: 5000,
+		position: "top-center",
+	},
+	saveArticleSource: {
+		id: CMSToastType.SaveArticleSource,
+		loading: "Saving Article Source...",
+		success: "Article Source has been updated!",
+		error: "Error updating article source",
+	},
+	confirmDeleteArticleSource: {
+		id: CMSToastType.DeleteArticleSource,
+		label: "Confirm",
+		success: "Article Source has been deleted!",
+		message: "Delete Article Source? This action cannot be undone.",
 		duration: 5000,
 		position: "top-center",
 	},
@@ -51,6 +67,8 @@ export const ToastMessagesMap = new Map<CMSToastType, ToastMessage>([
 		CMSToastType.DeleteArticleProvider,
 		ToastMessages.confirmDeleteArticleProvider,
 	],
+	[CMSToastType.SaveArticleSource, ToastMessages.saveArticleSource],
+	[CMSToastType.DeleteArticleSource, ToastMessages.confirmDeleteArticleSource],
 ]);
 
 // call initialise

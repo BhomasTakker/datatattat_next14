@@ -5,6 +5,7 @@ import styles from "./navigation.module.scss";
 const navLinks = [
 	{ label: "Articles", route: "/cms/articles" },
 	{ label: "Providers", route: "/cms/articles/providers" },
+	{ label: "Sources", route: "/cms/articles/source" },
 ];
 
 export const CMSNavigation = () => {
