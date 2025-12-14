@@ -6,6 +6,7 @@ const navLinks = [
 	{ label: "Articles", route: "/cms/articles" },
 	{ label: "Providers", route: "/cms/articles/providers" },
 	{ label: "Sources", route: "/cms/articles/source" },
+	{ label: "Source Lists", route: "/cms/articles/source-lists" },
 ];
 
 export const CMSNavigation = () => {
