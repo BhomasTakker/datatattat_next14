@@ -8,6 +8,8 @@ export enum CMSToastType {
 	DeleteArticleProvider = "delete-article-provider",
 	SaveArticleSource = "save-article-source",
 	DeleteArticleSource = "delete-article-source",
+	SaveArticleSourceList = "save-article-source-list",
+	DeleteArticleSourceList = "delete-article-source-list",
 }
 
 // You could have a lot?
@@ -56,6 +58,20 @@ const ToastMessages = {
 		duration: 5000,
 		position: "top-center",
 	},
+	saveArticleSourceList: {
+		id: CMSToastType.SaveArticleSourceList,
+		loading: "Saving Article Source List...",
+		success: "Article Source List has been updated!",
+		error: "Error updating article source list",
+	},
+	confirmDeleteArticleSourceList: {
+		id: CMSToastType.DeleteArticleSourceList,
+		label: "Confirm",
+		success: "Article Source List has been deleted!",
+		message: "Delete Article Source List? This action cannot be undone.",
+		duration: 5000,
+		position: "top-center",
+	},
 } as const;
 
 // We need to assign these options to the actual toast
@@ -69,6 +85,11 @@ export const ToastMessagesMap = new Map<CMSToastType, ToastMessage>([
 	],
 	[CMSToastType.SaveArticleSource, ToastMessages.saveArticleSource],
 	[CMSToastType.DeleteArticleSource, ToastMessages.confirmDeleteArticleSource],
+	[CMSToastType.SaveArticleSourceList, ToastMessages.saveArticleSourceList],
+	[
+		CMSToastType.DeleteArticleSourceList,
+		ToastMessages.confirmDeleteArticleSourceList,
+	],
 ]);
 
 // call initialise
