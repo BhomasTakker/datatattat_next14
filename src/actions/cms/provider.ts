@@ -1,6 +1,11 @@
 "use server";
 
-import { getCMSHeaders, getRoute } from "@/components/cms/utils";
+import {
+	appendParams,
+	createPaginationParams,
+	getCMSHeaders,
+	getRoute,
+} from "@/components/cms/utils";
 import { ProviderItem } from "@/types/data-structures/collection/item/item";
 import { redirect } from "next/navigation";
 
@@ -46,21 +51,16 @@ const createQueryString = (data: FetchProviderFormData) => {
 };
 
 const createProvidersQueryString = (data: FetchProvidersQuery) => {
-	const params = new URLSearchParams();
-
-	if (data.name) params.append("name", data.name);
-	if (data.url) params.append("url", data.url);
-	if (data.origin) params.append("origin", data.origin);
-	if (data.leaning) params.append("leaning", data.leaning);
-	if (data.minRating !== undefined)
-		params.append("minRating", String(data.minRating));
-	if (data.maxRating !== undefined)
-		params.append("maxRating", String(data.maxRating));
-
-	params.append("page", data.page || "1");
-	params.append("limit", data.limit || "10");
-	params.append("sortBy", data.sortBy || "createdAt");
-	params.append("sortOrder", data.sortOrder || "desc");
+	let params = createPaginationParams(data, new URLSearchParams());
+	params = appendParams(data, params, [
+		"name",
+		"url",
+		"origin",
+		"leaning",
+		"minRating",
+		"maxRating",
+		"id",
+	]);
 
 	return `?${params.toString()}`;
 };

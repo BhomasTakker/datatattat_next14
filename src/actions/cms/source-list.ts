@@ -1,6 +1,11 @@
 "use server";
 
-import { getCMSHeaders, getRoute } from "@/components/cms/utils";
+import {
+	appendParams,
+	createPaginationParams,
+	getCMSHeaders,
+	getRoute,
+} from "@/components/cms/utils";
 import { ArticleSourceList } from "@/types/cms/ArticleSourceList";
 import { redirect } from "next/navigation";
 
@@ -42,19 +47,15 @@ const createQueryString = (data: FetchSourceListFormData) => {
 };
 
 const createSourceListsQueryString = (data: FetchSourceListsQuery) => {
-	const params = new URLSearchParams();
-
-	if (data.title) params.append("title", data.title);
-	if (data.variant) params.append("variant", data.variant);
-	if (data.categories) params.append("categories", data.categories);
-	if (data.region) params.append("region", data.region);
-	if (data.coverage) params.append("coverage", data.coverage);
-	if (data.language) params.append("language", data.language);
-
-	params.append("page", data.page || "1");
-	params.append("limit", data.limit || "10");
-	params.append("sortBy", data.sortBy || "createdAt");
-	params.append("sortOrder", data.sortOrder || "desc");
+	let params = createPaginationParams(data, new URLSearchParams());
+	params = appendParams(data, params, [
+		"title",
+		"variant",
+		"categories",
+		"region",
+		"coverage",
+		"language",
+	]);
 
 	return `?${params.toString()}`;
 };

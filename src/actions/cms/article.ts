@@ -1,6 +1,11 @@
 "use server";
 
-import { getCMSHeaders, getRoute } from "@/components/cms/utils";
+import {
+	appendParams,
+	createPaginationParams,
+	getCMSHeaders,
+	getRoute,
+} from "@/components/cms/utils";
 import { CollectionItem } from "@/types/data-structures/collection/item/item";
 import { redirect } from "next/navigation";
 
@@ -43,17 +48,13 @@ type FetchArticlesQuery = {
 };
 
 const createArticlesQueryString = (data: FetchArticlesQuery) => {
-	const params = new URLSearchParams();
-
-	if (data.title) params.append("title", data.title);
-	if (data.src) params.append("src", data.src);
-	if (data.id) params.append("id", data.id);
-	if (data.providerId) params.append("provider", data.providerId);
-
-	params.append("page", data.page || "1");
-	params.append("limit", data.limit || "10");
-	params.append("sortBy", data.sortBy || "createdAt");
-	params.append("sortOrder", data.sortOrder || "desc");
+	let params = createPaginationParams(data, new URLSearchParams());
+	params = appendParams({ ...data, provider: data.providerId }, params, [
+		"title",
+		"src",
+		"id",
+		"provider",
+	]);
 
 	return `?${params.toString()}`;
 };
