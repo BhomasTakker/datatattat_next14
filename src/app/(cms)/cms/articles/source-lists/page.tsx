@@ -2,8 +2,6 @@ import styles from "../page.module.scss";
 import { PaginatedTable } from "@/components/content/components/table/paginated-table";
 import { CMSTitle } from "@/components/cms/title/cms-title";
 import { initCMSPage } from "@/actions/cms/init-cms-page";
-import { getSources, gotoSource } from "@/actions/cms/source";
-import { FetchSourcesCMSForm } from "@/components/cms/forms/article-source/fetch-sources-form";
 import { getSourceLists, gotoSourceList } from "@/actions/cms/source-list";
 
 export default async function Page() {
