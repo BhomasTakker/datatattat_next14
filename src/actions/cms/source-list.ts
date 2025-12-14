@@ -1,0 +1,146 @@
+"use server";
+
+import { getCMSHeaders, getRoute } from "@/components/cms/utils";
+import { ArticleSourceList } from "@/types/cms/ArticleSourceList";
+import { redirect } from "next/navigation";
+
+type FetchSourceListFormData = {
+	title?: string;
+	id?: string;
+};
+
+type FetchSourceListsQuery = {
+	title?: string;
+	id?: string;
+	variant?: string;
+	categories?: string;
+	region?: string;
+	coverage?: string;
+	language?: string;
+	page?: string;
+	limit?: string;
+	sortBy?: string;
+	sortOrder?: "desc" | "asc";
+};
+
+const paramCheck = (param: string | undefined) =>
+	param !== undefined && param.length > 0;
+
+const createQueryString = (data: FetchSourceListFormData) => {
+	let queryString = "";
+	switch (true) {
+		case paramCheck(data.id):
+			queryString = `?id=${data.id}`;
+			break;
+		case paramCheck(data.title):
+			queryString = `?title=${encodeURIComponent(data.title || "")}`;
+			break;
+		default:
+			queryString = "";
+	}
+	return queryString;
+};
+
+const createSourceListsQueryString = (data: FetchSourceListsQuery) => {
+	const params = new URLSearchParams();
+
+	if (data.title) params.append("title", data.title);
+	if (data.variant) params.append("variant", data.variant);
+	if (data.categories) params.append("categories", data.categories);
+	if (data.region) params.append("region", data.region);
+	if (data.coverage) params.append("coverage", data.coverage);
+	if (data.language) params.append("language", data.language);
+
+	params.append("page", data.page || "1");
+	params.append("limit", data.limit || "10");
+	params.append("sortBy", data.sortBy || "createdAt");
+	params.append("sortOrder", data.sortOrder || "desc");
+
+	return `?${params.toString()}`;
+};
+
+// There should be a base / generic paginated type somewhere
+type PaginatedData = {
+	data: ArticleSourceList[];
+	pagination: {
+		total: number;
+		page: number;
+		pages: number;
+		limit: number;
+	};
+};
+
+export async function getSourceLists(data: FetchSourceListsQuery) {
+	const queryString = createSourceListsQueryString(data);
+
+	return fetch(`${getRoute("/articles/source-lists/search")}${queryString}`, {
+		method: "GET",
+		headers: getCMSHeaders(),
+	})
+		.then((res) => res.json() as Promise<PaginatedData>)
+		.catch((err) => {
+			console.error("Error fetching source lists:", err);
+			return null;
+		});
+}
+
+export async function getSourceList(data: FetchSourceListFormData) {
+	const queryString = createQueryString(data);
+
+	return fetch(`${getRoute("/articles/source-lists/get")}${queryString}`, {
+		method: "GET",
+		headers: getCMSHeaders(),
+	})
+		.then((res) => res.json() as Promise<ArticleSourceList>)
+		.catch((err) => {
+			console.error("Error fetching source list:", err);
+			return null;
+		});
+}
+
+export async function updateSourceList(
+	data: ArticleSourceList & { _id?: string }
+) {
+	const _id = data._id;
+	if (!_id) {
+		throw new Error("Source List ID is required for update.");
+	}
+
+	return await fetch(`${getRoute("/articles/source-lists/update/")}${_id}`, {
+		method: "PUT",
+		headers: getCMSHeaders(),
+		body: JSON.stringify(data),
+	})
+		.then((res) => res.json() as Promise<ArticleSourceList>)
+		.catch((err) => {
+			//create errors etc sounds like a good idea
+			console.error("Error updating source list:", err);
+			throw err;
+		});
+}
+
+export async function deleteSourceList(id: string) {
+	if (!id) {
+		throw new Error("Source List ID is required for deletion.");
+	}
+
+	return await fetch(`${getRoute("/articles/source-lists/delete/")}${id}`, {
+		method: "DELETE",
+		headers: getCMSHeaders(),
+	})
+		.then((res) => res.json())
+		.catch((err) => {
+			console.error("Error deleting source list:", err);
+			throw err;
+		});
+}
+
+export async function gotoSourceList(
+	data: Record<string, unknown> & { _id?: string }
+) {
+	if (!data._id) {
+		return;
+	}
+
+	redirect(`/cms/articles/source-lists/${data._id}`);
+}
