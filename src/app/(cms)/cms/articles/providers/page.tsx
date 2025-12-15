@@ -4,6 +4,7 @@ import { getProviders, gotoProvider } from "@/actions/cms/provider";
 import { PaginatedTable } from "@/components/content/components/table/paginated-table";
 import { CMSTitle } from "@/components/cms/title/cms-title";
 import { initCMSPage } from "@/actions/cms/init-cms-page";
+import { CreateProviderForm } from "@/components/cms/forms/article-provider/create-provider.form";
 
 export default async function Page() {
 	await initCMSPage();
@@ -27,6 +28,7 @@ export default async function Page() {
 				/>
 			)}
 			<FetchProvidersCMSForm />
+			<CreateProviderForm />
 		</section>
 	);
 }
