@@ -1,8 +1,13 @@
 "use server";
 
-import { getCMSHeaders, getRoute } from "@/components/cms/utils";
+import {
+	appendParams,
+	createPaginationParams,
+	getRoute,
+} from "@/components/cms/utils";
 import { ArticleSource } from "@/types/cms/ArticleSource";
 import { redirect } from "next/navigation";
+import { getCMSHeaders } from "./query";
 
 type FetchSourceFormData = {
 	name?: string;
@@ -49,22 +54,18 @@ const createQueryString = (data: FetchSourceFormData) => {
 };
 
 const createSourcesQueryString = (data: FetchSourcesQuery) => {
-	const params = new URLSearchParams();
-
-	if (data.name) params.append("name", data.name);
-	if (data.src) params.append("src", data.src);
-	if (data.variant) params.append("variant", data.variant);
-	if (data.categories) params.append("categories", data.categories);
-	if (data.region) params.append("region", data.region);
-	if (data.coverage) params.append("coverage", data.coverage);
-	if (data.language) params.append("language", data.language);
-	if (data.source) params.append("source", data.source);
-	if (data.mediaType) params.append("mediaType", data.mediaType);
-
-	params.append("page", data.page || "1");
-	params.append("limit", data.limit || "10");
-	params.append("sortBy", data.sortBy || "createdAt");
-	params.append("sortOrder", data.sortOrder || "desc");
+	let params = createPaginationParams(data, new URLSearchParams());
+	params = appendParams(data, params, [
+		"name",
+		"src",
+		"variant",
+		"categories",
+		"region",
+		"coverage",
+		"language",
+		"source",
+		"mediaType",
+	]);
 
 	return `?${params.toString()}`;
 };
@@ -85,7 +86,7 @@ export async function getSources(data: FetchSourcesQuery) {
 
 	return fetch(`${getRoute("/articles/sources/search")}${queryString}`, {
 		method: "GET",
-		headers: getCMSHeaders(),
+		headers: await getCMSHeaders(),
 	})
 		.then((res) => res.json() as Promise<PaginatedData>)
 		.catch((err) => {
@@ -99,7 +100,7 @@ export async function getSource(data: FetchSourceFormData) {
 
 	return fetch(`${getRoute("/articles/sources/get")}${queryString}`, {
 		method: "GET",
-		headers: getCMSHeaders(),
+		headers: await getCMSHeaders(),
 	})
 		.then((res) => res.json() as Promise<ArticleSource>)
 		.catch((err) => {
@@ -116,7 +117,7 @@ export async function updateSource(data: ArticleSource & { _id?: string }) {
 
 	return await fetch(`${getRoute("/articles/sources/update/")}${_id}`, {
 		method: "PUT",
-		headers: getCMSHeaders(),
+		headers: await getCMSHeaders(),
 		body: JSON.stringify(data),
 	})
 		.then((res) => res.json() as Promise<ArticleSource>)
@@ -134,7 +135,7 @@ export async function deleteSource(id: string) {
 
 	return await fetch(`${getRoute("/articles/sources/delete/")}${id}`, {
 		method: "DELETE",
-		headers: getCMSHeaders(),
+		headers: await getCMSHeaders(),
 	})
 		.then((res) => res.json())
 		.catch((err) => {

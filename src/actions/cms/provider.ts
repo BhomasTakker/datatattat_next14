@@ -1,8 +1,13 @@
 "use server";
 
-import { getCMSHeaders, getRoute } from "@/components/cms/utils";
+import {
+	appendParams,
+	createPaginationParams,
+	getRoute,
+} from "@/components/cms/utils";
 import { ProviderItem } from "@/types/data-structures/collection/item/item";
 import { redirect } from "next/navigation";
+import { getCMSHeaders } from "./query";
 
 type FetchProviderFormData = {
 	name?: string;
@@ -46,21 +51,16 @@ const createQueryString = (data: FetchProviderFormData) => {
 };
 
 const createProvidersQueryString = (data: FetchProvidersQuery) => {
-	const params = new URLSearchParams();
-
-	if (data.name) params.append("name", data.name);
-	if (data.url) params.append("url", data.url);
-	if (data.origin) params.append("origin", data.origin);
-	if (data.leaning) params.append("leaning", data.leaning);
-	if (data.minRating !== undefined)
-		params.append("minRating", String(data.minRating));
-	if (data.maxRating !== undefined)
-		params.append("maxRating", String(data.maxRating));
-
-	params.append("page", data.page || "1");
-	params.append("limit", data.limit || "10");
-	params.append("sortBy", data.sortBy || "createdAt");
-	params.append("sortOrder", data.sortOrder || "desc");
+	let params = createPaginationParams(data, new URLSearchParams());
+	params = appendParams(data, params, [
+		"name",
+		"url",
+		"origin",
+		"leaning",
+		"minRating",
+		"maxRating",
+		"id",
+	]);
 
 	return `?${params.toString()}`;
 };
@@ -81,7 +81,7 @@ export async function getProviders(data: FetchProvidersQuery) {
 
 	return fetch(`${getRoute("/articles/providers/search")}${queryString}`, {
 		method: "GET",
-		headers: getCMSHeaders(),
+		headers: await getCMSHeaders(),
 	})
 		.then((res) => res.json() as Promise<PaginatedData>)
 		.catch((err) => {
@@ -95,7 +95,7 @@ export async function getProvider(data: FetchProviderFormData) {
 
 	return fetch(`${getRoute("/articles/providers/get")}${queryString}`, {
 		method: "GET",
-		headers: getCMSHeaders(),
+		headers: await getCMSHeaders(),
 	})
 		.then((res) => res.json() as Promise<ProviderItem>)
 		.catch((err) => {
@@ -112,7 +112,7 @@ export async function updateProvider(data: ProviderItem) {
 
 	return await fetch(`${getRoute("/articles/providers/update/")}${_id}`, {
 		method: "PUT",
-		headers: getCMSHeaders(),
+		headers: await getCMSHeaders(),
 		body: JSON.stringify(data),
 	})
 		.then((res) => res.json() as Promise<ProviderItem>)
@@ -130,7 +130,7 @@ export async function deleteProvider(id: string) {
 
 	return await fetch(`${getRoute("/articles/providers/delete/")}${id}`, {
 		method: "DELETE",
-		headers: getCMSHeaders(),
+		headers: await getCMSHeaders(),
 	})
 		.then((res) => res.json())
 		.catch((err) => {

@@ -7,6 +7,7 @@ const navLinks = [
 	{ label: "Providers", route: "/cms/articles/providers" },
 	{ label: "Sources", route: "/cms/articles/source" },
 	{ label: "Source Lists", route: "/cms/articles/source-lists" },
+	{ label: "Cron Jobs", route: "/cms/cron" },
 ];
 
 export const CMSNavigation = () => {

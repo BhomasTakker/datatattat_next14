@@ -10,6 +10,8 @@ export enum CMSToastType {
 	DeleteArticleSource = "delete-article-source",
 	SaveArticleSourceList = "save-article-source-list",
 	DeleteArticleSourceList = "delete-article-source-list",
+	SaveCronJob = "save-cron-job",
+	DeleteCronJob = "delete-cron-job",
 }
 
 // You could have a lot?
@@ -72,6 +74,20 @@ const ToastMessages = {
 		duration: 5000,
 		position: "top-center",
 	},
+	saveCronJob: {
+		id: CMSToastType.SaveCronJob,
+		loading: "Saving Cron Job...",
+		success: "Cron Job has been updated!",
+		error: "Error updating cron job",
+	},
+	confirmDeleteCronJob: {
+		id: CMSToastType.DeleteCronJob,
+		label: "Confirm",
+		success: "Cron Job has been deleted!",
+		message: "Delete Cron Job? This action cannot be undone.",
+		duration: 5000,
+		position: "top-center",
+	},
 } as const;
 
 // We need to assign these options to the actual toast
@@ -90,6 +106,8 @@ export const ToastMessagesMap = new Map<CMSToastType, ToastMessage>([
 		CMSToastType.DeleteArticleSourceList,
 		ToastMessages.confirmDeleteArticleSourceList,
 	],
+	[CMSToastType.SaveCronJob, ToastMessages.saveCronJob],
+	[CMSToastType.DeleteCronJob, ToastMessages.confirmDeleteCronJob],
 ]);
 
 // call initialise
