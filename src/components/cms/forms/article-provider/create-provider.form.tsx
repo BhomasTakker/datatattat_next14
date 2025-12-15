@@ -4,7 +4,6 @@ import { InputFactory } from "@/components/edit/inputs/input-factory";
 import { Button } from "@/components/ui/button";
 import { FormProvider, useForm } from "react-hook-form";
 import styles from "../form.module.scss";
-import { useRouter } from "next/navigation";
 import { createProvider } from "@/actions/cms/provider";
 import { initToastPromise } from "@/lib/sonner/toast";
 import { CMSToastType } from "../../toast";
@@ -14,7 +13,6 @@ import { FormTitle } from "../title/title";
 
 export const CreateProviderForm = () => {
 	const methods = useForm();
-	const router = useRouter();
 
 	const submitHandler = methods.handleSubmit(async (data) => {
 		initToastPromise({
