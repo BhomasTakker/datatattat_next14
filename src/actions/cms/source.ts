@@ -109,6 +109,35 @@ export async function getSource(data: FetchSourceFormData) {
 		});
 }
 
+export async function createSource(data: Omit<ArticleSource, "_id">) {
+	// Basic validation
+	if (!data.name || data.name.trim().length === 0) {
+		throw new Error("Source name is required.");
+	}
+
+	if (!data.src || data.src.trim().length === 0) {
+		throw new Error("Source src is required.");
+	}
+
+	// Validate src URL format
+	try {
+		new URL(data.src);
+	} catch {
+		throw new Error("Source src must be a valid URL.");
+	}
+
+	return await fetch(`${getRoute("/articles/sources/create")}`, {
+		method: "POST",
+		headers: await getCMSHeaders(),
+		body: JSON.stringify(data),
+	})
+		.then((res) => res.json() as Promise<ArticleSource>)
+		.catch((err) => {
+			console.error("Error creating source:", err);
+			throw err;
+		});
+}
+
 export async function updateSource(data: ArticleSource & { _id?: string }) {
 	const _id = data._id;
 	if (!_id) {
