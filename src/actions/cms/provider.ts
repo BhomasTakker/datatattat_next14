@@ -104,6 +104,19 @@ export async function getProvider(data: FetchProviderFormData) {
 		});
 }
 
+export async function createProvider(data: Omit<ProviderItem, "_id">) {
+	return await fetch(`${getRoute("/articles/providers/create")}`, {
+		method: "POST",
+		headers: await getCMSHeaders(),
+		body: JSON.stringify(data),
+	})
+		.then((res) => res.json() as Promise<ProviderItem>)
+		.catch((err) => {
+			console.error("Error creating provider:", err);
+			throw err;
+		});
+}
+
 export async function updateProvider(data: ProviderItem) {
 	const _id = data._id;
 	if (!_id) {
