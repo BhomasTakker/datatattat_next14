@@ -1,5 +1,6 @@
 import { mergeToastMaps } from "@/lib/sonner/toast";
 import { ToastMessage } from "@/lib/sonner/toast";
+import { create } from "domain";
 
 export enum CMSToastType {
 	DeleteArticle = "delete-article",
@@ -15,6 +16,7 @@ export enum CMSToastType {
 	CreateArticleSourceList = "create-article-source-list",
 	SaveCronJob = "save-cron-job",
 	DeleteCronJob = "delete-cron-job",
+	CreateCronJob = "create-cron-job",
 }
 
 // You could have a lot?
@@ -109,6 +111,12 @@ const ToastMessages = {
 		duration: 5000,
 		position: "top-center",
 	},
+	createCronJob: {
+		id: CMSToastType.CreateCronJob,
+		loading: "Creating Cron Job...",
+		success: "Cron Job has been created!",
+		error: "Error creating cron job",
+	},
 } as const;
 
 // We need to assign these options to the actual toast
@@ -132,6 +140,7 @@ export const ToastMessagesMap = new Map<CMSToastType, ToastMessage>([
 	[CMSToastType.CreateArticleSourceList, ToastMessages.createArticleSourceList],
 	[CMSToastType.SaveCronJob, ToastMessages.saveCronJob],
 	[CMSToastType.DeleteCronJob, ToastMessages.confirmDeleteCronJob],
+	[CMSToastType.CreateCronJob, ToastMessages.createCronJob],
 ]);
 
 // call initialise
