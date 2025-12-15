@@ -3,6 +3,7 @@ import { PaginatedTable } from "@/components/content/components/table/paginated-
 import { CMSTitle } from "@/components/cms/title/cms-title";
 import { initCMSPage } from "@/actions/cms/init-cms-page";
 import { getSourceLists, gotoSourceList } from "@/actions/cms/source-list";
+import { CreateSourceListForm } from "@/components/cms/forms/article-source-list/create-source-list";
 
 export default async function Page() {
 	await initCMSPage();
@@ -25,7 +26,7 @@ export default async function Page() {
 					onSelect={gotoSourceList}
 				/>
 			)}
-			{/* <FetchSourcesCMSForm /> */}
+			<CreateSourceListForm />
 		</section>
 	);
 }

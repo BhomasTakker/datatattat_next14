@@ -4,6 +4,7 @@ import { CMSTitle } from "@/components/cms/title/cms-title";
 import { initCMSPage } from "@/actions/cms/init-cms-page";
 import { getSources, gotoSource } from "@/actions/cms/source";
 import { FetchSourcesCMSForm } from "@/components/cms/forms/article-source/fetch-sources-form";
+import { CreateSourceForm } from "@/components/cms/forms/article-source/create-article-source.form";
 
 export default async function Page() {
 	await initCMSPage();
@@ -27,6 +28,7 @@ export default async function Page() {
 				/>
 			)}
 			<FetchSourcesCMSForm />
+			<CreateSourceForm />
 		</section>
 	);
 }

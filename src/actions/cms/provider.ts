@@ -104,6 +104,35 @@ export async function getProvider(data: FetchProviderFormData) {
 		});
 }
 
+export async function createProvider(data: Omit<ProviderItem, "_id">) {
+	// Basic validation
+	if (!data.name || data.name.trim().length === 0) {
+		throw new Error("Provider name is required.");
+	}
+
+	if (!data.url || data.url.trim().length === 0) {
+		throw new Error("Provider URL is required.");
+	}
+
+	// Validate URL format
+	try {
+		new URL(data.url);
+	} catch {
+		throw new Error("Provider URL must be a valid URL.");
+	}
+
+	return await fetch(`${getRoute("/articles/providers/create")}`, {
+		method: "POST",
+		headers: await getCMSHeaders(),
+		body: JSON.stringify(data),
+	})
+		.then((res) => res.json() as Promise<ProviderItem>)
+		.catch((err) => {
+			console.error("Error creating provider:", err);
+			throw err;
+		});
+}
+
 export async function updateProvider(data: ProviderItem) {
 	const _id = data._id;
 	if (!_id) {

@@ -1,0 +1,97 @@
+@use "../../../../scss/abstracts/units/" as units;
+@use "../../../../scss/abstracts/font/" as font;
+@use "../../../../scss/abstracts/colours/" as colours;
+
+.titleWrapper {
+	display: flex;
+	gap: units.$spacingMd;
+	align-items: flex-start;
+	margin-bottom: units.$spacingXl;
+	padding-bottom: units.$spacingMd;
+	border-bottom: 2px solid colours.$background-dark;
+
+	&.center {
+		justify-content: center;
+		text-align: center;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	&.left {
+		justify-content: flex-start;
+	}
+
+	&.small {
+		.title {
+			font-size: font.$title-sm;
+			font-weight: 600;
+		}
+
+		.subtitle {
+			font-size: font.$text-sm;
+		}
+
+		.icon {
+			font-size: font.$title-md;
+		}
+	}
+
+	&.medium {
+		.title {
+			font-size: font.$title-lg;
+			font-weight: 700;
+		}
+
+		.subtitle {
+			font-size: font.$text-md;
+		}
+
+		.icon {
+			font-size: font.$title-xl;
+		}
+	}
+
+	&.large {
+		.title {
+			font-size: font.$title-xl3;
+			font-weight: 800;
+		}
+
+		.subtitle {
+			font-size: font.$text-lg;
+		}
+
+		.icon {
+			font-size: font.$title-xl2;
+		}
+	}
+}
+
+.icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: colours.$cms-primary;
+	flex-shrink: 0;
+	line-height: 1;
+}
+
+.content {
+	display: flex;
+	flex-direction: column;
+	gap: units.$spacingXs;
+}
+
+.title {
+	margin: 0;
+	line-height: 1.2;
+	color: font.$text-sharp;
+	letter-spacing: -0.025em;
+}
+
+.subtitle {
+	margin: 0;
+	line-height: 1.5;
+	color: font.$text-muted;
+	font-weight: 400;
+}

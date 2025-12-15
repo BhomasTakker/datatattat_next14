@@ -59,6 +59,7 @@ export const CRON_JOB_ITEM_CONFIG: InputListProps = {
 			id: "fetchFunctionData",
 			type: EditInputs.text,
 			label: "Fetch Function Data (API Only)",
+			required: false,
 		},
 	],
 };

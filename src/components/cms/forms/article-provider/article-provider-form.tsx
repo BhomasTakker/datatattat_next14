@@ -13,6 +13,7 @@ import { createToastAction, initToastPromise } from "@/lib/sonner/toast";
 import { CMSToastType } from "../../toast";
 import { ARTICLE_PROVIDER_CONFIG } from "../../config/article-povider.config";
 import { use } from "react";
+import { FormTitle } from "../title/title";
 
 type ArticleProviderCMSFormProps = {
 	provider: ProviderItem & { _id?: string };
@@ -64,7 +65,10 @@ export const ArticleProviderCMSForm = ({
 	return (
 		<FormProvider {...methods}>
 			<form onSubmit={submitHandler} className={styles.form}>
-				<h2>Article Provider CMS Form</h2>
+				<FormTitle
+					title="Update Provider"
+					subtitle="Modify the provider details."
+				/>
 				<InputFactory data={{ ...ARTICLE_PROVIDER_CONFIG }} />
 				<div className={styles.buttons}>
 					{!disabled && <Button type="submit">Submit</Button>}

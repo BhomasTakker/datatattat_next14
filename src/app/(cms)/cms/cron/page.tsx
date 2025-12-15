@@ -3,7 +3,7 @@ import { PaginatedTable } from "@/components/content/components/table/paginated-
 import { CMSTitle } from "@/components/cms/title/cms-title";
 import { initCMSPage } from "@/actions/cms/init-cms-page";
 import { getCronJobs, gotoCronJob } from "@/actions/cms/cron-jobs";
-import { FetchCronJobsCMSForm } from "@/components/cms/forms/cron/fetch-cron";
+import { CreateCronJobForm } from "@/components/cms/forms/cron/create-cron-form";
 
 export default async function Page() {
 	await initCMSPage();
@@ -28,7 +28,7 @@ export default async function Page() {
 					onSelect={gotoCronJob}
 				/>
 			)}
-			<FetchCronJobsCMSForm />
+			<CreateCronJobForm />
 		</section>
 	);
 }
