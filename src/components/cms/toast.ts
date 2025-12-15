@@ -6,6 +6,7 @@ export enum CMSToastType {
 	SaveArticle = "save-article",
 	SaveArticleProvider = "save-article-provider",
 	DeleteArticleProvider = "delete-article-provider",
+	CreateArticleProvider = "create-article-provider",
 	SaveArticleSource = "save-article-source",
 	DeleteArticleSource = "delete-article-source",
 	SaveArticleSourceList = "save-article-source-list",
@@ -37,6 +38,12 @@ const ToastMessages = {
 		loading: "Saving Article Provider...",
 		success: "Article Provider has been updated!",
 		error: "Error updating article provider",
+	},
+	createArticleProvider: {
+		id: CMSToastType.CreateArticleProvider,
+		loading: "Creating Article Provider...",
+		success: "Article Provider has been created!",
+		error: "Error creating article provider",
 	},
 	confirmDeleteArticleProvider: {
 		id: CMSToastType.DeleteArticleProvider,
@@ -99,6 +106,7 @@ export const ToastMessagesMap = new Map<CMSToastType, ToastMessage>([
 		CMSToastType.DeleteArticleProvider,
 		ToastMessages.confirmDeleteArticleProvider,
 	],
+	[CMSToastType.CreateArticleProvider, ToastMessages.createArticleProvider],
 	[CMSToastType.SaveArticleSource, ToastMessages.saveArticleSource],
 	[CMSToastType.DeleteArticleSource, ToastMessages.confirmDeleteArticleSource],
 	[CMSToastType.SaveArticleSourceList, ToastMessages.saveArticleSourceList],
