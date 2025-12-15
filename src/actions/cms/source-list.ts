@@ -98,7 +98,19 @@ export async function getSourceList(data: FetchSourceListFormData) {
 			return null;
 		});
 }
-
+export async function createSourceList(data: ArticleSourceList) {
+	return await fetch(`${getRoute("/articles/source-lists/create")}`, {
+		method: "POST",
+		headers: await getCMSHeaders(),
+		body: JSON.stringify(data),
+	})
+		.then((res) => res.json() as Promise<ArticleSourceList>)
+		.catch((err) => {
+			//create errors etc sounds like a good idea
+			console.error("Error creating source list:", err);
+			throw err;
+		});
+}
 export async function updateSourceList(
 	data: ArticleSourceList & { _id?: string }
 ) {
