@@ -11,6 +11,7 @@ import { CMSToastType } from "../../toast";
 import { ArticleSource } from "@/types/cms/ArticleSource";
 import { deleteSource, updateSource } from "@/actions/cms/source";
 import { ARTICLE_SOURCE_CONFIG } from "../../config/article-source.config";
+import { FormTitle } from "../title/title";
 
 type ArticleSourceCMSFormProps = {
 	source: ArticleSource;
@@ -47,6 +48,10 @@ export const ArticleSourceCMSForm = ({ source }: ArticleSourceCMSFormProps) => {
 	return (
 		<FormProvider {...methods}>
 			<form onSubmit={submitHandler} className={styles.form}>
+				<FormTitle
+					title={`Edit Article Source: ${source.name}`}
+					subtitle={`Modify the article source details: ${source._id}`}
+				/>
 				<InputFactory data={{ ...ARTICLE_SOURCE_CONFIG }} />
 				<div className={styles.buttons}>
 					<Button type="submit">Submit</Button>
