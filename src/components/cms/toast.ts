@@ -9,6 +9,7 @@ export enum CMSToastType {
 	CreateArticleProvider = "create-article-provider",
 	SaveArticleSource = "save-article-source",
 	DeleteArticleSource = "delete-article-source",
+	CreateArticleSource = "create-article-source",
 	SaveArticleSourceList = "save-article-source-list",
 	DeleteArticleSourceList = "delete-article-source-list",
 	SaveCronJob = "save-cron-job",
@@ -67,6 +68,12 @@ const ToastMessages = {
 		duration: 5000,
 		position: "top-center",
 	},
+	createArticleSource: {
+		id: CMSToastType.CreateArticleSource,
+		loading: "Creating Article Source...",
+		success: "Article Source has been created!",
+		error: "Error creating article source",
+	},
 	saveArticleSourceList: {
 		id: CMSToastType.SaveArticleSourceList,
 		loading: "Saving Article Source List...",
@@ -109,6 +116,7 @@ export const ToastMessagesMap = new Map<CMSToastType, ToastMessage>([
 	[CMSToastType.CreateArticleProvider, ToastMessages.createArticleProvider],
 	[CMSToastType.SaveArticleSource, ToastMessages.saveArticleSource],
 	[CMSToastType.DeleteArticleSource, ToastMessages.confirmDeleteArticleSource],
+	[CMSToastType.CreateArticleSource, ToastMessages.createArticleSource],
 	[CMSToastType.SaveArticleSourceList, ToastMessages.saveArticleSourceList],
 	[
 		CMSToastType.DeleteArticleSourceList,
