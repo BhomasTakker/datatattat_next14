@@ -3,11 +3,11 @@
 import {
 	appendParams,
 	createPaginationParams,
-	getCMSHeaders,
 	getRoute,
 } from "@/components/cms/utils";
 import { CollectionItem } from "@/types/data-structures/collection/item/item";
 import { redirect } from "next/navigation";
+import { getCMSHeaders } from "./query";
 
 type FetchArticleFormData = {
 	src?: string;
@@ -75,7 +75,7 @@ export async function getArticles(data: FetchArticlesQuery) {
 
 	return fetch(`${getRoute("/articles/search")}${queryString}`, {
 		method: "GET",
-		headers: getCMSHeaders(),
+		headers: await getCMSHeaders(),
 	})
 		.then((res) => res.json() as Promise<PaginatedArticlesData>)
 		.catch((err) => {
@@ -89,7 +89,7 @@ export async function getArticle(data: FetchArticleFormData) {
 
 	return fetch(`${getRoute("/articles/get")}${queryString}`, {
 		method: "GET",
-		headers: getCMSHeaders(),
+		headers: await getCMSHeaders(),
 	})
 		.then((res) => {
 			return res.json() as Promise<CollectionItem>;
@@ -108,7 +108,7 @@ export async function updateArticle(data: CollectionItem) {
 
 	return await fetch(`${getRoute("/articles/update/")}${_id}`, {
 		method: "PUT",
-		headers: getCMSHeaders(),
+		headers: await getCMSHeaders(),
 		body: JSON.stringify(data),
 	})
 		.then((res) => res.json() as Promise<CollectionItem>)
@@ -126,7 +126,7 @@ export async function deleteArticle(id: string) {
 
 	return await fetch(`${getRoute("/articles/delete/")}${id}`, {
 		method: "DELETE",
-		headers: getCMSHeaders(),
+		headers: await getCMSHeaders(),
 	})
 		.then((res) => res.json())
 		.catch((err) => {

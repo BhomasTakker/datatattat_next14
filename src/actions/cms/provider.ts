@@ -3,11 +3,11 @@
 import {
 	appendParams,
 	createPaginationParams,
-	getCMSHeaders,
 	getRoute,
 } from "@/components/cms/utils";
 import { ProviderItem } from "@/types/data-structures/collection/item/item";
 import { redirect } from "next/navigation";
+import { getCMSHeaders } from "./query";
 
 type FetchProviderFormData = {
 	name?: string;
@@ -81,7 +81,7 @@ export async function getProviders(data: FetchProvidersQuery) {
 
 	return fetch(`${getRoute("/articles/providers/search")}${queryString}`, {
 		method: "GET",
-		headers: getCMSHeaders(),
+		headers: await getCMSHeaders(),
 	})
 		.then((res) => res.json() as Promise<PaginatedData>)
 		.catch((err) => {
@@ -95,7 +95,7 @@ export async function getProvider(data: FetchProviderFormData) {
 
 	return fetch(`${getRoute("/articles/providers/get")}${queryString}`, {
 		method: "GET",
-		headers: getCMSHeaders(),
+		headers: await getCMSHeaders(),
 	})
 		.then((res) => res.json() as Promise<ProviderItem>)
 		.catch((err) => {
@@ -112,7 +112,7 @@ export async function updateProvider(data: ProviderItem) {
 
 	return await fetch(`${getRoute("/articles/providers/update/")}${_id}`, {
 		method: "PUT",
-		headers: getCMSHeaders(),
+		headers: await getCMSHeaders(),
 		body: JSON.stringify(data),
 	})
 		.then((res) => res.json() as Promise<ProviderItem>)
@@ -130,7 +130,7 @@ export async function deleteProvider(id: string) {
 
 	return await fetch(`${getRoute("/articles/providers/delete/")}${id}`, {
 		method: "DELETE",
-		headers: getCMSHeaders(),
+		headers: await getCMSHeaders(),
 	})
 		.then((res) => res.json())
 		.catch((err) => {

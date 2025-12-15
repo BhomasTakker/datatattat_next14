@@ -3,11 +3,11 @@
 import {
 	appendParams,
 	createPaginationParams,
-	getCMSHeaders,
 	getRoute,
 } from "@/components/cms/utils";
 import { ArticleSource } from "@/types/cms/ArticleSource";
 import { redirect } from "next/navigation";
+import { getCMSHeaders } from "./query";
 
 type FetchSourceFormData = {
 	name?: string;
@@ -86,7 +86,7 @@ export async function getSources(data: FetchSourcesQuery) {
 
 	return fetch(`${getRoute("/articles/sources/search")}${queryString}`, {
 		method: "GET",
-		headers: getCMSHeaders(),
+		headers: await getCMSHeaders(),
 	})
 		.then((res) => res.json() as Promise<PaginatedData>)
 		.catch((err) => {
@@ -100,7 +100,7 @@ export async function getSource(data: FetchSourceFormData) {
 
 	return fetch(`${getRoute("/articles/sources/get")}${queryString}`, {
 		method: "GET",
-		headers: getCMSHeaders(),
+		headers: await getCMSHeaders(),
 	})
 		.then((res) => res.json() as Promise<ArticleSource>)
 		.catch((err) => {
@@ -117,7 +117,7 @@ export async function updateSource(data: ArticleSource & { _id?: string }) {
 
 	return await fetch(`${getRoute("/articles/sources/update/")}${_id}`, {
 		method: "PUT",
-		headers: getCMSHeaders(),
+		headers: await getCMSHeaders(),
 		body: JSON.stringify(data),
 	})
 		.then((res) => res.json() as Promise<ArticleSource>)
@@ -135,7 +135,7 @@ export async function deleteSource(id: string) {
 
 	return await fetch(`${getRoute("/articles/sources/delete/")}${id}`, {
 		method: "DELETE",
-		headers: getCMSHeaders(),
+		headers: await getCMSHeaders(),
 	})
 		.then((res) => res.json())
 		.catch((err) => {

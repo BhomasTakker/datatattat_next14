@@ -3,11 +3,11 @@
 import {
 	appendParams,
 	createPaginationParams,
-	getCMSHeaders,
 	getRoute,
 } from "@/components/cms/utils";
 import { ArticleSourceList } from "@/types/cms/ArticleSourceList";
 import { redirect } from "next/navigation";
+import { getCMSHeaders } from "./query";
 
 type FetchSourceListFormData = {
 	title?: string;
@@ -76,7 +76,7 @@ export async function getSourceLists(data: FetchSourceListsQuery) {
 
 	return fetch(`${getRoute("/articles/source-lists/search")}${queryString}`, {
 		method: "GET",
-		headers: getCMSHeaders(),
+		headers: await getCMSHeaders(),
 	})
 		.then((res) => res.json() as Promise<PaginatedData>)
 		.catch((err) => {
@@ -90,7 +90,7 @@ export async function getSourceList(data: FetchSourceListFormData) {
 
 	return fetch(`${getRoute("/articles/source-lists/get")}${queryString}`, {
 		method: "GET",
-		headers: getCMSHeaders(),
+		headers: await getCMSHeaders(),
 	})
 		.then((res) => res.json() as Promise<ArticleSourceList>)
 		.catch((err) => {
@@ -109,7 +109,7 @@ export async function updateSourceList(
 
 	return await fetch(`${getRoute("/articles/source-lists/update/")}${_id}`, {
 		method: "PUT",
-		headers: getCMSHeaders(),
+		headers: await getCMSHeaders(),
 		body: JSON.stringify(data),
 	})
 		.then((res) => res.json() as Promise<ArticleSourceList>)
@@ -127,7 +127,7 @@ export async function deleteSourceList(id: string) {
 
 	return await fetch(`${getRoute("/articles/source-lists/delete/")}${id}`, {
 		method: "DELETE",
-		headers: getCMSHeaders(),
+		headers: await getCMSHeaders(),
 	})
 		.then((res) => res.json())
 		.catch((err) => {

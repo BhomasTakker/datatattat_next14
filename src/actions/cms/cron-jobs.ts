@@ -3,11 +3,11 @@
 import {
 	appendParams,
 	createPaginationParams,
-	getCMSHeaders,
 	getRoute,
 } from "@/components/cms/utils";
 import { GenericCronConfig } from "@/types/cms/Cron";
 import { redirect } from "next/navigation";
+import { getCMSHeaders } from "./query";
 
 type FetchCronJobFormData = {
 	_id?: string;
@@ -73,7 +73,7 @@ export async function getCronJobs(data: FetchCronJobsQuery) {
 
 	return fetch(`${getRoute("/cron/search")}${queryString}`, {
 		method: "GET",
-		headers: getCMSHeaders(),
+		headers: await getCMSHeaders(),
 	})
 		.then((res) => res.json() as Promise<PaginatedCronJobsData>)
 		.catch((err) => {
@@ -87,7 +87,7 @@ export async function getCronJob(data: FetchCronJobFormData) {
 
 	return fetch(`${getRoute("/cron/get")}${queryString}`, {
 		method: "GET",
-		headers: getCMSHeaders(),
+		headers: await getCMSHeaders(),
 	})
 		.then((res) => {
 			return res.json() as Promise<GenericCronConfig>;
@@ -105,7 +105,7 @@ export async function createCronJob(data: Omit<GenericCronConfig, "_id">) {
 
 	return await fetch(`${getRoute("/cron/create")}`, {
 		method: "POST",
-		headers: getCMSHeaders(),
+		headers: await getCMSHeaders(),
 		body: JSON.stringify(data),
 	})
 		.then((res) => res.json() as Promise<GenericCronConfig>)
@@ -123,7 +123,7 @@ export async function updateCronJob(data: GenericCronConfig) {
 
 	return await fetch(`${getRoute("/cron/update/")}${_id}`, {
 		method: "PUT",
-		headers: getCMSHeaders(),
+		headers: await getCMSHeaders(),
 		body: JSON.stringify(data),
 	})
 		.then((res) => res.json() as Promise<GenericCronConfig>)
@@ -140,7 +140,7 @@ export async function deleteCronJob(id: string) {
 
 	return await fetch(`${getRoute("/cron/delete/")}${id}`, {
 		method: "DELETE",
-		headers: getCMSHeaders(),
+		headers: await getCMSHeaders(),
 	})
 		.then((res) => res.json())
 		.catch((err) => {
