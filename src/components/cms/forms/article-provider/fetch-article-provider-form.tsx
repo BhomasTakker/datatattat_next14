@@ -7,6 +7,7 @@ import styles from "../form.module.scss";
 import { useRouter } from "next/navigation";
 import { getProvider } from "@/actions/cms/provider";
 import { FETCH_PROVIDERS_CONFIG } from "../../config/fetch-providers.config";
+import { FormTitle } from "../title/title";
 
 export const FetchProvidersCMSForm = () => {
 	const methods = useForm();
@@ -26,7 +27,10 @@ export const FetchProvidersCMSForm = () => {
 	return (
 		<FormProvider {...methods}>
 			<form onSubmit={submitHandler} className={styles.form}>
-				<h2>Fetch Providers CMS Form</h2>
+				<FormTitle
+					title="Fetch Article Provider"
+					subtitle="Fetch a single existing provider."
+				/>
 				<InputFactory data={{ ...FETCH_PROVIDERS_CONFIG }} />
 				<Button type="submit">Submit</Button>
 			</form>
