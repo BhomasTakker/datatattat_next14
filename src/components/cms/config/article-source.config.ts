@@ -76,6 +76,7 @@ export const ARTICLE_SOURCE_CONFIG: InputListProps = {
 			id: "mediaType",
 			type: EditInputs.text,
 			label: "Media Type",
+			required: false,
 		},
 		{
 			id: "createdAt",
