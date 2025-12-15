@@ -6,7 +6,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import styles from "../form.module.scss";
 import { useRouter } from "next/navigation";
 import { createProvider } from "@/actions/cms/provider";
-import { createToastAction } from "@/lib/sonner/toast";
+import { createToastAction, initToastPromise } from "@/lib/sonner/toast";
 import { CMSToastType } from "../../toast";
 import { ProviderItem } from "@/types/data-structures/collection/item/item";
 import { ARTICLE_PROVIDER_CONFIG } from "../../config/article-povider.config";
@@ -17,12 +17,11 @@ export const CreateProviderForm = () => {
 	const router = useRouter();
 
 	const submitHandler = methods.handleSubmit(async (data) => {
-		createToastAction({
+		initToastPromise({
 			cb: () => createProvider(data as ProviderItem),
 			id: CMSToastType.CreateArticleProvider,
-			onComplete: (_res) =>
+			onComplete: () =>
 				Promise.resolve(console.log("Article Provider Created.")),
-			onError: (err) => console.error(err),
 		});
 	});
 
