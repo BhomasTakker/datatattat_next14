@@ -20,7 +20,7 @@ type PaginatedTable = {
 	title?: string;
 	columns: string[];
 	query?: { [key: string]: any };
-	fetchPaginatedData: (data: {
+	fetchPaginatedData?: (data: {
 		page?: string;
 		limit?: string;
 		[key: string]: any;
@@ -65,6 +65,7 @@ export const PaginatedTable = ({
 
 	useEffect(() => {
 		const fetchData = async () => {
+			if (!fetchPaginatedData) return;
 			const result = await fetchPaginatedData({
 				...query,
 				page: currentPage.toString(),
@@ -73,7 +74,9 @@ export const PaginatedTable = ({
 			if (result && result.data) setTableData(result.data);
 			if (result && result.pagination) setPagination(result.pagination);
 		};
-		fetchData();
+		if (fetchPaginatedData) {
+			fetchData();
+		}
 	}, [currentPage, currentLimit, query, fetchPaginatedData]);
 
 	return (
