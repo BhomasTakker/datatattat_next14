@@ -6,6 +6,7 @@ import { getArticles, gotoArticle } from "@/actions/cms/article";
 import { PaginatedTable } from "@/components/content/components/table/paginated-table";
 import { CMSTitle } from "@/components/cms/title/cms-title";
 import { initCMSPage } from "@/actions/cms/init-cms-page";
+import { getSources, gotoSource } from "@/actions/cms/source";
 
 type Params = Promise<{ id: string }>;
 type Props = {
@@ -28,15 +29,26 @@ export default async function Page({ params }: Props) {
 		providerId: articleProvider?._id,
 	});
 
-	const columns = ["title", "src", "variant", "createdAt"];
+	const sources = await getSources({ name: articleProvider.name });
 
 	const { name, description } = articleProvider;
 	return (
 		<section className={styles.root}>
 			<CMSTitle title={`Provider: ${name}`} description={`${description}`} />
+			{sources && (
+				<PaginatedTable
+					title="Provider Sources"
+					columns={["name", "src", "variant"]}
+					query={{ name: articleProvider?.name }}
+					paginatedData={sources}
+					fetchPaginatedData={getSources}
+					onSelect={gotoSource}
+				/>
+			)}
 			{articles && (
 				<PaginatedTable
-					columns={columns}
+					title="Provider Articles"
+					columns={["title", "src", "variant", "createdAt"]}
 					paginatedData={articles}
 					fetchPaginatedData={getArticles}
 					query={{ providerId: articleProvider?._id }}

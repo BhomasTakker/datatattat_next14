@@ -1,5 +1,6 @@
 "use client";
 
+import { FormTitle } from "@/components/cms/forms/title/title";
 import { PaginationForm } from "./forms/pagination.form";
 import { SimpleTable } from "./simple-table";
 import { useEffect, useState } from "react";
@@ -16,6 +17,7 @@ type PaginatedData = {
 
 type PaginatedTable = {
 	paginatedData: PaginatedData;
+	title?: string;
 	columns: string[];
 	query?: { [key: string]: any };
 	fetchPaginatedData: (data: {
@@ -30,6 +32,7 @@ export const PaginatedTable = ({
 	columns,
 	paginatedData,
 	query,
+	title,
 	onSelect,
 	fetchPaginatedData,
 }: PaginatedTable) => {
@@ -75,6 +78,8 @@ export const PaginatedTable = ({
 
 	return (
 		<div>
+			{/* We need a generic title and all other titles to use it or something */}
+			{title && title.length > 0 && <FormTitle title={title} size="small" />}
 			<PaginationForm
 				next={nextHandler}
 				prev={prevHandler}
