@@ -1,47 +1,27 @@
 import { EditInputs } from "@/components/edit/inputs/inputs";
 import { InputListProps } from "@/types/edit/inputs/inputs";
-import {
-	CronType,
-	FetchFunction,
-	TimeFunction,
-	SourceVariant,
-} from "@/types/cms/Cron";
+import { CronType, FetchFunction, SourceVariant } from "@/types/cms/Cron";
+import { CRON_FUNCTION } from "./timer/timer-options";
 
-export const CRON_JOB_ITEM_CONFIG: InputListProps = {
+const RSS_CRON_JOB_ITEM_CONFIG: InputListProps = {
 	id: "cron-item",
 	type: EditInputs.inputList,
 	label: "Cron Job Item",
 	createObject: false,
 	inputs: [
+		...CRON_FUNCTION,
 		{
-			id: "timeFunction",
-			type: EditInputs.select,
-			label: "Time Function",
-			options: Object.values(TimeFunction),
-		},
-		{
-			// depends on timeFunction selected
-			// how many digits and what they mean
-			id: "timeParams",
-			type: EditInputs.array,
-			title: "Time Parameters",
-			createObject: false,
-			input: {
-				id: "param",
-				type: EditInputs.number,
-				label: "Parameter",
-			},
-		},
-		{
+			// options determined by type selected in parent object
 			id: "fetchFunction",
 			type: EditInputs.select,
 			label: "Fetch Function",
 			options: Object.values(FetchFunction),
 		},
+		// these options determined by the original slection of type in parent object
 		{
 			id: "titles",
 			type: EditInputs.array,
-			title: "Titles (RSS Only)",
+			title: "Titles",
 			createObject: false,
 			input: {
 				id: "title",
@@ -52,17 +32,71 @@ export const CRON_JOB_ITEM_CONFIG: InputListProps = {
 		{
 			id: "variant",
 			type: EditInputs.select,
-			label: "Variant (RSS Only)",
+			label: "Variant",
 			options: Object.values(SourceVariant),
+		},
+	],
+};
+
+const API_CRON_JOB_ITEM_CONFIG: InputListProps = {
+	id: "cron-item",
+	type: EditInputs.inputList,
+	label: "Cron Job Item",
+	createObject: false,
+	inputs: [
+		...CRON_FUNCTION,
+		{
+			// options determined by type selected in parent object
+			id: "fetchFunction",
+			type: EditInputs.select,
+			label: "Fetch Function",
+			options: Object.values(FetchFunction),
 		},
 		{
 			id: "fetchFunctionData",
 			type: EditInputs.text,
-			label: "Fetch Function Data (API Only)",
+			label: "Fetch Function Data",
 			required: false,
 		},
 	],
 };
+
+const API_CRON_JOB_CONFIG: InputListProps = {
+	id: "cron-item",
+	type: EditInputs.inputList,
+	label: "Cron Job Item",
+	createObject: false,
+	inputs: [
+		{
+			id: "cron",
+			type: EditInputs.array,
+			title: "Cron Jobs",
+			createObject: true,
+			input: API_CRON_JOB_ITEM_CONFIG,
+		},
+	],
+};
+
+const RSS_CRON_JOB_CONFIG: InputListProps = {
+	id: "cron-item",
+	type: EditInputs.inputList,
+	label: "Cron Job Item",
+	createObject: false,
+	inputs: [
+		{
+			id: "cron",
+			type: EditInputs.array,
+			title: "Cron Jobs",
+			createObject: true,
+			input: RSS_CRON_JOB_ITEM_CONFIG,
+		},
+	],
+};
+
+const cronTypeMap = new Map<string, InputListProps>([
+	[CronType.API, API_CRON_JOB_CONFIG],
+	[CronType.RSS, RSS_CRON_JOB_CONFIG],
+]);
 
 export const CRON_JOB_CONFIG: InputListProps = {
 	id: "cron-job",
@@ -77,16 +111,11 @@ export const CRON_JOB_CONFIG: InputListProps = {
 		},
 		{
 			id: "type",
-			type: EditInputs.select,
+			type: EditInputs.objectSelect,
 			label: "Type",
 			options: Object.values(CronType),
-		},
-		{
-			id: "cron",
-			type: EditInputs.array,
-			title: "Cron Jobs",
-			createObject: true,
-			input: CRON_JOB_ITEM_CONFIG,
+			optionMap: cronTypeMap,
+			defaultValue: CronType.RSS,
 		},
 		{
 			id: "isActive",
