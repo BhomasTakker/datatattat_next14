@@ -11,6 +11,14 @@ import { CMSToastType } from "../../toast";
 import { ArticleSourceList } from "@/types/cms/ArticleSourceList";
 import { deleteSourceList, updateSourceList } from "@/actions/cms/source-list";
 import { ARTICLE_SOURCE_LIST_CONFIG } from "../../config/article-source-list.config";
+import { FormTitle } from "../title/title";
+
+// This is the correct type
+// but we have used ArticleSourceList to bild the queries
+// so need to refactor that at some point
+type ArticleSourceListForForm = {
+	sources: string[];
+} & Omit<ArticleSourceList, "sources">;
 
 type ArticleSourceListCMSFormProps = {
 	list: ArticleSourceList;
@@ -49,6 +57,10 @@ export const ArticleSourceListCMSForm = ({
 	return (
 		<FormProvider {...methods}>
 			<form onSubmit={submitHandler} className={styles.form}>
+				<FormTitle
+					title="Article Source List Details"
+					subtitle="Modify the Source List."
+				/>
 				<InputFactory data={{ ...ARTICLE_SOURCE_LIST_CONFIG }} />
 				<div className={styles.buttons}>
 					<Button type="submit">Submit</Button>

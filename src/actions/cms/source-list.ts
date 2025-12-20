@@ -12,6 +12,7 @@ import { getCMSHeaders } from "./query";
 type FetchSourceListFormData = {
 	title?: string;
 	id?: string;
+	populate?: boolean;
 };
 
 type FetchSourceListsQuery = {
@@ -33,9 +34,12 @@ const paramCheck = (param: string | undefined) =>
 
 const createQueryString = (data: FetchSourceListFormData) => {
 	let queryString = "";
+	let populateString = "";
+
 	switch (true) {
 		case paramCheck(data.id):
 			queryString = `?id=${data.id}`;
+
 			break;
 		case paramCheck(data.title):
 			queryString = `?title=${encodeURIComponent(data.title || "")}`;
@@ -43,7 +47,14 @@ const createQueryString = (data: FetchSourceListFormData) => {
 		default:
 			queryString = "";
 	}
-	return queryString;
+
+	// Is a little dirty putting this here but works for now
+	if (data.populate) {
+		populateString =
+			queryString.length > 0 ? "&populate=true" : "?populate=true";
+	}
+
+	return queryString + populateString;
 };
 
 const createSourceListsQueryString = (data: FetchSourceListsQuery) => {

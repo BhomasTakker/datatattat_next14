@@ -1,68 +1,13 @@
 import { EditInputs } from "@/components/edit/inputs/inputs";
 import { InputListProps } from "@/types/edit/inputs/inputs";
-import {
-	CronType,
-	FetchFunction,
-	TimeFunction,
-	SourceVariant,
-} from "@/types/cms/Cron";
+import { CronType } from "@/types/cms/Cron";
+import { RSS_CRON_JOB_CONFIG } from "./rss";
+import { API_CRON_JOB_CONFIG } from "./api";
 
-export const CRON_JOB_ITEM_CONFIG: InputListProps = {
-	id: "cron-item",
-	type: EditInputs.inputList,
-	label: "Cron Job Item",
-	createObject: false,
-	inputs: [
-		{
-			id: "timeFunction",
-			type: EditInputs.select,
-			label: "Time Function",
-			options: Object.values(TimeFunction),
-		},
-		{
-			// depends on timeFunction selected
-			// how many digits and what they mean
-			id: "timeParams",
-			type: EditInputs.array,
-			title: "Time Parameters",
-			createObject: false,
-			input: {
-				id: "param",
-				type: EditInputs.number,
-				label: "Parameter",
-			},
-		},
-		{
-			id: "fetchFunction",
-			type: EditInputs.select,
-			label: "Fetch Function",
-			options: Object.values(FetchFunction),
-		},
-		{
-			id: "titles",
-			type: EditInputs.array,
-			title: "Titles (RSS Only)",
-			createObject: false,
-			input: {
-				id: "title",
-				type: EditInputs.text,
-				label: "Title",
-			},
-		},
-		{
-			id: "variant",
-			type: EditInputs.select,
-			label: "Variant (RSS Only)",
-			options: Object.values(SourceVariant),
-		},
-		{
-			id: "fetchFunctionData",
-			type: EditInputs.text,
-			label: "Fetch Function Data (API Only)",
-			required: false,
-		},
-	],
-};
+const cronTypeMap = new Map<string, InputListProps>([
+	[CronType.API, API_CRON_JOB_CONFIG],
+	[CronType.RSS, RSS_CRON_JOB_CONFIG],
+]);
 
 export const CRON_JOB_CONFIG: InputListProps = {
 	id: "cron-job",
@@ -77,16 +22,11 @@ export const CRON_JOB_CONFIG: InputListProps = {
 		},
 		{
 			id: "type",
-			type: EditInputs.select,
+			type: EditInputs.objectSelect,
 			label: "Type",
 			options: Object.values(CronType),
-		},
-		{
-			id: "cron",
-			type: EditInputs.array,
-			title: "Cron Jobs",
-			createObject: true,
-			input: CRON_JOB_ITEM_CONFIG,
+			optionMap: cronTypeMap,
+			defaultValue: CronType.RSS,
 		},
 		{
 			id: "isActive",
