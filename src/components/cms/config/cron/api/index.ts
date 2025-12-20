@@ -8,7 +8,7 @@ const ROUTES: ArrayInputProps = {
 	id: "routes",
 	type: EditInputs.array,
 	title: "Routes",
-	createObject: true,
+	createObject: false,
 	input: {
 		id: "routeItem",
 		type: EditInputs.text,
@@ -21,7 +21,7 @@ const pageQueriesConfig: InputListProps = {
 	id: "fetchFunctionData",
 	type: EditInputs.inputList,
 	label: "Page Queries Config",
-	createObject: false,
+	createObject: true,
 	inputs: [
 		{
 			id: "api",
@@ -35,25 +35,25 @@ const pageQueriesConfig: InputListProps = {
 };
 
 const pingRoutesConfig: InputListProps = {
-	id: "pingRoutes",
+	id: "fetchFunctionData",
 	type: EditInputs.inputList,
 	label: "Ping Routes Config",
-	createObject: false,
+	createObject: true,
 	inputs: [ROUTES],
 };
 
 const radioScriptsConfig: InputListProps = {
-	id: "radioScripts",
+	id: "fetchFunctionData",
 	type: EditInputs.inputList,
 	label: "Radio Scripts Config",
-	createObject: false,
+	createObject: true,
 	inputs: [
 		{
 			id: "limit",
 			type: EditInputs.number,
 			label: "Limit",
 			defaultValue: 100,
-			max: 500,
+			max: 100,
 			min: 1,
 		},
 		{
@@ -61,22 +61,23 @@ const radioScriptsConfig: InputListProps = {
 			type: EditInputs.number,
 			label: "Offset",
 			defaultValue: 0,
-			min: 1,
+			min: 0,
 		},
 	],
 };
 
-const API_CRON_JOB_ITEM_CONFIG: InputListProps = {
-	id: "cron-item",
+const FETCH: InputListProps = {
+	id: "fetchFunctionData",
 	type: EditInputs.inputList,
-	label: "Cron Job Item",
+	// label: "Cron Job Item",
 	createObject: false,
 	inputs: [
-		...CRON_FUNCTION,
 		{
 			id: "fetchFunction",
 			type: EditInputs.objectSelect,
 			label: "Fetch Function",
+			optionId: "fetchFunctionData",
+			resetOnChange: true,
 			options: [
 				FetchFunction.PageQueries,
 				FetchFunction.PingRoutes,
@@ -89,6 +90,14 @@ const API_CRON_JOB_ITEM_CONFIG: InputListProps = {
 			]),
 		},
 	],
+};
+
+const API_CRON_JOB_ITEM_CONFIG: InputListProps = {
+	id: "cron-item",
+	type: EditInputs.inputList,
+	label: "Cron Job Item",
+	createObject: false,
+	inputs: [...CRON_FUNCTION, FETCH],
 };
 
 export const API_CRON_JOB_CONFIG: InputListProps = {
