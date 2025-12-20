@@ -1,13 +1,70 @@
 import { EditInputs } from "@/components/edit/inputs/inputs";
 import { FetchFunction } from "@/types/cms/Cron";
-import { InputListProps } from "@/types/edit/inputs/inputs";
+import { ArrayInputProps, InputListProps } from "@/types/edit/inputs/inputs";
 import { CRON_FUNCTION } from "../timer/timer-options";
+import { APIOptions } from "@/components/edit/config/query/api/api-base-config";
 
-const apiOptions = [
-	FetchFunction.PageQueries,
-	FetchFunction.PingRoutes,
-	FetchFunction.RadioScripts,
-];
+const ROUTES: ArrayInputProps = {
+	id: "routes",
+	type: EditInputs.array,
+	title: "Routes",
+	createObject: true,
+	input: {
+		id: "routeItem",
+		type: EditInputs.text,
+		label: "Route Item",
+		defaultValue: "/",
+	},
+};
+
+const pageQueriesConfig: InputListProps = {
+	id: "fetchFunctionData",
+	type: EditInputs.inputList,
+	label: "Page Queries Config",
+	createObject: false,
+	inputs: [
+		{
+			id: "api",
+			type: EditInputs.select,
+			label: "API",
+			options: [APIOptions.ARTICLES_SEARCH_API],
+			defaultValue: APIOptions.ARTICLES_SEARCH_API,
+		},
+		ROUTES,
+	],
+};
+
+const pingRoutesConfig: InputListProps = {
+	id: "pingRoutes",
+	type: EditInputs.inputList,
+	label: "Ping Routes Config",
+	createObject: false,
+	inputs: [ROUTES],
+};
+
+const radioScriptsConfig: InputListProps = {
+	id: "radioScripts",
+	type: EditInputs.inputList,
+	label: "Radio Scripts Config",
+	createObject: false,
+	inputs: [
+		{
+			id: "limit",
+			type: EditInputs.number,
+			label: "Limit",
+			defaultValue: 100,
+			max: 500,
+			min: 1,
+		},
+		{
+			id: "offset",
+			type: EditInputs.number,
+			label: "Offset",
+			defaultValue: 0,
+			min: 1,
+		},
+	],
+};
 
 const API_CRON_JOB_ITEM_CONFIG: InputListProps = {
 	id: "cron-item",
@@ -17,17 +74,19 @@ const API_CRON_JOB_ITEM_CONFIG: InputListProps = {
 	inputs: [
 		...CRON_FUNCTION,
 		{
-			// options determined by type selected in parent object
 			id: "fetchFunction",
-			type: EditInputs.select,
+			type: EditInputs.objectSelect,
 			label: "Fetch Function",
-			options: apiOptions,
-		},
-		{
-			id: "fetchFunctionData",
-			type: EditInputs.text,
-			label: "Fetch Function Data",
-			required: false,
+			options: [
+				FetchFunction.PageQueries,
+				FetchFunction.PingRoutes,
+				FetchFunction.RadioScripts,
+			],
+			optionMap: new Map([
+				[FetchFunction.PageQueries, pageQueriesConfig],
+				[FetchFunction.PingRoutes, pingRoutesConfig],
+				[FetchFunction.RadioScripts, radioScriptsConfig],
+			]),
 		},
 	],
 };
