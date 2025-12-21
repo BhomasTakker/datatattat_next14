@@ -249,7 +249,7 @@
 		@include templateBase;
 		width: 100%;
 		flex-direction: row;
-		gap: 0.5rem;
+		gap: $spacingXs;
 
 		&::before {
 			width: 8%;
