@@ -42,7 +42,7 @@ export const ArticleCollection = ({
 	const { renderMethod, styles, renderTemplate } = variantObject;
 
 	if (isTemplate) {
-		return <div className={styles.root}>{renderTemplate()}</div>;
+		return <div className={styles.root}>{renderTemplate(rest)}</div>;
 	}
 
 	return (
