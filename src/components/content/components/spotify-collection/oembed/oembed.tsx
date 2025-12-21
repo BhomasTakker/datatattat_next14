@@ -19,9 +19,16 @@ const renderMethod = (items: SpotifyOembed[] = [], options: UnknownObject) => {
 	return <SpotifyOembedComponent item={item} height={height} />;
 };
 
+const renderTemplate = (options: UnknownObject) => {
+	return (
+		<div className={styles.oembedPlaceholder}>Spotify OEmbed Template</div>
+	);
+};
+
 const spotifyOembed = {
 	styles,
 	renderMethod,
+	renderTemplate,
 };
 
 export default spotifyOembed;

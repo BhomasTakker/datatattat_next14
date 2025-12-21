@@ -6,6 +6,7 @@ import { Interaction } from "../../article/interaction/interactions";
 import { StyleSheet } from "@/types/css";
 import { UnknownObject } from "@/types/utils";
 import { ArticleRenderProps } from "../types";
+import { articleTemplate } from "../utils";
 
 // currently type and styles change between collection variants
 const renderArticle = (item: ArticleRenderProps, styles: StyleSheet) => {
@@ -23,14 +24,23 @@ const renderMethod =
 		return articles.slice(0, num).map((item) => renderArticle(item, styles));
 	};
 
+const renderTemplate = (styles: StyleSheet, num: number) => () => {
+	{
+		const template = articleTemplate(styles);
+		return template;
+	}
+};
+
 // you could call a function to return object based on given params
 // What is the benefit though?
 export const gridDisplay5 = {
 	styles: gridDisplay5Styles,
 	renderMethod: renderMethod(gridDisplay5Styles, 5),
+	renderTemplate: renderTemplate(gridDisplay5Styles, 5),
 };
 
 export const gridDisplay7 = {
 	styles: gridDisplay7Styles,
 	renderMethod: renderMethod(gridDisplay7Styles, 7),
+	renderTemplate: renderTemplate(gridDisplay7Styles, 7),
 };

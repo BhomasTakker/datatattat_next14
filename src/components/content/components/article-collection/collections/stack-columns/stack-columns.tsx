@@ -45,9 +45,17 @@ const renderMethod = (
 	);
 };
 
+const renderTemplate = () => {
+	{
+		const template = articleTemplate(styles);
+		return template;
+	}
+};
+
 const stackColumns = {
 	styles,
 	renderMethod,
+	renderTemplate,
 };
 
 export default stackColumns;

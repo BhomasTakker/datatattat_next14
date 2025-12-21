@@ -1,6 +1,7 @@
 import { OEmbed } from "@/types/data-structures/oembed";
 import { ClientOembed } from "../../content-oembed/client-component";
 import styles from "./stack.module.scss";
+import { UnknownObject } from "@/types/utils";
 
 export type OembedStackProps = {};
 
@@ -22,9 +23,14 @@ const renderMethod = (collection: OEmbed[] = [], props: OembedStackProps) => {
 	);
 };
 
+const renderTemplate = (options: UnknownObject) => {
+	return <div className={styles.oembedPlaceholder}>Oembed Stack Template</div>;
+};
+
 const oembedStack = {
 	styles,
 	renderMethod,
+	renderTemplate,
 };
 
 export default oembedStack;

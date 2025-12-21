@@ -39,9 +39,17 @@ const renderMethod = (
 	return articles.map((item) => renderArticle(item));
 };
 
+const renderTemplate = () => {
+	{
+		const template = articleTemplate(styles);
+		return template;
+	}
+};
+
 const stackScroller = {
 	styles,
 	renderMethod,
+	renderTemplate,
 };
 
 export default stackScroller;

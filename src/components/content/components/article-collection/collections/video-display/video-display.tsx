@@ -3,6 +3,7 @@ import { VideoDisplayComponent } from "./video-display-component";
 import { PlayerCollectionVariant, PlayerSourceTypes } from "./structs";
 import { UnknownObject } from "@/types/utils";
 import { ArticleRenderProps } from "../types";
+import { articleTemplate } from "../utils";
 
 export type VideoDisplayOptions = {
 	variant: PlayerCollectionVariant;
@@ -22,7 +23,15 @@ const renderMethod = (
 	return <VideoDisplayComponent articles={articles} {...options} />;
 };
 
+const renderTemplate = () => {
+	{
+		const template = articleTemplate(styles);
+		return template;
+	}
+};
+
 export const videoDisplay = {
 	styles: styles,
 	renderMethod: renderMethod,
+	renderTemplate: renderTemplate,
 };

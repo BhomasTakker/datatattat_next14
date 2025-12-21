@@ -16,9 +16,16 @@ const renderMethod = (
 	return <AudioStackClientComponent items={items} height={height} />;
 };
 
+const renderTemplate = (options: UnknownObject) => {
+	return (
+		<div className={styles.oembedPlaceholder}>Spotify Audio Stack Template</div>
+	);
+};
+
 const spotifyAudioStack = {
 	styles,
 	renderMethod,
+	renderTemplate,
 };
 
 export default spotifyAudioStack;

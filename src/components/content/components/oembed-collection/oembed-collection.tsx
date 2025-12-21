@@ -18,7 +18,11 @@ export type OEmbedCollectionProps = {
 // We should/could have bluesky api come through this?
 // It looks like it would be very easy to integrate
 // then we can get rid of the bluesky specific code
-export const OembedCollection = ({ component, dataObject }: ComponentProps) => {
+export const OembedCollection = ({
+	component,
+	dataObject,
+	isTemplate = false,
+}: ComponentProps) => {
 	const { componentProps } = component;
 	const { items = [], script = "" } =
 		(dataObject?.data as OEmbedCollectionProps) || {};
@@ -54,7 +58,11 @@ export const OembedCollection = ({ component, dataObject }: ComponentProps) => {
 		return null;
 	}
 
-	const { renderMethod, styles } = variantObject;
+	const { renderMethod, styles, renderTemplate } = variantObject;
+
+	if (isTemplate) {
+		return <div className={styles.root}>{renderTemplate(rest)}</div>;
+	}
 
 	return (
 		<div className={styles.root} data-testid={variantType}>

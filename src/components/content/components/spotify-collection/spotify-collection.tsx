@@ -9,6 +9,7 @@ type SpotifyCollectionProps = {
 export const SpotifyCollection = ({
 	component,
 	dataObject,
+	isTemplate = false,
 }: ComponentProps) => {
 	const { componentProps } = component;
 	const { variantType, ...rest } = componentProps || {};
@@ -20,7 +21,11 @@ export const SpotifyCollection = ({
 		return null;
 	}
 
-	const { renderMethod, styles } = variantObject;
+	const { renderMethod, styles, renderTemplate } = variantObject;
+
+	if (isTemplate) {
+		return <div className={styles.root}>{renderTemplate(rest)}</div>;
+	}
 
 	return (
 		<div className={styles.root} data-testid={variantType}>

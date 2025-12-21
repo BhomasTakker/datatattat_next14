@@ -49,13 +49,33 @@ export const VideoDisplayComponent = ({
 	);
 };
 
-export const DisplayPlayer = ({ component, dataObject }: ComponentProps) => {
+export const VideoDisplayTemplate = () => {
+	return (
+		<div className={styles.displayPlayerPlaceholder}>
+			Display Player Template
+		</div>
+	);
+};
+
+export const DisplayPlayer = ({
+	component,
+	dataObject,
+	isTemplate = false,
+}: ComponentProps) => {
 	const {
 		src = "",
 		sourceType,
 		poster,
 		audioOnlyMode,
 	} = component.componentProps as Partial<DisplayPlayerDataObject>;
+
+	if (isTemplate) {
+		return (
+			<div className={styles.root} data-testid="display-player-template">
+				<VideoDisplayTemplate />
+			</div>
+		);
+	}
 
 	return (
 		<VideoDisplayComponent

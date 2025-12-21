@@ -2,6 +2,7 @@ import { UnknownObject } from "@/types/utils";
 import { ArticleRenderProps } from "../types";
 import styles from "./audio-display.module.scss";
 import { AudioDisplayComponent } from "./audio-display-component";
+import { articleTemplate } from "../utils";
 
 export const AudioVerticalScrollerSize = {
 	large: "large",
@@ -26,7 +27,15 @@ const renderMethod = (
 	return <AudioDisplayComponent articles={articles} {...options} />;
 };
 
+const renderTemplate = () => {
+	{
+		const template = articleTemplate(styles);
+		return template;
+	}
+};
+
 export const audioDisplay = {
 	styles: styles,
 	renderMethod: renderMethod,
+	renderTemplate: renderTemplate,
 };

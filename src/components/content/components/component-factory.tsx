@@ -5,13 +5,16 @@ import {
 } from "@/components/content/components/component-map";
 import { PageComponent } from "@/types/page";
 import { ClientSideComponent } from "./client-side-component-render";
+import { ComponentDataObject } from "@/types/component";
 
 export const ComponentFactory = async ({
 	component,
 	isClient = false,
+	isTemplate = false,
 }: {
 	component: PageComponent;
 	isClient?: boolean;
+	isTemplate?: boolean;
 }) => {
 	const { componentType } = component || {};
 
@@ -20,6 +23,18 @@ export const ComponentFactory = async ({
 	// do better error handling
 	if (!Component) {
 		return <div>{`Component not found:- ${componentType}`}</div>;
+	}
+
+	if (isTemplate) {
+		const templateData: ComponentDataObject = { data: {} };
+		// Components to have a renderTemplate method
+		return (
+			<Component
+				component={component}
+				dataObject={templateData}
+				isTemplate={true}
+			/>
+		);
 	}
 
 	// Feels like fallback should be client side loading?

@@ -2,6 +2,7 @@ import { OEmbed } from "@/types/data-structures/oembed";
 import { ClientOembed } from "../../content-oembed/client-component";
 import styles from "./masonry.module.scss";
 import { ContainerWidthOptions } from "@/components/page/components/stack/types";
+import { UnknownObject } from "@/types/utils";
 
 export type OembedMasonryProps = {
 	minWidth: ContainerWidthOptions; // e.g. "xs", "sm", "md", "lg", "xl"
@@ -46,9 +47,16 @@ const renderMethod = (collection: OEmbed[] = [], props: unknown) => {
 	);
 };
 
+const renderTemplate = (options: UnknownObject) => {
+	return (
+		<div className={styles.oembedPlaceholder}>Oembed Masonry Template</div>
+	);
+};
+
 const oembedMasonry = {
 	styles,
 	renderMethod,
+	renderTemplate,
 };
 
 export default oembedMasonry;
