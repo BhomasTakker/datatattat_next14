@@ -1,4 +1,5 @@
 @use "../../../../../../scss/abstracts/colours/" as colours;
+@use "../../../../../../scss/abstracts/units/" as *;
 
 // Base template skeleton styles - shared by all templates
 @mixin templateBase {
@@ -17,37 +18,55 @@
 }
 
 // Text placeholder gradient patterns
-@mixin titleLines($padding: $spacingXs) {
+@mixin titleLines($padding: $spacingXs, $size: $spacingSm) {
 	background: 
         // Title - 2 lines
-		linear-gradient(colours.$background 0.8rem, transparent 0.8rem) 0 0 / 100%
-			0.8rem no-repeat,
-		linear-gradient(colours.$background 0.8rem, transparent 0.8rem) 0 1.2rem /
-			75% 0.8rem no-repeat;
+		linear-gradient(colours.$background $size, transparent $size) 0 0 / 100%
+			$size no-repeat,
+		linear-gradient(colours.$background $size, transparent $size) 0 1.2rem / 75%
+			$size no-repeat;
 	padding: $padding;
 }
 
-@mixin titleDescriptionLines($padding: $spacingXs) {
+@mixin titleDescriptionLines(
+	$padding: $spacingXs,
+	$titleSize: $spacingSm,
+	$descriptionSize: $spacingXs,
+	$metaSize: $spacingXxs
+) {
 	background: 
         // Title - 2 lines
-		linear-gradient(colours.$background 0.8rem, transparent 0.8rem) 0 0 / 100%
-			0.8rem no-repeat,
-		linear-gradient(colours.$background 0.8rem, transparent 0.8rem) 0 1.2rem /
-			75% 0.8rem no-repeat,
+		linear-gradient(colours.$background $titleSize, transparent $titleSize) 0 0 /
+			100% $titleSize no-repeat,
+		linear-gradient(colours.$background $titleSize, transparent $titleSize) 0
+			1.2rem / 75% $titleSize no-repeat,
 		// Description - 3 lines
-		linear-gradient(colours.$background-light 0.6rem, transparent 0.6rem) 0
-			2.8rem / 100% 0.6rem no-repeat,
-		linear-gradient(colours.$background-light 0.6rem, transparent 0.6rem) 0
-			3.8rem / 95% 0.6rem no-repeat,
-		linear-gradient(colours.$background-light 0.6rem, transparent 0.6rem) 0
-			4.8rem / 85% 0.6rem no-repeat,
+		linear-gradient(
+				colours.$background-light $descriptionSize,
+				transparent $descriptionSize
+			)
+			0 2.8rem / 100% 0.6rem no-repeat,
+		linear-gradient(
+				colours.$background-light $descriptionSize,
+				transparent $descriptionSize
+			)
+			0 3.8rem / 95% 0.6rem no-repeat,
+		linear-gradient(
+				colours.$background-light $descriptionSize,
+				transparent $descriptionSize
+			)
+			0 4.8rem / 85% 0.6rem no-repeat,
 		// Meta info - small line at bottom
-		linear-gradient(colours.$background 0.5rem, transparent 0.5rem) 0 bottom /
-			40% 0.5rem no-repeat;
+		linear-gradient(colours.$background $metaSize, transparent $metaSize) 0
+			bottom / 40% 0.5rem no-repeat;
 	padding: $padding;
 }
 
-@mixin singleTitleLine($padding: $spacingXxs) {
+@mixin singleTitleLine(
+	$padding: $spacingXxs,
+	$titleSize: $spacingSm,
+	$metaSize: $spacingXxs
+) {
 	background: 
         // Title - single line only
 		linear-gradient(colours.$background 0.4rem, transparent 0.4rem) 0 0.4rem /

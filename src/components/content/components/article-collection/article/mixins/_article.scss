@@ -184,6 +184,7 @@
 		width: 100%;
 		aspect-ratio: 32/9;
 		flex-direction: row;
+		gap: $spacingXxs;
 
 		&::before {
 			width: 50%;
@@ -191,7 +192,12 @@
 		}
 
 		&::after {
-			@include titleDescriptionLines($spacingXs);
+			@include titleDescriptionLines(
+				$spacingXs,
+				$spacingXs,
+				$spacingXxs,
+				$spacingXxxs
+			);
 			width: 50%;
 		}
 	}
