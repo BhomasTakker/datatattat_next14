@@ -1,0 +1,57 @@
+// Base template skeleton styles - shared by all templates
+@mixin templateBase {
+	display: flex;
+	background: white;
+
+	&::before {
+		content: "";
+		background: #e0e0e0;
+	}
+
+	&::after {
+		content: "";
+		display: block;
+	}
+}
+
+// Text placeholder gradient patterns
+@mixin titleLines($padding: $spacingXs) {
+	background: 
+        // Title - 2 lines
+		linear-gradient(#d0d0d0 0.8rem, transparent 0.8rem) 0 0 / 100% 0.8rem
+			no-repeat,
+		linear-gradient(#d0d0d0 0.8rem, transparent 0.8rem) 0 1.2rem / 75% 0.8rem
+			no-repeat;
+	padding: $padding;
+}
+
+@mixin titleDescriptionLines($padding: $spacingXs) {
+	background: 
+        // Title - 2 lines
+		linear-gradient(#d0d0d0 0.8rem, transparent 0.8rem) 0 0 / 100% 0.8rem
+			no-repeat,
+		linear-gradient(#d0d0d0 0.8rem, transparent 0.8rem) 0 1.2rem / 75% 0.8rem
+			no-repeat,
+		// Description - 3 lines
+		linear-gradient(#e5e5e5 0.6rem, transparent 0.6rem) 0 2.8rem / 100% 0.6rem
+			no-repeat,
+		linear-gradient(#e5e5e5 0.6rem, transparent 0.6rem) 0 3.8rem / 95% 0.6rem
+			no-repeat,
+		linear-gradient(#e5e5e5 0.6rem, transparent 0.6rem) 0 4.8rem / 85% 0.6rem
+			no-repeat,
+		// Meta info - small line at bottom
+		linear-gradient(#d0d0d0 0.5rem, transparent 0.5rem) 0 bottom / 40% 0.5rem
+			no-repeat;
+	padding: $padding;
+}
+
+@mixin singleTitleLine($padding: $spacingXxs) {
+	background: 
+        // Title - single line only
+		linear-gradient(#d0d0d0 0.4rem, transparent 0.4rem) 0 0.4rem / 80% 0.4rem
+			no-repeat,
+		// Meta info - small line at bottom
+		linear-gradient(#d0d0d0 0.3rem, transparent 0.3rem) 0 bottom / 30% 0.3rem
+			no-repeat;
+	padding: $padding;
+}
