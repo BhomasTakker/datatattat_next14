@@ -27,10 +27,18 @@ const renderMethod = (
 	return <AudioDisplayComponent articles={articles} {...options} />;
 };
 
-const renderTemplate = () => {
+const renderTemplate = (options: UnknownObject & AudioDisplayOptions) => {
 	{
-		const template = articleTemplate(styles);
-		return template;
+		return (
+			<div className={styles.root}>
+				{articleTemplate(styles)}
+				<div className={styles.articles}>
+					{Array.from({ length: 10 }).map((_, index) => (
+						<div key={index} className={styles.articleTemplate} />
+					))}
+				</div>
+			</div>
+		);
 	}
 };
 

@@ -18,10 +18,12 @@ import H5AudioPlayer from "react-h5-audio-player";
 
 type AudioDisplayComponentProps = {
 	articles: CollectionItem[];
+	isTemplate?: boolean;
 } & AudioDisplayOptions;
 
 export const AudioDisplayComponent = ({
 	articles = [],
+	isTemplate = false,
 	...options
 }: AudioDisplayComponentProps) => {
 	const firstArticle = articles[0] || {};

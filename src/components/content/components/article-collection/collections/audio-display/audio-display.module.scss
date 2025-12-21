@@ -1,4 +1,5 @@
 @use "../../article/mixins/" as article;
+@use "../../article/mixins/template" as *;
 @use "../../../../../../scss/abstracts/units/" as *;
 @use "../../../../../../scss/mixins/ui/" as ui;
 
@@ -45,6 +46,44 @@
 				1,
 				1
 			);
+		}
+	}
+
+	.template {
+		@include templateBase;
+		width: 100%;
+		height: $contentHeightXs;
+		flex-direction: row;
+		gap: $spacingXs;
+
+		&::before {
+			width: $contentHeightXs;
+			height: $contentHeightXs;
+			aspect-ratio: 1/1;
+		}
+
+		&::after {
+			@include audioDisplayLines($spacingXxs);
+			flex: 1;
+		}
+	}
+
+	.articleTemplate {
+		@include templateBase;
+		width: 100%;
+		height: $contentHeightXs4;
+		flex-direction: row;
+		gap: $spacingXs;
+
+		&::before {
+			width: $contentHeightXs4;
+			height: $contentHeightXs4;
+			aspect-ratio: 1/1;
+		}
+
+		&::after {
+			@include audioDisplayLines($spacingXxs);
+			flex: 1;
 		}
 	}
 }

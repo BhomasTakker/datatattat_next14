@@ -76,3 +76,30 @@
 			30% 0.3rem no-repeat;
 	padding: $padding;
 }
+
+@mixin audioDisplayLines(
+	$padding: $spacingXxs,
+	$titleSize: 0.8rem,
+	$descriptionSize: 0.6rem,
+	$metaSize: 0.5rem
+) {
+	background: 
+		// Title - 1 line
+		linear-gradient(colours.$background $titleSize, transparent $titleSize) 0 0 /
+			90% $titleSize no-repeat,
+		// Description - 2 lines
+		linear-gradient(
+				colours.$background-light $descriptionSize,
+				transparent $descriptionSize
+			)
+			0 1.4rem / 100% $descriptionSize no-repeat,
+		linear-gradient(
+				colours.$background-light $descriptionSize,
+				transparent $descriptionSize
+			)
+			0 2.4rem / 85% $descriptionSize no-repeat,
+		// Meta info - small line at bottom
+		linear-gradient(colours.$background $metaSize, transparent $metaSize) 0
+			bottom / 40% $metaSize no-repeat;
+	padding: $padding;
+}
