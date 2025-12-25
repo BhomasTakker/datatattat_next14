@@ -4,6 +4,10 @@ import { SpotifyCollectionItem } from "./types";
 import { ContainerHeightOptions } from "@/components/page/components/stack/types";
 import { UnknownObject } from "@/types/utils";
 import { articleTemplate } from "../../article-collection/collections/utils";
+import {
+	AudioPlayerArticles,
+	AudioPlayerTemplate,
+} from "../../article-collection/collections/audio-display/template";
 
 export type AudioStackProps = {
 	height: ContainerHeightOptions;
@@ -21,13 +25,9 @@ const renderMethod = (
 // create a component
 const renderTemplate = (options: UnknownObject) => {
 	return (
-		<div className={styles.root}>
-			<div className={styles.template} />
-			<div className={styles.articles}>
-				{Array.from({ length: 10 }).map((_, index) => (
-					<div key={index} className={styles.articleTemplate} />
-				))}
-			</div>
+		<div className={styles.template}>
+			<AudioPlayerTemplate />
+			<AudioPlayerArticles />
 		</div>
 	);
 };

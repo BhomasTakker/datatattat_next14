@@ -2,7 +2,7 @@ import { UnknownObject } from "@/types/utils";
 import { ArticleRenderProps } from "../types";
 import styles from "./audio-display.module.scss";
 import { AudioDisplayComponent } from "./audio-display-component";
-import { articleTemplate } from "../utils";
+import { AudioPlayerArticles, AudioPlayerTemplate } from "./template";
 
 export const AudioVerticalScrollerSize = {
 	large: "large",
@@ -32,12 +32,8 @@ const renderTemplate = (options: UnknownObject & AudioDisplayOptions) => {
 	{
 		return (
 			<div className={styles.root}>
-				{articleTemplate(styles)}
-				<div className={styles.articles}>
-					{Array.from({ length: 10 }).map((_, index) => (
-						<div key={index} className={styles.articleTemplate} />
-					))}
-				</div>
+				<AudioPlayerTemplate />
+				<AudioPlayerArticles />
 			</div>
 		);
 	}

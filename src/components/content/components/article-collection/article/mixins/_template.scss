@@ -86,13 +86,13 @@
 	background: 
 		// Title - 1 line
 		linear-gradient(colours.$background $titleSize, transparent $titleSize) 0 0 /
-			90% $titleSize no-repeat,
+			99% $titleSize no-repeat,
 		// Description - 2 lines
 		linear-gradient(
 				colours.$background-light $descriptionSize,
 				transparent $descriptionSize
 			)
-			0 1.4rem / 100% $descriptionSize no-repeat,
+			0 1.4rem / 99% $descriptionSize no-repeat,
 		linear-gradient(
 				colours.$background-light $descriptionSize,
 				transparent $descriptionSize
