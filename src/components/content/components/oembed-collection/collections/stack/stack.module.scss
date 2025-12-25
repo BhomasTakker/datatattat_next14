@@ -1,3 +1,5 @@
+@use "../../../../../../scss/abstracts/units/" as *;
+
 .root {
 	.list {
 		display: flex;
@@ -8,5 +10,19 @@
 			// sm, md, etc
 			width: 100%;
 		}
+	}
+}
+
+.template {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	gap: $spacingMd;
+	li {
+		width: 100%;
+		// flex is overkill
+		display: flex;
+		justify-content: center;
 	}
 }

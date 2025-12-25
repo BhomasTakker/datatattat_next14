@@ -17,3 +17,11 @@ export const ClientOembed = ({ html }: ClientOembedProps) => {
 		></div>
 	);
 };
+
+export const ClientOembedTemplate = () => {
+	return (
+		<div className={styles.template} data-testid="client-oembed-template">
+			<div className={styles.image} />
+		</div>
+	);
+};
