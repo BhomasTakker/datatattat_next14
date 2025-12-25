@@ -6,6 +6,7 @@ import { InViewComponent } from "@/components/ui/in-view/in-view";
 import { ArticleRenderProps } from "../types";
 import { WithData } from "@/components/ui/with-data/with-data";
 import { articleMetaLoader, articleRenderer, articleTemplate } from "../utils";
+import { ArticleTemplates } from "./template";
 
 // this may be the same but for styles across collections
 const renderArticle = (item: ArticleRenderProps) => {
@@ -47,8 +48,11 @@ const renderMethod = (
 
 const renderTemplate = () => {
 	{
-		const template = articleTemplate(styles);
-		return template;
+		return (
+			<div className={styles.container}>
+				<ArticleTemplates />
+			</div>
+		);
 	}
 };
 
