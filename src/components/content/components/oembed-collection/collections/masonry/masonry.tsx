@@ -1,5 +1,8 @@
 import { OEmbed } from "@/types/data-structures/oembed";
-import { ClientOembed } from "../../content-oembed/client-component";
+import {
+	ClientOembed,
+	ClientOembedTemplate,
+} from "../../content-oembed/client-component";
 import styles from "./masonry.module.scss";
 import { ContainerWidthOptions } from "@/components/page/components/stack/types";
 import { UnknownObject } from "@/types/utils";
@@ -48,8 +51,24 @@ const renderMethod = (collection: OEmbed[] = [], props: unknown) => {
 };
 
 const renderTemplate = (options: UnknownObject) => {
+	const { minWidth = "MD" } = options as OembedMasonryProps;
+	const columnWidth = Sizes[minWidth];
+
 	return (
-		<div className={styles.oembedPlaceholder}>Oembed Masonry Template</div>
+		<ul
+			className={`${styles.masonryTemplate}`}
+			style={
+				{
+					"--column-width": `${columnWidth}px`,
+				} as React.CSSProperties
+			}
+		>
+			{Array.from({ length: 20 }).map((_: unknown, index: number) => (
+				<li key={index} data-testid="content-oembed-template">
+					<ClientOembedTemplate />
+				</li>
+			))}
+		</ul>
 	);
 };
 
