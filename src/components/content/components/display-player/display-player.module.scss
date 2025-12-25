@@ -1,4 +1,17 @@
+@use "../../../../scss/abstracts/units/" as *;
+@use "../../../../scss/abstracts/colours/" as *;
+@use "../../components/article-collection/article/mixins/template" as *;
+
 .root {
 	display: flex;
 	justify-content: center;
+}
+.template {
+	@include templateBase;
+	width: 100%;
+	aspect-ratio: 16/9;
+	// This should be in the tmplate mixin
+	// i.e. templateContent or similar
+	// Then we can create a videoContent or something  - with a darker play icon or something
+	background: $background-dark;
 }

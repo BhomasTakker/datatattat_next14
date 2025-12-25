@@ -50,11 +50,7 @@ export const VideoDisplayComponent = ({
 };
 
 export const VideoDisplayTemplate = () => {
-	return (
-		<div className={styles.displayPlayerPlaceholder}>
-			Display Player Template
-		</div>
-	);
+	return <div className={styles.template} />;
 };
 
 export const DisplayPlayer = ({
