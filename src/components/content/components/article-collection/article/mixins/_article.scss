@@ -6,6 +6,27 @@
 @use "./base" as base;
 @use "./template" as *;
 
+@mixin articleCardTopDownTemplate($maxWidth, $minWidth) {
+	.article {
+		@include templateBase;
+		max-width: $maxWidth;
+		min-width: $minWidth;
+		width: 100%;
+		aspect-ratio: 16/18;
+		flex-direction: column;
+
+		&::before {
+			width: 100%;
+			aspect-ratio: 16/9;
+		}
+
+		&::after {
+			@include titleDescriptionLines($spacingXs);
+			flex: 1;
+		}
+	}
+}
+
 // this is a scroller - we wouldn't need to modify width
 // width and size can always be what we set it
 // For the relevant screen size - it is not dynamically responsive
@@ -93,6 +114,36 @@
 // }
 // Before using mixin to populate .article
 /////////////////////////////////////////
+@mixin articleCardLeftRightTemplate(
+	$maxWidth: $contentWidthMd,
+	$minWidth: $contentWidthMd
+) {
+	.article {
+		@include templateBase;
+		max-width: $maxWidth;
+		min-width: $minWidth;
+		width: 100%;
+		aspect-ratio: 32/9;
+		flex-direction: row;
+		gap: $spacingXxs;
+
+		&::before {
+			width: 50%;
+			aspect-ratio: 16/9;
+		}
+
+		&::after {
+			@include titleDescriptionLines(
+				$spacingXs,
+				$spacingXs,
+				$spacingXxs,
+				$spacingXxxs
+			);
+			width: 50%;
+		}
+	}
+}
+
 @mixin articleCardLeftRight(
 	$maxWidth: $contentWidthMd,
 	$minWidth: $contentWidthMd
@@ -199,6 +250,30 @@
 				$spacingXxxs
 			);
 			width: 50%;
+		}
+	}
+}
+
+@mixin articleCardListItemTemplate(
+	$maxWidth: $contentWidthMd,
+	$minWidth: $contentWidthMd
+) {
+	.article {
+		@include templateBase;
+		max-width: $maxWidth;
+		min-width: $minWidth;
+		width: 100%;
+		flex-direction: row;
+		gap: $spacingXs;
+
+		&::before {
+			width: 8%;
+			aspect-ratio: 16/9;
+		}
+
+		&::after {
+			@include singleTitleLine($spacingXxs);
+			width: 90%;
 		}
 	}
 }

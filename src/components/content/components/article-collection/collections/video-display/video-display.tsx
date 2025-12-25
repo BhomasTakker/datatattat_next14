@@ -23,10 +23,25 @@ const renderMethod = (
 	return <VideoDisplayComponent articles={articles} {...options} />;
 };
 
-const renderTemplate = () => {
+const renderTemplate = (options: UnknownObject & VideoDisplayOptions) => {
 	{
-		const template = articleTemplate(styles);
-		return template;
+		const { variant } = options;
+		const containerClassName = `container${variant}`;
+		// We shoould use this
+		const containerClass = styles[containerClassName];
+		return (
+			<div className={styles.template}>
+				<div className={styles.videoPlayer}>
+					<div className={styles.videoPlayer}></div>
+				</div>
+
+				<ul className={styles.articles}>
+					{Array.from({ length: 10 }).map((_, index) => (
+						<li key={index} className={styles.article} />
+					))}
+				</ul>
+			</div>
+		);
 	}
 };
 
