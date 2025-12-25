@@ -1,2 +1,25 @@
+@use "../../article-collection/article/mixins/article" as *;
+@use "../../article-collection/article/mixins/template" as *;
+@use "../../../../../scss/abstracts/units/" as *;
+
 .root {
+	// Duplicate of audio display styles / make component etc
+	.template {
+		@include templateBase;
+		width: 100%;
+		height: $contentHeightXs;
+		flex-direction: row;
+		gap: $spacingXs;
+
+		&::before {
+			width: $contentHeightXs;
+			height: $contentHeightXs;
+			aspect-ratio: 1/1;
+		}
+
+		&::after {
+			@include audioDisplayLines($spacingXxs);
+			flex: 1;
+		}
+	}
 }
