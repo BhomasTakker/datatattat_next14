@@ -6,7 +6,7 @@ import { Interaction } from "../../article/interaction/interactions";
 import { StyleSheet } from "@/types/css";
 import { UnknownObject } from "@/types/utils";
 import { ArticleRenderProps } from "../types";
-import { articleTemplate } from "../utils";
+import { GridArticleTemplates } from "./template";
 
 // currently type and styles change between collection variants
 const renderArticle = (item: ArticleRenderProps, styles: StyleSheet) => {
@@ -25,10 +25,7 @@ const renderMethod =
 	};
 
 const renderTemplate = (styles: StyleSheet, num: number) => () => {
-	{
-		const template = articleTemplate(styles);
-		return template;
-	}
+	return <GridArticleTemplates count={num} />;
 };
 
 // you could call a function to return object based on given params
