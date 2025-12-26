@@ -39,9 +39,7 @@ describe("WithData", () => {
 				template={template}
 			/>
 		);
-		await waitFor(() =>
-			expect(screen.getByText(/hello world/i)).toBeInTheDocument()
-		);
+		expect(await screen.findByText(/hello world/i)).toBeInTheDocument();
 	});
 
 	it("renders error state when fetchData rejects", async () => {
