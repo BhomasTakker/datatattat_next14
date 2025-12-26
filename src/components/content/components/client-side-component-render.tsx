@@ -43,6 +43,7 @@ export const ClientSideComponent = ({
 	}
 
 	if (!componentData) {
+		// get component and render template while loading data
 		return <div>Loading...</div>;
 	}
 

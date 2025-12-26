@@ -1,0 +1,6 @@
+@use "../../article/mixins/" as article;
+@use "../../../../../../scss/abstracts/units/" as *;
+
+.template {
+	@include article.articleCardTopDownTemplate(100%, 100%);
+}

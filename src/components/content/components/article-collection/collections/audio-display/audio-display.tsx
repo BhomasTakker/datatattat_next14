@@ -2,6 +2,7 @@ import { UnknownObject } from "@/types/utils";
 import { ArticleRenderProps } from "../types";
 import styles from "./audio-display.module.scss";
 import { AudioDisplayComponent } from "./audio-display-component";
+import { AudioPlayerArticles, AudioPlayerTemplate } from "./template";
 
 export const AudioVerticalScrollerSize = {
 	large: "large",
@@ -26,7 +27,18 @@ const renderMethod = (
 	return <AudioDisplayComponent articles={articles} {...options} />;
 };
 
+// We should use options to determine size etc of template
+const renderTemplate = (options: UnknownObject & AudioDisplayOptions) => {
+	return (
+		<div className={styles.root}>
+			<AudioPlayerTemplate />
+			<AudioPlayerArticles />
+		</div>
+	);
+};
+
 export const audioDisplay = {
 	styles: styles,
 	renderMethod: renderMethod,
+	renderTemplate: renderTemplate,
 };

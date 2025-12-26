@@ -9,6 +9,7 @@ export type ComponentDataObject = {
 export type ComponentProps = {
 	component: PageComponent;
 	dataObject: ComponentDataObject;
+	isTemplate?: boolean;
 };
 
 export type ComponentProfileProps = {

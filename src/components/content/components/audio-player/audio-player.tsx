@@ -27,6 +27,10 @@ type RendeProps = {
 };
 
 // A bit of a hack - we need a better solution
+// tbf - if it comes to it you just doa  Map.
+// Radio variants with each their own component
+// and create a factory to return the right one
+// consistentcy all the way down
 const renderPlayer = ({ src, variant }: RendeProps) => {
 	switch (true) {
 		case src.endsWith(".m3u8"):

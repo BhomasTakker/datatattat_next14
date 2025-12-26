@@ -6,6 +6,7 @@ import { InViewComponent } from "@/components/ui/in-view/in-view";
 import { WithData } from "@/components/ui/with-data/with-data";
 import { ArticleRenderProps } from "../types";
 import { articleTemplate, articleMetaLoader, articleRenderer } from "../utils";
+import { ArticleTemplates } from "./template";
 
 const renderArticle = (item: ArticleRenderProps) => {
 	const { src } = item;
@@ -39,9 +40,14 @@ const renderMethod = (
 	return articles.map((item) => renderArticle(item));
 };
 
+const renderTemplate = () => {
+	return <ArticleTemplates />;
+};
+
 const stackScroller = {
 	styles,
 	renderMethod,
+	renderTemplate,
 };
 
 export default stackScroller;

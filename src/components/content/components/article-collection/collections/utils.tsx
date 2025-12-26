@@ -8,9 +8,9 @@ export const articleRenderer =
 	(styles: StyleSheet) => (item: ArticleRenderProps) =>
 		<Article article={item} styles={styles} />;
 
-export const articleTemplate = (styles: StyleSheet) => (
-	<div className={styles.template} />
-);
+export const articleTemplate = (styles: StyleSheet) => {
+	return <div className={styles.template} />;
+};
 
 export const articleMetaLoader = (item: ArticleRenderProps) => async () => {
 	const loadData = item?.loadData;

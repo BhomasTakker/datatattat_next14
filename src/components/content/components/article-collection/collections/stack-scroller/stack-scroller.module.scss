@@ -2,9 +2,6 @@
 @use "../../../../../../scss/abstracts/units/" as *;
 @use "../../../../../../scss/mixins/ui/" as ui;
 
-.template {
-}
-
 .root {
 	display: flex;
 	gap: $spacingMd;

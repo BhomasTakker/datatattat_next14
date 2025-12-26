@@ -25,5 +25,6 @@ export const WithData = ({ getter, callback, template }: WithData) => {
 	if (error) {
 		return <div>{error}</div>;
 	}
-	return data ? callback(data) : template;
+
+	return data ? callback(data) : template; //template; //
 };

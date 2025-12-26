@@ -1,4 +1,5 @@
 @use "../../article-collection/article/mixins/" as article;
+@use "../../article-collection/article/mixins/template" as *;
 @use "../../../../../scss/abstracts/units/" as *;
 @use "../../../../../scss/mixins/ui/" as ui;
 
@@ -47,4 +48,8 @@
 			);
 		}
 	}
+}
+
+.template {
+	width: 100%;
 }

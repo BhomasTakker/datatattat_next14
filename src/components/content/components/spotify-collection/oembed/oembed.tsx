@@ -19,9 +19,21 @@ const renderMethod = (items: SpotifyOembed[] = [], options: UnknownObject) => {
 	return <SpotifyOembedComponent item={item} height={height} />;
 };
 
+const renderTemplate = (options: UnknownObject) => {
+	const { height = ContainerHeightOptions.MD } = options as OembedStackProps;
+	// There are options so we should create template dependent upon asset type
+	// type as class
+	return (
+		<div className={`${styles.template} ${styles[height]}`}>
+			<div className={styles.article} />
+		</div>
+	);
+};
+
 const spotifyOembed = {
 	styles,
 	renderMethod,
+	renderTemplate,
 };
 
 export default spotifyOembed;

@@ -1,6 +1,8 @@
 @use "../../article/mixins/" as article;
+@use "../../article/mixins/template" as *;
 @use "../../../../../../scss/abstracts/units/" as *;
 @use "../../../../../../scss/mixins/ui/" as ui;
+@use "../../../../../../scss/abstracts/colours/" as colours;
 
 .root {
 	.containerHorizontalScroll {
@@ -77,6 +79,66 @@
 						$contentWidthXs4
 					);
 				}
+			}
+		}
+	}
+
+	.template {
+		.videoPlayer {
+			display: flex;
+			justify-content: center;
+			aspect-ratio: 16/9;
+			background: colours.$background-dark;
+			margin-bottom: $spacingXl;
+		}
+
+		.articles {
+			display: flex;
+			gap: $spacingMd;
+			@include ui.scrollXNoScroller();
+			@include article.articleCardTopDownTemplate(
+				$contentWidthMd,
+				$contentWidthMd
+			);
+			@media screen and (min-width: $screenWidthSm) {
+				@include article.articleCardTopDownTemplate(
+					$contentWidthXl,
+					$contentWidthMd
+				);
+			}
+			@media screen and (min-width: $screenWidthMd) {
+				@include article.articleCardTopDownTemplate(
+					$contentWidthXl2,
+					$contentWidthMd
+				);
+			}
+		}
+
+		@media screen and (min-width: $screenWidthXl) {
+			display: grid;
+			grid-template-columns: 2fr 1fr;
+			gap: $spacingLg;
+
+			.videoPlayer {
+				margin-bottom: 0;
+				min-width: 0; // Prevent grid overflow
+				width: 100%; // Constrain to grid column
+			}
+
+			.articles {
+				display: flex;
+				flex-direction: column;
+				gap: $spacingXs;
+				// min-width: 0; // Prevent grid overflow
+				height: 0;
+				min-height: 100%;
+
+				@include ui.scrollXNoScroller();
+
+				@include article.articleCardLeftRightTemplate(
+					$contentWidthXl4,
+					$contentWidthXs4
+				);
 			}
 		}
 	}

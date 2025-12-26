@@ -1,5 +1,45 @@
+@use "../../../../../scss/abstracts/units/" as *;
+@use "../../../../../scss/abstracts/colours/" as *;
+@use "../../article-collection/article/mixins/template" as *;
+
 .root {
 	width: 100%;
 	display: flex;
 	justify-content: center;
+}
+
+.template {
+	@include templateBase;
+	max-width: $containerWidthMd;
+	width: 100%;
+	min-height: $contentHeightSm;
+	flex-direction: column;
+	padding: $spacingMd;
+	gap: $spacingMd;
+	position: relative;
+
+	// Avatar and username area
+	&::before {
+		width: $contentHeightXs5;
+		height: $contentHeightXs5;
+		border-radius: 50%;
+		flex-shrink: 0;
+	}
+
+	// Post content area (username, text, meta)
+	&::after {
+		@include titleDescriptionLines($spacingXs);
+		flex: 1;
+		min-height: $contentHeightXs3;
+		order: 1;
+	}
+
+	// Post image placeholder
+	.image {
+		width: 100%;
+		aspect-ratio: 16/9;
+		background: $background-dark;
+		border-radius: $spacingXxs;
+		order: 2;
+	}
 }

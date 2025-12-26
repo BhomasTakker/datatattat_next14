@@ -24,10 +24,11 @@ type ArticleCollectionComponentProps = VariantComponentProps &
 export const ArticleCollection = ({
 	component,
 	dataObject,
+	isTemplate = false,
 }: ComponentProps) => {
 	const { componentProps } = component;
-	const articlesData = dataObject.data as Collection;
-	const { items: articles } = articlesData;
+	const articlesData = dataObject?.data as Collection;
+	const { items: articles } = articlesData || { items: [] };
 	const { variantType, ...rest } =
 		componentProps as ArticleCollectionComponentProps;
 
@@ -38,7 +39,11 @@ export const ArticleCollection = ({
 		return null;
 	}
 
-	const { renderMethod, styles } = variantObject;
+	const { renderMethod, styles, renderTemplate } = variantObject;
+
+	if (isTemplate) {
+		return <div className={styles.root}>{renderTemplate(rest)}</div>;
+	}
 
 	return (
 		<div className={styles.root} data-testid={variantType}>

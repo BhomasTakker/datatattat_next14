@@ -4,4 +4,13 @@
 	.masonryGrid {
 		columns: var(--column-width);
 	}
+	.masonryTemplate {
+		columns: var(--column-width);
+
+		li {
+			margin-bottom: $spacingMd;
+			break-inside: avoid;
+			page-break-inside: avoid; // Fallback for older browsers
+		}
+	}
 }
