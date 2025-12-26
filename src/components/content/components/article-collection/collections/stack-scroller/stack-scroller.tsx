@@ -41,9 +41,7 @@ const renderMethod = (
 };
 
 const renderTemplate = () => {
-	{
-		return <ArticleTemplates />;
-	}
+	return <ArticleTemplates />;
 };
 
 const stackScroller = {

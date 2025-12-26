@@ -17,25 +17,4 @@
 	@media screen and (min-width: $screenWidthMd) {
 		@include article.articleCardTopDown($contentWidthXl2, $contentWidthXl2);
 	}
-
-	.templateArticle {
-		@include article.articleCardTopDownTemplate(
-			$contentWidthMd,
-			$contentWidthMd
-		);
-
-		@media screen and (min-width: $screenWidthSm) {
-			@include article.articleCardTopDownTemplate(
-				$contentWidthXl,
-				$contentWidthXl
-			);
-		}
-
-		@media screen and (min-width: $screenWidthMd) {
-			@include article.articleCardTopDownTemplate(
-				$contentWidthXl2,
-				$contentWidthXl2
-			);
-		}
-	}
 }
