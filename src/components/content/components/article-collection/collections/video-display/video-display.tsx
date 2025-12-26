@@ -3,7 +3,6 @@ import { VideoDisplayComponent } from "./video-display-component";
 import { PlayerCollectionVariant, PlayerSourceTypes } from "./structs";
 import { UnknownObject } from "@/types/utils";
 import { ArticleRenderProps } from "../types";
-import { articleTemplate } from "../utils";
 
 export type VideoDisplayOptions = {
 	variant: PlayerCollectionVariant;
@@ -31,9 +30,7 @@ const renderTemplate = (options: UnknownObject & VideoDisplayOptions) => {
 		const containerClass = styles[containerClassName];
 		return (
 			<div className={styles.template}>
-				<div className={styles.videoPlayer}>
-					<div className={styles.videoPlayer}></div>
-				</div>
+				<div className={styles.videoPlayer}></div>
 
 				<ul className={styles.articles}>
 					{Array.from({ length: 10 }).map((_, index) => (

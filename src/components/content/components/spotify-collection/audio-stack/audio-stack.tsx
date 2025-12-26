@@ -3,7 +3,6 @@ import { AudioStackClientComponent } from "./audio-stack-client";
 import { SpotifyCollectionItem } from "./types";
 import { ContainerHeightOptions } from "@/components/page/components/stack/types";
 import { UnknownObject } from "@/types/utils";
-import { articleTemplate } from "../../article-collection/collections/utils";
 import {
 	AudioPlayerArticles,
 	AudioPlayerTemplate,

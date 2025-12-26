@@ -29,14 +29,12 @@ const renderMethod = (
 
 // We should use options to determine size etc of template
 const renderTemplate = (options: UnknownObject & AudioDisplayOptions) => {
-	{
-		return (
-			<div className={styles.root}>
-				<AudioPlayerTemplate />
-				<AudioPlayerArticles />
-			</div>
-		);
-	}
+	return (
+		<div className={styles.root}>
+			<AudioPlayerTemplate />
+			<AudioPlayerArticles />
+		</div>
+	);
 };
 
 export const audioDisplay = {

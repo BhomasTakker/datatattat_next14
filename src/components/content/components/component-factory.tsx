@@ -17,6 +17,7 @@ export const ComponentFactory = async ({
 	isTemplate?: boolean;
 }) => {
 	const { componentType } = component || {};
+	// isTemplate = true; // REMOVE AFTER TESTING
 
 	const Component = ComponentsMap.get(componentType as ComponentsOptions);
 

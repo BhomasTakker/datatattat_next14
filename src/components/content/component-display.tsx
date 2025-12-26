@@ -12,7 +12,7 @@ export const ComponentDisplay = ({
 	component: PageComponent;
 	isClient?: boolean;
 }) => {
-	const { componentProps, componentType } = component;
+	const { componentProps } = component;
 
 	const Template = (
 		<ComponentFactory

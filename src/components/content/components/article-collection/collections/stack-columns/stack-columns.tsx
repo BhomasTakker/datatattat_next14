@@ -47,13 +47,11 @@ const renderMethod = (
 };
 
 const renderTemplate = () => {
-	{
-		return (
-			<div className={styles.container}>
-				<ArticleTemplates />
-			</div>
-		);
-	}
+	return (
+		<div className={styles.container}>
+			<ArticleTemplates />
+		</div>
+	);
 };
 
 const stackColumns = {
