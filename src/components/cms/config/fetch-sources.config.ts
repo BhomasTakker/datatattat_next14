@@ -9,26 +9,9 @@ export const FETCH_SOURCES_CONFIG: InputListProps = {
 
 	inputs: [
 		{
-			id: "fetchSourcesTitle",
-			type: EditInputs.title,
-			title: "Fetch Sources Settings",
-		},
-		{
 			id: "name",
 			type: EditInputs.text,
 			label: "Get by Name",
-			required: false,
-		},
-		{
-			id: "src",
-			type: EditInputs.text,
-			label: "Get by Source URL",
-			required: false,
-		},
-		{
-			id: "id",
-			type: EditInputs.text,
-			label: "Get by ID",
 			required: false,
 		},
 		// Add region, coverage, etc
