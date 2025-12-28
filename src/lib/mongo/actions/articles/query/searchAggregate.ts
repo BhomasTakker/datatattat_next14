@@ -32,6 +32,8 @@ export const createSearchAggregate = async (
 	const {
 		variant,
 		region,
+		orRegion = [],
+		excludeRegions = [],
 		coverage,
 		continent,
 		country,
@@ -74,6 +76,18 @@ export const createSearchAggregate = async (
 	if (region) {
 		const regions = Array.isArray(region) ? region : [region];
 		regions.forEach((r) => addFilter(filter, r, "details.region"));
+	}
+
+	// OR Region Logic - using should - potentially interferes with other shoulds
+	// i.e. minimumShouldMatch would either or rules - i.e. this region OR this match
+	// MongoDB Atlas Search treats array queries as OR by default
+	if (orRegion.length > 0) {
+		//filter NOT should
+		addFilter(filter, orRegion, "details.region");
+	}
+
+	if (excludeRegions.length > 0) {
+		addFilter(mustNot, excludeRegions, "details.region");
 	}
 
 	// coverage used for scoping articles. Give me US && national news

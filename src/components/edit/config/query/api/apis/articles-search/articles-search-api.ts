@@ -15,7 +15,7 @@ const REGION: ArrayInputProps = {
 	id: "region",
 	type: EditInputs.array,
 	label: "Select Region",
-	title: "Select Region",
+	title: "Select Region (This AND This)",
 	createObject: false,
 	input: {
 		id: "region",
@@ -24,9 +24,46 @@ const REGION: ArrayInputProps = {
 	},
 };
 
-const BASE_PARAMS: GenericInput[] = [
-	REGION,
+const OR_REGION: ArrayInputProps = {
+	id: "orRegion",
+	type: EditInputs.array,
+	label: "Region",
+	title: "Select Region (This OR This)",
+	createObject: false,
+	input: {
+		id: "orRegion",
+		type: EditInputs.text,
+		label: "Region",
+	},
+};
 
+const EXCLUDE_REGIONS: ArrayInputProps = {
+	id: "excludeRegions",
+	type: EditInputs.array,
+	label: "Exclude Regions",
+	title: "Exclude Regions",
+	createObject: false,
+	input: {
+		id: "excludeRegions",
+		type: EditInputs.text,
+		label: "Exclude Regions",
+	},
+};
+
+const REGION_INPUT: GenericInput[] = [
+	{
+		id: "regionInputsTitle",
+		type: EditInputs.title,
+		title: "Region Filters",
+		size: "large",
+	},
+	REGION,
+	OR_REGION,
+	EXCLUDE_REGIONS,
+];
+
+const BASE_PARAMS: GenericInput[] = [
+	...REGION_INPUT,
 	{
 		id: "coverage",
 		type: EditInputs.select,
