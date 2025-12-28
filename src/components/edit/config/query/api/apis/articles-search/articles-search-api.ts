@@ -1,5 +1,9 @@
 import { EditInputs } from "@/components/edit/inputs/inputs";
-import { GenericInput, InputListProps } from "@/types/edit/inputs/inputs";
+import {
+	ArrayInputProps,
+	GenericInput,
+	InputListProps,
+} from "@/types/edit/inputs/inputs";
 
 // BASE_PARAMS
 
@@ -7,60 +11,59 @@ import { GenericInput, InputListProps } from "@/types/edit/inputs/inputs";
 // VIDEO_PARAMS
 // AUDIO_PARAMS
 
-const BASE_PARAMS: GenericInput[] = [
-	{
-		// Select from available options uk, us, world, all
-		// select? or array? / multi select
+const REGION: ArrayInputProps = {
+	id: "region",
+	type: EditInputs.array,
+	label: "Select Region",
+	title: "Select Region (This AND This)",
+	createObject: false,
+	input: {
 		id: "region",
-		type: EditInputs.select,
-		options: ["uk", "us", "world"],
-		deselectLabel: "All",
+		type: EditInputs.text,
+		label: "Select Region",
+	},
+};
+
+const OR_REGION: ArrayInputProps = {
+	id: "orRegion",
+	type: EditInputs.array,
+	label: "Region",
+	title: "Select Region (This OR This)",
+	createObject: false,
+	input: {
+		id: "orRegion",
+		type: EditInputs.text,
 		label: "Region",
-		required: false,
 	},
-	////////////////////////////////////
-	// temp
-	// I think just use a search and multi select
-	// i.e. realtime update as you type
-	// select multiple regions i.e Europe, UK, Manchester
-	// to refine
-	// Some way of select this or this
-	// And do not select this
-	////////////////////////////////////
-	{
-		id: "continent",
-		type: EditInputs.select,
-		options: [
-			"Europe",
-			"North America",
-			"Asia",
-			"Africa",
-			"South America",
-			"Oceania",
-			"Antarctica",
-		],
-		deselectLabel: "All",
-		label: "Continent",
-		required: false,
-	},
-	{
-		id: "country",
+};
+
+const EXCLUDE_REGIONS: ArrayInputProps = {
+	id: "excludeRegions",
+	type: EditInputs.array,
+	label: "Exclude Regions",
+	title: "Exclude Regions",
+	createObject: false,
+	input: {
+		id: "excludeRegions",
 		type: EditInputs.text,
-		label: "Country",
-		required: false,
+		label: "Exclude Regions",
 	},
+};
+
+const REGION_INPUT: GenericInput[] = [
 	{
-		id: "state",
-		type: EditInputs.text,
-		label: "State",
-		required: false,
+		id: "regionInputsTitle",
+		type: EditInputs.title,
+		title: "Region Filters",
+		size: "large",
 	},
-	{
-		id: "city",
-		type: EditInputs.text,
-		label: "City",
-		required: false,
-	},
+	REGION,
+	OR_REGION,
+	EXCLUDE_REGIONS,
+];
+
+const BASE_PARAMS: GenericInput[] = [
+	...REGION_INPUT,
 	{
 		id: "coverage",
 		type: EditInputs.select,
@@ -229,24 +232,9 @@ export const PARAMS: GenericInput[] = [
 		// we are saved on comopnent props object - our parent
 		optionId: undefined, // "variantProps",
 	},
-	// Categpries likely dependent on variant
-	// {
-	// 	id: "categories",
-	// 	type: EditInputs.select,
-	// 	label: "Categories",
-	// 	required: false,
-	// 	options: ["24/7"],
-	// },
-	// {
-	// 	id: "query",
-	// 	type: EditInputs.text,
-	// 	label: "Text Search",
-	// 	required: false,
-	// 	// searches title / use - to exclude words 'to search a phrase'
-	// },
-	// split off into separate object
-	// We also want to add a regex option for inputs
 	{
+		// check with other must!
+		// We may be the wrong way round!
 		id: "mustContain",
 		type: EditInputs.array,
 		label: "Contains",
