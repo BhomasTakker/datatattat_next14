@@ -69,17 +69,12 @@ export const createSearchAggregate = async (
 	if (language) addFilter(filter, language, "details.languge");
 	if (mediaType) addFilter(filter, mediaType, "media.mediaType");
 
-	// eventually this OR this
-	if (region) addFilter(filter, region, "details.region");
-	if (continent) addFilter(filter, continent, "details.region");
-	if (country) addFilter(filter, country, "details.region");
-	if (state) addFilter(filter, state, "details.region");
-	if (city) addFilter(filter, city, "details.region");
-	// add continent, country, state, city, etc - all use region
-	// UK and Birmingham excludes Birmingham Alabama etc
-	// ultimately we want this AND this
-	// this OR this
-	// Not this etc
+	// This is AND logic for multiple regions
+	// We need to add OR logic & NOT logic later
+	if (region) {
+		const regions = Array.isArray(region) ? region : [region];
+		regions.forEach((r) => addFilter(filter, r, "details.region"));
+	}
 
 	// coverage used for scoping articles. Give me US && national news
 	if (coverage) addFilter(filter, coverage, "details.coverage");
