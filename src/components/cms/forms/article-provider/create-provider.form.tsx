@@ -32,6 +32,9 @@ export const CreateProviderForm = () => {
 				/>
 				<InputFactory data={ARTICLE_PROVIDER_CONFIG} />
 				<Button type="submit">Submit</Button>
+				<Button type="button" onClick={() => methods.reset()}>
+					Reset
+				</Button>
 			</form>
 		</FormProvider>
 	);

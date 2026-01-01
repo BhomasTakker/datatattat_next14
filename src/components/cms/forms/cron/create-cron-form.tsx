@@ -28,6 +28,9 @@ export const CreateCronJobForm = () => {
 				<FormTitle title="Create New Cron Job" subtitle="Add a new cron job." />
 				<InputFactory data={CRON_JOB_CONFIG} />
 				<Button type="submit">Submit</Button>
+				<Button type="button" onClick={() => methods.reset()}>
+					Reset
+				</Button>
 			</form>
 		</FormProvider>
 	);
