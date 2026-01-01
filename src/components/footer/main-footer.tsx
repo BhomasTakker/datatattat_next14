@@ -1,9 +1,8 @@
-import React from "react";
 import styles from "./main-footer.module.scss";
 import { Icons } from "./icons";
 
 const year = new Date(Date.now()).getFullYear();
-const COPYRIGHT_NOTICE = `Copyright ${year} ©Datatattat.`;
+const COPYRIGHT_NOTICE = `Copyright 2024 - ${year} ©Datatattat.`;
 const COPYRIGHT_MESSAGE =
 	"Datatattat is not responsible for the content of external sites.";
 

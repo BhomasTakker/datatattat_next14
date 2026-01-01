@@ -31,6 +31,9 @@ export const CreateSourceForm = () => {
 				/>
 				<InputFactory data={ARTICLE_SOURCE_CONFIG} />
 				<Button type="submit">Submit</Button>
+				<Button type="button" onClick={() => methods.reset()}>
+					Reset
+				</Button>
 			</form>
 		</FormProvider>
 	);
