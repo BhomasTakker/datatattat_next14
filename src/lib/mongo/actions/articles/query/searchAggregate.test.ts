@@ -34,7 +34,7 @@ describe("createSearchAggregate", () => {
 		jest.clearAllMocks();
 	});
 
-	it("should add filters for variant, region, and language", async () => {
+	it("should add filters for variant and language", async () => {
 		const spyAddFilter = jest.spyOn(searchQueryFunctions, "addFilter");
 		const queryParams = {
 			variant: "news",
@@ -48,11 +48,6 @@ describe("createSearchAggregate", () => {
 			expect.any(Array),
 			"news",
 			"variant"
-		);
-		expect(spyAddFilter).toHaveBeenCalledWith(
-			expect.any(Array),
-			"us",
-			"details.region"
 		);
 		expect(spyAddFilter).toHaveBeenCalledWith(
 			expect.any(Array),
