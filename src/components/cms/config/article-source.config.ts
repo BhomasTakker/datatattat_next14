@@ -33,6 +33,7 @@ export const ARTICLE_SOURCE_CONFIG: InputListProps = {
 			type: EditInputs.array,
 			title: "Categories",
 			createObject: false,
+			required: false,
 			input: {
 				id: "category",
 				type: EditInputs.text,
@@ -44,6 +45,7 @@ export const ARTICLE_SOURCE_CONFIG: InputListProps = {
 			type: EditInputs.array,
 			title: "Region",
 			createObject: false,
+			required: false,
 			input: {
 				id: "region",
 				// this is an enum or union
@@ -56,6 +58,7 @@ export const ARTICLE_SOURCE_CONFIG: InputListProps = {
 			type: EditInputs.array,
 			title: "Coverage",
 			createObject: false,
+			required: false,
 			input: {
 				id: "coverage",
 				type: EditInputs.text,

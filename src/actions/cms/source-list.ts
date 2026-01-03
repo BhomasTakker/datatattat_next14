@@ -115,7 +115,14 @@ export async function createSourceList(data: ArticleSourceList) {
 		headers: await getCMSHeaders(),
 		body: JSON.stringify(data),
 	})
-		.then((res) => res.json() as Promise<ArticleSourceList>)
+		.then(async (res) => {
+			if (!res.ok) {
+				const error = await res.json();
+				throw new Error(error.message || `HTTP error ${res.status}`);
+			}
+
+			return res.json() as Promise<ArticleSourceList>;
+		})
 		.catch((err) => {
 			//create errors etc sounds like a good idea
 			console.error("Error creating source list:", err);

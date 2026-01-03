@@ -131,7 +131,14 @@ export async function createSource(data: Omit<ArticleSource, "_id">) {
 		headers: await getCMSHeaders(),
 		body: JSON.stringify(data),
 	})
-		.then((res) => res.json() as Promise<ArticleSource>)
+		.then(async (res) => {
+			if (!res.ok) {
+				const error = await res.json();
+				throw new Error(error.message || `HTTP error ${res.status}`);
+			}
+
+			return res.json() as Promise<ArticleSource>;
+		})
 		.catch((err) => {
 			console.error("Error creating source:", err);
 			throw err;
