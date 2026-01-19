@@ -61,8 +61,10 @@ export const ARTICLE_SOURCE_CONFIG: InputListProps = {
 			required: false,
 			input: {
 				id: "coverage",
-				type: EditInputs.text,
+				type: EditInputs.select,
 				label: "Coverage",
+				options: ["local", "national", "international", "regional"],
+				defaultValue: "international",
 			},
 		},
 		{
