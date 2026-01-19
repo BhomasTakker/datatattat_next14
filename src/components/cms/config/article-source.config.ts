@@ -69,11 +69,13 @@ export const ARTICLE_SOURCE_CONFIG: InputListProps = {
 			id: "language",
 			type: EditInputs.text,
 			label: "Language",
+			defaultValue: "en",
 		},
 		{
 			id: "source",
 			type: EditInputs.text,
 			label: "Source",
+			defaultValue: "rss",
 		},
 		{
 			id: "mediaType",

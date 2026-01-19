@@ -55,6 +55,7 @@ export const ARTICLE_SOURCE_LIST_CONFIG: InputListProps = {
 			id: "language",
 			type: EditInputs.text,
 			label: "Language",
+			defaultValue: "en",
 		},
 		{
 			id: "sources",

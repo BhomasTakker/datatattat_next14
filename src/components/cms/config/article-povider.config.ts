@@ -47,6 +47,7 @@ export const ARTICLE_PROVIDER_CONFIG: InputListProps = {
 			min: 0,
 			max: 100,
 			step: 1,
+			defaultValue: 75,
 			validation: {
 				required: true,
 				min: 0,
@@ -61,6 +62,7 @@ export const ARTICLE_PROVIDER_CONFIG: InputListProps = {
 			min: -10,
 			max: 10,
 			step: 0.1,
+			defaultValue: 0,
 			validation: {
 				required: true,
 				min: -1,
