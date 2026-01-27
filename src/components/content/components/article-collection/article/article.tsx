@@ -35,7 +35,7 @@ export const Article = ({ article, styles }: ArticleProps) => {
     need correct ratio */}
 			{/* Media may not be required? Would we ever play a thing? - maybe - if so then add it */}
 			{/* Just be image - on click play media etc - the asset is always an image */}
-
+			{/* We need a 'showImage' flag here - we may want just the text */}
 			<ArticleImage
 				image={image || logo}
 				// logo OR placeholder
