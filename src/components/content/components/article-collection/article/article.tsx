@@ -35,18 +35,17 @@ export const Article = ({ article, styles }: ArticleProps) => {
     need correct ratio */}
 			{/* Media may not be required? Would we ever play a thing? - maybe - if so then add it */}
 			{/* Just be image - on click play media etc - the asset is always an image */}
-			{image && (
-				<ArticleImage
-					image={image}
-					// logo OR placeholder
-					fallback={logo}
-					imageAlt={
-						imageAlt ||
-						`We're sorry. This image does not have any alternative text.`
-					}
-					styles={styles}
-				/>
-			)}
+
+			<ArticleImage
+				image={image || logo}
+				// logo OR placeholder
+				fallback={logo}
+				imageAlt={
+					imageAlt ||
+					`We're sorry. This image does not have any alternative text.`
+				}
+				styles={styles}
+			/>
 			<div className={styles.contentContainer}>
 				<div className={styles.textContainer}>
 					<h3 className={styles.title}>{stripHTML(title)}</h3>
