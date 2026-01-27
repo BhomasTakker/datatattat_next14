@@ -18,6 +18,7 @@ export const ArticleImage = ({
 	const [sourceImage, setSourceImage] = useState(image);
 
 	const onErrorHandler = () => {
+		if (sourceImage === fallbackImageGradient()) return; // final fallback reached
 		if (sourceImage === fallback) {
 			setSourceImage(fallbackImageGradient());
 			return;
