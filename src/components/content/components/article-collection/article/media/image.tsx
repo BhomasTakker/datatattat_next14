@@ -1,5 +1,6 @@
 import { StyleSheet } from "@/types/css";
 import { useState } from "react";
+import { fallbackImageGradient } from "../utils/fallback";
 
 interface ArticleImage {
 	image: string;
@@ -16,8 +17,13 @@ export const ArticleImage = ({
 }: ArticleImage) => {
 	const [sourceImage, setSourceImage] = useState(image);
 
-	// we should update image alt
 	const onErrorHandler = () => {
+		if (sourceImage === fallbackImageGradient()) return; // final fallback reached
+		if (sourceImage === fallback) {
+			setSourceImage(fallbackImageGradient());
+			return;
+		}
+
 		setSourceImage(fallback);
 	};
 

@@ -2,7 +2,10 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { Article } from "./article";
-import { CollectionItem } from "@/types/data-structures/collection/item/item";
+import {
+	CollectionItem,
+	ProviderItem,
+} from "@/types/data-structures/collection/item/item";
 import { StyleSheet } from "@/types/css";
 
 // Mock the ArticleImage and Meta components
@@ -12,14 +15,17 @@ jest.mock("./media/image", () => {
 		ArticleImage: ({
 			image,
 			imageAlt,
+			fallback,
 		}: {
 			image: string;
 			imageAlt: string;
+			fallback: string;
 		}) => {
 			return (
 				<div data-testid="mock-article-image">
 					<div data-testid="image">{image}</div>
 					<div data-testid="imageAlt">{imageAlt}</div>
+					<div data-testid="fallback">{fallback}</div>
 				</div>
 			);
 		},
@@ -65,6 +71,16 @@ const mockArticle: CollectionItem = {
 	},
 };
 
+const mockProvider: ProviderItem = {
+	name: "Test Provider",
+	logo: "logo-url.png",
+	origin: "Test Origin",
+	description: "Test Provider Description",
+	url: "https://www.testprovider.com",
+	rating: 75,
+	leaning: 0,
+};
+
 describe("Article Component", () => {
 	it("renders the article with title and description", () => {
 		render(<Article article={mockArticle} styles={mockStyles} />);
@@ -83,11 +99,28 @@ describe("Article Component", () => {
 		expect(screen.getByTestId("mock-meta")).toBeInTheDocument();
 	});
 
-	it("does not render the ArticleImage component when image is not provided", () => {
+	it("renders the ArticleImage component with fallback when avatar is not provided", () => {
 		const articleWithoutImage = { ...mockArticle, avatar: null };
 		// @ts-expect-error - we are passing dead data for the image
 		render(<Article article={articleWithoutImage} styles={mockStyles} />);
-		expect(screen.queryByTestId("mock-article-image")).not.toBeInTheDocument();
+		const imageComponent = screen.getByTestId("mock-article-image");
+		expect(imageComponent).toBeInTheDocument();
+		// When avatar is null, both image and fallback use the logo (empty string in this case)
+		expect(screen.getByTestId("image")).toHaveTextContent("");
+		expect(screen.getByTestId("fallback")).toHaveTextContent("");
+	});
+
+	it("uses logo as fallback when avatar is provided but has no src", () => {
+		const articleWithLogo = {
+			...mockArticle,
+			provider: mockProvider,
+		};
+		render(<Article article={articleWithLogo} styles={mockStyles} />);
+		const imageComponent = screen.getByTestId("mock-article-image");
+		expect(imageComponent).toBeInTheDocument();
+		// Image uses avatar.src, fallback uses logo
+		expect(screen.getByTestId("image")).toHaveTextContent("test-image-src");
+		expect(screen.getByTestId("fallback")).toHaveTextContent("logo-url.png");
 	});
 
 	it("renders default alt text when image alt is not provided", () => {
@@ -98,8 +131,8 @@ describe("Article Component", () => {
 		render(<Article article={articleWithoutImageAlt} styles={mockStyles} />);
 		expect(
 			screen.getByText(
-				"We're sorry. This image does not have any alternative text."
-			)
+				"We're sorry. This image does not have any alternative text.",
+			),
 		).toBeInTheDocument();
 	});
 });
