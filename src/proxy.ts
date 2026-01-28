@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 
-export function middleware(request: NextRequest) {
+// We are just sending the pathname along as a header - this was a workaround
+// there will be better ways to do this probably
+
+export function proxy(request: NextRequest) {
 	const requestHeaders = new Headers(request.headers);
 	const pathname = request.nextUrl.pathname;
 	const isStaticRoute = pathname.startsWith("/_next/static/");

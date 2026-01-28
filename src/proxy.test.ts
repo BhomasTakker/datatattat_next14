@@ -1,5 +1,5 @@
 import { NextRequest } from "next/server";
-import { middleware } from "./middleware";
+import { proxy } from "./proxy";
 
 type MockRequest = {
 	headers: Headers;
@@ -34,7 +34,7 @@ const headersSetMock = jest
 		console.log("mocked function");
 	});
 
-describe("middleware", () => {
+describe("proxy", () => {
 	it("should set the x-pathname header for non-static routes", () => {
 		const mockRequest = {
 			headers: new Headers(),
@@ -43,12 +43,12 @@ describe("middleware", () => {
 			},
 		};
 
-		middleware(mockRequest as NextRequest) as unknown as MockResponse;
+		proxy(mockRequest as NextRequest) as unknown as MockResponse;
 
 		expect(headersSetMock).toHaveBeenCalledTimes(1);
 		expect(headersSetMock).toHaveBeenCalledWith(
 			"x-pathname",
-			mockRequest.nextUrl.pathname
+			mockRequest.nextUrl.pathname,
 		);
 	});
 
@@ -60,8 +60,8 @@ describe("middleware", () => {
 			},
 		};
 
-		const response = middleware(
-			mockRequest as NextRequest
+		const response = proxy(
+			mockRequest as NextRequest,
 		) as unknown as MockResponse;
 
 		expect(response.mockedValue).toBe(true);
@@ -75,7 +75,7 @@ describe("middleware", () => {
 			},
 		};
 
-		const response = middleware(mockRequest as NextRequest);
+		const response = proxy(mockRequest as NextRequest);
 
 		expect(response).toEqual({
 			mockedValue: true,
