@@ -29,7 +29,7 @@ const DetailsSchema = new Schema(
 		},
 		language: String,
 	},
-	{ _id: false, strict: false }
+	{ _id: false, strict: false },
 );
 
 const AvatarSchema = new Schema(
@@ -43,7 +43,7 @@ const AvatarSchema = new Schema(
 			default: "We apologize, but the image has no alt text available.",
 		},
 	},
-	{ _id: false }
+	{ _id: false },
 );
 
 const MediaSchema = new Schema({}, { _id: false, strict: false });
@@ -77,13 +77,18 @@ const ArticleSchema = new Schema<CollectionItem>(
 			required: [true, "Please provide a provider."],
 			ref: "ArticleProvider",
 		},
+		feed: {
+			type: mongoose.Schema.Types.ObjectId,
+			required: [true, "Please provide a source feed."],
+			ref: "ArticleSource",
+		},
 		// Management fields
 		disabled: {
 			type: Boolean,
 			default: false,
 		},
 	},
-	{ timestamps: true }
+	{ timestamps: true },
 );
 
 export default mongoose.models.Article ||
