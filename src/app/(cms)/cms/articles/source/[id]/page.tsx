@@ -6,6 +6,8 @@ import { initCMSPage } from "@/actions/cms/init-cms-page";
 import { ArticleSourceCMSForm } from "@/components/cms/forms/article-source/article-source";
 import { getProvider } from "@/actions/cms/provider";
 import { ArticleProviderCMSForm } from "@/components/cms/forms/article-provider/article-provider-form";
+import { getArticles, gotoArticle } from "@/actions/cms/article";
+import { PaginatedTable } from "@/components/content/components/table/paginated-table";
 
 type Params = Promise<{ id: string }>;
 type Props = {
@@ -31,6 +33,10 @@ export default async function Page({ params }: Props) {
 		name,
 	});
 
+	const articles = await getArticles({
+		sourceId: source._id,
+	});
+
 	return (
 		<section className={styles.root}>
 			<CMSTitle title={`Article Source: ${name}`} description={src} />
@@ -39,6 +45,16 @@ export default async function Page({ params }: Props) {
 					provider={provider}
 					disabled={true}
 					useNavigate={true}
+				/>
+			)}
+			{articles && (
+				<PaginatedTable
+					title="Source Articles"
+					columns={["title", "src", "variant", "createdAt"]}
+					paginatedData={articles}
+					fetchPaginatedData={getArticles}
+					query={{ sourceId: source._id }}
+					onSelect={gotoArticle}
 				/>
 			)}
 			<ArticleSourceCMSForm source={source} />

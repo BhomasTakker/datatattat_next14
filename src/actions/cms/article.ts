@@ -39,6 +39,7 @@ const createQueryString = (data: FetchArticleFormData) => {
 type FetchArticlesQuery = {
 	title?: string;
 	providerId?: string;
+	sourceId?: string;
 	id?: string;
 	src?: string;
 	page?: string;
@@ -49,12 +50,11 @@ type FetchArticlesQuery = {
 
 const createArticlesQueryString = (data: FetchArticlesQuery) => {
 	let params = createPaginationParams(data, new URLSearchParams());
-	params = appendParams({ ...data, provider: data.providerId }, params, [
-		"title",
-		"src",
-		"id",
-		"provider",
-	]);
+	params = appendParams(
+		{ ...data, provider: data.providerId, feed: data.sourceId },
+		params,
+		["title", "src", "id", "provider", "feed"],
+	);
 
 	return `?${params.toString()}`;
 };
@@ -136,7 +136,7 @@ export async function deleteArticle(id: string) {
 }
 
 export async function gotoArticle(
-	data: Record<string, unknown> & { _id?: string }
+	data: Record<string, unknown> & { _id?: string },
 ) {
 	if (!data._id) {
 		return;
