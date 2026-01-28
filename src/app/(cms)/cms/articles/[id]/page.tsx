@@ -5,6 +5,8 @@ import { ArticleCMSForm } from "@/components/cms/forms/article/article-form";
 import { ArticleProviderCMSForm } from "@/components/cms/forms/article-provider/article-provider-form";
 import { CMSTitle } from "@/components/cms/title/cms-title";
 import { initCMSPage } from "@/actions/cms/init-cms-page";
+import { ArticleSourceCMSForm } from "@/components/cms/forms/article-source/article-source";
+import { getSource } from "@/actions/cms/source";
 
 type Params = Promise<{ id: string }>;
 type Props = {
@@ -18,6 +20,10 @@ export default async function Page({ params }: Props) {
 
 	const article = await getArticle({
 		id: id,
+	});
+
+	const sourceFeed = await getSource({
+		id: article?.feed?._id || "",
 	});
 
 	if (!article?._id) {
@@ -35,6 +41,9 @@ export default async function Page({ params }: Props) {
 					disabled={true}
 					useNavigate={true}
 				/>
+			)}
+			{sourceFeed && (
+				<ArticleSourceCMSForm source={sourceFeed} disabled={true} />
 			)}
 			<ArticleCMSForm article={article} />
 		</section>

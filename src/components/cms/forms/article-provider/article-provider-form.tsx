@@ -61,13 +61,17 @@ export const ArticleProviderCMSForm = ({
 		}
 	};
 
+	const title = !disabled
+		? `Update Provider: ${provider.name}`
+		: `Provider Details: ${provider.name}`;
+	const subtitle = !disabled
+		? `Modify the provider details: ${provider._id}`
+		: `View the provider details: ${provider._id}`;
+
 	return (
 		<FormProvider {...methods}>
 			<form onSubmit={submitHandler} className={styles.form}>
-				<FormTitle
-					title="Update Provider"
-					subtitle="Modify the provider details."
-				/>
+				<FormTitle title={title} subtitle={subtitle} />
 				<InputFactory data={{ ...ARTICLE_PROVIDER_CONFIG }} />
 				<div className={styles.buttons}>
 					{!disabled && <Button type="submit">Submit</Button>}
