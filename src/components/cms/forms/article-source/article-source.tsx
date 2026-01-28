@@ -58,13 +58,17 @@ export const ArticleSourceCMSForm = ({
 		}
 	};
 
+	const title = !disabled
+		? `Edit Article Source: ${source.name}`
+		: `View Article Source: ${source.name}`;
+	const subtitle = !disabled
+		? `Modify the article source details: ${source._id}`
+		: `Viewing the article source details: ${source._id}`;
+
 	return (
 		<FormProvider {...methods}>
 			<form onSubmit={submitHandler} className={styles.form}>
-				<FormTitle
-					title={`Edit Article Source: ${source.name}`}
-					subtitle={`Modify the article source details: ${source._id}`}
-				/>
+				<FormTitle title={title} subtitle={subtitle} />
 				<InputFactory data={{ ...ARTICLE_SOURCE_CONFIG }} />
 				<div className={styles.buttons}>
 					{!disabled && <Button type="submit">Submit</Button>}
