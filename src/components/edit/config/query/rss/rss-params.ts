@@ -1,10 +1,12 @@
 import { EditInputs } from "@/components/edit/inputs/inputs";
 import { GenericInput } from "@/types/edit/inputs/inputs";
 
-const ArticleVariants = {
+// RSS Variants
+const RSSVariants = {
 	article: "article",
 	video: "video",
 	audio: "audio",
+	oembed: "oembed",
 } as const;
 
 export const RSS_PARAMS: GenericInput[] = [
@@ -23,11 +25,12 @@ export const RSS_PARAMS: GenericInput[] = [
 		type: EditInputs.select,
 		label: "Select Variant",
 		options: [
-			ArticleVariants.article,
-			ArticleVariants.video,
-			ArticleVariants.audio,
+			RSSVariants.article,
+			RSSVariants.video,
+			RSSVariants.audio,
+			RSSVariants.oembed,
 		],
-		defaultValue: ArticleVariants.article,
+		defaultValue: RSSVariants.article,
 		required: true,
 	},
 ];

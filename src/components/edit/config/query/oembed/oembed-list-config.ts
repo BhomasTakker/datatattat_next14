@@ -11,6 +11,7 @@ import { BLUESKY_OEMBED_CONFIG } from "./providers/bluesky";
 import { TWITTER_OEMBED_CONFIG } from "./providers/twitter";
 import { TIKTOK_OEMBED_CONFIG } from "./providers/tiktok";
 import { SPOTIFY_OEMBED_CONFIG } from "./providers/spotify";
+import { REDDIT_OEMBED_CONFIG } from "./providers/reddit";
 
 const createOembedArray = (config: GenericInput): InputListProps => {
 	return {
@@ -34,12 +35,14 @@ const createOembedArray = (config: GenericInput): InputListProps => {
 type pageContainersProps =
 	| typeof TWITTER_OEMBED_CONFIG
 	| typeof BLUESKY_OEMBED_CONFIG
-	| typeof TIKTOK_OEMBED_CONFIG;
+	| typeof TIKTOK_OEMBED_CONFIG
+	| typeof REDDIT_OEMBED_CONFIG;
 
 const pageContainersMap = new Map<string, pageContainersProps>([
 	[OembedOptions.twitter, createOembedArray(TWITTER_OEMBED_CONFIG)],
 	[OembedOptions.bluesky, createOembedArray(BLUESKY_OEMBED_CONFIG)],
 	[OembedOptions.tiktok, createOembedArray(TIKTOK_OEMBED_CONFIG)],
+	[OembedOptions.reddit, createOembedArray(REDDIT_OEMBED_CONFIG)],
 ]);
 
 const oembedListParams: ObjectSelectProps = {
