@@ -13,18 +13,18 @@ import { videoAdapter } from "./adapters/video-adapter";
 import { audioAdapter, PodcastRSSCollection } from "./adapters/audio-adapter";
 import { RSSChannelType } from "@/types/data-structures/rss";
 import { YouTubeRSSChannel } from "./types";
+import { oembedAdapter } from "./adapters/oembed-adapter";
 
-// temp
-type ArticleVariant = "article" | "video" | "audio";
+type RSSVariant = "article" | "video" | "audio" | "oembed";
 
 type RssParams = {
 	url: string;
-	variant: ArticleVariant;
+	variant: RSSVariant;
 };
 
 type FetchRSSCollection = {
 	url: string;
-	variant: ArticleVariant;
+	variant: RSSVariant;
 };
 
 type RSSType = RSSChannelType | YouTubeRSSChannel | PodcastRSSCollection;
@@ -34,12 +34,14 @@ const CACHE = 60 * 60 * 24;
 type Adapters =
 	| typeof articleAdapter
 	| typeof videoAdapter
-	| typeof audioAdapter;
+	| typeof audioAdapter
+	| typeof oembedAdapter;
 
 const adapters = new Map<string, Adapters>([
 	["article", articleAdapter],
 	["video", videoAdapter],
 	["audio", audioAdapter],
+	["oembed", oembedAdapter],
 ]);
 
 export const getParserCustomFields = (type: string) => {
@@ -59,7 +61,7 @@ export const getCollection = async ({ url, variant }: FetchRSSCollection) => {
 
 	const loadedCollection = (await rssParse(
 		url,
-		getParserCustomFields(variant)
+		getParserCustomFields(variant),
 	)) as RSSType;
 	if (!loadedCollection) {
 		return Promise.reject("Error fetching collection");
@@ -97,7 +99,7 @@ export const fetchRSSCollection = async ({
 		const collection = fetchWithCache(
 			() => getCollection({ url, variant }),
 			url,
-			CACHE
+			CACHE,
 		); // 1 day
 		return collection;
 	} catch {

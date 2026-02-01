@@ -39,8 +39,16 @@ export const OEMBED_COLLECTION_CONFIG: InputListProps = {
 			// we are saved on comopnent props object - our parent
 			optionId: undefined, // "variantProps",
 		},
+		// be goo to be able to determine what was chosen
+		// So we could determine what further data to use
 		getWithConfig({
-			options: [QueryOptions.OEMBED_LIST, QueryOptions.API_QUERY],
+			options: [
+				QueryOptions.OEMBED_LIST,
+				QueryOptions.API_QUERY,
+				// You would probably want to differentiate between rss and oembed rss? - like apis?
+				// We shouldn't need to specify variant for instance as we'll match it
+				QueryOptions.RSS,
+			],
 			defaultSelection: QueryOptions.OEMBED_LIST,
 			apiConfigOptions: {
 				options: [APIOptions.BLUESKY_API],
