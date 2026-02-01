@@ -11,6 +11,12 @@ export type TwitterOEmbedParams = {
 	tweetId: string;
 } & OEmbedParams;
 
+// assuming one type here
+export type RedditOEmbedParams = {
+	variant: OembedOptions.reddit;
+	url: string;
+} & OEmbedParams;
+
 export type BlueskyOEmbedParams = {
 	variant: OembedOptions.bluesky;
 	account: string;
