@@ -1,10 +1,7 @@
 import { BsTwitterX } from "react-icons/bs";
 import { TfiReddit } from "react-icons/tfi";
-import { FaYoutube } from "react-icons/fa6";
 import { FaSpotify } from "react-icons/fa";
 import { FaMixcloud } from "react-icons/fa6";
-import { FaInstagram } from "react-icons/fa6";
-import { FaFacebook } from "react-icons/fa";
 import { FaThreads } from "react-icons/fa6";
 import { FaBluesky } from "react-icons/fa6";
 import { FaTumblr } from "react-icons/fa";
@@ -26,10 +23,10 @@ export const iconsList = [
 		link: "https://www.reddit.com/user/datatattat/",
 		icon: TfiReddit,
 	},
-	{
-		link: "https://www.youtube.com/@RickAstleyYT",
-		icon: FaYoutube,
-	},
+	// {
+	// 	link: "https://www.youtube.com/@RickAstleyYT",
+	// 	icon: FaYoutube,
+	// },
 	{
 		link: "https://open.spotify.com/user/31f53zn4qds7oykh55x5ps735qoi",
 		icon: FaSpotify,
@@ -38,18 +35,18 @@ export const iconsList = [
 		link: "https://www.mixcloud.com/datatattat/",
 		icon: FaMixcloud,
 	},
-	{
-		link: "https://www.instagram.com/jeremycorbyn/",
-		icon: FaInstagram,
-	},
+	// {
+	// 	link: "https://www.instagram.com/jeremycorbyn/",
+	// 	icon: FaInstagram,
+	// },
 	{
 		link: "https://www.threads.net/@elonmusksjet",
 		icon: FaThreads,
 	},
-	{
-		link: "https://www.facebook.com/AntifaAustralia/",
-		icon: FaFacebook,
-	},
+	// {
+	// 	link: "https://www.facebook.com/AntifaAustralia/",
+	// 	icon: FaFacebook,
+	// },
 	{
 		link: "https://bsky.app/profile/datatattat.bsky.social",
 		icon: FaBluesky,
