@@ -60,10 +60,7 @@ export const ARTICLE_CREATE_CONFIG: InputListProps = {
 			id: "feed",
 			type: EditInputs.text,
 			label: "Source Feed ID",
-			required: true,
-			validation: {
-				required: true,
-			},
+			required: false,
 		},
 		...DETAILS,
 		...AVATAR,
