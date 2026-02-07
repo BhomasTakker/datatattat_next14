@@ -1,5 +1,9 @@
 import { EditInputs } from "@/components/edit/inputs/inputs";
 import { InputListProps } from "@/types/edit/inputs/inputs";
+import { AVATAR } from "./avatar.config";
+import { DETAILS } from "./details.config";
+import { MANAGEMENT } from "./management.config";
+import { ARTICLE_VARIANT } from "./variant/variant.config";
 
 export const ARTICLE_CREATE_CONFIG: InputListProps = {
 	id: "createArticle",
@@ -22,6 +26,12 @@ export const ARTICLE_CREATE_CONFIG: InputListProps = {
 			},
 		},
 		{
+			id: "description",
+			type: EditInputs.text,
+			label: "Description",
+			required: false,
+		},
+		{
 			id: "src",
 			type: EditInputs.url,
 			label: "Source URL",
@@ -31,25 +41,12 @@ export const ARTICLE_CREATE_CONFIG: InputListProps = {
 			},
 		},
 		{
-			id: "description",
-			type: EditInputs.text,
-			label: "Description",
-			required: false,
-		},
-		{
 			id: "guid",
 			type: EditInputs.text,
 			label: "GUID",
 			required: false,
 		},
-		{
-			id: "variant",
-			type: EditInputs.select,
-			label: "Variant",
-			options: ["article", "audio", "video"],
-			defaultValue: "article",
-			required: true,
-		},
+		ARTICLE_VARIANT,
 		{
 			id: "provider",
 			type: EditInputs.text,
@@ -68,5 +65,8 @@ export const ARTICLE_CREATE_CONFIG: InputListProps = {
 				required: true,
 			},
 		},
+		...DETAILS,
+		...AVATAR,
+		...MANAGEMENT,
 	],
 };
