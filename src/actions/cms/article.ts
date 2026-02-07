@@ -119,6 +119,50 @@ export async function updateArticle(data: CollectionItem) {
 		});
 }
 
+export async function createArticle(data: Omit<CollectionItem, "_id">) {
+	///////////////////////////////
+	// Add utils etc
+	// Basic validation
+	if (!data.title || data.title.trim().length === 0) {
+		throw new Error("Article title is required.");
+	}
+
+	if (!data.src || data.src.trim().length === 0) {
+		throw new Error("Article source URL is required.");
+	}
+
+	// Validate src URL format
+	try {
+		new URL(data.src);
+	} catch {
+		throw new Error("Article source URL must be a valid URL.");
+	}
+
+	if (!data.provider) {
+		throw new Error("Article provider is required.");
+	}
+	/////////////////////////////////////////
+
+	// We arethrowing an error on a 400 say AND resolving toast successful!
+	return await fetch(`${getRoute("/articles/create")}`, {
+		method: "POST",
+		headers: await getCMSHeaders(),
+		body: JSON.stringify(data),
+	})
+		.then(async (res) => {
+			if (!res.ok) {
+				const error = await res.json();
+				throw new Error(error.message || `HTTP error ${res.status}`);
+			}
+
+			return res.json() as Promise<CollectionItem>;
+		})
+		.catch((err) => {
+			console.error("Error creating article:", err);
+			throw err;
+		});
+}
+
 export async function deleteArticle(id: string) {
 	if (!id) {
 		throw new Error("Article ID is required for deletion.");

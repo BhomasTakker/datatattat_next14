@@ -4,6 +4,7 @@ import { getArticles, gotoArticle } from "@/actions/cms/article";
 import { PaginatedTable } from "@/components/content/components/table/paginated-table";
 import { CMSTitle } from "@/components/cms/title/cms-title";
 import { initCMSPage } from "@/actions/cms/init-cms-page";
+import { CreateArticleForm } from "@/components/cms/forms/article/create-article.form";
 
 export default async function Page() {
 	await initCMSPage();
@@ -29,6 +30,7 @@ export default async function Page() {
 				/>
 			)}
 			<FetchArticlesCMSForm />
+			<CreateArticleForm />
 		</section>
 	);
 }
