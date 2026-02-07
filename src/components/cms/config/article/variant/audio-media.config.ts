@@ -10,35 +10,43 @@ export const AUDIO_MEDIA: InputListProps = {
 	createObject: false,
 	inputs: [
 		{
-			id: "MediaTitle",
-			type: EditInputs.title,
-			title: "Audio Media",
-			header: "h3",
-		},
-		{
-			id: "type",
-			type: EditInputs.text,
-			label: "Type",
-			required: false,
-		},
-		{
-			id: "mediaType",
-			type: EditInputs.text,
-			label: "Media Type",
-			required: false,
-		},
-		{
-			id: "duration",
-			type: EditInputs.number,
-			label: "Duration (in seconds)",
-			min: 0,
-			required: false,
-		},
-		{
-			id: "collectionTitle",
-			type: EditInputs.text,
-			label: "Media Collection Title",
-			required: false,
+			id: "media",
+			type: EditInputs.inputList,
+			label: "Audio Media",
+			createObject: true,
+			inputs: [
+				{
+					id: "MediaTitle",
+					type: EditInputs.title,
+					title: "Audio Media",
+					header: "h3",
+				},
+				{
+					id: "type",
+					type: EditInputs.text,
+					label: "Type",
+					required: false,
+				},
+				{
+					id: "mediaType",
+					type: EditInputs.text,
+					label: "Media Type",
+					required: false,
+				},
+				{
+					id: "duration",
+					type: EditInputs.number,
+					label: "Duration (in seconds)",
+					min: 0,
+					required: false,
+				},
+				{
+					id: "collectionTitle",
+					type: EditInputs.text,
+					label: "Media Collection Title",
+					required: false,
+				},
+			],
 		},
 	],
 };
