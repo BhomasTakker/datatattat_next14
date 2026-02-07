@@ -120,6 +120,8 @@ export async function updateArticle(data: CollectionItem) {
 }
 
 export async function createArticle(data: Omit<CollectionItem, "_id">) {
+	///////////////////////////////
+	// Add utils etc
 	// Basic validation
 	if (!data.title || data.title.trim().length === 0) {
 		throw new Error("Article title is required.");
@@ -139,11 +141,9 @@ export async function createArticle(data: Omit<CollectionItem, "_id">) {
 	if (!data.provider) {
 		throw new Error("Article provider is required.");
 	}
+	/////////////////////////////////////////
 
-	if (!data.feed) {
-		throw new Error("Article source feed is required.");
-	}
-
+	// We arethrowing an error on a 400 say AND resolving toast successful!
 	return await fetch(`${getRoute("/articles/create")}`, {
 		method: "POST",
 		headers: await getCMSHeaders(),
