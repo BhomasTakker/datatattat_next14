@@ -3,7 +3,6 @@ import { InputListProps } from "@/types/edit/inputs/inputs";
 import { AVATAR } from "./avatar.config";
 import { DETAILS } from "./details.config";
 import { MANAGEMENT } from "./management.config";
-import { MEDIA } from "./media.config";
 import { ARTICLE_VARIANT } from "./variant/variant.config";
 
 export const ARTICLE_CONFIG: InputListProps = {
@@ -52,7 +51,6 @@ export const ARTICLE_CONFIG: InputListProps = {
 		},
 		...DETAILS,
 		...AVATAR,
-		...MEDIA,
 		...MANAGEMENT,
 	],
 };
