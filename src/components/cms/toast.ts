@@ -5,6 +5,7 @@ import { create } from "domain";
 export enum CMSToastType {
 	DeleteArticle = "delete-article",
 	SaveArticle = "save-article",
+	CreateArticle = "create-article",
 	SaveArticleProvider = "save-article-provider",
 	DeleteArticleProvider = "delete-article-provider",
 	CreateArticleProvider = "create-article-provider",
@@ -36,6 +37,12 @@ const ToastMessages = {
 		loading: "Saving Article...",
 		success: "Article has been updated!",
 		error: "Error updating article",
+	},
+	createArticle: {
+		id: CMSToastType.CreateArticle,
+		loading: "Creating Article...",
+		success: "Article has been created!",
+		error: "Error creating article",
 	},
 	saveArticleProvider: {
 		id: CMSToastType.SaveArticleProvider,
@@ -123,6 +130,7 @@ const ToastMessages = {
 export const ToastMessagesMap = new Map<CMSToastType, ToastMessage>([
 	[CMSToastType.DeleteArticle, ToastMessages.confirmDeleteArticle],
 	[CMSToastType.SaveArticle, ToastMessages.saveArticle],
+	[CMSToastType.CreateArticle, ToastMessages.createArticle],
 	[CMSToastType.SaveArticleProvider, ToastMessages.saveArticleProvider],
 	[
 		CMSToastType.DeleteArticleProvider,
