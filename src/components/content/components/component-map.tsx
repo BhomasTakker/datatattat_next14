@@ -2,7 +2,7 @@ import { ArticleCollection } from "./article-collection/article-collection";
 import { DisplayPlayer } from "./display-player/display-player";
 import { MediaPlayer } from "./media-player/media-player";
 import { OembedCollection } from "./oembed-collection/oembed-collection";
-import { PDFViewer } from "./pdf/pdf-viewer";
+import { PDFViewer } from "./pdf";
 import { SpotifyCollection } from "./spotify-collection/spotify-collection";
 
 export type ComponentType =
