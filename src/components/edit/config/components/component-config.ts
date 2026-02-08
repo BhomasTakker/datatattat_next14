@@ -8,6 +8,8 @@ import { componentProfile } from "../shared/component-profile";
 import { Ctas } from "../../inputs/ctas/ctas";
 import { PDF_VIEWER_CONFIG } from "./pdf-viewer/config";
 
+// We already have this enum in component-map
+// We should add that t types file and import it here instead of redefining it
 enum ComponentOptions {
 	ArticleCollection = "ArticleCollection",
 	OembedCollection = "OembedCollection",
