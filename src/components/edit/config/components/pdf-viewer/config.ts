@@ -17,5 +17,12 @@ export const PDF_VIEWER_CONFIG: InputListProps = {
 			label: "PDF URL",
 			required: true,
 		},
+		{
+			id: "pageNumber",
+			type: EditInputs.number,
+			label: "Initial Page Number",
+			defaultValue: 1,
+			min: 1,
+		},
 	],
 };
