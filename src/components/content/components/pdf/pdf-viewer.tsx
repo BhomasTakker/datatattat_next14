@@ -8,6 +8,7 @@ import "react-pdf/dist/Page/TextLayer.css";
 import styles from "./pdf-viewer.module.scss";
 import { PDFPagination } from "./pagination";
 import { PDFLoadError } from "./pdf-error";
+import { PDFTemplate } from "./pdf-template";
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 	"pdfjs-dist/build/pdf.worker.min.mjs",
@@ -29,7 +30,6 @@ export const PDFViewer = ({ component, dataObject }: ComponentProps) => {
 	const [pageNum, setPageNumber] = useState<number>(
 		parseInt(pageNumber, 10) || 1,
 	);
-	const [loading, setLoading] = useState<boolean>(true);
 	const [error, setError] = useState<string | null>(null);
 	const [pageWidth, setPageWidth] = useState<number>(800);
 	const containerRef = useRef<HTMLDivElement>(null);
@@ -42,7 +42,7 @@ export const PDFViewer = ({ component, dataObject }: ComponentProps) => {
 			}
 		};
 
-		// Initial measurement
+		// Initial measurement / would useLayoutEffect be correct here?
 		setTimeout(updateWidth, 0);
 
 		window.addEventListener("resize", updateWidth);
@@ -51,14 +51,12 @@ export const PDFViewer = ({ component, dataObject }: ComponentProps) => {
 
 	function onDocumentLoadSuccess({ numPages }: { numPages: number }): void {
 		setNumPages(numPages);
-		setLoading(false);
 		setError(null);
 	}
 
 	function onDocumentLoadError(error: Error): void {
 		console.error("Error loading PDF:", error);
 		setError(error.message || "Failed to load PDF");
-		setLoading(false);
 	}
 
 	function changePage(offset: number): void {
@@ -82,21 +80,19 @@ export const PDFViewer = ({ component, dataObject }: ComponentProps) => {
 
 	return (
 		<div className={styles.container}>
-			{loading && <div className={styles.loading}>Loading PDF...</div>}
-
 			<div ref={containerRef} className={styles.pdfWrapper}>
 				<Document
 					file={proxiedUrl}
 					onLoadSuccess={onDocumentLoadSuccess}
 					onLoadError={onDocumentLoadError}
-					// show template
-					loading={<div>Loading document...</div>}
+					loading={<PDFTemplate width={pageWidth} />}
 				>
 					<Page
 						pageNumber={pageNum}
 						renderTextLayer={true}
 						renderAnnotationLayer={true}
 						width={pageWidth}
+						loading={<PDFTemplate width={pageWidth} />}
 					/>
 				</Document>
 			</div>
