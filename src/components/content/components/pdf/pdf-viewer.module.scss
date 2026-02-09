@@ -47,16 +47,16 @@
 .pageInfo {
 	margin: 0;
 	font-size: $text-md;
-	min-width: 120px;
+	min-width: $contentWidthXs;
 	text-align: center;
 
 	@media (max-width: $screenWidthMd) {
-		min-width: 100px;
-		font-size: 0.9rem;
+		min-width: $contentWidthXs2;
+		font-size: $text-sm;
 	}
 
 	@media (max-width: $screenWidthSm) {
-		min-width: 80px;
+		min-width: $contentWidthXs3;
 		font-size: $text-sm;
 	}
 }

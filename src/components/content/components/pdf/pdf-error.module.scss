@@ -24,20 +24,20 @@
 
 	@media (max-width: $screenWidthMd) {
 		padding: $spacingSm;
-		font-size: 0.9rem;
+		font-size: $text-sm;
 	}
 }
 
 .errorHint {
 	color: $text-muted !important;
-	font-size: 0.9rem;
+	font-size: $text-sm;
 }
 
 .openButton {
 	padding: $spacingSm $spacingXl;
 	font-size: $text-md;
 	background-color: $cta-primary;
-	color: white;
+	color: $text-inverted;
 	border: none;
 	border-radius: $spacingXxxs;
 	cursor: pointer;

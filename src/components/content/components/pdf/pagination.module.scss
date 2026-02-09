@@ -31,7 +31,7 @@
 	font-size: $text-md;
 	cursor: pointer;
 	background-color: $cta-primary;
-	color: white;
+	color: $text-inverted;
 	border: none;
 	border-radius: $spacingXxxs;
 	transition: opacity 0.2s;
@@ -49,11 +49,11 @@
 
 	@media (max-width: $screenWidthMd) {
 		padding: $spacingXs $spacingSm;
-		font-size: 0.9rem;
+		font-size: $text-sm;
 	}
 
 	@media (max-width: $screenWidthSm) {
-		padding: 0.4rem 0.6rem;
+		padding: $spacingXxs $spacingXs;
 		font-size: $text-sm;
 	}
 }
