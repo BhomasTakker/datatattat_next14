@@ -6,11 +6,15 @@ import { OEMBED_COLLECTION_CONFIG } from "./oembed-collection/oembed-collection-
 import { SPOTIFY_COLLECTION_CONFIG } from "./spotify-collection/config";
 import { componentProfile } from "../shared/component-profile";
 import { Ctas } from "../../inputs/ctas/ctas";
+import { PDF_VIEWER_CONFIG } from "./pdf-viewer/config";
 
+// We already have this enum in component-map
+// We should add that t types file and import it here instead of redefining it
 enum ComponentOptions {
 	ArticleCollection = "ArticleCollection",
 	OembedCollection = "OembedCollection",
 	SpotifyCollection = "SpotifyCollection",
+	PDFViewer = "PDFViewer",
 	Oembed = "Oembed",
 	BlueSky = "BlueSky",
 	DisplayPlayer = "DisplayPlayer",
@@ -21,6 +25,7 @@ const pageContainersMap = new Map<string, InputListProps>([
 	[ComponentOptions.OembedCollection, OEMBED_COLLECTION_CONFIG],
 	[ComponentOptions.DisplayPlayer, DISPLAY_PLAYER_CONFIG],
 	[ComponentOptions.SpotifyCollection, SPOTIFY_COLLECTION_CONFIG],
+	[ComponentOptions.PDFViewer, PDF_VIEWER_CONFIG],
 ]);
 
 export const COMPONENT_CONFIG: GenericInput = {

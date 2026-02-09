@@ -1,0 +1,59 @@
+@use "../../../../scss/abstracts/units/" as *;
+@use "../../../../scss/abstracts/colours/" as *;
+@use "../../../../scss/abstracts/font/" as *;
+
+.error {
+	padding: $spacingMd;
+	background-color: $error-background;
+	border: 1px solid $error-border;
+	border-radius: $spacingXxxs;
+	color: $error-strong;
+	max-width: $containerWidthMd;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: $spacingSm;
+
+	p {
+		margin: 0;
+	}
+
+	strong {
+		font-weight: 600;
+	}
+
+	@media (max-width: $screenWidthMd) {
+		padding: $spacingSm;
+		font-size: $text-sm;
+	}
+}
+
+.errorHint {
+	color: $text-muted !important;
+	font-size: $text-sm;
+}
+
+.openButton {
+	padding: $spacingSm $spacingXl;
+	font-size: $text-md;
+	background-color: $cta-primary;
+	color: $text-inverted;
+	border: none;
+	border-radius: $spacingXxxs;
+	cursor: pointer;
+	transition: background-color 0.2s;
+	align-self: flex-start;
+
+	&:hover {
+		background-color: $cta-primary-hover;
+	}
+
+	&:active {
+		background-color: $cta-primary-active;
+	}
+
+	@media (max-width: $screenWidthMd) {
+		width: 100%;
+		align-self: stretch;
+	}
+}

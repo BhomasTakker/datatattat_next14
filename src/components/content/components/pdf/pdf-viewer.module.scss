@@ -1,0 +1,62 @@
+@use "../../../../scss/abstracts/units/" as *;
+@use "../../../../scss/abstracts/colours/" as *;
+@use "../../../../scss/abstracts/font/" as *;
+
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: $spacingMd;
+	padding: $spacingMd;
+	max-width: 100%;
+	width: 100%;
+
+	@media (max-width: $screenWidthMd) {
+		padding: $spacingXs;
+		gap: $spacingSm;
+	}
+}
+
+.pdfWrapper {
+	width: 100%;
+	max-width: $containerWidthXxl;
+	display: flex;
+	justify-content: center;
+	overflow-x: auto;
+
+	@media (max-width: $screenWidthMd) {
+		max-width: calc(100vw - $spacingXxxl);
+		overflow-x: scroll;
+	}
+
+	@media (max-width: $screenWidthSm) {
+		max-width: calc(100vw - $spacingMd);
+	}
+}
+
+.loading {
+	padding: $spacingXxxl;
+	font-size: $text-xl;
+
+	@media (max-width: $screenWidthMd) {
+		padding: $spacingMd;
+		font-size: $text-md;
+	}
+}
+
+.pageInfo {
+	margin: 0;
+	font-size: $text-md;
+	min-width: $contentWidthXs;
+	text-align: center;
+
+	@media (max-width: $screenWidthMd) {
+		min-width: $contentWidthXs2;
+		font-size: $text-sm;
+	}
+
+	@media (max-width: $screenWidthSm) {
+		min-width: $contentWidthXs3;
+		font-size: $text-sm;
+	}
+}

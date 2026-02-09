@@ -1,0 +1,59 @@
+@use "../../../../scss/abstracts/units/" as *;
+@use "../../../../scss/abstracts/colours/" as *;
+@use "../../../../scss/abstracts/font/" as *;
+
+.controls {
+	display: flex;
+	align-items: center;
+	gap: $spacingMd;
+	padding: $spacingMd;
+	background-color: $background-light;
+	border-radius: $spacingXs;
+	box-shadow: 0 2px 4px $shadowLight1;
+	width: fit-content;
+
+	@media (max-width: $screenWidthMd) {
+		gap: $spacingXs;
+		padding: $spacingSm;
+		width: 100%;
+		max-width: 100%;
+		justify-content: space-between;
+	}
+
+	@media (max-width: $screenWidthSm) {
+		gap: $spacingXxxs;
+		padding: $spacingXs;
+	}
+}
+
+.button {
+	padding: $spacingXs $spacingMd;
+	font-size: $text-md;
+	cursor: pointer;
+	background-color: $cta-primary;
+	color: $text-inverted;
+	border: none;
+	border-radius: $spacingXxxs;
+	transition: opacity 0.2s;
+	white-space: nowrap;
+
+	&:disabled {
+		cursor: not-allowed;
+		background-color: $cta-disabled;
+		opacity: 0.5;
+	}
+
+	&:hover:not(:disabled) {
+		opacity: 0.9;
+	}
+
+	@media (max-width: $screenWidthMd) {
+		padding: $spacingXs $spacingSm;
+		font-size: $text-sm;
+	}
+
+	@media (max-width: $screenWidthSm) {
+		padding: $spacingXxs $spacingXs;
+		font-size: $text-sm;
+	}
+}
