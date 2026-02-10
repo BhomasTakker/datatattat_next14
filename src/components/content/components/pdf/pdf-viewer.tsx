@@ -9,6 +9,7 @@ import styles from "./pdf-viewer.module.scss";
 import { PDFPagination } from "./pagination";
 import { PDFLoadError } from "./pdf-error";
 import { PDFTemplate } from "./pdf-template";
+import { IframePDF } from "./iframe-pdf";
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 	"pdfjs-dist/build/pdf.worker.min.mjs",
@@ -75,7 +76,12 @@ export const PDFViewer = ({ component, dataObject }: ComponentProps) => {
 	const proxiedUrl = `/api/proxy-pdf?url=${encodeURIComponent(pdfUrl)}`;
 
 	if (error) {
-		return <PDFLoadError error={error} pdfUrl={pdfUrl} />;
+		return (
+			<IframePDF
+				src={pdfUrl}
+				errorComponent={<PDFLoadError error={error} pdfUrl={pdfUrl} />}
+			/>
+		);
 	}
 
 	return (
