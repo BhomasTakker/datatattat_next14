@@ -1,23 +1,19 @@
 // Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
-exports[`AudioPlayer Snaps matches snapshot for .m3u8 src (VideoDisplayComponent) 1`] = `
+exports[`AudioPlayer Snaps matches snapshot for .m3u8 src 1`] = `
 <div
   class="audioPlayer"
 >
   <div
-    data-testid="video-display-component"
-    options="[object Object]"
+    data-testid="h5-audio-player"
+    layout="horizontal-reverse"
+    src="stream.m3u8"
   >
-    VideoDisplayComponent
+    H5AudioPlayer
     <span
-      data-testid="video-src"
+      data-testid="src"
     >
       stream.m3u8
-    </span>
-    <span
-      data-testid="audio-only"
-    >
-      true
     </span>
   </div>
 </div>
@@ -67,6 +63,7 @@ exports[`AudioPlayer Snaps matches snapshot for radio variant 1`] = `
 >
   <div
     customcontrolssection="MAIN_CONTROLS,VOLUME_CONTROLS"
+    customprogressbarsection="CURRENT_TIME,PROGRESS_BAR"
     data-testid="h5-audio-player"
     layout="horizontal-reverse"
     src="radio.mp3"
