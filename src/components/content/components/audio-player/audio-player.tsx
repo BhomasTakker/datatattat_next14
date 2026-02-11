@@ -8,9 +8,6 @@ import "react-h5-audio-player/src/styles.scss";
 import "video.js/dist/video-js.css";
 import "videojs-youtube";
 
-import H5AudioPlayer from "react-h5-audio-player";
-import { VideoDisplayComponent } from "../display-player/display-player";
-
 ///////////////////////////////////////////
 // Take in any audio player controls etc
 // I guess if playlist etc
@@ -26,20 +23,10 @@ type RendeProps = {
 	variant?: "default" | "radio" | string;
 };
 
-// A bit of a hack - we need a better solution
-// tbf - if it comes to it you just doa  Map.
-// Radio variants with each their own component
-// and create a factory to return the right one
-// consistentcy all the way down
+// Can be used for different renders.
+// We were using a video player for .m3u8
 const renderPlayer = ({ src, variant }: RendeProps) => {
 	switch (true) {
-		case src.endsWith(".m3u8"):
-			return (
-				<VideoDisplayComponent
-					key={src}
-					options={{ src, poster: "", audioOnlyMode: true }}
-				/>
-			);
 		case variant === "radio":
 			return (
 				<ReactH5AudioPlayer
@@ -51,6 +38,10 @@ const renderPlayer = ({ src, variant }: RendeProps) => {
 						RHAP_UI.VOLUME_CONTROLS,
 					]}
 					autoPlayAfterSrcChange={true}
+					customProgressBarSection={[
+						RHAP_UI.CURRENT_TIME,
+						RHAP_UI.PROGRESS_BAR,
+					]}
 					// showDownloadProgress={false}
 					showFilledVolume={true}
 					// defaultDuration={null}

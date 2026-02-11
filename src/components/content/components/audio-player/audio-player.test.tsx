@@ -21,6 +21,8 @@ jest.mock("react-h5-audio-player", () => {
 		RHAP_UI: {
 			MAIN_CONTROLS: "MAIN_CONTROLS",
 			VOLUME_CONTROLS: "VOLUME_CONTROLS",
+			CURRENT_TIME: "CURRENT_TIME",
+			PROGRESS_BAR: "PROGRESS_BAR",
 		},
 	};
 });
@@ -44,7 +46,7 @@ describe("AudioPlayer", () => {
 		expect(screen.getByTestId("h5-audio-player")).toBeInTheDocument();
 		expect(screen.getByTestId("src")).toHaveTextContent("audio.mp3");
 		expect(
-			screen.queryByTestId("video-display-component")
+			screen.queryByTestId("video-display-component"),
 		).not.toBeInTheDocument();
 	});
 
@@ -55,18 +57,19 @@ describe("AudioPlayer", () => {
 		// Since we can't check props directly, check that the component rendered
 	});
 
-	it("renders VideoDisplayComponent for .m3u8 src", () => {
+	it("renders audio player for .m3u8 src", () => {
 		render(<AudioPlayer src="stream.m3u8" />);
-		expect(screen.getByTestId("video-display-component")).toBeInTheDocument();
-		expect(screen.getByTestId("video-src")).toHaveTextContent("stream.m3u8");
-		expect(screen.getByTestId("audio-only")).toHaveTextContent("true");
-		expect(screen.queryByTestId("h5-audio-player")).not.toBeInTheDocument();
+		expect(screen.getByTestId("h5-audio-player")).toBeInTheDocument();
+		expect(screen.getByTestId("src")).toHaveTextContent("stream.m3u8");
+		// expect(screen.getByTestId("video-src")).toHaveTextContent("stream.m3u8");
+		// expect(screen.getByTestId("audio-only")).toHaveTextContent("true");
+		// expect(screen.queryByTestId("h5-audio-player")).not.toBeInTheDocument();
 	});
 
 	it("applies correct class names", () => {
 		render(<AudioPlayer src="audio.mp3" />);
 		expect(
-			screen.getByText("H5AudioPlayer").parentElement?.className
+			screen.getByText("H5AudioPlayer").parentElement?.className,
 		).toContain("audioPlayer");
 	});
 
@@ -83,19 +86,19 @@ describe("AudioPlayer", () => {
 
 		it("matches snapshot for radio variant", () => {
 			const { container } = render(
-				<AudioPlayer src="radio.mp3" variant="radio" />
+				<AudioPlayer src="radio.mp3" variant="radio" />,
 			);
 			expect(container.firstChild).toMatchSnapshot();
 		});
 
-		it("matches snapshot for .m3u8 src (VideoDisplayComponent)", () => {
+		it("matches snapshot for .m3u8 src", () => {
 			const { container } = render(<AudioPlayer src="stream.m3u8" />);
 			expect(container.firstChild).toMatchSnapshot();
 		});
 
 		it("matches snapshot for custom variant", () => {
 			const { container } = render(
-				<AudioPlayer src="audio.mp3" variant="custom" />
+				<AudioPlayer src="audio.mp3" variant="custom" />,
 			);
 			expect(container.firstChild).toMatchSnapshot();
 		});
