@@ -6,7 +6,7 @@ import { VERTICAL_STACK } from "./vertical-stack-variant";
 
 const pageStackMap = new Map<string, InputListProps>([
 	[PageStackCollectionVariants.Vertical, VERTICAL_STACK],
-	[PageStackCollectionVariants.RowStack, ROW_STACK],
+	// [PageStackCollectionVariants.RowStack, ROW_STACK],
 ]);
 
 export const PAGE_STACK_CONFIG: InputListProps = {
@@ -19,7 +19,7 @@ export const PAGE_STACK_CONFIG: InputListProps = {
 			id: "variant",
 			type: EditInputs.objectSelect,
 			label: "Stack Variant",
-			options: [...Object.values(PageStackCollectionVariants)],
+			options: [PageStackCollectionVariants.Vertical], // [...Object.values(PageStackCollectionVariants)],
 			optionMap: pageStackMap,
 			defaultValue: PageStackCollectionVariants.Vertical,
 		},
