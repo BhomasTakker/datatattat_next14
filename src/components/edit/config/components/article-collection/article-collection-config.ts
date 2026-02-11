@@ -61,7 +61,7 @@ export const ARTICLE_COLLECTION_CONFIG: InputListProps = {
 			// defaultSelection: QueryOptions.API_QUERY,
 			apiConfigOptions: {
 				options: [APIOptions.ARTICLES_SEARCH_API, APIOptions.YOUTUBE_API],
-				// defaultSelection: APIOptions.ARTICLES_SEARCH_API,
+				defaultSelection: APIOptions.ARTICLES_SEARCH_API,
 			},
 		}),
 	],
