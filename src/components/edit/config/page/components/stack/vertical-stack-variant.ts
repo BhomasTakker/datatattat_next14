@@ -9,13 +9,13 @@ export const VERTICAL_STACK: InputListProps = {
 	label: "Page Stack",
 
 	inputs: [
-		useContainerHeight("height", "Container Height", [
-			ContainerHeightOptions.SM,
-			ContainerHeightOptions.MD,
-			ContainerHeightOptions.LG,
-			ContainerHeightOptions.XL,
-			ContainerHeightOptions.XXL,
-			ContainerHeightOptions.FULL,
-		]),
+		// useContainerHeight("height", "Container Height", [
+		// 	ContainerHeightOptions.SM,
+		// 	ContainerHeightOptions.MD,
+		// 	ContainerHeightOptions.LG,
+		// 	ContainerHeightOptions.XL,
+		// 	ContainerHeightOptions.XXL,
+		// 	ContainerHeightOptions.FULL,
+		// ]),
 	],
 };

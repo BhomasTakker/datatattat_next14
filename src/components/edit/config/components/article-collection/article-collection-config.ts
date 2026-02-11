@@ -7,6 +7,7 @@ import { GRID_DISPLAY } from "./collections/grid/gridDisplay";
 import { VIDEO_DISPLAY } from "./collections/video-display/video-display";
 import { AUDIO_DISPLAY } from "./collections/audio-display/audio-display";
 import { getWithConfig, QueryOptions } from "../../query/_with-config";
+import { APIOptions } from "../../query/api/api-base-config";
 
 type articleCollectionProps =
 	| typeof STACK_SCROLLER_CONFIG
@@ -57,6 +58,11 @@ export const ARTICLE_COLLECTION_CONFIG: InputListProps = {
 				QueryOptions.MANUAL_VIDEO_SOURCES,
 				QueryOptions.RSS,
 			],
+			// defaultSelection: QueryOptions.API_QUERY,
+			apiConfigOptions: {
+				options: [APIOptions.ARTICLES_SEARCH_API, APIOptions.YOUTUBE_API],
+				// defaultSelection: APIOptions.ARTICLES_SEARCH_API,
+			},
 		}),
 	],
 };
