@@ -33,7 +33,7 @@
 		"rss-parser": "^3.13.0",
 		"sass": "^1.97.3",
 		"sonner": "^2.0.7",
-		"video.js": "^8.23.6",
+		"video.js": "^8.23.7",
 		"videojs-youtube": "^3.0.1"
 	},
 	"devDependencies": {
