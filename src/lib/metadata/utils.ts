@@ -1,4 +1,4 @@
-import { IPage, CardData, FavIcons, Metadata } from "@/types/page";
+import { FavIcons, Metadata } from "@/types/page";
 
 // https://nextjs.org/docs/app/api-reference/functions/generate-metadata#opengraph
 export const createOpenGraph = (og: Metadata) => {
