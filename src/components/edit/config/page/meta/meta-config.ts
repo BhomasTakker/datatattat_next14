@@ -1,6 +1,5 @@
 import { InputListProps } from "@/types/edit/inputs/inputs";
 import { EditInputs } from "../../../inputs/inputs";
-import { CARD_DATA } from "./card-data-config";
 import { FAV_ICON } from "./fav-icon-config";
 
 export const META_CONFIG: InputListProps = {
@@ -28,6 +27,12 @@ export const META_CONFIG: InputListProps = {
 							title: "Meta Properties",
 						},
 						{
+							id: "metaPropertiesDescription",
+							type: EditInputs.description,
+							text: "Add meta properties to your page. These can be used for SEO and social media sharing.",
+						},
+						//
+						{
 							id: "pageTitle",
 							type: EditInputs.text,
 							label: "Page Title",
@@ -51,8 +56,28 @@ export const META_CONFIG: InputListProps = {
 							label: "Page Image",
 							required: false,
 						},
+						{
+							id: "image:alt",
+							type: EditInputs.text,
+							label: "Image Alt",
+						},
+						{
+							id: "locale",
+							type: EditInputs.text,
+							label: "Locale",
+						},
+						{
+							id: "site_name",
+							type: EditInputs.text,
+							label: "Site Name",
+						},
+						{
+							id: "url",
+							type: EditInputs.text,
+							label: "Url",
+						},
 						FAV_ICON,
-						CARD_DATA,
+						// CARD_DATA,
 					],
 				},
 			],
