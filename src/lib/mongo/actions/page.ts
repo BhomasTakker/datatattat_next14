@@ -26,7 +26,7 @@ export const saveOrCreatePageByRoute = async (page: IPage, creator: string) => {
 				// options
 				new: true,
 				upsert: true, // Make this update into an upsert
-			}
+			},
 		);
 
 		return { result: res, message: "Saved Page!" };
@@ -63,17 +63,11 @@ export const createNewPageByRoute = async (route: string, userId: string) => {
 				pageDescription: "New Page Description",
 				pageKeywords: "new, page, keywords",
 				pageImage: "",
+				["image:alt"]: "",
+				locale: "",
+				site_name: "",
+				url: "",
 				favIcons: [],
-				showCardData: false,
-				cardData: {
-					title: "",
-					description: "",
-					image: "",
-					["image:alt"]: "",
-					locale: "",
-					site_name: "",
-					url: "",
-				},
 			},
 			content: {
 				containerType: "Stack",

@@ -53,9 +53,11 @@ export type Metadata = {
 	pageKeywords: string;
 	pageImage: string;
 	favIcons: FavIcons;
-	showCardData: boolean;
-	cardData: CardData;
 	createMetaData?: boolean;
+	["image:alt"]: string;
+	locale: string;
+	site_name: string;
+	url: string;
 };
 
 // do better!
