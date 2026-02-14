@@ -66,17 +66,11 @@ const MOCK = {
 		pageDescription: "Test description",
 		pageKeywords: "test, keywords",
 		pageImage: "test-image.jpg",
+		["image:alt"]: "Test Alt",
+		locale: "en",
+		site_name: "Test Site",
+		url: "http://test.com",
 		favIcons: [],
-		showCardData: false,
-		cardData: {
-			title: "Test Title",
-			description: "Test Description",
-			image: "test.jpg",
-			["image:alt"]: "Test Alt",
-			locale: "en",
-			site_name: "Test Site",
-			url: "http://test.com",
-		},
 	},
 	style: {},
 	profile: {
@@ -122,7 +116,7 @@ describe("PageDisplay", () => {
 	it("renders page component factory with content", async () => {
 		render(await PageDisplay({ page: MOCK }));
 		const pageComponentFactory = screen.getByTestId(
-			"test-page-component-factory"
+			"test-page-component-factory",
 		);
 		expect(pageComponentFactory).toBeInTheDocument();
 	});

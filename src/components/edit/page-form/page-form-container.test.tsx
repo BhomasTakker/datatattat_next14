@@ -124,17 +124,11 @@ const mockPageData: IPage = {
 		pageDescription: "Test Description",
 		pageKeywords: "test, keywords",
 		pageImage: "test-image.jpg",
+		"image:alt": "Test Alt",
+		locale: "en",
+		site_name: "Test Site",
+		url: "https://test.com",
 		favIcons: [],
-		showCardData: false,
-		cardData: {
-			title: "Test",
-			description: "Test",
-			image: "test.jpg",
-			"image:alt": "Test Alt",
-			locale: "en",
-			site_name: "Test Site",
-			url: "https://test.com",
-		},
 		createMetaData: true,
 	},
 	style: {},
@@ -209,7 +203,7 @@ describe("PageFormContainer", () => {
 
 		it("merges page data with template data", () => {
 			const { rerender } = render(
-				<PageFormContainer pageData={mockPageData} />
+				<PageFormContainer pageData={mockPageData} />,
 			);
 
 			// Initial render with original page data
@@ -231,7 +225,7 @@ describe("PageFormContainer", () => {
 				<PageFormInteractionController
 					pageData={mockPageData}
 					setTemplate={jest.fn()}
-				/>
+				/>,
 			);
 
 			expect(mockUseForm).toHaveBeenCalledWith({
@@ -245,7 +239,7 @@ describe("PageFormContainer", () => {
 				<PageFormInteractionController
 					pageData={mockPageData}
 					setTemplate={jest.fn()}
-				/>
+				/>,
 			);
 
 			expect(mockRefresh).toHaveBeenCalledTimes(1);
@@ -256,7 +250,7 @@ describe("PageFormContainer", () => {
 				<PageFormInteractionController
 					pageData={updatedPageData}
 					setTemplate={jest.fn()}
-				/>
+				/>,
 			);
 
 			expect(mockRefresh).toHaveBeenCalledTimes(2);
@@ -267,18 +261,18 @@ describe("PageFormContainer", () => {
 				<PageFormInteractionController
 					pageData={mockPageData}
 					setTemplate={jest.fn()}
-				/>
+				/>,
 			);
 
 			const contextProvider = screen.getByTestId("edit-context-provider");
 
 			expect(contextProvider).toHaveAttribute(
 				"data-has-submit-handler",
-				"true"
+				"true",
 			);
 			expect(contextProvider).toHaveAttribute(
 				"data-has-save-template-handler",
-				"true"
+				"true",
 			);
 			expect(contextProvider).toHaveAttribute("data-has-draft-handler", "true");
 			expect(contextProvider).toHaveAttribute("data-has-debug-handler", "true");
@@ -290,18 +284,18 @@ describe("PageFormContainer", () => {
 				<PageFormInteractionController
 					pageData={mockPageData}
 					setTemplate={mockSetTemplate}
-				/>
+				/>,
 			);
 
 			const modalContainer = screen.getByTestId("modal-container");
 
 			expect(modalContainer).toHaveAttribute(
 				"data-show-save-template",
-				"false"
+				"false",
 			);
 			expect(modalContainer).toHaveAttribute(
 				"data-show-load-template",
-				"false"
+				"false",
 			);
 			expect(modalContainer).toHaveAttribute("data-show-preview", "false");
 			expect(modalContainer).toHaveAttribute("data-has-set-template", "true");
@@ -314,7 +308,7 @@ describe("PageFormContainer", () => {
 				<PageFormInteractionController
 					pageData={mockPageData}
 					setTemplate={jest.fn()}
-				/>
+				/>,
 			);
 
 			// Test save template button
@@ -325,7 +319,7 @@ describe("PageFormContainer", () => {
 				const modalContainer = screen.getByTestId("modal-container");
 				expect(modalContainer).toHaveAttribute(
 					"data-show-save-template",
-					"true"
+					"true",
 				);
 			});
 
@@ -349,14 +343,14 @@ describe("PageFormContainer", () => {
 				(callback: any) => async (e?: any) => {
 					e?.preventDefault();
 					await callback({ title: "Updated Title" });
-				}
+				},
 			);
 
 			render(
 				<PageFormInteractionController
 					pageData={mockPageData}
 					setTemplate={jest.fn()}
-				/>
+				/>,
 			);
 
 			const submitBtn = screen.getByTestId("submit-btn");
@@ -378,14 +372,14 @@ describe("PageFormContainer", () => {
 				(callback: any) => async (e?: any) => {
 					e?.preventDefault();
 					await callback({ title: "Template Title" });
-				}
+				},
 			);
 
 			render(
 				<PageFormInteractionController
 					pageData={mockPageData}
 					setTemplate={jest.fn()}
-				/>
+				/>,
 			);
 
 			const saveTemplateBtn = screen.getByTestId("save-template-btn");
@@ -398,7 +392,7 @@ describe("PageFormContainer", () => {
 				const modalContainer = screen.getByTestId("modal-container");
 				expect(modalContainer).toHaveAttribute(
 					"data-show-save-template",
-					"true"
+					"true",
 				);
 			});
 		});
@@ -408,7 +402,7 @@ describe("PageFormContainer", () => {
 				<PageFormInteractionController
 					pageData={mockPageData}
 					setTemplate={jest.fn()}
-				/>
+				/>,
 			);
 
 			const loadTemplateBtn = screen.getByTestId("load-template-btn");
@@ -424,7 +418,7 @@ describe("PageFormContainer", () => {
 				<PageFormInteractionController
 					pageData={mockPageData}
 					setTemplate={jest.fn()}
-				/>
+				/>,
 			);
 
 			const previewBtn = screen.getByTestId("preview-btn");
@@ -446,14 +440,14 @@ describe("PageFormContainer", () => {
 				(callback: any) => async (e?: any) => {
 					e?.preventDefault();
 					await callback({ title: "Updated Title" });
-				}
+				},
 			);
 
 			render(
 				<PageFormInteractionController
 					pageData={mockPageData}
 					setTemplate={jest.fn()}
-				/>
+				/>,
 			);
 
 			const submitBtn = screen.getByTestId("submit-btn");

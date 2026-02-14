@@ -30,9 +30,11 @@ const mockPageDoc = {
 		pageDescription: "Desc",
 		pageKeywords: "a,b",
 		pageImage: "",
+		"image:alt": "",
+		locale: "",
+		site_name: "",
+		url: "",
 		favIcons: [],
-		showCardData: false,
-		cardData: {},
 	},
 	route: "/test",
 	profile: {},
@@ -67,7 +69,7 @@ describe("page actions", () => {
 			expect(pagefindOneAndUpdateSpy).toHaveBeenCalledWith(
 				{ route: "/test" },
 				expect.objectContaining({ creator: "user1" }),
-				expect.objectContaining({ upsert: true })
+				expect.objectContaining({ upsert: true }),
 			);
 			expect(result).toEqual({ result: mockPageDoc, message: "Saved Page!" });
 		});
@@ -123,7 +125,7 @@ describe("page actions", () => {
 			(Page.create as jest.Mock).mockResolvedValue({});
 			const result = await createNewPageByRoute("/new", "user2");
 			expect(Page.create).toHaveBeenCalledWith(
-				expect.objectContaining({ route: "/new", creator: "user2" })
+				expect.objectContaining({ route: "/new", creator: "user2" }),
 			);
 			expect(result).toEqual({
 				success: true,
@@ -133,10 +135,10 @@ describe("page actions", () => {
 
 		it("should throw error if route or userId is missing", async () => {
 			await expect(createNewPageByRoute("", "user2")).rejects.toThrow(
-				"Invalid route or userId"
+				"Invalid route or userId",
 			);
 			await expect(createNewPageByRoute("/new", "")).rejects.toThrow(
-				"Invalid route or userId"
+				"Invalid route or userId",
 			);
 		});
 
