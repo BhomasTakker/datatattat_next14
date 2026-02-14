@@ -28,16 +28,6 @@ export type PageProfile = {
 	showPageTitle?: boolean;
 };
 
-type CardData = {
-	title: string;
-	description: string;
-	image: string;
-	["image:alt"]: string;
-	locale: string;
-	site_name: string;
-	url: string;
-};
-
 export type FavIcon = {
 	favIcon: {
 		rel: string;
@@ -53,9 +43,11 @@ export type Metadata = {
 	pageKeywords: string;
 	pageImage: string;
 	favIcons: FavIcons;
-	showCardData: boolean;
-	cardData: CardData;
 	createMetaData?: boolean;
+	["image:alt"]: string;
+	locale: string;
+	site_name: string;
+	url: string;
 };
 
 // do better!

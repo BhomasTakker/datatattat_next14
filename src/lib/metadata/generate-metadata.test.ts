@@ -32,12 +32,16 @@ describe("generateMetaDataFromPage", () => {
 		expect(result).toEqual({});
 	});
 
-	it("returns metadata with openGraph and twitter when showCardData and cardData are present", async () => {
+	it("returns metadata with openGraph and twitter when createMetaData is true", async () => {
 		const meta: Partial<MetadataType> = {
 			pageTitle: "Test Title",
 			pageDescription: "Test Description",
 			pageKeywords: "test,jest",
 			pageImage: "image.png",
+			"image:alt": "Card Alt",
+			locale: "en_US",
+			site_name: "Example",
+			url: "https://example.com",
 			favIcons: [
 				{
 					favIcon: {
@@ -48,16 +52,6 @@ describe("generateMetaDataFromPage", () => {
 					},
 				},
 			],
-			showCardData: true,
-			cardData: {
-				title: "Card Title",
-				description: "Card Description",
-				image: "card.png",
-				url: "https://example.com",
-				locale: "en_US",
-				site_name: "Example",
-				"image:alt": "Card Alt",
-			},
 			createMetaData: true,
 		};
 		mockGetMetadataForRoute.mockResolvedValueOnce(meta);
@@ -69,9 +63,9 @@ describe("generateMetaDataFromPage", () => {
 		expect(result.keywords).toEqual(meta.pageKeywords);
 
 		expect(result.openGraph).toEqual({
-			title: "Card Title",
-			description: "Card Description",
-			image: "card.png",
+			title: "Test Title",
+			description: "Test Description",
+			image: "image.png",
 			url: "https://example.com",
 			type: "website",
 			locale: "en_US",
@@ -80,7 +74,7 @@ describe("generateMetaDataFromPage", () => {
 			audio: [],
 			images: [
 				{
-					url: "card.png",
+					url: "image.png",
 					alt: "Card Alt",
 				},
 			],
@@ -89,12 +83,12 @@ describe("generateMetaDataFromPage", () => {
 		expect(result.twitter).toEqual({
 			card: "summary_large_image",
 			site: "@datatattat",
-			title: "Card Title",
-			description: "Card Description",
+			title: "Test Title",
+			description: "Test Description",
 			creator: "@datatattat",
 			images: [
 				{
-					url: "https://Examplecard.png",
+					url: "https://Exampleimage.png",
 					alt: "Card Alt",
 				},
 			],
@@ -112,21 +106,25 @@ describe("generateMetaDataFromPage", () => {
 		});
 	});
 
-	it("returns metadata without openGraph and twitter when showCardData is false", async () => {
+	it("returns metadata with openGraph and twitter when createMetaData is true", async () => {
 		const meta: Partial<MetadataType> = {
 			pageTitle: "Test Title",
 			pageDescription: "Test Description",
 			pageKeywords: "test,jest",
+			pageImage: "image.png",
+			"image:alt": "Card Alt",
+			locale: "en_US",
+			site_name: "Example",
+			url: "https://example.com",
 			favIcons: [],
-			showCardData: false,
 			createMetaData: true,
 		};
 		mockGetMetadataForRoute.mockResolvedValueOnce(meta);
 
 		const result = await generateMetaDataFromPage("/test");
 
-		expect(result.openGraph).toBeUndefined();
-		expect(result.twitter).toBeUndefined();
+		expect(result.openGraph).toBeDefined();
+		expect(result.twitter).toBeDefined();
 	});
 
 	it("handles missing favIcons gracefully", async () => {
@@ -134,7 +132,11 @@ describe("generateMetaDataFromPage", () => {
 			pageTitle: "Test Title",
 			pageDescription: "Test Description",
 			pageKeywords: "test",
-			showCardData: false,
+			pageImage: "image.png",
+			"image:alt": "Card Alt",
+			locale: "en_US",
+			site_name: "Example",
+			url: "https://example.com",
 			createMetaData: true,
 		};
 		mockGetMetadataForRoute.mockResolvedValueOnce(meta);

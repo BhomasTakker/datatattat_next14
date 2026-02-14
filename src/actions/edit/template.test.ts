@@ -43,17 +43,11 @@ describe("Template Actions", () => {
 			pageDescription: "Test Description",
 			pageKeywords: "test, keywords",
 			pageImage: "test-image.jpg",
+			"image:alt": "Card Alt Text",
+			locale: "en",
+			site_name: "Test Site",
+			url: "https://test.com",
 			favIcons: [],
-			showCardData: false,
-			cardData: {
-				title: "Test Card",
-				description: "Test Card Description",
-				image: "card-image.jpg",
-				"image:alt": "Card Alt Text",
-				locale: "en",
-				site_name: "Test Site",
-				url: "https://test.com",
-			},
 		},
 		style: { color: "blue" },
 		profile: {
@@ -91,7 +85,7 @@ describe("Template Actions", () => {
 			expect(saveOrCreateTemplateByKey).toHaveBeenCalledWith(
 				templateName,
 				mockPage,
-				mockSession.user.user_id
+				mockSession.user.user_id,
 			);
 			expect(result).toBe(mockResult);
 		});
@@ -102,7 +96,7 @@ describe("Template Actions", () => {
 			(connectToMongoDB as jest.Mock).mockRejectedValue(error);
 
 			await expect(saveTemplate(templateName, mockPage)).rejects.toThrow(
-				"Database connection failed"
+				"Database connection failed",
 			);
 		});
 
@@ -112,7 +106,7 @@ describe("Template Actions", () => {
 			(saveOrCreateTemplateByKey as jest.Mock).mockRejectedValue(error);
 
 			await expect(saveTemplate(templateName, mockPage)).rejects.toThrow(
-				"Save failed"
+				"Save failed",
 			);
 		});
 	});
@@ -129,7 +123,7 @@ describe("Template Actions", () => {
 			expect(getServerSession).toHaveBeenCalled();
 			expect(getTemplateByKey).toHaveBeenCalledWith(
 				templateName,
-				mockSession.user.user_id
+				mockSession.user.user_id,
 			);
 			expect(result).toBe(mockTemplate);
 		});
@@ -149,7 +143,7 @@ describe("Template Actions", () => {
 			(connectToMongoDB as jest.Mock).mockRejectedValue(error);
 
 			await expect(loadTemplate(templateName)).rejects.toThrow(
-				"Database connection failed"
+				"Database connection failed",
 			);
 		});
 
@@ -180,7 +174,7 @@ describe("Template Actions", () => {
 			expect(connectToMongoDB).toHaveBeenCalled();
 			expect(getServerSession).toHaveBeenCalled();
 			expect(getUserFromSessionId).toHaveBeenCalledWith(
-				mockSession.user.user_id
+				mockSession.user.user_id,
 			);
 			expect(result).toEqual(mockUser.templates);
 		});
@@ -209,7 +203,7 @@ describe("Template Actions", () => {
 			(connectToMongoDB as jest.Mock).mockRejectedValue(error);
 
 			await expect(getUserTemplates()).rejects.toThrow(
-				"Database connection failed"
+				"Database connection failed",
 			);
 		});
 	});
@@ -278,7 +272,7 @@ describe("Template Actions", () => {
 			(connectToMongoDB as jest.Mock).mockRejectedValue(error);
 
 			await expect(checkTemplateNameUnique("test-template")).rejects.toThrow(
-				"Failed to get user templates"
+				"Failed to get user templates",
 			);
 		});
 	});
@@ -308,7 +302,7 @@ describe("Template Actions", () => {
 			expect(saveOrCreateTemplateByKey).toHaveBeenCalledWith(
 				"",
 				mockPage,
-				mockSession.user.user_id
+				mockSession.user.user_id,
 			);
 			expect(result).toBe(mockResult);
 		});
@@ -323,7 +317,7 @@ describe("Template Actions", () => {
 			expect(saveOrCreateTemplateByKey).toHaveBeenCalledWith(
 				specialName,
 				mockPage,
-				mockSession.user.user_id
+				mockSession.user.user_id,
 			);
 			expect(result).toBe(mockResult);
 		});
