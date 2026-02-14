@@ -14,6 +14,8 @@ export const generateMetaDataFromPage = async (
 		return {};
 	}
 
+	// url would surely be route?
+
 	const {
 		pageTitle,
 		pageDescription,
@@ -27,6 +29,7 @@ export const generateMetaDataFromPage = async (
 		return {};
 	}
 
+	// get url from route and site name from env or something
 	const openGraph = createOpenGraph(metadata);
 	const twitter = createTwitterCard(metadata);
 

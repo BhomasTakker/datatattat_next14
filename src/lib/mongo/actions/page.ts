@@ -66,7 +66,7 @@ export const createNewPageByRoute = async (route: string, userId: string) => {
 				["image:alt"]: "",
 				locale: "",
 				site_name: "",
-				url: "",
+				url: "", // route perhaps?
 				favIcons: [],
 			},
 			content: {
