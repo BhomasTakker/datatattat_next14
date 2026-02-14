@@ -20,8 +20,6 @@ export const generateMetaDataFromPage = async (
 		pageKeywords,
 		pageImage,
 		favIcons = [],
-		// showCardData,
-		// cardData,
 		createMetaData = false,
 	} = metadata;
 

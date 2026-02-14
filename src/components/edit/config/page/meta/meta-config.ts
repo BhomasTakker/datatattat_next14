@@ -15,7 +15,7 @@ export const META_CONFIG: InputListProps = {
 			label: "Create Page Meta Data",
 			inputs: [
 				{
-					id: "cardData",
+					id: "cardDataInputList",
 					type: EditInputs.inputList,
 					label: "Card Data",
 					createObject: false,
@@ -77,7 +77,6 @@ export const META_CONFIG: InputListProps = {
 							label: "Url",
 						},
 						FAV_ICON,
-						// CARD_DATA,
 					],
 				},
 			],
