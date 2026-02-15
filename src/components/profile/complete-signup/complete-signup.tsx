@@ -9,6 +9,7 @@ import { isUsernameValid as checkIsUsernameValid } from "@/actions/signup/check-
 import { confirmUsername } from "@/actions/signup/confirm-username";
 import { useRouter } from "next/navigation";
 import { patterns } from "@/utils/regex";
+import { TermsAndConditions } from "./terms-and-conditions";
 
 type Inputs = {
 	username: string;
@@ -19,8 +20,9 @@ type CompleteSignupProps = {
 };
 
 export const CompleteSignup = ({ username }: CompleteSignupProps) => {
+	const [hasAcceptedTerms, setHasAcceptedTerms] = useState(false);
 	const [isUsernameValid, setIsUsernameValid] = useState<boolean | undefined>(
-		undefined
+		undefined,
 	);
 	const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
 	const methods = useForm<Inputs>({
@@ -46,16 +48,24 @@ export const CompleteSignup = ({ username }: CompleteSignupProps) => {
 	});
 
 	useEffect(() => {
+		if (!hasAcceptedTerms) {
+			return;
+		}
+
 		const checkUsername = async () => {
 			const isValid = await checkIsUsernameValid(username);
 			setIsUsernameValid(isValid);
 			setIsSubmitDisabled(!isValid);
 		};
 		checkUsername();
-	}, []);
+	}, [hasAcceptedTerms, username]);
 
 	// Not sure I like it 100% but copilot wrote this!
 	useEffect(() => {
+		if (!hasAcceptedTerms) {
+			return;
+		}
+
 		const username = watch("username");
 		// use debounce
 		const checkUsername = async () => {
@@ -64,7 +74,11 @@ export const CompleteSignup = ({ username }: CompleteSignupProps) => {
 			setIsSubmitDisabled(!isValid);
 		};
 		checkUsername();
-	}, [watch("username")]);
+	}, [watch("username"), hasAcceptedTerms]);
+
+	if (!hasAcceptedTerms) {
+		return <TermsAndConditions onContinue={() => setHasAcceptedTerms(true)} />;
+	}
 
 	return (
 		<FormProvider {...methods}>

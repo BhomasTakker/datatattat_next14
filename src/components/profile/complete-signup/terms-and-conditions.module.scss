@@ -1,0 +1,30 @@
+@use "../../../scss/abstracts/colours/" as *;
+@use "../../../scss/abstracts/units/" as *;
+@use "../../../scss/abstracts/font/" as *;
+
+.termsSection {
+	display: flex;
+	flex-direction: column;
+	gap: $spacingMd;
+
+	.header {
+		padding: $spacingXxxl 0 $spacingXl;
+	}
+}
+
+.termsContent {
+	max-height: 18rem;
+	overflow-y: auto;
+	background-color: $background-light;
+	border-radius: $spacingXxs;
+	padding: $spacingSm;
+	display: flex;
+	flex-direction: column;
+	gap: $spacingSm;
+}
+
+.checkboxRow {
+	display: flex;
+	align-items: flex-start;
+	gap: $spacingXs;
+}
