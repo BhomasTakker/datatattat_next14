@@ -1,9 +1,6 @@
-import {
-	getComponentQueries,
-	getWithConfig,
-	QueryOptions,
-} from "./_with-config";
+import { getComponentQueries, getWithConfig } from "./_with-config";
 import { EditInputs } from "../../inputs/inputs";
+import { QueryOptions } from "./types";
 
 // Mock configs for dependencies
 jest.mock("./rss/rss-config", () => ({
@@ -88,7 +85,7 @@ describe("getWithConfig", () => {
 		});
 		expect(
 			// @ts-expect-error we know the input has an optionMap property
-			config.inputs[1].optionMap.get(QueryOptions.API_QUERY)
+			config.inputs[1].optionMap.get(QueryOptions.API_QUERY),
 		).toMatchObject({
 			id: "api-config",
 			options: ["A", "B"],
