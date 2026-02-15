@@ -49,20 +49,5 @@ export const ARTICLE_COLLECTION_CONFIG: InputListProps = {
 			// we are saved on comopnent props object - our parent
 			optionId: undefined, // "variantProps",
 		},
-		getWithConfig({
-			options: [
-				// we need to  add this after we determine variant
-				QueryOptions.NONE,
-				QueryOptions.API_QUERY,
-				QueryOptions.HTML_META_QUERY,
-				QueryOptions.MANUAL_VIDEO_SOURCES,
-				QueryOptions.RSS,
-			],
-			// defaultSelection: QueryOptions.API_QUERY,
-			apiConfigOptions: {
-				options: [APIOptions.ARTICLES_SEARCH_API, APIOptions.YOUTUBE_API],
-				defaultSelection: APIOptions.ARTICLES_SEARCH_API,
-			},
-		}),
 	],
 };
