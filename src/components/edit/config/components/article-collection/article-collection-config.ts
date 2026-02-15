@@ -1,31 +1,8 @@
 import { InputListProps } from "@/types/edit/inputs/inputs";
 import { EditInputs } from "../../../inputs/inputs";
-import { STACK_COLUMNS_CONFIG } from "./collections/stack/stack-columns";
-import { STACK_SCROLLER_CONFIG } from "./collections/stack/stack-scroller";
-import { ArticleCollectionVariants } from "@/components/content/components/article-collection/variant-map";
-import { GRID_DISPLAY } from "./collections/grid/gridDisplay";
-import { VIDEO_DISPLAY } from "./collections/video-display/video-display";
-import { AUDIO_DISPLAY } from "./collections/audio-display/audio-display";
-import { getWithConfig, QueryOptions } from "../../query/_with-config";
-import { APIOptions } from "../../query/api/api-base-config";
+import { articleCollectionsMap } from "./structs";
 
-type articleCollectionProps =
-	| typeof STACK_SCROLLER_CONFIG
-	| typeof STACK_COLUMNS_CONFIG
-	| typeof GRID_DISPLAY;
-
-const collectionsMap = new Map<string, articleCollectionProps>([
-	[ArticleCollectionVariants.StackScroller, STACK_SCROLLER_CONFIG],
-	[ArticleCollectionVariants.StackColumns, STACK_COLUMNS_CONFIG],
-	[ArticleCollectionVariants.gridDisplay5, GRID_DISPLAY],
-	[ArticleCollectionVariants.gridDisplay7, GRID_DISPLAY],
-	[ArticleCollectionVariants.videoDisplay, VIDEO_DISPLAY],
-	[ArticleCollectionVariants.audioDisplay, AUDIO_DISPLAY],
-]);
-
-// there may be a better way
-// Also utils this
-const options = Array.from(collectionsMap.keys()).map((key) => key);
+const options = Array.from(articleCollectionsMap.keys()).map((key) => key);
 
 export const ARTICLE_COLLECTION_CONFIG: InputListProps = {
 	id: "articleCollection",
@@ -45,7 +22,7 @@ export const ARTICLE_COLLECTION_CONFIG: InputListProps = {
 			defaultValue: "stack-scroller",
 			required: true,
 			options,
-			optionMap: collectionsMap,
+			optionMap: articleCollectionsMap,
 			// we are saved on comopnent props object - our parent
 			optionId: undefined, // "variantProps",
 		},
