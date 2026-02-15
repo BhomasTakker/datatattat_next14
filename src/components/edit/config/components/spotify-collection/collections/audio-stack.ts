@@ -1,9 +1,10 @@
 import { EditInputs } from "@/components/edit/inputs/inputs";
 import { InputListProps } from "@/types/edit/inputs/inputs";
-import { getWithConfig, QueryOptions } from "../../../query/_with-config";
+import { getWithConfig } from "../../../query/_with-config";
 import { APIOptions } from "../../../query/api/api-base-config";
 import { useContainerHeight } from "../../../shared/content";
 import { ContainerHeightOptions } from "@/components/page/components/stack/types";
+import { QueryOptions } from "../../../query/types";
 
 export const SPOTIFY_AUDIO_STACK_CONFIG: InputListProps = {
 	id: "spotifyAudioStack",

@@ -1,9 +1,7 @@
 import { AudioVerticalScrollerSize } from "@/components/content/components/article-collection/collections/audio-display/audio-display";
-import {
-	getWithConfig,
-	QueryOptions,
-} from "@/components/edit/config/query/_with-config";
+import { getWithConfig } from "@/components/edit/config/query/_with-config";
 import { APIOptions } from "@/components/edit/config/query/api/api-base-config";
+import { QueryOptions } from "@/components/edit/config/query/types";
 import { EditInputs } from "@/components/edit/inputs/inputs";
 import { InputListProps } from "@/types/edit/inputs/inputs";
 

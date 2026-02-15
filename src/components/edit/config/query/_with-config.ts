@@ -1,45 +1,17 @@
-import { ComponentDataOptions } from "@/lib/api/component-data/component-data-options";
 import { EditInputs } from "../../inputs/inputs";
-import { GenericInput, InputListProps } from "@/types/edit/inputs/inputs";
+import { InputListProps } from "@/types/edit/inputs/inputs";
 import { HTML_META_QUERY_CONFIG } from "./html/meta-config";
-import { APIOptions, GetAPIConfig, getAPIConfig } from "./api/api-base-config";
+import { getAPIConfig } from "./api/api-base-config";
 import { RSS_CONFIG } from "./rss/rss-config";
 import { MANUAL_VIDEO_SOURCES_QUERY_CONFIG } from "./video-sourcs/config";
 import { OEMBED_LIST_CONFIG } from "./oembed/oembed-list-config";
 import { SPOTIFY_COLLECTION_OEMBED_CONFIG } from "./oembed/providers/spotify";
-
-export enum QueryOptions {
-	NONE = "none",
-	RSS = ComponentDataOptions.RSS,
-	SPOTIFY_OEMBED = ComponentDataOptions.SPOTIFY_OEMBED,
-	OEMBED_LIST = ComponentDataOptions.OEMBED_LIST,
-	API_QUERY = ComponentDataOptions.API_QUERY,
-	HTML_META_QUERY = ComponentDataOptions.HTML_META_QUERY,
-	MANUAL_VIDEO_SOURCES = ComponentDataOptions.MANUAL_VIDEO_SOURCES,
-}
-
-type queryContainersProps =
-	| null
-	| typeof RSS_CONFIG
-	| typeof HTML_META_QUERY_CONFIG
-	| GenericInput;
-
-type ComponentQueryOptions = {
-	rssOptions?: object;
-	oembedOptions?: object;
-	apiOptions?: GetAPIConfig;
-	metaOptions?: object;
-};
-
-// All of this needs restructuring into types etc.
-// We were having import issues
-export const ARTICLE_OPTIONS = [
-	// we need to  add this after we determine variant
-	QueryOptions.NONE,
-	QueryOptions.API_QUERY,
-	QueryOptions.HTML_META_QUERY,
-	QueryOptions.RSS,
-];
+import {
+	ComponentQueryOptions,
+	queryContainersProps,
+	QueryOptions,
+	GetWithConfig,
+} from "./types";
 
 export const getComponentQueries = ({
 	rssOptions = {},
@@ -56,17 +28,6 @@ export const getComponentQueries = ({
 		[QueryOptions.HTML_META_QUERY, HTML_META_QUERY_CONFIG],
 		[QueryOptions.MANUAL_VIDEO_SOURCES, MANUAL_VIDEO_SOURCES_QUERY_CONFIG],
 	]);
-};
-
-type APIConfigOptions = {
-	options: APIOptions[];
-	defaultSelection?: APIOptions;
-};
-
-type GetWithConfig = {
-	options: QueryOptions[];
-	defaultSelection?: QueryOptions;
-	apiConfigOptions?: APIConfigOptions;
 };
 
 // pass options OR id ??
