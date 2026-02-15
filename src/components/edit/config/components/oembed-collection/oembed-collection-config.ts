@@ -1,10 +1,11 @@
 import { InputListProps } from "@/types/edit/inputs/inputs";
 import { EditInputs } from "../../../inputs/inputs";
-import { getWithConfig, QueryOptions } from "../../query/_with-config";
+import { getWithConfig } from "../../query/_with-config";
 import { OembedCollectionVariants } from "@/components/content/components/oembed-collection/variant-map";
 import { OEMBED_STACK_CONFIG } from "./collections/stack/stack";
 import { APIOptions } from "../../query/api/api-base-config";
 import { OEMBED_MASONRY_CONFIG } from "./collections/masonry";
+import { QueryOptions } from "../../query/types";
 
 type oembedCollectionProps = typeof OEMBED_STACK_CONFIG;
 
