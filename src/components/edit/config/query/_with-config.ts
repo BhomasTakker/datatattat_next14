@@ -31,6 +31,16 @@ type ComponentQueryOptions = {
 	metaOptions?: object;
 };
 
+// All of this needs restructuring into types etc.
+// We were having import issues
+export const ARTICLE_OPTIONS = [
+	// we need to  add this after we determine variant
+	QueryOptions.NONE,
+	QueryOptions.API_QUERY,
+	QueryOptions.HTML_META_QUERY,
+	QueryOptions.RSS,
+];
+
 export const getComponentQueries = ({
 	rssOptions = {},
 	oembedOptions = {},

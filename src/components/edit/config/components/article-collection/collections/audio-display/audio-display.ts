@@ -8,7 +8,7 @@ import { EditInputs } from "@/components/edit/inputs/inputs";
 import { InputListProps } from "@/types/edit/inputs/inputs";
 
 export const AUDIO_DISPLAY: InputListProps = {
-	id: "audoiDisplay",
+	id: "audioDisplay",
 	type: EditInputs.inputList,
 	label: "Audio Display",
 	inputs: [
@@ -33,16 +33,13 @@ export const AUDIO_DISPLAY: InputListProps = {
 		// needs adding to variant type
 		getWithConfig({
 			options: [
-				// we need to  add this after we determine variant
-				QueryOptions.NONE,
 				QueryOptions.API_QUERY,
 				QueryOptions.HTML_META_QUERY,
-				QueryOptions.MANUAL_VIDEO_SOURCES,
 				QueryOptions.RSS,
 			],
 			// defaultSelection: QueryOptions.API_QUERY,
 			apiConfigOptions: {
-				options: [APIOptions.ARTICLES_SEARCH_API, APIOptions.YOUTUBE_API],
+				options: [APIOptions.ARTICLES_SEARCH_API],
 				defaultSelection: APIOptions.ARTICLES_SEARCH_API,
 			},
 		}),
