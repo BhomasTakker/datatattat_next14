@@ -24,7 +24,7 @@ export const saveOrCreatePageByRoute = async (page: IPage, creator: string) => {
 			newPage, // update
 			{
 				// options
-				returnDocument: 'after',
+				returnDocument: "after",
 				upsert: true, // Make this update into an upsert
 			},
 		);

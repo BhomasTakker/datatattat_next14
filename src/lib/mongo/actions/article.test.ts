@@ -47,7 +47,7 @@ describe("article actions", () => {
 			expect(Article.findOneAndUpdate).toHaveBeenCalledWith(
 				{ src: mockArticle.src },
 				mockArticle,
-				{ returnDocument: 'after', upsert: true }
+				{ returnDocument: "after", upsert: true },
 			);
 			expect(result).toEqual({ result: mockRes, message: "Saved Article!" });
 		});

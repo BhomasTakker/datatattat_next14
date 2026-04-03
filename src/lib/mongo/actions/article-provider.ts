@@ -17,7 +17,7 @@ export const getArticleProviderByDomain = async (domain: string) => {
 };
 
 export const saveOrCreateArticleProviderByName = async (
-	provider: ProviderItem
+	provider: ProviderItem,
 ) => {
 	const { name } = provider;
 
@@ -26,9 +26,9 @@ export const saveOrCreateArticleProviderByName = async (
 			{ name }, // find
 			provider, // update
 			{
-				returnDocument: 'after',
+				returnDocument: "after",
 				upsert: true, // Make this update into an upsert
-			}
+			},
 		);
 	} catch (err) {
 		console.error(err);

@@ -13,9 +13,9 @@ export const saveOrCreateArticleBySrc = async (article: CollectionItem) => {
 			{ src }, // find
 			article, // update
 			{
-				returnDocument: 'after',
+				returnDocument: "after",
 				upsert: true, // Make this update into an upsert
-			}
+			},
 		).lean();
 
 		return { result: res, message: "Saved Article!" };

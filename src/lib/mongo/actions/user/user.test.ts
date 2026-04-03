@@ -119,7 +119,7 @@ describe.skip("user actions", () => {
 			expect(User.findOneAndUpdate).toHaveBeenCalledWith(
 				{ _id: "123" },
 				{ username: "updated" },
-				{ returnDocument: 'after' }
+				{ returnDocument: "after" },
 			);
 			expect(result).toEqual({ message: "User Updated" });
 		});

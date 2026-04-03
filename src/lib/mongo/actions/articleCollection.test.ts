@@ -44,12 +44,12 @@ describe("articleCollection actions", () => {
 			});
 
 			const result = await saveOrCreateArticleCollectionByFeed(
-				collection as any
+				collection as any,
 			);
 			expect(ArticleCollection.findOneAndUpdate).toHaveBeenCalledWith(
 				{ feed: "feed-url" },
 				{ ...collection },
-				{ returnDocument: 'after', upsert: true }
+				{ returnDocument: "after", upsert: true },
 			);
 			expect(result).toEqual({
 				result: mockRes,
@@ -61,7 +61,7 @@ describe("articleCollection actions", () => {
 			(ArticleCollection.findOneAndUpdate as jest.Mock).mockImplementation(
 				() => ({
 					lean: jest.fn().mockRejectedValue(new Error("fail")),
-				})
+				}),
 			);
 
 			const result = await saveOrCreateArticleCollectionByFeed({
@@ -80,12 +80,12 @@ describe("articleCollection actions", () => {
 			});
 
 			const result = await saveOrCreateArticleCollectionByFeed2(
-				collection as any
+				collection as any,
 			);
 			expect(ArticleCollection.findOneAndUpdate).toHaveBeenCalledWith(
 				{ feed: "feed-2" },
 				{ ...collection },
-				{ returnDocument: 'after', upsert: true }
+				{ returnDocument: "after", upsert: true },
 			);
 			expect(result).toEqual({
 				result: mockRes,
@@ -97,7 +97,7 @@ describe("articleCollection actions", () => {
 			(ArticleCollection.findOneAndUpdate as jest.Mock).mockImplementation(
 				() => ({
 					lean: jest.fn().mockRejectedValue(new Error("fail")),
-				})
+				}),
 			);
 
 			const result = await saveOrCreateArticleCollectionByFeed2({

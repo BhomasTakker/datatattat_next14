@@ -7,7 +7,7 @@ export const getArticleCollectionByFeed = async (feed: string) => {
 };
 
 export const saveOrCreateArticleCollectionByFeed = async (
-	collection: RSSChannelType
+	collection: RSSChannelType,
 ) => {
 	const { feedUrl } = collection;
 
@@ -16,9 +16,9 @@ export const saveOrCreateArticleCollectionByFeed = async (
 			{ feed: feedUrl }, // find
 			{ ...collection },
 			{
-				returnDocument: 'after',
+				returnDocument: "after",
 				upsert: true, // Make this update into an upsert
-			}
+			},
 		).lean();
 
 		return { result: res, message: "Saved Article Collection!" };
@@ -28,7 +28,7 @@ export const saveOrCreateArticleCollectionByFeed = async (
 };
 
 export const saveOrCreateArticleCollectionByFeed2 = async (
-	collection: RSSArticleCollection
+	collection: RSSArticleCollection,
 ) => {
 	const { feed } = collection;
 
@@ -37,9 +37,9 @@ export const saveOrCreateArticleCollectionByFeed2 = async (
 			{ feed }, // find
 			{ ...collection },
 			{
-				returnDocument: 'after',
+				returnDocument: "after",
 				upsert: true, // Make this update into an upsert
-			}
+			},
 		).lean();
 
 		return { result: res, message: "Saved Article Collection!" };
