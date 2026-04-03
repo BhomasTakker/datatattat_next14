@@ -23,7 +23,7 @@ export const getHeader = async (route: string) => {
 
 export const saveOrCreateHeaderByRoute = async (
 	header: Omit<HeaderType, "createdAt" | "updatedAt" | "creator">,
-	creator: string
+	creator: string,
 ) => {
 	const { route, nav } = header;
 
@@ -33,9 +33,9 @@ export const saveOrCreateHeaderByRoute = async (
 			{ route, nav, creator }, // update
 			{
 				// options
-				new: true,
+				returnDocument: "after",
 				upsert: true, // Make this update into an upsert
-			}
+			},
 		);
 	} catch (err) {
 		console.error(err);

@@ -79,14 +79,14 @@ describe("header actions", () => {
 					],
 					creator: "user2",
 				},
-				{ new: true, upsert: true }
+				{ returnDocument: "after", upsert: true },
 			);
 			expect(result).toEqual({ message: "Saved Header!" });
 		});
 
 		it("returns error message on exception", async () => {
 			(Header.findOneAndUpdate as jest.Mock).mockRejectedValue(
-				new Error("fail")
+				new Error("fail"),
 			);
 
 			const header = { route: "/fail", nav: [] };

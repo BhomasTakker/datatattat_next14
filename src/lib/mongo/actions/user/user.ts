@@ -37,7 +37,7 @@ export const updateUser = async (id: string, user: Partial<IUser>) => {
 	try {
 		// create if doesn't exist. Perhaps should not be.
 		const updatedUser = await User.findOneAndUpdate({ _id: id }, user, {
-			new: true,
+			returnDocument: "after",
 		});
 
 		if (!updatedUser) {

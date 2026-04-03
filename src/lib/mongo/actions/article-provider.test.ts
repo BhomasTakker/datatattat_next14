@@ -119,21 +119,21 @@ describe("article-provider actions", () => {
 	describe("saveOrCreateArticleProviderByName", () => {
 		it("should upsert provider and not throw", async () => {
 			(ArticleProvider.findOneAndUpdate as jest.Mock).mockResolvedValueOnce(
-				mockProvider
+				mockProvider,
 			);
 
 			const result = await saveOrCreateArticleProviderByName(mockProvider);
 			expect(ArticleProvider.findOneAndUpdate).toHaveBeenCalledWith(
 				{ name: mockProvider.name },
 				mockProvider,
-				{ new: true, upsert: true }
+				{ returnDocument: "after", upsert: true },
 			);
 			expect(result).toBeUndefined();
 		});
 
 		it("should handle errors and return error message", async () => {
 			(ArticleProvider.findOneAndUpdate as jest.Mock).mockRejectedValueOnce(
-				new Error("DB error")
+				new Error("DB error"),
 			);
 
 			const result = await saveOrCreateArticleProviderByName(mockProvider);
