@@ -126,7 +126,7 @@ describe("article-provider actions", () => {
 			expect(ArticleProvider.findOneAndUpdate).toHaveBeenCalledWith(
 				{ name: mockProvider.name },
 				mockProvider,
-				{ new: true, upsert: true }
+				{ returnDocument: 'after', upsert: true }
 			);
 			expect(result).toBeUndefined();
 		});

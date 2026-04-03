@@ -26,7 +26,7 @@ export const saveOrCreateArticleProviderByName = async (
 			{ name }, // find
 			provider, // update
 			{
-				new: true,
+				returnDocument: 'after',
 				upsert: true, // Make this update into an upsert
 			}
 		);

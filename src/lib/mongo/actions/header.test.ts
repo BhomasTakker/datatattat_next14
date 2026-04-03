@@ -79,7 +79,7 @@ describe("header actions", () => {
 					],
 					creator: "user2",
 				},
-				{ new: true, upsert: true }
+				{ returnDocument: 'after', upsert: true }
 			);
 			expect(result).toEqual({ message: "Saved Header!" });
 		});

@@ -13,7 +13,7 @@ export const saveOrCreateArticleBySrc = async (article: CollectionItem) => {
 			{ src }, // find
 			article, // update
 			{
-				new: true,
+				returnDocument: 'after',
 				upsert: true, // Make this update into an upsert
 			}
 		).lean();

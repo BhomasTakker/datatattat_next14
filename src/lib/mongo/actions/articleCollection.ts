@@ -16,7 +16,7 @@ export const saveOrCreateArticleCollectionByFeed = async (
 			{ feed: feedUrl }, // find
 			{ ...collection },
 			{
-				new: true,
+				returnDocument: 'after',
 				upsert: true, // Make this update into an upsert
 			}
 		).lean();
@@ -37,7 +37,7 @@ export const saveOrCreateArticleCollectionByFeed2 = async (
 			{ feed }, // find
 			{ ...collection },
 			{
-				new: true,
+				returnDocument: 'after',
 				upsert: true, // Make this update into an upsert
 			}
 		).lean();

@@ -33,7 +33,7 @@ export const saveOrCreateHeaderByRoute = async (
 			{ route, nav, creator }, // update
 			{
 				// options
-				new: true,
+				returnDocument: 'after',
 				upsert: true, // Make this update into an upsert
 			}
 		);
