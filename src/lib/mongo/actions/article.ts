@@ -1,5 +1,15 @@
 import Article from "@/models/Article";
 import { CollectionItem } from "@/types/data-structures/collection/item/item";
+import { isValidObjectId } from "mongoose";
+
+export const getArticlesByProviderId = async (providerId: string) => {
+	if (!isValidObjectId(providerId)) return [];
+	try {
+		return await Article.find({ provider: providerId }).lean();
+	} catch {
+		return [];
+	}
+};
 
 export const getArticleBySrc = async (src: string) => {
 	return await Article.findOne({ src }).lean();

@@ -1,9 +1,19 @@
 import { RSSArticleCollection } from "@/types/data-structures/collection/collection";
 import ArticleCollection from "../../../models/ArticleCollection";
 import { RSSChannelType } from "@/types/data-structures/rss";
+import { isValidObjectId } from "mongoose";
 
 export const getArticleCollectionByFeed = async (feed: string) => {
 	return await ArticleCollection.findOne({ feed }).lean();
+};
+
+export const getArticleCollectionsByProviderId = async (providerId: string) => {
+	if (!isValidObjectId(providerId)) return [];
+	try {
+		return await ArticleCollection.find({ provider: providerId }).lean();
+	} catch {
+		return [];
+	}
 };
 
 export const saveOrCreateArticleCollectionByFeed = async (
