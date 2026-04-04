@@ -13,7 +13,9 @@ export const getArticleProviderByNameFuzzy = async (name: string) => {
 	}).lean();
 };
 
-export const getArticleProviderById = async (id: string) => {
+export const getArticleProviderById = async (
+	id: string,
+): Promise<ProviderItem | null> => {
 	if (!isValidObjectId(id)) return null;
 	try {
 		return await ArticleProvider.findById(id).lean();

@@ -7,7 +7,10 @@ export const getArticleCollectionByFeed = async (feed: string) => {
 	return await ArticleCollection.findOne({ feed }).lean();
 };
 
-export const getArticleCollectionsByProviderId = async (providerId: string) => {
+// Perhaps not necessarily an RSSArticleCollection but we can use the same structure for now
+export const getArticleCollectionsByProviderId = async (
+	providerId: string,
+): Promise<RSSArticleCollection[]> => {
 	if (!isValidObjectId(providerId)) return [];
 	try {
 		return await ArticleCollection.find({ provider: providerId }).lean();
