@@ -12,6 +12,10 @@ export const getArticleProviderByNameFuzzy = async (name: string) => {
 	}).lean();
 };
 
+export const getArticleProviderById = async (id: string) => {
+	return await ArticleProvider.findById(id).lean();
+};
+
 export const getArticleProviderByDomain = async (domain: string) => {
 	return await ArticleProvider.findOne({ url: domain }).lean();
 };
