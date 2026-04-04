@@ -1,5 +1,6 @@
 import ArticleProvider from "@/models/ArticleProvider";
 import { ProviderItem } from "@/types/data-structures/collection/item/item";
+import { isValidObjectId } from "mongoose";
 
 export const getArticleProviderByName = async (name: string) => {
 	return await ArticleProvider.findOne({ name }).lean();
@@ -13,7 +14,12 @@ export const getArticleProviderByNameFuzzy = async (name: string) => {
 };
 
 export const getArticleProviderById = async (id: string) => {
-	return await ArticleProvider.findById(id).lean();
+	if (!isValidObjectId(id)) return null;
+	try {
+		return await ArticleProvider.findById(id).lean();
+	} catch {
+		return null;
+	}
 };
 
 export const getArticleProviderByDomain = async (domain: string) => {
