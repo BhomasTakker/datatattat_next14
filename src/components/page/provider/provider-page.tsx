@@ -7,6 +7,7 @@ import {
 	PlayerCollectionVariant,
 	PlayerSourceTypes,
 } from "@/components/content/components/article-collection/collections/video-display/structs";
+import styles from "./provider-page.module.scss";
 
 type Props = {
 	providerId: string;
@@ -22,20 +23,29 @@ export const ProviderPage = async ({ providerId }: Props) => {
 		variant: "video",
 	});
 	return (
-		<div>
-			<ProviderArticleCollectionComponent
-				variant={ArticleCollectionVariants.StackScroller}
-				items={cloneDeep(articles)}
-				componentProps={{}}
-			/>
-			<ProviderArticleCollectionComponent
-				variant={ArticleCollectionVariants.videoDisplay}
-				items={cloneDeep(videoArticles)}
-				componentProps={{
-					variant: PlayerCollectionVariant.VerticalScroll,
-					sourceType: PlayerSourceTypes.Youtube,
-				}}
-			/>
+		<div className={styles.root}>
+			{articles.length && (
+				<div>
+					<ProviderArticleCollectionComponent
+						variant={ArticleCollectionVariants.StackScroller}
+						items={cloneDeep(articles)}
+						componentProps={{}}
+					/>
+				</div>
+			)}
+
+			{videoArticles.length && (
+				<div>
+					<ProviderArticleCollectionComponent
+						variant={ArticleCollectionVariants.videoDisplay}
+						items={cloneDeep(videoArticles)}
+						componentProps={{
+							variant: PlayerCollectionVariant.VerticalScroll,
+							sourceType: PlayerSourceTypes.Youtube,
+						}}
+					/>
+				</div>
+			)}
 			{/* We would do more of these and different variants based on the collections */}
 		</div>
 	);
