@@ -4,6 +4,7 @@ import { isValidObjectId } from "mongoose";
 
 type GetArticlesByProviderIdOptions = {
 	variant?: string;
+	limit?: number;
 };
 
 export const getArticlesByProviderId = async (
@@ -11,11 +12,14 @@ export const getArticlesByProviderId = async (
 	options: GetArticlesByProviderIdOptions = {},
 ): Promise<CollectionItem[]> => {
 	if (!isValidObjectId(providerId)) return [];
-	const { variant } = options;
+	const { variant, limit = 50 } = options;
 	const query: Record<string, unknown> = { provider: providerId };
 	if (variant) query.variant = variant;
 	try {
-		return await Article.find(query).sort({ "details.published": -1 }).lean();
+		return await Article.find(query)
+			.sort({ "details.published": -1 })
+			.limit(limit)
+			.lean();
 	} catch {
 		return [];
 	}
