@@ -2,10 +2,20 @@ import Article from "@/models/Article";
 import { CollectionItem } from "@/types/data-structures/collection/item/item";
 import { isValidObjectId } from "mongoose";
 
-export const getArticlesByProviderId = async (providerId: string): Promise<CollectionItem[]> => {
+type GetArticlesByProviderIdOptions = {
+	variant?: string;
+};
+
+export const getArticlesByProviderId = async (
+	providerId: string,
+	options: GetArticlesByProviderIdOptions = {},
+): Promise<CollectionItem[]> => {
 	if (!isValidObjectId(providerId)) return [];
+	const { variant } = options;
+	const query: Record<string, unknown> = { provider: providerId };
+	if (variant) query.variant = variant;
 	try {
-		return await Article.find({ provider: providerId }).lean();
+		return await Article.find(query).sort({ "details.published": -1 }).lean();
 	} catch {
 		return [];
 	}
