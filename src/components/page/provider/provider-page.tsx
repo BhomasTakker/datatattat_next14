@@ -24,18 +24,20 @@ export const ProviderPage = async ({ providerId }: Props) => {
 	});
 	return (
 		<div className={styles.root}>
-			{articles.length && (
-				<div>
+			{articles.length > 0 && (
+				<section className={styles.section}>
+					<h2 className={styles.sectionTitle}>Articles</h2>
 					<ProviderArticleCollectionComponent
 						variant={ArticleCollectionVariants.StackScroller}
 						items={cloneDeep(articles)}
 						componentProps={{}}
 					/>
-				</div>
+				</section>
 			)}
 
-			{videoArticles.length && (
-				<div>
+			{videoArticles.length > 0 && (
+				<section className={styles.section}>
+					<h2 className={styles.sectionTitle}>Videos</h2>
 					<ProviderArticleCollectionComponent
 						variant={ArticleCollectionVariants.videoDisplay}
 						items={cloneDeep(videoArticles)}
@@ -44,7 +46,7 @@ export const ProviderPage = async ({ providerId }: Props) => {
 							sourceType: PlayerSourceTypes.Youtube,
 						}}
 					/>
-				</div>
+				</section>
 			)}
 			{/* We would do more of these and different variants based on the collections */}
 		</div>
