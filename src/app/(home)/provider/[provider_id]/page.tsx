@@ -1,9 +1,8 @@
-import { getPage } from "@/actions/page/page-actions";
 import styles from "../../../page.module.scss";
-import { IPage } from "@/types/page";
-import { PageDisplay } from "@/components/page/page-display";
 import { generateMetaDataFromPage } from "@/lib/metadata/generate-metadata";
 import { initialiseServices } from "@/lib/services/intialise-services";
+import { getArticleProviderById } from "@/lib/mongo/actions/article-provider";
+import { ProviderPage } from "@/components/page/provider/provider-page";
 
 // Would ge the same provider data and create based upon that
 export const generateMetadata = async () => await generateMetaDataFromPage("/");
@@ -27,18 +26,19 @@ type Props = {
 
 export default async function Provider({ params }: Props) {
 	await initialiseServices();
-	const page = (await getPage("/")) as IPage;
 	const providerId = (await params).provider_id;
 
-	if (!page) {
-		// omg do something
+	const providerData = await getArticleProviderById(providerId);
+
+	if (!providerData) {
 		return <h1>404</h1>;
 	}
 
+	// get within the ProviderPage
+
 	return (
 		<div className={styles.page}>
-			<div>Provider Display:- {providerId}</div>
-			<PageDisplay page={page} />
+			<ProviderPage providerId={providerId} />
 		</div>
 	);
 }
