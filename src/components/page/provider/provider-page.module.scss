@@ -31,6 +31,12 @@
 	}
 }
 
+.collectionsGrid {
+	display: flex;
+	flex-wrap: wrap;
+	gap: $spacingLg;
+}
+
 .sectionTitle {
 	font: $titleMd;
 	color: $text-sharp;

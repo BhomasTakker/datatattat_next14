@@ -1,4 +1,5 @@
 import { ProviderArticleCollectionComponent } from "./provider-component";
+import { ProviderCollectionCard } from "./provider-collection-card";
 import { ArticleCollectionVariants } from "@/components/content/components/article-collection/variants";
 import { getArticlesByProviderId } from "@/lib/mongo/actions/article";
 import { getArticleCollectionsByProviderId } from "@/lib/mongo/actions/articleCollection";
@@ -26,7 +27,7 @@ export const ProviderPage = async ({ providerId }: Props) => {
 		<div className={styles.root}>
 			{articles.length > 0 && (
 				<section className={styles.section}>
-					<h2 className={styles.sectionTitle}>Articles</h2>
+					<h2 className={styles.sectionTitle}>Latest Articles</h2>
 					<ProviderArticleCollectionComponent
 						variant={ArticleCollectionVariants.StackScroller}
 						items={cloneDeep(articles)}
@@ -37,7 +38,7 @@ export const ProviderPage = async ({ providerId }: Props) => {
 
 			{videoArticles.length > 0 && (
 				<section className={styles.section}>
-					<h2 className={styles.sectionTitle}>Videos</h2>
+					<h2 className={styles.sectionTitle}>Latest Videos</h2>
 					<ProviderArticleCollectionComponent
 						variant={ArticleCollectionVariants.videoDisplay}
 						items={cloneDeep(videoArticles)}
@@ -48,7 +49,19 @@ export const ProviderPage = async ({ providerId }: Props) => {
 					/>
 				</section>
 			)}
-			{/* We would do more of these and different variants based on the collections */}
+			{collections.length > 0 && (
+				<section className={styles.section}>
+					<h2 className={styles.sectionTitle}>Collections</h2>
+					<div className={styles.collectionsGrid}>
+						{collections.map((collection, i) => (
+							<ProviderCollectionCard
+								key={collection.feed ?? i}
+								collection={collection}
+							/>
+						))}
+					</div>
+				</section>
+			)}
 		</div>
 	);
 };
