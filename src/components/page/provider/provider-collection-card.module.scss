@@ -5,7 +5,9 @@
 .card {
 	display: flex;
 	flex-direction: column;
-	width: $containerWidthSm;
+	flex: 1 1 $containerWidthSm;
+	min-width: $containerWidthSm;
+	max-width: $containerWidthMd;
 	border: 1px solid $background-dark;
 	border-radius: $spacingXs;
 	overflow: hidden;
