@@ -1,11 +1,31 @@
 import styles from "../../../page.module.scss";
-import { generateMetaDataFromPage } from "@/lib/metadata/generate-metadata";
 import { initialiseServices } from "@/lib/services/intialise-services";
 import { getArticleProviderById } from "@/lib/mongo/actions/article-provider";
 import { ProviderPage } from "@/components/page/provider/provider-page";
+import type { Metadata } from "next";
 
-// Would ge the same provider data and create based upon that
-export const generateMetadata = async () => await generateMetaDataFromPage("/");
+export const generateMetadata = async ({
+	params,
+}: Props): Promise<Metadata> => {
+	await initialiseServices();
+	const providerId = (await params).provider_id;
+	const providerData = await getArticleProviderById(providerId);
+
+	if (!providerData) return {};
+
+	const { name, description, url, logo } = providerData;
+
+	return {
+		title: name,
+		description,
+		openGraph: {
+			title: `${name} | Datatattat`,
+			description,
+			url,
+			...(logo && { images: [{ url: logo, alt: name }] }),
+		},
+	};
+};
 
 // We need a revalidate strategy for everything
 // currently we are 15 minutes on news updates
