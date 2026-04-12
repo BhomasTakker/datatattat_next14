@@ -8,7 +8,10 @@ export const generateMetadata = async ({
 	params,
 }: Props): Promise<Metadata> => {
 	await initialiseServices();
-	const providerId = (await params).provider_id;
+
+	const awaitedParams = await params;
+
+	const providerId = awaitedParams.provider_id;
 	const providerData = await getArticleProviderById(providerId);
 
 	if (!providerData) return {};
