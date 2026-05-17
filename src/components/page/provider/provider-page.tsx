@@ -29,11 +29,21 @@ export const ProviderPage = async ({ providerData }: Props) => {
 	const videoArticles = await getArticlesByProviderId(providerId, {
 		variant: "video",
 	});
+	const hasContent =
+		articles.length > 0 || videoArticles.length > 0 || collections.length > 0;
+
 	return (
 		<div className={styles.root}>
 			<section>
 				<ProviderHeader provider={providerData} />
 			</section>
+			{!hasContent && (
+				<section className={styles.section}>
+					<p className={styles.emptyState}>
+						No content is available for this provider yet.
+					</p>
+				</section>
+			)}
 			{articles.length > 0 && (
 				<section className={styles.section}>
 					<h2 className={styles.sectionTitle}>Latest Articles</h2>

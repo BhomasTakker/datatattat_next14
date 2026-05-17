@@ -52,4 +52,11 @@
 			gap: $spacingLg;
 		}
 	}
+
+	.emptyState {
+		font: $textMd;
+		color: $text-muted;
+		padding: $spacingXxl 0;
+		text-align: center;
+	}
 }
