@@ -10,10 +10,7 @@ export const ProviderHeader = ({ provider }: Props) => {
 
 	return (
 		<div className={styles.root}>
-			{logo && (
-				// eslint-disable-next-line @next/next/no-img-element
-				<img src={logo} alt={`${name} logo`} className={styles.logo} />
-			)}
+			{logo && <img src={logo} alt={`${name} logo`} className={styles.logo} />}
 			<div className={styles.content}>
 				<h1 className={styles.name}>{name}</h1>
 				<p className={styles.description}>{description}</p>
