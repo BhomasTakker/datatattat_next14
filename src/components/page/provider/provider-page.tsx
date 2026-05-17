@@ -1,5 +1,6 @@
 import { ProviderArticleCollectionComponent } from "./provider-component";
 import { ProviderCollectionCard } from "./provider-collection-card";
+import { ProviderHeader } from "./provider-header";
 import { ArticleCollectionVariants } from "@/components/content/components/article-collection/variants";
 import { getArticlesByProviderId } from "@/lib/mongo/actions/article";
 import { getArticleCollectionsByProviderId } from "@/lib/mongo/actions/articleCollection";
@@ -8,13 +9,15 @@ import {
 	PlayerCollectionVariant,
 	PlayerSourceTypes,
 } from "@/components/content/components/article-collection/collections/video-display/structs";
+import { ProviderItem } from "@/types/data-structures/collection/item/item";
 import styles from "./provider-page.module.scss";
 
 type Props = {
 	providerId: string;
+	providerData: ProviderItem;
 };
 
-export const ProviderPage = async ({ providerId }: Props) => {
+export const ProviderPage = async ({ providerId, providerData }: Props) => {
 	const collections = await getArticleCollectionsByProviderId(providerId);
 	// We need to create an aggregate, get by provider and dateDescending
 	const articles = await getArticlesByProviderId(providerId, {
@@ -25,6 +28,9 @@ export const ProviderPage = async ({ providerId }: Props) => {
 	});
 	return (
 		<div className={styles.root}>
+			<section>
+				<ProviderHeader provider={providerData} />
+			</section>
 			{articles.length > 0 && (
 				<section className={styles.section}>
 					<h2 className={styles.sectionTitle}>Latest Articles</h2>

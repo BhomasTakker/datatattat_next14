@@ -57,11 +57,9 @@ export default async function Provider({ params }: Props) {
 		return <h1>404</h1>;
 	}
 
-	// get within the ProviderPage
-
 	return (
 		<div className={styles.page}>
-			<ProviderPage providerId={providerId} />
+			<ProviderPage providerId={providerId} providerData={providerData} />
 		</div>
 	);
 }
