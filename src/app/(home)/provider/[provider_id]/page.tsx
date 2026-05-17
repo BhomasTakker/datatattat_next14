@@ -1,6 +1,6 @@
 import styles from "../../../page.module.scss";
 import { initialiseServices } from "@/lib/services/intialise-services";
-import { getArticleProviderById } from "@/lib/mongo/actions/article-provider";
+import { getArticleProviderByIdOrSlug } from "@/lib/mongo/actions/article-provider";
 import { ProviderPage } from "@/components/page/provider/provider-page";
 import type { Metadata } from "next";
 
@@ -12,7 +12,7 @@ export const generateMetadata = async ({
 	const awaitedParams = await params;
 
 	const providerId = awaitedParams.provider_id;
-	const providerData = await getArticleProviderById(providerId);
+	const providerData = await getArticleProviderByIdOrSlug(providerId);
 
 	if (!providerData) return {};
 
@@ -51,7 +51,7 @@ export default async function Provider({ params }: Props) {
 	await initialiseServices();
 	const providerId = (await params).provider_id;
 
-	const providerData = await getArticleProviderById(providerId);
+	const providerData = await getArticleProviderByIdOrSlug(providerId);
 
 	if (!providerData) {
 		return <h1>404</h1>;
@@ -59,7 +59,7 @@ export default async function Provider({ params }: Props) {
 
 	return (
 		<div className={styles.page}>
-			<ProviderPage providerId={providerId} providerData={providerData} />
+			<ProviderPage providerData={providerData} />
 		</div>
 	);
 }

@@ -24,6 +24,30 @@ export const getArticleProviderById = async (
 	}
 };
 
+export const getArticleProviderBySlug = async (
+	slug: string,
+): Promise<ProviderItem | null> => {
+	// Decode %20 etc., then normalise: lowercase and replace hyphens with spaces
+	// so "BBC%20News", "bbc-news", and "BBC NeWs" all match "BBC News"
+	const normalised = decodeURIComponent(slug).toLowerCase().replace(/-/g, " ");
+	try {
+		return await ArticleProvider.findOne({
+			name: { $regex: new RegExp(`^${normalised}$`, "i") },
+		}).lean();
+	} catch {
+		return null;
+	}
+};
+
+export const getArticleProviderByIdOrSlug = async (
+	param: string,
+): Promise<ProviderItem | null> => {
+	if (isValidObjectId(param)) {
+		return await getArticleProviderById(param);
+	}
+	return await getArticleProviderBySlug(param);
+};
+
 export const getArticleProviderByDomain = async (domain: string) => {
 	return await ArticleProvider.findOne({ url: domain }).lean();
 };

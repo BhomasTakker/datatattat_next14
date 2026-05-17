@@ -13,11 +13,14 @@ import { ProviderItem } from "@/types/data-structures/collection/item/item";
 import styles from "./provider-page.module.scss";
 
 type Props = {
-	providerId: string;
 	providerData: ProviderItem;
 };
 
-export const ProviderPage = async ({ providerId, providerData }: Props) => {
+export const ProviderPage = async ({ providerData }: Props) => {
+	const providerId = providerData._id?.toString();
+	if (!providerId) {
+		return <h1>404</h1>;
+	}
 	const collections = await getArticleCollectionsByProviderId(providerId);
 	// We need to create an aggregate, get by provider and dateDescending
 	const articles = await getArticlesByProviderId(providerId, {
