@@ -1,6 +1,30 @@
 import "@testing-library/jest-dom";
 
-// Mock MpngoDB connection
+// Mock Mongoose
+jest.mock("mongoose", () => ({
+	__esModule: true,
+	default: {
+		Types: {
+			ObjectId: jest.fn().mockImplementation((id?: string) => ({
+				toString: () => id ?? "507f1f77bcf86cd799439011",
+			})),
+		},
+		Schema: {
+			Types: {
+				ObjectId: String,
+			},
+		},
+		connect: jest.fn(),
+	},
+	isValidObjectId: jest.fn().mockReturnValue(true),
+	Types: {
+		ObjectId: jest.fn().mockImplementation((id?: string) => ({
+			toString: () => id ?? "507f1f77bcf86cd799439011",
+		})),
+	},
+}));
+
+// Mock MongoDB connection
 jest.mock("../src/lib/mongo/db", () => ({
 	__esModule: true,
 	connectToMongoDB: jest.fn().mockResolvedValue(undefined),
