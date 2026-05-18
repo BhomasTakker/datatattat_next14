@@ -37,11 +37,6 @@ export const generateMetadata = async ({
 // We can and should go lower in future and for breaking news pages etc
 export const revalidate = 960;
 
-export async function generateStaticParams() {
-	// get admin routes from the database
-	return [];
-}
-
 type Params = Promise<{ provider_id: string }>;
 type Props = {
 	params: Params;
