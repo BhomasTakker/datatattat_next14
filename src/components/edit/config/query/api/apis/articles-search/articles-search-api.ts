@@ -161,6 +161,7 @@ export enum Variants {
 	article = "article",
 	video = "video",
 	audio = "audio",
+	provider = "provider",
 }
 
 const ARTICLE_PARAMS: InputListProps = {
@@ -218,6 +219,8 @@ const variantMap = new Map<string, InputListProps>([
 	[Variants.article, ARTICLE_PARAMS],
 	[Variants.video, VIDEO_PARAMS],
 	[Variants.audio, AUDIO_PARAMS],
+	// todo - create provider params
+	[Variants.provider, ARTICLE_PARAMS],
 ]);
 
 export const PARAMS: GenericInput[] = [
@@ -227,7 +230,12 @@ export const PARAMS: GenericInput[] = [
 		label: "Variant",
 		defaultValue: "article",
 		required: true,
-		options: [Variants.article, Variants.video, Variants.audio],
+		options: [
+			Variants.article,
+			Variants.video,
+			Variants.audio,
+			Variants.provider,
+		],
 		optionMap: variantMap,
 		// we are saved on comopnent props object - our parent
 		optionId: undefined, // "variantProps",

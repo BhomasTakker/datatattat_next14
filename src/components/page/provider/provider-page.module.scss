@@ -1,0 +1,62 @@
+@use "../../../scss/abstracts/units/" as *;
+@use "../../../scss/abstracts/font/" as *;
+@use "../../../scss/abstracts/colours/" as *;
+
+.root {
+	display: flex;
+	flex-direction: column;
+	gap: $spacingXxl;
+	padding: $spacingMd 0;
+
+	@media screen and (min-width: $screenWidthSm) {
+		padding: $spacingLg 0;
+	}
+
+	@media screen and (min-width: $screenWidthMd) {
+		padding: $spacingXxl 0;
+	}
+
+	.section {
+		display: flex;
+		flex-direction: column;
+		gap: $spacingMd;
+
+		// "& + &" = adjacent sibling combinator: targets a .section immediately preceded by another .section.
+		// Result: only the 2nd, 3rd, etc. sections get the divider — the first one is unaffected.
+		// Could do this with :not(:first-child) but that would be less efficient as it would require checking every .section, not just the ones that follow another .section.
+		& + & {
+			padding-top: $spacingXxl;
+			border-top: 1px solid $background-dark;
+		}
+
+		.sectionTitle {
+			font: $titleMd;
+			color: $text-sharp;
+
+			@media screen and (min-width: $screenWidthSm) {
+				font: $titleLg;
+			}
+
+			@media screen and (min-width: $screenWidthMd) {
+				font: $titleXl;
+			}
+
+			@media screen and (min-width: $screenWidthLg) {
+				font: $titleXl2;
+			}
+		}
+
+		.collectionsGrid {
+			display: flex;
+			flex-wrap: wrap;
+			gap: $spacingLg;
+		}
+	}
+
+	.emptyState {
+		font: $textMd;
+		color: $text-muted;
+		padding: $spacingXxl 0;
+		text-align: center;
+	}
+}

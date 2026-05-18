@@ -1,0 +1,68 @@
+@use "../../../scss/abstracts/units/" as *;
+@use "../../../scss/abstracts/font/" as *;
+@use "../../../scss/abstracts/colours/" as *;
+
+.card {
+	display: flex;
+	flex-direction: column;
+	flex: 1 1 $containerWidthSm;
+	min-width: $containerWidthSm;
+	max-width: $containerWidthMd;
+	border: 1px solid $background-dark;
+	border-radius: $spacingXs;
+	overflow: hidden;
+	background: $background-light;
+
+	.cardImage {
+		width: 100%;
+		height: $contentHeightXs;
+		object-fit: cover;
+	}
+
+	.cardBody {
+		display: flex;
+		flex-direction: column;
+		gap: $spacingXxs;
+		padding: $spacingMd;
+
+		.cardTitle {
+			font: $titleXs2;
+			color: $text-sharp;
+		}
+
+		.cardDescription {
+			font: $textSm;
+			color: $text-muted;
+			// Clamp to 3 lines
+			display: -webkit-box;
+			-webkit-line-clamp: 3;
+			line-clamp: 3;
+			-webkit-box-orient: vertical;
+			overflow: hidden;
+		}
+
+		.cardMeta {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: $spacingXs;
+			margin-top: $spacingXxs;
+
+			.cardFeed {
+				font: $textXs;
+				color: $text-light;
+				text-decoration: underline;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+				max-width: 70%;
+			}
+
+			.cardCount {
+				font: $textXs;
+				color: $text-muted;
+				white-space: nowrap;
+			}
+		}
+	}
+}

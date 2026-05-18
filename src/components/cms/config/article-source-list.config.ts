@@ -16,7 +16,7 @@ export const ARTICLE_SOURCE_LIST_CONFIG: InputListProps = {
 			id: "variant",
 			type: EditInputs.select,
 			label: "Variant",
-			options: ["article", "audio", "video"],
+			options: ["article", "audio", "video", "provider"],
 		},
 		{
 			id: "categories",

@@ -1,0 +1,112 @@
+@use "../../../scss/abstracts/units/" as *;
+@use "../../../scss/abstracts/font/" as *;
+@use "../../../scss/abstracts/colours/" as *;
+
+.root {
+	display: flex;
+	flex-direction: column;
+	gap: $spacingLg;
+
+	@media screen and (min-width: $screenWidthSm) {
+		flex-direction: row;
+		align-items: flex-start;
+		gap: $spacingXxl;
+	}
+
+	.logo {
+		width: $contentHeightXs2;
+		height: $contentHeightXs2;
+		object-fit: contain;
+		border-radius: $spacingXs;
+		flex-shrink: 0;
+
+		@media screen and (min-width: $screenWidthSm) {
+			width: $contentHeightSm;
+			height: $contentHeightSm;
+		}
+	}
+
+	.content {
+		display: flex;
+		flex-direction: column;
+		gap: $spacingSm;
+
+		.name {
+			font: $titleLg;
+			color: $text-sharp;
+
+			@media screen and (min-width: $screenWidthSm) {
+				font: $titleXl;
+			}
+
+			@media screen and (min-width: $screenWidthMd) {
+				font: $titleXl2;
+			}
+
+			@media screen and (min-width: $screenWidthLg) {
+				font: $titleXl3;
+			}
+		}
+
+		.description {
+			font: $textSm;
+			color: $text-muted;
+
+			@media screen and (min-width: $screenWidthSm) {
+				font: $textMd;
+			}
+		}
+
+		.meta {
+			display: flex;
+			flex-wrap: wrap;
+			gap: $spacingXs $spacingXl;
+			margin: 0;
+			padding-top: $spacingXs;
+			border-top: 1px solid $background-dark;
+
+			.metaItem {
+				display: flex;
+				flex-direction: column;
+				gap: $spacingXxxs;
+
+				.metaLabel {
+					font: $textXs;
+					color: $text-light;
+					text-transform: uppercase;
+					letter-spacing: 0.05em;
+				}
+
+				.metaValue {
+					font: $titleXs2;
+					color: $text-sharp;
+					margin: 0;
+
+					.rating {
+						font: $titleXs;
+						color: $text-sharp;
+					}
+
+					.ratingMax {
+						font: $textSm;
+						color: $text-muted;
+					}
+				}
+
+				.link {
+					font: $textSm;
+					color: $cta-primary;
+					text-decoration: underline;
+					overflow: hidden;
+					text-overflow: ellipsis;
+					white-space: nowrap;
+					max-width: $containerWidthSm;
+
+					&:hover {
+						color: $cta-primary-hover;
+					}
+				}
+			}
+		}
+	}
+}

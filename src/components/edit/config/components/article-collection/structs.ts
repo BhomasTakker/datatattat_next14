@@ -1,4 +1,4 @@
-import { ArticleCollectionVariants } from "@/components/content/components/article-collection/variant-map";
+import { ArticleCollectionVariants } from "@/components/content/components/article-collection/variants";
 import { AUDIO_DISPLAY } from "./collections/audio-display/audio-display";
 import { GRID_DISPLAY } from "./collections/grid/gridDisplay";
 import { STACK_COLUMNS_CONFIG } from "./collections/stack/stack-columns";
