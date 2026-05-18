@@ -2,8 +2,8 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import { verticalStack } from "./vertical-stack";
 import { PageComponents, PageComponent } from "@/types/page";
-import { ArticleCollectionVariants } from "@/components/content/components/article-collection/variant-map";
 import styles from "./vertical-stack.module.scss";
+import { ArticleCollectionVariants } from "@/components/content/components/article-collection/variants";
 
 // Mock the ComponentDisplay component since we're testing the vertical stack logic
 jest.mock("../../../../../content/component-display", () => ({
@@ -25,7 +25,7 @@ describe("vertical-stack", () => {
 	describe("renderComponents (renderMethod)", () => {
 		const createMockComponent = (
 			componentType: string,
-			id?: string
+			id?: string,
 		): PageComponent => ({
 			componentType,
 			componentProps: {
@@ -52,7 +52,12 @@ describe("vertical-stack", () => {
 		it("should render empty array when no components provided", () => {
 			const emptyComponents: PageComponents = [];
 			const { container } = render(
-				<ul>{verticalStack.renderMethod({ components: emptyComponents })}</ul>
+				<ul>
+					{verticalStack.renderMethod({
+						components: emptyComponents,
+						height: "MD",
+					})}
+				</ul>,
 			);
 
 			expect(container.querySelector("li")).toBeNull();
@@ -63,7 +68,9 @@ describe("vertical-stack", () => {
 				createMockComponent("article", "test-article-1"),
 			];
 
-			render(<ul>{verticalStack.renderMethod({ components })}</ul>);
+			render(
+				<ul>{verticalStack.renderMethod({ components, height: "MD" })}</ul>,
+			);
 
 			const listItem = screen.getByTestId("content-component");
 			expect(listItem).toBeInTheDocument();
@@ -82,7 +89,9 @@ describe("vertical-stack", () => {
 				createMockComponent("video", "test-video-1"),
 			];
 
-			render(<ul>{verticalStack.renderMethod({ components })}</ul>);
+			render(
+				<ul>{verticalStack.renderMethod({ components, height: "MD" })}</ul>,
+			);
 
 			const listItems = screen.getAllByTestId("content-component");
 			expect(listItems).toHaveLength(3);
@@ -93,7 +102,7 @@ describe("vertical-stack", () => {
 			});
 
 			const componentDisplays = screen.getAllByTestId(
-				"mocked-component-display"
+				"mocked-component-display",
 			);
 			expect(componentDisplays).toHaveLength(3);
 			expect(componentDisplays[0]).toHaveTextContent("article");
@@ -104,7 +113,9 @@ describe("vertical-stack", () => {
 		it("should apply correct CSS classes to list items", () => {
 			const components: PageComponents = [createMockComponent("article")];
 
-			render(<ul>{verticalStack.renderMethod({ components })}</ul>);
+			render(
+				<ul>{verticalStack.renderMethod({ components, height: "MD" })}</ul>,
+			);
 
 			const listItem = screen.getByTestId("content-component");
 			expect(listItem).toHaveClass(styles.item);
@@ -113,11 +124,13 @@ describe("vertical-stack", () => {
 		it("should pass component correctly to ComponentDisplay", () => {
 			const testComponent = createMockComponent(
 				"custom-component",
-				"custom-id"
+				"custom-id",
 			);
 			const components: PageComponents = [testComponent];
 
-			render(<ul>{verticalStack.renderMethod({ components })}</ul>);
+			render(
+				<ul>{verticalStack.renderMethod({ components, height: "MD" })}</ul>,
+			);
 
 			const componentDisplay = screen.getByTestId("mocked-component-display");
 			expect(componentDisplay).toHaveTextContent("custom-component");
@@ -167,13 +180,15 @@ describe("vertical-stack", () => {
 				},
 			];
 
-			render(<ul>{verticalStack.renderMethod({ components })}</ul>);
+			render(
+				<ul>{verticalStack.renderMethod({ components, height: "MD" })}</ul>,
+			);
 
 			const listItems = screen.getAllByTestId("content-component");
 			expect(listItems).toHaveLength(2);
 
 			const componentDisplays = screen.getAllByTestId(
-				"mocked-component-display"
+				"mocked-component-display",
 			);
 			expect(componentDisplays[0]).toHaveTextContent("article");
 			expect(componentDisplays[1]).toHaveTextContent("image");
@@ -187,17 +202,17 @@ describe("vertical-stack", () => {
 			];
 
 			const { container } = render(
-				<ul>{verticalStack.renderMethod({ components })}</ul>
+				<ul>{verticalStack.renderMethod({ components, height: "MD" })}</ul>,
 			);
 
 			const listItems = container.querySelectorAll(
-				'li[data-testid="content-component"]'
+				'li[data-testid="content-component"]',
 			);
 			expect(listItems).toHaveLength(3);
 
 			// Each ComponentDisplay should be rendered correctly
 			const componentDisplays = container.querySelectorAll(
-				'[data-testid="mocked-component-display"]'
+				'[data-testid="mocked-component-display"]',
 			);
 			expect(componentDisplays).toHaveLength(3);
 
@@ -228,7 +243,9 @@ describe("vertical-stack", () => {
 				},
 			];
 
-			render(<ul>{verticalStack.renderMethod({ components })}</ul>);
+			render(
+				<ul>{verticalStack.renderMethod({ components, height: "MD" })}</ul>,
+			);
 
 			const listItem = screen.getByTestId("content-component");
 			expect(listItem).toBeInTheDocument();
@@ -240,13 +257,16 @@ describe("vertical-stack", () => {
 		it("should handle large arrays of components", () => {
 			const largeComponentArray: PageComponents = Array.from(
 				{ length: 100 },
-				(_, index) => createMockComponent("component", `component-${index}`)
+				(_, index) => createMockComponent("component", `component-${index}`),
 			);
 
 			render(
 				<ul>
-					{verticalStack.renderMethod({ components: largeComponentArray })}
-				</ul>
+					{verticalStack.renderMethod({
+						components: largeComponentArray,
+						height: "MD",
+					})}
+				</ul>,
 			);
 
 			const listItems = screen.getAllByTestId("content-component");
@@ -261,7 +281,7 @@ describe("vertical-stack", () => {
 	describe("integration with ComponentDisplay", () => {
 		const createMockComponent = (
 			componentType: string,
-			id?: string
+			id?: string,
 		): PageComponent => ({
 			componentType,
 			componentProps: {
@@ -291,7 +311,9 @@ describe("vertical-stack", () => {
 			// We can't easily test the actual ComponentDisplay without mocking its dependencies,
 			// but we can verify that our render method structure is correct
 			expect(() => {
-				render(<ul>{verticalStack.renderMethod({ components })}</ul>);
+				render(
+					<ul>{verticalStack.renderMethod({ components, height: "MD" })}</ul>,
+				);
 			}).not.toThrow();
 		});
 	});
@@ -302,7 +324,9 @@ describe("vertical-stack", () => {
 			const components = undefined as any;
 
 			expect(() => {
-				render(<ul>{verticalStack.renderMethod({ components })}</ul>);
+				render(
+					<ul>{verticalStack.renderMethod({ components, height: "MD" })}</ul>,
+				);
 			}).toThrow(); // Should throw because we're trying to map over undefined
 		});
 
@@ -311,7 +335,9 @@ describe("vertical-stack", () => {
 			const components = null as any;
 
 			expect(() => {
-				render(<ul>{verticalStack.renderMethod({ components })}</ul>);
+				render(
+					<ul>{verticalStack.renderMethod({ components, height: "MD" })}</ul>,
+				);
 			}).toThrow(); // Should throw because we're trying to map over null
 		});
 
@@ -336,11 +362,13 @@ describe("vertical-stack", () => {
 				},
 			];
 
-			render(<ul>{verticalStack.renderMethod({ components })}</ul>);
+			render(
+				<ul>{verticalStack.renderMethod({ components, height: "MD" })}</ul>,
+			);
 
 			const componentDisplay = screen.getByTestId("mocked-component-display");
 			expect(componentDisplay).toHaveTextContent(
-				"component-with-special-chars!@#$%^&*()"
+				"component-with-special-chars!@#$%^&*()",
 			);
 		});
 	});
