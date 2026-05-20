@@ -1,5 +1,6 @@
 @use "../../article/mixins/" as article;
 @use "../../../../../../scss/abstracts/units/" as *;
+@use "../../../../../../scss/abstracts/font/" as *;
 @use "../../../../../../scss/mixins/ui/" as ui;
 
 .root {
@@ -15,13 +16,13 @@
 }
 
 .groupHeader {
-	font-size: 0.85rem;
-	font-weight: 600;
+	font-size: $text-sm;
+	font-weight: $font-weight-semibold;
 	text-transform: uppercase;
 	letter-spacing: 0.08em;
 	padding-bottom: $spacingXs;
 	border-bottom: 1px solid currentColor;
-	opacity: 0.5;
+	color: $text-light;
 }
 
 .articles {
