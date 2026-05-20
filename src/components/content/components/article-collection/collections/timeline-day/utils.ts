@@ -5,6 +5,9 @@ export type DayGroup = {
 	articles: ArticleRenderProps[];
 };
 
+// These feel more like time utils
+// Look at moving out of here
+
 const toDateKey = (value: Date | string): string => {
 	const date = new Date(value);
 	// YYYY-MM-DD in local time — used only for grouping, not display
