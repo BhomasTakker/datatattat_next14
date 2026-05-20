@@ -1,2 +1,42 @@
+@use "../../article/mixins/" as article;
+@use "../../../../../../scss/abstracts/units/" as *;
+@use "../../../../../../scss/mixins/ui/" as ui;
+
 .root {
+	display: flex;
+	flex-direction: column;
+	gap: $spacingLg;
+}
+
+.group {
+	display: flex;
+	flex-direction: column;
+	gap: $spacingSm;
+}
+
+.groupHeader {
+	font-size: 0.85rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	padding-bottom: $spacingXs;
+	border-bottom: 1px solid currentColor;
+	opacity: 0.5;
+}
+
+.articles {
+	display: flex;
+	gap: $spacingMd;
+
+	@include ui.scrollXNoScroller();
+
+	@include article.articleCardTopDown($contentWidthMd, $contentWidthMd);
+
+	@media screen and (min-width: $screenWidthSm) {
+		@include article.articleCardTopDown($contentWidthXl, $contentWidthXl);
+	}
+
+	@media screen and (min-width: $screenWidthMd) {
+		@include article.articleCardTopDown($contentWidthXl2, $contentWidthXl2);
+	}
 }
