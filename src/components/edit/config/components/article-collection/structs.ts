@@ -3,6 +3,7 @@ import { AUDIO_DISPLAY } from "./collections/audio-display/audio-display";
 import { GRID_DISPLAY } from "./collections/grid/gridDisplay";
 import { STACK_COLUMNS_CONFIG } from "./collections/stack/stack-columns";
 import { STACK_SCROLLER_CONFIG } from "./collections/stack/stack-scroller";
+import { TIMELINE_DAY_CONFIG } from "./collections/stack/timeline-day";
 import { VIDEO_DISPLAY } from "./collections/video-display/video-display";
 
 type articleCollectionProps =
@@ -17,4 +18,5 @@ export const articleCollectionsMap = new Map<string, articleCollectionProps>([
 	[ArticleCollectionVariants.gridDisplay7, GRID_DISPLAY],
 	[ArticleCollectionVariants.videoDisplay, VIDEO_DISPLAY],
 	[ArticleCollectionVariants.audioDisplay, AUDIO_DISPLAY],
+	[ArticleCollectionVariants.TimelineDay, TIMELINE_DAY_CONFIG],
 ]);
