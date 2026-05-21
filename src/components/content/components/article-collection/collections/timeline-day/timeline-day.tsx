@@ -28,8 +28,9 @@ export type TimelineDayOptions = {
 	sortOrder?: SortOrder;
 };
 
-const renderArticle = (item: ArticleRenderProps) => {
+export const renderArticle = (item: ArticleRenderProps) => {
 	const { src } = item;
+	if (!src) return null;
 	return (
 		<InViewComponent
 			key={src}
@@ -47,7 +48,7 @@ const renderArticle = (item: ArticleRenderProps) => {
 	);
 };
 
-const renderGroup = ({ label, articles }: DayGroup) => (
+export const renderGroup = ({ label, articles }: DayGroup) => (
 	<section key={label} className={styles.group}>
 		<h2 className={styles.groupHeader}>{label}</h2>
 		<div className={styles.articles}>
@@ -56,7 +57,7 @@ const renderGroup = ({ label, articles }: DayGroup) => (
 	</section>
 );
 
-const getGroups = (
+export const getGroups = (
 	articles: ArticleRenderProps[],
 	{
 		dateRangeCutoff = DateRangeCutoff.all,
