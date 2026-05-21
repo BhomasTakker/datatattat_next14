@@ -13,18 +13,8 @@ jest.mock("../../../video-player/video-player-container", () => ({
 		/>
 	),
 }));
-jest.mock("../../article/interaction/interactions", () => ({
-	Interaction: ({ children, onClick }: any) => (
-		<div data-testid="interaction" onClick={onClick}>
-			{children}
-		</div>
-	),
-}));
-jest.mock("../../../../../../components/ui/in-view/in-view", () => ({
-	InViewComponent: ({ children }: any) => (
-		<div data-testid="in-view">{children}</div>
-	),
-}));
+jest.mock("../../article/interaction/interactions");
+jest.mock("../../../../../../components/ui/in-view/in-view");
 jest.mock("../../../../../../components/ui/with-data/with-data", () => ({
 	WithData: ({ template }: any) => (
 		<div data-testid="with-data">{template}</div>

@@ -39,42 +39,10 @@ jest.mock("../../article-collection/article/article", () => ({
 }));
 
 // Mock the Interaction component
-jest.mock("../../article-collection/article/interaction/interactions", () => ({
-	Interaction: ({
-		children,
-		onClick,
-		type,
-	}: {
-		children: React.ReactNode;
-		onClick: () => void;
-		type: string;
-	}) => (
-		<div
-			data-testid="interaction"
-			onClick={onClick}
-			data-interaction-type={type}
-		>
-			{children}
-		</div>
-	),
-}));
+jest.mock("../../article-collection/article/interaction/interactions");
 
 // Mock the InViewComponent
-jest.mock("../../../../ui/in-view/in-view", () => ({
-	InViewComponent: ({
-		children,
-		template,
-		options,
-	}: {
-		children: React.ReactNode;
-		template: React.ReactNode;
-		options: any;
-	}) => (
-		<div data-testid="in-view-component" data-options={JSON.stringify(options)}>
-			{children}
-		</div>
-	),
-}));
+jest.mock("../../../../ui/in-view/in-view");
 
 // Mock the interactions map
 jest.mock(
@@ -275,7 +243,7 @@ describe("AudioStackClientComponent", () => {
 		expect(interactions).toHaveLength(3);
 
 		interactions.forEach((interaction) => {
-			expect(interaction).toHaveAttribute("data-interaction-type", "Click");
+			expect(interaction).toHaveAttribute("type", "Click");
 		});
 	});
 
@@ -291,17 +259,12 @@ describe("AudioStackClientComponent", () => {
 			expect(screen.getByTestId("client-oembed")).toBeInTheDocument();
 		});
 
-		const inViewComponents = screen.getAllByTestId("in-view-component");
+		const inViewComponents = screen.getAllByTestId("inview");
 		expect(inViewComponents).toHaveLength(3);
 
 		inViewComponents.forEach((component) => {
-			const options = JSON.parse(
-				component.getAttribute("data-options") || "{}"
-			);
-			expect(options).toEqual({
-				threshold: 0,
-				triggerOnce: true,
-			});
+			expect(component).toHaveAttribute("data-threshold", "0");
+			expect(component).toHaveAttribute("data-trigger-once", "true");
 		});
 	});
 

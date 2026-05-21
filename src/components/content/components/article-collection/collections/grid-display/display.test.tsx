@@ -8,13 +8,7 @@ jest.mock("../../article/article", () => ({
 		<div data-testid="article">{article.title}</div>
 	),
 }));
-jest.mock("../../article/interaction/interactions", () => ({
-	Interaction: ({ children, type, href }: any) => (
-		<a data-testid="interaction" data-type={type} href={href}>
-			{children}
-		</a>
-	),
-}));
+jest.mock("../../article/interaction/interactions");
 
 const mockArticles = Array.from({ length: 10 }).map((_, i) => ({
 	src: `/article-${i}`,
@@ -46,7 +40,7 @@ describe("gridDisplay5", () => {
 		const { getAllByTestId } = render(<>{elements}</>);
 		getAllByTestId("interaction").forEach((el, idx) => {
 			expect(el).toHaveAttribute("href", `/article-${idx}`);
-			expect(el).toHaveAttribute("data-type", InteractionsOptions.Navigate);
+			expect(el).toHaveAttribute("type", InteractionsOptions.Navigate);
 		});
 	});
 });

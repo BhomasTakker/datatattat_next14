@@ -2,13 +2,7 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import { ClientOembed } from "./client-component";
 
-jest.mock("../../../../../components/ui/in-view/in-view", () => ({
-	InViewComponent: ({ children, ...props }: any) => (
-		<div data-testid="inview" {...props}>
-			{children}
-		</div>
-	),
-}));
+jest.mock("../../../../../components/ui/in-view/in-view");
 
 describe("ClientOembed", () => {
 	it("renders the provided HTML content", () => {
