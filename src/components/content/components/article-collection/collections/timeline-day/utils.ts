@@ -1,5 +1,5 @@
 import { ArticleRenderProps } from "../types";
-import { DateRangeCutoff, LabelFormat } from "./timeline-day.types";
+import { DateRangeCutoff, LabelFormat, SortOrder } from "./timeline-day.types";
 
 export type DayGroup = {
 	label: string;
@@ -92,6 +92,13 @@ export const groupArticlesByDay = (
 	}
 
 	return groups;
+};
+
+export const applySortOrder = (groups: DayGroup[], sortOrder: SortOrder): DayGroup[] => {
+	if (sortOrder !== SortOrder.oldest) return groups;
+	const named = groups.filter((g) => g.label !== UNKNOWN_DATE_LABEL);
+	const unknown = groups.filter((g) => g.label === UNKNOWN_DATE_LABEL);
+	return [...named.slice().reverse(), ...unknown];
 };
 
 const cutoffMs: Record<DateRangeCutoff, number | null> = {

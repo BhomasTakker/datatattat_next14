@@ -4,6 +4,7 @@ import { TimelineDayTemplate } from "./template";
 import {
 	groupArticlesByDay,
 	filterByDateRange,
+	applySortOrder,
 	DayGroup,
 	UNKNOWN_DATE_LABEL,
 } from "./utils";
@@ -73,12 +74,7 @@ const renderMethod = (
 		: allGroups.filter((g) => g.label !== UNKNOWN_DATE_LABEL);
 	// Cap by maxGroups before reversing so we always take the N most recent days
 	const capped = maxGroups ? visible.slice(0, maxGroups) : visible;
-	const named = capped.filter((g) => g.label !== UNKNOWN_DATE_LABEL);
-	const unknown = capped.filter((g) => g.label === UNKNOWN_DATE_LABEL);
-	const groups =
-		sortOrder === SortOrder.oldest
-			? [...named.slice().reverse(), ...unknown]
-			: capped;
+	const groups = applySortOrder(capped, sortOrder);
 	return (
 		<div className={styles.root}>
 			{groups.map((group) => {
