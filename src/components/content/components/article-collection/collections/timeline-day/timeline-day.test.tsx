@@ -1,6 +1,14 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import { renderArticle, renderGroup } from "./timeline-day";
+import {
+	renderArticle,
+	renderGroup,
+	getGroups,
+	DateRangeCutoff,
+	LabelFormat,
+	SortOrder,
+} from "./timeline-day";
+import { UNKNOWN_DATE_LABEL } from "./utils";
 import { InteractionsOptions } from "../../article/interaction/interactions-map";
 import type { ArticleRenderProps } from "../types";
 
@@ -136,5 +144,162 @@ describe("renderGroup", () => {
 		expect(container.querySelectorAll("[data-testid='inview']")).toHaveLength(
 			0,
 		);
+	});
+});
+
+describe("getGroups", () => {
+	const makeArticleWithDate = (
+		id: string,
+		published: string,
+	): ArticleRenderProps => ({
+		...makeArticle(id),
+		details: { published },
+	});
+
+	const JAN_01 = "2020-01-01T10:00:00";
+	const JAN_01_NOON = "2020-01-01T11:00:00";
+	const JAN_01_LATE = "2020-01-01T12:00:00";
+	const JAN_02 = "2020-01-02T10:00:00";
+	const JAN_03 = "2020-01-03T10:00:00";
+	const JAN_15 = "2020-01-15T10:00:00";
+
+	describe("default behaviour", () => {
+		it("returns one group per distinct date", () => {
+			const articles = [
+				makeArticleWithDate("1", JAN_01),
+				makeArticleWithDate("2", JAN_02),
+			];
+			expect(getGroups(articles, {})).toHaveLength(2);
+		});
+
+		it("returns an empty array when given no articles", () => {
+			expect(getGroups([], {})).toEqual([]);
+		});
+	});
+
+	describe("dateRangeCutoff", () => {
+		it("includes all articles when using DateRangeCutoff.all", () => {
+			const articles = [
+				makeArticleWithDate("1", JAN_01),
+				makeArticleWithDate("2", JAN_02),
+			];
+			expect(
+				getGroups(articles, { dateRangeCutoff: DateRangeCutoff.all }),
+			).toHaveLength(2);
+		});
+
+		it("excludes articles outside the date range", () => {
+			const articles = [
+				makeArticleWithDate("1", JAN_01),
+				makeArticleWithDate("2", JAN_02),
+			];
+			expect(
+				getGroups(articles, { dateRangeCutoff: DateRangeCutoff.last24h }),
+			).toHaveLength(0);
+		});
+	});
+
+	describe("showUnknownDates", () => {
+		it("includes the unknown-date group by default", () => {
+			const articles = [makeArticle("1")];
+			const result = getGroups(articles, {});
+			expect(result).toHaveLength(1);
+			expect(result[0].label).toBe(UNKNOWN_DATE_LABEL);
+		});
+
+		it("excludes the unknown-date group when showUnknownDates is false", () => {
+			const articles = [makeArticle("1"), makeArticleWithDate("2", JAN_01)];
+			const result = getGroups(articles, { showUnknownDates: false });
+			expect(result.every((g) => g.label !== UNKNOWN_DATE_LABEL)).toBe(true);
+		});
+
+		it("does not affect named date groups when showUnknownDates is false", () => {
+			const articles = [
+				makeArticleWithDate("1", JAN_01),
+				makeArticleWithDate("2", JAN_02),
+			];
+			expect(getGroups(articles, { showUnknownDates: false })).toHaveLength(2);
+		});
+	});
+
+	describe("maxGroups", () => {
+		it("returns at most N groups when maxGroups is set", () => {
+			const articles = [
+				makeArticleWithDate("1", JAN_01),
+				makeArticleWithDate("2", JAN_02),
+				makeArticleWithDate("3", JAN_03),
+			];
+			expect(getGroups(articles, { maxGroups: 2 })).toHaveLength(2);
+		});
+
+		it("retains the most recent groups when maxGroups is set", () => {
+			const articles = [
+				makeArticleWithDate("1", JAN_01),
+				makeArticleWithDate("2", JAN_02),
+				makeArticleWithDate("3", JAN_03),
+			];
+			const result = getGroups(articles, { maxGroups: 2 });
+			const ids = result.flatMap((g) => g.articles.map((a) => a._id));
+			expect(ids).toContain("2");
+			expect(ids).toContain("3");
+			expect(ids).not.toContain("1");
+		});
+	});
+
+	describe("maxArticlesPerGroup", () => {
+		it("caps articles per group when maxArticlesPerGroup is set", () => {
+			const articles = [
+				makeArticleWithDate("1", JAN_01),
+				makeArticleWithDate("2", JAN_01_NOON),
+				makeArticleWithDate("3", JAN_01_LATE),
+			];
+			const result = getGroups(articles, { maxArticlesPerGroup: 2 });
+			expect(result[0].articles).toHaveLength(2);
+		});
+
+		it("does not cap groups with fewer articles than the limit", () => {
+			const articles = [
+				makeArticleWithDate("1", JAN_01),
+				makeArticleWithDate("2", JAN_02),
+			];
+			const result = getGroups(articles, { maxArticlesPerGroup: 5 });
+			result.forEach((g) => expect(g.articles).toHaveLength(1));
+		});
+	});
+
+	describe("sortOrder", () => {
+		it("returns groups newest-first by default", () => {
+			const articles = [
+				makeArticleWithDate("1", JAN_01),
+				makeArticleWithDate("2", JAN_02),
+			];
+			const result = getGroups(articles, {});
+			expect(result[0].articles[0]._id).toBe("2");
+			expect(result[1].articles[0]._id).toBe("1");
+		});
+
+		it("returns groups oldest-first when SortOrder.oldest", () => {
+			const articles = [
+				makeArticleWithDate("1", JAN_01),
+				makeArticleWithDate("2", JAN_02),
+			];
+			const result = getGroups(articles, { sortOrder: SortOrder.oldest });
+			expect(result[0].articles[0]._id).toBe("1");
+			expect(result[1].articles[0]._id).toBe("2");
+		});
+	});
+
+	describe("labelFormat", () => {
+		it("uses short format labels by default", () => {
+			const articles = [makeArticleWithDate("1", JAN_15)];
+			const result = getGroups(articles, {});
+			expect(result[0].label).not.toMatch(/\d{4}/);
+		});
+
+		it("uses long format labels when LabelFormat.long", () => {
+			const articles = [makeArticleWithDate("1", JAN_15)];
+			const result = getGroups(articles, { labelFormat: LabelFormat.long });
+			expect(result[0].label).toMatch(/2020/);
+		});
 	});
 });
