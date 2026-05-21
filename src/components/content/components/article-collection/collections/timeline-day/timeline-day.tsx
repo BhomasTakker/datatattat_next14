@@ -56,8 +56,8 @@ const renderGroup = ({ label, articles }: DayGroup) => (
 	</section>
 );
 
-const renderMethod = (
-	articles: ArticleRenderProps[] = [],
+const getGroups = (
+	articles: ArticleRenderProps[],
 	{
 		dateRangeCutoff = DateRangeCutoff.all,
 		labelFormat = LabelFormat.short,
@@ -66,7 +66,7 @@ const renderMethod = (
 		showUnknownDates = true,
 		sortOrder = SortOrder.newest,
 	}: TimelineDayOptions,
-) => {
+): DayGroup[] => {
 	const filtered = filterByDateRange(articles, dateRangeCutoff);
 	const allGroups = groupArticlesByDay(filtered, labelFormat);
 	const visible = showUnknownDates
@@ -74,18 +74,23 @@ const renderMethod = (
 		: allGroups.filter((g) => g.label !== UNKNOWN_DATE_LABEL);
 	// Cap by maxGroups before reversing so we always take the N most recent days
 	const capped = maxGroups ? visible.slice(0, maxGroups) : visible;
-	const groups = applySortOrder(capped, sortOrder);
-	return (
-		<div className={styles.root}>
-			{groups.map((group) => {
-				const limited = maxArticlesPerGroup
-					? { ...group, articles: group.articles.slice(0, maxArticlesPerGroup) }
-					: group;
-				return renderGroup(limited);
-			})}
-		</div>
-	);
+	const sorted = applySortOrder(capped, sortOrder);
+	return maxArticlesPerGroup
+		? sorted.map((g) => ({
+				...g,
+				articles: g.articles.slice(0, maxArticlesPerGroup),
+			}))
+		: sorted;
 };
+
+const renderMethod = (
+	articles: ArticleRenderProps[] = [],
+	options: TimelineDayOptions,
+) => (
+	<div className={styles.root}>
+		{getGroups(articles, options).map(renderGroup)}
+	</div>
+);
 
 const renderTemplate = () => {
 	return <TimelineDayTemplate />;
