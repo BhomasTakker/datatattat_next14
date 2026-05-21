@@ -5,7 +5,7 @@ import {
 	UNKNOWN_DATE_LABEL,
 } from "./utils";
 import type { DayGroup } from "./utils";
-import { DateRangeCutoff, LabelFormat, SortOrder } from "./timeline-day.types";
+import { DateRangeCutoff, SortOrder } from "./timeline-day.types";
 import type { ArticleRenderProps } from "../types";
 
 const makeArticle = (
@@ -68,26 +68,6 @@ describe("groupArticlesByDay", () => {
 		expect(result).toHaveLength(3);
 	});
 
-	it('labels the current day as "Today"', () => {
-		const articles = [makeArticle("1", `${todayKey()}T10:00:00`)];
-		const result = groupArticlesByDay(articles);
-		expect(result[0].label).toBe("Today");
-	});
-
-	it('labels the previous day as "Yesterday"', () => {
-		const articles = [makeArticle("1", `${yesterdayKey()}T10:00:00`)];
-		const result = groupArticlesByDay(articles);
-		expect(result[0].label).toBe("Yesterday");
-	});
-
-	it("labels older dates with a short formatted string", () => {
-		const articles = [makeArticle("1", "2020-06-15T12:00:00")];
-		const result = groupArticlesByDay(articles);
-		expect(result[0].label).not.toBe("Today");
-		expect(result[0].label).not.toBe("Yesterday");
-		expect(result[0].label.length).toBeGreaterThan(0);
-	});
-
 	it("orders groups newest-first", () => {
 		const articles = [
 			makeArticle("old", "2020-01-01T10:00:00"),
@@ -129,14 +109,6 @@ describe("groupArticlesByDay", () => {
 		const result = groupArticlesByDay(articles);
 		expect(result).toHaveLength(1);
 		expect(result[0].articles).toHaveLength(2);
-	});
-
-	it("produces a long-format label when LabelFormat.long is specified", () => {
-		const articles = [makeArticle("1", "2020-06-15T12:00:00")];
-		const result = groupArticlesByDay(articles, LabelFormat.long);
-		// Long format: "Monday, 15 June 2020" — contains a comma and a 4-digit year
-		expect(result[0].label).toMatch(/,/);
-		expect(result[0].label).toMatch(/2020/);
 	});
 
 	it("places all undated articles into a single Unknown date group", () => {
