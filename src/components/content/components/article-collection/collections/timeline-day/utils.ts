@@ -1,5 +1,5 @@
 import { ArticleRenderProps } from "../types";
-import { DateRangeCutoff } from "./timeline-day.types";
+import { DateRangeCutoff, LabelFormat } from "./timeline-day.types";
 
 export type DayGroup = {
 	label: string;
@@ -18,7 +18,7 @@ const toDateKey = (value: Date | string): string => {
 	return `${year}-${month}-${day}`;
 };
 
-const toDateLabel = (key: string): string => {
+const toDateLabel = (key: string, format: LabelFormat): string => {
 	const todayKey = toDateKey(new Date());
 	const yesterdayDate = new Date();
 	yesterdayDate.setDate(yesterdayDate.getDate() - 1);
@@ -27,8 +27,17 @@ const toDateLabel = (key: string): string => {
 	if (key === todayKey) return "Today";
 	if (key === yesterdayKey) return "Yesterday";
 
-	// "Mon 19 May" — consistent with the existing Time component style
 	const date = new Date(key);
+	if (format === LabelFormat.long) {
+		// "Wednesday, 19 May 2026"
+		return new Intl.DateTimeFormat("en-GB", {
+			weekday: "long",
+			day: "numeric",
+			month: "long",
+			year: "numeric",
+		}).format(date);
+	}
+	// "Mon 19 May" — consistent with the existing Time component style
 	return new Intl.DateTimeFormat("en-GB", {
 		weekday: "short",
 		day: "numeric",
@@ -38,6 +47,7 @@ const toDateLabel = (key: string): string => {
 
 export const groupArticlesByDay = (
 	articles: ArticleRenderProps[],
+	labelFormat: LabelFormat = LabelFormat.short,
 ): DayGroup[] => {
 	const grouped = new Map<string, ArticleRenderProps[]>();
 	const unpublished: ArticleRenderProps[] = [];
@@ -69,7 +79,7 @@ export const groupArticlesByDay = (
 	// Groups are already in newest-first order because articles were pre-sorted
 	const groups: DayGroup[] = Array.from(grouped.entries()).map(
 		([key, groupArticles]) => ({
-			label: toDateLabel(key),
+			label: toDateLabel(key, labelFormat),
 			articles: groupArticles,
 		}),
 	);

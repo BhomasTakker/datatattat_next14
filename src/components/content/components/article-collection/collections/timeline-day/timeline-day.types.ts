@@ -9,3 +9,8 @@ export enum SortOrder {
 	newest = "newest",
 	oldest = "oldest",
 }
+
+export enum LabelFormat {
+	short = "short",
+	long = "long",
+}

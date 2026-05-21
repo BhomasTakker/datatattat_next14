@@ -1,5 +1,6 @@
 import {
 	DateRangeCutoff,
+	LabelFormat,
 	SortOrder,
 } from "@/components/content/components/article-collection/collections/timeline-day/timeline-day";
 import { getWithConfig } from "@/components/edit/config/query/_with-config";
@@ -57,6 +58,14 @@ export const TIMELINE_DAY_CONFIG: InputListProps = {
 			defaultValue: SortOrder.newest,
 			required: true,
 			options: [...Object.values(SortOrder)],
+		},
+		{
+			id: "labelFormat",
+			type: EditInputs.select,
+			label: "Date label format",
+			defaultValue: LabelFormat.short,
+			required: true,
+			options: [...Object.values(LabelFormat)],
 		},
 		getWithConfig({
 			options: ARTICLE_OPTIONS,
