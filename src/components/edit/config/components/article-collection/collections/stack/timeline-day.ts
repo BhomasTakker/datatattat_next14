@@ -1,4 +1,7 @@
-import { DateRangeCutoff } from "@/components/content/components/article-collection/collections/timeline-day/timeline-day";
+import {
+	DateRangeCutoff,
+	SortOrder,
+} from "@/components/content/components/article-collection/collections/timeline-day/timeline-day";
 import { getWithConfig } from "@/components/edit/config/query/_with-config";
 import { APIOptions } from "@/components/edit/config/query/api/api-base-config";
 import { ARTICLE_OPTIONS } from "@/components/edit/config/query/types";
@@ -46,6 +49,14 @@ export const TIMELINE_DAY_CONFIG: InputListProps = {
 			type: EditInputs.switch,
 			label: "Show articles with unknown date",
 			defaultChecked: true,
+		},
+		{
+			id: "sortOrder",
+			type: EditInputs.select,
+			label: "Sort order",
+			defaultValue: SortOrder.newest,
+			required: true,
+			options: [...Object.values(SortOrder)],
 		},
 		getWithConfig({
 			options: ARTICLE_OPTIONS,

@@ -4,3 +4,8 @@ export enum DateRangeCutoff {
 	last7d = "last-7d",
 	last30d = "last-30d",
 }
+
+export enum SortOrder {
+	newest = "newest",
+	oldest = "oldest",
+}

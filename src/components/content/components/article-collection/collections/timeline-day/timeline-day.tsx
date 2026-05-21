@@ -7,15 +7,16 @@ import { Interaction } from "../../article/interaction/interactions";
 import { InteractionsOptions } from "../../article/interaction/interactions-map";
 import { WithData } from "@/components/ui/with-data/with-data";
 import { articleMetaLoader, articleRenderer, articleTemplate } from "../utils";
-import { DateRangeCutoff } from "./timeline-day.types";
+import { DateRangeCutoff, SortOrder } from "./timeline-day.types";
 
-export { DateRangeCutoff };
+export { DateRangeCutoff, SortOrder };
 
 export type TimelineDayOptions = {
 	dateRangeCutoff?: DateRangeCutoff;
 	maxArticlesPerGroup?: number;
 	maxGroups?: number;
 	showUnknownDates?: boolean;
+	sortOrder?: SortOrder;
 };
 
 const renderArticle = (item: ArticleRenderProps) => {
@@ -47,6 +48,8 @@ const renderGroup = ({ label, articles }: DayGroup) => (
 	</section>
 );
 
+const UNKNOWN_DATE_LABEL = "Unknown date";
+
 const renderMethod = (
 	articles: ArticleRenderProps[] = [],
 	{
@@ -54,14 +57,21 @@ const renderMethod = (
 		maxArticlesPerGroup,
 		maxGroups,
 		showUnknownDates = true,
+		sortOrder = SortOrder.newest,
 	}: TimelineDayOptions,
 ) => {
 	const filtered = filterByDateRange(articles, dateRangeCutoff);
 	const allGroups = groupArticlesByDay(filtered);
 	const visible = showUnknownDates
 		? allGroups
-		: allGroups.filter((g) => g.label !== "Unknown date");
-	const groups = maxGroups ? visible.slice(0, maxGroups) : visible;
+		: allGroups.filter((g) => g.label !== UNKNOWN_DATE_LABEL);
+	const named = visible.filter((g) => g.label !== UNKNOWN_DATE_LABEL);
+	const unknown = visible.filter((g) => g.label === UNKNOWN_DATE_LABEL);
+	const ordered =
+		sortOrder === SortOrder.oldest
+			? [...named.slice().reverse(), ...unknown]
+			: visible;
+	const groups = maxGroups ? ordered.slice(0, maxGroups) : ordered;
 	return (
 		<div className={styles.root}>
 			{groups.map((group) => {
