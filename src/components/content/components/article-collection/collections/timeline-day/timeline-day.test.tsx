@@ -17,7 +17,7 @@ import type { ArticleRenderProps } from "../types";
 jest.mock("./template", () => ({
 	TimelineDayTemplate: () => <div data-testid="timeline-day-template" />,
 }));
-jest.mock("./timeline-day.module.scss", () => ({}));;
+jest.mock("./timeline-day.module.scss", () => ({}));
 jest.mock("../../article/interaction/interactions", () => ({
 	Interaction: ({ children, ...props }: any) => (
 		<div data-testid="interaction" {...props}>
