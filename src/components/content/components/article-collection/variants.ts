@@ -5,4 +5,5 @@ export enum ArticleCollectionVariants {
 	gridDisplay7 = "grid-display-7",
 	videoDisplay = "video-display",
 	audioDisplay = "audio-display",
+	TimelineDay = "timeline-day",
 }

@@ -36,7 +36,9 @@ export const ShowInput = ({
 						id={id}
 						{...register(id)}
 						type="checkbox"
-						defaultChecked={defaultChecked}
+						checked={
+							watchValue !== undefined ? Boolean(watchValue) : defaultChecked
+						}
 					/>
 				</label>
 			</div>
