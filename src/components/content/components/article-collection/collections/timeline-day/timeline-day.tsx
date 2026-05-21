@@ -13,6 +13,8 @@ export { DateRangeCutoff };
 
 export type TimelineDayOptions = {
 	dateRangeCutoff?: DateRangeCutoff;
+	maxArticlesPerGroup?: number;
+	maxGroups?: number;
 };
 
 const renderArticle = (item: ArticleRenderProps) => {
@@ -46,13 +48,23 @@ const renderGroup = ({ label, articles }: DayGroup) => (
 
 const renderMethod = (
 	articles: ArticleRenderProps[] = [],
-	{ dateRangeCutoff = DateRangeCutoff.all }: TimelineDayOptions,
+	{
+		dateRangeCutoff = DateRangeCutoff.all,
+		maxArticlesPerGroup,
+		maxGroups,
+	}: TimelineDayOptions,
 ) => {
 	const filtered = filterByDateRange(articles, dateRangeCutoff);
-	const groups = groupArticlesByDay(filtered);
+	const allGroups = groupArticlesByDay(filtered);
+	const groups = maxGroups ? allGroups.slice(0, maxGroups) : allGroups;
 	return (
 		<div className={styles.root}>
-			{groups.map((group) => renderGroup(group))}
+			{groups.map((group) => {
+				const limited = maxArticlesPerGroup
+					? { ...group, articles: group.articles.slice(0, maxArticlesPerGroup) }
+					: group;
+				return renderGroup(limited);
+			})}
 		</div>
 	);
 };

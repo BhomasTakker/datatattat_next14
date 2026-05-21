@@ -23,6 +23,24 @@ export const TIMELINE_DAY_CONFIG: InputListProps = {
 			required: true,
 			options: [...Object.values(DateRangeCutoff)],
 		},
+		{
+			id: "maxArticlesPerGroup",
+			type: EditInputs.number,
+			label: "Max articles per day",
+			min: 1,
+			max: 20,
+			step: 1,
+			defaultValue: 10,
+		},
+		{
+			id: "maxGroups",
+			type: EditInputs.number,
+			label: "Max days to show",
+			min: 1,
+			max: 30,
+			step: 1,
+			defaultValue: 7,
+		},
 		getWithConfig({
 			options: ARTICLE_OPTIONS,
 			apiConfigOptions: {
