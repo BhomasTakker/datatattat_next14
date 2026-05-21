@@ -24,7 +24,7 @@ describe("SwitchInput", () => {
 				id="test-switch"
 				label="Test Label"
 				type={EditInputs.switch}
-			/>
+			/>,
 		);
 		expect(screen.getByLabelText("Test Label")).toBeInTheDocument();
 		expect(screen.getByRole("checkbox")).toBeInTheDocument();
@@ -36,7 +36,7 @@ describe("SwitchInput", () => {
 				id="test-switch"
 				label="Test Label"
 				type={EditInputs.switch}
-			/>
+			/>,
 		);
 		expect(screen.getByTestId("fa-check")).toBeInTheDocument();
 	});
@@ -48,7 +48,7 @@ describe("SwitchInput", () => {
 				label="Test Label"
 				defaultChecked
 				type={EditInputs.switch}
-			/>
+			/>,
 		);
 		expect(screen.getByRole("checkbox")).toBeChecked();
 	});
@@ -59,7 +59,7 @@ describe("SwitchInput", () => {
 				id="test-switch"
 				label="Test Label"
 				type={EditInputs.switch}
-			/>
+			/>,
 		);
 		expect(screen.getByRole("checkbox")).not.toBeChecked();
 	});
@@ -71,7 +71,7 @@ describe("SwitchInput", () => {
 				label="Test Label"
 				disabled
 				type={EditInputs.switch}
-			/>
+			/>,
 		);
 		expect(screen.getByRole("checkbox")).toBeDisabled();
 	});
@@ -82,18 +82,19 @@ describe("SwitchInput", () => {
 				id="test-switch"
 				label="Test Label"
 				type={EditInputs.switch}
-			/>
+			/>,
 		);
 		expect(screen.getByRole("checkbox")).toBeEnabled();
 	});
 
 	it("calls react-hook-form register with correct id", () => {
 		const register = jest.fn(() => ({}));
+		const watch = jest.fn(() => undefined);
 		jest
 			.spyOn(require("react-hook-form"), "useFormContext")
-			.mockReturnValue({ register });
+			.mockReturnValue({ register, watch });
 		render(
-			<SwitchInput id="my-switch" label="Label" type={EditInputs.switch} />
+			<SwitchInput id="my-switch" label="Label" type={EditInputs.switch} />,
 		);
 		expect(register).toHaveBeenCalledWith("my-switch");
 	});
@@ -104,7 +105,7 @@ describe("SwitchInput", () => {
 				id="switch-id"
 				label="Switch Label"
 				type={EditInputs.switch}
-			/>
+			/>,
 		);
 		const label = screen.getByLabelText("Switch Label");
 		expect(label).toBeInTheDocument();

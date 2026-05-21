@@ -9,7 +9,10 @@ export const SwitchInput = ({
 	defaultChecked = false,
 	disabled = false,
 }: SwitchInputProps) => {
-	const { register } = useFormContext();
+	const { register, watch } = useFormContext();
+	const savedValue = watch(id);
+	const isChecked =
+		savedValue !== undefined ? Boolean(savedValue) : defaultChecked;
 
 	return (
 		<div className={styles.input}>
@@ -23,7 +26,7 @@ export const SwitchInput = ({
 						id={id}
 						{...register(id)}
 						type="checkbox"
-						defaultChecked={defaultChecked}
+						checked={isChecked}
 					/>
 				</label>
 			</fieldset>
