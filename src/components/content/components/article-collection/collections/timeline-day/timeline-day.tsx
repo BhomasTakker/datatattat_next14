@@ -11,6 +11,8 @@ import { DateRangeCutoff, LabelFormat, SortOrder } from "./timeline-day.types";
 
 export { DateRangeCutoff, LabelFormat, SortOrder };
 
+const template = articleTemplate(styles);
+
 export type TimelineDayOptions = {
 	dateRangeCutoff?: DateRangeCutoff;
 	labelFormat?: LabelFormat;
@@ -22,7 +24,6 @@ export type TimelineDayOptions = {
 
 const renderArticle = (item: ArticleRenderProps) => {
 	const { src } = item;
-	const template = articleTemplate(styles);
 	return (
 		<InViewComponent
 			key={src}
