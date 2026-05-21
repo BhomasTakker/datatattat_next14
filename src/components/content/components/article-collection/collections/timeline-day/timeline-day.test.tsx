@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import { renderArticle } from "./timeline-day";
+import { renderArticle, renderGroup } from "./timeline-day";
 import { InteractionsOptions } from "../../article/interaction/interactions-map";
 import type { ArticleRenderProps } from "../types";
 
@@ -97,5 +97,44 @@ describe("renderArticle", () => {
 		render(<>{renderArticle(makeArticle("1"))}</>);
 		const withdata = screen.getByTestId("withdata");
 		expect(screen.getByTestId("interaction")).toContainElement(withdata);
+	});
+});
+
+describe("renderGroup", () => {
+	it("renders a <section> element", () => {
+		render(<>{renderGroup({ label: "Today", articles: [] })}</>);
+		expect(document.querySelector("section")).toBeInTheDocument();
+	});
+
+	it("renders the group label in an <h2>", () => {
+		render(<>{renderGroup({ label: "Today", articles: [] })}</>);
+		expect(screen.getByRole("heading", { level: 2 })).toHaveTextContent(
+			"Today",
+		);
+	});
+
+	it("renders one article element per article in the group", () => {
+		const articles = [makeArticle("1"), makeArticle("2"), makeArticle("3")];
+		render(<>{renderGroup({ label: "Today", articles })}</>);
+		expect(screen.getAllByTestId("inview")).toHaveLength(3);
+	});
+
+	it("skips articles with no src", () => {
+		const articles = [
+			makeArticle("1"),
+			{ ...makeArticle("2"), src: undefined as unknown as string },
+			makeArticle("3"),
+		];
+		render(<>{renderGroup({ label: "Today", articles })}</>);
+		expect(screen.getAllByTestId("inview")).toHaveLength(2);
+	});
+
+	it("renders with an empty articles list without crashing", () => {
+		const { container } = render(
+			<>{renderGroup({ label: "Today", articles: [] })}</>,
+		);
+		expect(container.querySelectorAll("[data-testid='inview']")).toHaveLength(
+			0,
+		);
 	});
 });
