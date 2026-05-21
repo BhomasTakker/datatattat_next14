@@ -7,12 +7,13 @@ import { Interaction } from "../../article/interaction/interactions";
 import { InteractionsOptions } from "../../article/interaction/interactions-map";
 import { WithData } from "@/components/ui/with-data/with-data";
 import { articleMetaLoader, articleRenderer, articleTemplate } from "../utils";
-import { DateRangeCutoff, SortOrder } from "./timeline-day.types";
+import { DateRangeCutoff, LabelFormat, SortOrder } from "./timeline-day.types";
 
-export { DateRangeCutoff, SortOrder };
+export { DateRangeCutoff, LabelFormat, SortOrder };
 
 export type TimelineDayOptions = {
 	dateRangeCutoff?: DateRangeCutoff;
+	labelFormat?: LabelFormat;
 	maxArticlesPerGroup?: number;
 	maxGroups?: number;
 	showUnknownDates?: boolean;
@@ -54,6 +55,7 @@ const renderMethod = (
 	articles: ArticleRenderProps[] = [],
 	{
 		dateRangeCutoff = DateRangeCutoff.all,
+		labelFormat = LabelFormat.short,
 		maxArticlesPerGroup,
 		maxGroups,
 		showUnknownDates = true,
@@ -61,17 +63,18 @@ const renderMethod = (
 	}: TimelineDayOptions,
 ) => {
 	const filtered = filterByDateRange(articles, dateRangeCutoff);
-	const allGroups = groupArticlesByDay(filtered);
+	const allGroups = groupArticlesByDay(filtered, labelFormat);
 	const visible = showUnknownDates
 		? allGroups
 		: allGroups.filter((g) => g.label !== UNKNOWN_DATE_LABEL);
-	const named = visible.filter((g) => g.label !== UNKNOWN_DATE_LABEL);
-	const unknown = visible.filter((g) => g.label === UNKNOWN_DATE_LABEL);
-	const ordered =
+	// Cap by maxGroups before reversing so we always take the N most recent days
+	const capped = maxGroups ? visible.slice(0, maxGroups) : visible;
+	const named = capped.filter((g) => g.label !== UNKNOWN_DATE_LABEL);
+	const unknown = capped.filter((g) => g.label === UNKNOWN_DATE_LABEL);
+	const groups =
 		sortOrder === SortOrder.oldest
 			? [...named.slice().reverse(), ...unknown]
-			: visible;
-	const groups = maxGroups ? ordered.slice(0, maxGroups) : ordered;
+			: capped;
 	return (
 		<div className={styles.root}>
 			{groups.map((group) => {
