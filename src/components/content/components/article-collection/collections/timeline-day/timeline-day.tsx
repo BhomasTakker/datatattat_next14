@@ -1,13 +1,19 @@
 import styles from "./timeline-day.module.scss";
-import { UnknownObject } from "@/types/utils";
 import { ArticleRenderProps } from "../types";
 import { TimelineDayTemplate } from "./template";
-import { groupArticlesByDay, DayGroup } from "./utils";
+import { groupArticlesByDay, filterByDateRange, DayGroup } from "./utils";
 import { InViewComponent } from "@/components/ui/in-view/in-view";
 import { Interaction } from "../../article/interaction/interactions";
 import { InteractionsOptions } from "../../article/interaction/interactions-map";
 import { WithData } from "@/components/ui/with-data/with-data";
 import { articleMetaLoader, articleRenderer, articleTemplate } from "../utils";
+import { DateRangeCutoff } from "./timeline-day.types";
+
+export { DateRangeCutoff };
+
+export type TimelineDayOptions = {
+	dateRangeCutoff?: DateRangeCutoff;
+};
 
 const renderArticle = (item: ArticleRenderProps) => {
 	const { src } = item;
@@ -40,9 +46,10 @@ const renderGroup = ({ label, articles }: DayGroup) => (
 
 const renderMethod = (
 	articles: ArticleRenderProps[] = [],
-	_: UnknownObject,
+	{ dateRangeCutoff = DateRangeCutoff.all }: TimelineDayOptions,
 ) => {
-	const groups = groupArticlesByDay(articles);
+	const filtered = filterByDateRange(articles, dateRangeCutoff);
+	const groups = groupArticlesByDay(filtered);
 	return (
 		<div className={styles.root}>
 			{groups.map((group) => renderGroup(group))}
@@ -50,7 +57,7 @@ const renderMethod = (
 	);
 };
 
-const renderTemplate = (_: UnknownObject) => {
+const renderTemplate = () => {
 	return <TimelineDayTemplate />;
 };
 

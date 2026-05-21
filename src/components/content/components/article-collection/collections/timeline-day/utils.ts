@@ -1,4 +1,5 @@
 import { ArticleRenderProps } from "../types";
+import { DateRangeCutoff } from "./timeline-day.types";
 
 export type DayGroup = {
 	label: string;
@@ -79,4 +80,26 @@ export const groupArticlesByDay = (
 	}
 
 	return groups;
+};
+
+const cutoffMs: Record<DateRangeCutoff, number | null> = {
+	[DateRangeCutoff.all]: null,
+	[DateRangeCutoff.last24h]: 24 * 60 * 60 * 1000,
+	[DateRangeCutoff.last7d]: 7 * 24 * 60 * 60 * 1000,
+	[DateRangeCutoff.last30d]: 30 * 24 * 60 * 60 * 1000,
+};
+
+export const filterByDateRange = (
+	articles: ArticleRenderProps[],
+	cutoff: DateRangeCutoff,
+): ArticleRenderProps[] => {
+	const ms = cutoffMs[cutoff];
+	if (ms === null) return articles;
+
+	const threshold = Date.now() - ms;
+	return articles.filter((article) => {
+		const published = article.details?.published;
+		if (!published) return false;
+		return new Date(published).getTime() >= threshold;
+	});
 };

@@ -1,5 +1,6 @@
-import { groupArticlesByDay } from "./utils";
-import { ArticleRenderProps } from "../types";
+import { groupArticlesByDay, filterByDateRange } from "./utils";
+import { DateRangeCutoff } from "./timeline-day.types";
+import type { ArticleRenderProps } from "../types";
 
 const makeArticle = (
 	id: string,
@@ -122,5 +123,66 @@ describe("groupArticlesByDay", () => {
 		const result = groupArticlesByDay(articles);
 		expect(result).toHaveLength(1);
 		expect(result[0].articles).toHaveLength(2);
+	});
+});
+
+describe("filterByDateRange", () => {
+	const hoursAgo = (h: number) =>
+		new Date(Date.now() - h * 60 * 60 * 1000).toISOString();
+	const daysAgo = (d: number) =>
+		new Date(Date.now() - d * 24 * 60 * 60 * 1000).toISOString();
+
+	it("returns all articles when cutoff is 'all'", () => {
+		const articles = [
+			makeArticle("1", hoursAgo(1)),
+			makeArticle("2", daysAgo(10)),
+			makeArticle("3", daysAgo(60)),
+		];
+		expect(filterByDateRange(articles, DateRangeCutoff.all)).toHaveLength(3);
+	});
+
+	it("filters to last 24 hours", () => {
+		const articles = [
+			makeArticle("recent", hoursAgo(12)),
+			makeArticle("old", daysAgo(2)),
+		];
+		const result = filterByDateRange(articles, DateRangeCutoff.last24h);
+		expect(result).toHaveLength(1);
+		expect(result[0]._id).toBe("recent");
+	});
+
+	it("filters to last 7 days", () => {
+		const articles = [
+			makeArticle("within", daysAgo(5)),
+			makeArticle("outside", daysAgo(10)),
+		];
+		const result = filterByDateRange(articles, DateRangeCutoff.last7d);
+		expect(result).toHaveLength(1);
+		expect(result[0]._id).toBe("within");
+	});
+
+	it("filters to last 30 days", () => {
+		const articles = [
+			makeArticle("within", daysAgo(20)),
+			makeArticle("outside", daysAgo(40)),
+		];
+		const result = filterByDateRange(articles, DateRangeCutoff.last30d);
+		expect(result).toHaveLength(1);
+		expect(result[0]._id).toBe("within");
+	});
+
+	it("excludes articles with no published date when a cutoff is active", () => {
+		const articles = [
+			makeArticle("recent", hoursAgo(1)),
+			makeArticle("no-date"),
+		];
+		const result = filterByDateRange(articles, DateRangeCutoff.last24h);
+		expect(result).toHaveLength(1);
+		expect(result[0]._id).toBe("recent");
+	});
+
+	it("returns empty array when no articles fall within the range", () => {
+		const articles = [makeArticle("old", daysAgo(60))];
+		expect(filterByDateRange(articles, DateRangeCutoff.last7d)).toHaveLength(0);
 	});
 });
