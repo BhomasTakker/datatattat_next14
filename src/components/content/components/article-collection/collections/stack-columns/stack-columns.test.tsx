@@ -10,11 +10,7 @@ jest.mock("./stack-columns.module.scss", () => ({
 }));
 jest.mock("../../../../../../components/ui/in-view/in-view");
 jest.mock("../../article/interaction/interactions");
-jest.mock("../../../../../../components/ui/with-data/with-data", () => ({
-	WithData: ({ template }: any) => (
-		<div data-testid="with-data">{template && "with-data"}</div>
-	),
-}));
+jest.mock("../../../../../../components/ui/with-data/with-data");
 jest.mock("../utils", () => ({
 	articleMetaLoader: jest.fn(() => jest.fn()),
 	articleRenderer: jest.fn(() => jest.fn()),
@@ -57,10 +53,10 @@ describe("stackColumns", () => {
 
 	it("each article renders WithData and passes template", () => {
 		render(stackColumns.renderMethod(mockArticles, {}) as React.ReactElement);
-		const withData = screen.getAllByTestId("with-data");
+		const withData = screen.getAllByTestId("withdata");
 		expect(withData).toHaveLength(mockArticles.length);
 		withData.forEach((el) => {
-			expect(el).toHaveTextContent("with-data");
+			expect(el).toHaveTextContent("mock-template");
 		});
 	});
 

@@ -31,7 +31,7 @@ exports[`VideoDisplayComponent applies the correct container class based on vari
             type="click"
           >
             <div
-              data-testid="with-data"
+              data-testid="withdata"
             >
               <div
                 data-testid="article-template"
@@ -52,7 +52,7 @@ exports[`VideoDisplayComponent applies the correct container class based on vari
             type="click"
           >
             <div
-              data-testid="with-data"
+              data-testid="withdata"
             >
               <div
                 data-testid="article-template"
@@ -97,7 +97,7 @@ exports[`VideoDisplayComponent renders the video player and articles 1`] = `
             type="click"
           >
             <div
-              data-testid="with-data"
+              data-testid="withdata"
             >
               <div
                 data-testid="article-template"
@@ -118,7 +118,7 @@ exports[`VideoDisplayComponent renders the video player and articles 1`] = `
             type="click"
           >
             <div
-              data-testid="with-data"
+              data-testid="withdata"
             >
               <div
                 data-testid="article-template"

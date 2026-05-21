@@ -36,8 +36,12 @@ exports[`AudioDisplayComponent renders a list of articles 1`] = `
             type="click"
           >
             <div
-              data-testid="article-template"
-            />
+              data-testid="withdata"
+            >
+              <div
+                data-testid="article-template"
+              />
+            </div>
           </div>
         </div>
       </li>
@@ -53,8 +57,12 @@ exports[`AudioDisplayComponent renders a list of articles 1`] = `
             type="click"
           >
             <div
-              data-testid="article-template"
-            />
+              data-testid="withdata"
+            >
+              <div
+                data-testid="article-template"
+              />
+            </div>
           </div>
         </div>
       </li>

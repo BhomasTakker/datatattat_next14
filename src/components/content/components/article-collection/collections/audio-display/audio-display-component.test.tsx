@@ -16,9 +16,7 @@ jest.mock("./display-article", () => ({
 }));
 jest.mock("../../../../../../components/ui/in-view/in-view");
 jest.mock("../../article/interaction/interactions");
-jest.mock("../../../../../../components/ui/with-data/with-data", () => ({
-	WithData: ({ template }: { template: React.ReactNode }) => <>{template}</>,
-}));
+jest.mock("../../../../../../components/ui/with-data/with-data");
 jest.mock("../utils", () => ({
 	articleMetaLoader: () => jest.fn(),
 	articleRenderer: () => jest.fn(),

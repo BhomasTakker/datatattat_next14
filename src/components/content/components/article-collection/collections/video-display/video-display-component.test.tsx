@@ -15,11 +15,7 @@ jest.mock("../../../video-player/video-player-container", () => ({
 }));
 jest.mock("../../article/interaction/interactions");
 jest.mock("../../../../../../components/ui/in-view/in-view");
-jest.mock("../../../../../../components/ui/with-data/with-data", () => ({
-	WithData: ({ template }: any) => (
-		<div data-testid="with-data">{template}</div>
-	),
-}));
+jest.mock("../../../../../../components/ui/with-data/with-data");
 jest.mock("../utils", () => ({
 	articleMetaLoader: (item: any) => () => item,
 	articleRenderer: () => () => <div data-testid="article-renderer" />,
@@ -55,9 +51,7 @@ describe("VideoDisplayComponent", () => {
 		expect(screen.getAllByTestId("interaction")).toHaveLength(
 			mockArticles.length,
 		);
-		expect(screen.getAllByTestId("with-data")).toHaveLength(
-			mockArticles.length,
-		);
+		expect(screen.getAllByTestId("withdata")).toHaveLength(mockArticles.length);
 		expect(container).toMatchSnapshot();
 	});
 

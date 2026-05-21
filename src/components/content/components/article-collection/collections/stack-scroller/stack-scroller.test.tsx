@@ -8,13 +8,7 @@ import { cloneDeep } from "../../../../../../utils/object";
 jest.mock("./stack-scroller.module.scss", () => ({}));
 jest.mock("../../article/interaction/interactions");
 jest.mock("../../../../../../components/ui/in-view/in-view");
-jest.mock("../../../../../../components/ui/with-data/with-data", () => ({
-	WithData: ({ children, ...props }: any) => (
-		<div data-testid="withdata" {...props}>
-			{children}
-		</div>
-	),
-}));
+jest.mock("../../../../../../components/ui/with-data/with-data");
 jest.mock("../utils", () => ({
 	articleTemplate: () => "template",
 	articleMetaLoader: (item: any) => () => ({ meta: "meta", ...item }),

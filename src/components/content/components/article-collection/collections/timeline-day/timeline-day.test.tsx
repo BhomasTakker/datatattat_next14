@@ -23,14 +23,7 @@ jest.mock("../../article/interaction/interactions-map", () => ({
 	InteractionsOptions: { Navigate: "navigate" },
 }));
 jest.mock("../../../../../../components/ui/in-view/in-view");
-jest.mock("../../../../../../components/ui/with-data/with-data", () => ({
-	WithData: ({
-		getter: _getter,
-		callback: _callback,
-		template: _template,
-		...props
-	}: any) => <div data-testid="withdata" {...props} />,
-}));
+jest.mock("../../../../../../components/ui/with-data/with-data");
 jest.mock("../utils", () => ({
 	articleTemplate: () => "template",
 	articleMetaLoader: jest.fn(() => jest.fn()),
