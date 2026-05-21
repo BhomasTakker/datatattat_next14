@@ -1,5 +1,11 @@
-import { groupArticlesByDay, filterByDateRange } from "./utils";
-import { DateRangeCutoff } from "./timeline-day.types";
+import {
+	groupArticlesByDay,
+	filterByDateRange,
+	applySortOrder,
+	UNKNOWN_DATE_LABEL,
+} from "./utils";
+import type { DayGroup } from "./utils";
+import { DateRangeCutoff, LabelFormat, SortOrder } from "./timeline-day.types";
 import type { ArticleRenderProps } from "../types";
 
 const makeArticle = (
@@ -123,6 +129,69 @@ describe("groupArticlesByDay", () => {
 		const result = groupArticlesByDay(articles);
 		expect(result).toHaveLength(1);
 		expect(result[0].articles).toHaveLength(2);
+	});
+
+	it("produces a long-format label when LabelFormat.long is specified", () => {
+		const articles = [makeArticle("1", "2020-06-15T12:00:00")];
+		const result = groupArticlesByDay(articles, LabelFormat.long);
+		// Long format: "Monday, 15 June 2020" — contains a comma and a 4-digit year
+		expect(result[0].label).toMatch(/,/);
+		expect(result[0].label).toMatch(/2020/);
+	});
+
+	it("places all undated articles into a single Unknown date group", () => {
+		const articles = [makeArticle("a"), makeArticle("b"), makeArticle("c")];
+		const result = groupArticlesByDay(articles);
+		expect(result).toHaveLength(1);
+		expect(result[0].label).toBe(UNKNOWN_DATE_LABEL);
+		expect(result[0].articles).toHaveLength(3);
+	});
+});
+
+describe("applySortOrder", () => {
+	const group = (label: string): DayGroup => ({ label, articles: [] });
+
+	it("returns groups unchanged when sortOrder is newest", () => {
+		const groups = [group("Today"), group("Yesterday"), group("Mon 12 May")];
+		const result = applySortOrder(groups, SortOrder.newest);
+		expect(result.map((g) => g.label)).toEqual([
+			"Today",
+			"Yesterday",
+			"Mon 12 May",
+		]);
+	});
+
+	it("reverses group order when sortOrder is oldest", () => {
+		const groups = [group("Today"), group("Yesterday"), group("Mon 12 May")];
+		const result = applySortOrder(groups, SortOrder.oldest);
+		expect(result.map((g) => g.label)).toEqual([
+			"Mon 12 May",
+			"Yesterday",
+			"Today",
+		]);
+	});
+
+	it("keeps the Unknown date group at the end when sorting oldest-first", () => {
+		const groups = [
+			group("Today"),
+			group("Yesterday"),
+			group(UNKNOWN_DATE_LABEL),
+		];
+		const result = applySortOrder(groups, SortOrder.oldest);
+		expect(result[result.length - 1].label).toBe(UNKNOWN_DATE_LABEL);
+		expect(result[0].label).toBe("Yesterday");
+		expect(result[1].label).toBe("Today");
+	});
+
+	it("returns an empty array unchanged", () => {
+		expect(applySortOrder([], SortOrder.oldest)).toEqual([]);
+	});
+
+	it("does not modify the original array", () => {
+		const groups = [group("Today"), group("Yesterday")];
+		const original = [...groups];
+		applySortOrder(groups, SortOrder.oldest);
+		expect(groups.map((g) => g.label)).toEqual(original.map((g) => g.label));
 	});
 });
 
