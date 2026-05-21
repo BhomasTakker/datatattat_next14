@@ -1,7 +1,12 @@
 import styles from "./timeline-day.module.scss";
 import { ArticleRenderProps } from "../types";
 import { TimelineDayTemplate } from "./template";
-import { groupArticlesByDay, filterByDateRange, DayGroup } from "./utils";
+import {
+	groupArticlesByDay,
+	filterByDateRange,
+	DayGroup,
+	UNKNOWN_DATE_LABEL,
+} from "./utils";
 import { InViewComponent } from "@/components/ui/in-view/in-view";
 import { Interaction } from "../../article/interaction/interactions";
 import { InteractionsOptions } from "../../article/interaction/interactions-map";
@@ -49,8 +54,6 @@ const renderGroup = ({ label, articles }: DayGroup) => (
 		</div>
 	</section>
 );
-
-const UNKNOWN_DATE_LABEL = "Unknown date";
 
 const renderMethod = (
 	articles: ArticleRenderProps[] = [],

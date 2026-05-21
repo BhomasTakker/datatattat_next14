@@ -6,6 +6,8 @@ export type DayGroup = {
 	articles: ArticleRenderProps[];
 };
 
+export const UNKNOWN_DATE_LABEL = "Unknown date";
+
 // These feel more like time utils
 // Look at moving out of here
 
@@ -86,7 +88,7 @@ export const groupArticlesByDay = (
 
 	// Append unpublished articles at the end under their own group
 	if (unpublished.length > 0) {
-		groups.push({ label: "Unknown date", articles: unpublished });
+		groups.push({ label: UNKNOWN_DATE_LABEL, articles: unpublished });
 	}
 
 	return groups;
