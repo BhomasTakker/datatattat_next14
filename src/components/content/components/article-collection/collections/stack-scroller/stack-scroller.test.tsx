@@ -6,32 +6,15 @@ import { cloneDeep } from "../../../../../../utils/object";
 
 // Mock dependencies
 jest.mock("./stack-scroller.module.scss", () => ({}));
-jest.mock("../../article/interaction/interactions", () => ({
-	Interaction: ({ children, ...props }: any) => (
-		<div data-testid="interaction" {...props}>
-			{children}
-		</div>
-	),
-}));
-jest.mock("../../../../../../components/ui/in-view/in-view", () => ({
-	InViewComponent: ({ children, ...props }: any) => (
-		<div data-testid="inview" {...props}>
-			{children}
-		</div>
-	),
-}));
-jest.mock("../../../../../../components/ui/with-data/with-data", () => ({
-	WithData: ({ children, ...props }: any) => (
-		<div data-testid="withdata" {...props}>
-			{children}
-		</div>
-	),
-}));
+jest.mock("../../article/interaction/interactions");
+jest.mock("../../../../../../components/ui/in-view/in-view");
+jest.mock("../../../../../../components/ui/with-data/with-data");
 jest.mock("../utils", () => ({
 	articleTemplate: () => "template",
 	articleMetaLoader: (item: any) => () => ({ meta: "meta", ...item }),
-	articleRenderer: () => (data: any) =>
-		<div data-testid="article-renderer">{JSON.stringify(data)}</div>,
+	articleRenderer: () => (data: any) => (
+		<div data-testid="article-renderer">{JSON.stringify(data)}</div>
+	),
 }));
 
 describe("stackScroller", () => {
@@ -58,10 +41,10 @@ describe("stackScroller", () => {
 		const { container } = render(<>{rendered}</>);
 		expect(screen.getAllByTestId("inview")).toHaveLength(sampleArticles.length);
 		expect(screen.getAllByTestId("interaction")).toHaveLength(
-			sampleArticles.length
+			sampleArticles.length,
 		);
 		expect(screen.getAllByTestId("withdata")).toHaveLength(
-			sampleArticles.length
+			sampleArticles.length,
 		);
 	});
 

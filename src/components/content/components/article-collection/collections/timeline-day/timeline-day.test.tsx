@@ -18,36 +18,12 @@ jest.mock("./template", () => ({
 	TimelineDayTemplate: () => <div data-testid="timeline-day-template" />,
 }));
 jest.mock("./timeline-day.module.scss", () => ({}));
-jest.mock("../../article/interaction/interactions", () => ({
-	Interaction: ({ children, ...props }: any) => (
-		<div data-testid="interaction" {...props}>
-			{children}
-		</div>
-	),
-}));
+jest.mock("../../article/interaction/interactions");
 jest.mock("../../article/interaction/interactions-map", () => ({
 	InteractionsOptions: { Navigate: "navigate" },
 }));
-jest.mock("../../../../../../components/ui/in-view/in-view", () => ({
-	InViewComponent: ({ children, options, ...props }: any) => (
-		<div
-			data-testid="inview"
-			data-threshold={options?.threshold}
-			data-trigger-once={String(options?.triggerOnce)}
-			{...props}
-		>
-			{children}
-		</div>
-	),
-}));
-jest.mock("../../../../../../components/ui/with-data/with-data", () => ({
-	WithData: ({
-		getter: _getter,
-		callback: _callback,
-		template: _template,
-		...props
-	}: any) => <div data-testid="withdata" {...props} />,
-}));
+jest.mock("../../../../../../components/ui/in-view/in-view");
+jest.mock("../../../../../../components/ui/with-data/with-data");
 jest.mock("../utils", () => ({
 	articleTemplate: () => "template",
 	articleMetaLoader: jest.fn(() => jest.fn()),

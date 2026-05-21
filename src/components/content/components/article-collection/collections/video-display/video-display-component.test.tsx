@@ -13,23 +13,9 @@ jest.mock("../../../video-player/video-player-container", () => ({
 		/>
 	),
 }));
-jest.mock("../../article/interaction/interactions", () => ({
-	Interaction: ({ children, onClick }: any) => (
-		<div data-testid="interaction" onClick={onClick}>
-			{children}
-		</div>
-	),
-}));
-jest.mock("../../../../../../components/ui/in-view/in-view", () => ({
-	InViewComponent: ({ children }: any) => (
-		<div data-testid="in-view">{children}</div>
-	),
-}));
-jest.mock("../../../../../../components/ui/with-data/with-data", () => ({
-	WithData: ({ template }: any) => (
-		<div data-testid="with-data">{template}</div>
-	),
-}));
+jest.mock("../../article/interaction/interactions");
+jest.mock("../../../../../../components/ui/in-view/in-view");
+jest.mock("../../../../../../components/ui/with-data/with-data");
 jest.mock("../utils", () => ({
 	articleMetaLoader: (item: any) => () => item,
 	articleRenderer: () => () => <div data-testid="article-renderer" />,
@@ -57,17 +43,15 @@ describe("VideoDisplayComponent", () => {
 				variant={PlayerCollectionVariant.HorizontalScroll}
 				sourceType={PlayerSourceTypes.Youtube}
 				autoplay={true}
-			/>
+			/>,
 		);
 		expect(
-			screen.getByTestId("mock-video-player-container")
+			screen.getByTestId("mock-video-player-container"),
 		).toBeInTheDocument();
 		expect(screen.getAllByTestId("interaction")).toHaveLength(
-			mockArticles.length
+			mockArticles.length,
 		);
-		expect(screen.getAllByTestId("with-data")).toHaveLength(
-			mockArticles.length
-		);
+		expect(screen.getAllByTestId("withdata")).toHaveLength(mockArticles.length);
 		expect(container).toMatchSnapshot();
 	});
 
@@ -78,7 +62,7 @@ describe("VideoDisplayComponent", () => {
 				variant={PlayerCollectionVariant.HorizontalScroll}
 				sourceType={PlayerSourceTypes.Youtube}
 				autoplay={true}
-			/>
+			/>,
 		);
 		const container = screen.getByTestId("mock-video-player-container");
 		const options = JSON.parse(container.getAttribute("data-options")!);
@@ -95,7 +79,7 @@ describe("VideoDisplayComponent", () => {
 				variant={PlayerCollectionVariant.HorizontalScroll}
 				sourceType={PlayerSourceTypes.Youtube}
 				autoplay={false}
-			/>
+			/>,
 		);
 		// Should still render the container, but no articles
 		expect(container.querySelectorAll("li")).toHaveLength(0);
@@ -108,7 +92,7 @@ describe("VideoDisplayComponent", () => {
 				variant={PlayerCollectionVariant.HorizontalScroll}
 				sourceType={PlayerSourceTypes.Youtube}
 				autoplay={false}
-			/>
+			/>,
 		);
 		const interactions = screen.getAllByTestId("interaction");
 		fireEvent.click(interactions[1]);
@@ -123,7 +107,7 @@ describe("VideoDisplayComponent", () => {
 				variant={PlayerCollectionVariant.VerticalScroll}
 				sourceType={PlayerSourceTypes.Youtube}
 				autoplay={false}
-			/>
+			/>,
 		);
 
 		const element = container.getElementsByClassName("containerVerticalScroll");

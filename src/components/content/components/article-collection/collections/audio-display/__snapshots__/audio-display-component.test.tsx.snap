@@ -26,20 +26,44 @@ exports[`AudioDisplayComponent renders a list of articles 1`] = `
     >
       <li>
         <div
-          data-testid="interaction"
+          data-testid="inview"
+          data-threshold="0"
+          data-trigger-once="true"
+          template="[object Object]"
         >
           <div
-            data-testid="article-template"
-          />
+            data-testid="interaction"
+            type="click"
+          >
+            <div
+              data-testid="withdata"
+            >
+              <div
+                data-testid="article-template"
+              />
+            </div>
+          </div>
         </div>
       </li>
       <li>
         <div
-          data-testid="interaction"
+          data-testid="inview"
+          data-threshold="0"
+          data-trigger-once="true"
+          template="[object Object]"
         >
           <div
-            data-testid="article-template"
-          />
+            data-testid="interaction"
+            type="click"
+          >
+            <div
+              data-testid="withdata"
+            >
+              <div
+                data-testid="article-template"
+              />
+            </div>
+          </div>
         </div>
       </li>
     </ul>

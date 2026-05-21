@@ -13,7 +13,7 @@ jest.mock(
 		spotifyOembedByResponse: {
 			createUrl: jest.fn().mockReturnValue("https://mocked-url.com"),
 		},
-	})
+	}),
 );
 
 // Mock the oembed utils
@@ -39,42 +39,10 @@ jest.mock("../../article-collection/article/article", () => ({
 }));
 
 // Mock the Interaction component
-jest.mock("../../article-collection/article/interaction/interactions", () => ({
-	Interaction: ({
-		children,
-		onClick,
-		type,
-	}: {
-		children: React.ReactNode;
-		onClick: () => void;
-		type: string;
-	}) => (
-		<div
-			data-testid="interaction"
-			onClick={onClick}
-			data-interaction-type={type}
-		>
-			{children}
-		</div>
-	),
-}));
+jest.mock("../../article-collection/article/interaction/interactions");
 
 // Mock the InViewComponent
-jest.mock("../../../../ui/in-view/in-view", () => ({
-	InViewComponent: ({
-		children,
-		template,
-		options,
-	}: {
-		children: React.ReactNode;
-		template: React.ReactNode;
-		options: any;
-	}) => (
-		<div data-testid="in-view-component" data-options={JSON.stringify(options)}>
-			{children}
-		</div>
-	),
-}));
+jest.mock("../../../../ui/in-view/in-view");
 
 // Mock the interactions map
 jest.mock(
@@ -83,7 +51,7 @@ jest.mock(
 		InteractionsOptions: {
 			Click: "Click",
 		},
-	})
+	}),
 );
 
 // Mock the stack types and utility function
@@ -165,7 +133,7 @@ describe("AudioStackClientComponent", () => {
 			<AudioStackClientComponent
 				items={mockSpotifyCollectionItems}
 				height={ContainerHeightOptions.MD}
-			/>
+			/>,
 		);
 
 		// Wait for the initial oembed fetch to complete
@@ -175,7 +143,7 @@ describe("AudioStackClientComponent", () => {
 
 		// Check that the oembed component is rendered
 		expect(screen.getByTestId("client-oembed")).toHaveTextContent(
-			"<div>Mocked Spotify Embed</div>"
+			"<div>Mocked Spotify Embed</div>",
 		);
 
 		// Check that all articles are rendered
@@ -197,7 +165,7 @@ describe("AudioStackClientComponent", () => {
 			<AudioStackClientComponent
 				items={mockSpotifyCollectionItems}
 				height={ContainerHeightOptions.LG}
-			/>
+			/>,
 		);
 
 		await waitFor(() => {
@@ -218,13 +186,13 @@ describe("AudioStackClientComponent", () => {
 			<AudioStackClientComponent
 				items={mockSpotifyCollectionItems}
 				height={ContainerHeightOptions.MD}
-			/>
+			/>,
 		);
 
 		await waitFor(() => {
 			expect(fetchOembed).toHaveBeenCalledWith(
 				{ id: "spotify-1", type: SearchTypes.Track },
-				expect.any(Function)
+				expect.any(Function),
 			);
 		});
 	});
@@ -234,7 +202,7 @@ describe("AudioStackClientComponent", () => {
 			<AudioStackClientComponent
 				items={mockSpotifyCollectionItems}
 				height={ContainerHeightOptions.MD}
-			/>
+			/>,
 		);
 
 		// Wait for initial render
@@ -254,7 +222,7 @@ describe("AudioStackClientComponent", () => {
 		await waitFor(() => {
 			expect(fetchOembed).toHaveBeenCalledWith(
 				{ id: "spotify-2", type: SearchTypes.Album },
-				expect.any(Function)
+				expect.any(Function),
 			);
 		});
 	});
@@ -264,7 +232,7 @@ describe("AudioStackClientComponent", () => {
 			<AudioStackClientComponent
 				items={mockSpotifyCollectionItems}
 				height={ContainerHeightOptions.MD}
-			/>
+			/>,
 		);
 
 		await waitFor(() => {
@@ -275,7 +243,7 @@ describe("AudioStackClientComponent", () => {
 		expect(interactions).toHaveLength(3);
 
 		interactions.forEach((interaction) => {
-			expect(interaction).toHaveAttribute("data-interaction-type", "Click");
+			expect(interaction).toHaveAttribute("type", "Click");
 		});
 	});
 
@@ -284,24 +252,19 @@ describe("AudioStackClientComponent", () => {
 			<AudioStackClientComponent
 				items={mockSpotifyCollectionItems}
 				height={ContainerHeightOptions.MD}
-			/>
+			/>,
 		);
 
 		await waitFor(() => {
 			expect(screen.getByTestId("client-oembed")).toBeInTheDocument();
 		});
 
-		const inViewComponents = screen.getAllByTestId("in-view-component");
+		const inViewComponents = screen.getAllByTestId("inview");
 		expect(inViewComponents).toHaveLength(3);
 
 		inViewComponents.forEach((component) => {
-			const options = JSON.parse(
-				component.getAttribute("data-options") || "{}"
-			);
-			expect(options).toEqual({
-				threshold: 0,
-				triggerOnce: true,
-			});
+			expect(component).toHaveAttribute("data-threshold", "0");
+			expect(component).toHaveAttribute("data-trigger-once", "true");
 		});
 	});
 
@@ -310,7 +273,7 @@ describe("AudioStackClientComponent", () => {
 			<AudioStackClientComponent
 				items={[]}
 				height={ContainerHeightOptions.MD}
-			/>
+			/>,
 		);
 
 		expect(container.firstChild).toBeNull();
@@ -329,7 +292,7 @@ describe("AudioStackClientComponent", () => {
 			<AudioStackClientComponent
 				items={itemsWithoutMedia}
 				height={ContainerHeightOptions.MD}
-			/>
+			/>,
 		);
 
 		// Should not call fetchOembed if media is missing
@@ -353,7 +316,7 @@ describe("AudioStackClientComponent", () => {
 			<AudioStackClientComponent
 				items={mockSpotifyCollectionItems}
 				height={ContainerHeightOptions.MD}
-			/>
+			/>,
 		);
 
 		// Should still render articles even if oembed fails
@@ -363,7 +326,7 @@ describe("AudioStackClientComponent", () => {
 		await waitFor(() => {
 			expect(consoleSpy).toHaveBeenCalledWith(
 				"Failed to fetch oembed data:",
-				expect.any(Error)
+				expect.any(Error),
 			);
 		});
 
@@ -383,12 +346,12 @@ describe("AudioStackClientComponent", () => {
 			<AudioStackClientComponent
 				items={mockSpotifyCollectionItems}
 				height={ContainerHeightOptions.MD}
-			/>
+			/>,
 		);
 
 		await waitFor(() => {
 			expect(getContainerHeight).toHaveBeenCalledWith(
-				ContainerHeightOptions.MD
+				ContainerHeightOptions.MD,
 			);
 		});
 	});
@@ -398,7 +361,7 @@ describe("AudioStackClientComponent", () => {
 			<AudioStackClientComponent
 				items={mockSpotifyCollectionItems}
 				height={ContainerHeightOptions.MD}
-			/>
+			/>,
 		);
 
 		await waitFor(() => {
@@ -419,7 +382,7 @@ describe("AudioStackClientComponent", () => {
 			<AudioStackClientComponent
 				items={mockSpotifyCollectionItems}
 				height={ContainerHeightOptions.MD}
-			/>
+			/>,
 		);
 
 		// Wait for initial render
@@ -434,7 +397,7 @@ describe("AudioStackClientComponent", () => {
 		await waitFor(() => {
 			expect(fetchOembed).toHaveBeenCalledWith(
 				{ id: "spotify-3", type: SearchTypes.Playlist },
-				expect.any(Function)
+				expect.any(Function),
 			);
 		});
 
@@ -444,7 +407,7 @@ describe("AudioStackClientComponent", () => {
 		await waitFor(() => {
 			expect(fetchOembed).toHaveBeenCalledWith(
 				{ id: "spotify-1", type: SearchTypes.Track },
-				expect.any(Function)
+				expect.any(Function),
 			);
 		});
 	});
