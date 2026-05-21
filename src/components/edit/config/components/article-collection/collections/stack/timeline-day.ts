@@ -26,7 +26,7 @@ export const TIMELINE_DAY_CONFIG: InputListProps = {
 		{
 			id: "maxArticlesPerGroup",
 			type: EditInputs.number,
-			label: "Max articles per day",
+			label: "Max articles per day (1–20)",
 			min: 1,
 			max: 20,
 			step: 1,
@@ -35,7 +35,7 @@ export const TIMELINE_DAY_CONFIG: InputListProps = {
 		{
 			id: "maxGroups",
 			type: EditInputs.number,
-			label: "Max days to show",
+			label: "Max days to show (1–30)",
 			min: 1,
 			max: 30,
 			step: 1,
