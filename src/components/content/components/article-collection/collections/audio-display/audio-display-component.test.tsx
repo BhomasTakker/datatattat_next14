@@ -35,13 +35,13 @@ describe("AudioDisplayComponent", () => {
 		render(<AudioDisplayComponent articles={mockArticles} />);
 		expect(screen.getByTestId("display-article")).toHaveTextContent("Audio 1");
 		expect(screen.getByTestId("mock-audio-player")).toHaveTextContent(
-			"audio1.mp3"
+			"audio1.mp3",
 		);
 	});
 
 	it("renders a list of articles", () => {
 		const { container } = render(
-			<AudioDisplayComponent articles={mockArticles} />
+			<AudioDisplayComponent articles={mockArticles} />,
 		);
 		const interactions = screen.getAllByTestId("interaction");
 		expect(interactions.length).toBe(2);
@@ -56,12 +56,12 @@ describe("AudioDisplayComponent", () => {
 		// The displayed article should update
 		waitFor(() => {
 			expect(screen.getByTestId("display-article")).toHaveTextContent(
-				"Audio 2"
+				"Audio 2",
 			);
 		});
 
 		expect(screen.getByTestId("mock-audio-player")).toHaveTextContent(
-			"audio2.mp3"
+			"audio2.mp3",
 		);
 	});
 
