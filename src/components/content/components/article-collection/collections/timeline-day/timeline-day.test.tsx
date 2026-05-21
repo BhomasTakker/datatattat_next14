@@ -3,6 +3,8 @@ import { render, screen } from "@testing-library/react";
 import {
 	renderArticle,
 	renderGroup,
+	renderMethod,
+	renderTemplate,
 	getGroups,
 	DateRangeCutoff,
 	LabelFormat,
@@ -12,7 +14,10 @@ import { UNKNOWN_DATE_LABEL } from "./utils";
 import { InteractionsOptions } from "../../article/interaction/interactions-map";
 import type { ArticleRenderProps } from "../types";
 
-jest.mock("./timeline-day.module.scss", () => ({}));
+jest.mock("./template", () => ({
+	TimelineDayTemplate: () => <div data-testid="timeline-day-template" />,
+}));
+jest.mock("./timeline-day.module.scss", () => ({}));;
 jest.mock("../../article/interaction/interactions", () => ({
 	Interaction: ({ children, ...props }: any) => (
 		<div data-testid="interaction" {...props}>
@@ -60,6 +65,21 @@ const makeArticle = (
 	variant: "",
 	details: {},
 });
+
+const makeArticleWithDate = (
+	id: string,
+	published: string,
+): ArticleRenderProps => ({
+	...makeArticle(id),
+	details: { published },
+});
+
+const JAN_01 = "2020-01-01T10:00:00";
+const JAN_01_NOON = "2020-01-01T11:00:00";
+const JAN_01_LATE = "2020-01-01T12:00:00";
+const JAN_02 = "2020-01-02T10:00:00";
+const JAN_03 = "2020-01-03T10:00:00";
+const JAN_15 = "2020-01-15T10:00:00";
 
 describe("renderArticle", () => {
 	it("renders an InViewComponent", () => {
@@ -148,21 +168,6 @@ describe("renderGroup", () => {
 });
 
 describe("getGroups", () => {
-	const makeArticleWithDate = (
-		id: string,
-		published: string,
-	): ArticleRenderProps => ({
-		...makeArticle(id),
-		details: { published },
-	});
-
-	const JAN_01 = "2020-01-01T10:00:00";
-	const JAN_01_NOON = "2020-01-01T11:00:00";
-	const JAN_01_LATE = "2020-01-01T12:00:00";
-	const JAN_02 = "2020-01-02T10:00:00";
-	const JAN_03 = "2020-01-03T10:00:00";
-	const JAN_15 = "2020-01-15T10:00:00";
-
 	describe("default behaviour", () => {
 		it("returns one group per distinct date", () => {
 			const articles = [
@@ -301,5 +306,43 @@ describe("getGroups", () => {
 			const result = getGroups(articles, { labelFormat: LabelFormat.long });
 			expect(result[0].label).toMatch(/2020/);
 		});
+	});
+});
+
+describe("renderMethod", () => {
+	it("renders a root div", () => {
+		const { container } = render(<>{renderMethod([], {})}</>);
+		expect(container.firstChild).not.toBeNull();
+	});
+
+	it("renders an empty root div when no articles are provided", () => {
+		const { container } = render(<>{renderMethod([], {})}</>);
+		expect(container.querySelector("section")).toBeNull();
+	});
+
+	it("renders one section per date group", () => {
+		const articles = [
+			makeArticleWithDate("1", JAN_01),
+			makeArticleWithDate("2", JAN_02),
+		];
+		render(<>{renderMethod(articles, {})}</>);
+		expect(document.querySelectorAll("section")).toHaveLength(2);
+	});
+
+	it("options are wired through — maxGroups caps the number of sections", () => {
+		const articles = [
+			makeArticleWithDate("1", JAN_01),
+			makeArticleWithDate("2", JAN_02),
+			makeArticleWithDate("3", JAN_03),
+		];
+		render(<>{renderMethod(articles, { maxGroups: 1 })}</>);
+		expect(document.querySelectorAll("section")).toHaveLength(1);
+	});
+});
+
+describe("renderTemplate", () => {
+	it("renders the timeline day template", () => {
+		render(<>{renderTemplate()}</>);
+		expect(screen.getByTestId("timeline-day-template")).toBeInTheDocument();
 	});
 });

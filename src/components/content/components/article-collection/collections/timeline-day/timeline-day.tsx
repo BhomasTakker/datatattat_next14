@@ -84,7 +84,7 @@ export const getGroups = (
 		: sorted;
 };
 
-const renderMethod = (
+export const renderMethod = (
 	articles: ArticleRenderProps[] = [],
 	options: TimelineDayOptions,
 ) => (
@@ -93,7 +93,7 @@ const renderMethod = (
 	</div>
 );
 
-const renderTemplate = () => {
+export const renderTemplate = () => {
 	return <TimelineDayTemplate />;
 };
 
