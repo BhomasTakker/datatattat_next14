@@ -8,18 +8,8 @@ import { ArticleRenderProps } from "../types";
 jest.mock("./stack-columns.module.scss", () => ({
 	container: "mock-container-class",
 }));
-jest.mock("../../../../../../components/ui/in-view/in-view", () => ({
-	InViewComponent: ({ children }: { children: React.ReactNode }) => (
-		<div data-testid="in-view">{children}</div>
-	),
-}));
-jest.mock("../../article/interaction/interactions", () => ({
-	Interaction: ({ children, type, href }: any) => (
-		<a data-testid="interaction" data-type={type} href={href}>
-			{children}
-		</a>
-	),
-}));
+jest.mock("../../../../../../components/ui/in-view/in-view");
+jest.mock("../../article/interaction/interactions");
 jest.mock("../../../../../../components/ui/with-data/with-data", () => ({
 	WithData: ({ template }: any) => (
 		<div data-testid="with-data">{template && "with-data"}</div>
@@ -44,14 +34,14 @@ describe("stackColumns", () => {
 
 	it("renderMethod renders a container div with correct class", () => {
 		const { container } = render(
-			stackColumns.renderMethod(mockArticles, {}) as React.ReactElement
+			stackColumns.renderMethod(mockArticles, {}) as React.ReactElement,
 		);
 		expect(container.firstChild).toHaveClass("mock-container-class");
 	});
 
 	it("renderMethod renders an InViewComponent for each article", () => {
 		render(stackColumns.renderMethod(mockArticles, {}) as React.ReactElement);
-		const inViewComponents = screen.getAllByTestId("in-view");
+		const inViewComponents = screen.getAllByTestId("inview");
 		expect(inViewComponents).toHaveLength(mockArticles.length);
 	});
 
@@ -61,10 +51,7 @@ describe("stackColumns", () => {
 		expect(interactions).toHaveLength(mockArticles.length);
 		interactions.forEach((interaction, idx) => {
 			expect(interaction).toHaveAttribute("href", mockArticles[idx].src);
-			expect(interaction).toHaveAttribute(
-				"data-type",
-				InteractionsOptions.Navigate
-			);
+			expect(interaction).toHaveAttribute("type", InteractionsOptions.Navigate);
 		});
 	});
 
@@ -79,10 +66,10 @@ describe("stackColumns", () => {
 
 	it("renderMethod renders nothing if articles is empty", () => {
 		const { container } = render(
-			stackColumns.renderMethod([], {}) as React.ReactElement
+			stackColumns.renderMethod([], {}) as React.ReactElement,
 		);
-		expect(container.querySelectorAll("[data-testid='in-view']")).toHaveLength(
-			0
+		expect(container.querySelectorAll("[data-testid='inview']")).toHaveLength(
+			0,
 		);
 	});
 });
