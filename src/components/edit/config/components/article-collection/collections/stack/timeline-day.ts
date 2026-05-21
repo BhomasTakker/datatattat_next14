@@ -41,6 +41,12 @@ export const TIMELINE_DAY_CONFIG: InputListProps = {
 			step: 1,
 			defaultValue: 7,
 		},
+		{
+			id: "showUnknownDates",
+			type: EditInputs.switch,
+			label: "Show articles with unknown date",
+			defaultChecked: true,
+		},
 		getWithConfig({
 			options: ARTICLE_OPTIONS,
 			apiConfigOptions: {

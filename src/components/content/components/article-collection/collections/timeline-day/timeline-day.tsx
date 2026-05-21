@@ -15,6 +15,7 @@ export type TimelineDayOptions = {
 	dateRangeCutoff?: DateRangeCutoff;
 	maxArticlesPerGroup?: number;
 	maxGroups?: number;
+	showUnknownDates?: boolean;
 };
 
 const renderArticle = (item: ArticleRenderProps) => {
@@ -52,11 +53,15 @@ const renderMethod = (
 		dateRangeCutoff = DateRangeCutoff.all,
 		maxArticlesPerGroup,
 		maxGroups,
+		showUnknownDates = true,
 	}: TimelineDayOptions,
 ) => {
 	const filtered = filterByDateRange(articles, dateRangeCutoff);
 	const allGroups = groupArticlesByDay(filtered);
-	const groups = maxGroups ? allGroups.slice(0, maxGroups) : allGroups;
+	const visible = showUnknownDates
+		? allGroups
+		: allGroups.filter((g) => g.label !== "Unknown date");
+	const groups = maxGroups ? visible.slice(0, maxGroups) : visible;
 	return (
 		<div className={styles.root}>
 			{groups.map((group) => {
