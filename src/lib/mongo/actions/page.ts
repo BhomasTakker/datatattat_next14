@@ -15,6 +15,7 @@ export const saveOrCreatePageByRoute = async (page: IPage, creator: string) => {
 		meta: page.meta,
 		route: decodedRoute,
 		profile: page.profile,
+		live: page.live,
 		content: page.content,
 		creator,
 	};
