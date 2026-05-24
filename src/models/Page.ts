@@ -15,7 +15,7 @@ const ComponentSchema = new Schema(
 		// deprecated, use componentProps to store _with data instead
 		_with: Object,
 	},
-	{ _id: false, strict: false }
+	{ _id: false, strict: false },
 );
 
 const ContentSchema = new Schema(
@@ -28,7 +28,7 @@ const ContentSchema = new Schema(
 		props: Schema.Types.Mixed,
 		components: [ComponentSchema],
 	},
-	{ _id: false }
+	{ _id: false },
 );
 
 const PageSchema = new Schema<IPage>(
@@ -51,9 +51,13 @@ const PageSchema = new Schema<IPage>(
 			type: Object,
 			required: false,
 		},
+		live: {
+			type: Boolean,
+			default: false,
+		},
 		content: ContentSchema,
 	},
-	{ timestamps: true }
+	{ timestamps: true },
 );
 
 export default mongoose.models.Page ||

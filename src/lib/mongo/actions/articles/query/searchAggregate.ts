@@ -27,7 +27,7 @@ import mongoose from "mongoose";
 
 export const createSearchAggregate = async (
 	queryParams: GetLatestArticlesProps,
-	aggregator: Aggregator
+	aggregator: Aggregator,
 ) => {
 	const {
 		variant,
@@ -147,7 +147,7 @@ export const createSearchAggregate = async (
 
 		// Resolve all provider names to ObjectIds in parallel
 		const providerDocs = await Promise.all(
-			providers.map((name) => getArticleProviderByNameFuzzy(name))
+			providers.map((name) => getArticleProviderByNameFuzzy(name)),
 		);
 
 		// Filter out nulls and extract ObjectIds
