@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { META_CONFIG } from "../config/page/meta/meta-config";
 import { PROFILE_CONFIG } from "../config/page/profile/profile-config";
+import { LIVE_CONFIG } from "../config/page/settings-config";
 import { InputFactory } from "../inputs/input-factory";
 import { PAGE_CONFIG } from "../config/page/page-config";
 import styles from "./page-form.module.scss";
@@ -49,6 +50,7 @@ export const PageForm = ({
 			<Button onClick={previewHandler}>Preview</Button>
 			<InputFactory data={{ ...META_CONFIG, id: meta }} />
 			<InputFactory data={{ ...PROFILE_CONFIG, id: profile }} />
+			<InputFactory data={LIVE_CONFIG} />
 
 			<InputFactory data={{ ...PAGE_CONFIG, id: `${content}` }} />
 			<Button type="submit">Submit</Button>
