@@ -8,7 +8,7 @@ export const ARTICLE_VARIANT: ObjectSelectProps = {
 	id: "variant",
 	type: EditInputs.objectSelect,
 	label: "Article Variant",
-	options: ["article", "video", "audio", "provider"],
+	options: ["article", "video", "audio", "provider", "page"],
 	defaultValue: "article",
 	required: true,
 	optionMap: new Map([
@@ -16,5 +16,6 @@ export const ARTICLE_VARIANT: ObjectSelectProps = {
 		["video", VIDEO_MEDIA],
 		["audio", AUDIO_MEDIA],
 		["provider", ARTICLE_MEDIA],
+		["page", ARTICLE_MEDIA],
 	]),
 };
