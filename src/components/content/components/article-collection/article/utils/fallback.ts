@@ -1,3 +1,5 @@
+import { LOGO_HERO } from "@/lib/assets/constants";
+
 export const fallbackImage = () => {
-	return "/assets/logo-hero.png";
+	return LOGO_HERO;
 };

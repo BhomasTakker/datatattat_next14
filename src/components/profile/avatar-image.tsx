@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { LOGO_SQUARE_CROPPED } from "@/lib/assets/constants";
 
 type AvatarImageProps = {
 	src?: string;
@@ -8,16 +9,14 @@ type AvatarImageProps = {
 };
 
 export const AvatarImage = ({ src, alt, className }: AvatarImageProps) => {
-	const [avatarSrc, setAvatarSrc] = useState(
-		src || "/assets/logo-square-cropped.png",
-	);
+	const [avatarSrc, setAvatarSrc] = useState(src || LOGO_SQUARE_CROPPED);
 
 	return (
 		<img
 			className={className}
 			src={avatarSrc}
 			alt={alt}
-			onError={() => setAvatarSrc("/assets/logo-square.png")}
+			onError={() => setAvatarSrc(LOGO_SQUARE_CROPPED)}
 		/>
 	);
 };

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { LOGO_SQUARE } from "@/lib/assets/constants";
 
 export const metadata: Metadata = {
 	title: {
@@ -7,12 +8,12 @@ export const metadata: Metadata = {
 	},
 	icons: {
 		icon: [
-			{ url: "/assets/logo-square.png", type: "image/png", sizes: "32x32" },
-			{ url: "/assets/logo-square.png", type: "image/png", sizes: "192x192" },
+			{ url: LOGO_SQUARE, type: "image/png", sizes: "32x32" },
+			{ url: LOGO_SQUARE, type: "image/png", sizes: "192x192" },
 		],
-		shortcut: "/assets/logo-square.png",
+		shortcut: LOGO_SQUARE,
 		apple: {
-			url: "/assets/logo-square.png",
+			url: LOGO_SQUARE,
 			type: "image/png",
 			sizes: "180x180",
 		},

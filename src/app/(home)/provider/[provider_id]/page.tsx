@@ -3,6 +3,7 @@ import { initialiseServices } from "@/lib/services/intialise-services";
 import { getArticleProviderByIdOrSlug } from "@/lib/mongo/actions/article-provider";
 import { ProviderPage } from "@/components/page/provider/provider-page";
 import type { Metadata } from "next";
+import { LOGO_HERO } from "@/lib/assets/constants";
 
 export const generateMetadata = async ({
 	params,
@@ -25,7 +26,7 @@ export const generateMetadata = async ({
 			title: `${name} | Datatattat`,
 			description,
 			url,
-			images: [{ url: logo || "/assets/logo-hero.png", alt: name }],
+			images: [{ url: logo || LOGO_HERO, alt: name }],
 		},
 	};
 };
