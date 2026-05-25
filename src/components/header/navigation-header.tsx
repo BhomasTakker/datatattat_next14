@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { AiFillHome } from "react-icons/ai";
 import styles from "./navigation-header.module.scss";
 import Link from "next/link";
 import { PATHS } from "@/lib/routing/paths";
@@ -17,7 +16,12 @@ const Logo = () => {
 		<div>
 			<Link aria-label="Home" href="/">
 				<div className={styles.homeContainer}>
-					<AiFillHome className={styles.logo} />
+					<Image
+						src="/assets/logo-cropped-black-trans.png"
+						alt="Datatattat logo"
+						height={32}
+						width={32}
+					/>
 				</div>
 			</Link>
 		</div>
