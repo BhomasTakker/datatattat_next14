@@ -8,7 +8,9 @@ type AvatarImageProps = {
 };
 
 export const AvatarImage = ({ src, alt, className }: AvatarImageProps) => {
-	const [avatarSrc, setAvatarSrc] = useState(src || "/assets/logo-square.png");
+	const [avatarSrc, setAvatarSrc] = useState(
+		src || "/assets/logo-square-cropped.png",
+	);
 
 	return (
 		<img
