@@ -2,6 +2,7 @@ import { PropsWithChildren, ReactNode } from "react";
 import styles from "./menu-drop-down.module.scss";
 import Link from "next/link";
 import { BiSolidUser } from "react-icons/bi";
+import { AvatarImage } from "@/components/profile/avatar-image";
 import { PATHS } from "@/lib/routing/paths";
 import { usePathname } from "next/navigation";
 
@@ -47,7 +48,7 @@ const DropDownItem = ({
 const ProfileItem = ({ avatar, username }: PropfileItemProps) => {
 	return (
 		<li className={styles.profile}>
-			<img
+			<AvatarImage
 				className={styles.profileImage}
 				src={avatar}
 				alt={`${username} profile picture`}

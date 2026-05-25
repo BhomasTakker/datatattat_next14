@@ -69,8 +69,7 @@ describe("ArticleImage Component", () => {
 		// Second error - should switch to gradient
 		fireEvent.error(imgElement);
 		const currentSrc = imgElement.getAttribute("src");
-		expect(currentSrc).toContain("data:image/svg+xml");
-		expect(currentSrc).toContain("linearGradient");
+		expect(currentSrc).toContain("/assets/logo-hero.png");
 	});
 
 	it("does not change image when gradient fallback fails", () => {

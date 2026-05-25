@@ -2,6 +2,7 @@ import { getMetadataForRoute } from "@/actions/page/page-actions";
 import { Metadata as MetadataType } from "@/types/page";
 import { Metadata } from "next";
 import { createIcons, createOpenGraph, createTwitterCard } from "./utils";
+import { LOGO_HERO } from "@/lib/assets/constants";
 
 // URL really
 export const generateMetaDataFromPage = async (
@@ -30,8 +31,9 @@ export const generateMetaDataFromPage = async (
 	}
 
 	// get url from route and site name from env or something
-	const openGraph = createOpenGraph(metadata);
-	const twitter = createTwitterCard(metadata);
+	const effectiveImage = pageImage || LOGO_HERO;
+	const openGraph = createOpenGraph({ ...metadata, pageImage: effectiveImage });
+	const twitter = createTwitterCard({ ...metadata, pageImage: effectiveImage });
 
 	return {
 		title: pageTitle,
@@ -39,7 +41,6 @@ export const generateMetaDataFromPage = async (
 		keywords: pageKeywords,
 		openGraph,
 		twitter,
-		// we need a fallback perhaps?
 		icons: createIcons(favIcons),
 	};
 };

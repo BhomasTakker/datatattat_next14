@@ -1,5 +1,6 @@
 import styles from "./user-profile.module.scss";
 import { IUser } from "@/types/user";
+import { AvatarImage } from "./avatar-image";
 
 type ProfilePageProps = {
 	user: Partial<IUser>;
@@ -29,7 +30,7 @@ export const UserProfile = ({ user }: ProfilePageProps) => {
 
 	return (
 		<article className={styles.root}>
-			<img
+			<AvatarImage
 				className={styles.image}
 				src={avatar}
 				alt={`${username} avatar image`}
