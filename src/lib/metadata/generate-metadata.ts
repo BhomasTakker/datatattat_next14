@@ -30,8 +30,9 @@ export const generateMetaDataFromPage = async (
 	}
 
 	// get url from route and site name from env or something
-	const openGraph = createOpenGraph(metadata);
-	const twitter = createTwitterCard(metadata);
+	const effectiveImage = pageImage || "/assets/logo-hero.png";
+	const openGraph = createOpenGraph({ ...metadata, pageImage: effectiveImage });
+	const twitter = createTwitterCard({ ...metadata, pageImage: effectiveImage });
 
 	return {
 		title: pageTitle,
@@ -39,7 +40,6 @@ export const generateMetaDataFromPage = async (
 		keywords: pageKeywords,
 		openGraph,
 		twitter,
-		// we need a fallback perhaps?
 		icons: createIcons(favIcons),
 	};
 };
