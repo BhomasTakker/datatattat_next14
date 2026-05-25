@@ -25,7 +25,7 @@ export const generateMetadata = async ({
 			title: `${name} | Datatattat`,
 			description,
 			url,
-			...(logo && { images: [{ url: logo, alt: name }] }),
+			images: [{ url: logo || "/assets/logo-hero.png", alt: name }],
 		},
 	};
 };
