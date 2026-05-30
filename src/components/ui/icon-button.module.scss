@@ -37,7 +37,7 @@
 		border: 1px solid $text-sharp;
 		border-radius: $spacingXxxs;
 		position: absolute;
-		z-index: 1; /* Ensure tooltip is displayed above content */
+		z-index: $z-index-tooltip; /* Ensure tooltip is displayed above content */
 		bottom: 100%;
 		left: 65%;
 		margin-left: calc(-#{$contentHeightXs} / 2);
