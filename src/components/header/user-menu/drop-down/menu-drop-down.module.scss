@@ -3,6 +3,7 @@
 
 .dropdown {
 	position: absolute;
+	z-index: $z-index-dropdown;
 	top: $contentHeightXs5;
 	right: 5%;
 	width: $contentWidthLg;
