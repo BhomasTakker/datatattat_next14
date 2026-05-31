@@ -44,6 +44,9 @@ export const getPagesForUser = async (userId: string) => {
 	return cloneDeep(pages) as HydratedDocument<IPage>[];
 };
 
+// When we update page view we also need to update the associated page article view counts
+// We also want unique views - so we need to check if the user has already viewed the page and if so update the timestamp but not add a new view
+// For users this is easy - we have the userId - for anonymous users we could use a cookie or local storage to track if they have viewed the page before
 export const recordPageView = async (route: string, userId?: string) => {
 	await initialiseServices();
 	const page = (await getPageByRoute(route)) as HydratedDocument<IPage>;
