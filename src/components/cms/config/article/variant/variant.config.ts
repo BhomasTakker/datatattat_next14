@@ -3,6 +3,7 @@ import { ObjectSelectProps } from "@/types/edit/inputs/inputs";
 import { ARTICLE_MEDIA } from "./article-media.config";
 import { AUDIO_MEDIA } from "./audio-media.config";
 import { VIDEO_MEDIA } from "./video-media.config";
+import { PAGE_MEDIA } from "./page-media.config";
 
 export const ARTICLE_VARIANT: ObjectSelectProps = {
 	id: "variant",
@@ -16,6 +17,6 @@ export const ARTICLE_VARIANT: ObjectSelectProps = {
 		["video", VIDEO_MEDIA],
 		["audio", AUDIO_MEDIA],
 		["provider", ARTICLE_MEDIA],
-		["page", ARTICLE_MEDIA],
+		["page", PAGE_MEDIA],
 	]),
 };

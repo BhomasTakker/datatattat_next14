@@ -5,6 +5,8 @@ export type PageContainer = {
 	initData: object;
 };
 
+export type PageType = "Content" | "User" | "Landing";
+
 export type PageProps = object;
 
 export type PageComponent = {
@@ -58,6 +60,17 @@ export type IPage = {
 	route: string;
 	creator: ObjectId;
 	live: boolean;
+
+	/**
+	 * Array of view objects for trend analysis
+	 * Each view contains a timestamp and optional userId
+	 */
+	views?: Array<{
+		timestamp: Date;
+		userId?: string;
+	}>;
+
+	pageType: PageType;
 
 	createdAt: Date;
 	updatedAt: Date;

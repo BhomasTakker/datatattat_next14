@@ -9,6 +9,7 @@ import { User } from "@/models/User";
 // Mock dependencies
 jest.mock("../../../../actions/page/page-actions", () => ({
 	getPage: jest.fn(),
+	recordPageViewForRoute: jest.fn(),
 }));
 jest.mock("../../../../lib/metadata/generate-metadata", () => ({
 	generateMetaDataFromPage: jest.fn(),
@@ -54,7 +55,7 @@ describe("UserHome page", () => {
 
 		await waitFor(() => {
 			expect(screen.getByTestId("main-header")).toHaveTextContent(
-				"users/testuser/section/subsection"
+				"users/testuser/section/subsection",
 			);
 			expect(screen.getByTestId("page-display")).toHaveTextContent("Test Page");
 			expect(screen.getByText("Test Page")).toBeInTheDocument();
@@ -83,7 +84,7 @@ describe("generateMetadata", () => {
 
 		const metadata = await generateMetadata({ params });
 		expect(generateMetaDataFromPage).toHaveBeenCalledWith(
-			`${PATHS.user("user1")}/foo/bar`
+			`${PATHS.user("user1")}/foo/bar`,
 		);
 		expect(metadata).toEqual({ title: "Meta Title" });
 	});

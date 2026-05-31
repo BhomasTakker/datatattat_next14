@@ -51,6 +51,8 @@ export type GetLatestArticlesProps = {
 
 	language?: string;
 
+	pageType?: string; // is this correct - feels wrong
+
 	sort?: string;
 	limit?: string;
 };
@@ -64,7 +66,7 @@ export const searchArticles = async (params: GetLatestArticlesProps) => {
 		},
 		queryCacheKey,
 		CACHE_TIME,
-		true
+		true,
 	);
 
 	//////////////////////////

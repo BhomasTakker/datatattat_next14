@@ -1,4 +1,4 @@
-import { getPage } from "@/actions/page/page-actions";
+import { getPage, recordPageViewForRoute } from "@/actions/page/page-actions";
 import { IPage } from "@/types/page";
 import { PageDisplay } from "@/components/page/page-display";
 import styles from "../../../page.module.scss";
@@ -34,6 +34,8 @@ export default async function UserHome({ params }: Props) {
 		// no page then homepage or redirect back
 		return <h1>404</h1>;
 	}
+
+	await recordPageViewForRoute(userPage);
 
 	return (
 		<>

@@ -38,3 +38,11 @@ export async function getUser(): Promise<IUser | null> {
 	}
 	return getUserFromSessionId(sessionUser.user_id);
 }
+
+export async function getUserId(): Promise<string | null> {
+	const user = await getUser();
+	if (!user) {
+		return null;
+	}
+	return user._id.toString();
+}
