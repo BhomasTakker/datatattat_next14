@@ -219,7 +219,15 @@ const AUDIO_PARAMS: InputListProps = {
 const PAGE_PARAMS: InputListProps = {
 	id: "page-params",
 	type: EditInputs.inputList,
-	inputs: [],
+	inputs: [
+		{
+			id: "pageType",
+			type: EditInputs.select,
+			label: "Page Type",
+			required: false,
+			options: ["Content", "User", "Landing"],
+		},
+	],
 };
 
 const variantMap = new Map<string, InputListProps>([
