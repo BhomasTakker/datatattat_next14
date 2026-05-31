@@ -65,6 +65,7 @@ const PageSchema = new Schema<IPage>(
 		},
 		pageType: {
 			type: String,
+			enum: ["Content", "User", "Landing"],
 			required: true,
 		},
 		content: ContentSchema,
