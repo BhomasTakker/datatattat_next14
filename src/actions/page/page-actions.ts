@@ -12,6 +12,7 @@ import { HydratedDocument } from "mongoose";
 import { redirect } from "next/navigation";
 import { getUserId } from "../user/get-user";
 import { recordContentViewAllWindows } from "@/lib/mongo/actions/content-views";
+import Page from "@/models/Page";
 
 export const getPage = async (route: string) => {
 	await initialiseServices();
@@ -51,9 +52,9 @@ export const getPagesForUser = async (userId: string) => {
 
 export const recordPageView = async (route: string, userId?: string) => {
 	await initialiseServices();
-	const page = await getPageDocumentByRoute(route);
+	const page = await getPageByRoute(route);
 	if (!page) return;
-	await page.updateOne({ _id: page._id }, { $inc: { totalViewCount: 1 } });
+	await Page.updateOne({ _id: page._id }, { $inc: { totalViewCount: 1 } });
 	await recordContentViewAllWindows(page._id, userId);
 };
 
