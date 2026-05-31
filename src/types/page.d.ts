@@ -59,6 +59,15 @@ export type IPage = {
 	creator: ObjectId;
 	live: boolean;
 
+	/**
+	 * Array of view objects for trend analysis
+	 * Each view contains a timestamp and optional userId
+	 */
+	views?: Array<{
+		timestamp: Date;
+		userId?: string;
+	}>;
+
 	createdAt: Date;
 	updatedAt: Date;
 

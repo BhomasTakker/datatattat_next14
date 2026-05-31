@@ -6,6 +6,7 @@ import { IPage } from "@/types/page";
 import { cloneDeep } from "@/utils/object";
 import { HydratedDocument } from "mongoose";
 import { redirect } from "next/navigation";
+import { getUserId } from "../user/get-user";
 
 export const getPage = async (route: string) => {
 	await initialiseServices();
@@ -41,4 +42,20 @@ export const getPagesForUser = async (userId: string) => {
 	}
 
 	return cloneDeep(pages) as HydratedDocument<IPage>[];
+};
+
+export const recordPageView = async (route: string, userId?: string) => {
+	await initialiseServices();
+	const page = (await getPageByRoute(route)) as HydratedDocument<IPage>;
+	if (!page) {
+		return;
+	}
+	page.views = page.views || [];
+	page.views.push({ timestamp: new Date(), userId });
+	await page.save();
+};
+
+export const recordPageViewForRoute = async (route: string) => {
+	const userId = await getUserId();
+	await recordPageView(route, userId || undefined);
 };
