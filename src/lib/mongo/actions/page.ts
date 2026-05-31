@@ -6,6 +6,11 @@ export const getPageByRoute = async (route: string) => {
 	return await Page.findOne({ route: decodedRoute }).lean();
 };
 
+export const getPageDocumentByRoute = async (route: string) => {
+	const decodedRoute = decodeURI(route);
+	return await Page.findOne({ route: decodedRoute });
+};
+
 export const saveOrCreatePageByRoute = async (page: IPage, creator: string) => {
 	const { route } = page;
 

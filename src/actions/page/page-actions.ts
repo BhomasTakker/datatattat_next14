@@ -1,6 +1,10 @@
 "use server";
 
-import { getPageByRoute, getPagesByUserId } from "@/lib/mongo/actions/page";
+import {
+	getPageByRoute,
+	getPageDocumentByRoute,
+	getPagesByUserId,
+} from "@/lib/mongo/actions/page";
 import { initialiseServices } from "@/lib/services/intialise-services";
 import { IPage } from "@/types/page";
 import { cloneDeep } from "@/utils/object";
@@ -49,7 +53,7 @@ export const getPagesForUser = async (userId: string) => {
 // For users this is easy - we have the userId - for anonymous users we could use a cookie or local storage to track if they have viewed the page before
 export const recordPageView = async (route: string, userId?: string) => {
 	await initialiseServices();
-	const page = (await getPageByRoute(route)) as HydratedDocument<IPage>;
+	const page = (await getPageDocumentByRoute(route)) as HydratedDocument<IPage>;
 	if (!page) {
 		return;
 	}
