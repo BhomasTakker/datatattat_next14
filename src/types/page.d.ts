@@ -1,3 +1,7 @@
+/**
+ * The type of a page for analytics and filtering.
+ */
+export type PageType = 'Content' | 'User' | 'Landing';
 import { ComponentPropsObject, With, WithQuery } from "./component";
 
 export type PageContainer = {
@@ -67,6 +71,8 @@ export type IPage = {
 		timestamp: Date;
 		userId?: string;
 	}>;
+
+	pageType: PageType;
 
 	createdAt: Date;
 	updatedAt: Date;

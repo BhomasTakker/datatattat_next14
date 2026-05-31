@@ -63,6 +63,10 @@ const PageSchema = new Schema<IPage>(
 			type: Boolean,
 			default: false,
 		},
+		pageType: {
+			type: String,
+			required: true,
+		},
 		content: ContentSchema,
 	},
 	{ timestamps: true },
