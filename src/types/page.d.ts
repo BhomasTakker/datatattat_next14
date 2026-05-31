@@ -70,7 +70,7 @@ export type IPage = {
 		userId?: string;
 	}>;
 
-	pageType: PageType;
+	pageType?: PageType;
 
 	createdAt: Date;
 	updatedAt: Date;
