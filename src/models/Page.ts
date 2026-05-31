@@ -69,6 +69,7 @@ const PageSchema = new Schema<IPage>(
 			default: "Content",
 			required: true,
 		},
+		totalViewCount: { type: Number, default: 0 },
 		content: ContentSchema,
 	},
 	{ timestamps: true },

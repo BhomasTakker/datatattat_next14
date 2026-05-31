@@ -11,6 +11,7 @@ import { cloneDeep } from "@/utils/object";
 import { HydratedDocument } from "mongoose";
 import { redirect } from "next/navigation";
 import { getUserId } from "../user/get-user";
+import { recordContentViewAllWindows } from "@/lib/mongo/actions/content-views";
 
 export const getPage = async (route: string) => {
 	await initialiseServices();
@@ -48,18 +49,12 @@ export const getPagesForUser = async (userId: string) => {
 	return cloneDeep(pages) as HydratedDocument<IPage>[];
 };
 
-// When we update page view we also need to update the associated page article view counts
-// We also want unique views - so we need to check if the user has already viewed the page and if so update the timestamp but not add a new view
-// For users this is easy - we have the userId - for anonymous users we could use a cookie or local storage to track if they have viewed the page before
 export const recordPageView = async (route: string, userId?: string) => {
 	await initialiseServices();
-	const page = (await getPageDocumentByRoute(route)) as HydratedDocument<IPage>;
-	if (!page) {
-		return;
-	}
-	page.views = page.views || [];
-	page.views.push({ timestamp: new Date(), userId });
-	await page.save();
+	const page = await getPageDocumentByRoute(route);
+	if (!page) return;
+	await page.update({ _id: page._id }, { $inc: { totalViewCount: 1 } });
+	await recordContentViewAllWindows(page._id, userId);
 };
 
 export const recordPageViewForRoute = async (route: string) => {

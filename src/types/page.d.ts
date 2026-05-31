@@ -75,5 +75,7 @@ export type IPage = {
 	createdAt: Date;
 	updatedAt: Date;
 
+	totalViewCount: number;
+
 	content: PageContent;
 };
