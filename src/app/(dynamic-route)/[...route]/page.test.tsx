@@ -14,6 +14,7 @@ jest.mock("../../../components/page/page-display", () => {
 jest.mock("../../../actions/page/page-actions", () => {
 	return {
 		getPage: jest.fn().mockResolvedValue({}),
+		recordPageViewForRoute: jest.fn().mockResolvedValue({}),
 	};
 });
 
@@ -47,7 +48,7 @@ describe("Page", () => {
 describe("Page snaps", () => {
 	it("renders homepage unchanged", async () => {
 		const { container } = render(
-			await Page({ params: Promise.resolve({ route: ["route1"] }) })
+			await Page({ params: Promise.resolve({ route: ["route1"] }) }),
 		);
 		expect(container).toMatchSnapshot();
 	});
