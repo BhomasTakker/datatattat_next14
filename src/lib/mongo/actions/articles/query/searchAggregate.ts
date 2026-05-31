@@ -44,6 +44,7 @@ export const createSearchAggregate = async (
 		origin,
 		provider,
 		categories,
+		pageType,
 		mustContain = [],
 		mustNotContain = [],
 		shouldContain = [],
@@ -65,7 +66,10 @@ export const createSearchAggregate = async (
 	if (variant) addFilter(filter, variant, "variant");
 
 	if (language) addFilter(filter, language, "details.languge");
+
 	if (mediaType) addFilter(filter, mediaType, "media.mediaType");
+
+	if (pageType) addFilter(filter, pageType, "media.type");
 
 	// coverage used for scoping articles. Give me US && national news
 	if (coverage) addFilter(filter, coverage, "details.coverage");
