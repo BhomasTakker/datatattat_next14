@@ -27,6 +27,14 @@ jest.mock("../../page.module.scss", () => ({
 	page: "mocked-page-class",
 }));
 
+// add to __mocks__
+jest.mock("../../../models/ContentViewsPastHour", () => ({
+	ContentViewPastHour: { create: jest.fn() },
+}));
+jest.mock("../../../models/ContentViewsPastDay", () => ({
+	ContentViewPastDay: { create: jest.fn() },
+}));
+
 describe("UserHome", () => {
 	const username = "testuser";
 	const params = Promise.resolve({ username });
@@ -50,7 +58,7 @@ describe("UserHome", () => {
 		// @ts-ignore
 		const { findByTestId } = render(await UserHome({ params }));
 		expect(await findByTestId("main-header")).toHaveTextContent(
-			"users/testuser"
+			"users/testuser",
 		);
 		expect(await findByTestId("page-display")).toHaveTextContent("Test Page");
 	});

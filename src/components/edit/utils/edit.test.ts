@@ -8,6 +8,13 @@ jest.mock("../../../actions/page/page-actions");
 jest.mock("../../../actions/header/get-header");
 jest.mock("next-auth");
 
+jest.mock("../../../models/ContentViewsPastHour", () => ({
+	ContentViewPastHour: { create: jest.fn() },
+}));
+jest.mock("../../../models/ContentViewsPastDay", () => ({
+	ContentViewPastDay: { create: jest.fn() },
+}));
+
 const mockSession = {
 	user: { user_id: "test-user-id" },
 };
@@ -30,7 +37,7 @@ describe("edit.ts", () => {
 
 		it("returns new page object if getPage throws", async () => {
 			(pageActions.getPage as jest.Mock).mockRejectedValue(
-				new Error("Not found")
+				new Error("Not found"),
 			);
 
 			const result = await getPageOrNew("/new-route");
