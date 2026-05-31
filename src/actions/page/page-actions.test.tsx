@@ -8,6 +8,13 @@ import { getPage } from "./page-actions";
 import { redirect } from "next/navigation";
 import { PATHS } from "@/lib/routing/paths";
 
+jest.mock("../../models/ContentViewsPastHour", () => ({
+	ContentViewPastHour: { create: jest.fn() },
+}));
+jest.mock("../../models/ContentViewsPastDay", () => ({
+	ContentViewPastDay: { create: jest.fn() },
+}));
+
 jest.mock("../../lib/mongo/actions/page", () => {
 	return {
 		getPageByRoute: jest.fn().mockResolvedValue({
@@ -37,7 +44,7 @@ describe("getPage", () => {
 			await getPage(badRoute);
 		} catch (error) {
 			expect((error as Error).message).toMatch(
-				`Redirecting to: ${PATHS.home()}`
+				`Redirecting to: ${PATHS.home()}`,
 			);
 		}
 	});
