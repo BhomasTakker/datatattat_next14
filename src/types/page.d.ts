@@ -1,13 +1,11 @@
-/**
- * The type of a page for analytics and filtering.
- */
-export type PageType = 'Content' | 'User' | 'Landing';
 import { ComponentPropsObject, With, WithQuery } from "./component";
 
 export type PageContainer = {
 	containerType: "Stack" | "Grid";
 	initData: object;
 };
+
+export type PageType = "Content" | "User" | "Landing";
 
 export type PageProps = object;
 
