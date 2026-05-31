@@ -53,7 +53,7 @@ export const recordPageView = async (route: string, userId?: string) => {
 	await initialiseServices();
 	const page = await getPageDocumentByRoute(route);
 	if (!page) return;
-	await page.update({ _id: page._id }, { $inc: { totalViewCount: 1 } });
+	await page.updateOne({ _id: page._id }, { $inc: { totalViewCount: 1 } });
 	await recordContentViewAllWindows(page._id, userId);
 };
 
