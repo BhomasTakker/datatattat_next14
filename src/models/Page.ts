@@ -38,14 +38,6 @@ const PageSchema = new Schema<IPage>(
 			required: false,
 		},
 
-		// Array of view objects with timestamp (and optional user info)
-		views: [
-			{
-				timestamp: { type: Date, default: Date.now },
-				userId: { type: Schema.Types.ObjectId, required: false }, // Optional: track user if logged in
-			},
-		],
-
 		route: {
 			type: String,
 			required: true,
