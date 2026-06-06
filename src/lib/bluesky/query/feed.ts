@@ -1,7 +1,9 @@
 import { AppBskyFeedPost } from "@atproto/api";
 import { BlueSkyAgent } from "..";
 import { BLUESKY_PUBLIC_SERVICE_URL } from "./utils";
-import { FeedViewPost } from "@atproto/api/dist/client/types/app/bsky/feed/defs";
+import { AppBskyFeedDefs } from "@atproto/api";
+
+type FeedViewPost = AppBskyFeedDefs.FeedViewPost;
 
 const convertFeedToPostUris = (feed: FeedViewPost[]) => {
 	let postUris: string[] = [];
