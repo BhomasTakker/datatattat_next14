@@ -1,7 +1,8 @@
 import { SearchPostsParams } from "@/types/bluesky";
-import { AppBskyFeedNS, AppBskyFeedSearchPosts, AtpAgent } from "@atproto/api";
-import { FeedViewPost } from "@atproto/api/dist/client/types/app/bsky/feed/defs";
+import { AppBskyFeedNS, AtpAgent } from "@atproto/api";
+import { AppBskyFeedDefs } from "@atproto/api";
 
+type FeedViewPost = AppBskyFeedDefs.FeedViewPost;
 // This should be more general - pass servivce as a parameter
 // the at protocol is anew protocol - like rss etc
 // this should ultimately be a bass
@@ -38,7 +39,7 @@ export class BlueSkyAgent {
 	public async getFeed(
 		feedUri: string,
 		limit: number = 10,
-		cursor: string = ""
+		cursor: string = "",
 	): Promise<FeedViewPost[]> {
 		try {
 			const feed = await this.blueSkyFeed.getFeed({
@@ -57,7 +58,7 @@ export class BlueSkyAgent {
 	public async getAuthorFeed(
 		actor: string,
 		limit: number = 10,
-		cursor: string = ""
+		cursor: string = "",
 	): Promise<FeedViewPost[]> {
 		try {
 			const feed = await this.agent.getAuthorFeed({
@@ -76,7 +77,7 @@ export class BlueSkyAgent {
 	public async getPostThread(
 		uri: string,
 		depth: number = 6,
-		parentHeight: number = 80
+		parentHeight: number = 80,
 	) {
 		try {
 			const thread = await this.blueSkyFeed.getPostThread({
