@@ -9,12 +9,17 @@ export const STACK_SCROLLER_CONFIG: InputListProps = {
 	type: EditInputs.inputList,
 	label: "Stack Scroller",
 	inputs: [
+		// should be a dupe so re-use...
 		// needs adding to variant type
 		getWithConfig({
 			options: ARTICLE_OPTIONS,
 			// defaultSelection: QueryOptions.API_QUERY,
 			apiConfigOptions: {
-				options: [APIOptions.ARTICLES_SEARCH_API, APIOptions.YOUTUBE_API],
+				options: [
+					APIOptions.ARTICLES_SEARCH_API,
+					APIOptions.TRENDING_ARTICLES_SEARCH_API,
+					APIOptions.YOUTUBE_API,
+				],
 				defaultSelection: APIOptions.ARTICLES_SEARCH_API,
 			},
 		}),

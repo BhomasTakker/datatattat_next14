@@ -4,9 +4,11 @@ import { cloneDeep } from "@/utils/object";
 import { youtubeApiFetch } from "../google/youtube/youtube-api";
 import { blueSkyFetch } from "@/lib/bluesky/query";
 import { spotifyFetch } from "../spotify";
+import { trendingSearch } from "@/lib/mongo/actions/articles/trending-search";
 
 type APIOptions =
 	| typeof searchArticles
+	| typeof trendingSearch
 	| typeof youtubeApiFetch
 	| typeof blueSkyFetch
 	| typeof spotifyFetch
@@ -14,6 +16,8 @@ type APIOptions =
 
 const apiMap = new Map<string, APIOptions>([
 	["none", null],
+	// do we do a trending search - easiest least invasive etc
+	["trending-articles-search-api", trendingSearch],
 	["articles-search-api", searchArticles],
 	["youtube-api", youtubeApiFetch],
 	["bluesky-api", blueSkyFetch],

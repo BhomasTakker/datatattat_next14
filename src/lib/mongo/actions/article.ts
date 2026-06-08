@@ -47,3 +47,14 @@ export const saveOrCreateArticleBySrc = async (article: CollectionItem) => {
 		return { message: "Error saving article" };
 	}
 };
+
+export const getArticleDocumentById = async (id: string) => {
+	if (!isValidObjectId(id)) return null;
+	return await Article.findById(id);
+};
+
+export const getArticleDocumentByGuid = async (id: string) => {
+	if (!id) return null;
+	console.log("TRY FIND ARTICLE BY GUID", { id });
+	return await Article.findOne({ guid: id });
+};

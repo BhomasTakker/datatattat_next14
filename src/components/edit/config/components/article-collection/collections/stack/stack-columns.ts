@@ -14,7 +14,11 @@ export const STACK_COLUMNS_CONFIG: InputListProps = {
 			options: ARTICLE_OPTIONS,
 			// defaultSelection: QueryOptions.API_QUERY,
 			apiConfigOptions: {
-				options: [APIOptions.ARTICLES_SEARCH_API, APIOptions.YOUTUBE_API],
+				options: [
+					APIOptions.ARTICLES_SEARCH_API,
+					APIOptions.TRENDING_ARTICLES_SEARCH_API,
+					APIOptions.YOUTUBE_API,
+				],
 				defaultSelection: APIOptions.ARTICLES_SEARCH_API,
 			},
 		}),

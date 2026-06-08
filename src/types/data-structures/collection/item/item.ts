@@ -1,5 +1,5 @@
 import { ArticleSource } from "@/types/cms/ArticleSource";
-import { BaseInfo, Details, Avatar, Media } from "../base";
+import { BaseInfo, Details, Avatar, Media, Metadata } from "../base";
 
 export type ProviderItem = {
 	_id?: string;
@@ -18,4 +18,5 @@ export type CollectionItem = BaseInfo & {
 	provider?: ProviderItem;
 	media?: Media;
 	feed?: ArticleSource;
+	metadata?: Metadata;
 };

@@ -13,6 +13,8 @@ import { redirect } from "next/navigation";
 import { getUserId } from "../user/get-user";
 import { recordContentViewAllWindows } from "@/lib/mongo/actions/content-views";
 import Page from "@/models/Page";
+import { getArticleDocumentByGuid } from "@/lib/mongo/actions/article";
+import Article from "@/models/Article";
 
 export const getPage = async (route: string) => {
 	await initialiseServices();
@@ -55,6 +57,22 @@ export const recordPageView = async (route: string, userId?: string) => {
 	const page = await getPageByRoute(route);
 	if (!page) return;
 	await Page.updateOne({ _id: page._id }, { $inc: { totalViewCount: 1 } });
+
+	const pageArticle = (await getArticleDocumentByGuid(
+		page._id.toString(),
+	)) as HydratedDocument<any>;
+
+	if (pageArticle) {
+		await Article.updateOne(
+			{ _id: pageArticle._id },
+			{ $inc: { "metadata.views.total": 1 } },
+		);
+
+		await pageArticle.save();
+
+		await recordContentViewAllWindows(pageArticle._id, userId);
+	}
+
 	await recordContentViewAllWindows(page._id, userId);
 };
 

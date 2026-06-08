@@ -39,3 +39,9 @@ export type Avatar = {
 export type Pagination = {
 	results: number;
 };
+
+export type Metadata = {
+	views?: {
+		total?: number;
+	};
+};
