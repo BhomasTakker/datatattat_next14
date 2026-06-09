@@ -4,12 +4,14 @@ import { ARTICLES_SEARCH_API_CONFIG } from "./apis/articles-search/articles-sear
 import { YOUTUBE_API_CONFIG } from "./apis/youtube-api";
 import { BLUESKY_API_CONFIG } from "./apis/bluesky/bluesky-api";
 import { SPOTIFY_API_CONFIG } from "./apis/spotify/spotify-api";
+import { ARTICLES_TRENDING_SEARCH_API_CONFIG } from "./apis/trending-articles-search/trending-articles-api";
 
 // Should be more global type/ struct we use these options elsewhere
 
 export enum APIOptions {
 	NONE = "none",
 	ARTICLES_SEARCH_API = "articles-search-api",
+	TRENDING_ARTICLES_SEARCH_API = "trending-articles-search-api",
 	YOUTUBE_API = "youtube-api",
 	BLUESKY_API = "bluesky-api",
 	SPOTIFY_API = "spotify-api",
@@ -19,6 +21,7 @@ export enum APIOptions {
 type apiContainersProps =
 	| null
 	| typeof ARTICLES_SEARCH_API_CONFIG
+	| typeof ARTICLES_TRENDING_SEARCH_API_CONFIG
 	| typeof YOUTUBE_API_CONFIG
 	| typeof BLUESKY_API_CONFIG
 	| typeof SPOTIFY_API_CONFIG;
@@ -26,6 +29,10 @@ type apiContainersProps =
 const apiMap = new Map<string, apiContainersProps>([
 	[APIOptions.NONE, null],
 	[APIOptions.ARTICLES_SEARCH_API, ARTICLES_SEARCH_API_CONFIG],
+	[
+		APIOptions.TRENDING_ARTICLES_SEARCH_API,
+		ARTICLES_TRENDING_SEARCH_API_CONFIG,
+	],
 	[APIOptions.YOUTUBE_API, YOUTUBE_API_CONFIG],
 	[APIOptions.BLUESKY_API, BLUESKY_API_CONFIG],
 	[APIOptions.SPOTIFY_API, SPOTIFY_API_CONFIG],

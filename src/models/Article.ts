@@ -48,6 +48,23 @@ const AvatarSchema = new Schema(
 
 const MediaSchema = new Schema({}, { _id: false, strict: false });
 
+const ViewsSchema = new Schema(
+	{
+		total: Number,
+	},
+	{
+		_id: false,
+		strict: false,
+	},
+);
+
+const MetadataSchema = new Schema(
+	{ views: ViewsSchema },
+	{
+		_id: false,
+	},
+);
+
 const ArticleSchema = new Schema<CollectionItem>(
 	{
 		title: {
@@ -87,6 +104,7 @@ const ArticleSchema = new Schema<CollectionItem>(
 			type: Boolean,
 			default: false,
 		},
+		metadata: MetadataSchema,
 	},
 	{ timestamps: true },
 );

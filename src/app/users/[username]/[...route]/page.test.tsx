@@ -4,7 +4,6 @@ import UserHome, { generateMetadata } from "./page";
 import { getPage } from "@/actions/page/page-actions";
 import { PATHS } from "@/lib/routing/paths";
 import { generateMetaDataFromPage } from "@/lib/metadata/generate-metadata";
-import { User } from "@/models/User";
 
 // Mock dependencies
 jest.mock("../../../../actions/page/page-actions", () => ({

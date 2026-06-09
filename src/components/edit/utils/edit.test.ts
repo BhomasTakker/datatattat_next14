@@ -8,12 +8,7 @@ jest.mock("../../../actions/page/page-actions");
 jest.mock("../../../actions/header/get-header");
 jest.mock("next-auth");
 
-jest.mock("../../../models/ContentViewsPastHour", () => ({
-	ContentViewPastHour: { create: jest.fn() },
-}));
-jest.mock("../../../models/ContentViewsPastDay", () => ({
-	ContentViewPastDay: { create: jest.fn() },
-}));
+jest.mock("../../../models/ContentViews");
 
 const mockSession = {
 	user: { user_id: "test-user-id" },

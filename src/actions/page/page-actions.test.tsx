@@ -8,12 +8,7 @@ import { getPage } from "./page-actions";
 import { redirect } from "next/navigation";
 import { PATHS } from "@/lib/routing/paths";
 
-jest.mock("../../models/ContentViewsPastHour", () => ({
-	ContentViewPastHour: { create: jest.fn() },
-}));
-jest.mock("../../models/ContentViewsPastDay", () => ({
-	ContentViewPastDay: { create: jest.fn() },
-}));
+jest.mock("../../models/ContentViews");
 
 jest.mock("../../lib/mongo/actions/page", () => {
 	return {
