@@ -27,13 +27,7 @@ jest.mock("../../page.module.scss", () => ({
 	page: "mocked-page-class",
 }));
 
-// add to __mocks__
-jest.mock("../../../models/ContentViewsPastHour", () => ({
-	ContentViewPastHour: { create: jest.fn() },
-}));
-jest.mock("../../../models/ContentViewsPastDay", () => ({
-	ContentViewPastDay: { create: jest.fn() },
-}));
+jest.mock("../../../models/ContentViews");
 
 describe("UserHome", () => {
 	const username = "testuser";

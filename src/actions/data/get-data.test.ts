@@ -5,6 +5,7 @@ import { With } from "@/types/component";
 
 // Mock dependencies
 jest.mock("../../lib/api/component-data/component-data-factory");
+jest.mock("../../models/ContentViews");
 
 describe("getData", () => {
 	const mockType = "mockType" as unknown as ComponentDataOptions;

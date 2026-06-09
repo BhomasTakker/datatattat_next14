@@ -8,6 +8,7 @@ jest.mock("../google/youtube/youtube-api");
 jest.mock("../../../../utils/object", () => ({
 	cloneDeep: jest.fn((data) => data),
 }));
+jest.mock("../../../../models/ContentViews");
 
 describe("apiFetch", () => {
 	const mockParams = { q: "test" };
