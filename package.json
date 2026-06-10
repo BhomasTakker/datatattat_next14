@@ -23,7 +23,7 @@
 		"mongoose": "^9.6.3",
 		"next": "^16.2.7",
 		"next-auth": "^4.24.14",
-		"react": "^19.2.6",
+		"react": "^19.2.7",
 		"react-dom": "^19.2.6",
 		"react-h5-audio-player": "^3.10.2",
 		"react-hook-form": "^7.78.0",
@@ -44,7 +44,7 @@
 		"@testing-library/user-event": "^14.6.1",
 		"@types/jest": "^30.0.0",
 		"@types/node": "^25",
-		"@types/react": "19.2.15",
+		"@types/react": "19.2.17",
 		"@types/react-dom": "19.2.3",
 		"@types/video.js": "^7.3.58",
 		"eslint": "^9",
@@ -58,7 +58,7 @@
 		"typescript": "^6"
 	},
 	"overrides": {
-		"@types/react": "19.2.15",
+		"@types/react": "19.2.17",
 		"@types/react-dom": "19.2.3"
 	}
 }
