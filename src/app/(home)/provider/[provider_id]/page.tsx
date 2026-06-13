@@ -23,7 +23,7 @@ export const generateMetadata = async ({
 		title: name,
 		description,
 		openGraph: {
-			title: `${name} | Datatattat`,
+			title: `${name}`,
 			description,
 			url,
 			images: [{ url: logo || LOGO_HERO, alt: name }],
