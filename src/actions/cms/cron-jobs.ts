@@ -150,7 +150,7 @@ export async function deleteCronJob(id: string) {
 }
 
 export async function gotoCronJob(
-	data: Record<string, unknown> & { _id?: string }
+	data: Record<string, unknown> & { _id?: string },
 ) {
 	if (!data._id) {
 		return;

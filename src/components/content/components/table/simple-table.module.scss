@@ -2,8 +2,13 @@
 @use "../../../../scss/abstracts/units/" as units;
 @use "../../../../scss/abstracts/ui/" as ui;
 
-.table {
+.tableWrapper {
 	width: 100%;
+	overflow-x: auto;
+}
+
+.table {
+	min-width: 100%;
 	border-collapse: collapse;
 	border: ui.$divider;
 	background-color: white;
@@ -11,10 +16,10 @@
 
 	th,
 	td {
+		max-width: 500px;
 		padding: units.$spacingMd units.$spacingLg;
 		text-align: left;
 		border-bottom: ui.$divider;
-		// max-width: 250px;
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;

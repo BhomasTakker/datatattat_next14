@@ -18,6 +18,8 @@ export enum CMSToastType {
 	SaveCronJob = "save-cron-job",
 	DeleteCronJob = "delete-cron-job",
 	CreateCronJob = "create-cron-job",
+	SavePage = "save-page",
+	SyncPageArticle = "sync-page-article",
 }
 
 // You could have a lot?
@@ -124,6 +126,18 @@ const ToastMessages = {
 		success: "Cron Job has been created!",
 		error: "Error creating cron job",
 	},
+	savePage: {
+		id: CMSToastType.SavePage,
+		loading: "Saving Page...",
+		success: "Page has been updated!",
+		error: "Error updating page",
+	},
+	syncPageArticle: {
+		id: CMSToastType.SyncPageArticle,
+		loading: "Syncing Page Article...",
+		success: "Page Article has been synced!",
+		error: "Error syncing page article",
+	},
 } as const;
 
 // We need to assign these options to the actual toast
@@ -149,6 +163,8 @@ export const ToastMessagesMap = new Map<CMSToastType, ToastMessage>([
 	[CMSToastType.SaveCronJob, ToastMessages.saveCronJob],
 	[CMSToastType.DeleteCronJob, ToastMessages.confirmDeleteCronJob],
 	[CMSToastType.CreateCronJob, ToastMessages.createCronJob],
+	[CMSToastType.SavePage, ToastMessages.savePage],
+	[CMSToastType.SyncPageArticle, ToastMessages.syncPageArticle],
 ]);
 
 // call initialise
