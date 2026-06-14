@@ -18,6 +18,10 @@ const admin = () => {
 	return "/admin";
 };
 
+const cms = () => {
+	return "/cms";
+};
+
 const user = (username: string) => {
 	return `/users/${username}`;
 };
@@ -45,4 +49,5 @@ export const PATHS = {
 	admin,
 	error,
 	profile,
+	cms,
 };
