@@ -12,31 +12,35 @@ export const SimpleTable = <T extends Record<string, any>>({
 	onSelect,
 }: SimpleTableProps<T>) => {
 	return (
-		<table className={styles.table}>
-			<thead className={styles.thead}>
-				<tr>
-					{columns.map((key) => (
-						<th key={key}>{key}</th>
-					))}
-				</tr>
-			</thead>
-			<tbody className={styles.tbody}>
-				{data.map((item, index) => {
-					return (
-						<tr
-							key={item.id || item._id || index}
-							onClick={() => onSelect && onSelect(item)}
-							className={styles.tr + (onSelect ? ` ${styles.clickable}` : "")}
-						>
-							{columns.map((key) => (
-								<td key={`${item.id || item._id || index}-${key}`}>
-									{item[key]}
-								</td>
-							))}
-						</tr>
-					);
-				})}
-			</tbody>
-		</table>
+		<div className={styles.tableWrapper}>
+			<table className={styles.table}>
+				<thead className={styles.thead}>
+					<tr>
+						{columns.map((key) => (
+							<th key={key}>{key}</th>
+						))}
+					</tr>
+				</thead>
+				<tbody className={styles.tbody}>
+					{data.map((item, index) => {
+						return (
+							<tr
+								key={item.id || item._id || index}
+								onClick={() => onSelect && onSelect(item)}
+								className={styles.tr + (onSelect ? ` ${styles.clickable}` : "")}
+							>
+								{columns.map((key) => (
+									<td key={`${item.id || item._id || index}-${key}`}>
+										{typeof item[key] === "boolean"
+											? String(item[key])
+											: item[key]}
+									</td>
+								))}
+							</tr>
+						);
+					})}
+				</tbody>
+			</table>
+		</div>
 	);
 };
