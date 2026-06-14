@@ -20,6 +20,7 @@ type PropfileItemProps = {
 export type DropDownProps = {
 	isOpen: boolean;
 	setIsOpen: (isOpen: boolean) => void;
+	role: string;
 } & PropfileItemProps;
 
 const DropDownItem = ({
@@ -63,6 +64,7 @@ export const MenuDropDown = ({
 	setIsOpen,
 	avatar,
 	username,
+	role,
 }: DropDownProps) => {
 	const pathname = usePathname();
 	return (
@@ -77,6 +79,12 @@ export const MenuDropDown = ({
 				</DropDownItem>
 				<DropDownItem href={PATHS.user(username)}>User Home</DropDownItem>
 				<DropDownItem href={PATHS.edit()}>Edit</DropDownItem>
+				{role === "admin" && (
+					<DropDownItem href={PATHS.admin()}>Admin</DropDownItem>
+				)}
+				{role === "admin" && (
+					<DropDownItem href={PATHS.cms()}>CMS</DropDownItem>
+				)}
 				<DropDownItem href={PATHS.signOut(pathname)}>Sign Out</DropDownItem>
 			</ul>
 		</div>

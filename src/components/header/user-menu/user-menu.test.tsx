@@ -24,17 +24,17 @@ describe("UserMenu", () => {
 	const avatar = "avatar.png";
 
 	it("renders the menu button", () => {
-		render(<UserMenu username={username} avatar={avatar} />);
+		render(<UserMenu username={username} avatar={avatar} role="user" />);
 		expect(screen.getByRole("button")).toBeInTheDocument();
 	});
 
 	it("does not show dropdown by default", () => {
-		render(<UserMenu username={username} avatar={avatar} />);
+		render(<UserMenu username={username} avatar={avatar} role="user" />);
 		expect(screen.queryByTestId("dropdown")).not.toBeInTheDocument();
 	});
 
 	it("shows dropdown when button is clicked", () => {
-		render(<UserMenu username={username} avatar={avatar} />);
+		render(<UserMenu username={username} avatar={avatar} role="user" />);
 		fireEvent.click(screen.getByRole("button"));
 		expect(screen.getByTestId("dropdown")).toBeInTheDocument();
 		expect(screen.getByText(username)).toBeInTheDocument();
@@ -42,7 +42,7 @@ describe("UserMenu", () => {
 	});
 
 	it("closes dropdown when clicking outside", () => {
-		render(<UserMenu username={username} avatar={avatar} />);
+		render(<UserMenu username={username} avatar={avatar} role="user" />);
 		fireEvent.click(screen.getByRole("button"));
 		expect(screen.getByTestId("dropdown")).toBeInTheDocument();
 
@@ -52,7 +52,7 @@ describe("UserMenu", () => {
 	});
 
 	it("toggles dropdown open/close on button click", () => {
-		render(<UserMenu username={username} avatar={avatar} />);
+		render(<UserMenu username={username} avatar={avatar} role="user" />);
 		const button = screen.getByRole("button");
 		fireEvent.click(button);
 		expect(screen.getByTestId("dropdown")).toBeInTheDocument();

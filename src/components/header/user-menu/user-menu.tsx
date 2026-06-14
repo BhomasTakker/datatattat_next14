@@ -3,15 +3,16 @@
 // This could be a generic component eaasily enough
 import { BiSolidUser } from "react-icons/bi";
 import styles from "./user-menu.module.scss";
-import React, { useEffect, useState } from "react";
-import { DropDownProps, MenuDropDown } from "./drop-down/menu-drop-down";
+import { useEffect, useState } from "react";
+import { MenuDropDown } from "./drop-down/menu-drop-down";
 
 type UserMenuProps = {
 	username: string;
 	avatar: string;
+	role: string;
 };
 
-export const UserMenu = ({ username, avatar }: UserMenuProps) => {
+export const UserMenu = ({ username, avatar, role }: UserMenuProps) => {
 	const [isOpen, setIsOpen] = useState(false);
 
 	useEffect(() => {
@@ -34,6 +35,7 @@ export const UserMenu = ({ username, avatar }: UserMenuProps) => {
 				setIsOpen={setIsOpen}
 				username={username}
 				avatar={avatar}
+				role={role}
 			/>
 		</div>
 	);

@@ -106,8 +106,10 @@ export const NavigationHeader = async () => {
 		const userData = await getUserById(user_id);
 
 		if (userData) {
-			const { username, avatar } = userData;
-			menuComponent = <UserMenu username={username} avatar={avatar} />;
+			const { username, avatar, role } = userData;
+			menuComponent = (
+				<UserMenu username={username} avatar={avatar} role={role} />
+			);
 		}
 	}
 
