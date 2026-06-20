@@ -1,0 +1,3 @@
+type SearchParameters = {
+	q?: string;
+};
