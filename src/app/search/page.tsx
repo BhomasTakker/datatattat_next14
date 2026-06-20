@@ -1,10 +1,17 @@
 import pageStyles from "../page.module.scss";
 import { SearchPage } from "@/components/page/search/search-page";
 
-export default async function Page() {
+type Params = Promise<SearchParameters>;
+type Props = {
+	searchParams: Params;
+};
+
+export default async function Page({ searchParams }: Props) {
+	const { q } = await searchParams;
+
 	return (
 		<div className={pageStyles.page}>
-			<SearchPage />
+			<SearchPage q={q} />
 		</div>
 	);
 }
