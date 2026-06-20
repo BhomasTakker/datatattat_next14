@@ -6,7 +6,7 @@ import { SearchPageContent } from "./components/page-content";
 export const SearchPage = async ({ q }: SearchParameters) => {
 	const isQueryEmpty = !q || q.trim() === "";
 
-	// I guess a simple search query will jut take a q and some basics i.e. time, region, etc
+	// I guess a simple search query will just take a q and some basics i.e. time, region, etc
 	// advanced search will be the full form - mustContain etc
 	const query = {
 		mustContain: q ? [q] : [],
@@ -20,7 +20,7 @@ export const SearchPage = async ({ q }: SearchParameters) => {
 
 	return (
 		<section className={styles.page}>
-			<h1>Search {q}</h1>
+			<h1>Search</h1>
 			<SearchPageContent isQueryEmpty={isQueryEmpty} articles={articles} />
 		</section>
 	);
