@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { searchArticles } from "@/actions/data/search-articles";
 import { CollectionItem } from "@/types/data-structures/collection/item/item";
 import { SimpleSearchForm } from "../forms/simple-search-form";
 import { ArticleList } from "./article-list";
 import { updateUrlState } from "@/utils/url";
+import { useRouter } from "next/navigation";
 
 type SearchPageContentProps = {
 	isQueryEmpty: boolean;
@@ -19,6 +20,22 @@ export const SearchPageContent = ({
 	const [articles, setArticles] = useState(initialArticles);
 	const [isEmpty, setIsEmpty] = useState(isQueryEmpty);
 	const [isLoading, setIsLoading] = useState(false);
+
+	// make a hook
+	const router = useRouter();
+	useEffect(() => {
+		// Handler for browser back/forward
+		const handlePopState = (event: any) => {
+			console.log("Back/Forward navigation detected", event);
+			window.location.reload();
+		};
+
+		window.addEventListener("popstate", handlePopState);
+
+		return () => {
+			window.removeEventListener("popstate", handlePopState);
+		};
+	}, [router]);
 
 	const handleSubmit = async (event: React.SubmitEvent<HTMLFormElement>) => {
 		event.preventDefault();
