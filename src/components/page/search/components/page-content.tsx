@@ -3,10 +3,11 @@
 import { useEffect, useState } from "react";
 import { searchArticles } from "@/actions/data/search-articles";
 import { CollectionItem } from "@/types/data-structures/collection/item/item";
-import { SimpleSearchForm } from "../forms/simple-search-form";
+import { SearchForm } from "../forms/search-form";
 import { ArticleList } from "./article-list";
 import { updateUrlState } from "@/utils/url";
 import { useRouter } from "next/navigation";
+import { FieldValues } from "react-hook-form";
 
 type SearchPageContentProps = {
 	isQueryEmpty: boolean;
@@ -20,13 +21,13 @@ export const SearchPageContent = ({
 	const [articles, setArticles] = useState(initialArticles);
 	const [isEmpty, setIsEmpty] = useState(isQueryEmpty);
 	const [isLoading, setIsLoading] = useState(false);
+	const [isAdvanced, setIsAdvanced] = useState(false);
 
-	// make a hook
+	// is it worth making a hook?
 	const router = useRouter();
 	useEffect(() => {
 		// Handler for browser back/forward
-		const handlePopState = (event: any) => {
-			console.log("Back/Forward navigation detected", event);
+		const handlePopState = () => {
 			window.location.reload();
 		};
 
@@ -37,12 +38,10 @@ export const SearchPageContent = ({
 		};
 	}, [router]);
 
-	const handleSubmit = async (event: React.SubmitEvent<HTMLFormElement>) => {
-		event.preventDefault();
+	const handleSubmit = async (data: FieldValues) => {
 		if (isLoading) return;
 		setIsLoading(true);
-		const formData = new FormData(event.currentTarget);
-		const query = (formData.get("q") as string).trim();
+		const query = (data.q as string).trim();
 
 		if (!query) {
 			setIsEmpty(true);
@@ -63,7 +62,11 @@ export const SearchPageContent = ({
 		<>
 			{isEmpty && <p>Please enter a search query.</p>}
 			{!isEmpty && articles.length > 0 && <ArticleList articles={articles} />}
-			<SimpleSearchForm onSubmit={handleSubmit} isLoading={isLoading} />
+			<SearchForm
+				onSubmit={handleSubmit}
+				isLoading={isLoading}
+				isAdvanced={isAdvanced}
+			/>
 		</>
 	);
 };
