@@ -8,6 +8,7 @@ import { ArticleList } from "./article-list";
 import { updateUrlState } from "@/utils/url";
 import { useRouter } from "next/navigation";
 import { FieldValues } from "react-hook-form";
+import { ToggleButton } from "@/components/ui/toggle-button/toggle-button";
 
 type SearchPageContentProps = {
 	isQueryEmpty: boolean;
@@ -62,6 +63,14 @@ export const SearchPageContent = ({
 		<>
 			{isEmpty && <p>Please enter a search query.</p>}
 			{!isEmpty && articles.length > 0 && <ArticleList articles={articles} />}
+
+			<ToggleButton
+				value={isAdvanced}
+				onChange={() => setIsAdvanced((v) => !v)}
+				labelOn="Advanced Search"
+				labelOff="Simple Search"
+				id="search-toggle"
+			/>
 			<SearchForm
 				onSubmit={handleSubmit}
 				isLoading={isLoading}
