@@ -1,4 +1,3 @@
-import { MainHeader } from "@/components/header/main-header";
 import pageStyles from "../page.module.scss";
 import { SearchPage } from "@/components/page/search/search-page";
 
