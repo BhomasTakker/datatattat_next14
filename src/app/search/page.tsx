@@ -1,3 +1,4 @@
+import { initialiseServices } from "@/lib/services/intialise-services";
 import pageStyles from "../page.module.scss";
 import { SearchPage } from "@/components/page/search/search-page";
 
@@ -7,6 +8,7 @@ type Props = {
 };
 
 export default async function Page({ searchParams }: Props) {
+	await initialiseServices();
 	const { q } = await searchParams;
 
 	return (
