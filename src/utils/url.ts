@@ -7,3 +7,9 @@ export const isStringValidURL = (s: string) => {
 		return false;
 	}
 };
+
+export const updateUrlState = (url: string) => {
+	if (window.location.href === new URL(url, window.location.origin).href)
+		return;
+	window.history.pushState(null, "", url);
+};
