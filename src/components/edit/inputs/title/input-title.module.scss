@@ -1,13 +1,27 @@
+@use "../../../../scss/abstracts/units/" as *;
+@use "../../../../scss/abstracts/font/" as *;
+@use "../../../../scss/abstracts/colours/" as *;
+
 .title {
-	font-size: large;
+	font: $titleLg;
+	color: $text;
+	border-bottom: 1px solid $background-dark;
+	padding-bottom: $spacingSm;
+	margin-bottom: $spacingSm;
 
 	&.small {
-		font-size: medium;
+		font: $titleMd;
+		color: $text-muted;
 	}
 	&.medium {
-		font-size: large;
+		font: $titleLg;
+		color: $text;
+		margin-bottom: $spacingMd;
 	}
 	&.large {
-		font-size: xx-large;
+		font: $titleXl2;
+		color: $text-sharp;
+		letter-spacing: 0.02em;
+		margin-bottom: $spacingMd;
 	}
 }
