@@ -100,3 +100,14 @@ export const variantInput: ObjectSelectProps = {
 	// we are saved on comopnent props object - our parent
 	optionId: undefined, // "variantProps",
 };
+
+type DynamicVariantInputProps = {
+	options: Variants[];
+};
+
+export const dynamicVariantInput = ({ options }: DynamicVariantInputProps) => {
+	return {
+		...variantInput,
+		options,
+	};
+};
