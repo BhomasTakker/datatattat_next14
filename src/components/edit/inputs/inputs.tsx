@@ -13,6 +13,7 @@ import { InputDescription } from "./description/input-description";
 import { DateInput } from "./date/date-input";
 import { URLInput } from "./url-input/url-input";
 import { InputCtas } from "./ctas/input-ctas";
+import { GroupInput } from "./group/group-input";
 
 export enum EditInputs {
 	ctas = "ctas",
@@ -33,6 +34,7 @@ export enum EditInputs {
 	assign = "assign",
 	assignId = "assignId",
 	date = "date",
+	group = "group",
 }
 
 type InputComponentOptions =
@@ -50,6 +52,7 @@ type InputComponentOptions =
 	| typeof InputDescription
 	| typeof DateInput
 	| typeof InputCtas
+	| typeof GroupInput
 	| FC;
 
 export const inputMap = new Map<EditInputs, InputComponentOptions>([
@@ -91,4 +94,6 @@ export const inputMap = new Map<EditInputs, InputComponentOptions>([
 	// And should probably call it objectAssign or something
 	// As it is more of a sub object specifyer
 	[EditInputs.assignId, AssignInputId],
+
+	[EditInputs.group, GroupInput],
 ]);

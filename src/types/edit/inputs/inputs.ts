@@ -117,6 +117,12 @@ export type InputListProps = {
 	inputs: GenericInput[];
 } & InputProps;
 
+export type InputGroupProps = {
+	id: string;
+	type: EditInputs.indent;
+	inputs: GenericInput[];
+} & InputProps;
+
 export type SelectInputProps = {
 	id: string;
 	type: EditInputs.select;
@@ -159,6 +165,7 @@ type InputTypes =
 	| NumberInputProps
 	| DescriptionInputProps
 	| DateInputProps
-	| InputCtasProps;
+	| InputCtasProps
+	| InputGroupProps;
 
 export type GenericInput = InputTypes;
