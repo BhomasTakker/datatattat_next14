@@ -3,10 +3,10 @@ import { buildArticleSearchQuery } from "./query";
 import { CollectionItem } from "@/types/data-structures/collection/item/item";
 
 export type GetLatestArticlesProps = {
-	mustContain?: string[];
-	mustNotContain?: string[];
-	shouldContain?: string[];
-	filterContain?: string[];
+	mustContain?: string | string[];
+	mustNotContain?: string | string[];
+	shouldContain?: string | string[];
+	filterContain?: string | string[];
 
 	minimumShouldMatch?: number;
 
@@ -42,8 +42,8 @@ export type GetLatestArticlesProps = {
 	durationLower?: string;
 
 	region?: string | string[];
-	orRegion?: string[];
-	excludeRegions?: string[];
+	orRegion?: string | string[];
+	excludeRegions?: string | string[];
 	// coverage used for scoping articles.
 	// i.e. local news is IN US
 	// but I want US && national news - maybe add sub-local
