@@ -4,8 +4,11 @@ import { InputFactory } from "@/components/edit/inputs/input-factory";
 import { Button } from "@/components/ui/button";
 import { FieldValues, FormProvider, useForm } from "react-hook-form";
 import styles from "./search-form.module.scss";
-import { SEARCH_ARTICLES_CONFIG } from "./simple-search-form.config";
-import { ARTICLES_SEARCH_API_CONFIG } from "@/components/edit/config/query/api/apis/articles-search/articles-search-api";
+import {
+	ARTICLES_SEARCH_API_CONFIG,
+	SIMPLE_SEARCH_API_CONFIG,
+} from "@/components/edit/config/query/api/apis/articles-search/articles-search-api";
+import { useSearchParams } from "next/navigation";
 
 type SearchFormProps = {
 	onSubmit: (event: FieldValues) => void;
@@ -19,7 +22,18 @@ export const SearchForm = ({
 	isLoading,
 	isAdvanced,
 }: SearchFormProps) => {
-	const methods = useForm();
+	const params = useSearchParams();
+
+	const methods = useForm({
+		shouldUnregister: true,
+		defaultValues: {
+			articlesSearchApi: {
+				params: {
+					...Object.fromEntries(params.entries()),
+				},
+			},
+		},
+	});
 
 	const submitHandler = methods.handleSubmit(async (data) => {
 		onSubmit(data);
@@ -27,7 +41,7 @@ export const SearchForm = ({
 
 	const config = isAdvanced
 		? ARTICLES_SEARCH_API_CONFIG
-		: SEARCH_ARTICLES_CONFIG;
+		: SIMPLE_SEARCH_API_CONFIG;
 
 	return (
 		<FormProvider {...methods}>

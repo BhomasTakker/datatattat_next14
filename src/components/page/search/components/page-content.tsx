@@ -1,14 +1,15 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { searchArticles } from "@/actions/data/search-articles";
 import { CollectionItem } from "@/types/data-structures/collection/item/item";
 import { SearchForm } from "../forms/search-form";
 import { ArticleList } from "./article-list";
 import { updateUrlState } from "@/utils/url";
-import { useRouter } from "next/navigation";
 import { FieldValues } from "react-hook-form";
 import { ToggleButton } from "@/components/ui/toggle-button/toggle-button";
+import { trimObjectValues } from "@/utils/object";
+import { usePopState } from "@/hooks/usePopState";
 
 type SearchPageContentProps = {
 	isQueryEmpty: boolean;
@@ -24,27 +25,28 @@ export const SearchPageContent = ({
 	const [isLoading, setIsLoading] = useState(false);
 	const [isAdvanced, setIsAdvanced] = useState(false);
 
-	// is it worth making a hook?
-	const router = useRouter();
-	useEffect(() => {
-		// Handler for browser back/forward
-		const handlePopState = () => {
+	usePopState({
+		handlePopState: () => {
 			window.location.reload();
-		};
-
-		window.addEventListener("popstate", handlePopState);
-
-		return () => {
-			window.removeEventListener("popstate", handlePopState);
-		};
-	}, [router]);
+		},
+	});
 
 	const handleSubmit = async (data: FieldValues) => {
 		if (isLoading) return;
 		setIsLoading(true);
-		const query = (data.q as string).trim();
 
-		if (!query) {
+		// this isn't great - works but? - at least use a config value?
+		// This is the object saved in the form state - we need to get the params from it
+		const params = data.articlesSearchApi?.params as
+			| Record<string, string>
+			| undefined;
+
+		const trimmedParams = trimObjectValues(params || {}) as Record<
+			string,
+			string
+		>;
+
+		if (!trimmedParams || Object.keys(trimmedParams).length === 0) {
 			setIsEmpty(true);
 			setArticles([]);
 			updateUrlState("/search");
@@ -52,10 +54,11 @@ export const SearchPageContent = ({
 			return;
 		}
 
-		const response = await searchArticles({ mustContain: [query] });
+		const response = await searchArticles(trimmedParams);
+
 		setIsEmpty(false);
 		setArticles(response.items);
-		updateUrlState(`/search?q=${encodeURIComponent(query)}`);
+		updateUrlState(`/search?${new URLSearchParams(trimmedParams).toString()}`);
 		setIsLoading(false);
 	};
 
