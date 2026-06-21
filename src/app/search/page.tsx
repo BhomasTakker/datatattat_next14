@@ -11,6 +11,8 @@ type Props = {
 	searchParams: Params;
 };
 
+// Add meta so we can provide links on social media - lol
+
 export default async function Page({ searchParams }: Props) {
 	await initialiseServices();
 	// We need to convert searchparams
