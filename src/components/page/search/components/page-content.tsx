@@ -65,20 +65,22 @@ export const SearchPageContent = ({
 	return (
 		<>
 			{isEmpty && <p>Please enter a search query.</p>}
-			{!isEmpty && articles.length > 0 && <ArticleList articles={articles} />}
 
-			<ToggleButton
+			{/* We will add advanced search later */}
+			{/* <ToggleButton
 				value={isAdvanced}
 				onChange={() => setIsAdvanced((v) => !v)}
 				labelOn="Advanced Search"
 				labelOff="Simple Search"
 				id="search-toggle"
-			/>
+			/> */}
 			<SearchForm
 				onSubmit={handleSubmit}
 				isLoading={isLoading}
 				isAdvanced={isAdvanced}
 			/>
+
+			{!isEmpty && articles.length > 0 && <ArticleList articles={articles} />}
 		</>
 	);
 };

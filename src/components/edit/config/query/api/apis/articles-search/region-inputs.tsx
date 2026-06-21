@@ -16,6 +16,7 @@ export const andRegion: TextInputProps = {
 	id: "region",
 	type: EditInputs.text,
 	label: "Select Region (This AND This)",
+	required: false,
 };
 
 export const orRegion: TextInputProps = {
