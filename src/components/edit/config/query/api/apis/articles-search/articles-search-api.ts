@@ -1,10 +1,6 @@
 import { EditInputs } from "@/components/edit/inputs/inputs";
-import {
-	GenericInput,
-	InputGroupProps,
-	InputListProps,
-} from "@/types/edit/inputs/inputs";
-import { variantInput } from "./variants";
+import { GenericInput, InputListProps } from "@/types/edit/inputs/inputs";
+import { dynamicVariantInput, variantInput, Variants } from "./variants";
 import {
 	containsInput,
 	mustContainInput,
@@ -77,12 +73,18 @@ export const ARTICLES_SEARCH_API_CONFIG: InputListProps = {
 	],
 };
 
+// Simple Article Search - Will create a Simple Video Search - create Audio when back up
+// Then create Full/Advanced searches
 const SIMPLE_PARAMS: GenericInput[] = [
 	containsInput,
 	{
 		id: "simpleSearchApiGroup",
 		type: EditInputs.group,
-		inputs: [variantInput, coverageInput, andRegion],
+		inputs: [
+			dynamicVariantInput({ options: [Variants.article] }),
+			coverageInput,
+			andRegion,
+		],
 	},
 	{
 		id: "simpleSearchApiGroup2",
