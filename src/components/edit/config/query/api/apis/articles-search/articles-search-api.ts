@@ -100,6 +100,7 @@ export const SIMPLE_SEARCH_API_CONFIG: InputListProps = {
 			id: "articlesSearchApiTitle",
 			type: EditInputs.title,
 			title: "Articles Search API",
+			size: "large",
 		},
 		// Probably type of search object select
 		{
