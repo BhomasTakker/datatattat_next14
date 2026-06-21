@@ -29,7 +29,7 @@ export const SearchPage = async (searchQueryProps: GetLatestArticlesProps) => {
 
 	return (
 		<section className={styles.page}>
-			<h1>Search</h1>
+			<h1 className={styles.title}>Search</h1>
 			<SearchPageContent isQueryEmpty={isQueryEmpty} articles={articles} />
 		</section>
 	);

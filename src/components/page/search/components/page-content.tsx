@@ -10,6 +10,7 @@ import { FieldValues } from "react-hook-form";
 import { ToggleButton } from "@/components/ui/toggle-button/toggle-button";
 import { trimObjectValues } from "@/utils/object";
 import { usePopState } from "@/hooks/usePopState";
+import styles from "./page-content.module.scss";
 
 type SearchPageContentProps = {
 	isQueryEmpty: boolean;
@@ -63,7 +64,7 @@ export const SearchPageContent = ({
 	};
 
 	return (
-		<>
+		<div className={styles.content}>
 			{isEmpty && <p>Please enter a search query.</p>}
 
 			{/* We will add advanced search later */}
@@ -74,13 +75,16 @@ export const SearchPageContent = ({
 				labelOff="Simple Search"
 				id="search-toggle"
 			/> */}
-			<SearchForm
-				onSubmit={handleSubmit}
-				isLoading={isLoading}
-				isAdvanced={isAdvanced}
-			/>
-
-			{!isEmpty && articles.length > 0 && <ArticleList articles={articles} />}
-		</>
+			<section className={styles.searchForm}>
+				<SearchForm
+					onSubmit={handleSubmit}
+					isLoading={isLoading}
+					isAdvanced={isAdvanced}
+				/>
+			</section>
+			<section className={styles.articles}>
+				{!isEmpty && articles.length > 0 && <ArticleList articles={articles} />}
+			</section>
+		</div>
 	);
 };
