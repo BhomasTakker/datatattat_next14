@@ -29,6 +29,7 @@ export const SearchPage = async (searchQueryProps: GetLatestArticlesProps) => {
 
 	return (
 		<section className={styles.page}>
+			{/* We need a title component */}
 			<h1 className={styles.title}>Search</h1>
 			<SearchPageContent isQueryEmpty={isQueryEmpty} articles={articles} />
 		</section>
