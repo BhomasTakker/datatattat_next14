@@ -119,7 +119,7 @@ export type InputListProps = {
 
 export type InputGroupProps = {
 	id: string;
-	type: EditInputs.indent;
+	type: EditInputs.group;
 	inputs: GenericInput[];
 } & InputProps;
 

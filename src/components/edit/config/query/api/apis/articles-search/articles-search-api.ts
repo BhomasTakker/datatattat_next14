@@ -1,5 +1,9 @@
 import { EditInputs } from "@/components/edit/inputs/inputs";
-import { GenericInput, InputListProps } from "@/types/edit/inputs/inputs";
+import {
+	GenericInput,
+	InputGroupProps,
+	InputListProps,
+} from "@/types/edit/inputs/inputs";
 import { variantInput } from "./variants";
 import {
 	containsInput,
@@ -74,13 +78,17 @@ export const ARTICLES_SEARCH_API_CONFIG: InputListProps = {
 };
 
 const SIMPLE_PARAMS: GenericInput[] = [
-	variantInput,
 	containsInput,
-	andRegion,
-	coverageInput,
-	withinInput,
-	sortInput,
-	limitInput,
+	{
+		id: "simpleSearchApiGroup",
+		type: EditInputs.group,
+		inputs: [variantInput, coverageInput, andRegion],
+	},
+	{
+		id: "simpleSearchApiGroup2",
+		type: EditInputs.group,
+		inputs: [withinInput, sortInput, limitInput],
+	},
 ];
 
 export const SIMPLE_SEARCH_API_CONFIG: InputListProps = {
