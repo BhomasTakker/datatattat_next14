@@ -76,6 +76,8 @@ export const SearchPageContent = ({
 				id="search-toggle"
 			/> */}
 			<section className={styles.searchForm}>
+				{/* We want here or above a way to search for video and eventually podcasts/audio displaying the appropriate component */}
+				{/* i.e. this would be Article Search form */}
 				<SearchForm
 					onSubmit={handleSubmit}
 					isLoading={isLoading}
