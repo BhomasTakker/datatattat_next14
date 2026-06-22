@@ -1,9 +1,10 @@
 import styles from "../page.module.scss";
 import { PaginatedTable } from "@/components/content/components/table/paginated-table";
-import { CMSTitle } from "@/components/cms/title/cms-title";
 import { initCMSPage } from "@/actions/cms/init-cms-page";
 import { getSourceLists, gotoSourceList } from "@/actions/cms/source-list";
 import { CreateSourceListForm } from "@/components/cms/forms/article-source-list/create-source-list";
+import { PageTitle } from "@/components/ui/typography/title/page-title";
+import { MdArticle } from "react-icons/md";
 
 export default async function Page() {
 	await initCMSPage();
@@ -14,9 +15,11 @@ export default async function Page() {
 
 	return (
 		<section className={styles.root}>
-			<CMSTitle
+			<PageTitle
 				title="CMS Article Sources"
 				description="Manage and organize article sources"
+				variant="cms"
+				Icon={MdArticle}
 			/>
 			{sourceLists && (
 				<PaginatedTable

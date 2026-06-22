@@ -8,9 +8,9 @@ import { getProviders, gotoProvider } from "@/actions/cms/provider";
 import { FETCH_PROVIDERS_CONFIG } from "../../config/fetch-providers.config";
 import { FormTitle } from "../title/title";
 import { useState } from "react";
-import { CMSTitle } from "../../title/cms-title";
 import { PaginatedTable } from "@/components/content/components/table/paginated-table";
 import { PaginatedData } from "@/types/data-structures/paginated";
+import { PageTitle } from "@/components/ui/typography/title/page-title";
 
 export const FetchProvidersCMSForm = () => {
 	const methods = useForm();
@@ -37,7 +37,7 @@ export const FetchProvidersCMSForm = () => {
 			{paginatedProviders && (
 				<>
 					{/* Different title component */}
-					<CMSTitle title="Search Results" />
+					<PageTitle title="Search Results" variant="cms" />
 					<PaginatedTable
 						columns={[
 							"name",

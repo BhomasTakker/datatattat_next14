@@ -1,5 +1,6 @@
-import { CMSTitle } from "@/components/cms/title/cms-title";
 import { initCMSPage } from "@/actions/cms/init-cms-page";
+import { PageTitle } from "@/components/ui/typography/title/page-title";
+import { MdArticle } from "react-icons/md";
 
 export default async function Page() {
 	const { username } = await initCMSPage();
@@ -11,7 +12,7 @@ export default async function Page() {
 
 	return (
 		<div>
-			<CMSTitle title="CMS" />
+			<PageTitle title="CMS" variant="cms" Icon={MdArticle} />
 		</div>
 	);
 }

@@ -4,9 +4,10 @@ import { ArticleProviderCMSForm } from "@/components/cms/forms/article-provider/
 import { getProvider } from "@/actions/cms/provider";
 import { getArticles, gotoArticle } from "@/actions/cms/article";
 import { PaginatedTable } from "@/components/content/components/table/paginated-table";
-import { CMSTitle } from "@/components/cms/title/cms-title";
 import { initCMSPage } from "@/actions/cms/init-cms-page";
 import { getSources, gotoSource } from "@/actions/cms/source";
+import { PageTitle } from "@/components/ui/typography/title/page-title";
+import { MdArticle } from "react-icons/md";
 
 type Params = Promise<{ id: string }>;
 type Props = {
@@ -34,7 +35,12 @@ export default async function Page({ params }: Props) {
 	const { name, description } = articleProvider;
 	return (
 		<section className={styles.root}>
-			<CMSTitle title={`Provider: ${name}`} description={`${description}`} />
+			<PageTitle
+				title={`Provider: ${name}`}
+				description={`${description}`}
+				variant="cms"
+				Icon={MdArticle}
+			/>
 			{sources && (
 				<PaginatedTable
 					title="Provider Sources"

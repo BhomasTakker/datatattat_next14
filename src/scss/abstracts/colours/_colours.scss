@@ -19,8 +19,11 @@ $cta-primary-active: #004085;
 $cta-disabled: #ccc;
 
 $cms-primary: rgb(92, 92, 250);
-
 $cms-primary-light: rgba(59, 130, 246, 0.05);
 $cms-secondary-light: rgba(147, 51, 234, 0.05);
+
+$default-primary: rgb(92, 92, 250);
+$default-primary-light: rgba(59, 130, 246, 0.05);
+$default-secondary-light: rgba(147, 51, 234, 0.05);
 
 $gradient: linear-gradient(0deg, var($shadowLight2), var($shadowLight1));

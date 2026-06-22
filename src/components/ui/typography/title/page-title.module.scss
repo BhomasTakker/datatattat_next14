@@ -4,17 +4,37 @@
 @use "../../../../scss/mixins/text/" as *;
 
 .header {
+	&.cms {
+		--title-primary: #{$cms-primary};
+		--title-primary-light: #{$cms-primary-light};
+		--title-secondary-light: #{$cms-secondary-light};
+	}
+	&.default {
+		--title-primary: #{$default-primary};
+		--title-primary-light: #{$default-primary-light};
+		--title-secondary-light: #{$default-secondary-light};
+	}
+	&.edit {
+		--title-primary: #{$default-primary};
+		--title-primary-light: #{$default-primary-light};
+		--title-secondary-light: #{$default-secondary-light};
+	}
+	&.admin {
+		--title-primary: #{$default-primary};
+		--title-primary-light: #{$default-primary-light};
+		--title-secondary-light: #{$default-secondary-light};
+	}
 	display: flex;
 	flex-direction: column;
 	gap: $spacingSm;
 	padding: $spacingLg $spacingMd;
 	background: linear-gradient(
 		135deg,
-		$cms-primary-light 0%,
-		$cms-secondary-light 100%
+		var(--title-primary-light) 0%,
+		var(--title-secondary-light) 100%
 	);
 	border-radius: 12px;
-	border-left: 4px solid $cms-primary;
+	border-left: 4px solid var(--title-primary);
 	margin-bottom: $spacingMd;
 
 	.titleWrapper {
@@ -25,7 +45,7 @@
 		.icon {
 			font-size: $title-xl2;
 			min-width: $title-xl2;
-			color: $cms-primary;
+			color: var(--title-primary);
 			flex-shrink: 0;
 		}
 

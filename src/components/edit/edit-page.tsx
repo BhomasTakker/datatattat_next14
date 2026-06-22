@@ -12,6 +12,8 @@ import { isValidUser } from "@/actions/auth/check-valid-user";
 import { connectToMongoDB } from "@/lib/mongo/db";
 import { AdminPages, UserPages } from "./pages/user-pages";
 import { getCurrentHeader, getPageOrNew } from "./utils/edit";
+import { PageTitle } from "../ui/typography/title/page-title";
+import { MdAdminPanelSettings, MdEdit } from "react-icons/md";
 
 type EditProps = {
 	route: string;
@@ -40,10 +42,14 @@ export const EditPage = async ({
 
 	const headerData = await getCurrentHeader(route);
 
+	const variant = isAdminEdit ? "admin" : "edit";
+	const pageTitle = isAdminEdit ? "Admin Edit" : "Edit Page";
+	const Icon = isAdminEdit ? MdAdminPanelSettings : MdEdit; // Placeholder for different icons if needed
+
 	return (
 		<section className={styles.root}>
-			<h1 className={styles.title}>{title}</h1>
-			{isUserAdmin ? <AdminNav levels={["/"]} isAdmin={isAdminEdit} /> : null}
+			<PageTitle title={pageTitle} variant={variant} Icon={Icon} />
+			{/* {isUserAdmin ? <AdminNav levels={["/"]} isAdmin={isAdminEdit} /> : null} */}
 			{/* Probably create away from here - use user */}
 			<UserProfile user={sessionUser} />
 			<p>

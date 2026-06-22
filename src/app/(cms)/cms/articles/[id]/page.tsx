@@ -3,10 +3,11 @@ import { getArticle } from "@/actions/cms/article";
 import { redirect } from "next/navigation";
 import { ArticleCMSForm } from "@/components/cms/forms/article/article-form";
 import { ArticleProviderCMSForm } from "@/components/cms/forms/article-provider/article-provider-form";
-import { CMSTitle } from "@/components/cms/title/cms-title";
 import { initCMSPage } from "@/actions/cms/init-cms-page";
 import { ArticleSourceCMSForm } from "@/components/cms/forms/article-source/article-source";
 import { getSource } from "@/actions/cms/source";
+import { PageTitle } from "@/components/ui/typography/title/page-title";
+import { MdArticle } from "react-icons/md";
 
 type Params = Promise<{ id: string }>;
 type Props = {
@@ -34,7 +35,12 @@ export default async function Page({ params }: Props) {
 
 	return (
 		<section className={styles.root}>
-			<CMSTitle title={`Article: ${title}`} description={description} />
+			<PageTitle
+				title={`Article: ${title}`}
+				description={description}
+				variant="cms"
+				Icon={MdArticle}
+			/>
 			{article.provider && (
 				<ArticleProviderCMSForm
 					provider={article.provider}

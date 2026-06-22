@@ -4,11 +4,17 @@ type PageTitleProps = {
 	title: string;
 	description?: string;
 	Icon?: React.ComponentType<{ className?: string }>;
+	variant?: "default" | "cms" | "edit" | "admin";
 };
 
-export const PageTitle = ({ title, description, Icon }: PageTitleProps) => {
+export const PageTitle = ({
+	title,
+	description,
+	Icon,
+	variant = "default",
+}: PageTitleProps) => {
 	return (
-		<div className={styles.header}>
+		<div className={`${styles.header} ${styles[variant]}`}>
 			<div className={styles.titleWrapper}>
 				{Icon && <Icon className={styles.icon} />}
 				<h1 className={styles.title}>{title}</h1>
