@@ -19,8 +19,6 @@ export default async function Page({ searchParams }: Props) {
 	// contains etc must be converted to an array of strings, and any empty values removed
 	const searchQueryProps = await searchParams;
 
-	console.log("searchQueryProps", searchQueryProps);
-
 	return (
 		<div className={pageStyles.page}>
 			<SearchPage {...searchQueryProps} />
