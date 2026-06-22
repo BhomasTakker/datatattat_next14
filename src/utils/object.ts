@@ -39,7 +39,7 @@ export const getNestedValue = <T>(
 	key: string,
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	object: any,
-	delim: string = "."
+	delim: string = ".",
 ) => {
 	if (!object) return object;
 	if (!key) return object;
@@ -54,4 +54,21 @@ export const getNestedValue = <T>(
 	// This is a bit hacky
 	// return could be given object
 	return value as T;
+};
+
+/**
+ * Trim object values - trim undefined and empty string values from object
+ * Could be used to clean up query params before sending to API
+ * So perhaps should be in URL utils
+ * @param obj - Object to trim
+ * @returns - Trimmed object
+ */
+export const trimObjectValues = (obj: Record<string, unknown>) => {
+	const trimmedObj: Record<string, unknown> = {};
+	Object.keys(obj).forEach((key) => {
+		if (obj[key] !== "" && obj[key] !== undefined) {
+			trimmedObj[key] = obj[key];
+		}
+	});
+	return trimmedObj;
 };

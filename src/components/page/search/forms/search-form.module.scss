@@ -1,0 +1,20 @@
+@use "../../../../scss/abstracts/units/" as *;
+@use "../../../../scss/mixins/edit" as editMixins;
+@use "../../../../scss/abstracts/colours/" as *;
+
+.form {
+	display: flex;
+	flex-direction: column;
+	gap: $spacingXl;
+
+	@include editMixins.form();
+
+	.buttons {
+		display: flex;
+		gap: $spacingMd;
+
+		> button {
+			flex: 1;
+		}
+	}
+}

@@ -1,0 +1,13 @@
+@use "../../../../scss/abstracts/units/" as *;
+
+.groupLayout {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	gap: $spacingMd;
+
+	.input {
+		flex: 1 1 $containerWidthXxs;
+	}
+}

@@ -5,7 +5,7 @@ import { PATHS } from "@/lib/routing/paths";
 import { getServerSession } from "next-auth";
 import { options } from "@/app/api/auth/[...nextauth]/options";
 import { UserMenu } from "./user-menu/user-menu";
-import { BiSolidUser } from "react-icons/bi";
+import { BiSolidUser, BiSearchAlt2 as SearchIcon } from "react-icons/bi";
 import { getUserById } from "@/lib/mongo/actions/user/user";
 import { Session } from "@/types/auth/session";
 import { initialiseServices } from "@/lib/services/intialise-services";
@@ -36,6 +36,20 @@ const Datatattat = () => {
 				<h2 className={styles.datatattat}>DATATATTAT</h2>
 			</Link>
 		</div>
+	);
+};
+
+const Search = () => {
+	return (
+		<Link
+			className={styles.simpleButton}
+			href={"/search"}
+			key={"Search"}
+			data-testid="search"
+			aria-hidden
+		>
+			<SearchIcon className={styles.logo} size={32} />
+		</Link>
 	);
 };
 
@@ -118,6 +132,7 @@ export const NavigationHeader = async () => {
 			<Logo />
 			<Datatattat />
 			<div className={styles.menuContainer}>
+				<Search />
 				<KofiButton />
 				{menuComponent}
 			</div>

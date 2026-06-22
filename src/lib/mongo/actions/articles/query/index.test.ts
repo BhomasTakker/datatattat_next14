@@ -37,7 +37,7 @@ describe("buildArticleSearchQuery", () => {
 
 	it("should return the result from Article.aggregate", async () => {
 		const result = await buildArticleSearchQuery(mockQueryParams);
-		expect(result).toBe(mockResult);
+		expect(result).toStrictEqual(mockResult);
 	});
 
 	it("should handle empty results", async () => {

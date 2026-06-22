@@ -19,6 +19,7 @@ import {
 } from "./aggregator-functions";
 import { getArticleProviderByNameFuzzy } from "../../article-provider";
 import mongoose from "mongoose";
+import { toStringArray } from "@/utils/array";
 
 // MongoDB Atlas Search Course
 // https://learn.mongodb.com/learning-paths/atlas-search
@@ -76,33 +77,31 @@ export const createSearchAggregate = async (
 
 	// Is this how you would do a multi select?
 	// feels a little wrong?
-	const categoriesArray = categories
-		? categories.split(",").map((cat) => cat.trim())
-		: [];
+	const categoriesArray = categories ? toStringArray(categories) : [];
 	if (categoriesArray && categoriesArray.length > 0) {
 		addFilter(filter, categoriesArray, "details.categories");
 	}
 
 	if (mustContain && mustContain?.length > 0) {
-		mustContain.forEach((item) => {
+		toStringArray(mustContain).forEach((item) => {
 			addFilter(must, item, "title");
 		});
 	}
 
 	if (mustNotContain && mustNotContain?.length > 0) {
-		mustNotContain.forEach((item) => {
+		toStringArray(mustNotContain).forEach((item) => {
 			addFilter(mustNot, item, "title");
 		});
 	}
 
 	if (shouldContain && shouldContain?.length > 0) {
-		shouldContain.forEach((item) => {
+		toStringArray(shouldContain).forEach((item) => {
 			addFilter(should, item, "title");
 		});
 	}
 
 	if (filterContain && filterContain?.length > 0) {
-		filterContain.forEach((item) => {
+		toStringArray(filterContain).forEach((item) => {
 			addFilter(filter, item, "title", "text");
 		});
 	}
@@ -147,7 +146,7 @@ export const createSearchAggregate = async (
 		| mongoose.Types.ObjectId[]
 		| undefined;
 	if (provider) {
-		const providers = Array.isArray(provider) ? provider : [provider];
+		const providers = toStringArray(provider);
 
 		// Resolve all provider names to ObjectIds in parallel
 		const providerDocs = await Promise.all(
@@ -172,10 +171,9 @@ export const createSearchAggregate = async (
 	// Region Filtering - is there a better way? //
 	///////////////////////////////////////////////
 	if (region) {
-		const regions = Array.isArray(region) ? region : [region];
 		aggregator.push({
 			$match: {
-				"details.region": { $in: regions },
+				"details.region": { $in: toStringArray(region) },
 			},
 		});
 	}
@@ -183,9 +181,10 @@ export const createSearchAggregate = async (
 	// i.e. minimumShouldMatch would either or rules - i.e. this region OR this match
 	// MongoDB Atlas Search treats array queries as OR by default
 	if (orRegion.length > 0) {
+		const orRegions = toStringArray(orRegion);
 		aggregator.push({
 			$match: {
-				"details.region": { $in: orRegion },
+				"details.region": { $in: orRegions },
 			},
 		});
 	}
@@ -193,7 +192,7 @@ export const createSearchAggregate = async (
 	if (excludeRegions.length > 0) {
 		aggregator.push({
 			$match: {
-				"details.region": { $in: excludeRegions },
+				"details.region": { $in: toStringArray(excludeRegions) },
 			},
 		});
 	}
