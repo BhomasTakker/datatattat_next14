@@ -11,7 +11,6 @@ jest.mock("next/link", () => {
 
 const baseProfile: ComponentProfileProps = {
 	componentTitle: "Test Title",
-	showComponentTitle: true,
 	// @ts-expect-error mock data
 	componentTitleLink: undefined,
 };

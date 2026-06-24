@@ -15,7 +15,6 @@ export type ComponentProps = {
 export type ComponentProfileProps = {
 	componentTitle: string;
 	componentTitleLink: string;
-	showComponentTitle: boolean;
 };
 
 export type WithQuery = {

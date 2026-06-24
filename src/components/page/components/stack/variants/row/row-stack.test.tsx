@@ -42,7 +42,6 @@ describe("rowStack", () => {
 			},
 			componentTitle: "",
 			componentTitleLink: "",
-			showComponentTitle: false,
 		},
 	});
 
@@ -215,7 +214,7 @@ describe("rowStack", () => {
 			const { container } = render(<ul>{result}</ul>);
 
 			const contentItems = container.querySelectorAll(
-				".item"
+				".item",
 			) as NodeListOf<HTMLElement>;
 			contentItems.forEach((item) => {
 				expect(item).toHaveStyle({
@@ -297,7 +296,7 @@ describe("rowStack", () => {
 
 		it("should handle large number of components", () => {
 			const manyComponents = Array.from({ length: 10 }, (_, i) =>
-				createMockComponent(`component-${i}`)
+				createMockComponent(`component-${i}`),
 			);
 
 			const props = {
