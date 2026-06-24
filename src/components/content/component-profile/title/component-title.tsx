@@ -5,10 +5,7 @@ type ComponentTitleProps = {
 	subTitle?: string;
 };
 
-export const ComponentTitle = ({
-	title,
-	subTitle = "Just some example text",
-}: ComponentTitleProps) => {
+export const ComponentTitle = ({ title, subTitle }: ComponentTitleProps) => {
 	console.log("ComponentTitle rendered with title:", title);
 	return (
 		<div className={styles.root}>
