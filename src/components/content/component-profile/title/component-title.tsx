@@ -6,7 +6,6 @@ type ComponentTitleProps = {
 };
 
 export const ComponentTitle = ({ title, subTitle }: ComponentTitleProps) => {
-	console.log("ComponentTitle rendered with title:", title);
 	return (
 		<div className={styles.root}>
 			<div className={styles.signal} />
