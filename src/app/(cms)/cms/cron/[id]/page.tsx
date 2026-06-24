@@ -1,9 +1,10 @@
 import styles from "../../../../page.module.scss";
 import { redirect } from "next/navigation";
-import { CMSTitle } from "@/components/cms/title/cms-title";
 import { initCMSPage } from "@/actions/cms/init-cms-page";
 import { getCronJob } from "@/actions/cms/cron-jobs";
 import { CronJobCMSForm } from "@/components/cms/forms/cron/cron-form";
+import { PageTitle } from "@/components/ui/typography/title/page-title";
+import { MdArticle } from "react-icons/md";
 
 type Params = Promise<{ id: string }>;
 type Props = {
@@ -27,7 +28,11 @@ export default async function Page({ params }: Props) {
 
 	return (
 		<section className={styles.root}>
-			<CMSTitle title={`Cron Job: ${cronJobId}`} />
+			<PageTitle
+				title={`Cron Job: ${cronJobId}`}
+				variant="cms"
+				Icon={MdArticle}
+			/>
 			<CronJobCMSForm cronJob={cronJob} />
 		</section>
 	);

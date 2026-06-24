@@ -1,9 +1,10 @@
 import styles from "../../../../page.module.scss";
 import { redirect } from "next/navigation";
-import { CMSTitle } from "@/components/cms/title/cms-title";
 import { initCMSPage } from "@/actions/cms/init-cms-page";
 import { getPage } from "@/actions/cms/page";
 import { PageCMSForm } from "@/components/cms/forms/page/page-form";
+import { PageTitle } from "@/components/ui/typography/title/page-title";
+import { MdArticle } from "react-icons/md";
 
 type Params = Promise<{ id: string }>;
 type Props = {
@@ -27,7 +28,7 @@ export default async function Page({ params }: Props) {
 
 	return (
 		<section className={styles.root}>
-			<CMSTitle title={`Page: ${route}`} />
+			<PageTitle title={`Page: ${route}`} variant="cms" Icon={MdArticle} />
 			<PageCMSForm page={page} />
 		</section>
 	);

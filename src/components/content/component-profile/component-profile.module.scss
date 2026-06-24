@@ -6,17 +6,7 @@
 	display: flex;
 
 	.title {
-		font: $titleXs;
-		color: $text;
-
 		// we cannot use variables with container queries
 		// I think this is the case / follow up on this
-		@container profile-container (min-width: 640px) {
-			font: $titleSm;
-		}
-
-		@container profile-container (min-width: 1024px) {
-			font: $titleMd;
-		}
 	}
 }

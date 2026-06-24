@@ -28,7 +28,7 @@ export default async function Page() {
 
 	return (
 		<div className={styles.page}>
-			<EditPage route={adminLevel} title="Admin Edit" isAdminEdit={true} />
+			<EditPage route={adminLevel} isAdminEdit={true} />
 		</div>
 	);
 }

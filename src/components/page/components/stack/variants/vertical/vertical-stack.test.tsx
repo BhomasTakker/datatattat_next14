@@ -40,7 +40,6 @@ describe("vertical-stack", () => {
 				},
 				componentTitle: id || `test-${componentType}`,
 				componentTitleLink: "",
-				showComponentTitle: true,
 				...(componentType === "article" && { title: "Test Article" }),
 				...(componentType === "image" && {
 					src: "test.jpg",
@@ -152,7 +151,6 @@ describe("vertical-stack", () => {
 						},
 						componentTitle: "Test Article",
 						componentTitleLink: "",
-						showComponentTitle: true,
 						title: "Test Article",
 						content: "Article content",
 					},
@@ -171,7 +169,6 @@ describe("vertical-stack", () => {
 						},
 						componentTitle: "Test Image",
 						componentTitleLink: "",
-						showComponentTitle: true,
 						src: "test.jpg",
 						alt: "Test image",
 						width: 800,
@@ -238,7 +235,6 @@ describe("vertical-stack", () => {
 						},
 						componentTitle: "Empty Component",
 						componentTitleLink: "",
-						showComponentTitle: true,
 					},
 				},
 			];
@@ -296,7 +292,6 @@ describe("vertical-stack", () => {
 				},
 				componentTitle: id || `test-${componentType}`,
 				componentTitleLink: "",
-				showComponentTitle: true,
 			},
 		});
 
@@ -357,7 +352,6 @@ describe("vertical-stack", () => {
 						},
 						componentTitle: "Special Component",
 						componentTitleLink: "",
-						showComponentTitle: true,
 					},
 				},
 			];

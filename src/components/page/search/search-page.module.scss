@@ -7,11 +7,4 @@
 	flex-direction: column;
 	gap: $spacingXl;
 	margin-top: $spacingXl;
-
-	.title {
-		font: $titleXl3;
-		color: $text-sharp;
-		border-left: 3px solid $cms-primary;
-		padding-left: $spacingMd;
-	}
 }

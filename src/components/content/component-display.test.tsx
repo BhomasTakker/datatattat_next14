@@ -33,7 +33,6 @@ describe("Component Display Test Suite", () => {
 			variant: "default",
 			componentTitle: "Sample Title",
 			componentTitleLink: "http://example.com",
-			showComponentTitle: true,
 		},
 		_with: {
 			type: "",

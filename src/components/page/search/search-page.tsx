@@ -6,6 +6,8 @@ import styles from "./search-page.module.scss";
 import { CollectionItem } from "@/types/data-structures/collection/item/item";
 import { SearchPageContent } from "./components/page-content";
 import { toStringArray } from "@/utils/array";
+import { PageTitle } from "@/components/ui/typography/title/page-title";
+import { MdSearch } from "react-icons/md";
 
 export const SearchPage = async (searchQueryProps: GetLatestArticlesProps) => {
 	const isQueryEmpty =
@@ -30,7 +32,7 @@ export const SearchPage = async (searchQueryProps: GetLatestArticlesProps) => {
 	return (
 		<section className={styles.page}>
 			{/* We need a title component */}
-			<h1 className={styles.title}>Search</h1>
+			<PageTitle title="Search Results" Icon={MdSearch} />
 			<SearchPageContent isQueryEmpty={isQueryEmpty} articles={articles} />
 		</section>
 	);

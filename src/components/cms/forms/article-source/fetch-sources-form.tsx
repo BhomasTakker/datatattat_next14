@@ -4,17 +4,15 @@ import { InputFactory } from "@/components/edit/inputs/input-factory";
 import { Button } from "@/components/ui/button";
 import { FormProvider, useForm } from "react-hook-form";
 import styles from "../form.module.scss";
-import { useRouter } from "next/navigation";
 import { getSources, gotoSource } from "@/actions/cms/source";
 import { FETCH_SOURCES_CONFIG } from "../../config/fetch-sources.config";
 import { useState } from "react";
 import { PaginatedData } from "@/types/data-structures/paginated";
-import { CMSTitle } from "../../title/cms-title";
 import { PaginatedTable } from "@/components/content/components/table/paginated-table";
+import { PageTitle } from "@/components/ui/typography/title/page-title";
 
 export const FetchSourcesCMSForm = () => {
 	const methods = useForm();
-	const router = useRouter();
 	const [sourcesData, setSourcesData] = useState<PaginatedData | null>(null);
 	const [searchQuery, setSearchQuery] = useState({});
 
@@ -39,7 +37,7 @@ export const FetchSourcesCMSForm = () => {
 			{sourcesData && (
 				<>
 					{/* Different title component */}
-					<CMSTitle title="Search Results" />
+					<PageTitle title="Search Results" variant="cms" />
 					<PaginatedTable
 						columns={["name", "collectionTitle", "variant", "src"]}
 						query={searchQuery}

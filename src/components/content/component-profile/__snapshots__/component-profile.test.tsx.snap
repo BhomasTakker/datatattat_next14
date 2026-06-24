@@ -9,11 +9,22 @@ exports[`ComponentProfile Snaps matches the snapshot with a title 1`] = `
   <div
     class="root"
   >
-    <h2
-      class="title"
+    <div
+      class="root"
     >
-      Test Title
-    </h2>
+      <div
+        class="signal"
+      />
+      <div
+        class="titleContainer"
+      >
+        <h2
+          class="title"
+        >
+          Test Title
+        </h2>
+      </div>
+    </div>
   </div>
 </DocumentFragment>
 `;
@@ -26,11 +37,22 @@ exports[`ComponentProfile Snaps matches the snapshot with a title link 1`] = `
     <a
       href="/test-link"
     >
-      <h2
-        class="title"
+      <div
+        class="root"
       >
-        Test Title
-      </h2>
+        <div
+          class="signal"
+        />
+        <div
+          class="titleContainer"
+        >
+          <h2
+            class="title"
+          >
+            Test Title
+          </h2>
+        </div>
+      </div>
     </a>
   </div>
 </DocumentFragment>

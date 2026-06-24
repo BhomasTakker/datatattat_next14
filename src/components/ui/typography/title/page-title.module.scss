@@ -1,0 +1,69 @@
+@use "../../../../scss/abstracts/units" as *;
+@use "../../../../scss/abstracts/colours/" as *;
+@use "../../../../scss/abstracts/font/" as *;
+@use "../../../../scss/mixins/text/" as *;
+
+.header {
+	&.cms {
+		--title-primary: #{$cms-primary};
+		--title-primary-light: #{$cms-primary-light};
+		--title-secondary-light: #{$cms-secondary-light};
+	}
+	&.default {
+		--title-primary: #{$default-primary};
+		--title-primary-light: #{$default-primary-light};
+		--title-secondary-light: #{$default-secondary-light};
+	}
+	&.edit {
+		--title-primary: #{$default-primary};
+		--title-primary-light: #{$default-primary-light};
+		--title-secondary-light: #{$default-secondary-light};
+	}
+	&.admin {
+		--title-primary: #{$default-primary};
+		--title-primary-light: #{$default-primary-light};
+		--title-secondary-light: #{$default-secondary-light};
+	}
+	display: flex;
+	flex-direction: column;
+	gap: $spacingSm;
+	padding: $spacingLg $spacingMd;
+	background: linear-gradient(
+		135deg,
+		var(--title-primary-light) 0%,
+		var(--title-secondary-light) 100%
+	);
+	border-radius: 12px;
+	border-left: 4px solid var(--title-primary);
+	margin-bottom: $spacingMd;
+
+	.titleWrapper {
+		display: flex;
+		align-items: center;
+		gap: $spacingMd;
+
+		.icon {
+			font-size: $title-xl2;
+			min-width: $title-xl2;
+			color: var(--title-primary);
+			flex-shrink: 0;
+		}
+
+		.title {
+			font: $titleXl3;
+			margin: 0;
+			color: $text-sharp;
+			flex: 1;
+			min-width: 0;
+			@include maxLines(2);
+		}
+	}
+
+	.description {
+		margin: 0;
+		padding-left: calc($spacingXxxl + #{$spacingMd});
+		color: $text;
+		font-size: $text-md;
+		@include maxLines(3);
+	}
+}

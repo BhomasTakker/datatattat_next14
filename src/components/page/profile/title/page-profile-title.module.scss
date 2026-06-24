@@ -1,0 +1,24 @@
+@use "../../../../scss/abstracts/colours/" as *;
+@use "../../../../scss/abstracts/units/" as *;
+@use "../../../../scss/abstracts/font/" as *;
+
+.root {
+	width: 100%;
+	margin-bottom: $spacingMd;
+	.title {
+		font-size: $title-xl3;
+		font-weight: 600;
+		letter-spacing: 0em;
+		color: $grey-dark;
+		margin: $spacingXxxl 0 $spacingXxs;
+		@media (max-width: 640px) {
+			font-size: $title-xl2;
+			letter-spacing: 0.02em;
+		}
+	}
+	.rule {
+		height: 1px;
+		background: $grey-light;
+		margin-bottom: $spacingMd;
+	}
+}

@@ -2,9 +2,10 @@ import { FetchArticlesCMSForm } from "@/components/cms/forms/fetch-articles";
 import styles from "./page.module.scss";
 import { getArticles, gotoArticle } from "@/actions/cms/article";
 import { PaginatedTable } from "@/components/content/components/table/paginated-table";
-import { CMSTitle } from "@/components/cms/title/cms-title";
 import { initCMSPage } from "@/actions/cms/init-cms-page";
 import { CreateArticleForm } from "@/components/cms/forms/article/create-article.form";
+import { PageTitle } from "@/components/ui/typography/title/page-title";
+import { MdArticle } from "react-icons/md";
 
 export default async function Page() {
 	await initCMSPage();
@@ -17,9 +18,10 @@ export default async function Page() {
 
 	return (
 		<section className={styles.root}>
-			<CMSTitle
+			<PageTitle
 				title="CMS Articles"
 				description="Manage and organize your article content"
+				Icon={MdArticle}
 			/>
 			{articles && (
 				<PaginatedTable

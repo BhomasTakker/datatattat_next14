@@ -14,7 +14,7 @@ jest.mock("../../../content/component-display", () => {
 				<>
 					{`Component type:- ${componentType}`}
 					<section>{`Component props:- ${JSON.stringify(
-						componentProps
+						componentProps,
 					)}`}</section>
 				</>
 			);
@@ -36,7 +36,6 @@ const MOCK_COMPONENT = {
 		variant: "default",
 		componentTitle: "Sample Title",
 		componentTitleLink: "/sample-link",
-		showComponentTitle: true,
 	},
 	_with: {
 		type: "sampleType",

@@ -32,7 +32,7 @@ export default async function Page({ params }: PageProps) {
 
 	return (
 		<div className={styles.page}>
-			<EditPage route={`${PATHS.users()}/${joined}`} title="Edit" />
+			<EditPage route={`${PATHS.users()}/${joined}`} />
 		</div>
 	);
 }

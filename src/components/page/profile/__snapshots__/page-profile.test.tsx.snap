@@ -6,11 +6,20 @@ exports[`PageProfile Component renders page profile unchanged 1`] = `
     class="root"
     data-testid="page-profile-root"
   >
-    <h1
-      class="title"
+    <div
+      class="root"
+      data-testid="page-profile-title-root"
     >
-      Test Title
-    </h1>
+      <h1
+        class="title"
+        data-testid="page-profile-title"
+      >
+        Test Title
+      </h1>
+      <div
+        class="rule"
+      />
+    </div>
   </div>
 </div>
 `;

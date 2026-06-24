@@ -1,11 +1,12 @@
 import styles from "../../page.module.scss";
 import { redirect } from "next/navigation";
-import { CMSTitle } from "@/components/cms/title/cms-title";
 import { initCMSPage } from "@/actions/cms/init-cms-page";
 import { getSourceList } from "@/actions/cms/source-list";
 import { ArticleSourceListCMSForm } from "@/components/cms/forms/article-source-list/article-source-list";
 import { gotoSource } from "@/actions/cms/source";
 import { PaginatedTable } from "@/components/content/components/table/paginated-table";
+import { PageTitle } from "@/components/ui/typography/title/page-title";
+import { MdArticle } from "react-icons/md";
 
 type Params = Promise<{ id: string }>;
 type Props = {
@@ -46,7 +47,12 @@ export default async function Page({ params }: Props) {
 
 	return (
 		<section className={styles.root}>
-			<CMSTitle title={`Article Source List: ${title}`} description={variant} />
+			<PageTitle
+				title={`Article Source List: ${title}`}
+				description={variant}
+				variant="cms"
+				Icon={MdArticle}
+			/>
 			{sources && (
 				<PaginatedTable
 					columns={["name", "url", "title", "variant"]}

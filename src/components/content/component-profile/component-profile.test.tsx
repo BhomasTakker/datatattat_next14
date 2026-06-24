@@ -11,7 +11,6 @@ jest.mock("next/link", () => {
 
 const baseProfile: ComponentProfileProps = {
 	componentTitle: "Test Title",
-	showComponentTitle: true,
 	// @ts-expect-error mock data
 	componentTitleLink: undefined,
 };
@@ -61,7 +60,7 @@ describe("ComponentProfile", () => {
 	it("renders the root div with the correct class", () => {
 		render(<ComponentProfile profile={baseProfile} />);
 		const rootDiv = screen.getByText("Test Title").closest("div");
-		expect(rootDiv).toHaveClass("root");
+		expect(rootDiv).toHaveClass("titleContainer");
 	});
 
 	describe("Snaps", () => {

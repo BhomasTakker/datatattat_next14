@@ -1,0 +1,52 @@
+@use "../../../../scss/abstracts/colours/" as *;
+@use "../../../../scss/abstracts/units/" as *;
+@use "../../../../scss/abstracts/font/" as *;
+
+.root {
+	display: flex;
+	align-items: flex-start;
+	gap: $spacingSm;
+	margin: 0;
+	margin-top: $spacingXxxl;
+	padding-bottom: $spacingMd;
+	@media (max-width: 640px) {
+		gap: $spacingLg;
+		padding-bottom: $spacingSm;
+	}
+	.signal {
+		margin-top: $spacingXxxs;
+		width: $spacingXxxs;
+		height: 2.125rem; // hmmm
+		background: $grey-strong; /* strong but minimalist */
+		border-radius: 2px;
+		@media (max-width: 640px) {
+			height: 1.375rem;
+			margin-top: $spacingXxs;
+		}
+	}
+	.titleContainer {
+		display: flex;
+		flex-direction: column;
+		gap: $spacingXxxs;
+		@media (max-width: 640px) {
+			gap: $spacingXxxxs;
+		}
+		.title {
+			font-family: system-ui, sans-serif;
+
+			font-size: $title-lg;
+			font-weight: $font-weight-semibold;
+			letter-spacing: 0.01em;
+
+			@media (max-width: 640px) {
+				font-size: $title-md;
+				letter-spacing: 0.02em;
+			}
+		}
+		.subTitle {
+			font-size: $text-md;
+			color: $grey-medium;
+			margin-top: $spacingXs;
+		}
+	}
+}

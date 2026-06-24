@@ -9,6 +9,12 @@ const componentProfileOptions = (): GenericInput[] => [
 		required: false,
 	},
 	{
+		id: "subTitle",
+		type: EditInputs.text,
+		label: "Component Subtitle",
+		required: false,
+	},
+	{
 		id: "componentTitleLink",
 		type: EditInputs.text,
 		label: "Component Title Link",
