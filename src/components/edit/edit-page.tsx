@@ -17,15 +17,10 @@ import { MdAdminPanelSettings, MdEdit } from "react-icons/md";
 
 type EditProps = {
 	route: string;
-	title: string;
 	isAdminEdit?: boolean;
 };
 
-export const EditPage = async ({
-	route,
-	title,
-	isAdminEdit = false,
-}: EditProps) => {
+export const EditPage = async ({ route, isAdminEdit = false }: EditProps) => {
 	// Should do this better - layout perhaps?
 	await connectToMongoDB();
 	// remove me
