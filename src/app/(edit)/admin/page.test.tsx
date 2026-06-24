@@ -5,10 +5,9 @@ import Page from "./page";
 // Mock dependencies
 jest.mock("../../page.module.scss", () => ({ page: "mocked-page-class" }));
 jest.mock("../../../components/edit/edit-page", () => ({
-	EditPage: ({ route, title, isAdminEdit }: any) => (
+	EditPage: ({ route, isAdminEdit }: any) => (
 		<div>
-			Mocked EditPage - {route} - {title} -{" "}
-			{isAdminEdit ? "admin" : "not admin"}
+			Mocked EditPage - {route} - {isAdminEdit ? "admin" : "not admin"}
 		</div>
 	),
 }));
@@ -56,7 +55,6 @@ describe("Admin Page", () => {
 		expect(props.className).toBe("mocked-page-class");
 		expect(props.children.type).toBeDefined();
 		expect(props.children.props.route).toBe("/");
-		expect(props.children.props.title).toBe("Admin Edit");
 		expect(props.children.props.isAdminEdit).toBe(true);
 	});
 

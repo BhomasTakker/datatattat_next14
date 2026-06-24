@@ -17,7 +17,9 @@ export const PageTitle = ({
 		<div className={`${styles.header} ${styles[variant]}`}>
 			<div className={styles.titleWrapper}>
 				{Icon && <Icon className={styles.icon} />}
-				<h1 className={styles.title}>{title}</h1>
+				<h1 className={styles.title} data-title="page-title">
+					{title}
+				</h1>
 			</div>
 			{description && <p className={styles.description}>{description}</p>}
 		</div>

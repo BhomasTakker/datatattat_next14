@@ -14,7 +14,6 @@ jest.mock("../../../../components/edit/edit-page", () => ({
 		<div
 			data-testid="edit-page"
 			data-route={route}
-			data-title={title}
 			data-admin={isAdminEdit ? "true" : "false"}
 		/>
 	),
@@ -23,10 +22,10 @@ jest.mock("../../../../lib/routing/paths", () => ({
 	PATHS: { home: jest.fn(() => "/home") },
 }));
 jest.mock("../../../../actions/auth/check-session", () =>
-	jest.fn(() => Promise.resolve())
+	jest.fn(() => Promise.resolve()),
 );
 jest.mock("../../../../actions/signup/signup-completed", () =>
-	jest.fn(() => Promise.resolve())
+	jest.fn(() => Promise.resolve()),
 );
 jest.mock("../../../../actions/auth/check-valid-user", () => ({
 	isValidUser: jest.fn(),
@@ -67,7 +66,6 @@ describe("Page", () => {
 		const editPage = screen.getByTestId("edit-page");
 		expect(editPage).toBeInTheDocument();
 		expect(editPage).toHaveAttribute("data-route", "/foo/bar");
-		expect(editPage).toHaveAttribute("data-title", "Admin Edit");
 		expect(editPage).toHaveAttribute("data-admin", "true");
 	});
 
