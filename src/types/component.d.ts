@@ -14,6 +14,7 @@ export type ComponentProps = {
 
 export type ComponentProfileProps = {
 	componentTitle: string;
+	subTitle?: string;
 	componentTitleLink: string;
 };
 

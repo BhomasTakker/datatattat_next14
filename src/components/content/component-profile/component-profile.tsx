@@ -9,9 +9,11 @@ export const ComponentProfile = ({
 }: {
 	profile: ComponentProfileProps;
 }) => {
-	const { componentTitle, componentTitleLink } = profile || {};
+	const { componentTitle, subTitle, componentTitleLink } = profile || {};
 
-	const titleComponent = <ComponentTitle title={componentTitle} />;
+	const titleComponent = (
+		<ComponentTitle title={componentTitle} subTitle={subTitle} />
+	);
 	const titleComponentToRender = componentTitleLink ? (
 		<Link href={componentTitleLink}>{titleComponent}</Link>
 	) : (
