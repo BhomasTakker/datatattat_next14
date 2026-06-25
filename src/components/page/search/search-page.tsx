@@ -32,7 +32,7 @@ export const SearchPage = async (searchQueryProps: GetLatestArticlesProps) => {
 	return (
 		<section className={styles.page}>
 			{/* We need a title component */}
-			<PageTitle title="Search Results" Icon={MdSearch} />
+			<PageTitle title="Search Page" Icon={MdSearch} />
 			<SearchPageContent isQueryEmpty={isQueryEmpty} articles={articles} />
 		</section>
 	);
