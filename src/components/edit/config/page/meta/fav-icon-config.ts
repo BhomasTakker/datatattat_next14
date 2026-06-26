@@ -107,7 +107,7 @@ export const FAV_ICON: ArrayInputProps = {
 				inputs: [relInput, typeInput],
 			},
 			{
-				id: "simpleSearchApiGroup2",
+				id: "favIconGroup2",
 				type: EditInputs.group,
 				inputs: [hrefInput, sizesInput],
 			},
