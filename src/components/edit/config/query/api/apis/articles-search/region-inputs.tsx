@@ -9,7 +9,7 @@ const regionTitle: TitleInputProps = {
 	id: "regionInputsTitle",
 	type: EditInputs.title,
 	title: "Region Filters",
-	size: "large",
+	size: "small",
 };
 
 export const andRegion: TextInputProps = {
@@ -32,8 +32,10 @@ const excludeRegions: TextInputProps = {
 };
 
 export const regionInputs: GenericInput[] = [
-	regionTitle,
-	andRegion,
-	orRegion,
-	excludeRegions,
+	// regionTitle,
+	{
+		id: "regionGroup",
+		type: EditInputs.group,
+		inputs: [andRegion, orRegion, excludeRegions],
+	},
 ];

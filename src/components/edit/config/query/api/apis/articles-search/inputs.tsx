@@ -1,5 +1,6 @@
 import { EditInputs } from "@/components/edit/inputs/inputs";
 import {
+	InputGroupProps,
 	NumberInputProps,
 	SelectInputProps,
 	TextInputProps,
@@ -20,24 +21,28 @@ export const providerInput: TextInputProps = {
 	label: "Filter By Provider",
 };
 
-export const trustInputs: NumberInputProps[] = [
-	{
-		id: "trustHigher",
-		type: EditInputs.number,
-		label: "Trust Rating Higher Than",
-		max: 100,
-		min: 0,
-		required: false,
-	},
-	{
-		id: "trustLower",
-		type: EditInputs.number,
-		label: "Trust Rating Lower Than",
-		max: 100,
-		min: 0,
-		required: false,
-	},
-];
+export const trustInputs: InputGroupProps = {
+	id: "trustInputs",
+	type: EditInputs.group,
+	inputs: [
+		{
+			id: "trustHigher",
+			type: EditInputs.number,
+			label: "Trust Rating Higher Than",
+			max: 100,
+			min: 0,
+			required: false,
+		},
+		{
+			id: "trustLower",
+			type: EditInputs.number,
+			label: "Trust Rating Lower Than",
+			max: 100,
+			min: 0,
+			required: false,
+		},
+	],
+};
 
 export const sortInput: SelectInputProps = {
 	id: "sort",
