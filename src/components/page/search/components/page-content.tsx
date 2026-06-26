@@ -22,7 +22,6 @@ type SearchPageContentProps = {
 };
 
 const getConfig = (isAdvanced: boolean) => {
-	console.log("getConfig called with isAdvanced:", isAdvanced);
 	return isAdvanced ? ARTICLES_SEARCH_API_CONFIG : SIMPLE_SEARCH_API_CONFIG;
 };
 
