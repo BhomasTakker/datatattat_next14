@@ -25,5 +25,19 @@ export const PROFILE_CONFIG: InputListProps = {
 				},
 			],
 		},
+		{
+			id: "pageType",
+			type: EditInputs.select,
+			label: "Page Type",
+			required: true,
+			defaultValue: "Content",
+			options: ["Content", "User", "Landing"],
+		},
+		{
+			id: "live",
+			type: EditInputs.switch,
+			label: "Live - Is the page searchable and visible to users?",
+			defaultChecked: false,
+		},
 	],
 };
