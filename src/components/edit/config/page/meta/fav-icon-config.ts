@@ -1,4 +1,8 @@
-import { ArrayInputProps } from "@/types/edit/inputs/inputs";
+import {
+	ArrayInputProps,
+	SelectInputProps,
+	TextInputProps,
+} from "@/types/edit/inputs/inputs";
 import { EditInputs } from "../../../inputs/inputs";
 
 enum typeOptions {
@@ -33,6 +37,60 @@ enum sizes {
 	_512x512 = "512x512",
 }
 
+const relInput: SelectInputProps = {
+	id: "rel",
+	type: EditInputs.select,
+	label: "Rel",
+	defaultValue: relOptions.ICON,
+	required: true,
+	options: [relOptions.ICON, relOptions.APPLE],
+};
+
+const typeInput: SelectInputProps = {
+	id: "type",
+	type: EditInputs.select,
+	label: "Source type",
+	defaultValue: typeOptions.PNG,
+	required: true,
+	options: [typeOptions.PNG, typeOptions.JPEG],
+};
+
+const hrefInput: TextInputProps = {
+	id: "href",
+	type: EditInputs.text,
+	label: "Source",
+	required: true,
+};
+
+const sizesInput: SelectInputProps = {
+	id: "sizes",
+	type: EditInputs.select,
+	label: "Size",
+	defaultValue: sizes.ANY,
+	required: true,
+	options: [
+		sizes.ANY,
+		sizes._16x16,
+		sizes._32x32,
+		sizes._36x36,
+		sizes._48x48,
+		sizes._57x57,
+		sizes._60x60,
+		sizes._72x72,
+		sizes._76x76,
+		sizes._96x96,
+		sizes._114x114,
+		sizes._120x120,
+		sizes._128x128,
+		sizes._144x144,
+		sizes._152x152,
+		sizes._180x180,
+		sizes._192x192,
+		sizes._384x384,
+		sizes._512x512,
+	],
+};
+
 export const FAV_ICON: ArrayInputProps = {
 	id: "favIcons",
 	type: EditInputs.array,
@@ -44,54 +102,14 @@ export const FAV_ICON: ArrayInputProps = {
 		label: "Fav Icon",
 		inputs: [
 			{
-				id: "rel",
-				type: EditInputs.select,
-				label: "Rel",
-				defaultValue: relOptions.ICON,
-				required: true,
-				options: [relOptions.ICON, relOptions.APPLE],
+				id: "favIconGroup1",
+				type: EditInputs.group,
+				inputs: [relInput, typeInput],
 			},
 			{
-				id: "type",
-				type: EditInputs.select,
-				label: "Source type",
-				defaultValue: typeOptions.PNG,
-				required: true,
-				options: [typeOptions.PNG, typeOptions.JPEG],
-			},
-			{
-				id: "href",
-				type: EditInputs.text,
-				label: "Source",
-				required: true,
-			},
-			{
-				id: "sizes",
-				type: EditInputs.select,
-				label: "Size",
-				defaultValue: sizes.ANY,
-				required: true,
-				options: [
-					sizes.ANY,
-					sizes._16x16,
-					sizes._32x32,
-					sizes._36x36,
-					sizes._48x48,
-					sizes._57x57,
-					sizes._60x60,
-					sizes._72x72,
-					sizes._76x76,
-					sizes._96x96,
-					sizes._114x114,
-					sizes._120x120,
-					sizes._128x128,
-					sizes._144x144,
-					sizes._152x152,
-					sizes._180x180,
-					sizes._192x192,
-					sizes._384x384,
-					sizes._512x512,
-				],
+				id: "simpleSearchApiGroup2",
+				type: EditInputs.group,
+				inputs: [hrefInput, sizesInput],
 			},
 		],
 	},
