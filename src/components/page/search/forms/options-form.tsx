@@ -1,9 +1,5 @@
 "use client";
 
-import {
-	dynamicVariantInput,
-	Variants,
-} from "@/components/edit/config/query/api/apis/articles-search/variants";
 import { InputFactory } from "@/components/edit/inputs/input-factory";
 import { EditInputs } from "@/components/edit/inputs/inputs";
 import { InputListProps } from "@/types/edit/inputs/inputs";
@@ -26,7 +22,6 @@ const OptionsConfig: InputListProps = {
 			label: "Advanced Search",
 			defaultChecked: false,
 		},
-		dynamicVariantInput({ options: [Variants.article, Variants.video] }),
 	],
 };
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { searchArticles } from "@/actions/data/search-articles";
 import { CollectionItem } from "@/types/data-structures/collection/item/item";
 import { SearchForm } from "../forms/search-form";
@@ -11,10 +11,20 @@ import { ToggleButton } from "@/components/ui/toggle-button/toggle-button";
 import { trimObjectValues } from "@/utils/object";
 import { usePopState } from "@/hooks/usePopState";
 import styles from "./page-content.module.scss";
+import {
+	ARTICLES_SEARCH_API_CONFIG,
+	SIMPLE_SEARCH_API_CONFIG,
+} from "@/components/edit/config/query/api/apis/articles-search/articles-search-api";
+import { OptionsForm } from "../forms/options-form";
 
 type SearchPageContentProps = {
 	isQueryEmpty: boolean;
 	articles: CollectionItem[];
+};
+
+const getConfig = (isAdvanced: boolean) => {
+	console.log("getConfig called with isAdvanced:", isAdvanced);
+	return isAdvanced ? ARTICLES_SEARCH_API_CONFIG : SIMPLE_SEARCH_API_CONFIG;
 };
 
 export const SearchPageContent = ({
@@ -25,12 +35,27 @@ export const SearchPageContent = ({
 	const [isEmpty, setIsEmpty] = useState(isQueryEmpty);
 	const [isLoading, setIsLoading] = useState(false);
 	const [isAdvanced, setIsAdvanced] = useState(false);
+	const [variant, setVariant] = useState<"article" | "video">("article");
 
 	usePopState({
 		handlePopState: () => {
 			window.location.reload();
 		},
 	});
+
+	// currently on variant and isAdvanced change we empty the results.
+	// It would be better if we only updated results on search
+	const optionsUpdatedHandler = (data: FieldValues) => {
+		const isAdvancedOption = data.optionsForm.isAdvanced as boolean;
+		setIsAdvanced(isAdvancedOption);
+		setArticles([]);
+	};
+
+	const onVariantChange = useCallback((newVariant: "article" | "video") => {
+		console.log("Variant changed to:", newVariant);
+		setVariant(newVariant);
+		setArticles([]);
+	}, []);
 
 	const handleSubmit = async (data: FieldValues) => {
 		if (isLoading) return;
@@ -65,27 +90,22 @@ export const SearchPageContent = ({
 
 	return (
 		<div className={styles.content}>
-			{isEmpty && <p>Please enter a search query.</p>}
+			<OptionsForm onSubmit={optionsUpdatedHandler} />
 
-			{/* We will add advanced search later */}
-			{/* <ToggleButton
-				value={isAdvanced}
-				onChange={() => setIsAdvanced((v) => !v)}
-				labelOn="Advanced Search"
-				labelOff="Simple Search"
-				id="search-toggle"
-			/> */}
 			<section className={styles.searchForm}>
-				{/* We want here or above a way to search for video and eventually podcasts/audio displaying the appropriate component */}
-				{/* i.e. this would be Article Search form */}
 				<SearchForm
 					onSubmit={handleSubmit}
+					onChange={onVariantChange}
 					isLoading={isLoading}
 					isAdvanced={isAdvanced}
+					config={getConfig(isAdvanced)}
 				/>
 			</section>
+			{isEmpty && <p>Please enter a search query.</p>}
 			<section className={styles.articles}>
-				{!isEmpty && articles.length > 0 && <ArticleList articles={articles} />}
+				{!isEmpty && articles.length > 0 && (
+					<ArticleList articles={articles} articleVariant={variant} />
+				)}
 			</section>
 		</div>
 	);

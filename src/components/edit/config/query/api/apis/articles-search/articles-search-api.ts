@@ -81,7 +81,7 @@ const SIMPLE_PARAMS: GenericInput[] = [
 		id: "simpleSearchApiGroup",
 		type: EditInputs.group,
 		inputs: [
-			dynamicVariantInput({ options: [Variants.article] }),
+			dynamicVariantInput({ options: [Variants.article, Variants.video] }),
 			coverageInput,
 			andRegion,
 		],
