@@ -1,5 +1,5 @@
 import { EditInputs } from "@/components/edit/inputs/inputs";
-import { GenericInput } from "@/types/edit/inputs/inputs";
+import { GenericInput, InputGroupProps } from "@/types/edit/inputs/inputs";
 
 const beforeInput: GenericInput = {
 	id: "before",
@@ -40,8 +40,8 @@ export const withinInput: GenericInput = {
 	required: false,
 };
 
-export const dateInputs: GenericInput[] = [
-	beforeInput,
-	afterInput,
-	withinInput,
-];
+export const dateInputs: InputGroupProps = {
+	id: "dateInputGroup",
+	type: EditInputs.group,
+	inputs: [beforeInput, afterInput, withinInput],
+};

@@ -1,5 +1,9 @@
 import { EditInputs } from "@/components/edit/inputs/inputs";
-import { GenericInput, InputListProps } from "@/types/edit/inputs/inputs";
+import {
+	DescriptionInputProps,
+	GenericInput,
+	InputListProps,
+} from "@/types/edit/inputs/inputs";
 import { dynamicVariantInput, variantInput, Variants } from "./variants";
 import {
 	containsInput,
@@ -19,22 +23,37 @@ import {
 
 const BASE_PARAMS: GenericInput[] = [
 	...regionInputs,
-	coverageInput,
+	{
+		id: "searchFilterGroup",
+		type: EditInputs.group,
+		inputs: [coverageInput, providerInput],
+	},
 	///////////////////////////////////////////
-	...dateInputs,
-	// provider options?
-	providerInput,
-	...trustInputs,
+	dateInputs,
+	trustInputs,
 	/////
-	sortInput,
-	limitInput,
+	{
+		id: "sortAndLimit",
+		type: EditInputs.group,
+		inputs: [sortInput, limitInput],
+	},
 ];
+
+const searchDescriptionInput: DescriptionInputProps = {
+	id: "searchDescription",
+	type: EditInputs.description,
+	text: "Seperate search terms with ','. To search phrases use double quotes.",
+};
 
 export const PARAMS: GenericInput[] = [
 	variantInput,
+	searchDescriptionInput,
 	containsInput,
-	mustContainInput,
-	mustNotContainInput,
+	{
+		id: "mustContainGroup",
+		type: EditInputs.group,
+		inputs: [mustContainInput, mustNotContainInput],
+	},
 	...shouldContainInput,
 	// {
 	// 	id: "textScore",

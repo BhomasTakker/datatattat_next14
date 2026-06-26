@@ -22,22 +22,28 @@ export const mustNotContainInput: GenericInput = {
 
 export const shouldContainInput: GenericInput[] = [
 	{
-		id: "shouldContain",
-		type: EditInputs.text,
-		label: "Should Contain",
+		id: "shouldContainGroup",
+		type: EditInputs.group,
+		inputs: [
+			{
+				id: "shouldContain",
+				type: EditInputs.text,
+				label: "Should Contain",
+			},
+			{
+				id: "minimumShouldMatch",
+				type: EditInputs.number,
+				label: "Minimum Should Match",
+				required: false,
+				step: 1,
+				min: 0,
+				defaultValue: 0,
+			},
+		],
 	},
 	{
 		id: "minimumShouldMatchDescription",
 		type: EditInputs.description,
 		text: "If you have added 'should' values, you can set a minimum number of values to match. If 0 is set, 1 value should be set.",
-	},
-	{
-		id: "minimumShouldMatch",
-		type: EditInputs.number,
-		label: "Minimum Should Match",
-		required: false,
-		step: 1,
-		min: 0,
-		defaultValue: 0,
 	},
 ];

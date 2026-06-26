@@ -33,7 +33,9 @@ const excludeRegions: TextInputProps = {
 
 export const regionInputs: GenericInput[] = [
 	regionTitle,
-	andRegion,
-	orRegion,
-	excludeRegions,
+	{
+		id: "regionGroup",
+		type: EditInputs.group,
+		inputs: [andRegion, orRegion, excludeRegions],
+	},
 ];
