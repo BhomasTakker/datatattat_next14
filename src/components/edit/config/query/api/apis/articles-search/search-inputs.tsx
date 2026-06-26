@@ -5,6 +5,7 @@ export const containsInput: GenericInput = {
 	id: "filterContain",
 	type: EditInputs.text,
 	label: "Contains",
+	required: false,
 };
 
 export const mustContainInput: GenericInput = {
@@ -12,12 +13,14 @@ export const mustContainInput: GenericInput = {
 	id: "mustContain",
 	type: EditInputs.text,
 	label: "Must Contain",
+	required: false,
 };
 
 export const mustNotContainInput: GenericInput = {
 	id: "mustNotContain",
 	type: EditInputs.text,
 	label: "Must Not Contain",
+	required: false,
 };
 
 export const shouldContainInput: GenericInput[] = [
@@ -29,6 +32,7 @@ export const shouldContainInput: GenericInput[] = [
 				id: "shouldContain",
 				type: EditInputs.text,
 				label: "Should Contain",
+				required: false,
 			},
 			{
 				id: "minimumShouldMatch",

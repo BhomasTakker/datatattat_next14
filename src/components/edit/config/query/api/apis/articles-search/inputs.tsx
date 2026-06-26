@@ -19,6 +19,7 @@ export const providerInput: TextInputProps = {
 	id: "provider",
 	type: EditInputs.text,
 	label: "Filter By Provider",
+	required: false,
 };
 
 export const trustInputs: InputGroupProps = {
