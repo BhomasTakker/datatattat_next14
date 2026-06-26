@@ -65,9 +65,7 @@ export const ARTICLES_SEARCH_API_CONFIG: InputListProps = {
 			id: "params",
 			type: EditInputs.inputList,
 			label: "API QUERY PARAMS",
-
 			createObject: true,
-
 			inputs: PARAMS,
 		},
 	],
