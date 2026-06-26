@@ -23,12 +23,14 @@ export const orRegion: TextInputProps = {
 	id: "orRegion",
 	type: EditInputs.text,
 	label: "Select Region (This OR This)",
+	required: false,
 };
 
 const excludeRegions: TextInputProps = {
 	id: "excludeRegions",
 	type: EditInputs.text,
 	label: "Exclude Regions",
+	required: false,
 };
 
 export const regionInputs: GenericInput[] = [
