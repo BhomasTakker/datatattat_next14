@@ -7,7 +7,6 @@ import { SearchForm } from "../forms/search-form";
 import { ArticleList } from "./article-list";
 import { updateUrlState } from "@/utils/url";
 import { FieldValues } from "react-hook-form";
-import { ToggleButton } from "@/components/ui/toggle-button/toggle-button";
 import { trimObjectValues } from "@/utils/object";
 import { usePopState } from "@/hooks/usePopState";
 import styles from "./page-content.module.scss";
