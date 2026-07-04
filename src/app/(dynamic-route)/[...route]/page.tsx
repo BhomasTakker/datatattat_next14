@@ -46,7 +46,7 @@ export default async function Page({ params }: Props) {
 		return <h1>404</h1>;
 	}
 
-	await recordPageViewForRoute(`/${joined}`);
+	// await recordPageViewForRoute(`/${joined}`);
 
 	return (
 		<div className={styles.page}>

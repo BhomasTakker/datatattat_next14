@@ -35,7 +35,7 @@ export default async function UserHome({ params }: Props) {
 		return <h1>404</h1>;
 	}
 
-	await recordPageViewForRoute(userPage);
+	// await recordPageViewForRoute(userPage);
 
 	return (
 		<>
